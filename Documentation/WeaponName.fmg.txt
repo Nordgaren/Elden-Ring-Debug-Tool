@@ -1,0 +1,675 @@
+110000 Unarmed
+1000000 Dagger
+1001000 Poison Dagger
+1010000 Black Knife
+1020000 Parrying Dagger
+1021000 Poison Parrying Dagger
+1030000 Miséricorde
+1031000 Poison Miséricorde
+1040000 Reduvia
+1050000 Crystal Knife
+1060000 Celebrant's Sickle
+1061000 Celebrant's Poison Sickle
+1070000 Glintstone Kris
+1080000 Scorpion's Stinger
+1090000 Great Knife
+1091000 Poison Great Knife
+1100000 Wakizashi
+1101000 Poison Wakizashi
+1110000 Cinquedea
+1130000 Ivory Sickle
+1140000 Bloodstained Dagger
+1141000 Poison Bloodstained Dagger
+1150000 Erdsteel Dagger
+1151000 Poison Erdsteel Dagger
+1160000 Blade of Calling
+2000000 Longsword
+2001000 Poison Longsword
+2010000 Short Sword
+2011000 Poison Short Sword
+2020000 Broadsword
+2021000 Poison Broadsword
+2030000 Royal Soldier Straight Sword
+2040000 Lordsworn's Straight Sword
+2041000 Lordsworn's Poison Straight Sword
+2050000 Weathered Straight Sword
+2051000 Weathered Poison Straight Sword
+2060000 Ornamental Straight Sword
+2070000 Golden Epitaph
+2080000 Nox Flowing Sword
+2090000 Inseparable Sword
+2091000 Poison Inseparable Sword
+2110000 Coded Sword
+2140000 Sword of Night and Flame
+2150000 Crystal Sword
+2180000 Carian Knight's Sword
+2190000 Sword of St. Trina
+2200000 Miquellan Knight's Sword
+2210000 Cane Sword
+2211000 Poison Cane Sword
+2220000 Regalia of Eochaid
+2230000 Noble's Slender Sword
+2231000 Noble's Poison Slender Sword
+2240000 Warhawk's Talon
+2241000 Warhawk's Poison Talon
+2250000 Lazuli Glintstone Sword
+2260000 Rotten Crystal Sword
+3000000 Bastard Sword
+3001000 Poison Bastard Sword
+3010000 Forked Greatsword
+3011000 Poison Forked Greatsword
+3020000 Iron Greatsword
+3021000 Poison Iron Greatsword
+3030000 Lordsworn's Greatsword
+3031000 Lordsworn's Poison Greatsword
+3040000 Knight's Greatsword
+3041000 Knight's Poison Greatsword
+3050000 Flamberge
+3051000 Poison Flamberge
+3060000 Ordovis's Greatsword
+3070000 Alabaster Lord's Sword
+3080000 Banished Knight's Greatsword
+3081000 Banished Knight's Poison Greatsword
+3090000 Dark Moon Greatsword
+3100000 Sacred Relic Sword
+3130000 Helphen's Steeple
+3140000 Blasphemous Blade
+3150000 Marais Executioner's Sword
+3160000 Sword of Milos
+3161000 Poison Sword of Milos
+3170000 Golden Order Greatsword
+3180000 Claymore
+3181000 Poison Claymore
+3190000 Gargoyle's Greatsword
+3191000 Gargoyle's Poison Greatsword
+3200000 Death's Poker
+3210000 Gargoyle's Blackblade
+3211000 Poison Gargoyle's Blackblade
+4000000 Greatsword
+4001000 Poison Greatsword
+4010000 Watchdog's Greatsword
+4011000 Watchdog's Poison Greatsword
+4020000 Maliketh's Black Blade
+4030000 Troll's Golden Sword
+4031000 Troll's Golden Poison Sword
+4040000 Zweihander
+4041000 Poison Zweihander
+4050000 Starscourge Greatsword
+4060000 Royal Greatsword
+4070000 Godslayer's Greatsword
+4080000 Ruins Greatsword
+4100000 Grafted Blade Greatsword
+4110000 Troll Knight's Sword
+5000000 Estoc
+5001000 Poison Estoc
+5010000 Cleanrot Knight's Sword
+5011000 Cleanrot Knight's Poison Sword
+5020000 Rapier
+5021000 Poison Rapier
+5030000 Rogier's Rapier
+5031000 Rogier's Poison Rapier
+5040000 Antspur Rapier
+5041000 Poison Antspur Rapier
+5050000 Frozen Needle
+5060000 Noble's Estoc
+5061000 Noble's Poison Estoc
+6000000 Bloody Helice
+6010000 Godskin Stitcher
+6011000 Poison Godskin Stitcher
+6020000 Great Épée
+6021000 Poison Great Épée
+6040000 Dragon King's Cragblade
+7000000 Falchion
+7001000 Poison Falchion
+7010000 Beastman's Curved Sword
+7011000 Beastman's Poison Curved Sword
+7020000 Shotel
+7021000 Poison Shotel
+7030000 Shamshir
+7031000 Poison Shamshir
+7040000 Bandit's Curved Sword
+7041000 Bandit's Poison Curved Sword
+7050000 Magma Blade
+7060000 Flowing Curved Sword
+7061000 Flowing Poison Curved Sword
+7070000 Wing of Astel
+7080000 Scavenger's Curved Sword
+7081000 Scavenger's Poison Curved Sword
+7090000 Sharktooth Curved Sword
+7091000 Poison Sharktooth Curved Sword
+7100000 Eclipse Shotel
+7110000 Serpent-God's Curved Sword
+7111000 Serpent-God's Poison Curved Sword
+7120000 Mantis Blade
+7121000 Poison Mantis Blade
+7140000 Scimitar
+7141000 Poison Scimitar
+7150000 Grossmesser
+7151000 Poison Grossmesser
+8010000 Onyx Lord's Greatsword
+8020000 Dismounter
+8021000 Poison Dismounter
+8030000 Bloodhound's Fang
+8031000 Bloodhound's Poison Fang
+8040000 Magma Wyrm's Scalesword
+8050000 Zamor Curved Sword
+8060000 Omen Cleaver
+8061000 Poison Omen Cleaver
+8070000 Monk's Flameblade
+8071000 Monk's Poison Flameblade
+8080000 Beastman's Cleaver
+8081000 Beastman's Poison Cleaver
+8100000 Morgott's Cursed Sword
+8110000 Holy Inferno Greatsword
+8111000 Poison Holy Inferno Greatsword
+9000000 Uchigatana
+9001000 Poison Uchigatana
+9010000 Nagakiba
+9011000 Poison Nagakiba
+9020000 Hand of Malenia
+9030000 Meteoric Ore Blade
+9031000 Poison Meteoric Ore Blade
+9040000 Rivers of Blood
+9060000 Moonveil
+9070000 Dragonscale Blade
+9080000 Serpentbone Blade
+9081000 Poison Serpentbone Blade
+10000000 Twinblade
+10001000 Poison Twinblade
+10010000 Godskin Peeler
+10011000 Poison Godskin Peeler
+10030000 Twinned Knight Swords
+10031000 Poison Twinned Knight Swords
+10050000 Eleonora's Poleblade
+10060000 Abundance and Decay Twinblade
+10070000 Abundance Twinblade
+10080000 Gargoyle's Twinblade
+10081000 Gargoyle's Poison Twinblade
+10090000 Gargoyle's Black Blades
+10091000 Gargoyle's Poison Black Blades
+11000000 Mace
+11001000 Poison Mace
+11010000 Club
+11011000 Poison Club
+11030000 Curved Club
+11031000 Poison Curved Club
+11040000 Warpick
+11041000 Poison Warpick
+11050000 Morning Star
+11051000 Poison Morning Star
+11060000 Varré's Bouquet
+11061000 Poison Varré's Bouquet
+11070000 Spiked Club
+11071000 Poison Spiked Club
+11080000 Hammer
+11081000 Poison Hammer
+11090000 Monk's Flamemace
+11091000 Monk's Poison Flamemace
+11100000 Envoy's Horn
+11110000 Scepter of the All-Knowing
+11120000 Nox Flowing Hammer
+11130000 Ringed Finger
+11140000 Stone Club
+11141000 Poison Stone Club
+11150000 Marika's Hammer
+11160000 Father Marika's Hammer
+11161000 Poison Marika's Hammer
+12000000 Large Club
+12001000 Poison Large Club
+12010000 Greathorn Hammer
+12011000 Poison Greathorn Hammer
+12020000 Battle Hammer
+12021000 Poison Battle Hammer
+12060000 Great Mace
+12061000 Poison Great Mace
+12080000 Curved Great Club
+12081000 Poison Curved Great Club
+12130000 Celebrant's Skull
+12131000 Celebrant's Poison Skull
+12140000 Pickaxe
+12141000 Poison Pickaxe
+12150000 Beastclaw Greathammer
+12160000 Envoy's Long Horn
+12170000 Cranial Vessel Candlestand
+12180000 Great Stars
+12181000 Poison Great Stars
+12190000 Brick Hammer
+12191000 Poison Brick Hammer
+12200000 Devourer's Scepter
+12210000 Rotten Battle Hammer
+12211000 Poison Rotten Battle Hammer
+13000000 Nightrider Flail
+13001000 Poison Nightrider Flail
+13010000 Flail
+13011000 Poison Flail
+13020000 Family Heads
+13030000 Bastard's Stars
+13040000 Chainlink Flail
+13041000 Poison Chainlink Flail
+14000000 Battle Axe
+14001000 Poison Battle Axe
+14010000 Forked Hatchet
+14011000 Poison Forked Hatchet
+14020000 Hand Axe
+14021000 Poison Hand Axe
+14030000 Jawbone Axe
+14031000 Poison Jawbone Axe
+14040000 Iron Cleaver
+14041000 Poison Iron Cleaver
+14050000 Ripple Blade
+14051000 Poison Ripple Blade
+14060000 Celebrant's Cleaver
+14061000 Celebrant's Poison Cleaver
+14080000 Icerind Hatchet
+14100000 Highland Axe
+14101000 Poison Highland Axe
+14110000 Sacrificial Axe
+14111000 Poison Sacrificial Axe
+14120000 Rosus' Axe
+14130000 Burial Axe
+14131000 Poison Burial Axe
+14140000 Stormhawk Axe
+15000000 Greataxe
+15001000 Poison Greataxe
+15010000 Warped Axe
+15011000 Poison Warped Axe
+15020000 Great Omenkiller Cleaver
+15021000 Poison Great Omenkiller Cleaver
+15030000 Crescent Moon Axe
+15031000 Poison Crescent Moon Axe
+15040000 Axe of Godrick
+15050000 Longhaft Axe
+15051000 Poison Longhaft Axe
+15060000 Rusted Anchor
+15061000 Poison Rusted Anchor
+15080000 Executioner's Greataxe
+15081000 Executioner's Poison Greataxe
+15110000 Winged Greathorn
+15120000 Butchering Knife
+15121000 Poison Butchering Knife
+15130000 Gargoyle's Great Axe
+15131000 Gargoyle's Poison Great Axe
+15140000 Gargoyle's Black Axe
+15141000 Poison Gargoyle's Black Axe
+16000000 Short Spear
+16001000 Poison Short Spear
+16010000 Spear
+16011000 Poison Spear
+16020000 Crystal Spear
+16030000 Clayman's Harpoon
+16031000 Clayman's Poison Harpoon
+16040000 Cleanrot Spear
+16041000 Poison Cleanrot Knight's Spear
+16050000 Partisan
+16051000 Poison Partisan
+16060000 Celebrant's Rib-Rake
+16061000 Celebrant's Poison Rib-Rake
+16070000 Pike
+16071000 Poison Pike
+16080000 Torchpole
+16090000 Bolt of Gransax
+16110000 Cross-Naginata
+16111000 Poison Cross-Naginata
+16120000 Death Ritual Spear
+16130000 Inquisitor's Girandole
+16140000 Spiked Spear
+16141000 Poison Spiked Spear
+16150000 Iron Spear
+16151000 Poison Iron Spear
+16160000 Rotten Crystal Spear
+17010000 Mohgwyn's Sacred Spear
+17020000 Siluria's Tree
+17030000 Serpent-Hunter
+17050000 Vyke's War Spear
+17060000 Lance
+17061000 Poison Lance
+17070000 Treespear
+17071000 Poison Treespear
+18000000 Halberd
+18001000 Poison Halberd
+18010000 Pest's Glaive
+18011000 Pest's Poison Glaive
+18020000 Lucerne
+18021000 Poison Lucerne
+18030000 Banished Knight's Halberd
+18031000 Banished Knight's Poison Halberd
+18040000 Commander's Standard
+18050000 Nightrider Glaive
+18051000 Poison Nightrider Glaive
+18060000 Ripple Crescent Halberd
+18061000 Poison Ripple Crescent Halberd
+18070000 Vulgar Militia Saw
+18071000 Poison Vulgar Militia Saw
+18080000 Golden Halberd
+18081000 Poison Golden Halberd
+18090000 Glaive
+18091000 Poison Glaive
+18100000 Loretta's War Sickle
+18110000 Guardian's Swordspear
+18111000 Guardian's Poison Swordspear
+18130000 Vulgar Militia Shotel
+18131000 Poison Vulgar Militia Shotel
+18140000 Dragon Halberd
+18141000 Poison Dragon Halberd
+18150000 Gargoyle's Halberd
+18151000 Gargoyle's Poison Halberd
+18160000 Gargoyle's Black Halberd
+18161000 Poison Gargoyle's Black Halberd
+19000000 Scythe
+19001000 Poison Scythe
+19010000 Grave Scythe
+19011000 Poison Grave Scythe
+19020000 Halo Scythe
+19050000 Heretic's Hook
+19060000 Winged Scythe
+20000000 Whip
+20001000 Poison Whip
+20020000 Thorned Whip
+20021000 Poison Thorned Whip
+20030000 Magma Whip Candlestick
+20031000 Poison Lava Whip
+20050000 Hoslow's Petal Whip
+20051000 Hoslow's Poison Petal Whip
+20060000 Giant's Red Braid
+20070000 Urumi
+20071000 Poison Urumi
+21000000 Caestus
+21001000 Poison Caestus
+21010000 Spiked Caestus
+21011000 Poison Spiked Caestus
+21060000 Grafted Dragon
+21070000 Iron Ball
+21071000 Poison Iron Ball
+21080000 Star Fist
+21081000 Poison Star Fist
+21100000 Katar
+21101000 Poison Katar
+21110000 Clinging Bone
+21120000 Veteran's Prosthesis
+21130000 Cipher Pata
+22000000 Hookclaws
+22001000 Poison Hookclaws
+22010000 Venomous Fang
+22011000 Poison Venomous Fang
+22020000 Bloodhound Claws
+22021000 Poison Bloodhound Claws
+22030000 Raptor Talons
+22031000 Poison Raptor Talons
+23000000 Prelate's Inferno Crozier
+23001000 Prelate's Poison Inferno Crozier
+23010000 Watchdog's Staff
+23011000 Poison Watchdog's Crosier
+23020000 Great Club
+23021000 Poison Great Club
+23030000 Envoy's Greathorn
+23040000 Duelist Greataxe
+23041000 Poison Duelist Greataxe
+23050000 Axe of Godfrey
+23060000 Dragon Greatclaw
+23070000 Staff of the Avatar
+23080000 Fallingstar Beast Jaw
+23100000 Ghiza's Wheel
+23110000 Giant-Crusher
+23111000 Poison Giant-Crusher
+23120000 Golem's Halberd
+23121000 Golem's Poison Halberd
+23130000 Troll's Hammer
+23131000 Troll's Poison Hammer
+23140000 Rotten Staff
+23150000 Rotten Greataxe
+23151000 Poison Rotten Greataxe
+24000000 Torch
+24020000 Steel-Wire Torch
+24040000 St. Trina's Torch
+24050000 Ghostflame Torch
+24060000 Beast-Repellent Torch
+24070000 Sentry's Torch
+30000000 Buckler
+30001000 Poison Buckler
+30010000 Perfumer's Shield
+30011000 Perfumer's Poison Shield
+30020000 Man-Serpent's Shield
+30021000 Man-serpent's Poison Shield
+30030000 Rickety Shield
+30031000 Poison Rickety Shield
+30040000 Pillory Shield
+30041000 Poison Pillory Shield
+30060000 Beastman's Jar-Shield
+30061000 Beastman's Poison Jar-Shield
+30070000 Red Thorn Roundshield
+30071000 Poison Red Thorn Roundshield
+30080000 Scripture Wooden Shield
+30081000 Poison Scripture Wooden Shield
+30090000 Riveted Wooden Shield
+30091000 Poison Riveted Wooden Shield
+30100000 Blue-White Wooden Shield
+30101000 Poison Blue-White Wooden Shield
+30110000 Rift Shield
+30111000 Poison Rift Shield
+30120000 Iron Roundshield
+30121000 Poison Iron Roundshield
+30130000 Gilded Iron Shield
+30131000 Gilded Poison Iron Shield
+30140000 Ice Crest Shield
+30141000 Poison Ice Crest Shield
+30150000 Smoldering Shield
+30151000 Poison Smoldering Shield
+30190000 Spiralhorn Shield
+30191000 Poison Spiralhorn Shield
+30200000 Coil Shield
+31000000 Kite Shield
+31001000 Poison Kite Shield
+31010000 Marred Leather Shield
+31011000 Marred Poison Leather Shield
+31020000 Marred Wooden Shield
+31021000 Marred Poison Wooden Shield
+31030000 Banished Knight's Shield
+31031000 Banished Knight's Poison Shield
+31040000 Albinauric Shield
+31041000 Poison Albinauric Shield
+31050000 Sun Realm Shield
+31051000 Poison Sun Realm Shield
+31060000 Silver Mirrorshield
+31070000 Round Shield
+31071000 Poison Round Shield
+31080000 Scorpion Kite Shield
+31081000 Poison Scorpion Kite Shield
+31090000 Twinbird Kite Shield
+31091000 Poison Twinbird Kite Shield
+31100000 Blue-Gold Kite Shield
+31101000 Poison Blue-Gold Kite Shield
+31130000 Brass Shield
+31131000 Poison Brass Shield
+31140000 Great Turtle Shell
+31141000 Poison Great Turtle Shell
+31170000 Shield of the Guilty
+31171000 Poison Shield of the Guilty
+31190000 Carian Knight's Shield
+31191000 Carian Knight's Poison Shield
+31230000 Large Leather Shield
+31231000 Poison Large Leather Shield
+31240000 Horse Crest Wooden Shield
+31241000 Poison Horse Crest Wooden Shield
+31250000 Candletree Wooden Shield
+31251000 Poison Candletree Wooden Shield
+31260000 Flame Crest Wooden Shield
+31261000 Poison Flame Crest Wooden Shield
+31270000 Hawk Crest Wooden Shield
+31271000 Poison Hawk Crest Wooden Shield
+31280000 Beast Crest Heater Shield
+31281000 Poison Beast Crest Heater Shield
+31290000 Red Crest Heater Shield
+31291000 Poison Red Crest Heater Shield
+31300000 Blue Crest Heater Shield
+31301000 Poison Blue Crest Heater Shield
+31310000 Eclipse Crest Heater Shield
+31311000 Poison Eclipse Crest Heater Shield
+31320000 Inverted Hawk Heater Shield
+31321000 Poison Inverted Hawk Heater Shield
+31330000 Heater Shield
+31331000 Poison Heater Shield
+31340000 Black Leather Shield
+31341000 Poison Black Leather Shield
+32000000 Dragon Towershield
+32001000 Poison Dragon Towershield
+32020000 Distinguished Greatshield
+32021000 Distinguished Poison Greatshield
+32030000 Crucible Hornshield
+32031000 Poison Crucible Hornshield
+32040000 Dragonclaw Shield
+32041000 Poison Dragonclaw Shield
+32050000 Briar Greatshield
+32051000 Poison Briar Greatshield
+32080000 Erdtree Greatshield
+32081000 Poison Erdtree Greatshield
+32090000 Golden Beast Crest Shield
+32091000 Poison Golden Beast Crest Shield
+32120000 Jellyfish Shield
+32130000 Fingerprint Stone Shield
+32131000 Poison Fingerprint Stone Shield
+32140000 Icon Shield
+32141000 Poison Icon Shield
+32150000 One-Eyed Shield
+32160000 Visage Shield
+32170000 Spiked Palisade Shield
+32171000 Poison Spiked Palisade Shield
+32190000 Manor Towershield
+32191000 Poison Manor Towershield
+32200000 Crossed-Tree Towershield
+32201000 Poison Crossed-Tree Towershield
+32210000 Inverted Hawk Towershield
+32211000 Poison Inverted Hawk Towershield
+32220000 Ant's Skull Plate
+32230000 Redmane Greatshield
+32231000 Poison Redmane Greatshield
+32240000 Eclipse Crest Greatshield
+32241000 Poison Eclipse Crest Greatshield
+32250000 Cuckoo Greatshield
+32251000 Poison Cuckoo Greatshield
+32260000 Golden Greatshield
+32261000 Poison Golden Greatshield
+32270000 Gilded Greatshield
+32271000 Poison Gilded Greatshield
+32280000 Haligtree Crest Greatshield
+32281000 Poison Haligtree Crest Greatshield
+32290000 Wooden Greatshield
+32291000 Poison Wooden Greatshield
+32300000 Lordsworn's Shield
+32301000 Poison Lordsworn's Shield
+33000000 Glintstone Staff
+33040000 Crystal Staff
+33050000 Gelmir Glintstone Staff
+33060000 Demi-Human Queen's Staff
+33090000 Carian Regal Scepter
+33120000 Digger's Staff
+33130000 Astrologer's Staff
+33170000 Carian Glintblade Staff
+33180000 Prince of Death's Staff
+33190000 Albinauric Staff
+33200000 Academy Glintstone Staff
+33210000 Carian Glintstone Staff
+33230000 Azur's Glintstone Staff
+33240000 Lusat's Glintstone Staff
+33250000 Meteorite Staff
+33260000 Staff of the Guilty
+33270000 Rotten Crystal Staff
+33280000 Staff of Loss
+34000000 Finger Seal
+34010000 Godslayer's Seal
+34020000 Giant's Seal
+34030000 Gravel Stone Seal
+34040000 Clawmark Seal
+34060000 Golden Order Seal
+34070000 Erdtree Seal
+34080000 Dragon Communion Seal
+34090000 Frenzied Flame Seal
+40000000 Shortbow
+40010000 Misbegotten Shortbow
+40020000 Red Branch Shortbow
+40030000 Harp Bow
+40050000 Composite Bow
+41000000 Longbow
+41010000 Albinauric Bow
+41020000 Horn Bow
+41030000 Erdtree Bow
+41040000 Serpent Bow
+41060000 Pulley Bow
+41070000 Black Bow
+42000000 Lion Greatbow
+42010000 Golem Greatbow
+42030000 Erdtree Greatbow
+42040000 Greatbow
+43000000 Soldier's Crossbow
+43020000 Light Crossbow
+43030000 Heavy Crossbow
+43050000 Pulley Crossbow
+43060000 Full Moon Crossbow
+43080000 Arbalest
+43100000 Buckshot Crossbow
+43110000 Crepus's Black-Key Crossbow
+44000000 Hand Ballista
+44010000 Jar Cannon
+50000000 Arrow
+50010000 Fire Arrow
+50020000 Serpent Arrow
+50030000 Bone Arrow (Fletched)
+50040000 St. Trina's Arrow
+50060000 Shattershard Arrow (Fletched)
+50080000 Rainbow Stone Arrow (Fletched)
+50090000 Golden Arrow
+50100000 Dwelling Arrow
+50110000 Bone Arrow
+50130000 Firebone Arrow (Fletched)
+50140000 Firebone Arrow
+50150000 Poisonbone Arrow (Fletched)
+50160000 Poisonbone Arrow
+50170000 Sleepbone Arrow (Fletched)
+50180000 Sleepbone Arrow
+50190000 Stormwing Bone Arrow
+50200000 Lightningbone Arrow (Fletched)
+50210000 Lightningbone Arrow
+50220000 Rainbow Stone Arrow
+50230000 Shattershard Arrow
+50240000 Spiritflame Arrow
+50250000 Storm Arrow
+50260000 Magicbone Arrow (Fletched)
+50270000 Magicbone Arrow
+50280000 Haligbone Arrow (Fletched)
+50290000 Haligbone Arrow
+50300000 Bloodbone Arrow (Fletched)
+50310000 Bloodbone Arrow
+50320000 Coldbone Arrow (Fletched)
+50330000 Coldbone Arrow
+50340000 Rotbone Arrow (Fletched)
+50350000 Rotbone Arrow
+51000000 Great Arrow
+51010000 Golem's Great Arrow
+51020000 Golden Great Arrow
+51030000 Golem's Magic Arrow
+51040000 Radahn's Spear
+51050000 Bone Great Arrow (Fletched)
+51060000 Bone Great Arrow
+52000000 Bolt
+52010000 Lightning Bolt
+52020000 Perfumer's Bolt
+52030000 Black-Key Bolt
+52040000 Burred Bolt
+52050000 Meteor Bolt
+52060000 Explosive Bolt
+52070000 Golden Bolt
+52080000 Lordsworn's Bolt
+52090000 Bone Bolt
+52100000 Firebone Bolt
+52110000 Lightningbone Bolt
+52120000 Magicbone Bolt
+52130000 Haligbone Bolt
+52140000 Poisonbone Bolt
+52150000 Bloodbone Bolt
+52160000 Coldbone Bolt
+52170000 Rotbone Bolt
+52180000 Sleepbone Bolt
+52190000 Flaming Bolt
+53000000 Ballista Bolt
+53010000 Lightning Greatbolt
+53020000 Explosive Greatbolt
+53030000 Bone Ballista Bolt
