@@ -61,7 +61,7 @@
                 <CheckBox Content="Spear" IsChecked="{Binding Hook.SpearNormal}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
-                <CheckBox Content="GreatSpear" IsChecked="{Binding Hook.SpearLarge}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                <CheckBox Content="Large Spear" IsChecked="{Binding Hook.SpearLarge}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <CheckBox Content="GreatSpear" IsChecked="{Binding Hook.SpearHeavy}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
@@ -98,6 +98,9 @@
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <CheckBox Content="Ballista" IsChecked="{Binding Hook.Ballista}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <CheckBox Content="GlintstoneStaff" IsChecked="{Binding Hook.Sorcery}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <CheckBox Content="GlintstoneStaff" IsChecked="{Binding Hook.Staff}" VerticalAlignment="Center" HorizontalAlignment="Center"/>

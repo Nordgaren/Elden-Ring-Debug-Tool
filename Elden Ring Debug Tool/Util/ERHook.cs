@@ -59,7 +59,7 @@ namespace Elden_Ring_Debug_Tool
         }
         public void Update()
         {
-            if (!Hooked)
+            if (!Setup)
                 return;
 
             OnPropertyChanged(nameof(Dagger));
