@@ -1,0 +1,26 @@
+40000000 Shortbow
+40010000 Misbegotten Shortbow
+40020000 Red Branch Shortbow
+40030000 Harp Bow
+40050000 Composite Bow
+41000000 Longbow
+41010000 Albinauric Bow
+41020000 Horn Bow
+41030000 Erdtree Bow
+41040000 Serpent Bow
+41060000 Pulley Bow
+41070000 Black Bow
+42000000 Lion Greatbow
+42010000 Golem Greatbow
+42030000 Erdtree Greatbow
+42040000 Greatbow
+43000000 Soldier's Crossbow
+43020000 Light Crossbow
+43030000 Heavy Crossbow
+43050000 Pulley Crossbow
+43060000 Full Moon Crossbow
+43080000 Arbalest
+43100000 Buckshot Crossbow
+43110000 Crepus's Black-Key Crossbow
+44000000 Hand Ballista
+44010000 Jar Cannon

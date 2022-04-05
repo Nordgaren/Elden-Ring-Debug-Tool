@@ -1,0 +1,27 @@
+33000000 Glintstone Staff
+33040000 Crystal Staff
+33050000 Gelmir Glintstone Staff
+33060000 Demi-Human Queen's Staff
+33090000 Carian Regal Scepter
+33120000 Digger's Staff
+33130000 Astrologer's Staff
+33170000 Carian Glintblade Staff
+33180000 Prince of Death's Staff
+33190000 Albinauric Staff
+33200000 Academy Glintstone Staff
+33210000 Carian Glintstone Staff
+33230000 Azur's Glintstone Staff
+33240000 Lusat's Glintstone Staff
+33250000 Meteorite Staff
+33260000 Staff of the Guilty
+33270000 Rotten Crystal Staff
+33280000 Staff of Loss
+34000000 Finger Seal
+34010000 Godslayer's Seal
+34020000 Giant's Seal
+34030000 Gravel Stone Seal
+34040000 Clawmark Seal
+34060000 Golden Order Seal
+34070000 Erdtree Seal
+34080000 Dragon Communion Seal
+34090000 Frenzied Flame Seal

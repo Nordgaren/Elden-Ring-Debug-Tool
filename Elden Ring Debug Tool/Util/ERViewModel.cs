@@ -13,7 +13,7 @@ namespace Elden_Ring_Debug_Tool
 
         public ERViewModel()
         {
-            Hook = new ERHook(5000, 5000);
+            Hook = new ERHook(5000, 5000, p => p.MainWindowTitle == "ELDEN RING™");
             Hook.OnHooked += Hook_OnHooked;
             Hook.OnUnhooked += Hook_OnUnhooked;
             Hook.Start();

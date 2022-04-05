@@ -1,0 +1,256 @@
+1000000 Dagger
+1010000 Black Knife
+1020000 Parrying Dagger
+1030000 Miséricorde
+1040000 Reduvia
+1050000 Crystal Knife
+1060000 Celebrant's Sickle
+1070000 Glintstone Kris
+1080000 Scorpion's Stinger
+1090000 Great Knife
+1100000 Wakizashi
+1110000 Cinquedea
+1130000 Ivory Sickle
+1140000 Bloodstained Dagger
+1150000 Erdsteel Dagger
+1160000 Blade of Calling
+2000000 Longsword
+2010000 Short Sword
+2020000 Broadsword
+2040000 Lordsworn's Straight Sword
+2050000 Weathered Straight Sword
+2060000 Ornamental Straight Sword
+2070000 Golden Epitaph
+2080000 Nox Flowing Sword
+2090000 Inseparable Sword
+2110000 Coded Sword
+2140000 Sword of Night and Flame
+2150000 Crystal Sword
+2180000 Carian Knight's Sword
+2190000 Sword of St. Trina
+2200000 Miquellan Knight's Sword
+2210000 Cane Sword
+2220000 Regalia of Eochaid
+2230000 Noble's Slender Sword
+2240000 Warhawk's Talon
+2250000 Lazuli Glintstone Sword
+2260000 Rotten Crystal Sword
+3000000 Bastard Sword
+3010000 Forked Greatsword
+3020000 Iron Greatsword
+3030000 Lordsworn's Greatsword
+3040000 Knight's Greatsword
+3050000 Flamberge
+3060000 Ordovis's Greatsword
+3070000 Alabaster Lord's Sword
+3080000 Banished Knight's Greatsword
+3090000 Dark Moon Greatsword
+3100000 Sacred Relic Sword
+3130000 Helphen's Steeple
+3140000 Blasphemous Blade
+3150000 Marais Executioner's Sword
+3160000 Sword of Milos
+3170000 Golden Order Greatsword
+3180000 Claymore
+3190000 Gargoyle's Greatsword
+3200000 Death's Poker
+3210000 Gargoyle's Blackblade
+4000000 Greatsword
+4010000 Watchdog's Greatsword
+4020000 Maliketh's Black Blade
+4030000 Troll's Golden Sword
+4040000 Zweihander
+4050000 Starscourge Greatsword
+4060000 Royal Greatsword
+4070000 Godslayer's Greatsword
+4080000 Ruins Greatsword
+4100000 Grafted Blade Greatsword
+4110000 Troll Knight's Sword
+5000000 Estoc
+5010000 Cleanrot Knight's Sword
+5020000 Rapier
+5030000 Rogier's Rapier
+5040000 Antspur Rapier
+5050000 Frozen Needle
+5060000 Noble's Estoc
+6000000 Bloody Helice
+6010000 Godskin Stitcher
+6020000 Great Épée
+6040000 Dragon King's Cragblade
+7000000 Falchion
+7010000 Beastman's Curved Sword
+7020000 Shotel
+7030000 Shamshir
+7040000 Bandit's Curved Sword
+7050000 Magma Blade
+7060000 Flowing Curved Sword
+7070000 Wing of Astel
+7080000 Scavenger's Curved Sword
+7100000 Eclipse Shotel
+7110000 Serpent-God's Curved Sword
+7120000 Mantis Blade
+7140000 Scimitar
+7150000 Grossmesser
+8010000 Onyx Lord's Greatsword
+8020000 Dismounter
+8030000 Bloodhound's Fang
+8040000 Magma Wyrm's Scalesword
+8050000 Zamor Curved Sword
+8060000 Omen Cleaver
+8070000 Monk's Flameblade
+8080000 Beastman's Cleaver
+8100000 Morgott's Cursed Sword
+9000000 Uchigatana
+9010000 Nagakiba
+9020000 Hand of Malenia
+9030000 Meteoric Ore Blade
+9040000 Rivers of Blood
+9060000 Moonveil
+9070000 Dragonscale Blade
+9080000 Serpentbone Blade
+10000000 Twinblade
+10010000 Godskin Peeler
+10030000 Twinned Knight Swords
+10050000 Eleonora's Poleblade
+10080000 Gargoyle's Twinblade
+10090000 Gargoyle's Black Blades
+11000000 Mace
+11010000 Club
+11030000 Curved Club
+11040000 Warpick
+11050000 Morning Star
+11060000 Varré's Bouquet
+11070000 Spiked Club
+11080000 Hammer
+11090000 Monk's Flamemace
+11100000 Envoy's Horn
+11110000 Scepter of the All-Knowing
+11120000 Nox Flowing Hammer
+11130000 Ringed Finger
+11140000 Stone Club
+11150000 Marika's Hammer
+12000000 Large Club
+12010000 Greathorn Hammer
+12020000 Battle Hammer
+12060000 Great Mace
+12080000 Curved Great Club
+12130000 Celebrant's Skull
+12140000 Pickaxe
+12150000 Beastclaw Greathammer
+12160000 Envoy's Long Horn
+12170000 Cranial Vessel Candlestand
+12180000 Great Stars
+12190000 Brick Hammer
+12200000 Devourer's Scepter
+12210000 Rotten Battle Hammer
+13000000 Nightrider Flail
+13010000 Flail
+13020000 Family Heads
+13030000 Bastard's Stars
+13040000 Chainlink Flail
+14000000 Battle Axe
+14010000 Forked Hatchet
+14020000 Hand Axe
+14030000 Jawbone Axe
+14040000 Iron Cleaver
+14050000 Ripple Blade
+14060000 Celebrant's Cleaver
+14080000 Icerind Hatchet
+14100000 Highland Axe
+14110000 Sacrificial Axe
+14120000 Rosus' Axe
+14140000 Stormhawk Axe
+15000000 Greataxe
+15010000 Warped Axe
+15020000 Great Omenkiller Cleaver
+15030000 Crescent Moon Axe
+15040000 Axe of Godrick
+15050000 Longhaft Axe
+15060000 Rusted Anchor
+15080000 Executioner's Greataxe
+15110000 Winged Greathorn
+15120000 Butchering Knife
+15130000 Gargoyle's Great Axe
+15140000 Gargoyle's Black Axe
+16000000 Short Spear
+16010000 Spear
+16020000 Crystal Spear
+16030000 Clayman's Harpoon
+16040000 Cleanrot Spear
+16050000 Partisan
+16060000 Celebrant's Rib-Rake
+16070000 Pike
+16080000 Torchpole
+16090000 Bolt of Gransax
+16110000 Cross-Naginata
+16120000 Death Ritual Spear
+16130000 Inquisitor's Girandole
+16140000 Spiked Spear
+16150000 Iron Spear
+16160000 Rotten Crystal Spear
+17010000 Mohgwyn's Sacred Spear
+17020000 Siluria's Tree
+17030000 Serpent-Hunter
+17050000 Vyke's War Spear
+17060000 Lance
+17070000 Treespear
+18000000 Halberd
+18010000 Pest's Glaive
+18020000 Lucerne
+18030000 Banished Knight's Halberd
+18040000 Commander's Standard
+18050000 Nightrider Glaive
+18060000 Ripple Crescent Halberd
+18070000 Vulgar Militia Saw
+18080000 Golden Halberd
+18090000 Glaive
+18100000 Loretta's War Sickle
+18110000 Guardian's Swordspear
+18130000 Vulgar Militia Shotel
+18140000 Dragon Halberd
+18150000 Gargoyle's Halberd
+18160000 Gargoyle's Black Halberd
+19000000 Scythe
+19010000 Grave Scythe
+19020000 Halo Scythe
+19060000 Winged Scythe
+20000000 Whip
+20020000 Thorned Whip
+20030000 Magma Whip Candlestick
+20050000 Hoslow's Petal Whip
+20060000 Giant's Red Braid
+20070000 Urumi
+21000000 Caestus
+21010000 Spiked Caestus
+21060000 Grafted Dragon
+21070000 Iron Ball
+21080000 Star Fist
+21100000 Katar
+21110000 Clinging Bone
+21120000 Veteran's Prosthesis
+21130000 Cipher Pata
+22000000 Hookclaws
+22010000 Venomous Fang
+22020000 Bloodhound Claws
+22030000 Raptor Talons
+23000000 Prelate's Inferno Crozier
+23010000 Watchdog's Staff
+23020000 Great Club
+23030000 Envoy's Greathorn
+23040000 Duelist Greataxe
+23050000 Axe of Godfrey
+23060000 Dragon Greatclaw
+23070000 Staff of the Avatar
+23080000 Fallingstar Beast Jaw
+23100000 Ghiza's Wheel
+23110000 Giant-Crusher
+23120000 Golem's Halberd
+23130000 Troll's Hammer
+23140000 Rotten Staff
+23150000 Rotten Greataxe
+24000000 Torch
+24020000 Steel-Wire Torch
+24040000 St. Trina's Torch
+24050000 Ghostflame Torch
+24060000 Beast-Repellent Torch
+24070000 Sentry's Torch

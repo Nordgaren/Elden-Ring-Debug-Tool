@@ -24,6 +24,8 @@ namespace Elden_Ring_Debug_Tool
         public MainWindow()
         {
             InitializeComponent();
+            ERItemCategory.GetItemCategories();
+            ERGem.GetGems();
         }
 
         ERHook Hook => ViewModel.Hook;

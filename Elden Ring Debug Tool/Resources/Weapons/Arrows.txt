@@ -1,0 +1,36 @@
+50000000 Arrow - Arrow
+50010000 Arrow - Fire
+50020000 Arrow - Serpent
+50030000 Arrow - Bone (Fletched)
+50040000 Arrow - St. Trina's
+50060000 Arrow - Shattershard (Fletched)
+50080000 Arrow - Rainbow Stone (Fletched)
+50090000 Arrow - Golden
+50100000 Arrow - Dwelling
+50110000 Arrow - Bone
+50130000 Arrow - Firebone (Fletched)
+50140000 Arrow - Firebone
+50150000 Arrow - Poisonbone (Fletched)
+50160000 Arrow - Poisonbone
+50170000 Arrow - Sleepbone (Fletched)
+50180000 Arrow - Sleepbone
+50190000 Arrow - Stormwing Bone
+50200000 Arrow - Lightningbone (Fletched)
+50210000 Arrow - Lightningbone
+50220000 Arrow - Rainbow Stone
+50230000 Arrow - Shattershard
+50240000 Arrow - Spiritflame
+50250000 Arrow - Storm
+50260000 Arrow - Magicbone (Fletched)
+50270000 Arrow - Magicbone
+50280000 Arrow - Haligbone (Fletched)
+50290000 Arrow - Haligbone
+50300000 Arrow - Bloodbone (Fletched)
+50310000 Arrow - Bloodbone
+50320000 Arrow - Coldbone (Fletched)
+50330000 Arrow - Coldbone
+50340000 Arrow - Rotbone (Fletched)
+50350000 Arrow - Rotbone
+51030000 Arrow - Golem's Magic
+51050000 Arrow - Bone (Fletched)
+51060000 Arrow - Bone

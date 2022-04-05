@@ -1,0 +1,69 @@
+30000000 Buckler
+30010000 Perfumer's Shield
+30020000 Man-Serpent's Shield
+30030000 Rickety Shield
+30040000 Pillory Shield
+30060000 Beastman's Jar-Shield
+30070000 Red Thorn Roundshield
+30080000 Scripture Wooden Shield
+30090000 Riveted Wooden Shield
+30100000 Blue-White Wooden Shield
+30110000 Rift Shield
+30120000 Iron Roundshield
+30130000 Gilded Iron Shield
+30140000 Ice Crest Shield
+30150000 Smoldering Shield
+30190000 Spiralhorn Shield
+30200000 Coil Shield
+31000000 Kite Shield
+31010000 Marred Leather Shield
+31020000 Marred Wooden Shield
+31030000 Banished Knight's Shield
+31040000 Albinauric Shield
+31050000 Sun Realm Shield
+31060000 Silver Mirrorshield
+31070000 Round Shield
+31080000 Scorpion Kite Shield
+31090000 Twinbird Kite Shield
+31100000 Blue-Gold Kite Shield
+31130000 Brass Shield
+31140000 Great Turtle Shell
+31170000 Shield of the Guilty
+31190000 Carian Knight's Shield
+31230000 Large Leather Shield
+31240000 Horse Crest Wooden Shield
+31250000 Candletree Wooden Shield
+31260000 Flame Crest Wooden Shield
+31270000 Hawk Crest Wooden Shield
+31280000 Beast Crest Heater Shield
+31290000 Red Crest Heater Shield
+31300000 Blue Crest Heater Shield
+31310000 Eclipse Crest Heater Shield
+31320000 Inverted Hawk Heater Shield
+31330000 Heater Shield
+31340000 Black Leather Shield
+32000000 Dragon Towershield
+32020000 Distinguished Greatshield
+32030000 Crucible Hornshield
+32040000 Dragonclaw Shield
+32050000 Briar Greatshield
+32080000 Erdtree Greatshield
+32090000 Golden Beast Crest Shield
+32120000 Jellyfish Shield
+32130000 Fingerprint Stone Shield
+32140000 Icon Shield
+32150000 One-Eyed Shield
+32160000 Visage Shield
+32170000 Spiked Palisade Shield
+32190000 Manor Towershield
+32200000 Crossed-Tree Towershield
+32210000 Inverted Hawk Towershield
+32220000 Ant's Skull Plate
+32230000 Redmane Greatshield
+32240000 Eclipse Crest Greatshield
+32250000 Cuckoo Greatshield
+32260000 Golden Greatshield
+32270000 Gilded Greatshield
+32280000 Haligtree Crest Greatshield
+32290000 Wooden Greatshield
+32300000 Lordsworn's Shield

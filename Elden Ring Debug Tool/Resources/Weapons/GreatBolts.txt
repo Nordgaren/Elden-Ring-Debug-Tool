@@ -1,0 +1,4 @@
+53000000 Greatbolt - Ballista Bolt
+53010000 Greatbolt - Lightning
+53020000 Greatbolt - Explosive
+53030000 Greatbolt - Bone Ballista Bolt

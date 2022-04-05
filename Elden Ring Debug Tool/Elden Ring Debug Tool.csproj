@@ -9,6 +9,32 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resources\ERItemCategories.txt" />
+    <None Remove="Resources\Weapons\Arrows.txt" />
+    <None Remove="Resources\Weapons\Bolts.txt" />
+    <None Remove="Resources\Weapons\Gems.txt" />
+    <None Remove="Resources\Weapons\GreatArrows.txt" />
+    <None Remove="Resources\Weapons\GreatBolts.txt" />
+    <None Remove="Resources\Weapons\MeleeWeapons.txt" />
+    <None Remove="Resources\Weapons\RangedWeapons.txt" />
+    <None Remove="Resources\Weapons\Shields.txt" />
+    <None Remove="Resources\Weapons\SpellTools.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\ERItemCategories.txt" />
+    <EmbeddedResource Include="Resources\Weapons\Arrows.txt" />
+    <EmbeddedResource Include="Resources\Weapons\Bolts.txt" />
+    <EmbeddedResource Include="Resources\Weapons\Gems.txt" />
+    <EmbeddedResource Include="Resources\Weapons\GreatArrows.txt" />
+    <EmbeddedResource Include="Resources\Weapons\GreatBolts.txt" />
+    <EmbeddedResource Include="Resources\Weapons\MeleeWeapons.txt" />
+    <EmbeddedResource Include="Resources\Weapons\RangedWeapons.txt" />
+    <EmbeddedResource Include="Resources\Weapons\Shields.txt" />
+    <EmbeddedResource Include="Resources\Weapons\SpellTools.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\PropertyHook\PropertyHook\PropertyHook.csproj" />
   </ItemGroup>
 

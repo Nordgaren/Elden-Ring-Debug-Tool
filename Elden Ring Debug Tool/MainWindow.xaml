@@ -5,14 +5,119 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Elden_Ring_Debug_Tool"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800" Loaded="Window_Loaded" Closing="Window_Closing">
+        Title="MainWindow" Height="550" Width="800" Loaded="Window_Loaded" Closing="Window_Closing">
     <Window.DataContext>
         <local:ERViewModel x:Name="ViewModel"/>
     </Window.DataContext>
     <Grid>
-        <StackPanel Orientation="Horizontal">
-            <Label Content="First Int:"/>
-            <Label Content="{Binding Hook.PlayerInventoryFirstInt}"/>
+        <StackPanel>
+            <Label Content="Bitfield:" VerticalAlignment="Center"/>
+            <StackPanel Orientation="Horizontal">
+                <CheckBox Content="Dagger" IsChecked="{Binding Hook.Dagger}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <CheckBox Content="StraightSword" IsChecked="{Binding Hook.SwordNormal}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <CheckBox Content="Greatsword" IsChecked="{Binding Hook.SwordLarge}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <CheckBox Content="ColossalSword" IsChecked="{Binding Hook.SwordGigantic}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <CheckBox Content="CurvedSword" IsChecked="{Binding Hook.SabreNormal}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <CheckBox Content="CurvedGreatsword" IsChecked="{Binding Hook.SabreLarge}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <CheckBox Content="Katana" IsChecked="{Binding Hook.katana}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <CheckBox Content="Twinblade" IsChecked="{Binding Hook.SwordDoulbeEdge}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <CheckBox Content="ThrustingSword" IsChecked="{Binding Hook.SwordPierce}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <CheckBox Content="HeavyThrustingSword" IsChecked="{Binding Hook.RapierHeavy}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <CheckBox Content="Axe" IsChecked="{Binding Hook.AxeNormal}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <CheckBox Content="Greataxe" IsChecked="{Binding Hook.AxeLarge}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <CheckBox Content="Hammer" IsChecked="{Binding Hook.HammerNormal}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <CheckBox Content="GreatHammer" IsChecked="{Binding Hook.HammerLarge}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <CheckBox Content="Flail" IsChecked="{Binding Hook.Flail}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <CheckBox Content="Spear" IsChecked="{Binding Hook.SpearNormal}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <CheckBox Content="GreatSpear" IsChecked="{Binding Hook.SpearLarge}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <CheckBox Content="GreatSpear" IsChecked="{Binding Hook.SpearHeavy}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <CheckBox Content="Halberd" IsChecked="{Binding Hook.SpearAxe}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <CheckBox Content="Reaper" IsChecked="{Binding Hook.Sickle}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <CheckBox Content="Fist" IsChecked="{Binding Hook.Knuckle}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <CheckBox Content="Claws" IsChecked="{Binding Hook.Claw}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <CheckBox Content="Whip" IsChecked="{Binding Hook.Whip}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <CheckBox Content="ColossalWeapon" IsChecked="{Binding Hook.Axhammerlarge}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <CheckBox Content="LightBow" IsChecked="{Binding Hook.BowSmall}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <CheckBox Content="Bow" IsChecked="{Binding Hook.BowNormal}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <CheckBox Content="Greatbow" IsChecked="{Binding Hook.BowLarge}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <CheckBox Content="Crossbow" IsChecked="{Binding Hook.Clossbow}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <CheckBox Content="Ballista" IsChecked="{Binding Hook.Ballista}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <CheckBox Content="GlintstoneStaff" IsChecked="{Binding Hook.Staff}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <CheckBox Content="FingerSeal" IsChecked="{Binding Hook.Talisman}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <CheckBox Content="SmallShield" IsChecked="{Binding Hook.ShieldSmall}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <CheckBox Content="MediumShield" IsChecked="{Binding Hook.ShieldNormal}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <CheckBox Content="Greatshield" IsChecked="{Binding Hook.SheildLarge}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <CheckBox Content="Torch" IsChecked="{Binding Hook.Torch}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            </StackPanel>
         </StackPanel>
     </Grid>
+
 </Window>
