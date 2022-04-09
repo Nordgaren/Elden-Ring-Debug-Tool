@@ -1,0 +1,696 @@
+Armor
+fg_a_0000: [1000] Type 1
+fg_a_0002: [1100] Type 2
+fg_a_0011: [1200] Type 3
+fg_a_0004: [1300] Type 4
+fg_a_0012: [1400] Type 5
+fg_a_0006: [1500] Type 6
+fg_a_0010: [1600] Type 7
+fg_a_0005: [1700] Type 8
+fg_a_0007: [1800] Type 9
+fg_a_0003: [1900] Type 10
+fg_a_0000: [2000] Type 11
+fg_a_0000: [2100] Type 12
+fg_a_0000: [2200] Type 13
+fg_a_0000: [2300] Type 14
+fg_a_0000: [2400] Type 15
+fg_a_0000: [2500] Type 16
+fg_a_0000: [2600] Type 17
+fg_a_0000: [2700] Type 18
+fg_a_0000: [2800] Type 19
+fg_a_0000: [2900] Type 20
+fg_a_0000: [3000] Type 1
+fg_a_0006: [3100] Type 2
+fg_a_0002: [3200] Type 3
+fg_a_0004: [3300] Type 4
+fg_a_0005: [3400] Type 5
+fg_a_0007: [3500] Type 6
+fg_a_0008: [3600] Type 7
+fg_a_0003: [3700] Type 8
+fg_a_0009: [3800] Type 9
+fg_a_0010: [3900] Type 10
+fg_a_0000: [4000] Type 11
+fg_a_0000: [4100] Type 12
+fg_a_0000: [4200] Type 13
+fg_a_0000: [4300] Type 14
+fg_a_0000: [4400] Type 15
+fg_a_0000: [4500] Type 16
+fg_a_0000: [4600] Type 17
+fg_a_0000: [4700] Type 18
+fg_a_0000: [4800] Type 19
+fg_a_0000: [4900] Type 20
+m_9000: [5000] Travel Hairstyle
+f_9000: [5000] Travel Hairstyle
+hd_m_0000: [10000] Head
+hd_f_0000: [10000] Head
+bd_m_0000: [10100] Body
+bd_f_0000: [10100] Body
+am_m_0000: [10200] Arms
+am_f_0000: [10200] Arms
+lg_m_0000: [10300] Legs
+lg_f_0000: [10300] Legs
+hd_m_1010: [40000] Iron Helmet
+bd_m_1010: [40100] Scale Armor
+am_m_1010: [40200] Iron Gauntlets
+lg_m_1010: [40300] Leather Trousers
+hd_m_1840: [50000] Kaiden Helm
+bd_m_1840: [50100] Kaiden Armor
+am_m_1840: [50200] Kaiden Gauntlets
+lg_m_1840: [50300] Kaiden Trousers
+hd_m_1100: [60000] Drake Knight Helm
+bd_m_1100: [60100] Drake Knight Armor
+am_m_1100: [60200] Drake Knight Gauntlets
+lg_m_1100: [60300] Drake Knight Greaves
+hd_m_1101: [61000] Drake Knight Helm (Altered)
+bd_m_1101: [61100] Drake Knight Armor (Altered)
+bd_f_1101: [61100] Drake Knight Armor (Altered)
+hd_m_1120: [80000] Scaled Helm
+bd_m_1120: [80100] Scaled Armor
+am_m_1120: [80200] Scaled Gauntlets
+lg_m_1120: [80300] Scaled Greaves
+bd_m_1121: [81100] Scaled Armor (Altered)
+hd_m_1130: [90000] Perfumer Hood
+bd_m_1130: [90100] Perfumer Robe
+am_m_1130: [90200] Perfumer Gloves
+lg_m_1130: [90300] Perfumer Sarong
+lg_f_1130: [90300] Perfumer Sarong
+bd_m_1131: [91100] Perfumer Robe (Altered)
+hd_m_1140: [100000] Traveler's Hat
+bd_m_1140: [100100] Perfumer's Traveling Garb
+am_m_1140: [100200] Traveler's Gloves
+lg_m_1140: [100300] Traveler's Slops
+bd_m_1141: [101100] Perfumer's Traveling Garb (Altered)
+hd_m_1160: [120000] Alberich's Pointed Hat
+bd_m_1160: [120100] Alberich's Robe
+bd_f_1160: [120100] Alberich's Robe
+am_m_1160: [120200] Alberich's Bracers
+lg_m_1160: [120300] Alberich's Trousers
+hd_m_1161: [121000] Alberich's Pointed Hat (Altered)
+bd_m_1161: [121100] Alberich's Robe (Altered)
+bd_f_1161: [121100] Alberich's Robe (Altered)
+hd_m_1170: [130000] Spellblade's Pointed Hat
+bd_m_1170: [130100] Spellblade's Traveling Attire
+am_m_1170: [130200] Spellblade's Gloves
+lg_m_1170: [130300] Spellblade's Trousers
+bd_m_1171: [131100] Spellblade's Traveling Attire (Altered)
+hd_m_1180: [140000] Bull-Goat Helm
+bd_m_1180: [140100] Bull-Goat Armor
+am_m_1180: [140200] Bull-Goat Gauntlets
+lg_m_1180: [140300] Bull-Goat Greaves
+hd_m_1190: [150000] Iron Kasa
+bd_m_1190: [150100] Ronin's Armor
+am_m_1190: [150200] Ronin's Gauntlets
+lg_m_1190: [150300] Ronin's Greaves
+bd_m_1191: [151100] Ronin's Armor (Altered)
+hd_m_1200: [160000] Guilty Hood
+bd_m_1200: [160100] Cloth Garb
+bd_f_1200: [160100] Cloth Garb
+lg_m_1200: [160300] Cloth Trousers
+hd_m_1600: [170000] Black Wolf Mask
+bd_m_1600: [170100] Blaidd's Armor
+am_m_1600: [170200] Blaidd's Gauntlets
+lg_m_1600: [170300] Blaidd's Greaves
+bd_m_1601: [171100] Blaidd's Armor (Altered)
+hd_m_1610: [180000] Black Knife Hood
+bd_m_1610: [180100] Black Knife Armor
+am_m_1610: [180200] Black Knife Gauntlets
+lg_m_1610: [180300] Black Knife Greaves
+bd_m_1611: [181100] Black Knife Armor (Altered)
+hd_m_1640: [190000] Exile Hood
+bd_m_1640: [190100] Exile Armor
+am_m_1640: [190200] Exile Gauntlets
+lg_m_1640: [190300] Exile Greaves
+hd_m_1650: [200000] Banished Knight Helm
+bd_m_1650: [200100] Banished Knight Armor
+am_m_1650: [200200] Banished Knight Gauntlets
+lg_m_1650: [200300] Banished Knight Greaves
+hd_m_1651: [201000] Banished Knight Helm (Altered)
+bd_m_1651: [201100] Banished Knight Armor (Altered)
+hd_m_1670: [210000] Briar Helm
+bd_m_1670: [210100] Briar Armor
+am_m_1670: [210200] Briar Gauntlets
+lg_m_1670: [210300] Briar Greaves
+bd_m_1671: [211100] Briar Armor (Altered)
+hd_m_1680: [220000] Page Hood
+bd_m_1680: [220100] Page Garb
+lg_m_1680: [220300] Page Trousers
+bd_m_1681: [221100] Page Garb (Altered)
+hd_m_1690: [230000] Night's Cavalry Helm
+bd_m_1690: [230100] Night's Cavalry Armor
+am_m_1690: [230200] Night's Cavalry Gauntlets
+lg_m_1690: [230300] Night's Cavalry Greaves
+hd_m_1691: [231000] Night's Cavalry Helm (Altered)
+bd_m_1691: [231100] Night's Cavalry Armor (Altered)
+hd_m_1700: [240000] Blue Silver Mail Hood
+bd_m_1700: [240100] Blue Silver Mail Armor
+bd_f_1700: [240100] Blue Silver Mail Armor
+am_m_1700: [240200] Blue Silver Bracelets
+lg_m_1700: [240300] Blue Silver Mail Skirt
+bd_m_1701: [241100] Blue Silver Mail Armor (Altered)
+bd_f_1701: [241100] Blue Silver Mail Armor (Altered)
+hd_m_1710: [250000] Nomadic Merchant's Chapeau
+bd_m_1710: [250100] Nomadic Merchant's Finery
+lg_m_1710: [250300] Nomadic Merchant's Trousers
+bd_m_1711: [251100] Nomadic Merchant's Finery (Altered)
+hd_m_1720: [260000] Malformed Dragon Helm
+bd_m_1720: [260100] Malformed Dragon Armor
+am_m_1720: [260200] Malformed Dragon Gauntlets
+lg_m_1720: [260300] Malformed Dragon Greaves
+hd_m_1730: [270000] Tree Sentinel Helm
+bd_m_1730: [270100] Tree Sentinel Armor
+am_m_1730: [270200] Tree Sentinel Gauntlets
+lg_m_1730: [270300] Tree Sentinel Greaves
+bd_m_1731: [271100] Tree Sentinel Armor (Altered)
+hd_m_1740: [280000] Royal Knight Helm
+bd_m_1740: [280100] Royal Knight Armor
+am_m_1740: [280200] Royal Knight Gauntlets
+lg_m_1740: [280300] Royal Knight Greaves
+bd_m_1741: [281100] Royal Knight Armor (Altered)
+hd_m_1750: [290000] Nox Monk Hood
+bd_m_1750: [290100] Nox Monk Armor
+am_m_1750: [290200] Nox Monk Bracelets
+lg_m_1750: [290300] Nox Monk Greaves
+hd_m_1751: [291000] Nox Monk Hood (Altered)
+bd_m_1751: [291100] Nox Monk Armor (Altered)
+hd_m_1755: [292000] Nox Swordstress Crown
+bd_m_1755: [292100] Nox Swordstress Armor
+bd_f_1755: [292100] Nox Swordstress Armor
+hd_m_2630: [293000] Night Maiden Twin Crown
+bd_m_2630: [293100] Night Maiden Armor
+bd_f_2630: [293100] Night Maiden Armor
+hd_m_1756: [294000] Nox Swordstress Crown (Altered)
+bd_m_1756: [294100] Nox Swordstress Armor (Altered)
+bd_f_1756: [294100] Nox Swordstress Armor (Altered)
+hd_m_1760: [300000] Great Horned Headband
+bd_m_1760: [300100] Fur Raiment
+bd_f_1760: [300100] Fur Raiment
+lg_m_1760: [300300] Fur Leggings
+lg_f_1760: [300300] Fur Leggings
+hd_m_1765: [301000] Shining Horned Headband
+bd_m_1765: [301100] Shaman Furs
+bd_f_1765: [301100] Shaman Furs
+lg_m_1765: [301300] Shaman Leggings
+lg_f_1765: [301300] Shaman Leggings
+hd_m_1770: [310000] Duelist Helm
+bd_m_1770: [310100] Gravekeeper Cloak
+bd_f_1770: [310100] Gravekeeper Cloak
+lg_m_1770: [310300] Duelist Greaves
+bd_m_1771: [311100] Gravekeeper Cloak (Altered)
+bd_f_1771: [311100] Gravekeeper Cloak (Altered)
+hd_m_1790: [320000] Sanguine Noble Hood
+bd_m_1790: [320100] Sanguine Noble Robe
+lg_m_1790: [320300] Sanguine Noble Waistcloth
+hd_m_1800: [330000] Guardian Mask
+bd_m_1800: [330100] Guardian Garb (Full Bloom)
+am_m_1800: [330200] Guardian Bracers
+lg_m_1800: [330300] Guardian Greaves
+bd_m_1801: [331100] Guardian Garb
+hd_m_1810: [340000] Cleanrot Helm
+bd_m_1810: [340100] Cleanrot Armor
+am_m_1810: [340200] Cleanrot Gauntlets
+lg_m_1810: [340300] Cleanrot Greaves
+hd_m_1811: [341000] Cleanrot Helm (Altered)
+bd_m_1811: [341100] Cleanrot Armor (Altered)
+hd_m_1820: [350000] Fire Monk Hood
+bd_m_1820: [350100] Fire Monk Armor
+am_m_1820: [350200] Fire Monk Gauntlets
+lg_m_1820: [350300] Fire Monk Greaves
+hd_m_1825: [351000] Blackflame Monk Hood
+bd_m_1825: [351100] Blackflame Monk Armor
+am_m_1825: [351200] Blackflame Monk Gauntlets
+lg_m_1825: [351300] Blackflame Monk Greaves
+hd_m_1830: [360000] Fire Prelate Helm
+bd_m_1830: [360100] Fire Prelate Armor
+am_m_1830: [360200] Fire Prelate Gauntlets
+lg_m_1830: [360300] Fire Prelate Greaves
+bd_m_1831: [361100] Fire Prelate Armor (Altered)
+hd_m_1860: [370000] Aristocrat Headband
+bd_m_1860: [370100] Aristocrat Garb
+bd_f_1860: [370100] Aristocrat Garb
+lg_m_1860: [370300] Aristocrat Boots
+bd_m_1861: [371100] Aristocrat Garb (Altered)
+bd_f_1861: [371100] Aristocrat Garb (Altered)
+hd_m_1870: [380000] Aristocrat Hat
+bd_m_1870: [380100] Aristocrat Coat
+hd_m_1880: [390000] Old Aristocrat Cowl
+bd_m_1880: [390100] Old Aristocrat Gown
+lg_m_1880: [390300] Old Aristocrat Shoes
+lg_f_1880: [390300] Old Aristocrat Shoes
+hd_m_1930: [420000] Vulgar Militia Helm
+bd_m_1930: [420100] Vulgar Militia Armor
+am_m_1930: [420200] Vulgar Militia Gauntlets
+lg_m_1930: [420300] Vulgar Militia Greaves
+hd_m_1940: [430000] Sage Hood
+bd_m_1940: [430100] Sage Robe
+lg_m_1940: [430300] Sage Trousers
+hd_m_1950: [440000] Pumpkin Helm
+hd_m_2000: [460000] Elden Lord Crown
+bd_m_2000: [460100] Elden Lord Armor
+am_m_2000: [460200] Elden Lord Bracers
+lg_m_2000: [460300] Elden Lord Greaves
+bd_m_2001: [461100] Elden Lord Armor (Altered)
+hd_m_2010: [470000] Radahn's Redmane Helm
+bd_m_2010: [470100] Radahn's Lion Armor
+am_m_2010: [470200] Radahn's Gauntlets
+lg_m_2010: [470300] Radahn's Greaves
+bd_m_2011: [471100] Radahn's Lion Armor (Altered)
+bd_m_2020: [480100] Lord of Blood's Robe
+bd_m_2021: [481100] Lord of Blood's Robe (Altered)
+hd_m_2050: [510000] Queen's Crescent Crown
+bd_m_2050: [510100] Queen's Robe
+am_m_2050: [510200] Queen's Bracelets
+lg_m_2050: [510300] Queen's Leggings
+hd_m_2060: [520000] Sanguine Noble Hood
+bd_m_2060: [520100] Sanguine Noble Robe
+am_m_2060: [520200] Sanguine Noble Bracelets
+lg_m_2060: [520300] Sanguine Noble Trousers
+hd_m_2070: [530000] Godskin Apostle Hood
+bd_m_2070: [530100] Godskin Apostle Robe
+am_m_2070: [530200] Godskin Apostle Bracelets
+lg_m_2070: [530300] Godskin Apostle Trousers
+hd_m_2080: [540000] Depraved Perfumer Headscarf
+bd_m_2080: [540100] Depraved Perfumer Robe
+am_m_2080: [540200] Depraved Perfumer Gloves
+lg_m_2080: [540300] Depraved Perfumer Trousers
+bd_m_2081: [541100] Depraved Perfumer Robe (Altered)
+hd_m_2110: [570000] Crucible Axe Helm
+bd_m_2110: [570100] Crucible Axe Armor
+am_m_2110: [570200] Crucible Gauntlets
+lg_m_2110: [570300] Crucible Greaves
+hd_m_2115: [571000] Crucible Tree Helm
+bd_m_2115: [571100] Crucible Tree Armor
+bd_m_2111: [572100] Crucible Axe Armor (Altered)
+bd_m_2116: [573100] Crucible Tree Armor (Altered)
+hd_m_2120: [580000] Lusat's Glintstone Crown
+bd_m_2120: [580100] Lusat's Robe
+am_m_2120: [580200] Lusat's Manchettes
+lg_m_2120: [580300] Old Sorcerer's Legwraps
+hd_m_2125: [581000] Azur's Glintstone Crown
+bd_m_2125: [581100] Azur's Glintstone Robe
+am_m_2125: [581200] Azur's Manchettes
+hd_m_1210: [590000] All-Knowing Helm
+bd_m_1210: [590100] All-Knowing Armor
+am_m_1210: [590200] All-Knowing Gauntlets
+lg_m_1210: [590300] All-Knowing Greaves
+bd_m_1211: [591100] All-Knowing Armor (Altered)
+hd_m_1220: [600000] Twinned Helm
+bd_m_1220: [600100] Twinned Armor
+am_m_1220: [600200] Twinned Gauntlets
+lg_m_1220: [600300] Twinned Greaves
+bd_m_1221: [601100] Twinned Armor (Altered)
+hd_m_1230: [610000] Ragged Hat
+bd_m_1230: [610100] Ragged Armor
+am_m_1230: [610200] Ragged Gloves
+lg_m_1230: [610300] Ragged Loincloth
+hd_m_1231: [611000] Ragged Hat (Altered)
+bd_m_1231: [611100] Ragged Armor (Altered)
+hd_m_1240: [620000] Prophet Blindfold
+bd_m_1240: [620100] Corhyn's Robe
+bd_f_1240: [620100] Corhyn's Robe
+lg_m_1240: [620300] Prophet Trousers
+bd_m_1241: [621100] Prophet Robe (Altered)
+bd_f_1241: [621100] Prophet Robe (Altered)
+bd_m_1245: [622100] Prophet Robe
+bd_f_1245: [622100] Prophet Robe
+hd_m_1250: [630000] Astrologer Hood
+bd_m_1250: [630100] Astrologer Robe
+bd_f_1250: [630100] Astrologer Robe
+am_m_1250: [630200] Astrologer Gloves
+lg_m_1250: [630300] Astrologer Trousers
+bd_m_1251: [631100] Astrologer Robe (Altered)
+bd_f_1251: [631100] Astrologer Robe (Altered)
+hd_m_1260: [640000] Lionel's Helm
+bd_m_1260: [640100] Lionel's Armor
+am_m_1260: [640200] Lionel's Gauntlets
+lg_m_1260: [640300] Lionel's Greaves
+bd_m_1261: [641100] Lionel's Armor (Altered)
+hd_m_1270: [650000] Hoslow's Helm
+bd_m_1270: [650100] Hoslow's Armor
+am_m_1270: [650200] Hoslow's Gauntlets
+lg_m_1270: [650300] Hoslow's Greaves
+hd_m_1275: [651000] Diallos's Mask
+bd_m_1271: [652100] Hoslow's Armor (Altered)
+hd_m_1280: [660000] Vagabond Knight Helm
+bd_m_1280: [660100] Vagabond Knight Armor
+am_m_1280: [660200] Vagabond Knight Gauntlets
+lg_m_1280: [660300] Vagabond Knight Greaves
+bd_m_1281: [661100] Vagabond Knight Armor (Altered)
+hd_m_1290: [670000] Blue Cloth Cowl
+bd_m_1290: [670100] Blue Cloth Vest
+am_m_1290: [670200] Warrior Gauntlets
+lg_m_1290: [670300] Warrior Greaves
+hd_m_1300: [680000] White Mask
+bd_m_1300: [680100] War Surgeon Gown
+am_m_1300: [680200] War Surgeon Gloves
+lg_m_1300: [680300] War Surgeon Trousers
+bd_m_1301: [681100] War Surgeon Gown (Altered)
+hd_m_1310: [690000] Royal Remains Helm
+bd_m_1310: [690100] Royal Remains Armor
+am_m_1310: [690200] Royal Remains Gauntlets
+lg_m_1310: [690300] Royal Remains Greaves
+hd_m_1320: [700000] Brave's Cord Circlet
+bd_m_1320: [700100] Brave's Battlewear
+am_m_1320: [700200] Brave's Bracer
+lg_m_1320: [700300] Brave's Legwraps
+hd_m_1325: [701000] Brave's Leather Helm
+bd_m_1321: [702000] Brave's Battlewear (Altered)
+hd_m_1330: [720000] Beast Champion Helm
+bd_m_1330: [720100] Beast Champion Armor
+am_m_1330: [720200] Beast Champion Gauntlets
+lg_m_1330: [720300] Beast Champion Greaves
+bd_m_1331: [721100] Beast Champion Armor (Altered)
+hd_m_1380: [730000] Champion Headband
+bd_m_1380: [730100] Champion Pauldron
+bd_f_1380: [730100] Champion Pauldron
+am_m_1380: [730200] Champion Bracers
+lg_m_1380: [730300] Champion Gaiters
+lg_f_1380: [730300] Champion Gaiters
+hd_m_1390: [740000] Crimson Hood
+bd_m_1390: [740100] Noble's Traveling Garb
+bd_f_1390: [740100] Noble's Traveling Garb
+am_m_1390: [740200] Noble's Gloves
+lg_m_1390: [740300] Noble's Trousers
+hd_m_1395: [741000] Navy Hood
+hd_m_1620: [760000] Maliketh's Helm
+bd_m_1620: [760100] Maliketh's Armor
+am_m_1620: [760200] Maliketh's Gauntlets
+lg_m_1620: [760300] Maliketh's Greaves
+bd_m_1621: [761100] Maliketh's Armor (Altered)
+hd_m_1630: [770000] Malenia's Winged Helm
+bd_m_1630: [770100] Malenia's Armor
+bd_f_1630: [770100] Malenia's Armor
+am_m_1630: [770200] Malenia's Gauntlet
+lg_m_1630: [770300] Malenia's Greaves
+bd_m_1631: [771100] Malenia's Armor (Altered)
+bd_f_1631: [771100] Malenia's Armor (Altered)
+hd_m_1660: [780000] Veteran's Helm
+bd_m_1660: [780100] Veteran's Armor
+am_m_1660: [780200] Veteran's Gauntlets
+lg_m_1660: [780300] Veteran's Greaves
+bd_m_1661: [781100] Veteran's Armor (Altered)
+hd_m_1850: [790000] Bloodhound Knight Helm
+bd_m_1850: [790100] Bloodhound Knight Armor
+am_m_1850: [790200] Bloodhound Knight Gauntlets
+lg_m_1850: [790300] Bloodhound Knight Greaves
+bd_m_1851: [791100] Bloodhound Knight Armor (Altered)
+hd_m_2130: [800000] Festive Hood
+bd_m_2130: [800100] Festive Garb
+bd_f_2130: [800100] Festive Garb
+hd_m_2131: [801000] Festive Hood (Altered)
+bd_m_2131: [801100] Festive Garb (Altered)
+bd_f_2131: [801100] Festive Garb (Altered)
+hd_m_2135: [802000] Blue Festive Hood
+bd_m_2135: [802100] Blue Festive Garb
+bd_f_2135: [802100] Blue Festive Garb
+hd_m_2140: [810000] Commoner's Headband
+bd_m_2140: [810100] Commoner's Garb
+lg_m_2140: [810300] Commoner's Shoes
+hd_m_2141: [811000] Commoner's Headband (Altered)
+bd_m_2141: [811100] Commoner's Garb (Altered)
+bd_m_2145: [812000] Commoner's Simple Garb
+bd_m_2146: [812100] Commoner's Simple Garb (Altered)
+hd_m_2150: [820000] Envoy Crown
+hd_m_2160: [830000] Twinsage Glintstone Crown
+bd_m_2160: [830100] Raya Lucarian Robe
+bd_f_2160: [830100] Raya Lucarian Robe
+am_m_2160: [830200] Sorcerer Manchettes
+lg_m_2160: [830300] Sorcerer Leggings
+lg_f_2160: [830300] Sorcerer Leggings
+hd_m_2165: [831000] Olivinus Glintstone Crown
+hd_m_2170: [832000] Lazuli Glintstone Crown
+hd_m_2175: [833000] Karolos Glintstone Crown
+hd_m_2540: [834000] Witch's Glintstone Crown
+hd_m_2190: [840000] Marionette Soldier Helm
+bd_m_2190: [840100] Marionette Soldier Armor
+hd_m_2180: [850000] Marionette Soldier Birdhelm
+hd_m_1350: [860000] Raging Wolf Helm
+bd_m_1350: [860100] Raging Wolf Armor
+am_m_1350: [860200] Raging Wolf Gauntlets
+lg_m_1350: [860300] Raging Wolf Greaves
+bd_m_1351: [861100] Raging Wolf Armor (Altered)
+hd_m_1360: [870000] Land of Reeds Helm
+bd_m_1360: [870100] Land of Reeds Armor
+am_m_1360: [870200] Land of Reeds Gauntlets
+lg_m_1360: [870300] Land of Reeds Greaves
+bd_m_1361: [871100] Land of Reeds Armor (Altered)
+hd_m_1365: [872000] Okina Mask
+bd_m_1365: [872100] White Reed Armor
+am_m_1365: [872200] White Reed Gauntlets
+lg_m_1365: [872300] White Reed Greaves
+hd_m_1400: [880000] Confessor Hood
+bd_m_1400: [880100] Confessor Armor
+am_m_1400: [880200] Confessor Gloves
+lg_m_1400: [880300] Confessor Boots
+hd_m_1401: [881000] Confessor Hood (Altered)
+bd_m_1401: [881100] Confessor Armor (Altered)
+hd_m_1410: [890000] Prisoner Iron Mask
+bd_m_1410: [890100] Prisoner Clothing
+bd_f_1410: [890100] Prisoner Clothing
+lg_m_1410: [890300] Prisoner Trousers
+hd_m_1415: [891000] Blackguard's Iron Mask
+hd_m_1420: [900000] Traveling Maiden Hood
+bd_m_1420: [900100] Traveling Maiden Robe
+bd_f_1420: [900100] Traveling Maiden Robe
+am_m_1420: [900200] Traveling Maiden Gloves
+lg_m_1420: [900300] Traveling Maiden Boots
+bd_m_1421: [901100] Traveling Maiden Robe (Altered)
+bd_f_1421: [901100] Traveling Maiden Robe (Altered)
+hd_m_1425: [902000] Finger Maiden Fillet
+bd_m_1425: [902100] Finger Maiden Robe
+bd_f_1425: [902100] Finger Maiden Robe
+lg_m_1425: [902300] Finger Maiden Shoes
+lg_f_1425: [902300] Finger Maiden Shoes
+bd_m_1426: [903100] Finger Maiden Robe (Altered)
+bd_f_1426: [903100] Finger Maiden Robe (Altered)
+hd_m_1430: [910000] Preceptor's Big Hat
+bd_m_1430: [910100] Preceptor's Long Gown
+am_m_1430: [910200] Preceptor's Gloves
+lg_m_1430: [910300] Preceptor's Trousers
+hd_m_1431: [911000] Mask of Confidence
+bd_m_1431: [911100] Preceptor's Long Gown (Altered)
+hd_m_1440: [920000] Grass Hair Ornament
+hd_m_1450: [930000] Skeletal Mask
+bd_m_1450: [930100] Raptor's Black Feathers
+am_m_1450: [930200] Bandit Manchettes
+lg_m_1450: [930300] Bandit Boots
+bd_m_1451: [931100] Bandit Garb
+bd_f_1451: [931100] Bandit Garb
+hd_m_1460: [940000] Eccentric's Hood
+bd_m_1460: [940100] Eccentric's Armor
+am_m_1460: [940200] Eccentric's Manchettes
+lg_m_1460: [940300] Eccentric's Breeches
+hd_m_1461: [941000] Eccentric's Hood (Altered)
+hd_m_1470: [950000] Fingerprint Helm
+bd_m_1470: [950100] Fingerprint Armor
+am_m_1470: [950200] Fingerprint Gauntlets
+lg_m_1470: [950300] Fingerprint Greaves
+bd_m_1471: [951100] Fingerprint Armor (Altered)
+hd_m_1480: [960000] Consort's Mask
+bd_m_1480: [960100] Consort's Robe
+bd_f_1480: [960100] Consort's Robe
+lg_m_1480: [960300] Consort's Trousers
+hd_m_1530: [961000] Ruler's Mask
+bd_m_1530: [961100] Ruler's Robe
+bd_f_1530: [961100] Ruler's Robe
+bd_m_1531: [962100] Upper-Class Robe
+bd_f_1531: [962100] Upper-Class Robe
+hd_m_1485: [963000] Marais Mask
+bd_m_1485: [963100] Marais Robe
+am_m_1485: [963200] Bloodsoaked Manchettes
+hd_m_1486: [964000] Bloodsoaked Mask
+bd_m_1486: [964100] Official's Attire
+bd_f_1486: [964100] Official's Attire
+hd_m_1490: [970000] Omen Helm
+bd_m_1490: [970100] Omen Armor
+am_m_1490: [970200] Omen Gauntlets
+lg_m_1490: [970300] Omen Greaves
+hd_m_1500: [980000] Carian Knight Helm
+bd_m_1500: [980100] Carian Knight Armor
+am_m_1500: [980200] Carian Knight Gauntlets
+lg_m_1500: [980300] Carian Knight Greaves
+bd_m_1501: [981100] Carian Knight Armor (Altered)
+hd_m_1510: [990000] Hierodas Glintstone Crown
+bd_m_1510: [990100] Errant Sorcerer Robe
+am_m_1510: [990200] Errant Sorcerer Manchettes
+lg_m_1510: [990300] Errant Sorcerer Boots
+bd_m_1511: [991100] Errant Sorcerer Robe (Altered)
+hd_m_1520: [1000000] Haima Glintstone Crown
+bd_m_1520: [1000100] Battlemage Robe
+am_m_1520: [1000200] Battlemage Manchettes
+lg_m_1520: [1000300] Battlemage Legwraps
+hd_m_2200: [1010000] Snow Witch Hat
+bd_m_2200: [1010100] Snow Witch Robe
+bd_f_2200: [1010100] Snow Witch Robe
+lg_m_2200: [1010300] Snow Witch Skirt
+bd_m_2201: [1011100] Snow Witch Robe (Altered)
+bd_f_2201: [1011100] Snow Witch Robe (Altered)
+bd_m_2210: [1020100] Traveler's Clothes
+bd_f_2210: [1020100] Traveler's Clothes
+am_m_2210: [1020200] Traveler's Manchettes
+lg_m_2210: [1020300] Traveler's Boots
+hd_m_2220: [1030000] Juvenile Scholar Cap
+bd_m_2220: [1030100] Juvenile Scholar Robe
+hd_m_2230: [1040000] Radiant Gold Mask
+bd_m_2230: [1040100] Goldmask's Rags
+bd_f_2230: [1040100] Goldmask's Rags
+am_m_2230: [1040200] Gold Bracelets
+lg_m_2230: [1040300] Gold Waistwrap
+lg_f_2230: [1040300] Gold Waistwrap
+bd_m_2240: [1050100] Fell Omen Cloak
+bd_f_2240: [1050100] Fell Omen Cloak
+hd_m_2250: [1060000] Albinauric Mask
+bd_m_2250: [1060100] Dirty Chainmail
+hd_m_2260: [1070000] Zamor Mask
+bd_m_2260: [1070100] Zamor Armor
+am_m_2260: [1070200] Zamor Bracelets
+lg_m_2260: [1070300] Zamor Legwraps
+hd_m_2270: [1080000] Imp Head (Cat)
+hd_m_2510: [1081000] Imp Head (Fanged)
+hd_m_2520: [1082000] Imp Head (Long-Tongued)
+hd_m_2570: [1083000] Imp Head (Corpse)
+hd_m_2575: [1084000] Imp Head (Wolf)
+hd_m_2580: [1085000] Imp Head (Elder)
+hd_m_2280: [1090000] Silver Tear Mask
+hd_m_1540: [1100000] Chain Coif
+hd_f_1540: [1100000] Chain Coif
+bd_m_1540: [1100100] Chain Armor
+bd_f_1540: [1100100] Chain Armor
+am_m_1540: [1100200] Chain Gauntlets
+am_f_1540: [1100200] Chain Gauntlets
+lg_m_1540: [1100300] Chain Leggings
+hd_m_1545: [1101000] Greathelm
+bd_m_1545: [1101100] Eye Surcoat
+bd_m_1546: [1102100] Tree Surcoat
+hd_m_2290: [1110000] Octopus Head
+hd_m_2300: [1120000] Jar
+hd_m_2310: [1130000] Mushroom Head
+bd_m_2310: [1130100] Mushroom Body
+bd_f_2310: [1130100] Mushroom Body
+am_m_2310: [1130200] Mushroom Arms
+am_f_2310: [1130200] Mushroom Arms
+lg_m_2310: [1130300] Mushroom Legs
+lg_f_2310: [1130300] Mushroom Legs
+hd_m_1550: [1300000] Nox Mirrorhelm
+hd_m_1555: [1301000] Iji's Mirrorhelm
+hd_m_1560: [1400000] Black Hood
+bd_m_1560: [1400100] Leather Armor
+bd_f_1560: [1400100] Leather Armor
+am_m_1560: [1400200] Leather Gloves
+lg_m_1560: [1400300] Leather Boots
+hd_m_1561: [1401000] Bandit Mask
+hd_m_1570: [1500000] Knight Helm
+bd_m_1570: [1500100] Knight Armor
+am_m_1570: [1500200] Knight Gauntlets
+lg_m_1570: [1500300] Knight Greaves
+hd_m_1580: [1600000] Greathood
+hd_m_2320: [1700000] Godrick Soldier Helm
+bd_m_2320: [1700100] Tree-and-Beast Surcoat
+am_m_2320: [1700200] Godrick Soldier Gauntlets
+lg_m_2320: [1700300] Godrick Soldier Greaves
+hd_m_2330: [1710000] Raya Lucarian Helm
+bd_m_2330: [1710100] Cuckoo Surcoat
+am_m_2330: [1710200] Raya Lucarian Gauntlets
+lg_m_2330: [1710300] Raya Lucarian Greaves
+hd_m_2340: [1720000] Leyndell Soldier Helm
+bd_m_2340: [1720100] Erdtree Surcoat
+am_m_2340: [1720200] Leyndell Soldier Gauntlets
+lg_m_2340: [1720300] Leyndell Soldier Greaves
+hd_m_2350: [1730000] Radahn Soldier Helm
+bd_m_2350: [1730100] Redmane Surcoat
+am_m_2350: [1730200] Radahn Soldier Gauntlets
+lg_m_2350: [1730300] Radahn Soldier Greaves
+bd_m_2360: [1740100] Mausoleum Surcoat
+am_m_2360: [1740200] Mausoleum Gauntlets
+lg_m_2360: [1740300] Mausoleum Greaves
+hd_m_2370: [1750000] Haligtree Helm
+bd_m_2370: [1750100] Haligtree Crest Surcoat
+am_m_2370: [1750200] Haligtree Gauntlets
+lg_m_2370: [1750300] Haligtree Greaves
+hd_m_2380: [1760000] Gelmir Knight Helm
+bd_m_2380: [1760100] Gelmir Knight Armor
+am_m_2380: [1760200] Gelmir Knight Gauntlets
+lg_m_2380: [1760300] Gelmir Knight Greaves
+bd_m_2381: [1761100] Gelmir Knight Armor (Altered)
+hd_m_2390: [1770000] Godrick Knight Helm
+bd_m_2390: [1770100] Godrick Knight Armor
+am_m_2390: [1770200] Godrick Knight Gauntlets
+lg_m_2390: [1770300] Godrick Knight Greaves
+bd_m_2391: [1771100] Godrick Knight Armor (Altered)
+hd_m_2400: [1780000] Cuckoo Knight Helm
+bd_m_2400: [1780100] Cuckoo Knight Armor
+am_m_2400: [1780200] Cuckoo Knight Gauntlets
+lg_m_2400: [1780300] Cuckoo Knight Greaves
+bd_m_2401: [1781100] Cuckoo Knight Armor (Altered)
+hd_m_2410: [1790000] Leyndell Knight Helm
+bd_m_2410: [1790100] Leyndell Knight Armor
+am_m_2410: [1790200] Leyndell Knight Gauntlets
+lg_m_2410: [1790300] Leyndell Knight Greaves
+bd_m_2411: [1791100] Leyndell Knight Armor (Altered)
+hd_m_2420: [1800000] Redmane Knight Helm
+bd_m_2420: [1800100] Redmane Knight Armor
+am_m_2420: [1800200] Redmane Knight Gauntlets
+lg_m_2420: [1800300] Redmane Knight Greaves
+bd_m_2421: [1801100] Redmane Knight Armor (Altered)
+bd_m_2430: [1810100] Mausoleum Knight Armor
+am_m_2430: [1810200] Mausoleum Knight Gauntlets
+lg_m_2430: [1810300] Mausoleum Knight Greaves
+bd_m_2431: [1811100] Mausoleum Knight Armor (Altered)
+hd_m_2440: [1820000] Haligtree Knight Helm
+bd_m_2440: [1820100] Haligtree Knight Armor
+am_m_2440: [1820200] Haligtree Knight Gauntlets
+lg_m_2440: [1820300] Haligtree Knight Greaves
+bd_m_2441: [1821100] Haligtree Knight Armor (Altered)
+hd_m_2450: [1830000] Foot Soldier Cap
+bd_m_2450: [1830100] Chain-Draped Tabard
+am_m_2450: [1830200] Foot Soldier Gauntlets
+lg_m_2450: [1830300] Foot Soldier Greaves
+hd_m_2460: [1840000] Foot Soldier Helmet
+bd_m_2460: [1840100] Foot Soldier Tabard
+hd_m_2470: [1850000] Gilded Foot Soldier Cap
+bd_m_2470: [1850100] Leather-Draped Tabard
+hd_m_2480: [1860000] Foot Soldier Helm
+bd_m_2480: [1860100] Scarlet Tabard
+bd_m_2490: [1870100] Bloodsoaked Tabard
+hd_m_2500: [1880000] Sacred Crown Helm
+bd_m_2500: [1880100] Ivory-Draped Tabard
+hd_m_2530: [1890000] Omensmirk Mask
+bd_m_2530: [1890100] Omenkiller Robe
+am_m_2530: [1890200] Omenkiller Long Gloves
+lg_m_2530: [1890300] Omenkiller Boots
+hd_m_2550: [1900000] Ash-of-War Scarab
+hd_m_2551: [1901000] Incantation Scarab
+hd_m_2552: [1902000] Glintstone Scarab
+hd_m_2555: [1910000] Crimson Tear Scarab
+hd_m_2560: [1920000] Cerulean Tear Scarab
+hd_m_1590: [1930100] Deathbed Dress
+hd_f_1590: [1930100] Deathbed Dress
+hd_m_1590: [1930300] Deathbed Smalls
+hd_f_1590: [1930300] Deathbed Smalls
+hd_m_1595: [1940000] Fia's Hood
+hd_m_1595: [1940100] Fia's Robe
+hd_f_1595: [1940100] Fia's Robe
+hd_m_1596: [1941100] Fia's Robe (Altered)
+hd_f_1596: [1941100] Fia's Robe (Altered)
+hd_m_2590: [1950100] Millicent's Robe
+hd_f_2590: [1950100] Millicent's Robe
+am_m_2590: [1950200] Millicent's Gloves
+hd_m_2590: [1950300] Millicent's Boots
+hd_m_2600: [1970100] Millicent's Tunic
+hd_f_2600: [1970100] Millicent's Tunic
+am_m_2600: [1970200] Golden Prosthetic
+hd_m_2505: [1980000] Highwayman Hood
+bd_m_2505: [1980100] Highwayman Cloth Armor
+am_m_2505: [1980200] Highwayman Gauntlets
+hd_m_1685: [1990000] High Page Hood
+bd_m_1685: [1990100] High Page Clothes
+bd_m_1686: [1991100] High Page Clothes (Altered)
+hd_m_1775: [2000000] Rotten Duelist Helm
+bd_m_1775: [2000100] Rotten Gravekeeper Cloak
+bd_f_1775: [2000100] Rotten Gravekeeper Cloak
+hd_m_1775: [2000300] Rotten Duelist Greaves
+bd_m_1776: [2001100] Rotten Gravekeeper Cloak (Altered)
+bd_f_1776: [2001100] Rotten Gravekeeper Cloak (Altered)
+hd_m_2610: [2010000] Mushroom Crown
+hd_m_2620: [2020000] Black Dumpling
+bd_m_2640: [2030000] Lazuli Robe
+bd_f_2640: [2030000] Lazuli Robe

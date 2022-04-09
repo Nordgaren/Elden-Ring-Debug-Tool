@@ -49,6 +49,7 @@
 048(1) = pad
 049(1) = defaultWepAttr
 050(2) = pad2
+
 051(1) = canMountWep_Dagger
 052(1) = canMountWep_SwordNormal
 053(1) = canMountWep_SwordLarge
@@ -57,6 +58,7 @@
 056(1) = canMountWep_SaberLarge
 057(1) = canMountWep_katana
 058(1) = canMountWep_SwordDoubleEdge
+
 059(1) = canMountWep_SwordPierce
 060(1) = canMountWep_RapierHeavy
 061(1) = canMountWep_AxeNormal
@@ -65,6 +67,7 @@
 064(1) = canMountWep_HammerLarge
 065(1) = canMountWep_Flail
 066(1) = canMountWep_SpearNormal
+
 067(1) = canMountWep_SpearLarge
 068(1) = canMountWep_SpearHeavy
 069(1) = canMountWep_SpearAxe
@@ -73,6 +76,7 @@
 072(1) = canMountWep_Claw
 073(1) = canMountWep_Whip
 074(1) = canMountWep_AxhammerLarge
+
 075(1) = canMountWep_BowSmall
 076(1) = canMountWep_BowNormal
 077(1) = canMountWep_BowLarge
@@ -81,10 +85,12 @@
 080(1) = canMountWep_Staff
 081(1) = canMountWep_Sorcery
 082(1) = canMountWep_Talisman
+
 083(1) = canMountWep_ShieldSmall
 084(1) = canMountWep_ShieldNormal
 085(1) = canMountWep_ShieldLarge
 086(1) = canMountWep_Torch
+
 087(1) = reserved_canMountWep
 088(3) = reserved2_canMountWep
 089(4) = spEffectMsgId0

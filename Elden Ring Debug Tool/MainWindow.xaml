@@ -10,7 +10,9 @@
         <local:ERViewModel x:Name="ViewModel"/>
     </Window.DataContext>
     <Grid>
-        <StackPanel>
+        <DataGrid x:Name="ParamGrid"/>
+        <StackPanel x:Name="ParamPanel"/>
+        <!--<StackPanel>
             <Label Content="Bitfield:" VerticalAlignment="Center"/>
             <StackPanel Orientation="Horizontal">
                 <CheckBox Content="Dagger" IsChecked="{Binding Hook.Dagger}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
@@ -120,7 +122,7 @@
             <StackPanel Orientation="Horizontal">
                 <CheckBox Content="Torch" IsChecked="{Binding Hook.Torch}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
             </StackPanel>
-        </StackPanel>
+        </StackPanel>-->
     </Grid>
 
 </Window>

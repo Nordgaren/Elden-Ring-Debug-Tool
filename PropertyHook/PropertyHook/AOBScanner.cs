@@ -19,7 +19,6 @@ namespace PropertyHook
             IntPtr memRegionAddr = process.MainModule.BaseAddress;
             IntPtr mainModuleEnd = process.MainModule.BaseAddress + process.MainModule.ModuleMemorySize;
             uint queryResult;
-
             do
             {
                 var memInfo = new Kernel32.MEMORY_BASIC_INFORMATION();

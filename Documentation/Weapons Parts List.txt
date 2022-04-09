@@ -1,0 +1,442 @@
+Weapons
+wp_a_0001: [110000] Unarmed
+wp_a_0100: [1000000] Dagger
+wp_a_0101: [1010000] Black Knife
+wp_a_0102: [1020000] Parrying Dagger
+wp_a_0103: [1030000] Misericorde
+wp_a_0105: [1040000] Reduvia
+wp_a_0115: [1050000] Crystal Knife
+wp_a_0416: [1060000] Celebrant's Sickle
+wp_a_0116: [1070000] Glintstone Kris
+wp_a_0117: [1080000] Scorpion's Stinger
+wp_a_0118: [1090000] Great Knife
+wp_a_0120: [1100000] Wakizashi
+wp_a_0417: [1110000] Cinquedea
+wp_a_0122: [1130000] Ivory Sickle
+wp_a_0110: [1140000] Bloodstained Dagger
+wp_a_0123: [1150000] Erdsteel Dagger
+wp_a_0124: [1160000] Blade of Calling
+wp_a_0200: [2000000] Longsword
+wp_a_0199: [2010000] Short Sword
+wp_a_0201: [2020000] Broadsword
+wp_a_0207: [2040000] Lordsworn's Straight Sword
+wp_a_0214: [2050000] Weathered Straight Sword
+wp_a_0215: [2060000] Ornamental Straight Sword
+wp_a_0216: [2070000] Golden Epitaph
+wp_a_0217: [2080000] Nox Flowing Sword
+wp_a_0614: [2090000] Inseparable Sword
+wp_a_0222: [2110000] Coded Sword
+wp_a_0223: [2140000] Sword of Night and Flame
+wp_a_0224: [2150000] Crystal Sword
+wp_a_0227: [2180000] Carian Knight's Sword
+wp_a_0230: [2190000] Sword of St. Trina
+wp_a_0229: [2200000] Miquellan Knight's Sword
+wp_a_0228: [2210000] Cane Sword
+wp_a_0220: [2220000] Regalia of Eochaid
+wp_a_0211: [2230000] Noble's Slender Sword
+wp_a_0231: [2240000] Warhawk's Talon
+wp_a_0232: [2250000] Lazuli Glintstone Sword
+wp_a_0233: [2260000] Rotten Crystal Sword
+wp_a_0600: [3000000] Bastard Sword
+wp_a_0604: [3010000] Forked Greatsword
+wp_a_0606: [3020000] Iron Greatsword
+wp_a_0607: [3030000] Lordsworn's Greatsword
+wp_a_0609: [3040000] Knight's Greatsword
+wp_a_0610: [3050000] Flamberge
+wp_a_0613: [3060000] Ordovis's Greatsword
+wp_a_0204: [3070000] Alabaster Lord's Sword
+wp_a_0203: [3080000] Banished Knight's Greatsword
+wp_a_0617: [3090000] Dark Moon Greatsword
+wp_a_0618: [3100000] Sacred Relic Sword
+wp_a_0621: [3130000] Helphen's Steeple
+wp_a_0213: [3140000] Blasphemous Blade
+wp_a_0625: [3150000] Marais Executioner's Sword
+wp_a_0628: [3160000] Sword of Milos
+wp_a_0627: [3170000] Golden Order Greatsword
+wp_a_0601: [3180000] Claymore
+wp_a_0629: [3190000] Gargoyle's Greatsword
+wp_a_0631: [3200000] Death's Poker
+wp_a_0632: [3210000] Gargoyle's Blackblade
+wp_a_0612: [4000000] Greatsword
+wp_a_0210: [4010000] Watchdog's Greatsword
+wp_a_0603: [4020000] Maliketh's Black Blade
+wp_a_0608: [4030000] Troll's Golden Sword
+wp_a_0611: [4040000] Zweihander
+wp_a_0454: [4050000] Starscourge Greatsword
+wp_a_0602: [4060000] Royal Greatsword
+wp_a_0622: [4070000] Godslayer's Greatsword
+wp_a_0623: [4080000] Ruins Greatsword
+wp_a_0626: [4100000] Grafted Blade Greatsword
+wp_a_0630: [4110000] Troll Knight's Sword
+wp_a_0300: [5000000] Estoc
+wp_a_0209: [5010000] Cleanrot Knight's Sword
+wp_a_0250: [5020000] Rapier
+wp_a_0251: [5030000] Rogier's Rapier
+wp_a_0253: [5040000] Antspur Rapier
+wp_a_0254: [5050000] Frozen Needle
+wp_a_0252: [5060000] Noble's Estoc
+wp_a_0302: [6000000] Bloody Helice
+wp_a_0301: [6010000] Godskin Stitcher
+wp_a_0303: [6020000] Great epee
+wp_a_0305: [6040000] Dragon King's Cragblade
+wp_a_0401: [7000000] Falchion
+wp_a_0500: [7010000] Beastman's Curved Sword
+wp_a_0402: [7020000] Shotel
+wp_a_0408: [7030000] Shamshir
+wp_a_0409: [7040000] Bandit's Curved Sword
+wp_a_0414: [7050000] Magma Blade
+wp_a_0418: [7060000] Flowing Curved Sword
+wp_a_0419: [7070000] Wing of Astel
+wp_a_0421: [7080000] Scavenger's Curved Sword
+wp_a_0422: [7100000] Eclipse Shotel
+wp_a_0423: [7110000] Serpent-God's Curved Sword
+wp_a_0424: [7120000] Mantis Blade
+wp_a_0400: [7140000] Scimitar
+wp_a_0425: [7150000] Grossmesser
+wp_a_0404: [8010000] Onyx Lord's Greatsword
+wp_a_0452: [8020000] Dismounter
+wp_a_0453: [8030000] Bloodhound's Fang
+wp_a_0455: [8040000] Magma Wyrm's Scalesword
+wp_a_0456: [8050000] Zamor Curved Sword
+wp_a_0457: [8060000] Omen Cleaver
+wp_a_0413: [8070000] Monk's Flameblade
+wp_a_0502: [8080000] Beastman's Cleaver
+wp_a_0459: [8100000] Morgott's Cursed Sword
+wp_a_0550: [9000000] Uchigatana
+wp_a_0551: [9010000] Nagakiba
+wp_a_0552: [9020000] Hand of Malenia
+wp_a_0553: [9030000] Meteoric Ore Blade
+wp_a_0554: [9040000] Rivers of Blood
+wp_a_0556: [9060000] Moonveil
+wp_a_0558: [9070000] Dragonscale Blade
+wp_a_0557: [9080000] Serpentbone Blade
+wp_a_1100: [10000000] Twinblade
+wp_a_1101: [10010000] Godskin Peeler
+wp_a_1105: [10030000] Twinned Knight Swords
+wp_a_1104: [10050000] Eleonora's Poleblade
+wp_a_1109: [10080000] Gargoyle's Twinblade
+wp_a_1110: [10090000] Gargoyle's Black Blades
+wp_a_0802: [11000000] Mace
+wp_a_0800: [11010000] Club
+wp_a_0805: [11030000] Curved Club
+wp_a_0809: [11040000] Warpick
+wp_a_0812: [11050000] Morning Star
+wp_a_0814: [11060000] Varre's Bouquet
+wp_a_0815: [11070000] Spiked Club
+wp_a_0816: [11080000] Hammer
+wp_a_0806: [11090000] Monk's Flamemace
+wp_a_4014: [11100000] Envoy's Horn
+wp_a_0817: [11110000] Scepter of the All-Knowing
+wp_a_0818: [11120000] Nox Flowing Hammer
+wp_a_0819: [11130000] Ringed Finger
+wp_a_0820: [11140000] Stone Club
+wp_a_0821: [11150000] Marika's Hammer
+wp_a_0850: [12000000] Large Club
+wp_a_0803: [12010000] Greathorn Hammer
+wp_a_0804: [12020000] Battle Hammer
+wp_a_0852: [12060000] Great Mace
+wp_a_0855: [12080000] Curved Great Club
+wp_a_0860: [12130000] Celebrant's Skull
+wp_a_0861: [12140000] Pickaxe
+wp_a_0862: [12150000] Beastclaw Greathammer
+wp_a_4015: [12160000] Envoy's Long Horn
+wp_a_0863: [12170000] Cranial Vessel Candlestand
+wp_a_0864: [12180000] Great Stars
+wp_a_0865: [12190000] Brick Hammer
+wp_a_0871: [12200000] Devourer's Scepter
+wp_a_0876: [12210000] Rotten Battle Hammer
+wp_a_1251: [13000000] Nightrider Flail
+wp_a_1250: [13010000] Flail
+wp_a_1252: [13020000] Family Heads
+wp_a_1253: [13030000] Bastard's Stars
+wp_a_1255: [13040000] Chainlink Flail
+wp_a_0701: [14000000] Battle Axe
+wp_a_0406: [14010000] Forked Hatchet
+wp_a_0700: [14020000] Hand Axe
+wp_a_0705: [14030000] Jawbone Axe
+wp_a_0706: [14040000] Iron Cleaver
+wp_a_0707: [14050000] Ripple Blade
+wp_a_0708: [14060000] Celebrant's Cleaver
+wp_a_0714: [14080000] Icerind Hatchet
+wp_a_0716: [14100000] Highland Axe
+wp_a_0717: [14110000] Sacrificial Axe
+wp_a_0718: [14120000] Rosus' Axe
+wp_a_0720: [14140000] Stormhawk Axe
+wp_a_0750: [15000000] Greataxe
+wp_a_0711: [15010000] Warped Axe
+wp_a_0712: [15020000] Great Omenkiller Cleaver
+wp_a_0752: [15030000] Crescent Moon Axe
+wp_a_0756: [15040000] Axe of Godrick
+wp_a_1006: [15050000] Longhaft Axe
+wp_a_0713: [15060000] Rusted Anchor
+wp_a_0758: [15080000] Executioner's Greataxe
+wp_a_0753: [15110000] Winged Greathorn
+wp_a_0761: [15120000] Butchering Knife
+wp_a_0762: [15130000] Gargoyle's Great Axe
+wp_a_0763: [15140000] Gargoyle's Black Axe
+wp_a_0923: [16000000] Short Spear
+wp_a_0902: [16010000] Spear
+wp_a_0905: [16020000] Crystal Spear
+wp_a_0909: [16030000] Clayman's Harpoon
+wp_a_0910: [16040000] Cleanrot Spear
+wp_a_0921: [16050000] Partisan
+wp_a_0922: [16060000] Celebrant's Rib-Rake
+wp_a_0926: [16070000] Pike
+wp_a_3001: [16080000] Torchpole
+wp_a_0930: [16090000] Bolt of Gransax
+wp_a_0932: [16110000] Cross-Naginata
+wp_a_0933: [16120000] Death Ritual Spear
+wp_a_0934: [16130000] Inquisitor's Girandole
+wp_a_1017: [16140000] Spiked Spear
+wp_a_0919: [16150000] Iron Spear
+wp_a_1021: [16160000] Rotten Crystal Spear
+wp_a_0918: [17010000] Mohgwyn's Sacred Spear
+wp_a_0929: [17020000] Siluria's Tree
+wp_a_0935: [17030000] Serpent-Hunter
+wp_a_0937: [17050000] Vyke's War Spear
+wp_a_0938: [17060000] Lance
+wp_a_0939: [17070000] Treespear
+wp_a_1001: [18000000] Halberd
+wp_a_0911: [18010000] Pest's Glaive
+wp_a_1002: [18020000] Lucerne
+wp_a_1003: [18030000] Banished Knight's Halberd
+wp_a_1004: [18040000] Commander's Standard
+wp_a_1005: [18050000] Nightrider Glaive
+wp_a_1007: [18060000] Ripple Crescent Halberd
+wp_a_1009: [18070000] Vulgar Militia Saw
+wp_a_1013: [18080000] Golden Halberd
+wp_a_1014: [18090000] Glaive
+wp_a_1016: [18100000] Loretta's War Sickle
+wp_a_0907: [18110000] Guardian's Swordspear
+wp_a_1054: [18130000] Vulgar Militia Shotel
+wp_a_1019: [18140000] Dragon Halberd
+wp_a_1020: [18150000] Gargoyle's Halberd
+wp_a_1022: [18160000] Gargoyle's Black Halberd
+wp_a_1050: [19000000] Scythe
+wp_a_1052: [19010000] Grave Scythe
+wp_a_1053: [19020000] Halo Scythe
+wp_a_1057: [19060000] Winged Scythe
+wp_a_1200: [20000000] Whip
+wp_a_1203: [20020000] Thorned Whip
+wp_a_1204: [20030000] Magma Whip Candlestick
+wp_a_1206: [20050000] Hoslow's Petal Whip
+wp_a_1207: [20060000] Giant's Red Braid
+wp_a_1208: [20070000] Urumi
+wp_a_1150: [21000000] Caestus
+wp_a_1153: [21010000] Spiked Caestus
+wp_a_1162: [21060000] Grafted Dragon
+wp_a_1164: [21070000] Iron Ball
+wp_a_1166: [21080000] Star Fist
+wp_a_1157: [21100000] Katar
+wp_a_1158: [21110000] Clinging Bone
+wp_a_1159: [21120000] Veteran's Prosthesis
+wp_a_1165: [21130000] Cipher Pata
+wp_a_1152: [22000000] Hookclaws
+wp_a_1151: [22010000] Venomous Fang
+wp_a_1154: [22020000] Bloodhound Claws
+wp_a_1163: [22030000] Raptor Talons
+wp_a_0856: [23000000] Prelate's Inferno Crozier
+wp_a_0807: [23010000] Watchdog's Staff
+wp_a_0851: [23020000] Great Club
+wp_a_4016: [23030000] Envoy's Greathorn
+wp_a_0754: [23040000] Duelist Greataxe
+wp_a_0755: [23050000] Axe of Godfrey
+wp_a_0854: [23060000] Dragon Greatclaw
+wp_a_0866: [23070000] Staff of the Avatar
+wp_a_0867: [23080000] Fallingstar Beast Jaw
+wp_a_0869: [23100000] Ghiza's Wheel
+wp_a_0870: [23110000] Giant-Crusher
+wp_a_1012: [23120000] Golem's Halberd
+wp_a_0873: [23130000] Troll's Hammer
+wp_a_0874: [23140000] Rotten Staff
+wp_a_0875: [23150000] Rotten Greataxe
+wp_a_3000: [24000000] Torch
+wp_a_3004: [24020000] Steel-Wire Torch
+wp_a_3006: [24040000] St. Trina's Torch
+wp_a_3007: [24050000] Ghostflame Torch
+wp_a_3000: [24060000] Beast-Repellent Torch
+wp_a_3008: [24070000] Sentry's Torch
+wp_a_2098: [30000000] Buckler
+wp_a_2103: [30010000] Perfumer's Shield
+wp_a_2104: [30020000] Man-Serpent's Shield
+wp_a_2008: [30030000] Rickety Shield
+wp_a_2106: [30040000] Pillory Shield
+wp_a_0503: [30060000] Beastman's Jar-Shield
+wp_a_2108: [30070000] Red Thorn Roundshield
+wp_a_2109: [30080000] Scripture Wooden Shield
+wp_a_2110: [30090000] Riveted Wooden Shield
+wp_a_2111: [30100000] Blue-White Wooden Shield
+wp_a_2115: [30110000] Rift Shield
+wp_a_2116: [30120000] Iron Roundshield
+wp_a_2117: [30130000] Gilded Iron Shield
+wp_a_2118: [30140000] Ice Crest Shield
+wp_a_2119: [30150000] Smoldering Shield
+wp_a_2113: [30190000] Spiralhorn Shield
+wp_a_2112: [30200000] Coil Shield
+wp_a_2033: [31000000] Kite Shield
+wp_a_2101: [31010000] Marred Leather Shield
+wp_a_2001: [31020000] Marred Wooden Shield
+wp_a_2002: [31030000] Banished Knight's Shield
+wp_a_2005: [31040000] Albinauric Shield
+wp_a_2007: [31050000] Sun Realm Shield
+wp_a_2014: [31060000] Silver Mirrorshield
+wp_a_2016: [31070000] Round Shield
+wp_a_2031: [31080000] Scorpion Kite Shield
+wp_a_2032: [31090000] Twinbird Kite Shield
+wp_a_2030: [31100000] Blue-Gold Kite Shield
+wp_a_2203: [31130000] Brass Shield
+wp_a_2021: [31140000] Great Turtle Shell
+wp_a_2024: [31170000] Shield of the Guilty
+wp_a_2026: [31190000] Carian Knight's Shield
+wp_a_2044: [31230000] Large Leather Shield
+wp_a_2043: [31240000] Horse Crest Wooden Shield
+wp_a_2042: [31250000] Candletree Wooden Shield
+wp_a_2041: [31260000] Flame Crest Wooden Shield
+wp_a_2040: [31270000] Hawk Crest Wooden Shield
+wp_a_2039: [31280000] Beast Crest Heater Shield
+wp_a_2038: [31290000] Red Crest Heater Shield
+wp_a_2037: [31300000] Blue Crest Heater Shield
+wp_a_2036: [31310000] Eclipse Crest Heater Shield
+wp_a_2035: [31320000] Inverted Hawk Heater Shield
+wp_a_2020: [31330000] Heater Shield
+wp_a_2045: [31340000] Black Leather Shield
+wp_a_2208: [32000000] Dragon Towershield
+wp_a_2010: [32020000] Distinguished Greatshield
+wp_a_2013: [32030000] Crucible Hornshield
+wp_a_2003: [32040000] Dragonclaw Shield
+wp_a_2202: [32050000] Briar Greatshield
+wp_a_2206: [32080000] Erdtree Greatshield
+wp_a_2207: [32090000] Golden Beast Crest Shield
+wp_a_2211: [32120000] Jellyfish Shield
+wp_a_2212: [32130000] Fingerprint Stone Shield
+wp_a_2213: [32140000] Icon Shield
+wp_a_2214: [32150000] One-Eyed Shield
+wp_a_2217: [32160000] Visage Shield
+wp_a_2216: [32170000] Spiked Palisade Shield
+wp_a_2218: [32190000] Manor Towershield
+wp_a_2219: [32200000] Crossed-Tree Towershield
+wp_a_2220: [32210000] Inverted Hawk Towershield
+wp_a_2221: [32220000] Ant's Skull Plate
+wp_a_2222: [32230000] Redmane Greatshield
+wp_a_2223: [32240000] Eclipse Crest Greatshield
+wp_a_2224: [32250000] Cuckoo Greatshield
+wp_a_2225: [32260000] Golden Greatshield
+wp_a_2226: [32270000] Gilded Greatshield
+wp_a_2227: [32280000] Haligtree Crest Greatshield
+wp_a_2009: [32290000] Wooden Greatshield
+wp_a_2228: [32300000] Lordsworn's Shield
+wp_a_1310: [33000000] Glintstone Staff
+wp_a_1303: [33040000] Crystal Staff
+wp_a_1307: [33050000] Gelmir Glintstone Staff
+wp_a_1309: [33060000] Demi-Human Queen's Staff
+wp_a_1325: [33090000] Carian Regal Scepter
+wp_a_1317: [33120000] Digger's Staff
+wp_a_1319: [33130000] Astrologer's Staff
+wp_a_1328: [33170000] Carian Glintblade Staff
+wp_a_1327: [33180000] Prince of Death's Staff
+wp_a_1326: [33190000] Albinauric Staff
+wp_a_1322: [33200000] Academy Glintstone Staff
+wp_a_1323: [33210000] Carian Glintstone Staff
+wp_a_1340: [33230000] Azur's Glintstone Staff
+wp_a_1341: [33240000] Lusat's Glintstone Staff
+wp_a_1324: [33250000] Meteorite Staff
+wp_a_1316: [33260000] Staff of the Guilty
+wp_a_1342: [33270000] Rotten Crystal Staff
+wp_a_1329: [33280000] Staff of Loss
+wp_a_1330: [34000000] Finger Seal
+wp_a_1331: [34010000] Godslayer's Seal
+wp_a_1332: [34020000] Giant's Seal
+wp_a_1333: [34030000] Gravel Stone Seal
+wp_a_1334: [34040000] Clawmark Seal
+wp_a_1336: [34060000] Golden Order Seal
+wp_a_1336: [34070000] Erdtree Seal
+wp_a_1336: [34080000] Dragon Communion Seal
+wp_a_1336: [34090000] Frenzied Flame Seal
+wp_a_1406: [40000000] Shortbow
+wp_a_1405: [40010000] Misbegotten Shortbow
+wp_a_1402: [40020000] Red Branch Shortbow
+wp_a_1411: [40030000] Harp Bow
+wp_a_1401: [40050000] Composite Bow
+wp_a_1410: [41000000] Longbow
+wp_a_1403: [41010000] Albinauric Bow
+wp_a_1404: [41020000] Horn Bow
+wp_a_1413: [41030000] Erdtree Bow
+wp_a_1414: [41040000] Serpent Bow
+wp_a_1419: [41060000] Pulley Bow
+wp_a_1418: [41070000] Black Bow
+wp_a_1408: [42000000] Lion Greatbow
+wp_a_1407: [42010000] Golem Greatbow
+wp_a_1417: [42030000] Erdtree Greatbow
+wp_a_1420: [42040000] Greatbow
+wp_a_1501: [43000000] Soldier's Crossbow
+wp_a_1503: [43020000] Light Crossbow
+wp_a_1512: [43030000] Heavy Crossbow
+wp_a_1508: [43050000] Pulley Crossbow
+wp_a_1513: [43060000] Full Moon Crossbow
+wp_a_1506: [43080000] Arbalest
+wp_a_1514: [43110000] Crepus's Black-Key Crossbow
+wp_a_1510: [44000000] Hand Ballista
+wp_a_1511: [44010000] Jar Cannon
+wp_a_7000: [50000000] Arrow
+wp_a_7030: [50010000] Fire Arrow
+wp_a_7040: [50020000] Serpent Arrow
+wp_a_7020: [50030000] Bone Arrow (Fletched)
+wp_a_7060: [50040000] St. Trina's Arrow
+wp_a_7020: [50060000] Shattershard Arrow (Fletched)
+wp_a_7020: [50080000] Rainbow Stone Arrow (Fletched)
+wp_a_7110: [50090000] Golden Arrow
+wp_a_7050: [50100000] Dwelling Arrow
+wp_a_7010: [50110000] Bone Arrow
+wp_a_7020: [50130000] Firebone Arrow (Fletched)
+wp_a_7010: [50140000] Firebone Arrow
+wp_a_7020: [50150000] Poisonbone Arrow (Fletched)
+wp_a_7010: [50160000] Poisonbone Arrow
+wp_a_7020: [50170000] Sleepbone Arrow (Fletched)
+wp_a_7010: [50180000] Sleepbone Arrow
+wp_a_7000: [50190000] Stormwing Bone Arrow
+wp_a_7020: [50200000] Lightningbone Arrow (Fletched)
+wp_a_7010: [50210000] Lightningbone Arrow
+wp_a_7010: [50220000] Rainbow Stone Arrow
+wp_a_7010: [50230000] Shattershard Arrow
+wp_a_7000: [50240000] Spiritflame Arrow
+wp_a_7020: [50260000] Magicbone Arrow (Fletched)
+wp_a_7010: [50270000] Magicbone Arrow
+wp_a_7020: [50280000] Haligbone Arrow (Fletched)
+wp_a_7010: [50290000] Haligbone Arrow
+wp_a_7020: [50300000] Bloodbone Arrow (Fletched)
+wp_a_7010: [50310000] Bloodbone Arrow
+wp_a_7020: [50320000] Coldbone Arrow (Fletched)
+wp_a_7010: [50330000] Coldbone Arrow
+wp_a_7020: [50340000] Rotbone Arrow (Fletched)
+wp_a_7010: [50350000] Rotbone Arrow
+wp_a_7300: [51000000] Great Arrow
+wp_a_7310: [51010000] Golem's Great Arrow
+wp_a_7320: [51020000] Golden Great Arrow
+wp_a_7330: [51030000] Golem's Magic Arrow
+wp_a_7340: [51040000] Radahn's Spear
+wp_a_7350: [51050000] Bone Great Arrow (Fletched)
+wp_a_7350: [51060000] Bone Great Arrow
+wp_a_7500: [52000000] Bolt
+wp_a_7500: [52010000] Lightning Bolt
+wp_a_7520: [52020000] Perfumer's Bolt
+wp_a_7530: [52030000] Black-Key Bolt
+wp_a_7500: [52040000] Burred Bolt
+wp_a_7730: [52050000] Meteor Bolt
+wp_a_7500: [52060000] Explosive Bolt
+wp_a_7500: [52070000] Golden Bolt
+wp_a_7500: [52080000] Lordsworn's Bolt
+wp_a_7570: [52090000] Bone Bolt
+wp_a_7500: [52100000] Firebone Bolt
+wp_a_7500: [52110000] Lightningbone Bolt
+wp_a_7500: [52120000] Magicbone Bolt
+wp_a_7500: [52130000] Haligbone Bolt
+wp_a_7500: [52140000] Poisonbone Bolt
+wp_a_7500: [52150000] Bloodbone Bolt
+wp_a_7500: [52160000] Coldbone Bolt
+wp_a_7500: [52170000] Rotbone Bolt
+wp_a_7500: [52180000] Sleepbone Bolt
+wp_a_7500: [52190000] Flaming Bolt
+wp_a_7700: [53000000] Ballista Bolt
+wp_a_7710: [53010000] Lightning Greatbolt
+wp_a_7720: [53020000] Explosive Greatbolt
+wp_a_7730: [53030000] Bone Ballista Bolt

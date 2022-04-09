@@ -28,7 +28,7 @@ namespace Elden_Ring_Debug_Tool
 
         public static void GetGems()
         {
-            string result = Util.GetResource("Weapons.Gems.txt");
+            string result = Util.GetTxtResource("Resources/Weapons/Gems.txt");
             Gems = new List<ERGem>();
 
             foreach (string line in result.Split(new string[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries))

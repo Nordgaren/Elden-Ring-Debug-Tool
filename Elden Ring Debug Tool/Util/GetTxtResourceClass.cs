@@ -1,44 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Reflection;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
 namespace Elden_Ring_Debug_Tool
 {
-    internal class Util
+    class GetTxtResourceClass
     {
-
         public static readonly string ExeDir = Environment.CurrentDirectory;
-
-        public static int DeleteFromEnd(int num, int n)
-        {
-            for (int i = 1; num != 0; i++)
-            {
-                num = num / 10;
-
-                if (i == n)
-                    return num;
-            }
-
-            return 0;
-        }
-
-        public static string GetEmbededResource(string item)
-        {
-            var assembly = Assembly.GetExecutingAssembly();
-            var resourceName = $"Elden_Ring_Weapon_Randomizer.Resources.{item}";
-
-            using (Stream stream = assembly.GetManifestResourceStream(resourceName))
-            using (StreamReader reader = new StreamReader(stream))
-            {
-                return reader.ReadToEnd();
-            }
-        }
-
 
         public static string GetTxtResource(string filePath)
         {

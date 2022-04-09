@@ -1,0 +1,701 @@
+Weapons
+WP_A_1: [110000] Unarmed
+WP_A_0: [170000] Throwing Dagger
+WP_A_0: [183000] Explosive Stone
+WP_A_0: [300000] Ancestral Infant's Head
+WP_A_0: [351000] Spark Aromatic
+WP_A_0: [361000] Acid Spraymist
+WP_A_0: [830000] Fire Pot
+WP_A_0: [840000] Roped Fire Pot
+WP_A_0: [851000] Roped Holy Water Pot
+WP_A_0: [860000] Volcano Pot
+WP_A_100: [1000000] Dagger
+WP_A_101: [1010000] Black Knife
+WP_A_102: [1020000] Parrying Dagger
+WP_A_103: [1030000] Misericorde
+WP_A_105: [1040000] Reduvia
+WP_A_115: [1050000] Crystal Knife
+WP_A_416: [1060000] Celebrant's Sickle
+WP_A_116: [1070000] Glintstone Kris
+WP_A_117: [1080000] Scorpion's Stinger
+WP_A_118: [1090000] Great Knife
+WP_A_120: [1100000] Wakizashi
+WP_A_417: [1110000] Cinquedea
+WP_A_122: [1130000] Ivory Sickle
+WP_A_110: [1140000] Bloodstained Dagger
+WP_A_123: [1150000] Erdsteel Dagger
+WP_A_124: [1160000] Blade of Calling
+WP_A_200: [2000000] Longsword
+WP_A_199: [2010000] Short Sword
+WP_A_201: [2020000] Broadsword
+WP_A_207: [2040000] Lordsworn's Straight Sword
+WP_A_214: [2050000] Weathered Straight Sword
+WP_A_215: [2060000] Ornamental Straight Sword
+WP_A_216: [2070000] Golden Epitaph
+WP_A_217: [2080000] Nox Flowing Sword
+WP_A_614: [2090000] Inseparable Sword
+WP_A_222: [2110000] Coded Sword
+WP_A_223: [2140000] Sword of Night and Flame
+WP_A_224: [2150000] Crystal Sword
+WP_A_227: [2180000] Carian Knight's Sword
+WP_A_230: [2190000] Sword of St. Trina
+WP_A_229: [2200000] Miquellan Knight's Sword
+WP_A_228: [2210000] Cane Sword
+WP_A_220: [2220000] Regalia of Eochaid
+WP_A_211: [2230000] Noble's Slender Sword
+WP_A_231: [2240000] Warhawk's Talon
+WP_A_232: [2250000] Lazuli Glintstone Sword
+WP_A_233: [2260000] Rotten Crystal Sword
+WP_A_600: [3000000] Bastard Sword
+WP_A_604: [3010000] Forked Greatsword
+WP_A_606: [3020000] Iron Greatsword
+WP_A_607: [3030000] Lordsworn's Greatsword
+WP_A_609: [3040000] Knight's Greatsword
+WP_A_610: [3050000] Flamberge
+WP_A_613: [3060000] Ordovis's Greatsword
+WP_A_204: [3070000] Alabaster Lord's Sword
+WP_A_203: [3080000] Banished Knight's Greatsword
+WP_A_617: [3090000] Dark Moon Greatsword
+WP_A_618: [3100000] Sacred Relic Sword
+WP_A_621: [3130000] Helphen's Steeple
+WP_A_213: [3140000] Blasphemous Blade
+WP_A_625: [3150000] Marais Executioner's Sword
+WP_A_628: [3160000] Sword of Milos
+WP_A_627: [3170000] Golden Order Greatsword
+WP_A_601: [3180000] Claymore
+WP_A_629: [3190000] Gargoyle's Greatsword
+WP_A_631: [3200000] Death's Poker
+WP_A_632: [3210000] Gargoyle's Blackblade
+WP_A_612: [4000000] Greatsword
+WP_A_210: [4010000] Watchdog's Greatsword
+WP_A_603: [4020000] Maliketh's Black Blade
+WP_A_608: [4030000] Troll's Golden Sword
+WP_A_611: [4040000] Zweihander
+WP_A_454: [4050000] Starscourge Greatsword
+WP_A_602: [4060000] Royal Greatsword
+WP_A_622: [4070000] Godslayer's Greatsword
+WP_A_623: [4080000] Ruins Greatsword
+WP_A_626: [4100000] Grafted Blade Greatsword
+WP_A_630: [4110000] Troll Knight's Sword
+WP_A_300: [5000000] Estoc
+WP_A_209: [5010000] Cleanrot Knight's Sword
+WP_A_250: [5020000] Rapier
+WP_A_251: [5030000] Rogier's Rapier
+WP_A_253: [5040000] Antspur Rapier
+WP_A_254: [5050000] Frozen Needle
+WP_A_252: [5060000] Noble's Estoc
+WP_A_302: [6000000] Bloody Helice
+WP_A_301: [6010000] Godskin Stitcher
+WP_A_303: [6020000] Great epee
+WP_A_305: [6040000] Dragon King's Cragblade
+WP_A_401: [7000000] Falchion
+WP_A_500: [7010000] Beastman's Curved Sword
+WP_A_402: [7020000] Shotel
+WP_A_408: [7030000] Shamshir
+WP_A_409: [7040000] Bandit's Curved Sword
+WP_A_414: [7050000] Magma Blade
+WP_A_418: [7060000] Flowing Curved Sword
+WP_A_419: [7070000] Wing of Astel
+WP_A_421: [7080000] Scavenger's Curved Sword
+WP_A_422: [7100000] Eclipse Shotel
+WP_A_423: [7110000] Serpent-God's Curved Sword
+WP_A_424: [7120000] Mantis Blade
+WP_A_400: [7140000] Scimitar
+WP_A_425: [7150000] Grossmesser
+WP_A_404: [8010000] Onyx Lord's Greatsword
+WP_A_452: [8020000] Dismounter
+WP_A_453: [8030000] Bloodhound's Fang
+WP_A_455: [8040000] Magma Wyrm's Scalesword
+WP_A_456: [8050000] Zamor Curved Sword
+WP_A_457: [8060000] Omen Cleaver
+WP_A_413: [8070000] Monk's Flameblade
+WP_A_502: [8080000] Beastman's Cleaver
+WP_A_459: [8100000] Morgott's Cursed Sword
+WP_A_550: [9000000] Uchigatana
+WP_A_551: [9010000] Nagakiba
+WP_A_552: [9020000] Hand of Malenia
+WP_A_553: [9030000] Meteoric Ore Blade
+WP_A_554: [9040000] Rivers of Blood
+WP_A_556: [9060000] Moonveil
+WP_A_558: [9070000] Dragonscale Blade
+WP_A_557: [9080000] Serpentbone Blade
+WP_A_1100: [10000000] Twinblade
+WP_A_1101: [10010000] Godskin Peeler
+WP_A_1105: [10030000] Twinned Knight Swords
+WP_A_1104: [10050000] Eleonora's Poleblade
+WP_A_1109: [10080000] Gargoyle's Twinblade
+WP_A_1110: [10090000] Gargoyle's Black Blades
+WP_A_802: [11000000] Mace
+WP_A_800: [11010000] Club
+WP_A_805: [11030000] Curved Club
+WP_A_809: [11040000] Warpick
+WP_A_812: [11050000] Morning Star
+WP_A_814: [11060000] Varre's Bouquet
+WP_A_815: [11070000] Spiked Club
+WP_A_816: [11080000] Hammer
+WP_A_806: [11090000] Monk's Flamemace
+WP_A_4014: [11100000] Envoy's Horn
+WP_A_817: [11110000] Scepter of the All-Knowing
+WP_A_818: [11120000] Nox Flowing Hammer
+WP_A_819: [11130000] Ringed Finger
+WP_A_820: [11140000] Stone Club
+WP_A_821: [11150000] Marika's Hammer
+WP_A_850: [12000000] Large Club
+WP_A_803: [12010000] Greathorn Hammer
+WP_A_804: [12020000] Battle Hammer
+WP_A_852: [12060000] Great Mace
+WP_A_855: [12080000] Curved Great Club
+WP_A_860: [12130000] Celebrant's Skull
+WP_A_861: [12140000] Pickaxe
+WP_A_862: [12150000] Beastclaw Greathammer
+WP_A_4015: [12160000] Envoy's Long Horn
+WP_A_863: [12170000] Cranial Vessel Candlestand
+WP_A_864: [12180000] Great Stars
+WP_A_865: [12190000] Brick Hammer
+WP_A_871: [12200000] Devourer's Scepter
+WP_A_876: [12210000] Rotten Battle Hammer
+WP_A_1251: [13000000] Nightrider Flail
+WP_A_1250: [13010000] Flail
+WP_A_1252: [13020000] Family Heads
+WP_A_1253: [13030000] Bastard's Stars
+WP_A_1255: [13040000] Chainlink Flail
+WP_A_701: [14000000] Battle Axe
+WP_A_406: [14010000] Forked Hatchet
+WP_A_700: [14020000] Hand Axe
+WP_A_705: [14030000] Jawbone Axe
+WP_A_706: [14040000] Iron Cleaver
+WP_A_707: [14050000] Ripple Blade
+WP_A_708: [14060000] Celebrant's Cleaver
+WP_A_714: [14080000] Icerind Hatchet
+WP_A_716: [14100000] Highland Axe
+WP_A_717: [14110000] Sacrificial Axe
+WP_A_718: [14120000] Rosus' Axe
+WP_A_720: [14140000] Stormhawk Axe
+WP_A_750: [15000000] Greataxe
+WP_A_711: [15010000] Warped Axe
+WP_A_712: [15020000] Great Omenkiller Cleaver
+WP_A_752: [15030000] Crescent Moon Axe
+WP_A_756: [15040000] Axe of Godrick
+WP_A_1006: [15050000] Longhaft Axe
+WP_A_713: [15060000] Rusted Anchor
+WP_A_758: [15080000] Executioner's Greataxe
+WP_A_753: [15110000] Winged Greathorn
+WP_A_761: [15120000] Butchering Knife
+WP_A_762: [15130000] Gargoyle's Great Axe
+WP_A_763: [15140000] Gargoyle's Black Axe
+WP_A_923: [16000000] Short Spear
+WP_A_902: [16010000] Spear
+WP_A_905: [16020000] Crystal Spear
+WP_A_909: [16030000] Clayman's Harpoon
+WP_A_910: [16040000] Cleanrot Spear
+WP_A_921: [16050000] Partisan
+WP_A_922: [16060000] Celebrant's Rib-Rake
+WP_A_926: [16070000] Pike
+WP_A_3001: [16080000] Torchpole
+WP_A_930: [16090000] Bolt of Gransax
+WP_A_932: [16110000] Cross-Naginata
+WP_A_933: [16120000] Death Ritual Spear
+WP_A_934: [16130000] Inquisitor's Girandole
+WP_A_1017: [16140000] Spiked Spear
+WP_A_919: [16150000] Iron Spear
+WP_A_1021: [16160000] Rotten Crystal Spear
+WP_A_918: [17010000] Mohgwyn's Sacred Spear
+WP_A_929: [17020000] Siluria's Tree
+WP_A_935: [17030000] Serpent-Hunter
+WP_A_937: [17050000] Vyke's War Spear
+WP_A_938: [17060000] Lance
+WP_A_939: [17070000] Treespear
+WP_A_1001: [18000000] Halberd
+WP_A_911: [18010000] Pest's Glaive
+WP_A_1002: [18020000] Lucerne
+WP_A_1003: [18030000] Banished Knight's Halberd
+WP_A_1004: [18040000] Commander's Standard
+WP_A_1005: [18050000] Nightrider Glaive
+WP_A_1007: [18060000] Ripple Crescent Halberd
+WP_A_1009: [18070000] Vulgar Militia Saw
+WP_A_1013: [18080000] Golden Halberd
+WP_A_1014: [18090000] Glaive
+WP_A_1016: [18100000] Loretta's War Sickle
+WP_A_907: [18110000] Guardian's Swordspear
+WP_A_1054: [18130000] Vulgar Militia Shotel
+WP_A_1019: [18140000] Dragon Halberd
+WP_A_1020: [18150000] Gargoyle's Halberd
+WP_A_1022: [18160000] Gargoyle's Black Halberd
+WP_A_1050: [19000000] Scythe
+WP_A_1052: [19010000] Grave Scythe
+WP_A_1053: [19020000] Halo Scythe
+WP_A_1057: [19060000] Winged Scythe
+WP_A_1200: [20000000] Whip
+WP_A_1203: [20020000] Thorned Whip
+WP_A_1204: [20030000] Magma Whip Candlestick
+WP_A_1206: [20050000] Hoslow's Petal Whip
+WP_A_1207: [20060000] Giant's Red Braid
+WP_A_1208: [20070000] Urumi
+WP_A_1150: [21000000] Caestus
+WP_A_1153: [21010000] Spiked Caestus
+WP_A_1162: [21060000] Grafted Dragon
+WP_A_1164: [21070000] Iron Ball
+WP_A_1166: [21080000] Star Fist
+WP_A_1157: [21100000] Katar
+WP_A_1158: [21110000] Clinging Bone
+WP_A_1159: [21120000] Veteran's Prosthesis
+WP_A_1165: [21130000] Cipher Pata
+WP_A_1152: [22000000] Hookclaws
+WP_A_1151: [22010000] Venomous Fang
+WP_A_1154: [22020000] Bloodhound Claws
+WP_A_1163: [22030000] Raptor Talons
+WP_A_856: [23000000] Prelate's Inferno Crozier
+WP_A_807: [23010000] Watchdog's Staff
+WP_A_851: [23020000] Great Club
+WP_A_4016: [23030000] Envoy's Greathorn
+WP_A_754: [23040000] Duelist Greataxe
+WP_A_755: [23050000] Axe of Godfrey
+WP_A_854: [23060000] Dragon Greatclaw
+WP_A_866: [23070000] Staff of the Avatar
+WP_A_867: [23080000] Fallingstar Beast Jaw
+WP_A_869: [23100000] Ghiza's Wheel
+WP_A_870: [23110000] Giant-Crusher
+WP_A_1012: [23120000] Golem's Halberd
+WP_A_873: [23130000] Troll's Hammer
+WP_A_874: [23140000] Rotten Staff
+WP_A_875: [23150000] Rotten Greataxe
+WP_A_3000: [24000000] Torch
+WP_A_3004: [24020000] Steel-Wire Torch
+WP_A_3006: [24040000] St. Trina's Torch
+WP_A_3007: [24050000] Ghostflame Torch
+WP_A_3000: [24060000] Beast-Repellent Torch
+WP_A_3008: [24070000] Sentry's Torch
+WP_A_2098: [30000000] Buckler
+WP_A_2103: [30010000] Perfumer's Shield
+WP_A_2104: [30020000] Man-Serpent's Shield
+WP_A_2008: [30030000] Rickety Shield
+WP_A_2106: [30040000] Pillory Shield
+WP_A_503: [30060000] Beastman's Jar-Shield
+WP_A_2108: [30070000] Red Thorn Roundshield
+WP_A_2109: [30080000] Scripture Wooden Shield
+WP_A_2110: [30090000] Riveted Wooden Shield
+WP_A_2111: [30100000] Blue-White Wooden Shield
+WP_A_2115: [30110000] Rift Shield
+WP_A_2116: [30120000] Iron Roundshield
+WP_A_2117: [30130000] Gilded Iron Shield
+WP_A_2118: [30140000] Ice Crest Shield
+WP_A_2119: [30150000] Smoldering Shield
+WP_A_2113: [30190000] Spiralhorn Shield
+WP_A_2112: [30200000] Coil Shield
+WP_A_2033: [31000000] Kite Shield
+WP_A_2101: [31010000] Marred Leather Shield
+WP_A_2001: [31020000] Marred Wooden Shield
+WP_A_2002: [31030000] Banished Knight's Shield
+WP_A_2005: [31040000] Albinauric Shield
+WP_A_2007: [31050000] Sun Realm Shield
+WP_A_2014: [31060000] Silver Mirrorshield
+WP_A_2016: [31070000] Round Shield
+WP_A_2031: [31080000] Scorpion Kite Shield
+WP_A_2032: [31090000] Twinbird Kite Shield
+WP_A_2030: [31100000] Blue-Gold Kite Shield
+WP_A_2203: [31130000] Brass Shield
+WP_A_2021: [31140000] Great Turtle Shell
+WP_A_2024: [31170000] Shield of the Guilty
+WP_A_2026: [31190000] Carian Knight's Shield
+WP_A_2044: [31230000] Large Leather Shield
+WP_A_2043: [31240000] Horse Crest Wooden Shield
+WP_A_2042: [31250000] Candletree Wooden Shield
+WP_A_2041: [31260000] Flame Crest Wooden Shield
+WP_A_2040: [31270000] Hawk Crest Wooden Shield
+WP_A_2039: [31280000] Beast Crest Heater Shield
+WP_A_2038: [31290000] Red Crest Heater Shield
+WP_A_2037: [31300000] Blue Crest Heater Shield
+WP_A_2036: [31310000] Eclipse Crest Heater Shield
+WP_A_2035: [31320000] Inverted Hawk Heater Shield
+WP_A_2020: [31330000] Heater Shield
+WP_A_2045: [31340000] Black Leather Shield
+WP_A_2208: [32000000] Dragon Towershield
+WP_A_2010: [32020000] Distinguished Greatshield
+WP_A_2013: [32030000] Crucible Hornshield
+WP_A_2003: [32040000] Dragonclaw Shield
+WP_A_2202: [32050000] Briar Greatshield
+WP_A_2206: [32080000] Erdtree Greatshield
+WP_A_2207: [32090000] Golden Beast Crest Shield
+WP_A_2211: [32120000] Jellyfish Shield
+WP_A_2212: [32130000] Fingerprint Stone Shield
+WP_A_2213: [32140000] Icon Shield
+WP_A_2214: [32150000] One-Eyed Shield
+WP_A_2217: [32160000] Visage Shield
+WP_A_2216: [32170000] Spiked Palisade Shield
+WP_A_2218: [32190000] Manor Towershield
+WP_A_2219: [32200000] Crossed-Tree Towershield
+WP_A_2220: [32210000] Inverted Hawk Towershield
+WP_A_2221: [32220000] Ant's Skull Plate
+WP_A_2222: [32230000] Redmane Greatshield
+WP_A_2223: [32240000] Eclipse Crest Greatshield
+WP_A_2224: [32250000] Cuckoo Greatshield
+WP_A_2225: [32260000] Golden Greatshield
+WP_A_2226: [32270000] Gilded Greatshield
+WP_A_2227: [32280000] Haligtree Crest Greatshield
+WP_A_2009: [32290000] Wooden Greatshield
+WP_A_2228: [32300000] Lordsworn's Shield
+WP_A_1310: [33000000] Glintstone Staff
+WP_A_1303: [33040000] Crystal Staff
+WP_A_1307: [33050000] Gelmir Glintstone Staff
+WP_A_1309: [33060000] Demi-Human Queen's Staff
+WP_A_1325: [33090000] Carian Regal Scepter
+WP_A_1317: [33120000] Digger's Staff
+WP_A_1319: [33130000] Astrologer's Staff
+WP_A_1328: [33170000] Carian Glintblade Staff
+WP_A_1327: [33180000] Prince of Death's Staff
+WP_A_1326: [33190000] Albinauric Staff
+WP_A_1322: [33200000] Academy Glintstone Staff
+WP_A_1323: [33210000] Carian Glintstone Staff
+WP_A_1340: [33230000] Azur's Glintstone Staff
+WP_A_1341: [33240000] Lusat's Glintstone Staff
+WP_A_1324: [33250000] Meteorite Staff
+WP_A_1316: [33260000] Staff of the Guilty
+WP_A_1342: [33270000] Rotten Crystal Staff
+WP_A_1329: [33280000] Staff of Loss
+WP_A_1330: [34000000] Finger Seal
+WP_A_1331: [34010000] Godslayer's Seal
+WP_A_1332: [34020000] Giant's Seal
+WP_A_1333: [34030000] Gravel Stone Seal
+WP_A_1334: [34040000] Clawmark Seal
+WP_A_1336: [34060000] Golden Order Seal
+WP_A_1336: [34070000] Erdtree Seal
+WP_A_1336: [34080000] Dragon Communion Seal
+WP_A_1336: [34090000] Frenzied Flame Seal
+WP_A_1406: [40000000] Shortbow
+WP_A_1405: [40010000] Misbegotten Shortbow
+WP_A_1402: [40020000] Red Branch Shortbow
+WP_A_1411: [40030000] Harp Bow
+WP_A_1401: [40050000] Composite Bow
+WP_A_1410: [41000000] Longbow
+WP_A_1403: [41010000] Albinauric Bow
+WP_A_1404: [41020000] Horn Bow
+WP_A_1413: [41030000] Erdtree Bow
+WP_A_1414: [41040000] Serpent Bow
+WP_A_1419: [41060000] Pulley Bow
+WP_A_1418: [41070000] Black Bow
+WP_A_1408: [42000000] Lion Greatbow
+WP_A_1407: [42010000] Golem Greatbow
+WP_A_1417: [42030000] Erdtree Greatbow
+WP_A_1420: [42040000] Greatbow
+WP_A_1501: [43000000] Soldier's Crossbow
+WP_A_1503: [43020000] Light Crossbow
+WP_A_1512: [43030000] Heavy Crossbow
+WP_A_1508: [43050000] Pulley Crossbow
+WP_A_1513: [43060000] Full Moon Crossbow
+WP_A_1506: [43080000] Arbalest
+WP_A_1514: [43110000] Crepus's Black-Key Crossbow
+WP_A_1510: [44000000] Hand Ballista
+WP_A_1511: [44010000] Jar Cannon
+WP_A_7000: [50000000] Arrow
+WP_A_7030: [50010000] Fire Arrow
+WP_A_7040: [50020000] Serpent Arrow
+WP_A_7020: [50030000] Bone Arrow (Fletched)
+WP_A_7060: [50040000] St. Trina's Arrow
+WP_A_7020: [50060000] Shattershard Arrow (Fletched)
+WP_A_7020: [50080000] Rainbow Stone Arrow (Fletched)
+WP_A_7110: [50090000] Golden Arrow
+WP_A_7050: [50100000] Dwelling Arrow
+WP_A_7010: [50110000] Bone Arrow
+WP_A_7020: [50130000] Firebone Arrow (Fletched)
+WP_A_7010: [50140000] Firebone Arrow
+WP_A_7020: [50150000] Poisonbone Arrow (Fletched)
+WP_A_7010: [50160000] Poisonbone Arrow
+WP_A_7020: [50170000] Sleepbone Arrow (Fletched)
+WP_A_7010: [50180000] Sleepbone Arrow
+WP_A_7000: [50190000] Stormwing Bone Arrow
+WP_A_7020: [50200000] Lightningbone Arrow (Fletched)
+WP_A_7010: [50210000] Lightningbone Arrow
+WP_A_7010: [50220000] Rainbow Stone Arrow
+WP_A_7010: [50230000] Shattershard Arrow
+WP_A_7000: [50240000] Spiritflame Arrow
+WP_A_7020: [50260000] Magicbone Arrow (Fletched)
+WP_A_7010: [50270000] Magicbone Arrow
+WP_A_7020: [50280000] Haligbone Arrow (Fletched)
+WP_A_7010: [50290000] Haligbone Arrow
+WP_A_7020: [50300000] Bloodbone Arrow (Fletched)
+WP_A_7010: [50310000] Bloodbone Arrow
+WP_A_7020: [50320000] Coldbone Arrow (Fletched)
+WP_A_7010: [50330000] Coldbone Arrow
+WP_A_7020: [50340000] Rotbone Arrow (Fletched)
+WP_A_7010: [50350000] Rotbone Arrow
+WP_A_7300: [51000000] Great Arrow
+WP_A_7310: [51010000] Golem's Great Arrow
+WP_A_7320: [51020000] Golden Great Arrow
+WP_A_7330: [51030000] Golem's Magic Arrow
+WP_A_7340: [51040000] Radahn's Spear
+WP_A_7350: [51050000] Bone Great Arrow (Fletched)
+WP_A_7350: [51060000] Bone Great Arrow
+WP_A_7500: [52000000] Bolt
+WP_A_7500: [52010000] Lightning Bolt
+WP_A_7520: [52020000] Perfumer's Bolt
+WP_A_7530: [52030000] Black-Key Bolt
+WP_A_7500: [52040000] Burred Bolt
+WP_A_7730: [52050000] Meteor Bolt
+WP_A_7500: [52060000] Explosive Bolt
+WP_A_7500: [52070000] Golden Bolt
+WP_A_7500: [52080000] Lordsworn's Bolt
+WP_A_7570: [52090000] Bone Bolt
+WP_A_7500: [52100000] Firebone Bolt
+WP_A_7500: [52110000] Lightningbone Bolt
+WP_A_7500: [52120000] Magicbone Bolt
+WP_A_7500: [52130000] Haligbone Bolt
+WP_A_7500: [52140000] Poisonbone Bolt
+WP_A_7500: [52150000] Bloodbone Bolt
+WP_A_7500: [52160000] Coldbone Bolt
+WP_A_7500: [52170000] Rotbone Bolt
+WP_A_7500: [52180000] Sleepbone Bolt
+WP_A_7500: [52190000] Flaming Bolt
+WP_A_7700: [53000000] Ballista Bolt
+WP_A_7710: [53010000] Lightning Greatbolt
+WP_A_7720: [53020000] Explosive Greatbolt
+WP_A_7730: [53030000] Bone Ballista Bolt
+000(1) = disableParam_NT
+001(1) = disableParamReserve1
+002(3) = disableParamReserve2
+003(4) = sortId
+004(4) = wanderingEquipId
+005(2) = resistSleep
+006(2) = resistMadness
+007(4) = saDurability
+008(4) = toughnessCorrectRate
+009(4) = fixPrice
+010(4) = basicPrice
+011(4) = sellValue
+012(4) = weight
+013(4) = residentSpEffectId
+014(4) = residentSpEffectId2
+015(4) = residentSpEffectId3
+016(4) = materialSetId
+017(4) = partsDamageRate
+018(4) = corectSARecover
+019(4) = originEquipPro
+020(4) = originEquipPro1
+021(4) = originEquipPro2
+022(4) = originEquipPro3
+023(4) = originEquipPro4
+024(4) = originEquipPro5
+025(4) = originEquipPro6
+026(4) = originEquipPro7
+027(4) = originEquipPro8
+028(4) = originEquipPro9
+029(4) = originEquipPro10
+030(4) = originEquipPro11
+031(4) = originEquipPro12
+032(4) = originEquipPro13
+033(4) = originEquipPro14
+034(4) = originEquipPro15
+035(4) = faceScaleM_ScaleX
+036(4) = faceScaleM_ScaleZ
+037(4) = faceScaleM_MaxX
+038(4) = faceScaleM_MaxZ
+039(4) = faceScaleF_ScaleX
+040(4) = faceScaleF_ScaleZ
+041(4) = faceScaleF_MaxX
+042(4) = faceScaleF_MaxZ
+043(4) = qwcId
+044(2) = equipModelId
+045(2) = iconIdM
+046(2) = iconIdF
+047(2) = knockBack
+048(2) = knockbackBounceRate
+049(2) = durability
+050(2) = durabilityMax
+051(2) = pad03
+052(2) = defFlickPower
+053(2) = defensePhysics
+054(2) = defenseMagic
+055(2) = defenseFire
+056(2) = defenseThunder
+057(2) = defenseSlash
+058(2) = defenseBlow
+059(2) = defenseThrust
+060(2) = resistPoison
+061(2) = resistDisease
+062(2) = resistBlood
+063(2) = resistCurse
+064(2) = reinforceTypeId
+065(2) = trophySGradeId
+066(2) = shopLv
+067(1) = knockbackParamId
+068(1) = flickDamageCutRate
+069(1) = equipModelCategory
+070(1) = equipModelGender
+071(1) = protectorCategory
+072(1) = rarity
+073(1) = sortGroupId
+074(1) = partsDmgType
+075(2) = pad04
+076(1) = isDeposit
+077(1) = headEquip
+078(1) = bodyEquip
+079(1) = armEquip
+080(1) = legEquip
+081(1) = useFaceScale
+082(1) = isSkipWeakDamageAnim
+083(1) = pad06
+084(1) = defenseMaterialVariationValue_Weak
+085(2) = autoFootEffectDecalBaseId2
+086(2) = autoFootEffectDecalBaseId3
+087(1) = defenseMaterialVariationValue
+088(1) = isDiscard
+089(1) = isDrop
+090(1) = disableMultiDropShare
+091(1) = simpleModelForDlc
+092(1) = showLogCondType
+093(1) = showDialogCondType
+094(1) = pad
+095(4) = neutralDamageCutRate
+096(4) = slashDamageCutRate
+097(4) = blowDamageCutRate
+098(4) = thrustDamageCutRate
+099(4) = magicDamageCutRate
+100(4) = fireDamageCutRate
+101(4) = thunderDamageCutRate
+102(2) = defenseMaterialSfx1
+103(2) = defenseMaterialSfx_Weak1
+104(2) = defenseMaterial1
+105(2) = defenseMaterial_Weak1
+106(2) = defenseMaterialSfx2
+107(2) = defenseMaterialSfx_Weak2
+108(2) = footMaterialSe
+109(2) = defenseMaterial_Weak2
+110(4) = autoFootEffectDecalBaseId1
+111(4) = toughnessDamageCutRate
+112(4) = toughnessRecoverCorrection
+113(4) = darkDamageCutRate
+114(2) = defenseDark
+115(1) = invisibleFlag48
+116(1) = invisibleFlag49
+117(1) = invisibleFlag50
+118(1) = invisibleFlag51
+119(1) = invisibleFlag52
+120(1) = invisibleFlag53
+121(1) = invisibleFlag54
+122(1) = invisibleFlag55
+123(1) = invisibleFlag56
+124(1) = invisibleFlag57
+125(1) = invisibleFlag58
+126(1) = invisibleFlag59
+127(1) = invisibleFlag60
+128(1) = invisibleFlag61
+129(1) = invisibleFlag62
+130(1) = invisibleFlag63
+131(1) = invisibleFlag64
+132(1) = invisibleFlag65
+133(1) = invisibleFlag66
+134(1) = invisibleFlag67
+135(1) = invisibleFlag68
+136(1) = invisibleFlag69
+137(1) = invisibleFlag70
+138(1) = invisibleFlag71
+139(1) = invisibleFlag72
+140(1) = invisibleFlag73
+141(1) = invisibleFlag74
+142(1) = invisibleFlag75
+143(1) = invisibleFlag76
+144(1) = invisibleFlag77
+145(1) = invisibleFlag78
+146(1) = invisibleFlag79
+147(1) = invisibleFlag80
+148(1) = padbit
+149(1) = postureControlId
+150(4) = pad2
+151(4) = saleValue
+152(2) = resistFreeze
+153(1) = invisibleFlag_SexVer00
+154(1) = invisibleFlag_SexVer01
+155(1) = invisibleFlag_SexVer02
+156(1) = invisibleFlag_SexVer03
+157(1) = invisibleFlag_SexVer04
+158(1) = invisibleFlag_SexVer05
+159(1) = invisibleFlag_SexVer06
+160(1) = invisibleFlag_SexVer07
+161(1) = invisibleFlag_SexVer08
+162(1) = invisibleFlag_SexVer09
+163(1) = invisibleFlag_SexVer10
+164(1) = invisibleFlag_SexVer11
+165(1) = invisibleFlag_SexVer12
+166(1) = invisibleFlag_SexVer13
+167(1) = invisibleFlag_SexVer14
+168(1) = invisibleFlag_SexVer15
+169(1) = invisibleFlag_SexVer16
+170(1) = invisibleFlag_SexVer17
+171(1) = invisibleFlag_SexVer18
+172(1) = invisibleFlag_SexVer19
+173(1) = invisibleFlag_SexVer20
+174(1) = invisibleFlag_SexVer21
+175(1) = invisibleFlag_SexVer22
+176(1) = invisibleFlag_SexVer23
+177(1) = invisibleFlag_SexVer24
+178(1) = invisibleFlag_SexVer25
+179(1) = invisibleFlag_SexVer26
+180(1) = invisibleFlag_SexVer27
+181(1) = invisibleFlag_SexVer28
+182(1) = invisibleFlag_SexVer29
+183(1) = invisibleFlag_SexVer30
+184(1) = invisibleFlag_SexVer31
+185(1) = invisibleFlag_SexVer32
+186(1) = invisibleFlag_SexVer33
+187(1) = invisibleFlag_SexVer34
+188(1) = invisibleFlag_SexVer35
+189(1) = invisibleFlag_SexVer36
+190(1) = invisibleFlag_SexVer37
+191(1) = invisibleFlag_SexVer38
+192(1) = invisibleFlag_SexVer39
+193(1) = invisibleFlag_SexVer40
+194(1) = invisibleFlag_SexVer41
+195(1) = invisibleFlag_SexVer42
+196(1) = invisibleFlag_SexVer43
+197(1) = invisibleFlag_SexVer44
+198(1) = invisibleFlag_SexVer45
+199(1) = invisibleFlag_SexVer46
+200(1) = invisibleFlag_SexVer47
+201(1) = invisibleFlag_SexVer48
+202(1) = invisibleFlag_SexVer49
+203(1) = invisibleFlag_SexVer50
+204(1) = invisibleFlag_SexVer51
+205(1) = invisibleFlag_SexVer52
+206(1) = invisibleFlag_SexVer53
+207(1) = invisibleFlag_SexVer54
+208(1) = invisibleFlag_SexVer55
+209(1) = invisibleFlag_SexVer56
+210(1) = invisibleFlag_SexVer57
+211(1) = invisibleFlag_SexVer58
+212(1) = invisibleFlag_SexVer59
+213(1) = invisibleFlag_SexVer60
+214(1) = invisibleFlag_SexVer61
+215(1) = invisibleFlag_SexVer62
+216(1) = invisibleFlag_SexVer63
+217(1) = invisibleFlag_SexVer64
+218(1) = invisibleFlag_SexVer65
+219(1) = invisibleFlag_SexVer66
+220(1) = invisibleFlag_SexVer67
+221(1) = invisibleFlag_SexVer68
+222(1) = invisibleFlag_SexVer69
+223(1) = invisibleFlag_SexVer70
+224(1) = invisibleFlag_SexVer71
+225(1) = invisibleFlag_SexVer72
+226(1) = invisibleFlag_SexVer73
+227(1) = invisibleFlag_SexVer74
+228(1) = invisibleFlag_SexVer75
+229(1) = invisibleFlag_SexVer76
+230(1) = invisibleFlag_SexVer77
+231(1) = invisibleFlag_SexVer78
+232(1) = invisibleFlag_SexVer79
+233(1) = invisibleFlag_SexVer80
+234(1) = invisibleFlag_SexVer81
+235(1) = invisibleFlag_SexVer82
+236(1) = invisibleFlag_SexVer83
+237(1) = invisibleFlag_SexVer84
+238(1) = invisibleFlag_SexVer85
+239(1) = invisibleFlag_SexVer86
+240(1) = invisibleFlag_SexVer87
+241(1) = invisibleFlag_SexVer88
+242(1) = invisibleFlag_SexVer89
+243(1) = invisibleFlag_SexVer90
+244(1) = invisibleFlag_SexVer91
+245(1) = invisibleFlag_SexVer92
+246(1) = invisibleFlag_SexVer93
+247(1) = invisibleFlag_SexVer94
+248(1) = invisibleFlag_SexVer95
+249(14) = pad404
