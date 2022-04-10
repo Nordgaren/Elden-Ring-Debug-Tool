@@ -6,7 +6,14 @@
     <RootNamespace>Elden_Ring_Debug_Tool</RootNamespace>
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
+    <PackageIcon>elden_ring_logo-freelogovectors.net_.png</PackageIcon>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <ApplicationIcon>elden_ring_logo-freelogovectors.net_White.ico</ApplicationIcon>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="elden_ring_logo-freelogovectors.net_White.ico" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Extended.Wpf.Toolkit" Version="4.3.0" />
@@ -1751,6 +1758,17 @@
 
   <ItemGroup>
     <Folder Include="TabControls\ParamViewerControls\ParamControls\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\Icon\elden_ring_logo-freelogovectors.net_.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+    <None Include="..\README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
   </ItemGroup>
 
 </Project>

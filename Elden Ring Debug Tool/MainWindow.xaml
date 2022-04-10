@@ -6,7 +6,7 @@
         xmlns:wpfTool="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:local="clr-namespace:Elden_Ring_Debug_Tool"
         mc:Ignorable="d"
-        Title="MainWindow" Height="550" Width="800" Loaded="Window_Loaded" Closing="Window_Closing" Background="DarkGray">
+        Title="MainWindow" Height="550" Width="800" Loaded="Window_Loaded" Closing="Window_Closing" Background="DarkGray" >
     <Window.DataContext>
         <local:ERViewModel x:Name="ViewModel"/>
     </Window.DataContext>
