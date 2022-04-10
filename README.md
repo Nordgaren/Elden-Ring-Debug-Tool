@@ -10,6 +10,7 @@ Backup your saves before using this tool, and restore the backups before going o
 
 ## Known Issues
 * Params that share defs don't come up. Working on it.  
+* Loading params is a bit sow. I am working on that, as well.
 
 ## Installing  
 * Extract contents of zip archive to it's own folder. You may have to run as admin if DS2S META crashes  
