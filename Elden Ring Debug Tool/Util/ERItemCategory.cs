@@ -13,7 +13,7 @@ namespace Elden_Ring_Debug_Tool
     {
         public List<ERWeapon> Weapons;
 
-        private static Regex categoryEntryRx = new Regex(@"^(?<list>.+) (?<infusable>\S+)$");
+        private static Regex CategoryEntryRx = new Regex(@"^(?<list>.+) (?<infusable>\S+)$");
         private ERItemCategory(string itemList, bool infusible)
         {
             Weapons = new List<ERWeapon>();
@@ -32,7 +32,7 @@ namespace Elden_Ring_Debug_Tool
             {
                 if (!line.Contains("//")) //determine if line is a valid resource or not
                 {
-                    Match itemEntry = categoryEntryRx.Match(line);
+                    Match itemEntry = CategoryEntryRx.Match(line);
                     var name = itemEntry.Groups["list"].Value;
                     var infusible = Convert.ToBoolean(itemEntry.Groups["infusable"].Value);
                     All.Add(new ERItemCategory(Util.GetTxtResource($"Resources/{name}"), infusible));

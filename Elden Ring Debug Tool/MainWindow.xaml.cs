@@ -1,4 +1,5 @@
-﻿using SoulsFormats;
+﻿using PropertyHook;
+using SoulsFormats;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -15,8 +16,12 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.IO;
+using System.Reflection;
+using System.Runtime.CompilerServices;
 using Xceed.Wpf.Toolkit;
-using static SoulsFormats.PARAMDEF;
+using System.Xml;
+using System.Xml.Serialization;
 
 namespace Elden_Ring_Debug_Tool
 {
@@ -30,6 +35,15 @@ namespace Elden_Ring_Debug_Tool
             InitializeComponent();
             ERItemCategory.GetItemCategories();
             ERGem.GetGems();
+            Hook.OnSetup += Hook_OnSetup;
+        }
+
+        private void Hook_OnSetup(object? sender, PropertyHook.PHEventArgs e)
+        {
+            Dispatcher.Invoke(() => 
+            {
+                DebugParam.GetParams();
+            });
         }
 
         ERHook Hook => ViewModel.Hook;
@@ -41,89 +55,88 @@ namespace Elden_Ring_Debug_Tool
             UpdateTimer.Interval = 16;
             UpdateTimer.Elapsed += UpdateTimer_Elapsed;
             UpdateTimer.Enabled = true;
-            var defPath = @"C:\Users\Nord\source\repos\Paramdex\ER\Defs\EquipParamWeapon.xml";
-            var defs = XmlDeserialize(defPath);
-            GetOffsets(defs);
         }
 
-        private void GetOffsets(PARAMDEF paramDEF)
-        {
-            ParamPanel.Children.Clear();
+        //private void GetOffsets(PARAMDEF paramDEF, PHPointer pointer)
+        //{
+        //    ParamPanel.Children.Clear();
 
-            int totalSize = 0;
-            for (int i = 0; i < paramDEF.Fields.Count; i++)
-            {
-                Field field = paramDEF.Fields[i];
-                DefType type = field.DisplayType;
-                var size = ParamUtil.IsArrayType(type) ? ParamUtil.GetValueSize(type) * field.ArrayLength : ParamUtil.GetValueSize(type);
-                if (ParamUtil.IsArrayType(type))
-                    totalSize += ParamUtil.GetValueSize(type) * field.ArrayLength;
-                else
-                    totalSize += ParamUtil.GetValueSize(type);
+        //    int totalSize = 0;
+        //    paramDEF.GetRowSize();
+        //    for (int i = 0; i < paramDEF.Fields.Count; i++)
+        //    {
+        //        Field field = paramDEF.Fields[i];
+        //        DefType type = field.DisplayType;
+        //        var size = ParamUtil.IsArrayType(type) ? ParamUtil.GetValueSize(type) * field.ArrayLength : ParamUtil.GetValueSize(type);
+        //        if (ParamUtil.IsArrayType(type))
+        //            totalSize += ParamUtil.GetValueSize(type) * field.ArrayLength;
+        //        else
+        //            totalSize += ParamUtil.GetValueSize(type);
 
-                if (ParamUtil.IsBitType(type) && field.BitSize != -1)
-                {
-                    int bitOffset = field.BitSize;
-                    DefType bitType = type == DefType.dummy8 ? DefType.u8 : type;
-                    int bitLimit = ParamUtil.GetBitLimit(bitType);
-                    Debug.WriteLine($"Bitoffset: {bitOffset}");
-                    for (; i < paramDEF.Fields.Count - 1; i++)
-                    {
-                        Field nextField = paramDEF.Fields[i + 1];
-                        DefType nextType = nextField.DisplayType;
-                        if (!ParamUtil.IsBitType(nextType) || nextField.BitSize == -1 || bitOffset + nextField.BitSize > bitLimit
-                            || (nextType == DefType.dummy8 ? DefType.u8 : nextType) != bitType)
-                            break;
-                        bitOffset += nextField.BitSize;
-                        Debug.WriteLine($"Bitoffset??: {bitOffset}");
-                    }
+        //        if (ParamUtil.IsBitType(type) && field.BitSize != -1)
+        //        {
+        //            int bitOffset = field.BitSize;
+        //            DefType bitType = type == DefType.dummy8 ? DefType.u8 : type;
+        //            int bitLimit = ParamUtil.GetBitLimit(bitType);
+        //            for (; i < paramDEF.Fields.Count - 1; i++)
+        //            {
+        //                var bitfield = new BitfieldControl(pointer, totalSize - size, bitOffset - 1, paramDEF.Fields[i].InternalName);
+        //                ParamPanel.Children.Add(bitfield);
+        //                Field nextField = paramDEF.Fields[i + 1];
+        //                DefType nextType = nextField.DisplayType;
+        //                if (!ParamUtil.IsBitType(nextType) || nextField.BitSize == -1 || bitOffset + nextField.BitSize > bitLimit
+        //                    || (nextType == DefType.dummy8 ? DefType.u8 : nextType) != bitType)
+        //                    break;
+        //                bitOffset += nextField.BitSize;
+        //            }
+        //        }
+        //        else
+        //        {
+        //            switch (type)
+        //            {
+        //                case DefType.u8:
+        //                    var u8 = new ParamUNumControl<byte>(pointer, totalSize - size, field.InternalName);
+        //                    ParamPanel.Children.Add(u8);
+        //                    break;
+        //                case DefType.s8:
+        //                    var s8 = new ParamNumControl<sbyte>(pointer, totalSize - size, field.InternalName);
+        //                    ParamPanel.Children.Add(s8);
+        //                    break;
+        //                case DefType.u16:
+        //                    var u16 = new ParamUNumControl<ushort>(pointer, totalSize - size, field.InternalName);
+        //                    ParamPanel.Children.Add(u16);
+        //                    break;
+        //                case DefType.s16:
+        //                    var s16 = new ParamNumControl<short>(pointer, totalSize - size, field.InternalName);
+        //                    ParamPanel.Children.Add(s16);
+        //                    break;
+        //                case DefType.u32:
+        //                    var u32 = new ParamUNumControl<uint>(pointer, totalSize - size, field.InternalName);
+        //                    ParamPanel.Children.Add(u32);
+        //                    break;
+        //                case DefType.s32:
+        //                    var s32 = new ParamNumControl<int>(pointer, totalSize - size, field.InternalName);
+        //                    ParamPanel.Children.Add(s32);
+        //                    break;
+        //                case DefType.f32:
+        //                    var f32 = new ParamDecControl<float>(pointer, totalSize - size, field.InternalName);
+        //                    ParamPanel.Children.Add(f32);
+        //                    break;
+        //                case DefType.fixstr:
+        //                case DefType.fixstrW:
+        //                case DefType.dummy8:
+        //                    var dummy8 = new ParamNumControl<byte>(pointer, totalSize - size, field.InternalName);
+        //                    ParamPanel.Children.Add(dummy8);
+        //                    break;
+        //                default:
+        //                    break;
+        //            }
+        //        }
 
-                }
+                
+        //    }
+        //}
 
-                switch (type)
-                {
-                    case DefType.s8:
-                        break;
-                    case DefType.s16:
-                        break;
-                    case DefType.u16:
-                        break;
-                    case DefType.s32:
-                        break;
-                    case DefType.u32:
-                        break;
-                    case DefType.f32:
-                        break;
-                    case DefType.dummy8:
-                        break;
-                    case DefType.fixstr:
-                        break;
-                    case DefType.fixstrW:
-                        break;
-                    case DefType.u8:
-                    default:
-                        break;
-                }
-            }
-        }
-
-        public void Trash()
-        {
-            ParamPanel.Children.Clear();
-
-                var bonfireControl = new IntegerUpDown();
-                Binding binding = new Binding("Value")
-                {
-                    Source = Hook,
-                    Path = new PropertyPath(bonfire.Replace(" ", "").Replace("'", ""))
-                };
-                bonfireControl.SetBinding(IntegerUpDown.ValueProperty, binding);
-                bonfireControl.Minimum = 0;
-                bonfireControl.Maximum = 99;
-                bonfireControl.Label = bonfire;
-                bonfireControl.nudValue.Margin = new Thickness(0, 5, 0, 0);
-                ParamPanel.Children.Add(bonfireControl);
-        }
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             UpdateTimer.Stop();

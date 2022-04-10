@@ -3,15 +3,25 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:wpfTool="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:local="clr-namespace:Elden_Ring_Debug_Tool"
         mc:Ignorable="d"
-        Title="MainWindow" Height="550" Width="800" Loaded="Window_Loaded" Closing="Window_Closing">
+        Title="MainWindow" Height="550" Width="800" Loaded="Window_Loaded" Closing="Window_Closing" Background="DarkGray">
     <Window.DataContext>
         <local:ERViewModel x:Name="ViewModel"/>
     </Window.DataContext>
     <Grid>
-        <DataGrid x:Name="ParamGrid"/>
-        <StackPanel x:Name="ParamPanel"/>
+        <TabControl>
+            <TabItem Header="Params">
+                <Grid Background="LightGray">
+                    <local:ParamViewerControl x:Name="DebugParam" Hook="{Binding Hook}"/>
+                </Grid>
+            </TabItem>
+        </TabControl>
+        <!--<DataGrid x:Name="ParamGrid"/>-->
+        <!--<ScrollViewer CanContentScroll="False">
+            <StackPanel x:Name="ParamPanel" CanVerticallyScroll="True"  />
+        </ScrollViewer>-->
         <!--<StackPanel>
             <Label Content="Bitfield:" VerticalAlignment="Center"/>
             <StackPanel Orientation="Horizontal">

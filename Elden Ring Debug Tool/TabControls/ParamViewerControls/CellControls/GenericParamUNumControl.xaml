@@ -1,0 +1,20 @@
+﻿<UserControl x:Class="Elden_Ring_Debug_Tool.GenericParamUNumControl"
+             x:Name="ParamUNumCtrl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Elden_Ring_Debug_Tool"
+             xmlns:wpfTool="http://schemas.xceed.com/wpf/xaml/toolkit"
+             mc:Ignorable="d" 
+             d:DesignHeight="25" d:DesignWidth="200">
+    <Grid >
+        <Grid.ColumnDefinitions >
+            <ColumnDefinition Width="125"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <Label Content="{Binding ElementName=ParamUNumCtrl, Path=FieldName}" HorizontalAlignment="Left" Grid.ColumnSpan="2" />
+        <wpfTool:ULongUpDown Value="{Binding ElementName=ParamUNumCtrl, Path=ParamValue, BindsDirectlyToSource=True}" Name="UNumControl" Width="75" Grid.Column="1" HorizontalAlignment="Right" />
+    </Grid>
+</UserControl>

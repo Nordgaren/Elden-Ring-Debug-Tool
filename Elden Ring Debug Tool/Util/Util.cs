@@ -45,10 +45,25 @@ namespace Elden_Ring_Debug_Tool
             //Get local directory + file path, read file, return string contents of file
 
             //Path.Combine(Environment.CurrentDirectory, filePath);
+            if (!File.Exists($@"{ExeDir}/{filePath}"))
+                return "";
 
             string fileString = File.ReadAllText($@"{ExeDir}/{filePath}");
 
             return fileString;
+        }
+
+        public static string[] GetListResource(string filePath)
+        {
+            //Get local directory + file path, read file, return string contents of file
+
+            //Path.Combine(Environment.CurrentDirectory, filePath);
+            if (!File.Exists($@"{ExeDir}/{filePath}"))
+                return new string[] { };
+
+            string[] stringArray = File.ReadAllLines($@"{ExeDir}/{filePath}");
+
+            return stringArray;
         }
 
         public static bool IsValidTxtResource(string txtLine)

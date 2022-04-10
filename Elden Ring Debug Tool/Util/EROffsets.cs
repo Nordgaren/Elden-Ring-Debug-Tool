@@ -41,6 +41,7 @@ namespace Elden_Ring_Debug_Tool
         public enum Param
         {
             TotalParamLength = 0x0,
+            NameOffset = 0x10,
             TableLength = 0x30,
         }
 

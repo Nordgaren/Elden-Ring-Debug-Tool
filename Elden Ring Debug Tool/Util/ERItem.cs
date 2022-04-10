@@ -9,14 +9,14 @@ namespace Elden_Ring_Debug_Tool
 {
     class ERItem
     {
-        private static Regex itemEntryRx = new Regex(@"^\s*(?<id>\S+)\s+(?<name>.*)$");
+        private static Regex ItemEntryRx = new Regex(@"^\s*(?<id>\S+)\s+(?<name>.*)$");
 
         public string Name;
         public int ID;
 
         public ERItem(string config)
         {
-            Match itemEntry = itemEntryRx.Match(config);
+            Match itemEntry = ItemEntryRx.Match(config);
             Name = itemEntry.Groups["name"].Value.Replace("\r", "");
             ID = Convert.ToInt32(itemEntry.Groups["id"].Value);
         }

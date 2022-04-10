@@ -12,7 +12,7 @@ namespace Elden_Ring_Debug_Tool
     class ERGem
     {
         public static List<ERGem> Gems;
-        private static Regex gemEntryRx = new Regex(@"^\s*(?<id>\S+)\s+(?<name>.*)$");
+        private static Regex GemEntryRx = new Regex(@"^\s*(?<id>\S+)\s+(?<name>.*)$");
 
         public string Name;
         public int ID;
@@ -21,7 +21,7 @@ namespace Elden_Ring_Debug_Tool
 
         public ERGem(string config)
         {
-            Match itemEntry = gemEntryRx.Match(config);
+            Match itemEntry = GemEntryRx.Match(config);
             Name = itemEntry.Groups["name"].Value.Replace("\r", "");
             ID = Convert.ToInt32(itemEntry.Groups["id"].Value);
         }

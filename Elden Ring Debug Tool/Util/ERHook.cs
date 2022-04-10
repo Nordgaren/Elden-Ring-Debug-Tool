@@ -14,7 +14,7 @@ using WeaponType = Elden_Ring_Debug_Tool.ERWeapon.WeaponType;
 
 namespace Elden_Ring_Debug_Tool
 {
-    internal class ERHook : PHook, INotifyPropertyChanged
+    public class ERHook : PHook, INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler? PropertyChanged;
         protected void OnPropertyChanged([CallerMemberName] string name = null)
@@ -26,9 +26,14 @@ namespace Elden_Ring_Debug_Tool
         private PHPointer PlayerGameData { get; set; }
         private PHPointer SoloParamRepositorySetup { get; set; }
         private PHPointer SoloParamRepository { get; set; }
-        private PHPointer EquipParamWeapon { get; set; }
-        private PHPointer EquipParamGem { get; set; }
-
+        public PHPointer EquipParamWeapon { get; set; }
+        public PHPointer EquipParamGem { get; set; }
+        public event EventHandler<PHEventArgs> OnSetup;
+        private void RaiseOnSetup()
+        {
+            OnSetup?.Invoke(this, new PHEventArgs(this));
+        }
+        public List<PHPointer> Params;
         //private PHPointer DurabilityAddr { get; set; }
         //private PHPointer DurabilitySpecialAddr { get; set; }
         public bool Loaded => this?.PlayerGameData?.Resolve() != IntPtr.Zero;
@@ -41,8 +46,15 @@ namespace Elden_Ring_Debug_Tool
             SoloParamRepositorySetup = RegisterAbsoluteAOB(EROffsets.SoloParamRepositorySetupAoB);
 
         }
+
+        internal PHPointer GetParamPointer(int[] offsetInt)
+        {
+            return CreateChildPointer(SoloParamRepository, offsetInt);
+        }
+
         private void ERHook_OnHooked(object? sender, PHEventArgs e)
         {
+            Params = new List<PHPointer>();
             GameDataMan = CreateBasePointer(BasePointerFromSetupPointer(GameDataManSetup));
             PlayerGameData = CreateChildPointer(GameDataMan, EROffsets.PlayerGameData);
 
@@ -54,8 +66,11 @@ namespace Elden_Ring_Debug_Tool
             EquipParamWeaponBytes = bytes;
             EquipParamGemOffsetDict = BuildOffsetDictionary(EquipParamGem, "RAM_GEM_ST", ref bytes);
             EquipParamGemBytes = bytes;
+            Params.Add(EquipParamWeapon);
+            Params.Add(EquipParamGem);
             GetParams();
             Setup = true;
+            RaiseOnSetup();
         }
         public void Update()
         {

@@ -73,7 +73,6 @@ namespace Elden_Ring_Debug_Tool
             Bolt = 85,
             BallistaBolt = 86,
         }
-
         public int RealID { get; set; }
         public bool Infusible { get; set; }
         public bool Unique { get; set; }
