@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Elden_Ring_Debug_Tool
 {
-    public class ERParam
+    public class ERParam : IComparable<ERParam>
     {
         public PHPointer Pointer { get; private set; }
         public PARAMDEF ParamDef { get; private set; }
@@ -18,9 +18,9 @@ namespace Elden_Ring_Debug_Tool
         public string Type { get; private set; }
         public int Length { get; private set; }
         public byte[] Bytes { get; private set; }
-        public Dictionary<int, int> OffsetDictionary { get; private set; }
+        public List<Row> Rows { get; private set; }
         private static Regex ParamEntryRx = new Regex(@"^\s*(?<id>\S+)\s+(?<name>.*)$");
-        public Dictionary<int, string> RowDictionary { get; private set; }
+        public Dictionary<int, string> NameDictionary { get; private set; }
         public int RowLength { get; private set; }
 
         public ERParam(PHPointer pointer, PARAMDEF paramdef, string name)
@@ -29,13 +29,13 @@ namespace Elden_Ring_Debug_Tool
             ParamDef = paramdef;
             Name = name;
             Type = paramdef.ParamType;
+            BuildNameDictionary();
             BuildOffsetDictionary();
-            BuildRowDictionary();
             RowLength = ParamDef.GetRowSize();
         }
         private void BuildOffsetDictionary()
         {
-            OffsetDictionary = new Dictionary<int, int>();
+            Rows = new List<Row>();
             Length = Pointer.ReadInt32((int)EROffsets.Param.NameOffset);
             
             var paramType = Pointer.ReadString(Length, Encoding.UTF8, (uint)Type.Length);
@@ -54,20 +54,20 @@ namespace Elden_Ring_Debug_Tool
             {
                 var itemID = BitConverter.ToInt32(Bytes, param + paramID);
                 var itemParamOffset = BitConverter.ToInt32(Bytes, param + paramOffset);
-                if (OffsetDictionary.ContainsKey(itemID))
-                {
-                    Debug.WriteLine(itemID);
-                }
-                OffsetDictionary.Add(itemID, itemParamOffset);
+                var name = $"{itemID} - ";
+                if (NameDictionary.ContainsKey(itemID))
+                    name += $"{NameDictionary[itemID]}";
+
+                Rows.Add(new Row(name, itemID, itemParamOffset));
 
                 param += nextParam;
             }
 
         }
-        private void BuildRowDictionary()
+        private void BuildNameDictionary()
         {
-            RowDictionary = new Dictionary<int, string>();
-            string result = Util.GetTxtResource(@$"Resources/Names/{Name}.txt");
+            NameDictionary = new Dictionary<int, string>();
+            string result = Util.GetTxtResource(@$"Resources/Params/Names/{Name}.txt");
             if (string.IsNullOrWhiteSpace(result))
                 return;
 
@@ -78,14 +78,40 @@ namespace Elden_Ring_Debug_Tool
                     Match itemEntry = ParamEntryRx.Match(line);
                     var name = itemEntry.Groups["name"].Value.Replace("\r", "");
                     var id = Convert.ToInt32(itemEntry.Groups["id"].Value);
-                    if (RowDictionary.ContainsKey(id))
-                    {
-                        Debug.WriteLine(name);
-                        Debug.WriteLine(id);
-                    }
-                    RowDictionary.Add(id, name);
+                    if (NameDictionary.ContainsKey(id))
+                        continue;
+
+                    NameDictionary.Add(id, name);
                 }
             };
+        }
+
+        public override string ToString()
+        {
+            return Name;
+        }
+
+        public int CompareTo(ERParam? other)
+        {
+            return this.Name.CompareTo(other.Name);
+        }
+
+        public class Row
+        {
+            public string Name { get; private set; }
+            public int ID { get; private set; }
+            public int DataOffset { get; private set; }
+
+            public Row(string name, int id, int offset)
+            {
+                Name = name;
+                ID = id;
+                DataOffset = offset;
+            }
+            public override string ToString()
+            {
+                return Name;
+            }
         }
     }
 }

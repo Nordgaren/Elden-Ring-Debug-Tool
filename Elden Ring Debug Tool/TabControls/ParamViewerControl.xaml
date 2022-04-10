@@ -1,11 +1,12 @@
 ﻿<local:DebugControl x:Class="Elden_Ring_Debug_Tool.ParamViewerControl"
+                    x:Name="DebugParam"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Elden_Ring_Debug_Tool"
              mc:Ignorable="d" 
-             Height="500" Width="800" Background="DarkGray">
+             Background="DarkGray" d:DesignHeight="475" d:DesignWidth="680">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
@@ -16,14 +17,13 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"  >
-            <ComboBox x:Name="ComboBoxParams" HorizontalAlignment="Center" Width="300" Margin="0,35,0,0" IsEnabled="False"/>
+            <ComboBox x:Name="ComboBoxParams" HorizontalAlignment="Center" Width="300" Margin="0,35,0,0" IsEnabled="{Binding ElementName=DebugParam, Path=Hook.Loaded}" DisplayMemberPath="Name" SelectionChanged="ComboBoxParams_SelectionChanged" />
         </StackPanel>
         <StackPanel Grid.Row="1" Grid.Column="0" >
-            <ListBox Height="400" IsEnabled="False" />
-
+            <ListBox x:Name="ListBoxRows" IsEnabled="{Binding ElementName=DebugParam, Path=Hook.Loaded}" BorderThickness="0" SelectionChanged="ListBoxRows_SelectionChanged"/>
         </StackPanel>
         <ScrollViewer CanContentScroll="False" Grid.Column="1" Grid.Row="1">
-            <StackPanel x:Name="ParamPanel" CanVerticallyScroll="True" IsEnabled="False"/>
+            <StackPanel x:Name="ParamPanel" CanVerticallyScroll="True" IsEnabled="{Binding ElementName=DebugParam, Path=Hook.Loaded}" />
         </ScrollViewer>
     </Grid>
 </local:DebugControl>

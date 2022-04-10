@@ -36,7 +36,7 @@ namespace Elden_Ring_Debug_Tool
         public List<PHPointer> Params;
         //private PHPointer DurabilityAddr { get; set; }
         //private PHPointer DurabilitySpecialAddr { get; set; }
-        public bool Loaded => this?.PlayerGameData?.Resolve() != IntPtr.Zero;
+        public bool Loaded => PlayerGameData != null ?  PlayerGameData.Resolve() != IntPtr.Zero : false;
         private bool Setup = false;
         public ERHook(int refreshInterval, int minLifetime, Func<Process, bool> processSelector)
             : base(refreshInterval, minLifetime, processSelector)
@@ -77,6 +77,7 @@ namespace Elden_Ring_Debug_Tool
             if (!Setup)
                 return;
 
+            OnPropertyChanged(nameof(Loaded));
             OnPropertyChanged(nameof(Dagger));
             OnPropertyChanged(nameof(SwordNormal));
             OnPropertyChanged(nameof(SwordLarge));

@@ -1518,6 +1518,9 @@
     <None Update="Resources\Params\Pointers\ObjActParam.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="Resources\Params\Pointers\ParamOffsets.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="Resources\Params\Pointers\PartsDrawParam.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -1597,9 +1600,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Resources\Params\Pointers\SoundChrPhysicsSeParam.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="Resources\Params\Pointers\SoundCommonIngameParam.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Resources\Params\Pointers\SoundCutsceneParam.xml">
@@ -1750,7 +1750,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Resources\Params\Pointers\" />
     <Folder Include="TabControls\ParamViewerControls\ParamControls\" />
   </ItemGroup>
 
