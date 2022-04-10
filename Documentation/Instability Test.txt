@@ -1,0 +1,9 @@
+929 jumping r2 standing Hammer
+929 jumping re while jumping Hammer
+780 jumpinf r2 while standing hook
+780 jumping re while jumping hook
+1156 instability damage (Player who took damage was attacking, and palyer who did damage jump R2 with hook)
+
+butt damage
+125
+4
