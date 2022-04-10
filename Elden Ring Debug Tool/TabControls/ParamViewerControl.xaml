@@ -19,11 +19,9 @@
         <StackPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"  >
             <ComboBox x:Name="ComboBoxParams" HorizontalAlignment="Center" Width="300" Margin="0,35,0,0" IsEnabled="{Binding ElementName=DebugParam, Path=Hook.Loaded}" DisplayMemberPath="Name" SelectionChanged="ComboBoxParams_SelectionChanged" />
         </StackPanel>
-        <ScrollViewer CanContentScroll="False" Grid.Column="0" Grid.Row="1">
             <StackPanel Grid.Row="1" Grid.Column="0" >
-                <ListBox x:Name="ListBoxRows" IsEnabled="{Binding ElementName=DebugParam, Path=Hook.Loaded}" BorderThickness="0" SelectionChanged="ListBoxRows_SelectionChanged" />
+                <ListBox x:Name="ListBoxRows" IsEnabled="{Binding ElementName=DebugParam, Path=Hook.Loaded}" BorderThickness="0" Height="{Binding ElementName=DebugParam, Path=ActualHeight}" SelectionChanged="ListBoxRows_SelectionChanged" ScrollViewer.VerticalScrollBarVisibility="Visible"/>
             </StackPanel>
-        </ScrollViewer>
       
         <ScrollViewer CanContentScroll="False" Grid.Column="1" Grid.Row="1">
             <StackPanel x:Name="ParamPanel" CanVerticallyScroll="True" IsEnabled="{Binding ElementName=DebugParam, Path=Hook.Loaded}" />
