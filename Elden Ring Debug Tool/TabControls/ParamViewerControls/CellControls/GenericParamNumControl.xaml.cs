@@ -34,37 +34,37 @@ namespace Elden_Ring_Debug_Tool
     /// </summary>
     public partial class ParamNumControl<T> : GenericParamNumControl
     {
-        public PHPointer Param { get; private set; }
+        public ERParam Param { get; private set; }
         public int Offset { get; private set; }
         public string FieldName { get; private set; }
         public long ParamValue
         {
             get
             {
-                var bytes = Param.ReadBytes(Offset, GetSize());
-                return GetValue(bytes);
+                //var bytes = Param.Pointer.ReadBytes(Offset, GetSize());
+                return GetValue();
             }
             set 
             {
                 var buffer = BitConverter.GetBytes(value);
                 var bytes = new byte[GetSize()];
                 Array.Copy(buffer, bytes, bytes.Length);
-                Param.WriteBytes(Offset, bytes);
+                Param.Pointer.WriteBytes(Offset, bytes);
             }
         }
 
-        private long GetValue(byte[] bytes)
+        private long GetValue()
         {
             switch (GetSize())
             {
                 case 1:
-                    return bytes[0];
+                    return Param.Bytes[Offset];
                 case 2:
-                    return BitConverter.ToInt16(bytes);
+                    return BitConverter.ToInt16(Param.Bytes, Offset);
                 case 4:
-                    return BitConverter.ToInt32(bytes);
+                    return BitConverter.ToInt32(Param.Bytes, Offset);
                 case 8:
-                    return BitConverter.ToInt64(bytes);
+                    return BitConverter.ToInt64(Param.Bytes, Offset);
                 default:
                     return 0;
             }
@@ -76,7 +76,7 @@ namespace Elden_Ring_Debug_Tool
             return (uint)Marshal.SizeOf(typeof(T));
         }
 
-        public ParamNumControl(PHPointer param, int offset, string name)
+        public ParamNumControl(ERParam param, int offset, string name)
         {
             Param = param;
             Offset = offset;

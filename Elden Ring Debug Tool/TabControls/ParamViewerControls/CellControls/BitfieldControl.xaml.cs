@@ -21,25 +21,25 @@ namespace Elden_Ring_Debug_Tool
     /// </summary>
     public partial class BitfieldControl : UserControl
     {
-        public PHPointer Param { get; private set; }
+        public ERParam Param { get; private set; }
         public int Offset { get; private set; }
         public int Position { get; private set; }
         public string FieldName { get; private set; }
         public bool ParamValue
         {
-            get => ((Param?.ReadByte(Offset) & (1 << Position)) != 0);
+            get => ((Param.Bytes[Offset] & (1 << Position)) != 0);
             set
             {
-                var paramValue = Param.ReadByte(Offset);
+                var paramValue = Param.Pointer.ReadByte(Offset);
                 if (value)
                     paramValue |= (byte)(1 << Position);
                 else
                    paramValue &= (byte)~(1 << Position);
 
-                Param.WriteByte(Offset, paramValue);
+                Param.Pointer.WriteByte(Offset, paramValue);
             }
         }
-        public BitfieldControl(PHPointer param, int offset, int position, string name)
+        public BitfieldControl(ERParam param, int offset, int position, string name)
         {
             Param = param;
             Offset = offset;

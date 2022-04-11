@@ -39,26 +39,31 @@ namespace Elden_Ring_Debug_Tool
             var paramPath = $"{Util.ExeDir}/Resources/Params/";
             
             var pointerPath = $"{paramPath}/Pointers/";
-            var paramPointers = Directory.GetFiles(pointerPath);
+            var paramPointers = Directory.GetFiles(pointerPath, "*.txt");
             foreach (var path in paramPointers)
             {
                 var pointers = File.ReadAllLines(path);
                 AddParam(paramPath, path, pointers);
             }
 
-            ComboBoxParams.ItemsSource = Params;
-            ComboBoxParams.SelectedIndex = 0;
+            FilterParams();
         }
 
         private void AddParam(string paramPath, string path, string[] pointers)
         {
             foreach (var entry in pointers)
             {
+                if (!Util.IsValidTxtResource(entry))
+                    continue;
+
                 var info = entry.Split(':');
                 var name = info[1];
-                var defPath = $"{paramPath}/Defs/{name}.xml";
+                var defName = info.Length > 2 ? info[2] : name;
+
+                var defPath = $"{paramPath}/Defs/{defName}.xml";
                 if (!File.Exists(defPath))
-                    continue;
+                    throw new Exception($"The PARAMDEF {defName} does not exist for {entry}. If the PARAMDEF is named differently than the param name, add another \":\" and append the PARAMDEF name" +
+                        $"Example: 3130:WwiseValueToStrParam_BgmBossChrIdConv:WwiseValueToStrConvertParamFormat");
 
                 var offsetInt = new int[3] { int.Parse(info[0], System.Globalization.NumberStyles.HexNumber) ,0x80, 0x80};
 
@@ -74,98 +79,93 @@ namespace Elden_Ring_Debug_Tool
 
         private void ComboBoxParams_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            ParamPanel.Children.Clear();
-            ListBoxRows.ItemsSource = ((ERParam)ComboBoxParams.SelectedItem).Rows;
+            FilterRows();
         }
 
         private void ListBoxRows_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var param = ((ERParam)ComboBoxParams.SelectedItem);
             var row = ((ERParam.Row)ListBoxRows.SelectedItem);
-            if (row == null || param == null)
+            if (row == null)
                 return;
 
-            GetOffsets(param.ParamDef, Hook.CreateBasePointer(param.Pointer.Resolve() + row.DataOffset));
+            ParamPanel.Children.Clear();
+            foreach (var control in row.Cells)
+            {
+                ParamPanel.Children.Add(control);
+            }
+            ParamPanel.IsEnabled = true;
+
+        }
+        private void SearchBoxParam_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            //ComboBoxParams.IsDropDownOpen = true;
+            //FilterParams();
+            //SearchBoxParams.Focus();
         }
 
-        private void GetOffsets(PARAMDEF paramDEF, PHPointer pointer)
+        private void FilterParams()
         {
-            ParamPanel.Children.Clear();
-
-            int totalSize = 0;
-            paramDEF.GetRowSize();
-            for (int i = 0; i < paramDEF.Fields.Count; i++)
+            if (string.IsNullOrWhiteSpace(SearchBoxParams.Text))
             {
-                Field field = paramDEF.Fields[i];
-                DefType type = field.DisplayType;
-                var size = ParamUtil.IsArrayType(type) ? ParamUtil.GetValueSize(type) * field.ArrayLength : ParamUtil.GetValueSize(type);
-                if (ParamUtil.IsArrayType(type))
-                    totalSize += ParamUtil.GetValueSize(type) * field.ArrayLength;
-                else
-                    totalSize += ParamUtil.GetValueSize(type);
-
-                if (ParamUtil.IsBitType(type) && field.BitSize != -1)
+                ComboBoxParams.ItemsSource = Params;
+                ComboBoxParams.SelectedIndex = 0;
+            }
+            else
+            {
+                var filteredItems = new List<ERParam>();
+                foreach (var param in Params)
                 {
-                    int bitOffset = field.BitSize;
-                    DefType bitType = type == DefType.dummy8 ? DefType.u8 : type;
-                    int bitLimit = ParamUtil.GetBitLimit(bitType);
-                    for (; i < paramDEF.Fields.Count - 1; i++)
-                    {
-                        var bitfield = new BitfieldControl(pointer, totalSize - size, bitOffset - 1, paramDEF.Fields[i].InternalName);
-                        ParamPanel.Children.Add(bitfield);
-                        Field nextField = paramDEF.Fields[i + 1];
-                        DefType nextType = nextField.DisplayType;
-                        if (!ParamUtil.IsBitType(nextType) || nextField.BitSize == -1 || bitOffset + nextField.BitSize > bitLimit
-                            || (nextType == DefType.dummy8 ? DefType.u8 : nextType) != bitType)
-                            break;
-                        bitOffset += nextField.BitSize;
-                    }
+                    if (param.Name.ToLower().Contains(SearchBoxParams.Text.ToLower()))
+                        filteredItems.Add(param);
                 }
-                else
-                {
-                    switch (type)
-                    {
-                        case DefType.u8:
-                            var u8 = new ParamUNumControl<byte>(pointer, totalSize - size, field.InternalName);
-                            ParamPanel.Children.Add(u8);
-                            break;
-                        case DefType.s8:
-                            var s8 = new ParamNumControl<sbyte>(pointer, totalSize - size, field.InternalName);
-                            ParamPanel.Children.Add(s8);
-                            break;
-                        case DefType.u16:
-                            var u16 = new ParamUNumControl<ushort>(pointer, totalSize - size, field.InternalName);
-                            ParamPanel.Children.Add(u16);
-                            break;
-                        case DefType.s16:
-                            var s16 = new ParamNumControl<short>(pointer, totalSize - size, field.InternalName);
-                            ParamPanel.Children.Add(s16);
-                            break;
-                        case DefType.u32:
-                            var u32 = new ParamUNumControl<uint>(pointer, totalSize - size, field.InternalName);
-                            ParamPanel.Children.Add(u32);
-                            break;
-                        case DefType.s32:
-                            var s32 = new ParamNumControl<int>(pointer, totalSize - size, field.InternalName);
-                            ParamPanel.Children.Add(s32);
-                            break;
-                        case DefType.f32:
-                            var f32 = new ParamDecControl<float>(pointer, totalSize - size, field.InternalName);
-                            ParamPanel.Children.Add(f32);
-                            break;
-                        case DefType.fixstr:
-                        case DefType.fixstrW:
-                        case DefType.dummy8:
-                            var dummy8 = new ParamNumControl<byte>(pointer, totalSize - size, field.InternalName);
-                            ParamPanel.Children.Add(dummy8);
-                            break;
-                        default:
-                            break;
-                    }
-                }
-
-
+                ComboBoxParams.ItemsSource = filteredItems;
             }
         }
+        private void SearchBoxRow_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            FilterRows();
+        }
+
+        private void FilterRows()
+        {
+            if (ComboBoxParams.SelectedItem == null)
+                return;
+
+            ParamPanel.Children.Clear();
+            var selectedParam = ((ERParam)ComboBoxParams.SelectedItem);
+            if (string.IsNullOrWhiteSpace(SearchBoxRow.Text))
+            {
+                ListBoxRows.ItemsSource = ListBoxRows.ItemsSource = selectedParam.Rows;
+                ListBoxRows.SelectedIndex = 0;
+            }
+            else
+            {
+                var filteredItems = new List<ERParam.Row>();
+                if (CbxIDSearch.IsChecked.Value)
+                {
+                    foreach (var param in selectedParam.Rows)
+                    {
+                        if (param.ID.ToString().Contains(SearchBoxRow.Text))
+                            filteredItems.Add(param);
+                    }
+                }
+                else
+                {
+                    foreach (var param in selectedParam.Rows)
+                    {
+                        if (param.Name.ToLower().Contains(SearchBoxRow.Text.ToLower()))
+                            filteredItems.Add(param);
+                    }
+                }
+                ListBoxRows.ItemsSource = filteredItems;
+            }
+        }
+
+        private void SearchBoxField_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        
     }
 }

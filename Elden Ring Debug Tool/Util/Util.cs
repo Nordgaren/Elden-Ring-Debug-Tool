@@ -75,6 +75,7 @@ namespace Elden_Ring_Debug_Tool
             {
                 txtLine = txtLine.Substring(0, txtLine.IndexOf("//")); // remove everything after "//" comments
             };
+
             if (string.IsNullOrWhiteSpace(txtLine) == true) //empty line check
             {
                 return false; //resource line invalid

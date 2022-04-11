@@ -14,16 +14,33 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="100"/>
+            <RowDefinition Height="20"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"  >
-            <ComboBox x:Name="ComboBoxParams" HorizontalAlignment="Center" Width="300" Margin="0,35,0,0" IsEnabled="{Binding ElementName=DebugParam, Path=Hook.Loaded}" DisplayMemberPath="Name" SelectionChanged="ComboBoxParams_SelectionChanged" />
+            <Grid Width="300" Margin="0,25,0,0">
+                <TextBox x:Name="SearchBoxParams" HorizontalContentAlignment="Center" TextChanged="SearchBoxParam_TextChanged" IsEnabled="False"/>
+                <!--IsEnabled="{Binding ElementName=DebugParam, Path=Hook.Loaded}"--> 
+                <TextBlock Margin="5,2" MinWidth="50" Text="Search Params Coming Soon..." HorizontalAlignment="Center"
+                   Foreground="DarkGray"  Visibility="{Binding ElementName=SearchBoxParams, Path=Text.IsEmpty, Converter={StaticResource ResourceKey=boolToVisibilityConverter}}" IsHitTestVisible="False"/>
+            </Grid>
+            <ComboBox x:Name="ComboBoxParams" HorizontalAlignment="Center" Width="300" Margin="0,10,0,0" IsEnabled="{Binding ElementName=DebugParam, Path=Hook.Loaded}" DisplayMemberPath="Name" SelectionChanged="ComboBoxParams_SelectionChanged" />
         </StackPanel>
-            <StackPanel Grid.Row="1" Grid.Column="0" >
+
+        <TextBox Grid.Row="1" Grid.Column="0" x:Name="SearchBoxRow" HorizontalContentAlignment="Center" TextChanged="SearchBoxRow_TextChanged" IsEnabled="{Binding ElementName=DebugParam, Path=Hook.Loaded}"/>
+        <TextBlock Grid.Row="1" Grid.Column="0" Margin="5,2" MinWidth="50" Text="Search Rows..." HorizontalAlignment="Center"
+                   Foreground="DarkGray" Visibility="{Binding ElementName=SearchBoxRow, Path=Text.IsEmpty, Converter={StaticResource ResourceKey=boolToVisibilityConverter}}" IsHitTestVisible="False"/>
+        <CheckBox Grid.Row="1" Grid.Column="0"  x:Name="CbxIDSearch" Content="Search IDs" VerticalAlignment="Center" HorizontalAlignment="Left" Width="75"/>
+
+        <TextBox Grid.Row="1" Grid.Column="1" x:Name="SearchBoxField" HorizontalContentAlignment="Center" TextChanged="SearchBoxField_TextChanged"  IsEnabled="False"/> <!--IsEnabled="{Binding ElementName=DebugParam, Path=Hook.Loaded}"-->
+        <TextBlock Grid.Row="1" Grid.Column="1" Margin="5,2" MinWidth="50" Text="Search Fields Coming Soon..." HorizontalAlignment="Center"
+                   Foreground="DarkGray" Visibility="{Binding ElementName=SearchBoxField, Path=Text.IsEmpty, Converter={StaticResource ResourceKey=boolToVisibilityConverter}}" IsHitTestVisible="False"/>
+        <CheckBox Grid.Row="1" Grid.Column="1" x:Name="CbxValueSearch" Content="Search Values" VerticalAlignment="Center" HorizontalAlignment="Right" FlowDirection="RightToLeft" Width="95"/>
+        
+        <StackPanel Grid.Row="2" Grid.Column="0" >
                 <ListBox x:Name="ListBoxRows" IsEnabled="{Binding ElementName=DebugParam, Path=Hook.Loaded}" BorderThickness="0" Height="{Binding ElementName=DebugParam, Path=ActualHeight}" SelectionChanged="ListBoxRows_SelectionChanged" ScrollViewer.VerticalScrollBarVisibility="Visible"/>
             </StackPanel>
-      
-        <ScrollViewer CanContentScroll="False" Grid.Column="1" Grid.Row="1">
+        <ScrollViewer  Grid.Row="2" Grid.Column="1" CanContentScroll="False" >
             <StackPanel x:Name="ParamPanel" CanVerticallyScroll="True" IsEnabled="{Binding ElementName=DebugParam, Path=Hook.Loaded}" />
         </ScrollViewer>
     </Grid>

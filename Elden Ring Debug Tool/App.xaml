@@ -8,6 +8,7 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Themes\ControlDictionary.xaml"/>
             </ResourceDictionary.MergedDictionaries>
+            <local:BoolToVisibilityConverter x:Key="boolToVisibilityConverter"/>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

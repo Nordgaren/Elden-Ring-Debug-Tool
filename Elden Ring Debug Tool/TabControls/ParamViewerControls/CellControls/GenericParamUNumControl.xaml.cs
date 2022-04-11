@@ -34,37 +34,37 @@ namespace Elden_Ring_Debug_Tool
     /// </summary>
     public partial class ParamUNumControl<T> : GenericParamUNumControl
     {
-        public PHPointer Param { get; private set; }
+        public ERParam Param { get; private set; }
         public int Offset { get; private set; }
         public string FieldName { get; private set; }
         public ulong ParamValue
         {
             get
             {
-                var bytes = Param.ReadBytes(Offset, GetSize());
-                return GetValue(bytes);
+                //var bytes = Param.Pointer.ReadBytes(Offset, GetSize());
+                return GetValue();
             }
             set 
             {
                 var buffer = BitConverter.GetBytes(value);
                 var bytes = new byte[GetSize()];
                 Array.Copy(buffer, bytes, bytes.Length);
-                Param.WriteBytes(Offset, bytes);
+                Param.Pointer.WriteBytes(Offset, bytes);
             }
         }
 
-        private ulong GetValue(byte[] bytes)
+        private ulong GetValue()
         {
             switch (GetSize())
             {
                 case 1:
-                    return bytes[0];
+                    return Param.Bytes[Offset];
                 case 2:
-                    return BitConverter.ToUInt16(bytes);
+                    return BitConverter.ToUInt16(Param.Bytes, Offset);
                 case 4:
-                    return BitConverter.ToUInt32(bytes);
+                    return BitConverter.ToUInt32(Param.Bytes, Offset);
                 case 8:
-                    return BitConverter.ToUInt64(bytes);
+                    return BitConverter.ToUInt64(Param.Bytes, Offset);
                 default:
                     return 0;
             }
@@ -75,7 +75,7 @@ namespace Elden_Ring_Debug_Tool
             return (uint)Marshal.SizeOf(typeof(T));
         }
 
-        public ParamUNumControl(PHPointer param, int offset, string name)
+        public ParamUNumControl(ERParam param, int offset, string name)
         {
             Param = param;
             Offset = offset;

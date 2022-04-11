@@ -35,16 +35,16 @@ namespace Elden_Ring_Debug_Tool
     /// </summary>
     public partial class ParamDecControl<T> : GenericParamDecControl
     {
-        public PHPointer Param { get; private set; }
+        public ERParam Param { get; private set; }
         public int Offset { get; private set; }
         public string FieldName { get; private set; }
         public float ParamValue
         {
-            get => Param?.ReadSingle(Offset) ?? 0f;
-            set => Param.WriteSingle(Offset, value);
+            get => BitConverter.ToSingle(Param.Bytes, Offset);
+            set => Param.Pointer.WriteSingle(Offset, value);
         }
 
-        public ParamDecControl(PHPointer param, int offset, string name)
+        public ParamDecControl(ERParam param, int offset, string name)
         {
             Param = param;
             Offset = offset;
