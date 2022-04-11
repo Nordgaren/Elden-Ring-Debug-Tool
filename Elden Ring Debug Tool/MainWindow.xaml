@@ -6,22 +6,31 @@
         xmlns:wpfTool="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:local="clr-namespace:Elden_Ring_Debug_Tool"
         mc:Ignorable="d"
-        Title="Elden Ring Debug Tool" Height="600" Width="800" Icon="Icon.ico" Loaded="Window_Loaded" Closing="Window_Closing" Background="DarkGray" WindowStyle="None" ResizeMode="CanResizeWithGrip" AllowsTransparency="True" >
+        Title="Elden Ring Debug Tool" Height="600" Width="800" Icon="Icon.ico" Loaded="Window_Loaded" Closing="Window_Closing" Background="DarkGray" >
     <Window.DataContext>
         <local:ERViewModel x:Name="ViewModel"/>
     </Window.DataContext>
     <Grid>
-        <StackPanel>
-            <Grid Height="25" MouseDown="Grid_MouseDown" Background="Black">
-                <StackPanel Orientation="Horizontal">
-                    <Image Source="Icon.ico" Width="25" />
-                    <Label x:Name="lblWindowName" Foreground="White" Content="Elden Ring Debug Tool"/>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal" 
+            <TabControl>
+                <TabItem Header="Params">
+                    <Grid Background="LightGray">
+                        <local:ParamViewerControl x:Name="DebugParam" Hook="{Binding Hook}"/>
+                    </Grid>
+                </TabItem>
+            </TabControl>
+    </Grid>
+
+</Window>
+<!--<Grid Height="25" MouseDown="Grid_MouseDown" Background="Black">
+    <StackPanel Orientation="Horizontal">
+        --><!--<Image Source="Icon.ico" Width="25" />--><!--
+        <Label x:Name="lblWindowName" Foreground="White" Content="Elden Ring Debug Tool"/>
+    </StackPanel>
+    <StackPanel Orientation="Horizontal" 
                         Grid.Column="11"
                         HorizontalAlignment="Right"
                             Grid.ColumnSpan="2">
-                    <Button x:Name="Minimize"
+        <Button x:Name="Minimize"
                         Content="➖"
                         VerticalAlignment="Center"
                         Width="20"
@@ -32,7 +41,7 @@
                         Click="Minimize_Click"
                         BorderThickness="0"/>
 
-                    <Button x:Name="Maximize"
+        <Button x:Name="Maximize"
                         Content="☐"
                         VerticalAlignment="Center"
                         Width="20"
@@ -42,7 +51,7 @@
                         Foreground="White"
                         Click="Maximize_Click"
                         BorderThickness="0"/>
-                    <Button x:Name="btnClose"
+        <Button x:Name="btnClose"
                         Content="❌"
                         Width="20"
                         Height="20"
@@ -50,16 +59,5 @@
                         Foreground="White"
                         Click="MainWindowClose_Click"
                         BorderThickness="0"/>
-                </StackPanel>
-            </Grid>
-            <TabControl>
-                <TabItem Header="Params">
-                    <Grid Background="LightGray">
-                        <local:ParamViewerControl x:Name="DebugParam" Hook="{Binding Hook}"/>
-                    </Grid>
-                </TabItem>
-            </TabControl>
-        </StackPanel>
-    </Grid>
-
-</Window>
+    </StackPanel>
+</Grid>-->

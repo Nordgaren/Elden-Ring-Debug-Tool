@@ -20,11 +20,10 @@
         <StackPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"  >
             <Grid Width="300" Margin="0,25,0,0" Visibility="Hidden">
                 <TextBox x:Name="SearchBoxParams" HorizontalContentAlignment="Center" TextChanged="SearchBoxParam_TextChanged" IsEnabled="False"/>
-                <!--IsEnabled="{Binding ElementName=DebugParam, Path=Hook.Loaded}"--> 
                 <TextBlock Margin="5,2" MinWidth="50" Text="Search Params Coming Soon..." HorizontalAlignment="Center"
                    Foreground="DarkGray"  Visibility="{Binding ElementName=SearchBoxParams, Path=Text.IsEmpty, Converter={StaticResource ResourceKey=boolToVisibilityConverter}}" IsHitTestVisible="False"/>
             </Grid>
-            <ComboBox x:Name="ComboBoxParams" HorizontalAlignment="Center" Width="300" Margin="0,10,0,0" IsEnabled="{Binding ElementName=DebugParam, Path=Hook.Loaded}" DisplayMemberPath="Name" SelectionChanged="ComboBoxParams_SelectionChanged" />
+            <ComboBox x:Name="ComboBoxParams" HorizontalAlignment="Center" Width="300" Margin="0,10,0,0" IsEnabled="{Binding ElementName=DebugParam, Path=Hook.Loaded}" DisplayMemberPath="Name" SelectionChanged="ComboBoxParams_SelectionChanged" HorizontalContentAlignment="Center"/>
         </StackPanel>
 
         <TextBox Grid.Row="1" Grid.Column="0" x:Name="SearchBoxRow" HorizontalContentAlignment="Center" TextChanged="SearchBoxRow_TextChanged" IsEnabled="{Binding ElementName=DebugParam, Path=Hook.Loaded}"/>

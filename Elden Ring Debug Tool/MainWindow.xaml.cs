@@ -71,28 +71,28 @@ namespace Elden_Ring_Debug_Tool
             }));
         }
 
-        private void Grid_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            if (e.ChangedButton == MouseButton.Left)
-                DragMove();
-        }
+        //private void Grid_MouseDown(object sender, MouseButtonEventArgs e)
+        //{
+        //    if (e.ChangedButton == MouseButton.Left)
+        //        DragMove();
+        //}
 
-        private void Minimize_Click(object sender, RoutedEventArgs e)
-        {
-            WindowState = System.Windows.WindowState.Minimized;
-        }
+        //private void Minimize_Click(object sender, RoutedEventArgs e)
+        //{
+        //    WindowState = System.Windows.WindowState.Minimized;
+        //}
 
-        private void MainWindowClose_Click(object sender, RoutedEventArgs e)
-        {
-            Close();
-        }
+        //private void MainWindowClose_Click(object sender, RoutedEventArgs e)
+        //{
+        //    Close();
+        //}
 
-        private void Maximize_Click(object sender, RoutedEventArgs e)
-        {
-            if (WindowState == System.Windows.WindowState.Maximized)
-                WindowState = System.Windows.WindowState.Normal;
-            else
-                WindowState = System.Windows.WindowState.Maximized;
-        }
+        //private void Maximize_Click(object sender, RoutedEventArgs e)
+        //{
+        //    if (WindowState == System.Windows.WindowState.Maximized)
+        //        WindowState = System.Windows.WindowState.Normal;
+        //    else
+        //        WindowState = System.Windows.WindowState.Maximized;
+        //}
     }
 }
