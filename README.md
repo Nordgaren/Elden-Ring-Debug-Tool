@@ -29,6 +29,10 @@ My fork of [Property Hook](https://github.com/Nordgaren/PropertyHook) by [TKGP](
 **[King Borehaha](https://github.com/kingborehaha/DS-Gadget-Local-Loader)** Who's local loading system has worked really well for a lot of things, including this  
 
 # Change Log  
+### Beta 0.3.1  
+
+* Fixed crash some users were experiencing and added global exception handler  
+
 ### Beta 0.3  
 
 * Temporarily Reverted UI Changes
