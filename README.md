@@ -9,16 +9,15 @@ Backup your saves before using this tool, and restore the backups before going o
 * [.NET 5 Desktop Runtime x64](https://download.visualstudio.microsoft.com/download/pr/b1902c77-e022-4b3e-a01a-e8830df936ff/09d0957435bf8c37eae11b4962d4221b/windowsdesktop-runtime-5.0.15-win-x64.exe)  
 
 ## Known Issues
-* Params that share defs don't come up. Working on it.  
-* Loading params is a bit sow. I am working on that, as well.
+* Loading param row fields is still a TAD sow. I am still looking to optimize it, a bit, if I can.
 
 ## Installing  
 * Extract contents of zip archive to it's own folder. You may have to run as admin if DS2S META crashes  
 
 ## Usage
 * For a param to load there has to be both a def in `Resources/Params/Defs` and a definition in on of the files in `Resources/Params/Pointers`  
-* The format for pointer is Offset:Name. You can organize these files however you want. They will all be opened, read, split and added to the Param list, if there is a corresponding def.
-* Can add names to a file with the same name as the param in `Resources/Params/Names` to add row names. Default name will just be the Row ID.
+* The format for pointer is `Offset:Name`. You can organize these files however you want. They will all be opened, read, split and added to the Param list, if there is a corresponding def. If the param has a shared def, you can optionally format like so `Offset:Name:ParamDefName` and the tool will look for the correct paramdef.  
+* Can add names to a file with the same name as the param in `Resources/Params/Names` to add row names. Default name will just be the Row ID.  
 
 ## Libraries
 My fork of [Property Hook](https://github.com/Nordgaren/PropertyHook) by [TKGP](https://github.com/JKAnderson/)  
