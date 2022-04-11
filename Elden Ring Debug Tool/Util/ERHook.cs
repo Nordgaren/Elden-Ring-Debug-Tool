@@ -44,12 +44,11 @@ namespace Elden_Ring_Debug_Tool
             OnHooked += ERHook_OnHooked;
             GameDataManSetup = RegisterAbsoluteAOB(EROffsets.GameDataManSetupAoB);
             SoloParamRepositorySetup = RegisterAbsoluteAOB(EROffsets.SoloParamRepositorySetupAoB);
-
         }
 
-        internal PHPointer GetParamPointer(int[] offsetInt)
+        internal PHPointer GetParamPointer(int[] offset)
         {
-            return CreateChildPointer(SoloParamRepository, offsetInt);
+            return CreateChildPointer(SoloParamRepository, offset);
         }
 
         private void ERHook_OnHooked(object? sender, PHEventArgs e)
@@ -64,7 +63,7 @@ namespace Elden_Ring_Debug_Tool
             var bytes = new byte[0];
             EquipParamWeaponOffsetDict = BuildOffsetDictionary(EquipParamWeapon, "EQUIP_PARAM_WEAPON_ST", ref bytes);
             EquipParamWeaponBytes = bytes;
-            EquipParamGemOffsetDict = BuildOffsetDictionary(EquipParamGem, "RAM_GEM_ST", ref bytes);
+            EquipParamGemOffsetDict = BuildOffsetDictionary(EquipParamGem, "EQUIP_PARAM_GEM_ST", ref bytes);
             EquipParamGemBytes = bytes;
             Params.Add(EquipParamWeapon);
             Params.Add(EquipParamGem);
@@ -171,10 +170,10 @@ namespace Elden_Ring_Debug_Tool
         private Dictionary<int, int> BuildOffsetDictionary(PHPointer pointer, string expectedParamName, ref byte[] paramBytes)
         {
             var dictionary = new Dictionary<int, int>();
-            var nameOffset = pointer.ReadInt32((int)EROffsets.Param.TotalParamLength);
+            var nameOffset = pointer.ReadInt32((int)EROffsets.Param.NameOffset);
             var paramName = pointer.ReadString(nameOffset, Encoding.UTF8, 0x18);
             if (paramName != expectedParamName)
-                throw new InvalidOperationException($"Incorrect Param Pointer: {expectedParamName}");
+                throw new InvalidOperationException($"Incorrect Param Pointer: {paramName} should be {expectedParamName}");
 
             paramBytes = pointer.ReadBytes((int)EROffsets.Param.TotalParamLength, (uint)nameOffset);
             var tableLength = pointer.ReadInt32((int)EROffsets.Param.TableLength);

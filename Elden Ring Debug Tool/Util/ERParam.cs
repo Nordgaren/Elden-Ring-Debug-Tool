@@ -42,7 +42,7 @@ namespace Elden_Ring_Debug_Tool
             
             var ParamType = Pointer.ReadString(Length, Encoding.UTF8, (uint)Type.Length);
             if (ParamType != Type)
-                throw new InvalidOperationException($"Incorrect Param Pointer: {Type}");
+                throw new InvalidOperationException($"Incorrect Param Pointer: {ParamType} should be {Type}");
 
             Bytes = Pointer.ReadBytes(0x0, (uint)Length);
 
