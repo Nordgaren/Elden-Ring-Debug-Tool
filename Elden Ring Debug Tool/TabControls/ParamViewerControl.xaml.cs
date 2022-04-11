@@ -84,18 +84,12 @@ namespace Elden_Ring_Debug_Tool
 
         private void ListBoxRows_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var row = ((ERParam.Row)ListBoxRows.SelectedItem);
-            if (row == null)
-                return;
-
-            ParamPanel.Children.Clear();
-            foreach (var control in row.Cells)
-            {
-                ParamPanel.Children.Add(control);
-            }
-            ParamPanel.IsEnabled = true;
+            FilterFields();
 
         }
+
+        
+
         private void SearchBoxParam_TextChanged(object sender, TextChangedEventArgs e)
         {
             //ComboBoxParams.IsDropDownOpen = true;
@@ -128,14 +122,14 @@ namespace Elden_Ring_Debug_Tool
 
         private void FilterRows()
         {
-            if (ComboBoxParams.SelectedItem == null)
+            var selectedParam = ((ERParam)ComboBoxParams.SelectedItem);
+            if (selectedParam == null)
                 return;
 
             ParamPanel.Children.Clear();
-            var selectedParam = ((ERParam)ComboBoxParams.SelectedItem);
             if (string.IsNullOrWhiteSpace(SearchBoxRow.Text))
             {
-                ListBoxRows.ItemsSource = ListBoxRows.ItemsSource = selectedParam.Rows;
+                ListBoxRows.ItemsSource = selectedParam.Rows;
                 ListBoxRows.SelectedIndex = 0;
             }
             else
@@ -163,9 +157,45 @@ namespace Elden_Ring_Debug_Tool
 
         private void SearchBoxField_TextChanged(object sender, TextChangedEventArgs e)
         {
-
+            FilterFields();
         }
 
-        
+        private void FilterFields()
+        {
+            
+            var row = ((ERParam.Row)ListBoxRows.SelectedItem);
+            if (row == null)
+                return;
+
+            ParamPanel.Children.Clear();
+            if (string.IsNullOrWhiteSpace(SearchBoxField.Text))
+            {
+                foreach (var control in row.Cells)
+                {
+                    ParamPanel.Children.Add(control);
+                }
+            }
+            else
+            {
+                if (CbxValueSearch.IsChecked.Value)
+                {
+                    foreach (var control in row.Cells)
+                    {
+                        if (((ICellControl)control).Value.Contains(SearchBoxField.Text))
+                            ParamPanel.Children.Add(control);
+                    }
+                }
+                else
+                {
+                    foreach (var control in row.Cells)
+                    {
+                        if (((ICellControl)control).FieldName.ToLower().Contains(SearchBoxField.Text.ToLower()))
+                            ParamPanel.Children.Add(control);
+                    }
+                }
+                
+            }
+        }
+
     }
 }

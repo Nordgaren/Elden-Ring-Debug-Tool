@@ -33,15 +33,21 @@ namespace Elden_Ring_Debug_Tool
     /// <summary>
     /// Interaction logic for ParamControl.xaml
     /// </summary>
-    public partial class ParamDecControl<T> : GenericParamDecControl
+    public partial class ParamDecControl<T> : GenericParamDecControl, ICellControl
     {
         public ERParam Param { get; private set; }
         public int Offset { get; private set; }
-        public string FieldName { get; private set; }
+        public string FieldName { get; set; }
+        public string Value { get => ParamValue.ToString(); }
         public float ParamValue
         {
             get => BitConverter.ToSingle(Param.Bytes, Offset);
-            set => Param.Pointer.WriteSingle(Offset, value);
+            set
+            {
+                Param.Pointer.WriteSingle(Offset, value);
+                var bytes = BitConverter.GetBytes(value);
+                Array.Copy(bytes, 0,Param.Bytes, Offset,  bytes.Length);
+            }
         }
 
         public ParamDecControl(ERParam param, int offset, string name)

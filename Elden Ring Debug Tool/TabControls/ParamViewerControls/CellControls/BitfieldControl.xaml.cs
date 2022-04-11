@@ -19,24 +19,27 @@ namespace Elden_Ring_Debug_Tool
     /// <summary>
     /// Interaction logic for BitfieldControl.xaml
     /// </summary>
-    public partial class BitfieldControl : UserControl
+    public partial class BitfieldControl : UserControl, ICellControl
     {
         public ERParam Param { get; private set; }
         public int Offset { get; private set; }
         public int Position { get; private set; }
-        public string FieldName { get; private set; }
+        public string FieldName { get; set; }
+        public string Value { get => ParamValue ? "1" : "0"; }
         public bool ParamValue
         {
             get => ((Param.Bytes[Offset] & (1 << Position)) != 0);
             set
             {
-                var paramValue = Param.Pointer.ReadByte(Offset);
+                var paramValue = Param.Bytes[Offset];
                 if (value)
                     paramValue |= (byte)(1 << Position);
                 else
                    paramValue &= (byte)~(1 << Position);
 
                 Param.Pointer.WriteByte(Offset, paramValue);
+                var bytes = BitConverter.GetBytes(paramValue);
+                Array.Copy(bytes, 0, Param.Bytes, Offset, bytes.Length);
             }
         }
         public BitfieldControl(ERParam param, int offset, int position, string name)

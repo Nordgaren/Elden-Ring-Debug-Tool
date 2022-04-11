@@ -32,11 +32,12 @@ namespace Elden_Ring_Debug_Tool
     /// <summary>
     /// Interaction logic for ParamControl.xaml
     /// </summary>
-    public partial class ParamNumControl<T> : GenericParamNumControl
+    public partial class ParamNumControl<T> : GenericParamNumControl, ICellControl
     {
         public ERParam Param { get; private set; }
         public int Offset { get; private set; }
-        public string FieldName { get; private set; }
+        public string FieldName { get; set; }
+        public string Value { get=> ParamValue.ToString(); }
         public long ParamValue
         {
             get
@@ -50,6 +51,7 @@ namespace Elden_Ring_Debug_Tool
                 var bytes = new byte[GetSize()];
                 Array.Copy(buffer, bytes, bytes.Length);
                 Param.Pointer.WriteBytes(Offset, bytes);
+                Array.Copy(bytes, 0, Param.Bytes, Offset, bytes.Length);
             }
         }
 

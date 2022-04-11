@@ -123,18 +123,9 @@ namespace Elden_Ring_Debug_Tool
                 DataOffset = offset;
             }
 
-            //public List<UserControl> GetCells()
-            //{
-            //    if (Cells == null)
-            //        BuildCells();
-                    
-            //    return Cells;
-
-            //}
-
             private void BuildCells()
             {
-                Cells = new List<UserControl>();
+                _cells = new List<UserControl>();
                 int totalSize = 0;
                 Param.ParamDef.GetRowSize();
                 for (int i = 0; i < Param.ParamDef.Fields.Count; i++)
@@ -155,7 +146,7 @@ namespace Elden_Ring_Debug_Tool
                         for (; i < Param.ParamDef.Fields.Count - 1; i++)
                         {
                             var bitfield = new BitfieldControl(Param, DataOffset + totalSize - size, bitOffset - 1, Param.ParamDef.Fields[i].InternalName);
-                            Cells.Add(bitfield);
+                            _cells.Add(bitfield);
                             Field nextField = Param.ParamDef.Fields[i + 1];
                             DefType nextType = nextField.DisplayType;
                             if (!ParamUtil.IsBitType(nextType) || nextField.BitSize == -1 || bitOffset + nextField.BitSize > bitLimit
@@ -170,37 +161,37 @@ namespace Elden_Ring_Debug_Tool
                         {
                             case DefType.u8:
                                 var u8 = new ParamUNumControl<byte>(Param, DataOffset + totalSize - size, field.InternalName);
-                                Cells.Add(u8);
+                                _cells.Add(u8);
                                 break;
                             case DefType.s8:
                                 var s8 = new ParamNumControl<sbyte>(Param, DataOffset + totalSize - size, field.InternalName);
-                                Cells.Add(s8);
+                                _cells.Add(s8);
                                 break;
                             case DefType.u16:
                                 var u16 = new ParamUNumControl<ushort>(Param, DataOffset + totalSize - size, field.InternalName);
-                                Cells.Add(u16);
+                                _cells.Add(u16);
                                 break;
                             case DefType.s16:
                                 var s16 = new ParamNumControl<short>(Param, DataOffset + totalSize - size, field.InternalName);
-                                Cells.Add(s16);
+                                _cells.Add(s16);
                                 break;
                             case DefType.u32:
                                 var u32 = new ParamUNumControl<uint>(Param, DataOffset + totalSize - size, field.InternalName);
-                                Cells.Add(u32);
+                                _cells.Add(u32);
                                 break;
                             case DefType.s32:
                                 var s32 = new ParamNumControl<int>(Param, DataOffset + totalSize - size, field.InternalName);
-                                Cells.Add(s32);
+                                _cells.Add(s32);
                                 break;
                             case DefType.f32:
                                 var f32 = new ParamDecControl<float>(Param, DataOffset + totalSize - size, field.InternalName);
-                                Cells.Add(f32);
+                                _cells.Add(f32);
                                 break;
                             case DefType.fixstr:
                             case DefType.fixstrW:
                             case DefType.dummy8:
                                 var dummy8 = new ParamNumControl<byte>(Param, DataOffset + totalSize - size, field.InternalName);
-                                Cells.Add(dummy8);
+                                _cells.Add(dummy8);
                                 break;
                             default:
                                 break;
