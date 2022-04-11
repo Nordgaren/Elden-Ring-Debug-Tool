@@ -37,6 +37,8 @@ My fork of [Property Hook](https://github.com/Nordgaren/PropertyHook) by [TKGP](
 
 * Field Search 
 
+* UI Update
+
 ### Beta 0.1  
 
 * Reads most params. Can edit them, too.  
