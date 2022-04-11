@@ -39,6 +39,8 @@ My fork of [Property Hook](https://github.com/Nordgaren/PropertyHook) by [TKGP](
 
 * UI Update
 
+* Optimized Field loading/saving fields of rows that are already loaded
+
 ### Beta 0.1  
 
 * Reads most params. Can edit them, too.  
