@@ -21,8 +21,13 @@ jobs:
     - name: build
       run: dotnet publish "src/Elden Ring Debug Tool/Elden Ring Debug Tool.csproj" /p:PublishProfile=FolderProfile.pubxml
       
+    - name: Zip build files
+      run: 7z a "Elden Ring Debug Tool.zip" ".\src\Elden Ring Debug Tool\bin\Publish\win-x64\*.*" -r
+
     - name: publish artifact
       uses: actions/upload-artifact@v3
       with:
         name: publish
-        path: src/Elden Ring Debug Tool/bin/Publish/win-x64
+        path: "Elden Ring Debug Tool.zip"
+
+    
