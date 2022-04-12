@@ -12,6 +12,14 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SoulsFormats", "..\SoulsFormats\SoulsFormats\SoulsFormats.csproj", "{5B3185FA-C22B-4EBE-A053-3D835D9D827A}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{C6D57919-CA93-41A6-9A80-BFAA5CB97723}"
+	ProjectSection(SolutionItems) = preProject
+		.github\workflows\build.yml = .github\workflows\build.yml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "solution items", "solution items", "{5A55EC0D-D2E0-43B2-B4A9-DA2D23BF0D21}"
+	ProjectSection(SolutionItems) = preProject
+		.github\workflows\build.yml = .github\workflows\build.yml
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
