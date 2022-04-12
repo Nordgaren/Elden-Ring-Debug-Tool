@@ -1,4 +1,5 @@
-﻿using PropertyHook;
+﻿using Keystone;
+using PropertyHook;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -21,18 +22,21 @@ namespace Elden_Ring_Debug_Tool
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }
-        private PHPointer GameDataManSetup { get; set; }
-        private PHPointer GameDataMan { get; set; }
-        private PHPointer PlayerGameData { get; set; }
-        private PHPointer SoloParamRepositorySetup { get; set; }
-        private PHPointer SoloParamRepository { get; set; }
-        public PHPointer EquipParamWeapon { get; set; }
-        public PHPointer EquipParamGem { get; set; }
         public event EventHandler<PHEventArgs> OnSetup;
         private void RaiseOnSetup()
         {
             OnSetup?.Invoke(this, new PHEventArgs(this));
         }
+
+        private PHPointer CSSystemStep { get; set; }
+        private PHPointer IsLoaded { get; set; }
+        private PHPointer GameDataMan { get; set; }
+        private PHPointer PlayerGameData { get; set; }
+        private PHPointer SoloParamRepository { get; set; }
+        private PHPointer CapParamCall { get; set; }
+        public PHPointer EquipParamWeapon { get; set; }
+        public PHPointer EquipParamGem { get; set; }
+     
         public List<PHPointer> Params;
         //private PHPointer DurabilityAddr { get; set; }
         //private PHPointer DurabilitySpecialAddr { get; set; }
@@ -42,24 +46,30 @@ namespace Elden_Ring_Debug_Tool
             : base(refreshInterval, minLifetime, processSelector)
         {
             OnHooked += ERHook_OnHooked;
-            GameDataManSetup = RegisterAbsoluteAOB(EROffsets.GameDataManSetupAoB);
-            SoloParamRepositorySetup = RegisterAbsoluteAOB(EROffsets.SoloParamRepositorySetupAoB);
+
+            CSSystemStep = RegisterAbsoluteAOB(EROffsets.CSSystemStepAoB, EROffsets.CSSystemStepOffset);
+            IsLoaded = CreateChildPointer(CSSystemStep, EROffsets.IsLoadedOffset1, EROffsets.IsLoadedOffset2, EROffsets.IsLoadedOffset3, EROffsets.IsLoadedOffset4);
+            GameDataMan = RegisterRelativeAOB(EROffsets.GameDataManSetupAoB, EROffsets.RelativePtrAddressOffset, EROffsets.RelativePtrInstructionSize, 0x0);
+            PlayerGameData = CreateChildPointer(GameDataMan, EROffsets.PlayerGameData);
+
+            SoloParamRepository = RegisterRelativeAOB(EROffsets.SoloParamRepositorySetupAoB, EROffsets.RelativePtrAddressOffset, EROffsets.RelativePtrInstructionSize, 0x0);
+            EquipParamWeapon = CreateChildPointer(SoloParamRepository, EROffsets.EquipParamWeaponOffset1, EROffsets.EquipParamWeaponOffset2, EROffsets.EquipParamWeaponOffset3);
+            EquipParamGem = CreateChildPointer(SoloParamRepository, EROffsets.EquipParamGemOffset1, EROffsets.EquipParamGemOffset2, EROffsets.EquipParamGemOffset3);
+
+            CapParamCall = RegisterAbsoluteAOB(EROffsets.CapParamCallAoB);
         }
 
-        internal PHPointer GetParamPointer(int[] offset)
-        {
-            return CreateChildPointer(SoloParamRepository, offset);
-        }
 
         private void ERHook_OnHooked(object? sender, PHEventArgs e)
         {
-            Params = new List<PHPointer>();
-            GameDataMan = CreateBasePointer(BasePointerFromSetupPointer(GameDataManSetup));
-            PlayerGameData = CreateChildPointer(GameDataMan, EROffsets.PlayerGameData);
+            var isLoaded = IsLoaded.ReadByte(EROffsets.IsLoaded);
+            while (isLoaded < 2)
+            {
+                isLoaded  = IsLoaded.ReadByte(EROffsets.IsLoaded);
+            }
 
-            SoloParamRepository = CreateBasePointer(BasePointerFromSetupPointer(SoloParamRepositorySetup));
-            EquipParamWeapon = CreateChildPointer(SoloParamRepository, EROffsets.EquipParamWeaponOffset1, EROffsets.EquipParamWeaponOffset2, EROffsets.EquipParamWeaponOffset3);
-            EquipParamGem = CreateChildPointer(SoloParamRepository, EROffsets.EquipParamGemOffset1, EROffsets.EquipParamGemOffset2, EROffsets.EquipParamGemOffset3);
+            Params = new List<PHPointer>();
+
             var bytes = new byte[0];
             EquipParamWeaponOffsetDict = BuildOffsetDictionary(EquipParamWeapon, "EQUIP_PARAM_WEAPON_ST", ref bytes);
             EquipParamWeaponBytes = bytes;
@@ -77,41 +87,8 @@ namespace Elden_Ring_Debug_Tool
                 return;
 
             OnPropertyChanged(nameof(Loaded));
-            OnPropertyChanged(nameof(Dagger));
-            OnPropertyChanged(nameof(SwordNormal));
-            OnPropertyChanged(nameof(SwordLarge));
-            OnPropertyChanged(nameof(SwordGigantic));
-            OnPropertyChanged(nameof(SabreNormal));
-            OnPropertyChanged(nameof(SabreLarge));
-            OnPropertyChanged(nameof(katana));
-            OnPropertyChanged(nameof(SwordDoulbeEdge));
-            OnPropertyChanged(nameof(SwordPierce));
-            OnPropertyChanged(nameof(RapierHeavy));
-            OnPropertyChanged(nameof(AxeNormal));
-            OnPropertyChanged(nameof(AxeLarge));
-            OnPropertyChanged(nameof(HammerNormal));
-            OnPropertyChanged(nameof(HammerLarge));
-            OnPropertyChanged(nameof(Flail));
-            OnPropertyChanged(nameof(SpearNormal));
-            OnPropertyChanged(nameof(SpearLarge));
-            OnPropertyChanged(nameof(SpearHeavy));
-            OnPropertyChanged(nameof(SpearAxe));
-            OnPropertyChanged(nameof(Sickle));
-            OnPropertyChanged(nameof(Knuckle));
-            OnPropertyChanged(nameof(Claw));
-            OnPropertyChanged(nameof(Whip));
-            OnPropertyChanged(nameof(Axhammerlarge));
-            OnPropertyChanged(nameof(BowSmall));
-            OnPropertyChanged(nameof(BowNormal));
-            OnPropertyChanged(nameof(BowLarge));
-            OnPropertyChanged(nameof(Clossbow));
-            OnPropertyChanged(nameof(Ballista));
-            OnPropertyChanged(nameof(Staff));
-            OnPropertyChanged(nameof(Talisman));
-            OnPropertyChanged(nameof(ShieldSmall));
-            OnPropertyChanged(nameof(ShieldNormal));
-            OnPropertyChanged(nameof(SheildLarge));
-            OnPropertyChanged(nameof(Torch));
+            OnPropertyChanged(nameof(Setup));
+
         }
         private void GetParams()
         {
@@ -147,6 +124,8 @@ namespace Elden_Ring_Debug_Tool
             //        infusions.Add(DS2SInfusion.Infusions[i]);
             //}
         }
+
+
 
         private void GetProperties(ERItemCategory category)
         {
@@ -194,6 +173,41 @@ namespace Elden_Ring_Debug_Tool
             return dictionary;
         }
 
+
+        internal PHPointer GetParamPointer(int offset)
+        {
+            return CreateChildPointer(SoloParamRepository, new int[] { offset, 0x80, 0x80 });
+        }
+        internal void SaveParam(ERParam param)
+        {
+            var asmString = Util.GetEmbededResource("Assembly.SaveParams.asm");
+            var asm = string.Format(asmString, SoloParamRepository.Resolve(), param.Offset, CapParamCall.Resolve());
+            AsmExecute(asm);
+        }
+
+        private Engine Engine = new Engine(Architecture.X86, Mode.X64);
+        //TKCode
+        private void AsmExecute(string asm)
+        {
+            // Assemble once to determine size
+            var bytes = Engine.Assemble(asm, 0);
+            var error = Engine.GetLastKeystoneError();
+            IntPtr insertPtr = Allocate((uint)bytes.Buffer.Length, Kernel32.PAGE_EXECUTE_READWRITE);
+            // Then rebase and inject
+            // Note: you can't use String.Format here because IntPtr is not IFormattable
+            Kernel32.WriteBytes(Handle, insertPtr, bytes.Buffer);
+
+            Debug.WriteLine("");
+            foreach (var b in bytes.Buffer)
+            {
+                Debug.Write($"{b.ToString("X2")} ");
+            }
+            Debug.WriteLine("");
+
+            Execute(insertPtr);
+            Free(insertPtr);
+        }
+
         public void RestoreParams()
         {
             if (!Setup)
@@ -202,11 +216,7 @@ namespace Elden_Ring_Debug_Tool
             EquipParamWeapon.WriteBytes((int)EROffsets.Param.TotalParamLength, EquipParamWeaponBytes);
             EquipParamGem.WriteBytes((int)EROffsets.Param.TotalParamLength, EquipParamGemBytes);
         }
-        public IntPtr BasePointerFromSetupPointer(PHPointer pointer)
-        {
-            var readInt = pointer.ReadInt32(EROffsets.BasePtrOffset1);
-            return pointer.ReadIntPtr(readInt + EROffsets.BasePtrOffset2);
-        }
+
         public int Level => PlayerGameData.ReadInt32((int)EROffsets.Player.Level);
         public string LevelString => PlayerGameData?.ReadInt32((int)EROffsets.Player.Level).ToString() ?? "";
         public byte ArmStyle
@@ -360,412 +370,6 @@ namespace Elden_Ring_Debug_Tool
             get => OGLHandWeapon1Param?.ReadInt32((int)EROffsets.EquipParamWeapon.SwordArtsParamId) ?? 0;
             set => OGLHandWeapon1Param?.WriteInt32((int)EROffsets.EquipParamWeapon.SwordArtsParamId, value);
         }
-        public int AshOfWarID { get; set; } = 40100;
-        public uint AshOfWarBitfield1
-        { 
-            get => EquipParamGem?.ReadUInt32(EquipParamGemOffsetDict[AshOfWarID] + (int)EROffsets.EquipParamGem.canMountWep_Dagger) ?? 0; 
-            set => EquipParamGem?.WriteUInt32(EquipParamGemOffsetDict[AshOfWarID] + (int)EROffsets.EquipParamGem.canMountWep_Dagger, value); 
-        }
-        public byte AshOfWarBitfield2
-        {
-            get => EquipParamGem?.ReadByte(EquipParamGemOffsetDict[AshOfWarID] + (int)EROffsets.EquipParamGem.canMountWep_ShieldSmall) ?? 0;
-            set => EquipParamGem?.WriteByte(EquipParamGemOffsetDict[AshOfWarID] + (int)EROffsets.EquipParamGem.canMountWep_ShieldSmall, value);
-        }
-        public bool Dagger
-        {
-            get => (AshOfWarBitfield1 & 1) != 0;
-            set
-            {
-                if (value)
-                    AshOfWarBitfield1 |= 1;
-                else
-                    AshOfWarBitfield1 = (uint)(AshOfWarBitfield1 & ~1);
-            }
-        }
-        public bool SwordNormal
-        {
-            get => (AshOfWarBitfield1 & 2) != 0;
-            set
-            {
-                if (value)
-                    AshOfWarBitfield1 |= 2;
-                else
-                    AshOfWarBitfield1 = (uint)(AshOfWarBitfield1 & ~2);
-            }
-        }
-        public bool SwordLarge
-        {
-            get => (AshOfWarBitfield1 & 4) != 0;
-            set
-            {
-                if (value)
-                    AshOfWarBitfield1 |= 4;
-                else
-                    AshOfWarBitfield1 = (uint)(AshOfWarBitfield1 & ~4);
-            }
-        }
-        public bool SwordGigantic
-        {
-            get => (AshOfWarBitfield1 & 8) != 0;
-            set
-            {
-                if (value)
-                    AshOfWarBitfield1 |= 8;
-                else
-                    AshOfWarBitfield1 = (uint)(AshOfWarBitfield1 & ~8);
-            }
-        }
-        public bool SabreNormal
-        {
-            get => (AshOfWarBitfield1 & 16) != 0;
-            set
-            {
-                if (value)
-                    AshOfWarBitfield1 |= 16;
-                else
-                    AshOfWarBitfield1 = (uint)(AshOfWarBitfield1 & ~16);
-            }
-        }
-        public bool SabreLarge
-        {
-            get => (AshOfWarBitfield1 & 32) != 0;
-            set
-            {
-                if (value)
-                    AshOfWarBitfield1 |= 32;
-                else
-                    AshOfWarBitfield1 = (uint)(AshOfWarBitfield1 & ~32);
-            }
-        }
-        public bool katana
-        {
-            get => (AshOfWarBitfield1 & 64) != 0;
-            set
-            {
-                if (value)
-                    AshOfWarBitfield1 |= 64;
-                else
-                    AshOfWarBitfield1 = (uint)(AshOfWarBitfield1 & ~64);
-            }
-        }
-        public bool SwordDoulbeEdge
-        {
-            get => (AshOfWarBitfield1 & 128) != 0;
-            set
-            {
-                if (value)
-                    AshOfWarBitfield1 |= 128;
-                else
-                    AshOfWarBitfield1 = (uint)(AshOfWarBitfield1 & ~128);
-            }
-        }
-        public bool SwordPierce
-        {
-            get => (AshOfWarBitfield1 & 256) != 0;
-            set
-            {
-                if (value)
-                    AshOfWarBitfield1 |= 256;
-                else
-                    AshOfWarBitfield1 = (uint)(AshOfWarBitfield1 & ~256);
-            }
-        }
-        public bool RapierHeavy
-        {
-            get => (AshOfWarBitfield1 & 512) != 0;
-            set
-            {
-                if (value)
-                    AshOfWarBitfield1 |= 512;
-                else
-                    AshOfWarBitfield1 = (uint)(AshOfWarBitfield1 & ~512);
-            }
-        }
-        public bool AxeNormal
-        {
-            get => (AshOfWarBitfield1 & 1024) != 0;
-            set
-            {
-                if (value)
-                    AshOfWarBitfield1 |= 1024;
-                else
-                    AshOfWarBitfield1 = (uint)(AshOfWarBitfield1 & ~1024);
-            }
-        }
-        public bool AxeLarge
-        {
-            get => (AshOfWarBitfield1 & 2048) != 0;
-            set
-            {
-                if (value)
-                    AshOfWarBitfield1 |= 2048;
-                else
-                    AshOfWarBitfield1 = (uint)(AshOfWarBitfield1 & ~2048);
-            }
-        }
-        public bool HammerNormal
-        {
-            get => (AshOfWarBitfield1 & 4096) != 0;
-            set
-            {
-                if (value)
-                    AshOfWarBitfield1 |= 4096;
-                else
-                    AshOfWarBitfield1 = (uint)(AshOfWarBitfield1 & ~4096);
-            }
-        }
-        public bool HammerLarge
-        {
-            get => (AshOfWarBitfield1 & 8192) != 0;
-            set
-            {
-                if (value)
-                    AshOfWarBitfield1 |= 8192;
-                else
-                    AshOfWarBitfield1 = (uint)(AshOfWarBitfield1 & ~8192);
-            }
-        }
-        public bool Flail
-        {
-            get => (AshOfWarBitfield1 & 16384) != 0;
-            set
-            {
-                if (value)
-                    AshOfWarBitfield1 |= 16384;
-                else
-                    AshOfWarBitfield1 = (uint)(AshOfWarBitfield1 & ~16384);
-            }
-        }
-        public bool SpearNormal
-        {
-            get => (AshOfWarBitfield1 & 32768) != 0;
-            set
-            {
-                if (value)
-                    AshOfWarBitfield1 |= 32768;
-                else
-                    AshOfWarBitfield1 = (uint)(AshOfWarBitfield1 & ~32768);
-            }
-        }
-        public bool SpearLarge
-        {
-            get => (AshOfWarBitfield1 & 65536) != 0;
-            set
-            {
-                if (value)
-                    AshOfWarBitfield1 |= 65536;
-                else
-                    AshOfWarBitfield1 = (uint)(AshOfWarBitfield1 & ~65536);
-            }
-        }
-        public bool SpearHeavy
-        {
-            get => (AshOfWarBitfield1 & 131072) != 0;
-            set
-            {
-                if (value)
-                    AshOfWarBitfield1 |= 131072;
-                else
-                    AshOfWarBitfield1 = (uint)(AshOfWarBitfield1 & ~131072);
-            }
-        }
-        public bool SpearAxe
-        {
-            get => (AshOfWarBitfield1 & 262144) != 0;
-            set
-            {
-                if (value)
-                    AshOfWarBitfield1 |= 262144;
-                else
-                    AshOfWarBitfield1 = (uint)(AshOfWarBitfield1 & ~262144);
-            }
-        }
-        public bool Sickle
-        {
-            get => (AshOfWarBitfield1 & 524288) != 0;
-            set
-            {
-                if (value)
-                    AshOfWarBitfield1 |= 524288;
-                else
-                    AshOfWarBitfield1 = (uint)(AshOfWarBitfield1 & ~524288);
-            }
-        }
-        public bool Knuckle
-        {
-            get => (AshOfWarBitfield1 & 1048576) != 0;
-            set
-            {
-                if (value)
-                    AshOfWarBitfield1 |= 1048576;
-                else
-                    AshOfWarBitfield1 = (uint)(AshOfWarBitfield1 & ~1048576);
-            }
-        }
-        public bool Claw
-        {
-            get => (AshOfWarBitfield1 & 2097152) != 0;
-            set
-            {
-                if (value)
-                    AshOfWarBitfield1 |= 2097152;
-                else
-                    AshOfWarBitfield1 = (uint)(AshOfWarBitfield1 & ~2097152);
-            }
-        }
-        public bool Whip
-        {
-            get => (AshOfWarBitfield1 & 4194304) != 0;
-            set
-            {
-                if (value)
-                    AshOfWarBitfield1 |= 4194304;
-                else
-                    AshOfWarBitfield1 = (uint)(AshOfWarBitfield1 & ~4194304);
-            }
-        }
-        public bool Axhammerlarge
-        {
-            get => (AshOfWarBitfield1 & 8388608) != 0;
-            set
-            {
-                if (value)
-                    AshOfWarBitfield1 |= 8388608;
-                else
-                    AshOfWarBitfield1 = (uint)(AshOfWarBitfield1 & ~8388608);
-            }
-        }
-        public bool BowSmall
-        {
-            get => (AshOfWarBitfield1 & 16777216) != 0;
-            set
-            {
-                if (value)
-                    AshOfWarBitfield1 |= 16777216;
-                else
-                    AshOfWarBitfield1 = (uint)(AshOfWarBitfield1 & ~16777216);
-            }
-        }
-        public bool BowNormal
-        {
-            get => (AshOfWarBitfield1 & 33554432) != 0;
-            set
-            {
-                if (value)
-                    AshOfWarBitfield1 |= 33554432;
-                else
-                    AshOfWarBitfield1 = (uint)(AshOfWarBitfield1 & ~33554432);
-            }
-        }
-        public bool BowLarge
-        {
-            get => (AshOfWarBitfield1 & 67108864) != 0;
-            set
-            {
-                if (value)
-                    AshOfWarBitfield1 |= 67108864;
-                else
-                    AshOfWarBitfield1 = (uint)(AshOfWarBitfield1 & ~67108864);
-            }
-        }
-        public bool Clossbow
-        {
-            get => (AshOfWarBitfield1 & 134217728) != 0;
-            set
-            {
-                if (value)
-                    AshOfWarBitfield1 |= 134217728;
-                else
-                    AshOfWarBitfield1 = (uint)(AshOfWarBitfield1 & ~134217728);
-            }
-        }
-        public bool Ballista
-        {
-            get => (AshOfWarBitfield1 & 268435456) != 0;
-            set
-            {
-                if (value)
-                    AshOfWarBitfield1 |= 268435456;
-                else
-                    AshOfWarBitfield1 = (uint)(AshOfWarBitfield1 & ~268435456);
-            }
-        }
-        public bool Staff
-        {
-            get => (AshOfWarBitfield1 & 536870912) != 0;
-            set
-            {
-                if (value)
-                    AshOfWarBitfield1 |= 536870912;
-                else
-                    AshOfWarBitfield1 = (uint)(AshOfWarBitfield1 & ~536870912);
-            }
-        }
-        public bool Sorcery
-        {
-            get => (AshOfWarBitfield1 & 1073741824) != 0;
-            set
-            {
-                if (value)
-                    AshOfWarBitfield1 |= 1073741824;
-                else
-                    AshOfWarBitfield1 = (uint)(AshOfWarBitfield1 & ~1073741824);
-            }
-        }
-        public bool Talisman
-        {
-            get => (AshOfWarBitfield1 & 2147483648) != 0;
-            set
-            {
-                if (value)
-                    AshOfWarBitfield1 |= 2147483648;
-                else
-                    AshOfWarBitfield1 = (uint)(AshOfWarBitfield1 & ~2147483648);
-            }
-        }
-        public bool ShieldSmall
-        {
-            get => (AshOfWarBitfield2 & 1) != 0;
-            set
-            {
-                if (value)
-                    AshOfWarBitfield2 |= 1;
-                else
-                    AshOfWarBitfield2 = (byte)(AshOfWarBitfield2 & ~1);
-            }
-        }
-        public bool ShieldNormal
-        {
-            get => (AshOfWarBitfield2 & 2) != 0;
-            set
-            {
-                if (value)
-                    AshOfWarBitfield2 |= 2;
-                else
-                    AshOfWarBitfield2 = (byte)(AshOfWarBitfield2 & ~2);
-            }
-        }
-        public bool SheildLarge
-        {
-            get => (AshOfWarBitfield2 & 4) != 0;
-            set
-            {
-                if (value)
-                    AshOfWarBitfield2 |= 4;
-                else
-                    AshOfWarBitfield2 = (byte)(AshOfWarBitfield2 & ~4);
-            }
-        }
-        public bool Torch
-        {
-            get => (AshOfWarBitfield2 & 8) != 0;
-            set
-            {
-                if (value)
-                    AshOfWarBitfield2 |= 8;
-                else
-                    AshOfWarBitfield2 = (byte)(AshOfWarBitfield2 & ~8);
-            }
-        }
+
     }
 }

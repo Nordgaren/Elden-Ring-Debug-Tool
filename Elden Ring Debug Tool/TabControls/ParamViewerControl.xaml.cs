@@ -2,6 +2,7 @@
 using SoulsFormats;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -65,13 +66,13 @@ namespace Elden_Ring_Debug_Tool
                     throw new Exception($"The PARAMDEF {defName} does not exist for {entry}. If the PARAMDEF is named differently than the param name, add another \":\" and append the PARAMDEF name" +
                         $"Example: 3130:WwiseValueToStrParam_BgmBossChrIdConv:WwiseValueToStrConvertParamFormat");
 
-                var offsetInt = new int[3] { int.Parse(info[0], System.Globalization.NumberStyles.HexNumber) ,0x80, 0x80};
+                var offset = int.Parse(info[0], System.Globalization.NumberStyles.HexNumber);
 
-                var pointer = Hook.GetParamPointer(offsetInt);
+                var pointer = Hook.GetParamPointer(offset);
 
                 var paramDef = XmlDeserialize(defPath);
 
-                Params.Add(new ERParam(pointer, paramDef, name));
+                Params.Add(new ERParam(pointer, offset, paramDef, name));
             }
 
             Params.Sort();
@@ -196,6 +197,28 @@ namespace Elden_Ring_Debug_Tool
                 
             }
         }
+        private string ParamSavePath => $@"{Directory.GetParent(Hook.Process.MainModule.FileName).Parent.FullName}\capture\param";
+        private void SaveButton_Click(object sender, RoutedEventArgs e)
+        {
+            var param = (ERParam)ComboBoxParams.SelectedItem;
+            Hook.SaveParam(param);
+            MessageBox.Show($@"{param.Name} saved to:
+{ParamSavePath}\capture\param", "Param Saved", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
 
+        private void OpenButton_Click(object sender, RoutedEventArgs e)
+        {
+            Process.Start("explorer.exe", ParamSavePath);
+        }
+
+        private void ReloadButton_Click(object sender, RoutedEventArgs e)
+        {
+            var result = MessageBox.Show("Are you sure you want to reset the currently selected param to what it was when the game loaded?", "Reset Param", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+            if (result == MessageBoxResult.Yes)
+            {
+                var selectedParam = ((ERParam)ComboBoxParams.SelectedItem);
+                selectedParam.ResetParam();
+            }
+        }
     }
 }

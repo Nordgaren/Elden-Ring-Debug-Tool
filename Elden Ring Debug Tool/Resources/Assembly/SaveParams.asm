@@ -1,0 +1,9 @@
+﻿mov rcx,0x{0:X2}
+mov rcx,[rcx+0x{1:X2}]
+mov rcx,[rcx+0x80]
+
+sub rsp,0x28
+mov r14, 0x{2:X2}
+call r14
+add rsp,0x28
+ret

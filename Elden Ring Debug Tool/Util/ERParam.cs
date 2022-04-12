@@ -15,6 +15,7 @@ namespace Elden_Ring_Debug_Tool
     public class ERParam : IComparable<ERParam>
     {
         public PHPointer Pointer { get; private set; }
+        public int Offset { get; private set; }
         public PARAMDEF ParamDef { get; private set; }
         public string Name { get; private set; }
         public string Type { get; private set; }
@@ -25,9 +26,10 @@ namespace Elden_Ring_Debug_Tool
         public Dictionary<int, string> NameDictionary { get; private set; }
         public int RowLength { get; private set; }
 
-        public ERParam(PHPointer pointer, PARAMDEF Paramdef, string name)
+        public ERParam(PHPointer pointer, int offset, PARAMDEF Paramdef, string name)
         {
             Pointer = pointer;
+            Offset = offset;
             ParamDef = Paramdef;
             Name = name;
             Type = Paramdef.ParamType;
@@ -94,6 +96,10 @@ namespace Elden_Ring_Debug_Tool
         {
             return this.Name.CompareTo(other.Name);
         }
+        internal void ResetParam()
+        {
+            Pointer.WriteBytes(0 ,Bytes);
+        }
         public class Row
         {
             public ERParam Param { get; private set; }
@@ -113,7 +119,6 @@ namespace Elden_Ring_Debug_Tool
                 }
                 set { _cells = value; }
             }
-
 
             public Row(ERParam param, string name, int id, int offset)
             {
@@ -207,5 +212,7 @@ namespace Elden_Ring_Debug_Tool
                 return Name;
             }
         }
+
+       
     }
 }
