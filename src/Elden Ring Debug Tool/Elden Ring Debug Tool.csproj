@@ -14,6 +14,9 @@
 	  <PackageId>$(TargetPath)</PackageId>
 	  <Configurations>Debug;Release;Publish</Configurations>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Publish|AnyCPU'">
+    <Optimize>True</Optimize>
+  </PropertyGroup>
 
   <ItemGroup>
   	<ResourceFiles Include="$(ProjectDir)Resources\**\*.*" />
@@ -21,24 +24,35 @@
 
 
   <!-- Copy all resources to the build output directy except when building in publish mode, to have them exist in a debug/release build, but not have them packed into an executable when publishing -->
-  <Target Name="CopyResources" Condition="'$(Configuration)'!='Publish'" AfterTargets="Build">
-	<Message Text="Copy resource files" Importance="High" />
-	<Message Text="Files: @(ResourceFiles)" Importance="High" />
-	<Message Text="directory: $(OutDir)" Importance="High" />
-	<Copy SourceFiles="@(ResourceFiles)" DestinationFolder="$(OutDir)Resources\%(RecursiveDir)" SkipUnchangedFiles="true" />
+  <Target 
+	  Name="CopyResources" 
+	  Condition="'$(Configuration)'!='Publish'" 
+	  AfterTargets="Build">
+	<Message Text="Copy resource files"         Importance="High" />
+	<Message Text="Files: @(ResourceFiles)"     Importance="High" />
+	<Message Text="directory: $(OutDir)"        Importance="High" />
+	<Copy 
+		SourceFiles="@(ResourceFiles)" 
+		DestinationFolder="$(OutDir)Resources\%(RecursiveDir)" 
+		SkipUnchangedFiles="true" />
   </Target>
 
   <!-- Copy all resources to the published output -->
-  <Target Name="CopyResourcesPublish" Condition="'$(Configuration)'=='Publish'" AfterTargets="Publish">
-  	<Message Text="Copy resource files" Importance="High" />
-  	<Message Text="Files: @(ResourceFiles)" Importance="High" />
-  	<Message Text="directory: $(PublishDir)" Importance="High" />
-  	<Copy SourceFiles="@(ResourceFiles)" DestinationFolder="$(PublishDir)Resources\%(RecursiveDir)" SkipUnchangedFiles="true" />
+  <Target 
+	  Name="CopyResourcesPublish" 
+	  Condition="'$(Configuration)'=='Publish'" 
+	  AfterTargets="Publish">
+  	<Message Text="Copy resource files"         Importance="High" />
+  	<Message Text="Files: @(ResourceFiles)"     Importance="High" />
+  	<Message Text="directory: $(PublishDir)"    Importance="High" />
+  	<Copy 
+	    SourceFiles="@(ResourceFiles)" 
+	    DestinationFolder="$(PublishDir)Resources\%(RecursiveDir)" 
+	    SkipUnchangedFiles="true" />
     <ZipDirectory 
-	    SourceDirectory="$(PublishDir)"
-	    DestinationFile="$(PublishDir)../Elden Ring debug tool $(AssemblyVersion).zip"
-	    Overwrite="true"
-    />
+	    SourceDirectory="$(PublishDir)" 
+	    DestinationFile="$(PublishDir)../Elden Ring debug tool $(AssemblyVersion).zip" 
+	    Overwrite="true" />
   </Target>
 	
   <ItemGroup>
