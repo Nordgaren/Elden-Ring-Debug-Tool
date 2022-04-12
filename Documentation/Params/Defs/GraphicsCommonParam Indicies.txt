@@ -1,0 +1,5 @@
+//Format[dec]:Index(size) = Name 
+000(4) = hitBulletDecalOffset_HitIns
+001(8) = reserved02
+002(4) = charaWetDecalFadeRange
+003(240) = reserved04

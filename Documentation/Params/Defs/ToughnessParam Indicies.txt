@@ -1,0 +1,8 @@
+//Format[dec]:Index(size) = Name 
+000(4) = correctionRate
+001(2) = minToughness
+002(1) = isNonEffectiveCorrectionForMin
+003(1) = pad2
+004(4) = spEffectId
+005(4) = proCorrectionRate
+006(16) = pad1

@@ -1,0 +1,12 @@
+//Format[dec]:Index(size) = Name 
+000(1) = moveDir
+001(1) = key1
+002(1) = key2
+003(1) = key3
+004(1) = bMoveDirHold
+005(1) = bKeyHold1
+006(1) = bKeyHold2
+007(1) = bKeyHold3
+008(4) = gestureId
+009(1) = bLifeEndSuccess
+010(3) = pad1

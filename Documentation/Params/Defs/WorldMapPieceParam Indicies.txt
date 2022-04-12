@@ -1,0 +1,17 @@
+//Format[dec]:Index(size) = Name 
+000(1) = disableParam_NT
+001(1) = disableParamReserve1
+002(3) = disableParamReserve2
+003(4) = openEventFlagId
+004(4) = openTravelAreaLeft
+005(4) = openTravelAreaRight
+006(4) = openTravelAreaTop
+007(4) = openTravelAreaBottom
+008(4) = acquisitionEventFlagId
+009(4) = acquisitionEventScale
+010(4) = acquisitionEventCenterX
+011(4) = acquisitionEventCenterY
+012(4) = acquisitionEventResScale
+013(4) = acquisitionEventResOffsetX
+014(4) = acquisitionEventResOffsetY
+015(12) = pad

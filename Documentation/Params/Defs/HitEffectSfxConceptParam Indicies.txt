@@ -1,0 +1,15 @@
+//Format[dec]:Index(size) = Name 
+000(2) = atkIron_1
+001(2) = atkIron_2
+002(2) = atkLeather_1
+003(2) = atkLeather_2
+004(2) = atkWood_1
+005(2) = atkWood_2
+006(2) = atkBody_1
+007(2) = atkBody_2
+008(2) = atkStone_1
+009(2) = atkStone_2
+010(4) = pad
+011(2) = atkNone_1
+012(2) = atkNone_2
+013(52) = reserve

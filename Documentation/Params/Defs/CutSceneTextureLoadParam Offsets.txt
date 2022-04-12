@@ -1,0 +1,20 @@
+//Format[hex]:Index(size) = Name 
+000(1) = disableParam_NT
+Bitfield: 8
+001(3) = disableParamReserve2
+004(16) = texName_00
+014(16) = texName_01
+024(16) = texName_02
+034(16) = texName_03
+044(16) = texName_04
+054(16) = texName_05
+064(16) = texName_06
+074(16) = texName_07
+084(16) = texName_08
+094(16) = texName_09
+0A4(16) = texName_10
+0B4(16) = texName_11
+0C4(16) = texName_12
+0D4(16) = texName_13
+0E4(16) = texName_14
+0F4(16) = texName_15

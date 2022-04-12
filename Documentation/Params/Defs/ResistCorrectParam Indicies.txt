@@ -1,0 +1,11 @@
+//Format[dec]:Index(size) = Name 
+000(4) = addPoint1
+001(4) = addPoint2
+002(4) = addPoint3
+003(4) = addPoint4
+004(4) = addPoint5
+005(4) = addRate1
+006(4) = addRate2
+007(4) = addRate3
+008(4) = addRate4
+009(4) = addRate5

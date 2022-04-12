@@ -1,0 +1,7 @@
+//Format[hex]:Index(size) = Name 
+000(4) = eventLayerId
+004(4) = mapStudioLayerId
+008(4) = multiPlayAreaOffset
+00C(4) = overrideMapPlaceNameId
+010(4) = overrideSaveMapNameId
+014(16) = pad2

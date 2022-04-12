@@ -1,0 +1,14 @@
+//Format[dec]:Index(size) = Name 
+000(1) = disableParam_NT
+001(1) = disableParamReserve1
+002(3) = disableParamReserve2
+003(4) = worldMapPieceId
+004(4) = textId
+005(4) = pad1
+006(1) = areaNo
+007(1) = gridXNo
+008(1) = gridZNo
+009(1) = pad2
+010(4) = posX
+011(4) = posY
+012(4) = posZ

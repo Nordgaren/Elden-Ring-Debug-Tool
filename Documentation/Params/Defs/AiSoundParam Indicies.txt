@@ -1,0 +1,16 @@
+//Format[dec]:Index(size) = Name 
+000(4) = radius
+001(4) = lifeFrame
+002(1) = bSpEffectEnable
+003(1) = type
+004(1) = opposeTarget
+005(1) = friendlyTarget
+006(1) = selfTarget
+007(1) = disableOnTargetPCompany
+008(1) = rank
+009(4) = forgetTime
+010(4) = priority
+011(4) = soundBehaviorId
+012(1) = aiSoundLevel
+013(1) = replaningState
+014(6) = pad1

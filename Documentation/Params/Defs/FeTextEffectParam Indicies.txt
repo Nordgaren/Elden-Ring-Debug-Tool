@@ -1,0 +1,8 @@
+//Format[dec]:Index(size) = Name 
+000(2) = resId
+001(2) = pad1
+002(4) = textId
+003(4) = seId
+004(1) = canMixMapName
+005(1) = pad3
+006(19) = pad2

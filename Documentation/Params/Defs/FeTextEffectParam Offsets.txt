@@ -1,0 +1,8 @@
+//Format[hex]:Index(size) = Name 
+000(2) = resId
+002(2) = pad1
+004(4) = textId
+008(4) = seId
+00C(1) = canMixMapName
+Bitfield: 8
+00D(19) = pad2

@@ -1,0 +1,9 @@
+//Format[dec]:Index(size) = Name 
+000(4) = RangeMin
+001(4) = RangeMax
+002(4) = LifeTimeMin
+003(4) = LifeTimeMax
+004(4) = DeleteDist
+005(4) = NearDist
+006(4) = LimiteRotateMin
+007(4) = LimiteRotateMax

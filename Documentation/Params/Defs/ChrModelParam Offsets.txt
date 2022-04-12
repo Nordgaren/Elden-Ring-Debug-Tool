@@ -1,0 +1,8 @@
+//Format[hex]:Index(size) = Name 
+000(1) = disableParam_NT
+Bitfield: 8
+001(3) = disableParamReserve2
+004(1) = modelMemoryType
+005(1) = texMemoryType
+006(2) = cameraDitherFadeId
+008(4) = reportAnimMemSizeMb

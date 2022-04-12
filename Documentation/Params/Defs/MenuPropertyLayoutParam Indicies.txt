@@ -1,0 +1,6 @@
+//Format[dec]:Index(size) = Name 
+000(16) = LayoutPath
+001(4) = PropertyID
+002(4) = CaptionTextID
+003(4) = HelpTextID
+004(4) = reserved

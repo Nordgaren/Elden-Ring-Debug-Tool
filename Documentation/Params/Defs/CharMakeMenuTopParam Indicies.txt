@@ -1,0 +1,14 @@
+//Format[dec]:Index(size) = Name 
+000(4) = commandType
+001(4) = captionId
+002(4) = faceParamId
+003(4) = tableId
+004(4) = viewCondition
+005(1) = previewMode
+006(3) = reserved2
+007(4) = tableId2
+008(4) = refFaceParamId
+009(4) = refTextId
+010(4) = helpTextId
+011(4) = unlockEventFlagId
+012(4) = reserved

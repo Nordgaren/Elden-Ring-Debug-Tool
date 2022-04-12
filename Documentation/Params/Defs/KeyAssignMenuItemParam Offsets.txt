@@ -1,0 +1,11 @@
+//Format[hex]:Index(size) = Name 
+000(4) = textID
+004(4) = key
+008(1) = enableUnassign
+009(1) = enablePadConfig
+00A(1) = enableMouseConfig
+00B(1) = group
+00C(4) = mappingTextID
+010(1) = viewPad
+011(1) = viewKeyboardMouse
+012(6) = padding

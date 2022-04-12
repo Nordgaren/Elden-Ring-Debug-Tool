@@ -1,0 +1,5 @@
+//Format[dec]:Index(size) = Name 
+000(1) = enabled
+001(3) = dmy
+002(4) = forceHiResoBlur
+003(4) = maxBlurLevel

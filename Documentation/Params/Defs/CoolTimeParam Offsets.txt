@@ -1,0 +1,9 @@
+//Format[hex]:Index(size) = Name 
+000(4) = limitationTime
+004(4) = observeTime
+008(4) = limitationTime
+00C(4) = observeTime
+010(4) = limitationTime
+014(4) = observeTime
+018(4) = limitationTime
+01C(4) = observeTime

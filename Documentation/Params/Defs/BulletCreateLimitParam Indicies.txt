@@ -1,0 +1,5 @@
+//Format[dec]:Index(size) = Name 
+000(1) = limitNum_byGroup
+001(1) = isLimitEachOwner
+002(1) = pad2
+003(30) = pad

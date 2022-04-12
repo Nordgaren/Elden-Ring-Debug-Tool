@@ -1,0 +1,4 @@
+//Format[dec]:Index(size) = Name 
+000(1) = enabled
+001(1) = forceFXAA2
+002(2) = dmy

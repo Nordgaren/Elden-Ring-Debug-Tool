@@ -1,0 +1,15 @@
+//Format[dec]:Index(size) = Name 
+000(4) = atkChrId
+001(4) = defChrId
+002(4) = rideCamParamId
+003(4) = atkChrAnimId
+004(4) = defChrAnimId
+005(4) = defAdjustDmyId
+006(4) = defCheckDmyId
+007(4) = diffAngMyToDef
+008(4) = dist
+009(4) = upperYRange
+010(4) = lowerYRange
+011(4) = diffAngMin
+012(4) = diffAngMax
+013(12) = pad

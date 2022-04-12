@@ -1,0 +1,5 @@
+//Format[dec]:Index(size) = Name 
+000(4) = SoundNo
+001(4) = ExpandRange
+002(4) = FollowSpeed
+003(4) = FollowRate

@@ -1,0 +1,23 @@
+//Format[hex]:Index(size) = Name 
+000(1) = disableParam_NT
+Bitfield: 8
+001(3) = disableParamReserve2
+004(4) = msgId
+008(4) = voiceId
+00C(4) = spEffectId0
+010(4) = motionId0
+014(4) = spEffectId1
+018(4) = motionId1
+01C(4) = returnPos
+020(4) = reactionId
+024(4) = eventId
+028(4) = msgId_female
+02C(4) = voiceId_female
+030(2) = lipSyncStart
+032(2) = lipSyncTime
+034(4) = pad2
+038(4) = timeout
+03C(4) = talkAnimationId
+040(1) = isForceDisp
+Bitfield: 8
+041(31) = pad1

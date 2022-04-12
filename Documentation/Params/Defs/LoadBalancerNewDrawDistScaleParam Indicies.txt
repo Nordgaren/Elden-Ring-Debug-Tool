@@ -1,0 +1,12 @@
+//Format[dec]:Index(size) = Name 
+000(1) = DrawDist_LvBegin
+001(1) = DrawDist_LvEnd
+002(2) = reserve0
+003(4) = DrawDist_ScaleBegin
+004(4) = DrawDist_ScaleEnd
+005(1) = ShadwDrawDist_LvBegin
+006(1) = ShadwDrawDist_LvEnd
+007(2) = reserve1
+008(4) = ShadwDrawDist_ScaleBegin
+009(4) = ShadwDrawDist_ScaleEnd
+010(24) = reserve2

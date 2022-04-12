@@ -1,0 +1,9 @@
+//Format[dec]:Index(size) = Name 
+000(1) = enabled
+001(1) = maxFilterLevel
+002(2) = dmy
+003(4) = textureSizeScaler
+004(4) = textureSizeDivider
+005(4) = textureMinSize
+006(4) = textureMaxSize
+007(4) = blurCountBias

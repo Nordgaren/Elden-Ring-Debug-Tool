@@ -1,0 +1,47 @@
+//Format[hex]:Index(size) = Name 
+000(1) = disableParam_NT
+Bitfield: 8
+001(3) = disableParamReserve2
+004(2) = iconId
+006(1) = rank
+007(1) = sortGroupId
+008(4) = spEffectId0
+00C(4) = spEffectId1
+010(4) = spEffectId2
+014(4) = itemGetTutorialFlagId
+018(4) = swordArtsParamId
+01C(4) = mountValue
+020(4) = sellValue
+024(4) = saleValue
+028(4) = sortId
+02C(2) = compTrophySedId
+02E(2) = trophySeqId
+030(1) = configurableWepAttr00
+Bitfield: 8
+031(1) = configurableWepAttr08
+Bitfield: 8
+032(1) = rarity
+033(1) = configurableWepAttr16
+Bitfield: 8
+034(1) = isDiscard
+Bitfield: 8
+035(1) = defaultWepAttr
+036(2) = pad2
+038(1) = canMountWep_Dagger
+Bitfield: 8
+039(1) = canMountWep_SwordPierce
+Bitfield: 8
+03A(1) = canMountWep_SpearLarge
+Bitfield: 8
+03B(1) = canMountWep_BowSmall
+Bitfield: 8
+03C(1) = canMountWep_ShieldSmall
+Bitfield: 8
+03D(3) = reserved2_canMountWep
+040(4) = spEffectMsgId0
+044(4) = spEffectMsgId1
+048(4) = spEffectId_forAtk0
+04C(4) = spEffectId_forAtk1
+050(4) = spEffectId_forAtk2
+054(4) = mountWepTextId
+058(8) = pad6

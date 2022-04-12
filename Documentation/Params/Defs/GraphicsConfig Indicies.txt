@@ -1,0 +1,15 @@
+//Format[dec]:Index(size) = Name 
+000(1) = m_textureFilterQuality
+001(1) = m_aaQuality
+002(1) = m_ssaoQuality
+003(1) = m_dofQuality
+004(1) = m_motionBlurQuality
+005(1) = m_shadowQuality
+006(1) = m_lightingQuality
+007(1) = m_effectQuality
+008(1) = m_decalQuality
+009(1) = m_reflectionQuality
+010(1) = m_waterQuality
+011(1) = m_shaderQuality
+012(1) = m_volumetricEffectQuality
+013(3) = m_dummy

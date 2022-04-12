@@ -1,0 +1,5 @@
+//Format[hex]:Index(size) = Name 
+000(1) = limitNum_byGroup
+001(1) = isLimitEachOwner
+Bitfield: 8
+002(30) = pad

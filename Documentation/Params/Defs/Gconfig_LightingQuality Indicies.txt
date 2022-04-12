@@ -1,0 +1,6 @@
+//Format[dec]:Index(size) = Name 
+000(4) = localLightDistFactor
+001(1) = localLightShadowEnabled
+002(1) = forwardPassLightingEnabled
+003(1) = localLightShadowSpecLevelMax
+004(1) = dmy

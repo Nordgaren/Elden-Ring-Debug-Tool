@@ -1,0 +1,10 @@
+//Format[dec]:Index(size) = Name 
+000(1) = disableParam_NT
+001(1) = disableParamReserve1
+002(3) = disableParamReserve2
+003(1) = srcR
+004(1) = srcG
+005(1) = srcB
+006(1) = pad1
+007(4) = mimicryEstablishmentParamId
+008(4) = pad2

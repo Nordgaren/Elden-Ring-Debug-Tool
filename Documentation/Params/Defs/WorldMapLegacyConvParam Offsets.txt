@@ -1,0 +1,21 @@
+//Format[hex]:Index(size) = Name 
+000(1) = disableParam_NT
+Bitfield: 8
+001(3) = disableParamReserve2
+004(1) = srcAreaNo
+005(1) = srcGridXNo
+006(1) = srcGridZNo
+007(1) = pad1
+008(4) = srcPosX
+00C(4) = srcPosY
+010(4) = srcPosZ
+014(1) = dstAreaNo
+015(1) = dstGridXNo
+016(1) = dstGridZNo
+017(1) = pad2
+018(4) = dstPosX
+01C(4) = dstPosY
+020(4) = dstPosZ
+024(1) = isBasePoint
+Bitfield: 8
+025(11) = pad4

@@ -1,0 +1,27 @@
+//Format[hex]:Index(size) = Name 
+000(1) = disableParam_NT
+Bitfield: 8
+001(3) = disableParamReserve2
+004(4) = EnableFastTravelEventFlagId
+008(4) = WeatherLotTimeOffsetIngameSeconds
+00C(1) = WeatherCreateAssetLimitId
+00D(1) = MapAiSightType
+00E(1) = SoundIndoorType
+00F(1) = ReverbDefaultType
+010(2) = BgmPlaceInfo
+012(2) = EnvPlaceInfo
+014(4) = MapAdditionalSoundBankId
+018(2) = MapHeightForSound
+01A(1) = IsEnableBlendTimezoneEnvmap
+01B(1) = OverrideGIResolution_XSS
+01C(4) = MapLoHiChangeBorderDist_XZ
+020(4) = MapLoHiChangeBorderDist_Y
+024(4) = MapLoHiChangePlayDist
+028(4) = MapAutoDrawGroupBackFacePixelNum
+02C(4) = PlayerLigntScale
+030(1) = IsEnableTimezonnePlayerLigntScale
+031(1) = isDisableAutoCliffWind
+032(2) = OpenChrActivateThreshold
+034(4) = MapMimicryEstablishmentParamId
+038(1) = OverrideGIResolution_XSX
+039(7) = Reserve

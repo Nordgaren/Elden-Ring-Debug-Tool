@@ -1,0 +1,7 @@
+//Format[dec]:Index(size) = Name 
+000(1) = disableParam_NT
+001(1) = disableParamReserve1
+002(3) = disableParamReserve2
+003(4) = unlockFlagId
+004(4) = invalidFlagId
+005(4) = msgId

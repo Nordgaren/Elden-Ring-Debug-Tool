@@ -1,0 +1,8 @@
+//Format[dec]:Index(size) = Name 
+000(1) = disableParam_NT
+001(1) = disableParamReserve1
+002(3) = disableParamReserve2
+003(4) = textId
+004(2) = tabId
+005(2) = sortId
+006(4) = pad

@@ -22,7 +22,7 @@ namespace Elden_Ring_Debug_Tool
             var args = Environment.GetCommandLineArgs();
 
 #if DEBUG
-            //args = new[] { "", @"G:\Steam\steamapps\common\ELDEN RING\Game\regulation - Copy.bin" };
+            args = new[] { "", @"G:\Steam\steamapps\common\ELDEN RING 1.03.3\Game\regulation.bin.bnd" };
 #endif
             if (args.Length > 1)
             {
@@ -34,7 +34,7 @@ namespace Elden_Ring_Debug_Tool
 
                 if (CheckIfPossiblyEncrypted(buffer))
                 {
-                    if (!File.Exists($"{args[1]}.bak"))
+                    if (!File.Exists($"{args[1]}.PreDecrypt.bak"))
                         File.Copy(args[1], $"{args[1]}.PreDecrypt.bak");
 
                     var decryptedReg = SFUtil.DecryptERRegulation(args[1]);
@@ -43,7 +43,7 @@ namespace Elden_Ring_Debug_Tool
                 }
                 else if (BND4.IsRead(args[1], out BND4 bnd))
                 {
-                    if (!File.Exists($"{args[1]}.bak"))
+                    if (!File.Exists($"{args[1]}.PreEncrypt.bak"))
                         File.Copy(args[1], $"{args[1]}.PreEncrypt.bak");
 
                     SFUtil.EncryptERRegulation(args[1], bnd);
@@ -66,7 +66,7 @@ namespace Elden_Ring_Debug_Tool
         private bool CheckIfPossiblyEncrypted(byte[] buffer)
         {
             var magic = Encoding.ASCII.GetString(buffer);
-            return magic != "BND4" && magic != "DCX";
+            return magic != "BND4" && magic != "DCX\0";
         }
 
         void GlobalExceptionHandler(object sender, UnhandledExceptionEventArgs e)

@@ -1,0 +1,5 @@
+//Format[dec]:Index(size) = Name 
+000(4) = value
+001(4) = textId
+002(1) = compareType
+003(3) = padding

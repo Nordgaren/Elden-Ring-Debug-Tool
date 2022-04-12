@@ -1,0 +1,8 @@
+//Format[dec]:Index(size) = Name 
+000(4) = CaptionTextID
+001(4) = IconID
+002(4) = RequiredPropertyID
+003(1) = CompareType
+004(1) = pad2
+005(2) = FormatType
+006(16) = pad

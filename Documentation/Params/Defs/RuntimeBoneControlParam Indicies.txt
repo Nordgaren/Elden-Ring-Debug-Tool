@@ -1,0 +1,7 @@
+//Format[dec]:Index(size) = Name 
+000(4) = chrId
+001(1) = ctrlType
+002(11) = pad
+003(32) = applyBone
+004(32) = targetBone1
+005(32) = targetBone2

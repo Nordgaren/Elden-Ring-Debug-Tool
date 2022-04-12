@@ -1,0 +1,9 @@
+//Format[dec]:Index(size) = Name 
+000(64) = paramName
+001(4) = materialId
+002(4) = materialParamValue0
+003(4) = materialParamValue1
+004(4) = materialParamValue2
+005(4) = materialParamValue3
+006(4) = materialParamValue4
+007(8) = pad

@@ -1,0 +1,14 @@
+//Format[dec]:Index(size) = Name 
+000(4) = mimicryEstablishment0
+001(4) = mimicryEstablishment1
+002(4) = mimicryEstablishment2
+003(4) = mimicryBeginSfxId0
+004(4) = mimicrySfxId0
+005(4) = mimicryEndSfxId0
+006(4) = mimicryBeginSfxId1
+007(4) = mimicrySfxId1
+008(4) = mimicryEndSfxId1
+009(4) = mimicryBeginSfxId2
+010(4) = mimicrySfxId2
+011(4) = mimicryEndSfxId2
+012(16) = pad1

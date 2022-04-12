@@ -1,0 +1,11 @@
+//Format[dec]:Index(size) = Name 
+000(4) = MinFadeLeaf
+001(4) = MinFadeFrond
+002(4) = MinFadeBranch
+003(4) = MinTranslucencyLeaf
+004(4) = MaxTranslucencyLeaf
+005(4) = MinTranslucencyFrond
+006(4) = MaxTranslucencyFrond
+007(4) = MinTranslucencyBranch
+008(4) = MaxTranslucencyBranch
+009(4) = BillboardBackSpecularWeakenParam

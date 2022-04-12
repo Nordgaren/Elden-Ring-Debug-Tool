@@ -1,0 +1,17 @@
+//Format[dec]:Index(size) = Name 
+000(4) = camAtPosX
+001(4) = camAtPosY
+002(4) = camAtPosZ
+003(4) = camDist
+004(4) = camRotX
+005(4) = camRotY
+006(4) = camFov
+007(4) = camDistMin
+008(4) = camDistMax
+009(4) = camRotXMin
+010(4) = camRotXMax
+011(4) = GparamID
+012(4) = envTexId
+013(4) = Grapm_ID_forPS4
+014(4) = Grapm_ID_forXB1
+015(4) = pad

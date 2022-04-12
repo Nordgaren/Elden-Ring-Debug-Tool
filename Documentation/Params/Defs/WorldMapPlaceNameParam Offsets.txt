@@ -1,0 +1,14 @@
+//Format[hex]:Index(size) = Name 
+000(1) = disableParam_NT
+Bitfield: 8
+001(3) = disableParamReserve2
+004(4) = worldMapPieceId
+008(4) = textId
+00C(4) = pad1
+010(1) = areaNo
+011(1) = gridXNo
+012(1) = gridZNo
+013(1) = pad2
+014(4) = posX
+018(4) = posY
+01C(4) = posZ

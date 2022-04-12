@@ -1,0 +1,8 @@
+//Format[hex]:Index(size) = Name 
+000(1) = enabled
+001(1) = ombEnabled
+002(1) = forceScaleVelocityBuffer
+003(1) = cheapFilterMode
+004(4) = sampleCountBias
+008(4) = recurrenceCountBias
+00C(4) = blurMaxLengthScale

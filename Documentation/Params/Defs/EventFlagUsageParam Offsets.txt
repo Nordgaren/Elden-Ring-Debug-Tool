@@ -1,0 +1,6 @@
+//Format[hex]:Index(size) = Name 
+000(1) = usageType
+001(1) = playlogCategory
+002(2) = padding1
+004(4) = flagNum
+008(24) = padding2

@@ -1,0 +1,9 @@
+//Format[dec]:Index(size) = Name 
+000(1) = disableParam_NT
+001(1) = disableParamReserve1
+002(3) = disableParamReserve2
+003(4) = chrInitParam
+004(4) = originChrInitParam
+005(4) = imageId
+006(4) = textId
+007(12) = reserve

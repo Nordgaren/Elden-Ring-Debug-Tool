@@ -1,0 +1,122 @@
+//Format[hex]:Index(size) = Name 
+000(2) = atk0_EzStateId
+002(2) = atk1_EzStateId
+004(2) = atk2_EzStateId
+006(2) = atk3_EzStateId
+008(2) = atk4_EzStateId
+00A(2) = atk5_EzStateId
+00C(2) = atk6_EzStateId
+00E(2) = atk7_EzStateId
+010(2) = atk8_EzStateId
+012(2) = atk9_EzStateId
+014(2) = atk10_EzStateId
+016(2) = atk11_EzStateId
+018(2) = atk12_EzStateId
+01A(2) = atk13_EzStateId
+01C(2) = atk14_EzStateId
+01E(2) = atk15_EzStateId
+020(2) = atk16_EzStateId
+022(2) = atk17_EzStateId
+024(2) = atk18_EzStateId
+026(2) = atk19_EzStateId
+028(2) = atk20_EzStateId
+02A(2) = atk21_EzStateId
+02C(2) = atk22_EzStateId
+02E(2) = atk23_EzStateId
+030(2) = atk24_EzStateId
+032(2) = atk25_EzStateId
+034(2) = atk26_EzStateId
+036(2) = atk27_EzStateId
+038(2) = atk28_EzStateId
+03A(2) = atk29_EzStateId
+03C(2) = atk0_MinDist
+03E(2) = atk1_MinDist
+040(2) = atk2_MinDist
+042(2) = atk3_MinDist
+044(2) = atk4_MinDist
+046(2) = atk5_MinDist
+048(2) = atk6_MinDist
+04A(2) = atk7_MinDist
+04C(2) = atk8_MinDist
+04E(2) = atk9_MinDist
+050(2) = atk10_MinDist
+052(2) = atk11_MinDist
+054(2) = atk12_MinDist
+056(2) = atk13_MinDist
+058(2) = atk14_MinDist
+05A(2) = atk15_MinDist
+05C(2) = atk16_MinDist
+05E(2) = atk17_MinDist
+060(2) = atk18_MinDist
+062(2) = atk19_MinDist
+064(2) = atk20_MinDist
+066(2) = atk21_MinDist
+068(2) = atk22_MinDist
+06A(2) = atk23_MinDist
+06C(2) = atk24_MinDist
+06E(2) = atk25_MinDist
+070(2) = atk26_MinDist
+072(2) = atk27_MinDist
+074(2) = atk28_MinDist
+076(2) = atk29_MinDist
+078(2) = atk0_MaxDist
+07A(2) = atk1_MaxDist
+07C(2) = atk2_MaxDist
+07E(2) = atk3_MaxDist
+080(2) = atk4_MaxDist
+082(2) = atk5_MaxDist
+084(2) = atk6_MaxDist
+086(2) = atk7_MaxDist
+088(2) = atk8_MaxDist
+08A(2) = atk9_MaxDist
+08C(2) = atk10_MaxDist
+08E(2) = atk11_MaxDist
+090(2) = atk12_MaxDist
+092(2) = atk13_MaxDist
+094(2) = atk14_MaxDist
+096(2) = atk15_MaxDist
+098(2) = atk16_MaxDist
+09A(2) = atk17_MaxDist
+09C(2) = atk18_MaxDist
+09E(2) = atk19_MaxDist
+0A0(2) = atk20_MaxDist
+0A2(2) = atk21_MaxDist
+0A4(2) = atk22_MaxDist
+0A6(2) = atk23_MaxDist
+0A8(2) = atk24_MaxDist
+0AA(2) = atk25_MaxDist
+0AC(2) = atk26_MaxDist
+0AE(2) = atk27_MaxDist
+0B0(2) = atk28_MaxDist
+0B2(2) = atk29_MaxDist
+0B4(1) = atk0_AtkDistType
+Bitfield: 8
+0B5(1) = atk2_AtkDistType
+Bitfield: 8
+0B6(1) = atk4_AtkDistType
+Bitfield: 8
+0B7(1) = atk6_AtkDistType
+Bitfield: 8
+0B8(1) = atk8_AtkDistType
+Bitfield: 8
+0B9(1) = atk10_AtkDistType
+Bitfield: 8
+0BA(1) = atk12_AtkDistType
+Bitfield: 8
+0BB(1) = atk14_AtkDistType
+Bitfield: 8
+0BC(1) = atk16_AtkDistType
+Bitfield: 8
+0BD(1) = atk18_AtkDistType
+Bitfield: 8
+0BE(1) = atk20_AtkDistType
+Bitfield: 8
+0BF(1) = atk22_AtkDistType
+Bitfield: 8
+0C0(1) = atk24_AtkDistType
+Bitfield: 8
+0C1(1) = atk26_AtkDistType
+Bitfield: 8
+0C2(1) = atk28_AtkDistType
+Bitfield: 8
+0C3(13) = pad0

@@ -1,0 +1,6 @@
+//Format[dec]:Index(size) = Name 
+000(2) = attribute1
+001(2) = attribute2
+002(2) = attribute3
+003(2) = attribute4
+004(8) = padding4

@@ -1,0 +1,14 @@
+//Format[dec]:Index(size) = Name 
+000(1) = baseColorR
+001(1) = baseColorG
+002(1) = baseColorB
+003(1) = reserve_0
+004(4) = baseColorA
+005(1) = metallic
+006(1) = reserve_1
+007(1) = reserve_2
+008(1) = reserve_3
+009(4) = metallicRate
+010(4) = shininessRate
+011(1) = shininess
+012(11) = reserve_4

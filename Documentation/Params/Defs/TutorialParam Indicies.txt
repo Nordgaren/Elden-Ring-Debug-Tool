@@ -1,0 +1,15 @@
+//Format[dec]:Index(size) = Name 
+000(1) = disableParam_NT
+001(1) = disableParamReserve1
+002(3) = disableParamReserve2
+003(1) = menuType
+004(1) = triggerType
+005(1) = repeatType
+006(1) = pad1
+007(2) = imageId
+008(2) = pad2
+009(4) = unlockEventFlagId
+010(4) = textId
+011(4) = displayMinTime
+012(4) = displayTime
+013(4) = pad3

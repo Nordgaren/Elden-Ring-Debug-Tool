@@ -1,0 +1,13 @@
+//Format[dec]:Index(size) = Name 
+000(4) = variationId
+001(4) = behaviorJudgeId
+002(1) = ezStateBehaviorType_old
+003(1) = refType
+004(2) = pad2
+005(4) = refId
+006(4) = consumeSA
+007(4) = stamina
+008(4) = consumeDurability
+009(1) = category
+010(1) = heroPoint
+011(2) = pad1

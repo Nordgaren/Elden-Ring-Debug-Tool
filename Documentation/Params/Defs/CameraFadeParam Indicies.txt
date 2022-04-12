@@ -1,0 +1,7 @@
+//Format[dec]:Index(size) = Name 
+000(4) = NearMinDist
+001(4) = NearMaxDist
+002(4) = FarMinDist
+003(4) = FarMaxDist
+004(4) = MiddleAlpha
+005(12) = dummy

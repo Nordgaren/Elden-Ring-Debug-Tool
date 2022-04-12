@@ -1,0 +1,5 @@
+//Format[dec]:Index(size) = Name 
+000(4) = limitationTime_Normal
+001(4) = limitationTime_NormalDriedFinger
+002(4) = limitationTime_Guardian
+003(4) = limitationTime_GuardianDriedFinger

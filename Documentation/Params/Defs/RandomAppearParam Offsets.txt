@@ -1,0 +1,27 @@
+//Format[hex]:Index(size) = Name 
+000(1) = slot0
+Bitfield: 8
+001(1) = slot8
+Bitfield: 8
+002(1) = slot16
+Bitfield: 8
+003(1) = slot24
+Bitfield: 8
+004(1) = slot32
+Bitfield: 8
+005(1) = slot40
+Bitfield: 8
+006(1) = slot48
+Bitfield: 8
+007(1) = slot56
+Bitfield: 8
+008(1) = slot64
+Bitfield: 8
+009(1) = slot72
+Bitfield: 8
+00A(1) = slot80
+Bitfield: 8
+00B(1) = slot88
+Bitfield: 8
+00C(1) = slot96
+Bitfield: 8

@@ -1,0 +1,11 @@
+//Format[hex]:Index(size) = Name 
+000(2) = a000_leftArmFB
+002(2) = a000_leftWristFB
+004(2) = a000_leftWristIO
+006(2) = a002_leftArmFB
+008(2) = a002_leftWristFB
+00A(2) = a002_leftWristIO
+00C(2) = a003_leftArmFB
+00E(2) = a003_leftWristFB
+010(2) = a003_leftWristIO
+012(14) = pad

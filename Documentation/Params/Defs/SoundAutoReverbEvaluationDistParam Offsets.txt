@@ -1,0 +1,9 @@
+//Format[hex]:Index(size) = Name 
+000(4) = NoHitDist
+004(1) = isCollectNoHitPoint
+005(1) = isCollectOutdoorPoint
+006(1) = isCollectFloorPoint
+007(1) = distValCalcType
+008(4) = enableLifeTime
+00C(4) = maxDistRecordNum
+010(4) = ignoreDistNumForMax

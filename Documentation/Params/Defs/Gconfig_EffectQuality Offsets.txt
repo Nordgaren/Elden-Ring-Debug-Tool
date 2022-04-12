@@ -1,0 +1,13 @@
+//Format[hex]:Index(size) = Name 
+000(1) = softParticleEnabled
+001(1) = glowEnabled
+002(1) = distortionEnable
+003(1) = cs_upScaleEnabledType
+004(4) = fNumOnceEmitsScale
+008(4) = fEmitSpanScale
+00C(4) = fLodDistance1Scale
+010(4) = fLodDistance2Scale
+014(4) = fLodDistance3Scale
+018(4) = fLodDistance4Scale
+01C(4) = fScaleRenderDistanceScale
+020(4) = dmy

@@ -1,0 +1,7 @@
+//Format[hex]:Index(size) = Name 
+000(1) = disableParam_NT
+Bitfield: 8
+001(3) = disableParamReserve2
+004(4) = unlockFlagId
+008(4) = invalidFlagId
+00C(4) = msgId

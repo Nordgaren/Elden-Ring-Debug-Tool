@@ -1,0 +1,14 @@
+//Format[dec]:Index(size) = Name 
+000(4) = cellSizeX
+001(4) = cellSizeY
+002(4) = cellSizeZ
+003(4) = cellOffsetX
+004(4) = cellOffsetY
+005(4) = cellOffsetZ
+006(1) = enableBloodstain
+007(1) = enableBloodMessage
+008(1) = enableGhost
+009(1) = enableMultiPlay
+010(1) = enableRingSearch
+011(1) = enableBreakInSearch
+012(3) = dummy

@@ -1,0 +1,12 @@
+//Format[dec]:Index(size) = Name 
+000(1) = disableParam_NT
+001(1) = disableParamReserve1
+002(3) = disableParamReserve2
+003(1) = ReverbType
+004(3) = pad0
+005(2) = BgmBehaviorTypeOnStart
+006(2) = OneShotBgmBehaviorOnStart
+007(4) = PostPlaySeId
+008(4) = PostPlaySeIdForSkip
+009(4) = EnterMapMuteStopTimeOnDrawCutscene
+010(8) = reserved

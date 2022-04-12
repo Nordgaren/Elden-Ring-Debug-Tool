@@ -1,0 +1,8 @@
+//Format[hex]:Index(size) = Name 
+000(1) = workTag
+001(1) = categoryTag
+002(1) = compareType
+003(1) = dummy1
+004(4) = compareValue
+008(8) = dummy2
+010(32) = userTag

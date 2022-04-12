@@ -1,0 +1,25 @@
+//Format[hex]:Index(size) = Name 
+000(4) = materialId01
+004(4) = materialId02
+008(4) = materialId03
+00C(4) = materialId04
+010(4) = materialId05
+014(4) = materialId06
+018(8) = pad_id
+020(1) = itemNum01
+021(1) = itemNum02
+022(1) = itemNum03
+023(1) = itemNum04
+024(1) = itemNum05
+025(1) = itemNum06
+026(2) = pad_num
+028(1) = materialCate01
+029(1) = materialCate02
+02A(1) = materialCate03
+02B(1) = materialCate04
+02C(1) = materialCate05
+02D(1) = materialCate06
+02E(2) = pad_cate
+030(1) = isDisableDispNum01
+Bitfield: 6
+031(3) = pad

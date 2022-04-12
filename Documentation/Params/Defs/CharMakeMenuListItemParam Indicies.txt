@@ -1,0 +1,5 @@
+//Format[dec]:Index(size) = Name 
+000(4) = value
+001(4) = captionId
+002(1) = iconId
+003(7) = reserved

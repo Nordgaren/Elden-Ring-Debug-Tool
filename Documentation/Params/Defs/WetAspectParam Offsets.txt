@@ -1,0 +1,14 @@
+//Format[hex]:Index(size) = Name 
+000(1) = baseColorR
+001(1) = baseColorG
+002(1) = baseColorB
+003(1) = reserve_0
+004(4) = baseColorA
+008(1) = metallic
+009(1) = reserve_1
+00A(1) = reserve_2
+00B(1) = reserve_3
+00C(4) = metallicRate
+010(4) = shininessRate
+014(1) = shininess
+015(11) = reserve_4

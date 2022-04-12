@@ -1,0 +1,15 @@
+//Format[hex]:Index(size) = Name 
+000(2) = atkIron_1
+002(2) = atkIron_2
+004(2) = atkLeather_1
+006(2) = atkLeather_2
+008(2) = atkWood_1
+00A(2) = atkWood_2
+00C(2) = atkBody_1
+00E(2) = atkBody_2
+010(2) = atkStone_1
+012(2) = atkStone_2
+014(4) = pad
+018(2) = atkNone_1
+01A(2) = atkNone_2
+01C(52) = reserve

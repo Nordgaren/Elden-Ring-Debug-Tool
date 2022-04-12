@@ -1,0 +1,9 @@
+//Format[dec]:Index(size) = Name 
+000(1) = disableParam_NT
+001(1) = disableParamReserve1
+002(3) = disableParamReserve2
+003(4) = client1SpEffectId
+004(4) = client2SpEffectId
+005(4) = client3SpEffectId
+006(1) = bOverrideSpEffect
+007(15) = pad3

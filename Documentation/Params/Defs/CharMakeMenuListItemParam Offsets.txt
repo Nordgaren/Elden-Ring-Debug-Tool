@@ -1,0 +1,5 @@
+//Format[hex]:Index(size) = Name 
+000(4) = value
+004(4) = captionId
+008(1) = iconId
+009(7) = reserved

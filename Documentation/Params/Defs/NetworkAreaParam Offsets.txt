@@ -1,0 +1,10 @@
+//Format[hex]:Index(size) = Name 
+000(4) = cellSizeX
+004(4) = cellSizeY
+008(4) = cellSizeZ
+00C(4) = cellOffsetX
+010(4) = cellOffsetY
+014(4) = cellOffsetZ
+018(1) = enableBloodstain
+Bitfield: 6
+019(3) = dummy

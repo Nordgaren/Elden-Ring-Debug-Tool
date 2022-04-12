@@ -1,0 +1,10 @@
+//Format[dec]:Index(size) = Name 
+000(8) = reserved0
+001(4) = soundTargetTryApproachTime
+002(4) = searchTargetTryApproachTime
+003(4) = memoryTargetTryApproachTime
+004(40) = reserved5
+005(4) = activateChrByTime_PhantomId
+006(4) = findUnfavorableFailedPointDist
+007(4) = findUnfavorableFailedPointHeight
+008(184) = reserved18
