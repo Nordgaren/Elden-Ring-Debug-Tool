@@ -189,7 +189,6 @@ namespace Elden_Ring_Debug_Tool
         //TKCode
         private void AsmExecute(string asm)
         {
-            // Assemble once to determine size
             var bytes = Engine.Assemble(asm, 0);
             var error = Engine.GetLastKeystoneError();
             IntPtr insertPtr = Allocate((uint)bytes.Buffer.Length, Kernel32.PAGE_EXECUTE_READWRITE);

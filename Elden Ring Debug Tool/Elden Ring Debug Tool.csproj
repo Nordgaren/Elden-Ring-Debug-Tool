@@ -16,7 +16,7 @@
 	<ItemGroup>
 		<OutputDir Include="$(BaseOutputPath)\$(Configuration)\publish\$(ProjectName) $(AssemblyVersion)" />
 	</ItemGroup>
-	<Target Name="MakeMyDir" AfterTargets="Build" Condition="$(Configuration) == Release">
+	<Target Name="MakeMyDir" AfterTargets="Publish" Condition="$(Configuration) == Release">
 		<Message Text="Executing Copy Files task" Importance="High" />
 		<Copy SourceFiles="$(ProjectDir)\$(BaseOutputPath)\$(Configuration)\publish\$(ProjectName).exe" DestinationFolder="@(OutputDir)" />
 		<Copy SourceFiles="$(SolutionDir)readme.md" DestinationFiles="$(ProjectDir)\$(BaseOutputPath)\$(Configuration)\publish\$(ProjectName) $(AssemblyVersion)\readme.txt" />
