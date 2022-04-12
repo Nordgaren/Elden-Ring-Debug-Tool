@@ -23,10 +23,6 @@
 		<Exec Command="if not exist &quot;@(OutputDir)\Resources&quot; md &quot;@(OutputDir)\Resources&quot;" />
 		<Exec Command="xcopy /e /y &quot;$(TargetDir)\Resources&quot; &quot;@(OutputDir)\Resources&quot;" />
 		<Message Text="Copied files to build folder" Importance="High" />
-		<Message Text="$(FinalOutputPath)" Importance="High" />
-		<Message Text="@(OutputDir)" Importance="High" />
-		<Message Text="$(TargetDir)" Importance="High" />
-		<Message Text="" Importance="High" />
 	</Target>
 
 
