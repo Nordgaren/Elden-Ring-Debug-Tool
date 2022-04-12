@@ -25,7 +25,11 @@
 	<Message Text="Copy resource files"     Importance="High" />
 	<Message Text="Files: @(ResourceFiles)" Importance="High" />
 	<Message Text="directory: $(OutDir)"    Importance="High" />
-	<Copy SourceFiles="@(ResourceFiles)" DestinationFolder="$(OutDir)Resources" />
+	<Copy
+		SourceFiles="@(ResourceFiles)" 
+		DestinationFolder="$(OutDir)Resources\%(RecursiveDir)"
+		SkipUnchangedFiles="true"/>
+	<Zip />
   </Target>
 
   <!-- Copy all resources to the published output -->
@@ -33,7 +37,10 @@
   	<Message Text="Copy resource files" Importance="High" />
   	<Message Text="Files: @(ResourceFiles)" Importance="High" />
   	<Message Text="directory: $(PublishDir)" Importance="High" />
-  	<Copy SourceFiles="@(ResourceFiles)" DestinationFolder="$(PublishDir)Resources" />
+  	<Copy 
+	    SourceFiles="@(ResourceFiles)" 
+	    DestinationFolder="$(PublishDir)Resources\%(RecursiveDir)" 
+	    SkipUnchangedFiles="true"/>
   </Target>
 	
   <ItemGroup>
