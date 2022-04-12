@@ -19,7 +19,7 @@ jobs:
       run: dotnet restore
       
     - name: build
-      run: dotnet publish /p:PublishProfile=FolderProfile.pubxml
+      run: dotnet publish "src/Elden Ring Debug Tool/Elden Ring Debug Tool.csproj" /p:PublishProfile=FolderProfile.pubxml
       
     - name: publish artifact
       uses: actions/upload-artifact@v3
