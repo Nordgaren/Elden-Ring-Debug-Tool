@@ -62,11 +62,11 @@ namespace Elden_Ring_Debug_Tool
 
         private void ERHook_OnHooked(object? sender, PHEventArgs e)
         {
-            var isLoaded = IsLoaded.ReadByte(EROffsets.IsLoaded);
-            while (isLoaded < 2)
-            {
-                isLoaded  = IsLoaded.ReadByte(EROffsets.IsLoaded);
-            }
+            //var isLoaded = IsLoaded.ReadByte(EROffsets.IsLoaded);
+            //while (isLoaded < 2)
+            //{
+            //    isLoaded  = IsLoaded.ReadByte(EROffsets.IsLoaded);
+            //}
 
             Params = new List<PHPointer>();
 

@@ -5,7 +5,7 @@
     <RootNamespace>Elden_Ring_Debug_Tool</RootNamespace>
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
-    <PackageIcon>elden_ring_logo-freelogovectors.net_White.png</PackageIcon>
+    <PackageIcon>elden_ring_logo-freelogovectors.net_White_Border.png</PackageIcon>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <ApplicationIcon>Icon.ico</ApplicationIcon>
     <AssemblyVersion>0.3.1</AssemblyVersion>
@@ -1783,7 +1783,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="..\Icon\elden_ring_logo-freelogovectors.net_White.png">
+    <None Include="..\Icon\elden_ring_logo-freelogovectors.net_White_Border.png">
       <Pack>True</Pack>
       <PackagePath>\</PackagePath>
     </None>
@@ -1799,6 +1799,10 @@
 
   <ItemGroup>
     <None Remove="C:\Users\Nord\.nuget\packages\keystoneengine.csharp\0.9.1.1\build\x86\keystone.dll" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Icon.ico" />
   </ItemGroup>
 
   <ItemGroup>
