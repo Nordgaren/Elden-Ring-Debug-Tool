@@ -29,6 +29,10 @@ My fork of [Property Hook](https://github.com/Nordgaren/PropertyHook) by [TKGP](
 **[King Borehaha](https://github.com/kingborehaha/DS-Gadget-Local-Loader)** Who's local loading system has worked really well for a lot of things, including this project  
 
 # Change Log  
+### Beta 0.4   
+
+* Can now save params using the games built-in function thanks to Pav! Params save to `ELDEN RING/capture/param`.  
+
 ### Beta 0.3.1  
 
 * Fixed crash some users were experiencing and added global exception handler  
