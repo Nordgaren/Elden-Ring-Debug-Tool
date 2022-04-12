@@ -34,7 +34,7 @@ My fork of [Property Hook](https://github.com/Nordgaren/PropertyHook) by [TKGP](
 
 * Can now save params using the games built-in function thanks to Pav! Params save to `ELDEN RING/capture/param`. 
 
-* Added drag and drop functionality to Decrypt and Re-encrypt regulation.bin to the exe. 
+* Added drag and drop functionality to decrypt and re-encrypt regulation.bin to the exe. 
 
 ### Beta 0.3.1  
 
