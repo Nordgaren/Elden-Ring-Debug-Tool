@@ -76,9 +76,9 @@ namespace Elden_Ring_Debug_Tool
                 var exception = (Exception)e.ExceptionObject;
                 LogException(exception);
             }
-            catch (Exception ex)
+            catch
             {
-                throw ex;
+                throw;
             }
         }
 
@@ -89,9 +89,9 @@ namespace Elden_Ring_Debug_Tool
             {
                 LogException(e.Exception);
             }
-            catch (Exception ex)
+            catch
             {
-
+                // ignored
             }
 
         }
