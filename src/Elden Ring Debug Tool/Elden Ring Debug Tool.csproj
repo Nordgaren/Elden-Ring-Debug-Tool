@@ -22,14 +22,10 @@
 
   <!-- Copy all resources to the build output directy except when building in publish mode, to have them exist in a debug/release build, but not have them packed into an executable when publishing -->
   <Target Name="CopyResources" Condition="'$(Configuration)'!='Publish'" AfterTargets="Build">
-	<Message Text="Copy resource files"     Importance="High" />
+	<Message Text="Copy resource files" Importance="High" />
 	<Message Text="Files: @(ResourceFiles)" Importance="High" />
-	<Message Text="directory: $(OutDir)"    Importance="High" />
-	<Copy
-		SourceFiles="@(ResourceFiles)" 
-		DestinationFolder="$(OutDir)Resources\%(RecursiveDir)"
-		SkipUnchangedFiles="true"/>
-	<Zip />
+	<Message Text="directory: $(OutDir)" Importance="High" />
+	<Copy SourceFiles="@(ResourceFiles)" DestinationFolder="$(OutDir)Resources\%(RecursiveDir)" SkipUnchangedFiles="true" />
   </Target>
 
   <!-- Copy all resources to the published output -->
@@ -37,10 +33,12 @@
   	<Message Text="Copy resource files" Importance="High" />
   	<Message Text="Files: @(ResourceFiles)" Importance="High" />
   	<Message Text="directory: $(PublishDir)" Importance="High" />
-  	<Copy 
-	    SourceFiles="@(ResourceFiles)" 
-	    DestinationFolder="$(PublishDir)Resources\%(RecursiveDir)" 
-	    SkipUnchangedFiles="true"/>
+  	<Copy SourceFiles="@(ResourceFiles)" DestinationFolder="$(PublishDir)Resources\%(RecursiveDir)" SkipUnchangedFiles="true" />
+    <ZipDirectory 
+	    SourceDirectory="$(PublishDir)"
+	    DestinationFile="$(PublishDir)../Elden Ring debug tool $(AssemblyVersion).zip"
+	    Overwrite="true"
+    />
   </Target>
 	
   <ItemGroup>
@@ -59,6 +57,7 @@
   <ItemGroup>
     <PackageReference Include="Extended.Wpf.Toolkit" Version="4.3.0" />
     <PackageReference Include="keystoneengine.csharp" Version="0.9.1.1" />
+    <PackageReference Include="Microsoft.Build.Tasks.Core" Version="17.1.0" />
   </ItemGroup>
 
   <ItemGroup>
