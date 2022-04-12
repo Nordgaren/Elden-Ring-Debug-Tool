@@ -3,13 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.32112.339
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Elden Ring Debug Tool", "Elden Ring Debug Tool\Elden Ring Debug Tool.csproj", "{ACDC9A09-30DD-4DD7-9423-B8C4CDECF90F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Elden Ring Debug Tool", "src\Elden Ring Debug Tool\Elden Ring Debug Tool.csproj", "{ACDC9A09-30DD-4DD7-9423-B8C4CDECF90F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PropertyHook", "PropertyHook\PropertyHook\PropertyHook.csproj", "{18EFF8D2-C4D5-4E18-9A31-38E106BA1CF7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PropertyHook", "src\PropertyHook\PropertyHook\PropertyHook.csproj", "{18EFF8D2-C4D5-4E18-9A31-38E106BA1CF7}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MemHook", "MemHook\MemHook.csproj", "{5FE3C223-5373-4BDF-BC0F-D4EBB83F9CA5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MemHook", "src\MemHook\MemHook.csproj", "{5FE3C223-5373-4BDF-BC0F-D4EBB83F9CA5}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SoulsFormats", "..\SoulsFormats\SoulsFormats\SoulsFormats.csproj", "{5B3185FA-C22B-4EBE-A053-3D835D9D827A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{C6D57919-CA93-41A6-9A80-BFAA5CB97723}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -36,6 +38,12 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{ACDC9A09-30DD-4DD7-9423-B8C4CDECF90F} = {C6D57919-CA93-41A6-9A80-BFAA5CB97723}
+		{18EFF8D2-C4D5-4E18-9A31-38E106BA1CF7} = {C6D57919-CA93-41A6-9A80-BFAA5CB97723}
+		{5FE3C223-5373-4BDF-BC0F-D4EBB83F9CA5} = {C6D57919-CA93-41A6-9A80-BFAA5CB97723}
+		{5B3185FA-C22B-4EBE-A053-3D835D9D827A} = {C6D57919-CA93-41A6-9A80-BFAA5CB97723}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {1CFB4F6A-4307-4038-BBEE-2E6F8FD440A1}
