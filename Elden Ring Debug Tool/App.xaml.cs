@@ -5,6 +5,7 @@ using System.Configuration;
 using System.Data;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Threading;
@@ -21,17 +22,17 @@ namespace Elden_Ring_Debug_Tool
             var args = Environment.GetCommandLineArgs();
 
 #if DEBUG
-            args = new[] { "", @"G:\Steam\steamapps\common\ELDEN RING\Game\regulation - Copy.bin" };
+            //args = new[] { "", @"G:\Steam\steamapps\common\ELDEN RING\Game\regulation - Copy.bin" };
 #endif
             if (args.Length > 1)
             {
-                var buffer = new byte[0xF];
+                var buffer = new byte[4];
                 using (var fs = File.OpenRead(args[1]))
                 {
                     fs.Read(buffer, 0, buffer.Length); 
                 }
 
-                if (CheckAllNull(buffer))
+                if (CheckIfPossiblyEncrypted(buffer))
                 {
                     if (!File.Exists($"{args[1]}.bak"))
                         File.Copy(args[1], $"{args[1]}.PreDecrypt.bak");
@@ -62,15 +63,10 @@ namespace Elden_Ring_Debug_Tool
             Dispatcher.UnhandledException += WpfExceptionHandler;
         }
 
-        private bool CheckAllNull(byte[] buffer)
+        private bool CheckIfPossiblyEncrypted(byte[] buffer)
         {
-            foreach (var b in buffer)
-            {
-                if (b != 0)
-                    return false;
-            }
-
-            return true;
+            var magic = Encoding.ASCII.GetString(buffer);
+            return magic != "BND4" && magic != "DCX";
         }
 
         void GlobalExceptionHandler(object sender, UnhandledExceptionEventArgs e)

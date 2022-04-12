@@ -213,7 +213,7 @@ namespace Elden_Ring_Debug_Tool
 
         private void ReloadButton_Click(object sender, RoutedEventArgs e)
         {
-            var result = MessageBox.Show("Are you sure you want to reset the currently selected param to what it was when the game loaded?", "Reset Param", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+            var result = MessageBox.Show("Are you sure you want to reset the currently selected param to what it was when the debug tool loaded?", "Reset Param", MessageBoxButton.YesNo, MessageBoxImage.Warning);
             if (result == MessageBoxResult.Yes)
             {
                 var selectedParam = ((ERParam)ComboBoxParams.SelectedItem);

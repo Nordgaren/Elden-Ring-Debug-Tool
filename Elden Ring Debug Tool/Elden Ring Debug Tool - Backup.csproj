@@ -13,23 +13,7 @@
 	  <IncludeAllContentForSelfExtract>true</IncludeAllContentForSelfExtract>
 	  <PackageId>$(TargetPath)</PackageId>
   </PropertyGroup>
-	<ItemGroup>
-		<OutputDir Include="$(BaseOutputPath)\$(Configuration)\publish\$(ProjectName) $(AssemblyVersion)" />
-	</ItemGroup>
-	<Target Name="MakeMyDir" AfterTargets="Build" Condition="$(Configuration) == Release">
-		<Message Text="Executing Copy Files task" Importance="High" />
-		<Copy SourceFiles="$(ProjectDir)\$(BaseOutputPath)\$(Configuration)\publish\$(ProjectName).exe" DestinationFolder="@(OutputDir)" />
-		<Copy SourceFiles="$(SolutionDir)readme.md" DestinationFiles="$(ProjectDir)\$(BaseOutputPath)\$(Configuration)\publish\$(ProjectName) $(AssemblyVersion)\readme.txt" />
-		<Exec Command="if not exist &quot;@(OutputDir)\Resources&quot; md &quot;@(OutputDir)\Resources&quot;" />
-		<Exec Command="xcopy /e /y &quot;$(TargetDir)\Resources&quot; &quot;@(OutputDir)\Resources&quot;" />
-		<Message Text="Copied files to build folder" Importance="High" />
-		<Message Text="$(FinalOutputPath)" Importance="High" />
-		<Message Text="@(OutputDir)" Importance="High" />
-		<Message Text="$(TargetDir)" Importance="High" />
-		<Message Text="" Importance="High" />
-	</Target>
-
-
+	
 	<ItemGroup>
 		<Content Update="keystone.dll">
 			<CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
@@ -1833,5 +1817,9 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </None>
   </ItemGroup>
+
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="set output=$(TargetDir)Elden Ring Debug Tool @(VersionNumber)&#xD;&#xA;if &quot;$(ConfigurationName)&quot; == &quot;Release&quot; (&#xD;&#xA;  md &quot;%25output%25&quot;&#xD;&#xA;  del &quot;%25output%25&quot;&#xD;&#xA;  md &quot;%25output%25\Resources&quot;&#xD;&#xA;  xcopy  /e &quot;$(TargetDir)\Resources&quot; &quot;%25output%25\Resources&quot;  &#xD;&#xA;  copy &quot;$(TargetName).exe&quot; &quot;%25output%25\&quot;&#xD;&#xA;  copy &quot;$(TargetName).exe.config&quot; &quot;%25output%25\&quot;&#xD;&#xA;  copy &quot;$(TargetDir)$(TargetName).pdb&quot; &quot;%25output%25\&quot;&#xD;&#xA;  copy &quot;$(SolutionDir)readme.md&quot; &quot;%25output%25\readme.txt&quot;&#xD;&#xA;)" />
+  </Target>
 
 </Project>
