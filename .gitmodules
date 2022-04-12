@@ -1,3 +1,6 @@
 [submodule "SoulsFormats"]
 	path = SoulsFormats
 	url = https://github.com/JKAnderson/SoulsFormats.git
+[submodule "PropertyHook"]
+	path = PropertyHook
+	url = https://github.com/Nordgaren/PropertyHook.git
