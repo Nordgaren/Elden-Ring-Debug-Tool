@@ -18,7 +18,7 @@ Backup your saves before using this tool, and restore the backups before going o
 * For a param to load there has to be both a def in `Resources/Params/Defs` and a definition in on of the files in `Resources/Params/Pointers`  
 * The format for pointer is `Offset:Name`. You can organize these files however you want. They will all be opened, read, split and added to the Param list, if there is a corresponding def. If the param has a shared def, you can optionally format like so `Offset:Name:ParamDefName` and the tool will look for the correct paramdef.  
 * Can add names to a file with the same name as the param in `Resources/Params/Names` to add row names. Default name will just be the Row ID.  
-* After saving params, you can decrypt your regulation.bin by dragging and dropping it over the debug tools exe. Rename the param to have the correct capitalization, unpack the regulation.bin with Yabber and replace the one with the saved param and then re-pack the regulation.bin with [Yabber](https://github.com/JKAnderson/Yabber/releases). You can re-encrypt the regulation file, as well, but is unnecessary.  
+* After saving params, you can decrypt your regulation.bin by dragging and dropping it over the debug tools exe. Rename the param to have the correct capitalization, unpack the regulation.bin with Yabber and replace the one with the saved param and then re-pack the regulation.bin with [Yabber](https://github.com/JKAnderson/Yabber/releases). You can re-encrypt the regulation file, as well, but it is unnecessary.  
 
 ## Libraries
 [SoulsFormats](https://github.com/JKAnderson/SoulsFormats) by [TKGP](https://github.com/JKAnderson/)  
