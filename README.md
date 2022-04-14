@@ -27,6 +27,7 @@ My fork of [Property Hook](https://github.com/Nordgaren/PropertyHook) by [TKGP](
 ## Thank You  
 **[TKGP](https://github.com/JKAnderson/)** Author of [DS Gadget](https://github.com/JKAnderson/DS-Gadget) [Property Hook](https://github.com/JKAnderson/PropertyHook) and [SoulsFormats](https://github.com/JKAnderson/SoulsFormats)  
 **Pav** Author of one of the CE Tables I used to find pointers and offsets, as well as provided the pointer list  
+**[inuNorii](https://github.com/inunorii)** Creator of The Grand Archives table, which I also used for this, and one of the admins at TGA Discord.  
 **[King Borehaha](https://github.com/kingborehaha/DS-Gadget-Local-Loader)** Who's local loading system has worked really well for a lot of things, including this project  
 
 # Change Log  
