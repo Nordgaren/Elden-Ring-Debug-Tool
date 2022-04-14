@@ -17,7 +17,6 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Xml.Serialization;
-using static SoulsFormats.PARAMDEF;
 
 
 namespace Elden_Ring_Debug_Tool
@@ -34,49 +33,12 @@ namespace Elden_Ring_Debug_Tool
             InitializeComponent();
         }
 
-        public void GetParams()
+        public void HookParams()
         {
-            Params = new List<ERParam>();
-            var paramPath = $"{Util.ExeDir}/Resources/Params/";
-            
-            var pointerPath = $"{paramPath}/Pointers/";
-            var paramPointers = Directory.GetFiles(pointerPath, "*.txt");
-            foreach (var path in paramPointers)
-            {
-                var pointers = File.ReadAllLines(path);
-                AddParam(paramPath, path, pointers);
-            }
-
+            Params = Hook.GetParams();
             FilterParams();
         }
 
-        private void AddParam(string paramPath, string path, string[] pointers)
-        {
-            foreach (var entry in pointers)
-            {
-                if (!Util.IsValidTxtResource(entry))
-                    continue;
-
-                var info = entry.Split(':');
-                var name = info[1];
-                var defName = info.Length > 2 ? info[2] : name;
-
-                var defPath = $"{paramPath}/Defs/{defName}.xml";
-                if (!File.Exists(defPath))
-                    throw new Exception($"The PARAMDEF {defName} does not exist for {entry}. If the PARAMDEF is named differently than the param name, add another \":\" and append the PARAMDEF name" +
-                        $"Example: 3130:WwiseValueToStrParam_BgmBossChrIdConv:WwiseValueToStrConvertParamFormat");
-
-                var offset = int.Parse(info[0], System.Globalization.NumberStyles.HexNumber);
-
-                var pointer = Hook.GetParamPointer(offset);
-
-                var paramDef = XmlDeserialize(defPath);
-
-                Params.Add(new ERParam(pointer, offset, paramDef, name));
-            }
-
-            Params.Sort();
-        }
 
         private void ComboBoxParams_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -89,7 +51,11 @@ namespace Elden_Ring_Debug_Tool
 
         }
 
-        
+        internal virtual void ReloadCtrl() 
+        {
+
+        }
+
 
         private void SearchBoxParam_TextChanged(object sender, TextChangedEventArgs e)
         {
@@ -217,7 +183,7 @@ namespace Elden_Ring_Debug_Tool
             if (result == MessageBoxResult.Yes)
             {
                 var selectedParam = ((ERParam)ComboBoxParams.SelectedItem);
-                selectedParam.ResetParam();
+                selectedParam.RestoreParam();
             }
         }
     }

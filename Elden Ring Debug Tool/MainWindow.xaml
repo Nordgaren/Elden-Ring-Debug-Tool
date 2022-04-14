@@ -17,7 +17,12 @@
                         <local:ParamViewerControl x:Name="DebugParam" Hook="{Binding Hook}"/>
                     </Grid>
                 </TabItem>
-            </TabControl>
+            <TabItem Header="Inventory">
+                <Grid Background="LightGray">
+                    <local:ItemControl x:Name="DebugItems" Hook="{Binding Hook}"/>
+                </Grid>
+            </TabItem>
+        </TabControl>
     </Grid>
 
 </Window>

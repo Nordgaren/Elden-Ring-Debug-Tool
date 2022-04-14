@@ -24,6 +24,7 @@ namespace Elden_Ring_Debug_Tool
         public List<Row> Rows { get; private set; }
         private static Regex ParamEntryRx = new Regex(@"^\s*(?<id>\S+)\s+(?<name>.*)$");
         public Dictionary<int, string> NameDictionary { get; private set; }
+        public Dictionary<int, int> OffsetDict { get; private set; }
         public int RowLength { get; private set; }
 
         public ERParam(PHPointer pointer, int offset, PARAMDEF Paramdef, string name)
@@ -40,6 +41,7 @@ namespace Elden_Ring_Debug_Tool
         private void BuildOffsetDictionary()
         {
             Rows = new List<Row>();
+            OffsetDict = new Dictionary<int, int>();
             Length = Pointer.ReadInt32((int)EROffsets.Param.NameOffset);
             
             var ParamType = Pointer.ReadString(Length, Encoding.UTF8, (uint)Type.Length);
@@ -61,6 +63,9 @@ namespace Elden_Ring_Debug_Tool
                 var name = $"{itemID} - ";
                 if (NameDictionary.ContainsKey(itemID))
                     name += $"{NameDictionary[itemID]}";
+
+                if (!OffsetDict.ContainsKey(itemID))
+                    OffsetDict.Add(itemID, itemParamOffset);
 
                 Rows.Add(new Row(this ,name, itemID, itemParamOffset));
 
@@ -96,7 +101,7 @@ namespace Elden_Ring_Debug_Tool
         {
             return this.Name.CompareTo(other.Name);
         }
-        internal void ResetParam()
+        internal void RestoreParam()
         {
             Pointer.WriteBytes(0 ,Bytes);
         }

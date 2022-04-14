@@ -1,0 +1,48 @@
+﻿<local:DebugControl x:Class="Elden_Ring_Debug_Tool.ItemControl"
+            x:Name="ItemCon"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:wpfTool="http://schemas.xceed.com/wpf/xaml/toolkit"
+             xmlns:local="clr-namespace:Elden_Ring_Debug_Tool"
+             mc:Ignorable="d" 
+             d:DesignHeight="600" d:DesignWidth="425" Background="LightGray">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="225"/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="135"/>
+            <RowDefinition Height="470"/>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Column="0" Margin="5">
+            <Label Content="Category"/>
+            <ComboBox x:Name="cmbCategory" SelectionChanged="cmbCategory_SelectionChanged"/>
+            <Label Content="Infusion"/>
+            <ComboBox x:Name="cmbInfusion" />
+            <Grid>
+                <TextBox x:Name="txtSearch" Height="20" TextChanged="txtSearch_TextChanged" PreviewKeyDown="KeyPressed" PreviewMouseLeftButtonDown="txtSearch_PreviewMouseLeftButtonDown"/>
+                <Label x:Name="lblSearch" Foreground="LightSlateGray" Content="Search..." IsEnabled="False" Margin="5,0,0,0" IsHitTestVisible="False"/>
+            </Grid>
+        </StackPanel>
+        <StackPanel Grid.Column="1" Margin="5">
+            <Label Content="Quantity" />
+            <wpfTool:IntegerUpDown x:Name="nudQuantity" Minimum="1" Value="1" ClipValueToMinMax="True" Maximum="0"/>
+            <Label Content="Upgrade" />
+            <wpfTool:IntegerUpDown x:Name="nudUpgrade" Minimum="0" Maximum="0"/>
+            <CheckBox x:Name="SearchAllCheckbox" Content="Search All" Margin="0,10,0,0" Checked="SearchAllCheckbox_Checked" Unchecked="SearchAllCheckbox_Checked"/>
+        </StackPanel>
+        <StackPanel Grid.Column="2" Margin="5">
+            <Label Content="Max Held" Visibility="Hidden" x:Name="txtMaxHeld"/>
+            <CheckBox Content="Restrict" IsChecked="True" Margin="0,3,0,0" x:Name="cbxQuantityRestrict" Checked="cbxQuantityRestrict_Checked" Unchecked="cbxQuantityRestrict_Checked"/>
+            <Separator Height="25" Visibility="Hidden"/>
+            <CheckBox x:Name="cbxMax" Content="Max" Margin="0,2,0,0" IsChecked="True" Checked="cbxMaxUpgrade_Checked" Unchecked="cbxMaxUpgrade_Checked" />
+            <Separator Height="5" Visibility="Hidden"/>
+            <Button x:Name="btnCreate" Content="Create" Click="btnCreate_Click" PreviewKeyDown="KeyPressed"/>
+        </StackPanel>
+        <ListBox x:Name="lbxItems" Grid.Row="1" Grid.ColumnSpan="3" Margin="5" SelectionChanged="lbxItems_SelectionChanged" PreviewKeyDown="KeyPressed" />
+    </Grid>
+</local:DebugControl>

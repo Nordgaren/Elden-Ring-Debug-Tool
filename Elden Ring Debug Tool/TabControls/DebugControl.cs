@@ -33,7 +33,7 @@ namespace Elden_Ring_Debug_Tool
         internal virtual void UpdateCtrl() { }
         internal virtual void ReloadCtrl() { }
         internal virtual void EnableCtrls(bool v) { }
-        public virtual void InitTab() { }
+        public virtual void InitCtrl() { }
 
 
     }

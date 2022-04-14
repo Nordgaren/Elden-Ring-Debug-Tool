@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -11,7 +12,10 @@ using System.Threading.Tasks;
 using System.Timers;
 using System.Windows.Threading;
 using Infusion = Elden_Ring_Debug_Tool.ERWeapon.Infusion;
+using Category = Elden_Ring_Debug_Tool.ERItem.Category;
 using WeaponType = Elden_Ring_Debug_Tool.ERWeapon.WeaponType;
+using static SoulsFormats.PARAMDEF;
+
 
 namespace Elden_Ring_Debug_Tool
 {
@@ -34,14 +38,15 @@ namespace Elden_Ring_Debug_Tool
         private PHPointer PlayerGameData { get; set; }
         private PHPointer SoloParamRepository { get; set; }
         private PHPointer CapParamCall { get; set; }
-        public PHPointer EquipParamWeapon { get; set; }
-        public PHPointer EquipParamGem { get; set; }
-     
+        public PHPointer ItemGive { get; set; }
+        public PHPointer MapItemMan { get; set; }
+        public static bool Reading { get; set; }
+        public string ID => Process?.Id.ToString() ?? "Not Hooked";
         public List<PHPointer> Params;
         //private PHPointer DurabilityAddr { get; set; }
         //private PHPointer DurabilitySpecialAddr { get; set; }
         public bool Loaded => PlayerGameData != null ?  PlayerGameData.Resolve() != IntPtr.Zero : false;
-        private bool Setup = false;
+        public bool Setup = false;
         public ERHook(int refreshInterval, int minLifetime, Func<Process, bool> processSelector)
             : base(refreshInterval, minLifetime, processSelector)
         {
@@ -49,12 +54,14 @@ namespace Elden_Ring_Debug_Tool
 
             CSSystemStep = RegisterAbsoluteAOB(EROffsets.CSSystemStepAoB, EROffsets.CSSystemStepOffset);
             IsLoaded = CreateChildPointer(CSSystemStep, EROffsets.IsLoadedOffset1, EROffsets.IsLoadedOffset2, EROffsets.IsLoadedOffset3, EROffsets.IsLoadedOffset4);
-            GameDataMan = RegisterRelativeAOB(EROffsets.GameDataManSetupAoB, EROffsets.RelativePtrAddressOffset, EROffsets.RelativePtrInstructionSize, 0x0);
+            GameDataMan = RegisterRelativeAOB(EROffsets.GameDataManAoB, EROffsets.RelativePtrAddressOffset, EROffsets.RelativePtrInstructionSize, 0x0);
             PlayerGameData = CreateChildPointer(GameDataMan, EROffsets.PlayerGameData);
 
-            SoloParamRepository = RegisterRelativeAOB(EROffsets.SoloParamRepositorySetupAoB, EROffsets.RelativePtrAddressOffset, EROffsets.RelativePtrInstructionSize, 0x0);
-            EquipParamWeapon = CreateChildPointer(SoloParamRepository, EROffsets.EquipParamWeaponOffset1, EROffsets.EquipParamWeaponOffset2, EROffsets.EquipParamWeaponOffset3);
-            EquipParamGem = CreateChildPointer(SoloParamRepository, EROffsets.EquipParamGemOffset1, EROffsets.EquipParamGemOffset2, EROffsets.EquipParamGemOffset3);
+            SoloParamRepository = RegisterRelativeAOB(EROffsets.SoloParamRepositoryAoB, EROffsets.RelativePtrAddressOffset, EROffsets.RelativePtrInstructionSize, 0x0);
+
+            ItemGive = RegisterAbsoluteAOB(EROffsets.ItemGiveAoB, EROffsets.ItemGiveOffset);
+            MapItemMan = RegisterRelativeAOB(EROffsets.MapItemManAoB, EROffsets.RelativePtrAddressOffset, EROffsets.RelativePtrInstructionSize, 0x0);
+
 
             CapParamCall = RegisterAbsoluteAOB(EROffsets.CapParamCallAoB);
         }
@@ -62,24 +69,9 @@ namespace Elden_Ring_Debug_Tool
 
         private void ERHook_OnHooked(object? sender, PHEventArgs e)
         {
-            //var isLoaded = IsLoaded.ReadByte(EROffsets.IsLoaded);
-            //while (isLoaded < 2)
-            //{
-            //    isLoaded  = IsLoaded.ReadByte(EROffsets.IsLoaded);
-            //}
-
-            Params = new List<PHPointer>();
-
-            var bytes = new byte[0];
-            EquipParamWeaponOffsetDict = BuildOffsetDictionary(EquipParamWeapon, "EQUIP_PARAM_WEAPON_ST", ref bytes);
-            EquipParamWeaponBytes = bytes;
-            EquipParamGemOffsetDict = BuildOffsetDictionary(EquipParamGem, "EQUIP_PARAM_GEM_ST", ref bytes);
-            EquipParamGemBytes = bytes;
-            Params.Add(EquipParamWeapon);
-            Params.Add(EquipParamGem);
-            GetParams();
             Setup = true;
             RaiseOnSetup();
+            ReadParams();
         }
         public void Update()
         {
@@ -90,100 +82,47 @@ namespace Elden_Ring_Debug_Tool
             OnPropertyChanged(nameof(Setup));
 
         }
-        private void GetParams()
+        private void ReadParams()
         {
             foreach (var category in ERItemCategory.All)
             {
-                GetProperties(category);
-            }
-
-            foreach (var gem in ERGem.Gems)
-            {
-                GetInfusions(gem);
-                GetWeapons(gem);
-            }
-        }
-
-        private void GetWeapons(ERGem gem)
-        {
-            gem.WeaponTypes = new List<WeaponType>();
-        }
-
-        private void GetInfusions(ERGem gem)
-        {
-            gem.Infusions = new List<Infusion>();
-            var bitField = BitConverter.ToInt32(EquipParamGemBytes, EquipParamGemOffsetDict[gem.ID] + (int)EROffsets.EquipParamGem.canMountWep_Dagger);
-            //if (bitField == 0)
-            //    return;
-
-
-
-            //for (int i = 1; i < WeaponType.; i++)
-            //{
-            //    if ((bitField & (1 << i)) != 0)
-            //        infusions.Add(DS2SInfusion.Infusions[i]);
-            //}
-        }
-
-
-
-        private void GetProperties(ERItemCategory category)
-        {
-            foreach (var weapon in category.Weapons)
-            {
-                if (!EquipParamWeaponOffsetDict.ContainsKey(weapon.ID))
+                foreach (var item in category.Items)
                 {
-                    Debug.WriteLine($"{weapon.ID} {weapon.Name}");
-                    continue;
+                    SetupItem(item);
                 }
-                weapon.Unique = BitConverter.ToInt32(EquipParamWeaponBytes, EquipParamWeaponOffsetDict[weapon.ID] + (int)EROffsets.EquipParamWeapon.MaterialSetID) == 2200;
-                weapon.SwordArtId = BitConverter.ToInt32(EquipParamWeaponBytes, EquipParamWeaponOffsetDict[weapon.ID] + (int)EROffsets.EquipParamWeapon.SwordArtsParamId);
-                weapon.Type = (ERWeapon.WeaponType)BitConverter.ToInt32(EquipParamWeaponBytes, EquipParamWeaponOffsetDict[weapon.ID] + (int)EROffsets.EquipParamWeapon.WepType);
             }
         }
 
-        public Dictionary<int, int> EquipParamWeaponOffsetDict { get; private set; }
-        private byte[] EquipParamWeaponBytes { get; set; }
-        public Dictionary<int, int> EquipParamGemOffsetDict { get; private set; }
-        private byte[] EquipParamGemBytes { get; set; }
-        private Dictionary<int, int> BuildOffsetDictionary(PHPointer pointer, string expectedParamName, ref byte[] paramBytes)
+        private void SetupItem(ERItem item)
         {
-            var dictionary = new Dictionary<int, int>();
-            var nameOffset = pointer.ReadInt32((int)EROffsets.Param.NameOffset);
-            var paramName = pointer.ReadString(nameOffset, Encoding.UTF8, 0x18);
-            if (paramName != expectedParamName)
-                throw new InvalidOperationException($"Incorrect Param Pointer: {paramName} should be {expectedParamName}");
-
-            paramBytes = pointer.ReadBytes((int)EROffsets.Param.TotalParamLength, (uint)nameOffset);
-            var tableLength = pointer.ReadInt32((int)EROffsets.Param.TableLength);
-            var param = 0x40;
-            var paramID = 0x0;
-            var paramOffset = 0x8;
-            var nextParam = 0x18;
-
-            while (param < tableLength)
+            switch (item.ItemCategory)
             {
-                var itemID = pointer.ReadInt32(param + paramID);
-                var itemParamOffset = pointer.ReadInt32(param + paramOffset);
-                dictionary.Add(itemID, itemParamOffset);
-
-                param += nextParam;
+                case Category.Weapons:
+                    item.SetupItem(EquipParamWeapon);
+                    break;
+                case Category.Protector:
+                    item.SetupItem(EquipParamProtector);
+                    break;
+                case Category.Accessory:
+                    item.SetupItem(EquipParamAccessory);
+                    break;
+                case Category.Goods:
+                    item.SetupItem(EquipParamGoods);
+                    break;
+                case Category.Gem:
+                    item.SetupItem(EquipParamGem);
+                    break;
+                default:
+                    break;
             }
-
-            return dictionary;
         }
 
+        private ERParam EquipParamAccessory;
+        private ERParam EquipParamGem;
+        private ERParam EquipParamGoods;
+        private ERParam EquipParamProtector;
+        private ERParam EquipParamWeapon;
 
-        internal PHPointer GetParamPointer(int offset)
-        {
-            return CreateChildPointer(SoloParamRepository, new int[] { offset, 0x80, 0x80 });
-        }
-        internal void SaveParam(ERParam param)
-        {
-            var asmString = Util.GetEmbededResource("Assembly.SaveParams.asm");
-            var asm = string.Format(asmString, SoloParamRepository.Resolve(), param.Offset, CapParamCall.Resolve());
-            AsmExecute(asm);
-        }
 
         private Engine Engine = new Engine(Architecture.X86, Mode.X64);
         //TKCode
@@ -192,32 +131,136 @@ namespace Elden_Ring_Debug_Tool
             var bytes = Engine.Assemble(asm, 0);
             var error = Engine.GetLastKeystoneError();
             IntPtr insertPtr = Allocate((uint)bytes.Buffer.Length, Kernel32.PAGE_EXECUTE_READWRITE);
-            // Then rebase and inject
-            // Note: you can't use String.Format here because IntPtr is not IFormattable
+
             Kernel32.WriteBytes(Handle, insertPtr, bytes.Buffer);
 
+
+#if DEBUG
+            DebugPrintArray(bytes);
+#endif
+
+            Execute(insertPtr);
+            Free(insertPtr);
+        }
+
+#if DEBUG
+        private static void DebugPrintArray(EncodedData bytes)
+        {
             Debug.WriteLine("");
             foreach (var b in bytes.Buffer)
             {
                 Debug.Write($"{b.ToString("X2")} ");
             }
             Debug.WriteLine("");
+        }
+#endif
 
-            Execute(insertPtr);
-            Free(insertPtr);
+        #region Params
+
+        public List<ERParam> GetParams()
+        {
+            var paramList = new List<ERParam>();
+            var paramPath = $"{Util.ExeDir}/Resources/Params/";
+
+            var pointerPath = $"{paramPath}/Pointers/";
+            var paramPointers = Directory.GetFiles(pointerPath, "*.txt");
+            foreach (var path in paramPointers)
+            {
+                var pointers = File.ReadAllLines(path);
+                AddParam(paramList, paramPath, path, pointers);
+            }
+
+            return paramList;
         }
 
+        public void AddParam(List<ERParam> paramList,string paramPath, string path, string[] pointers)
+        {
+            foreach (var entry in pointers)
+            {
+                if (!Util.IsValidTxtResource(entry))
+                    continue;
+
+                var info = entry.Split(':');
+                var name = info[1];
+                var defName = info.Length > 2 ? info[2] : name;
+
+                var defPath = $"{paramPath}/Defs/{defName}.xml";
+                if (!File.Exists(defPath))
+                    throw new Exception($"The PARAMDEF {defName} does not exist for {entry}. If the PARAMDEF is named differently than the param name, add another \":\" and append the PARAMDEF name" +
+                        $"Example: 3130:WwiseValueToStrParam_BgmBossChrIdConv:WwiseValueToStrConvertParamFormat");
+
+                var offset = int.Parse(info[0], System.Globalization.NumberStyles.HexNumber);
+
+                var pointer = GetParamPointer(offset);
+
+                var paramDef = XmlDeserialize(defPath);
+
+                var param = new ERParam(pointer, offset, paramDef, name);
+
+                SetParamPtrs(param);
+
+                paramList.Add(param);
+            }
+            paramList.Sort();
+        }
+
+        private void SetParamPtrs(ERParam param)
+        {
+            switch (param.Name)
+            {
+                case "EquipParamAccessory":
+                    EquipParamAccessory = param;
+                    break;
+                case "EquipParamGem":
+                    EquipParamGem = param;
+                    break;
+                case "EquipParamGoods":
+                    EquipParamGoods = param;
+                    break;
+                case "EquipParamProtector":
+                    EquipParamProtector = param;
+                    break;
+                case "EquipParamWeapon":
+                    EquipParamWeapon = param;
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        internal PHPointer GetParamPointer(int offset)
+        {
+            return CreateChildPointer(SoloParamRepository, new int[] { offset, 0x80, 0x80 });
+        }
+        internal void SaveParam(ERParam param)
+        {
+            var asmString = Util.GetEmbededResource("Resources.Assembly.SaveParams.asm");
+            var asm = string.Format(asmString, SoloParamRepository.Resolve(), param.Offset, CapParamCall.Resolve());
+            AsmExecute(asm);
+        }
         public void RestoreParams()
         {
             if (!Setup)
                 return;
 
-            EquipParamWeapon.WriteBytes((int)EROffsets.Param.TotalParamLength, EquipParamWeaponBytes);
-            EquipParamGem.WriteBytes((int)EROffsets.Param.TotalParamLength, EquipParamGemBytes);
+            EquipParamWeapon.RestoreParam();
+            EquipParamGem.RestoreParam();
         }
+
+        #endregion
+
+        #region Inventory
+
+
+        #endregion
+
 
         public int Level => PlayerGameData.ReadInt32((int)EROffsets.Player.Level);
         public string LevelString => PlayerGameData?.ReadInt32((int)EROffsets.Player.Level).ToString() ?? "";
+
+
+
+        #region ChrAsm
         public byte ArmStyle
         {
             get => PlayerGameData.ReadByte((int)EROffsets.Weapons.ArmStyle);
@@ -347,12 +390,13 @@ namespace Elden_Ring_Debug_Tool
                     return;
                 PlayerGameData.WriteInt32((int)EROffsets.Weapons.Bolt2, value);
             }
-        }
+        } 
+        #endregion
 
         private int OGRHandWeapon1 { get; set; }
         private PHPointer OGRHandWeapon1Param
         {
-            get => CreateBasePointer(EquipParamWeapon.Resolve() + EquipParamWeaponOffsetDict[OGRHandWeapon1]);
+            get => CreateBasePointer(EquipParamWeapon.Pointer.Resolve() + EquipParamWeapon.OffsetDict[OGRHandWeapon1]);
         }
         private int OGRHandWeapon1SwordArtID
         {
@@ -362,7 +406,7 @@ namespace Elden_Ring_Debug_Tool
         private int OGLHandWeapon1 { get; set; }
         private PHPointer OGLHandWeapon1Param
         {
-            get => CreateBasePointer(EquipParamWeapon.Resolve() + EquipParamWeaponOffsetDict[OGLHandWeapon1]);
+            get => CreateBasePointer(EquipParamWeapon.Pointer.Resolve() + EquipParamWeapon.OffsetDict[OGLHandWeapon1]);
         }
         private int OGLHandWeapon1SwordArtID
         {

@@ -30,7 +30,7 @@ namespace Elden_Ring_Debug_Tool
         public static string GetEmbededResource(string item)
         {
             var assembly = Assembly.GetExecutingAssembly();
-            var resourceName = $"Elden_Ring_Debug_Tool.Resources.{item}";
+            var resourceName = $"Elden_Ring_Debug_Tool.{item}";
 
             using (Stream stream = assembly.GetManifestResourceStream(resourceName))
             using (StreamReader reader = new StreamReader(stream))

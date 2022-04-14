@@ -22,7 +22,7 @@ namespace Elden_Ring_Debug_Tool
             var args = Environment.GetCommandLineArgs();
 
 #if DEBUG
-            args = new[] { "", @"G:\Steam\steamapps\common\ELDEN RING 1.03.3\Game\regulation.bin.bnd" };
+            //args = new[] { "", @"G:\Steam\steamapps\common\ELDEN RING 1.03.3\Game\regulation.bin.bnd" };
 #endif
             if (args.Length > 1)
             {

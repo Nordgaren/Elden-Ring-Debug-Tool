@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media;
 
 namespace Elden_Ring_Debug_Tool
 {
@@ -11,20 +12,93 @@ namespace Elden_Ring_Debug_Tool
     {
         public ERHook Hook { get; private set; }
 
+        public bool GameLoaded { get; set; }
+        public bool Reading
+        {
+            get => ERHook.Reading;
+            set => ERHook.Reading = value;
+        }
+
         public ERViewModel()
         {
             Hook = new ERHook(5000, 5000, p => p.MainWindowTitle == "ELDEN RING™");
-            Hook.OnHooked += Hook_OnHooked;
-            Hook.OnUnhooked += Hook_OnUnhooked;
             Hook.Start();
         }
-        private void Hook_OnHooked(object? sender, PHEventArgs e)
+        public Brush ForegroundID
         {
-            
+            get
+            {
+                if (Hook.ID != "Not Hooked")
+                    return Brushes.GreenYellow;
+                return Brushes.IndianRed;
+            }
         }
-        private void Hook_OnUnhooked(object? sender, PHEventArgs e)
+        public string ContentLoaded
         {
+            get
+            {
+                if (Hook.Loaded)
+                    return "Yes";
+                return "No";
+            }
+        }
+        public Brush ForegroundLoaded
+        {
+            get
+            {
+                if (Hook.Loaded)
+                    return Brushes.GreenYellow;
+                return Brushes.IndianRed;
+            }
+        }
+        //public string ContentOnline
+        //{
+        //    get
+        //    {
+        //        if (!Hook.Hooked)
+        //            return null;
 
+        //        if (Hook.Online)
+        //            return "Yes";
+        //        return "No";
+        //    }
+        //}
+        //public Brush ForegroundOnline
+        //{
+        //    get
+        //    {
+        //        if (!Hook.Hooked)
+        //            return null;
+
+        //        if (Hook.Online)
+        //            return Brushes.GreenYellow;
+        //        return Brushes.IndianRed;
+        //    }
+        //}
+
+        public Brush ForegroundVersion
+        {
+            get
+            {
+                if (!Hook.Hooked)
+                    return Brushes.Black;
+
+                if (Hook.Is64Bit)
+                    return Brushes.GreenYellow;
+                return Brushes.IndianRed;
+            }
         }
+
+        public void UpdateMainProperties()
+        {
+            OnPropertyChanged(nameof(ForegroundID));
+            OnPropertyChanged(nameof(ContentLoaded));
+            OnPropertyChanged(nameof(ForegroundLoaded));
+            //OnPropertyChanged(nameof(ContentOnline));
+            //OnPropertyChanged(nameof(ForegroundOnline));
+            OnPropertyChanged(nameof(ForegroundVersion));
+            OnPropertyChanged(nameof(GameLoaded));
+        }
+
     }
 }

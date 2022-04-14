@@ -35,10 +35,12 @@
 
 	
 	<ItemGroup>
+    <None Remove="Resources\Assembly\ItemGive.asm" />
     <None Remove="Resources\Assembly\SaveParams.asm" />
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="Resources\Assembly\ItemGive.asm" />
     <EmbeddedResource Include="Resources\Assembly\SaveParams.asm">
       <Generator></Generator>
     </EmbeddedResource>

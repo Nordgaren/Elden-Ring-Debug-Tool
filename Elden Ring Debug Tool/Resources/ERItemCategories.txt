@@ -1,5 +1,3 @@
-﻿Weapons/MeleeWeapons.txt true
-Weapons/MeleeWeapons.txt true
-Weapons/MeleeWeapons.txt true
-//RangedWeapons.txt false
-Weapons/Shields.txt true
+﻿0x80800000 true Weapons/MeleeWeapons.txt Melee Weapons
+0x80800000 true Weapons/Shields.txt Shields
+0xB0000001 true Weapons/Gems.txt Shields

@@ -34,7 +34,6 @@ namespace Elden_Ring_Debug_Tool
         {
             InitializeComponent();
             ERItemCategory.GetItemCategories();
-            ERGem.GetGems();
             Hook.OnSetup += Hook_OnSetup;
         }
 
@@ -42,7 +41,7 @@ namespace Elden_Ring_Debug_Tool
         {
             Dispatcher.Invoke(() => 
             {
-                DebugParam.GetParams();
+                DebugParam.HookParams();
             });
         }
 
@@ -52,12 +51,23 @@ namespace Elden_Ring_Debug_Tool
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            InitAllCtrls();
             UpdateTimer.Interval = 16;
             UpdateTimer.Elapsed += UpdateTimer_Elapsed;
             UpdateTimer.Enabled = true;
         }
 
-        
+        bool FormLoaded
+        {
+            get => ViewModel.GameLoaded;
+            set => ViewModel.GameLoaded = value;
+        }
+        public bool Reading
+        {
+            get => ViewModel.Reading;
+            set => ViewModel.Reading = value;
+        }
+
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
@@ -67,8 +77,71 @@ namespace Elden_Ring_Debug_Tool
         {
             Dispatcher.Invoke(new Action(() =>
             {
-                Hook.Update();
+                if (Hook.Hooked)
+                {
+                    if (Hook.Loaded && Hook.Setup)
+                    {
+                        if (!FormLoaded)
+                        {
+                            FormLoaded = true;
+                            Reading = true;
+                            ReloadAllCtrls();
+                            Reading = false;
+                            EnableAllCtrls(true);
+                        }
+                        else
+                        {
+                            Reading = true;
+                            UpdateProperties();
+                            UpdateAllCtrl();
+                            Reading = false;
+                        }
+                    }
+                    else if (FormLoaded)
+                    {
+                        Reading = true;
+                        UpdateProperties();
+                        //Hook.UpdateName();
+                        EnableAllCtrls(false);
+                        FormLoaded = false;
+                        Reading = false;
+                    }
+                }
             }));
+        }
+
+        private void UpdateMainProperties()
+        {
+            //Hook.UpdateMainProperties();
+            ViewModel.UpdateMainProperties();
+            //CheckFocused();
+        }
+
+        private void InitAllCtrls()
+        {
+            DebugItems.InitCtrl();
+        }
+        private void UpdateProperties()
+        {
+
+        }
+        private void EnableAllCtrls(bool enable)
+        {
+            DebugItems.EnableCtrls(enable);
+        }
+        private void ReloadAllCtrls()
+        {
+            DebugItems.ReloadCtrl();
+        }
+        private void UpdateAllCtrl()
+        {
+            DebugItems.UpdateCtrl();
+            Hook.Update();
+        }
+
+        private void link_RequestNavigate(object sender, RequestNavigateEventArgs e)
+        {
+            Process.Start(e.Uri.ToString());
         }
 
         //private void Grid_MouseDown(object sender, MouseButtonEventArgs e)

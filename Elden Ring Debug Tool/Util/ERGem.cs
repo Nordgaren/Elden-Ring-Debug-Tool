@@ -9,35 +9,62 @@ using WeaponType = Elden_Ring_Debug_Tool.ERWeapon.WeaponType;
 
 namespace Elden_Ring_Debug_Tool
 {
-    class ERGem
+    class ERGem : ERItem
     {
-        public static List<ERGem> Gems;
-        private static Regex GemEntryRx = new Regex(@"^\s*(?<id>\S+)\s+(?<name>.*)$");
+        //public static List<ERGem> Gems;
+        private static Regex gemEntryRx = new Regex(@"^\s*(?<id>\S+)\s+(?<name>.*)$");
 
-        public string Name;
-        public int ID;
-        public List<Infusion> Infusions = new List<Infusion>();
+        public long CanMountBitfield;
+        public int SwordArtID;
+        public short WeaponAttr;
+        public List<Infusion> Infusions;
         public List<WeaponType> WeaponTypes = new List<WeaponType>();
 
-        public ERGem(string config)
-        {
-            Match itemEntry = GemEntryRx.Match(config);
-            Name = itemEntry.Groups["name"].Value.Replace("\r", "");
-            ID = Convert.ToInt32(itemEntry.Groups["id"].Value);
-        }
 
-        public static void GetGems()
+        private void GetInfusions()
         {
-            string result = Util.GetTxtResource("Resources/Weapons/Gems.txt");
-            Gems = new List<ERGem>();
+            Infusions = new List<Infusion>() { Infusion.Standard };
 
-            foreach (string line in result.Split(new string[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries))
+            if (WeaponAttr == 0)
+                return;
+
+            for (int i = 1; i < AllInfusions.Count; i++)
             {
-                if (!line.Contains("//")) //determine if line is a valid resource or not
-                {
-                    Gems.Add(new ERGem(line));
-                }
-            };
+                if ((WeaponAttr & (1 << i)) != 0)
+                    Infusions.Add(AllInfusions[i]);
+            }
         }
+
+        private void GetWeapons()
+        {
+            WeaponTypes = new List<WeaponType>();
+
+            if (CanMountBitfield == 0)
+                return;
+
+            for (int i = 0; i < Weapons.Count; i++)
+            {
+                if ((CanMountBitfield & (1L << i)) != 0)
+                    WeaponTypes.Add(Weapons[i]);
+            }
+        }
+
+        public override void SetupItem(ERParam param)
+        {
+            
+            CanMountBitfield = BitConverter.ToInt64(param.Bytes, param.OffsetDict[ID] + (int)EROffsets.EquipParamGem.CanMountWep_Dagger);
+            GetWeapons();
+            GetInfusions();
+        }
+
+        public ERGem(string config, Category category) : base(config, category)
+        {
+
+        }
+
+        public static List<WeaponType> Weapons = Enum.GetValues(typeof(WeaponType)).Cast<WeaponType>().ToList();
+
+        public static List<Infusion> AllInfusions = Enum.GetValues(typeof(Infusion)).Cast<Infusion>().ToList();
+
     }
 }

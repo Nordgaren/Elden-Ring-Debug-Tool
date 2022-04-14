@@ -43,7 +43,7 @@ namespace Elden_Ring_Debug_Tool
             GreatHammer = 23, //HammerLarge
             Flail = 24, //Flail
             Spear = 25, //SpearNormal
-            SpearHeavy = 00, //SpearLarge
+            SpearLarge = 00, //SpearLarge
             GreatSpear = 28, //SpearHeavy
             Halberd = 29, //SpearAxe
             Reaper = 31, //Sickle
@@ -71,17 +71,25 @@ namespace Elden_Ring_Debug_Tool
             Arrow = 81,
             GreatArrow = 83,
             Bolt = 85,
-            BallistaBolt = 86,
+            BallistaBolt = 86
         }
         public int RealID { get; set; }
-        public bool Infusible { get; set; }
         public bool Unique { get; set; }
         public int SwordArtId { get; set; }
+        public bool Infisible { get; set; }
         public WeaponType Type { get; set; }
-        public ERWeapon(string config, bool infusible) : base(config) 
+        public ERWeapon(string config, Category category) : base(config, category) 
         {
-            RealID = Util.DeleteFromEnd(ID, 3);
-            Infusible = infusible;
+            RealID = Util.DeleteFromEnd(ID, 4);
+        }
+
+        public override void SetupItem(ERParam param)
+        {
+            var bitfield = param.Bytes[(int)EROffsets.EquipParamWeapon.DisableMultiDropShare];
+            Infisible = (bitfield & (1 << 8)) == 1;
+            if (Unique)
+                Console.WriteLine();
+            Unique = BitConverter.ToInt32(param.Bytes, param.OffsetDict[ID] + (int)EROffsets.EquipParamWeapon.MaterialSetID) == 2200;
         }
     }
 }
