@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -17,10 +18,9 @@ namespace Elden_Ring_Debug_Tool
     /// </summary>
     public partial class App : Application
     {
-        public App()
+    public App()
         {
             var args = Environment.GetCommandLineArgs();
-
 #if DEBUG
             //args = new[] { "", @"G:\Steam\steamapps\common\ELDEN RING 1.03.3\Game\regulation.bin.bnd" };
 #endif

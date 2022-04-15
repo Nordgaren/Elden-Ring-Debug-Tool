@@ -1566,9 +1566,6 @@
     <None Update="Resources\Params\Pointers\ParamOffsets.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Resources\Params\Pointers\ParamOffsets.txt.bak">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Update="Resources\Params\Pointers\PartsDrawParam.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

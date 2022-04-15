@@ -30,11 +30,15 @@ My fork of [Property Hook](https://github.com/Nordgaren/PropertyHook) by [TKGP](
 **[King Borehaha](https://github.com/kingborehaha/DS-Gadget-Local-Loader)** Who's local loading system has worked really well for a lot of things, including this project  
 
 # Change Log  
+### Beta 0.5  
+
+* Inventory tab has been added.     
+
 ### Beta 0.4   
 
-* Can now save params using the games built-in function thanks to Pav! Params save to `ELDEN RING/capture/param`. 
+* Can now save params using the games built-in function thanks to Pav! Params save to `ELDEN RING/capture/param`.  
 
-* Added drag and drop functionality to decrypt and re-encrypt regulation.bin to the exe. 
+* Added drag and drop functionality to decrypt and re-encrypt regulation.bin to the exe.  
 
 * Can reset params back to how they were when the tool loaded.  
 
@@ -44,20 +48,20 @@ My fork of [Property Hook](https://github.com/Nordgaren/PropertyHook) by [TKGP](
 
 ### Beta 0.3  
 
-* Temporarily Reverted UI Changes
+* Temporarily Reverted UI Changes  
 
 
 ### Beta 0.2  
 
-* Reads ALL params, now.
+* Reads ALL params, now.  
 
-* Row Search
+* Row Search  
 
-* Field Search 
+* Field Search  
 
-* UI Update
+* UI Update  
 
-* Optimized Field loading/saving fields of rows that are already loaded
+* Optimized Field loading/saving fields of rows that are already loaded  
 
 ### Beta 0.1  
 

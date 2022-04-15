@@ -79,6 +79,7 @@ namespace Elden_Ring_Debug_Tool
         public enum EquipParamGem
         {
             SwordArtsParamId = 0x18,
+            ConfigurableWepAttr = 0x30,
             CanMountWep_Dagger = 0x38,
             CanMountWep_SwordPierce = 0x39,
             CanMountWep_SpearLarge = 0x3A,
@@ -94,17 +95,14 @@ namespace Elden_Ring_Debug_Tool
 
         public const int ItemInfoArraySize = 0xA0;
 
-        public enum ItemInfo
-        {
-            ID = 0x0,
-            Quantity = 0x4,
-            RelayValue = 0x8,
-            Gem = 0xB
-        }
         public enum ItemGiveStruct
         {
-            Count = 0x0,
-            ItemInfo = 0x4
+            Count = 0x20,
+            ID = 0x24,
+            Quantity = 0x28,
+            Infusion = 0x2C,
+            Upgrade = 0x2E,
+            Gem = 0x30
         }
 
     }

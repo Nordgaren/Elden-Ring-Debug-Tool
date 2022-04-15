@@ -8,7 +8,7 @@ namespace Elden_Ring_Debug_Tool
 {
     internal class ERWeapon : ERItem
     {
-        public enum Infusion
+        public enum Infusion : short
         {
             Standard = 000,
             Heavy = 100,
@@ -78,6 +78,7 @@ namespace Elden_Ring_Debug_Tool
         public int SwordArtId { get; set; }
         public bool Infisible { get; set; }
         public WeaponType Type { get; set; }
+        public ERGem DefaultGem { get; set; }
         public ERWeapon(string config, Category category) : base(config, category) 
         {
             RealID = Util.DeleteFromEnd(ID, 4);
@@ -86,10 +87,16 @@ namespace Elden_Ring_Debug_Tool
         public override void SetupItem(ERParam param)
         {
             var bitfield = param.Bytes[(int)EROffsets.EquipParamWeapon.DisableMultiDropShare];
-            Infisible = (bitfield & (1 << 8)) == 1;
+            Infisible = (bitfield & (1 << 8)) == 0;
+            
+            Unique = BitConverter.ToInt32(param.Bytes, param.OffsetDict[ID] + (int)EROffsets.EquipParamWeapon.MaterialSetID) == 2200;
             if (Unique)
                 Console.WriteLine();
-            Unique = BitConverter.ToInt32(param.Bytes, param.OffsetDict[ID] + (int)EROffsets.EquipParamWeapon.MaterialSetID) == 2200;
+
+            DefaultGem = ERGem.Gems.FirstOrDefault(gem => gem.SwordArtID == SwordArtId);
+
+            if (DefaultGem == null)
+                throw new Exception($"Cannot locate default gem for {Name}");
         }
     }
 }

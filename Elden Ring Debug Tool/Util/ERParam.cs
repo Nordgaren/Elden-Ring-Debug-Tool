@@ -44,9 +44,9 @@ namespace Elden_Ring_Debug_Tool
             OffsetDict = new Dictionary<int, int>();
             Length = Pointer.ReadInt32((int)EROffsets.Param.NameOffset);
             
-            var ParamType = Pointer.ReadString(Length, Encoding.UTF8, (uint)Type.Length);
-            if (ParamType != Type)
-                throw new InvalidOperationException($"Incorrect Param Pointer: {ParamType} should be {Type}");
+            var paramType = Pointer.ReadString(Length, Encoding.UTF8, (uint)Type.Length);
+            if (paramType != Type)
+                throw new InvalidOperationException($"Incorrect Param Pointer: {paramType} should be {Type}");
 
             Bytes = Pointer.ReadBytes(0x0, (uint)Length);
 

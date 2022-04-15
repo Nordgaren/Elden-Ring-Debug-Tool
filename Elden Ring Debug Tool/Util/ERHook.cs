@@ -59,8 +59,8 @@ namespace Elden_Ring_Debug_Tool
 
             SoloParamRepository = RegisterRelativeAOB(EROffsets.SoloParamRepositoryAoB, EROffsets.RelativePtrAddressOffset, EROffsets.RelativePtrInstructionSize, 0x0);
 
-            ItemGive = RegisterAbsoluteAOB(EROffsets.ItemGiveAoB, EROffsets.ItemGiveOffset);
-            MapItemMan = RegisterRelativeAOB(EROffsets.MapItemManAoB, EROffsets.RelativePtrAddressOffset, EROffsets.RelativePtrInstructionSize, 0x0);
+            ItemGive = RegisterAbsoluteAOB(EROffsets.ItemGiveAoB);
+            MapItemMan = RegisterRelativeAOB(EROffsets.MapItemManAoB, EROffsets.RelativePtrAddressOffset, EROffsets.RelativePtrInstructionSize);
 
 
             CapParamCall = RegisterAbsoluteAOB(EROffsets.CapParamCallAoB);
@@ -69,9 +69,9 @@ namespace Elden_Ring_Debug_Tool
 
         private void ERHook_OnHooked(object? sender, PHEventArgs e)
         {
-            Setup = true;
             RaiseOnSetup();
             ReadParams();
+            Setup = true;
         }
         public void Update()
         {
@@ -128,15 +128,20 @@ namespace Elden_Ring_Debug_Tool
         //TKCode
         private void AsmExecute(string asm)
         {
-            var bytes = Engine.Assemble(asm, 0);
+            //Assemble once to get the size
+            var bytes = Engine.Assemble(asm, (ulong)Process.MainModule.BaseAddress);
             var error = Engine.GetLastKeystoneError();
-            IntPtr insertPtr = Allocate((uint)bytes.Buffer.Length, Kernel32.PAGE_EXECUTE_READWRITE);
+            IntPtr insertPtr = GetPrefferedIntPtr(bytes.Buffer.Length, Kernel32.PAGE_EXECUTE_READWRITE);
+
+            //Reassemble with the location if the intPtr to support things like Call and Jmp
+            bytes = Engine.Assemble(asm, (ulong)insertPtr);
+            error = Engine.GetLastKeystoneError();
 
             Kernel32.WriteBytes(Handle, insertPtr, bytes.Buffer);
 
 
 #if DEBUG
-            DebugPrintArray(bytes);
+            //DebugPrintArray(bytes);
 #endif
 
             Execute(insertPtr);
@@ -245,6 +250,31 @@ namespace Elden_Ring_Debug_Tool
 
             EquipParamWeapon.RestoreParam();
             EquipParamGem.RestoreParam();
+        }
+
+        internal void GetItem(int id, int quantity, int infusion, int upgrade, int gem)
+        {
+            var itemInfobytes = new byte[0x34];
+            var itemInfo = GetPrefferedIntPtr(0x34);
+
+            var bytes = BitConverter.GetBytes(0x1);
+            Array.Copy(bytes, 0x0,itemInfobytes, (int)EROffsets.ItemGiveStruct.Count, bytes.Length);
+
+            bytes = BitConverter.GetBytes(id + infusion + upgrade);
+            Array.Copy(bytes, 0x0,itemInfobytes, (int)EROffsets.ItemGiveStruct.ID, bytes.Length);
+
+            bytes = BitConverter.GetBytes(quantity);
+            Array.Copy(bytes, 0x0, itemInfobytes, (int)EROffsets.ItemGiveStruct.Quantity, bytes.Length);
+
+            bytes = BitConverter.GetBytes(0xFFFFFFFF);
+            Array.Copy(bytes, 0x0, itemInfobytes, (int)EROffsets.ItemGiveStruct.Gem, bytes.Length);
+
+            Kernel32.WriteBytes(Handle, itemInfo, itemInfobytes);
+
+            var asmString = Util.GetEmbededResource("Resources.Assembly.ItemGive.asm");
+            var asm = string.Format(asmString, itemInfo.ToString("X2"), MapItemMan.Resolve(), ItemGive.Resolve() + EROffsets.ItemGiveOffset);
+            AsmExecute(asm);
+            Free(itemInfo);
         }
 
         #endregion

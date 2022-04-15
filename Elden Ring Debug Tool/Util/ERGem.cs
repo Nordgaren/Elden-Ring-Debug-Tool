@@ -11,8 +11,7 @@ namespace Elden_Ring_Debug_Tool
 {
     class ERGem : ERItem
     {
-        //public static List<ERGem> Gems;
-        private static Regex gemEntryRx = new Regex(@"^\s*(?<id>\S+)\s+(?<name>.*)$");
+        public static List<ERGem> Gems = new List<ERGem>();
 
         public long CanMountBitfield;
         public int SwordArtID;
@@ -51,15 +50,15 @@ namespace Elden_Ring_Debug_Tool
 
         public override void SetupItem(ERParam param)
         {
-            
             CanMountBitfield = BitConverter.ToInt64(param.Bytes, param.OffsetDict[ID] + (int)EROffsets.EquipParamGem.CanMountWep_Dagger);
+            WeaponAttr = BitConverter.ToInt16(param.Bytes, param.OffsetDict[ID] + (int)EROffsets.EquipParamGem.ConfigurableWepAttr);
             GetWeapons();
             GetInfusions();
         }
 
         public ERGem(string config, Category category) : base(config, category)
         {
-
+            Gems.Add(this);
         }
 
         public static List<WeaponType> Weapons = Enum.GetValues(typeof(WeaponType)).Cast<WeaponType>().ToList();

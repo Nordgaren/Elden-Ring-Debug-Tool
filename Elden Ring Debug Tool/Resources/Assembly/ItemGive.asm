@@ -1,9 +1,9 @@
-﻿sub rsp,48
-mov r8, {0:X2}          ;ItemGiveStruct
-lea rdx,[r8 + 20]
-mov r10, {1:X2}         ;MapItemMap
-mov rcx,[r10]
-mov [rdx],01
-call {2:X2}             ;ItemGive Function
-add rsp,48
+﻿sub rsp,0x48
+mov r8,0x{0:X2}		;Item Give Struct
+lea rdx,[r8+0x20]	
+mov r10,0x{1:X2}	;MapItemMan
+mov rcx,[r10]	
+mov [rdx],0x1
+call 0x{2:X2}
+add rsp,0x48
 ret

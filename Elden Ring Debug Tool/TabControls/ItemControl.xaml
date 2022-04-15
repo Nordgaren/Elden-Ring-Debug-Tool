@@ -30,14 +30,15 @@
         </StackPanel>
         <StackPanel Grid.Column="1" Margin="5">
             <Label Content="Quantity" />
-            <wpfTool:IntegerUpDown x:Name="nudQuantity" Minimum="1" Value="1" ClipValueToMinMax="True" Maximum="0"/>
+            <wpfTool:IntegerUpDown x:Name="nudQuantity" Minimum="1" Value="1" ClipValueToMinMax="True" Maximum="1"/>
             <Label Content="Upgrade" />
-            <wpfTool:IntegerUpDown x:Name="nudUpgrade" Minimum="0" Maximum="0"/>
+            <wpfTool:IntegerUpDown x:Name="nudUpgrade" Minimum="0" Maximum="1" Value="0"/>
             <CheckBox x:Name="SearchAllCheckbox" Content="Search All" Margin="0,10,0,0" Checked="SearchAllCheckbox_Checked" Unchecked="SearchAllCheckbox_Checked"/>
         </StackPanel>
         <StackPanel Grid.Column="2" Margin="5">
             <Label Content="Max Held" Visibility="Hidden" x:Name="txtMaxHeld"/>
-            <CheckBox Content="Restrict" IsChecked="True" Margin="0,3,0,0" x:Name="cbxQuantityRestrict" Checked="cbxQuantityRestrict_Checked" Unchecked="cbxQuantityRestrict_Checked"/>
+            <!--<CheckBox Content="Restrict" IsChecked="True" Margin="0,3,0,0" x:Name="cbxQuantityRestrict" Checked="cbxQuantityRestrict_Checked" Unchecked="cbxQuantityRestrict_Checked"/>-->
+            <CheckBox Content="Silent" IsChecked="True" Margin="0,3,0,0" x:Name="cbxSilent" />
             <Separator Height="25" Visibility="Hidden"/>
             <CheckBox x:Name="cbxMax" Content="Max" Margin="0,2,0,0" IsChecked="True" Checked="cbxMaxUpgrade_Checked" Unchecked="cbxMaxUpgrade_Checked" />
             <Separator Height="5" Visibility="Hidden"/>

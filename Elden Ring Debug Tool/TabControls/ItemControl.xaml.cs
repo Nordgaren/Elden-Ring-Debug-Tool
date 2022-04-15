@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Infusion = Elden_Ring_Debug_Tool.ERWeapon.Infusion;
 
 namespace Elden_Ring_Debug_Tool
 {
@@ -146,22 +147,22 @@ namespace Elden_Ring_Debug_Tool
             if (item == null)
                 return;
 
-            if (!cbxQuantityRestrict.IsChecked.Value)
-            {
-                //var max = Hook.GetMaxQuantity(item);
-                //var held = Hook.GetHeld(item);
-                //nudQuantity.IsEnabled = true;
-                //nudQuantity.Maximum = 99;
-                //txtMaxHeld.Visibility = max - held > 0 ? Visibility.Hidden : Visibility.Visible;
-            }
-            else if (lbxItems.SelectedIndex != -1)
-            {
-                //var max = Hook.GetMaxQuantity(item);
-                //var held = Hook.GetHeld(item);
-                //nudQuantity.Maximum = max - held;
-                //nudQuantity.IsEnabled = nudQuantity.Maximum > 1;
-                //txtMaxHeld.Visibility = nudQuantity.Maximum > 0 ? Visibility.Hidden : Visibility.Visible;
-            }
+            //if (!cbxQuantityRestrict.IsChecked.Value)
+            //{
+            //    //var max = Hook.GetMaxQuantity(item);
+            //    //var held = Hook.GetHeld(item);
+            //    nudQuantity.IsEnabled = true;
+            //    nudQuantity.Maximum = int.MaxValue;
+            //    //txtMaxHeld.Visibility = max - held > 0 ? Visibility.Hidden : Visibility.Visible;
+            //}
+            //else if (lbxItems.SelectedIndex != -1)
+            //{
+            //    //var max = Hook.GetMaxQuantity(item);
+            //    //var held = Hook.GetHeld(item);
+            //    nudQuantity.Maximum = 99;
+            //    //nudQuantity.IsEnabled = nudQuantity.Maximum > 1;
+            //    //txtMaxHeld.Visibility = nudQuantity.Maximum > 0 ? Visibility.Hidden : Visibility.Visible;
+            //}
         }
 
         private void cmbInfusion_SelectedIndexChanged(object sender, EventArgs e)
@@ -174,40 +175,48 @@ namespace Elden_Ring_Debug_Tool
 
         private void lbxItems_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (!Hook.Hooked) return;
+            if (!Hook.Setup) return;
 
             ERItem item = lbxItems.SelectedItem as ERItem;
             if (item == null)
                 return;
 
-            if (!cbxQuantityRestrict.IsChecked.Value)
+            //if (!cbxQuantityRestrict.IsChecked.Value)
+            //{
+            //    txtMaxHeld.Visibility = nudQuantity.Maximum > 0 ? Visibility.Hidden : Visibility.Visible;
+
+            //    //var max = Hook.GetMaxQuantity(item);
+            //    //var held = Hook.GetHeld(item);
+            //    nudQuantity.Maximum = 99;
+            //    //nudQuantity.IsEnabled = true;
+            //    //txtMaxHeld.Visibility = max - held > 0 ? Visibility.Hidden : Visibility.Visible;
+            //}
+
+            nudUpgrade.Maximum = 0;
+
+            cmbInfusion.Items.Clear();
+            if (item.ItemCategory == ERItem.Category.Weapons)
             {
-                txtMaxHeld.Visibility = nudQuantity.Maximum > 0 ? Visibility.Hidden : Visibility.Visible;
+                var weapon = item as ERWeapon;
+                if (weapon.Infisible)
+                    foreach (var infusion in weapon.DefaultGem.Infusions)
+                        cmbInfusion.Items.Add(infusion);
 
-                //var max = Hook.GetMaxQuantity(item);
-                //var held = Hook.GetHeld(item);
-                //nudQuantity.Maximum = 99;
-                //nudQuantity.IsEnabled = true;
-                //txtMaxHeld.Visibility = max - held > 0 ? Visibility.Hidden : Visibility.Visible;
+                nudUpgrade.Maximum = weapon.Unique ? 10 : 25;
             }
+            else
+                cmbInfusion.Items.Add(Infusion.Standard);
 
-            //cmbInfusion.Items.Clear();
-            //if (item.Type == ERItem.ItemType.Weapon)
-            //    foreach (var infusion in Hook.GetWeaponInfusions(item.ID))
-            //        cmbInfusion.Items.Add(infusion);
-            //else
-            //    cmbInfusion.Items.Add(DS2SInfusion.Infusions[0]);
+            nudUpgrade.IsEnabled = nudUpgrade.Maximum > 0;
 
-            //cmbInfusion.SelectedIndex = 0;
-            //cmbInfusion.IsEnabled = cmbInfusion.Items.Count > 1;
+            cmbInfusion.SelectedIndex = 0;
+            cmbInfusion.IsEnabled = cmbInfusion.Items.Count > 1;
 
-            //nudUpgrade.Maximum = Hook.GetMaxUpgrade(item);
-            //nudUpgrade.IsEnabled = nudUpgrade.Maximum > 0;
 
             //btnCreate.IsEnabled = Hook.GetIsDroppable(item.ID) || Properties.Settings.Default.SpawnUndroppable;
             //if (!Properties.Settings.Default.UpdateMaxLive)
             //    HandleMaxAvailable();
-            //HandleMaxItemCheckbox();
+            HandleMaxItemCheckbox();
         }
 
         public void UpdateCreateEnabled()
@@ -234,21 +243,24 @@ namespace Elden_Ring_Debug_Tool
         {
             //if (!Properties.Settings.Default.UpdateMaxLive)
             //    HandleMaxAvailable();
-            ////Check if the button is enabled and the selected item isn't null
-            //if (btnCreate.IsEnabled && lbxItems.SelectedItem != null)
-            //{
-            //    _ = ChangeColor(Brushes.DarkGray);
-            //    ERItem item = lbxItems.SelectedItem as ERItem;
-            //    if (item == null)
-            //        return;
+            //Check if the button is enabled and the selected item isn't null
+            if (btnCreate.IsEnabled && lbxItems.SelectedItem != null)
+            {
+                _ = ChangeColor(Brushes.DarkGray);
+                ERItem item = lbxItems.SelectedItem as ERItem;
+                if (item == null)
+                    return;
 
-            //    var id = item.ID;
+                var id = item.ID;
 
-            //    var infusion = cmbInfusion.SelectedItem as DS2SInfusion;
-            //    Hook.GetItem(id, (short)nudQuantity.Value, (byte)nudUpgrade.Value, (byte)infusion.ID);
-            //    if (!Properties.Settings.Default.UpdateMaxLive)
-            //        HandleMaxAvailable();
-            //}
+                var infusion = (Infusion)cmbInfusion.SelectedItem;
+
+                var gem = ERGem.Gems[0];
+
+                Hook.GetItem(id, (int)nudQuantity.Value, (int)infusion, (int)nudUpgrade.Value, gem.ID);
+                //if (!Properties.Settings.Default.UpdateMaxLive)
+                //    HandleMaxAvailable();
+            }
         }
 
         //handles up and down scrolling
@@ -336,26 +348,26 @@ namespace Elden_Ring_Debug_Tool
         private void cbxMaxUpgrade_Checked(object sender, RoutedEventArgs e)
         {
             //HandleMaxItemCheckbox()
-            if (cbxMax.IsChecked.Value)
-            {
-                nudUpgrade.Value = nudUpgrade.Maximum;
-                nudQuantity.Value = nudQuantity.Maximum;
-            }
-            else
-            {
-                nudUpgrade.Value = nudUpgrade.Minimum;
-                nudQuantity.Value = nudQuantity.Minimum;
-            }
+            //if (cbxMax.IsChecked.Value)
+            //{
+            //    nudUpgrade.Value = nudUpgrade.Maximum;
+            //    nudQuantity.Value = nudQuantity.Maximum;
+            //}
+            //else
+            //{
+            //    nudUpgrade.Value = nudUpgrade.Minimum;
+            //    nudQuantity.Value = nudQuantity.Minimum;
+            //}
         }
 
         private void HandleMaxItemCheckbox()
         {
             //Set upgrade nud to max if max checkbox is ticked
-            if (cbxMax.IsChecked.Value)
-            {
-                nudUpgrade.Value = nudUpgrade.Maximum;
-                nudQuantity.Value = nudQuantity.Maximum;
-            }
+            //if (cbxMax.IsChecked.Value)
+            //{
+            //    nudUpgrade.Value = nudUpgrade.Maximum;
+            //    nudQuantity.Value = nudQuantity.Maximum;
+            //}
         }
 
         private void cmbInfusion_KeyDown(object sender, KeyEventArgs e)
