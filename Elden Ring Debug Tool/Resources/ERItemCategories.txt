@@ -1,3 +1,10 @@
-﻿0x80800000 true Weapons/MeleeWeapons.txt Melee Weapons
-0x80800000 true Weapons/Shields.txt Shields
-0xB0000001 true Weapons/Gems.txt Shields
+﻿0x00000000 true Items/Weapons/MeleeWeapons.txt Melee Weapons
+0x00000000 true Items/Weapons/RangedWeapons.txt Ranged Weapons
+0x10000000 true Items/Armor.txt Armor
+0x00000000 true Items/Weapons/SpellTools.txt Spell Tools
+0x00000000 true Items/Weapons/Shields.txt Shields
+0x20000000 true Items/Talismans.txt Talismans
+0x00000000 true Items/Weapons/Ammo.txt Ammo
+0x40000000 true Items/Goods.txt Goods
+0x40000000 true Items/Magic.txt Magic
+0x80000000 true Items/Gems.txt Gems

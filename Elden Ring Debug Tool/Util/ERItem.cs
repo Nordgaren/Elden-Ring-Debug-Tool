@@ -11,11 +11,11 @@ namespace Elden_Ring_Debug_Tool
     {
         public enum Category : uint
         {
-            Weapons = 0x80800000,
-            Protector = 0x90800000,
-            Accessory = 0xA0000000,
-            Goods = 0xB0000000,
-            Gem = 0xB0000001
+            Weapons = 0x00000000,
+            Protector = 0x10000000,
+            Accessory = 0x20000000,
+            Goods = 0x40000000,
+            Gem = 0x80000000,
         }
         private static Regex ItemEntryRx = new Regex(@"^\s*(?<id>\S+)\s+(?<name>.*)$");
 
@@ -23,12 +23,17 @@ namespace Elden_Ring_Debug_Tool
         public int ID;
         public Category ItemCategory;
 
+        public bool IsDrop;
+        public bool IsMultiplayerShare;
+        public bool CanAquireFromOtherPlayers => IsDrop && IsMultiplayerShare;
+
         public ERItem(string config, Category category)
         {
             Match itemEntry = ItemEntryRx.Match(config);
             Name = itemEntry.Groups["name"].Value.Replace("\r", "");
             ID = Convert.ToInt32(itemEntry.Groups["id"].Value);
-            ItemCategory = (Category)category;
+            ItemCategory = category;
+
         }
 
         public override string ToString()
@@ -38,7 +43,32 @@ namespace Elden_Ring_Debug_Tool
 
         public virtual void SetupItem(ERParam param)
         {
+            var bitfield = 0;
+            switch (ItemCategory)
+            {
+                case Category.Protector:
+                    bitfield = param.Bytes[param.OffsetDict[ID] + (int)EROffsets.EquipParamProtector.IsDiscard];
+                    IsDrop = (bitfield & (1 << 1)) != 0;
+                    IsMultiplayerShare = (bitfield & (1 << 2)) == 0;
+                    break;
+                case Category.Accessory:
+                    bitfield = param.Bytes[param.OffsetDict[ID] + (int)EROffsets.EquipParamAccessory.IsDeposit];
+                    IsMultiplayerShare = (bitfield & (1 << 2)) == 0;
+                    IsDrop = (bitfield & (1 << 4)) != 0;
+                    break;
+                case Category.Goods:
+                    bitfield = param.Bytes[param.OffsetDict[ID] + (int)EROffsets.EquipParamGoods.IsFullSuppleItem];
+                    IsMultiplayerShare = (bitfield & (1 << 3)) == 0;
 
+                    bitfield = param.Bytes[param.OffsetDict[ID] + (int)EROffsets.EquipParamGoods.IsDrop];
+                    IsDrop = (bitfield & (1 << 0)) != 0;
+                    break;
+                case Category.Gem:
+                case Category.Weapons:
+                    break;
+                default:
+                    throw new Exception("Item Does not have a proper category.");
+            }
         }
 
     }

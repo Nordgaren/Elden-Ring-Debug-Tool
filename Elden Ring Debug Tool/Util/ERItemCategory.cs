@@ -19,14 +19,14 @@ namespace Elden_Ring_Debug_Tool
 
         private static Regex CategoryEntryRx = new Regex(@"^(?<category>\S+) (?<show>\S+) (?<path>\S+) (?<name>.+)$");
 
-        private ERItemCategory(string name, ulong category, string itemList, bool showIDs)
+        private ERItemCategory(string name, Category category, string itemList, bool showIDs)
         {
             Name = name;
             Items = new List<ERItem>();
             foreach (string line in itemList.Split(new string[] { "\n" }, StringSplitOptions.RemoveEmptyEntries))
             {
-                if (!line.Contains("/")) //determine if line is a valid resource or not
-                    AddItem(line, (Category)category);
+                if (Util.IsValidTxtResource(line)) //determine if line is a valid resource or not
+                    AddItem(line, category);
             };
         }
 
@@ -38,16 +38,15 @@ namespace Elden_Ring_Debug_Tool
                     Items.Add(new ERWeapon(line, category));
                     break;
                 case Category.Protector:
-                    break;
                 case Category.Accessory:
-                    break;
                 case Category.Goods:
+                    Items.Add(new ERItem(line, category));
                     break;
                 case Category.Gem:
                     Items.Add(new ERGem(line, category));
                     break;
                 default:
-                    break;
+                    throw new Exception("Incorrect Category");
             }
         }
 
@@ -58,13 +57,13 @@ namespace Elden_Ring_Debug_Tool
 
             foreach (string line in result.Split(new string[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries))
             {
-                if (!line.Contains("//")) //determine if line is a valid resource or not
+                if (Util.IsValidTxtResource(line)) //determine if line is a valid resource or not
                 {
                     Match itemEntry = CategoryEntryRx.Match(line);
                     var name = itemEntry.Groups["name"].Value;
                     var show = Convert.ToBoolean(itemEntry.Groups["show"].Value);
                     var cat = itemEntry.Groups["category"].Value;
-                    var category = Convert.ToUInt32(cat, 16);
+                    var category = (Category)Convert.ToUInt32(cat, 16);
                     var path = itemEntry.Groups["path"].Value;
                     All.Add(new ERItemCategory(name , category ,Util.GetTxtResource($"Resources/{path}"), show));
                 }

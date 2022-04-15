@@ -45,7 +45,7 @@
         <CheckBox Grid.Row="1" Grid.Column="1" x:Name="CbxValueSearch" Content="Search Values" VerticalAlignment="Center" HorizontalAlignment="Right" FlowDirection="RightToLeft" Width="95"/>
         
         <StackPanel Grid.Row="2" Grid.Column="0" >
-                <ListBox x:Name="ListBoxRows" IsEnabled="{Binding ElementName=DebugParam, Path=Hook.Loaded}" BorderThickness="0" Height="{Binding ElementName=DebugParam, Path=ActualHeight}" SelectionChanged="ListBoxRows_SelectionChanged" ScrollViewer.VerticalScrollBarVisibility="Visible"/>
+            <ListBox x:Name="ListBoxRows" IsEnabled="{Binding ElementName=DebugParam, Path=Hook.Loaded}" BorderThickness="0" Height="{Binding ElementName=DebugParam, Path=ActualHeight}" ItemContainerStyle="{DynamicResource _ListBoxItemStyle}" SelectionChanged="ListBoxRows_SelectionChanged" ScrollViewer.VerticalScrollBarVisibility="Visible"/>
             </StackPanel>
         <ScrollViewer  Grid.Row="2" Grid.Column="1" CanContentScroll="False" >
             <StackPanel x:Name="ParamPanel" CanVerticallyScroll="True" IsEnabled="{Binding ElementName=DebugParam, Path=Hook.Loaded}" />

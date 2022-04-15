@@ -33,7 +33,13 @@ My fork of [Property Hook](https://github.com/Nordgaren/PropertyHook) by [TKGP](
 # Change Log  
 ### Beta 0.5  
 
-* Inventory tab has been added.     
+* Inventory tab has been added.  
+
+* Can now give yourself any item in the game, and add items to the list via the Resources/Items files and the Rsources/ERItemCategories.txt file.      
+
+* Items are BY DEFAULT limited to only items that can be shared in multiplayer. You can turn this off with the checkbox in the panel next to the Give panel.  
+
+* The panel on the right will become inventory viewer.  
 
 ### Beta 0.4   
 

@@ -54,28 +54,6 @@ namespace Elden_Ring_Debug_Tool
             TableLength = 0x30,
         }
 
-        public const int EquipParamWeaponOffset1 = 0x88;
-        public const int EquipParamWeaponOffset2 = 0x80;
-        public const int EquipParamWeaponOffset3 = 0x80;
-
-        public enum EquipParamWeapon
-        {
-            SortID = 0x8,
-            MaterialSetID = 0x5C,
-            OriginEquipWep = 0x60,
-            IconID = 0xBE,
-            ReinforceTypeID = 0xDA,
-            DisableMultiDropShare = 0x109,
-            SwordArtsParamId = 0x198,
-            WepType = 0x1A6,
-            OriginEquipWep16 = 0x250
-        }
-
-
-        public const int EquipParamGemOffset1 = 0x2BD8;
-        public const int EquipParamGemOffset2 = 0x80;
-        public const int EquipParamGemOffset3 = 0x80;
-
         public enum EquipParamGem
         {
             SwordArtsParamId = 0x18,
@@ -85,8 +63,34 @@ namespace Elden_Ring_Debug_Tool
             CanMountWep_SpearLarge = 0x3A,
             CanMountWep_BowSmall = 0x3B,
             CanMountWep_ShieldSmall = 0x3C,
-            Default_WepAttr = 0x35,
-
+            IsDiscard = 0x34,
+            Default_WepAttr = 0x35
+        }
+        public enum EquipParamAccessory
+        {
+            IsDeposit = 0x40
+        }
+        public enum EquipParamGoods
+        {
+            IsFullSuppleItem = 0x4A,
+            IsDrop = 0x6F
+        }
+        public enum EquipParamProtector
+        {
+            IsDiscard = 0xE3
+        }
+        public enum EquipParamWeapon
+        {
+            SortID = 0x8,
+            MaterialSetID = 0x5C,
+            OriginEquipWep = 0x60,
+            IconID = 0xBE,
+            ReinforceTypeID = 0xDA,
+            BaseChangeCategory = 0x108,
+            DisableMultiDropShare = 0x109,
+            SwordArtsParamId = 0x198,
+            WepType = 0x1A6,
+            OriginEquipWep16 = 0x250
         }
 
         public const string ItemGiveAoB = "8B 02 83 F8 0A";

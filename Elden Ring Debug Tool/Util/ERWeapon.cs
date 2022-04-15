@@ -43,7 +43,7 @@ namespace Elden_Ring_Debug_Tool
             GreatHammer = 23, //HammerLarge
             Flail = 24, //Flail
             Spear = 25, //SpearNormal
-            SpearLarge = 00, //SpearLarge
+            SpearLarge = 26, //SpearLarge UNUSED
             GreatSpear = 28, //SpearHeavy
             Halberd = 29, //SpearAxe
             Reaper = 31, //Sickle
@@ -57,7 +57,7 @@ namespace Elden_Ring_Debug_Tool
             Crossbow = 55, //Clossbow
             Ballista = 56, //Ballista
             GlintstoneStaff = 57, //Staff
-            Sorcery = 00, //Sorcery
+            Sorcery = 58, //Sorcery UNUSED
             FingerSeal = 61, //Talisman
             SmallShield = 65, //ShieldSmall
             MediumShield = 67, //ShieldNormal
@@ -86,14 +86,20 @@ namespace Elden_Ring_Debug_Tool
 
         public override void SetupItem(ERParam param)
         {
-            var bitfield = param.Bytes[(int)EROffsets.EquipParamWeapon.DisableMultiDropShare];
-            Infisible = (bitfield & (1 << 8)) == 0;
-            
-            Unique = BitConverter.ToInt32(param.Bytes, param.OffsetDict[ID] + (int)EROffsets.EquipParamWeapon.MaterialSetID) == 2200;
-            if (Unique)
-                Console.WriteLine();
 
-            DefaultGem = ERGem.Gems.FirstOrDefault(gem => gem.SwordArtID == SwordArtId);
+            var bitfield = param.Bytes[param.OffsetDict[ID] + (int)EROffsets.EquipParamWeapon.DisableMultiDropShare];
+            IsMultiplayerShare = (bitfield & (1 << 0)) == 0;
+            IsDrop = (bitfield & (1 << 2)) != 0;
+            Infisible = (bitfield & (1 << 7)) == 0;
+
+            if (!param.OffsetDict.ContainsKey(ID))
+                throw new Exception($"No offset present for {Name}");
+
+            Unique = BitConverter.ToInt32(param.Bytes, param.OffsetDict[ID] + (int)EROffsets.EquipParamWeapon.MaterialSetID) == 2200;
+
+            DefaultGem = ERGem.All.FirstOrDefault(gem => gem.SwordArtID == SwordArtId);
+
+            Type = (WeaponType)BitConverter.ToInt16(param.Bytes, param.OffsetDict[ID] + (int)EROffsets.EquipParamWeapon.WepType);
 
             if (DefaultGem == null)
                 throw new Exception($"Cannot locate default gem for {Name}");

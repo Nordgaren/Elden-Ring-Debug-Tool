@@ -11,14 +11,14 @@ namespace Elden_Ring_Debug_Tool
 {
     class ERGem : ERItem
     {
-        public static List<ERGem> Gems = new List<ERGem>();
+        public static List<ERGem> All = new List<ERGem>();
 
         public long CanMountBitfield;
         public int SwordArtID;
         public short WeaponAttr;
         public List<Infusion> Infusions;
         public List<WeaponType> WeaponTypes = new List<WeaponType>();
-
+        public static ERGem None;
 
         private void GetInfusions()
         {
@@ -50,6 +50,10 @@ namespace Elden_Ring_Debug_Tool
 
         public override void SetupItem(ERParam param)
         {
+            var bitfield = param.Bytes[param.OffsetDict[ID] + (int)EROffsets.EquipParamGem.IsDiscard];
+            IsDrop = (bitfield & (1 << 1)) != 0;
+            IsMultiplayerShare = (bitfield & (1 << 3)) == 0;
+
             CanMountBitfield = BitConverter.ToInt64(param.Bytes, param.OffsetDict[ID] + (int)EROffsets.EquipParamGem.CanMountWep_Dagger);
             WeaponAttr = BitConverter.ToInt16(param.Bytes, param.OffsetDict[ID] + (int)EROffsets.EquipParamGem.ConfigurableWepAttr);
             GetWeapons();
@@ -58,7 +62,7 @@ namespace Elden_Ring_Debug_Tool
 
         public ERGem(string config, Category category) : base(config, category)
         {
-            Gems.Add(this);
+            All.Add(this);
         }
 
         public static List<WeaponType> Weapons = Enum.GetValues(typeof(WeaponType)).Cast<WeaponType>().ToList();

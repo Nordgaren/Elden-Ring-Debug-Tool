@@ -122,6 +122,7 @@ namespace Elden_Ring_Debug_Tool
         private ERParam EquipParamGoods;
         private ERParam EquipParamProtector;
         private ERParam EquipParamWeapon;
+        private ERParam MagicParam;
 
 
         private Engine Engine = new Engine(Architecture.X86, Mode.X64);
@@ -228,6 +229,9 @@ namespace Elden_Ring_Debug_Tool
                 case "EquipParamWeapon":
                     EquipParamWeapon = param;
                     break;
+                case "Magic":
+                    MagicParam = param;
+                    break;
                 default:
                     break;
             }
@@ -266,7 +270,7 @@ namespace Elden_Ring_Debug_Tool
             bytes = BitConverter.GetBytes(quantity);
             Array.Copy(bytes, 0x0, itemInfobytes, (int)EROffsets.ItemGiveStruct.Quantity, bytes.Length);
 
-            bytes = BitConverter.GetBytes(0xFFFFFFFF);
+            bytes = BitConverter.GetBytes(gem);
             Array.Copy(bytes, 0x0, itemInfobytes, (int)EROffsets.ItemGiveStruct.Gem, bytes.Length);
 
             Kernel32.WriteBytes(Handle, itemInfo, itemInfobytes);

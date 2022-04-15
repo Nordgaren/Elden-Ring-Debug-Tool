@@ -72,6 +72,18 @@
     <None Update="Resources\ERItemCategories.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="Resources\Items\Armor.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\Items\Goods.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\Items\Magic.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\Items\Talismans.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Resources\Params\Defs\ActionButtonParam.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -1758,31 +1770,22 @@
     <None Update="Resources\Params\Pointers\WwiseValueToStrParam_Switch_PlayerVoiceType.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Resources\Weapons\Arrows.txt">
+    <None Update="Resources\Items\Gems.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Resources\Weapons\Bolts.txt">
+    <None Update="Resources\Items\Weapons\Ammo.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Resources\Weapons\Gems.txt">
+    <None Update="Resources\Items\Weapons\MeleeWeapons.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Resources\Weapons\GreatArrows.txt">
+    <None Update="Resources\Items\Weapons\RangedWeapons.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Resources\Weapons\GreatBolts.txt">
+    <None Update="Resources\Items\Weapons\Shields.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Resources\Weapons\MeleeWeapons.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Resources\Weapons\RangedWeapons.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Resources\Weapons\Shields.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Resources\Weapons\SpellTools.txt">
+    <None Update="Resources\Items\Weapons\SpellTools.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>

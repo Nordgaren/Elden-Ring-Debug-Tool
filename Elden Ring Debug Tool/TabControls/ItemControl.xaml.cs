@@ -181,13 +181,16 @@ namespace Elden_Ring_Debug_Tool
             if (item == null)
                 return;
 
-            //if (!cbxQuantityRestrict.IsChecked.Value)
+            if (!cbxQuantityRestrict.IsChecked.Value)
+                nudQuantity.Maximum = int.MaxValue;
+            else
+                nudQuantity.Maximum = 99;
+
             //{
             //    txtMaxHeld.Visibility = nudQuantity.Maximum > 0 ? Visibility.Hidden : Visibility.Visible;
 
             //    //var max = Hook.GetMaxQuantity(item);
             //    //var held = Hook.GetHeld(item);
-            //    nudQuantity.Maximum = 99;
             //    //nudQuantity.IsEnabled = true;
             //    //txtMaxHeld.Visibility = max - held > 0 ? Visibility.Hidden : Visibility.Visible;
             //}
@@ -195,6 +198,10 @@ namespace Elden_Ring_Debug_Tool
             nudUpgrade.Maximum = 0;
 
             cmbInfusion.Items.Clear();
+
+            cmbGems.Items.Clear();
+            cmbGems.Items.Add(new ERGem("-1 None", ERItem.Category.Gem));
+
             if (item.ItemCategory == ERItem.Category.Weapons)
             {
                 var weapon = item as ERWeapon;
@@ -202,9 +209,17 @@ namespace Elden_Ring_Debug_Tool
                     foreach (var infusion in weapon.DefaultGem.Infusions)
                         cmbInfusion.Items.Add(infusion);
 
+
+                if (!weapon.Unique)
+                    foreach (var gem in ERGem.All)
+                        if (gem.WeaponTypes.Contains(weapon.Type))
+                            cmbGems.Items.Add(gem);
+
+
                 nudUpgrade.Maximum = weapon.Unique ? 10 : 25;
             }
-            else
+          
+            if (cmbInfusion.Items.Count == 0)
                 cmbInfusion.Items.Add(Infusion.Standard);
 
             nudUpgrade.IsEnabled = nudUpgrade.Maximum > 0;
@@ -212,8 +227,10 @@ namespace Elden_Ring_Debug_Tool
             cmbInfusion.SelectedIndex = 0;
             cmbInfusion.IsEnabled = cmbInfusion.Items.Count > 1;
 
+            cmbGems.SelectedIndex = 0;
+            cmbGems.IsEnabled = cmbGems.Items.Count > 1;
 
-            //btnCreate.IsEnabled = Hook.GetIsDroppable(item.ID) || Properties.Settings.Default.SpawnUndroppable;
+            btnCreate.IsEnabled = item.CanAquireFromOtherPlayers || cbxLimit.IsChecked.Value;
             //if (!Properties.Settings.Default.UpdateMaxLive)
             //    HandleMaxAvailable();
             HandleMaxItemCheckbox();
@@ -255,7 +272,9 @@ namespace Elden_Ring_Debug_Tool
 
                 var infusion = (Infusion)cmbInfusion.SelectedItem;
 
-                var gem = ERGem.Gems[0];
+                id += (int)item.ItemCategory;
+
+                var gem = cmbGems.SelectedItem as ERGem;
 
                 Hook.GetItem(id, (int)nudQuantity.Value, (int)infusion, (int)nudUpgrade.Value, gem.ID);
                 //if (!Properties.Settings.Default.UpdateMaxLive)

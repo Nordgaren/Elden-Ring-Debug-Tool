@@ -20,7 +20,6 @@
 43050000 Pulley Crossbow
 43060000 Full Moon Crossbow
 43080000 Arbalest
-43100000 Buckshot Crossbow
 43110000 Crepus's Black-Key Crossbow
 44000000 Hand Ballista
 44010000 Jar Cannon
