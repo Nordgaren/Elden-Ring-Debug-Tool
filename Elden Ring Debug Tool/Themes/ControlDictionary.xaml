@@ -49,7 +49,7 @@
                 <ControlTemplate TargetType="ListBoxItem">
                     <Border Name="_Border"
                                 Padding="2"
-                                SnapsToDevicePixels="true">
+                                SnapsToDevicePixels="true" Background="{StaticResource ListBox.Disabled.Background}">
                         <ContentPresenter />
                     </Border>
                     <ControlTemplate.Triggers>

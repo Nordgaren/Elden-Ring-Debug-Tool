@@ -93,7 +93,6 @@ namespace Elden_Ring_Debug_Tool
             if (selectedParam == null)
                 return;
 
-            ParamPanel.Children.Clear();
             if (string.IsNullOrWhiteSpace(SearchBoxRow.Text))
             {
                 ListBoxRows.ItemsSource = selectedParam.Rows;
@@ -124,20 +123,33 @@ namespace Elden_Ring_Debug_Tool
 
         private void SearchBoxField_TextChanged(object sender, TextChangedEventArgs e)
         {
-            FilterFields();
-        }
+            var selectedParam = ((ERParam)ComboBoxParams.SelectedItem);
+            if (selectedParam == null)
+                return;
 
-        private void FilterFields()
-        {
-            
             var row = ((ERParam.Row)ListBoxRows.SelectedItem);
             if (row == null)
                 return;
 
+            selectedParam.SelectedRow = row;
+        }
+
+        private void FilterFields()
+        {
+            var selectedParam = ((ERParam)ComboBoxParams.SelectedItem);
+            if (selectedParam == null)
+                return;
+
+            var row = ((ERParam.Row)ListBoxRows.SelectedItem);
+            if (row == null)
+                return;
+
+            selectedParam.SelectedRow = row;
+
             ParamPanel.Children.Clear();
             if (string.IsNullOrWhiteSpace(SearchBoxField.Text))
             {
-                foreach (var control in row.Cells)
+                foreach (var control in selectedParam.Cells)
                 {
                     ParamPanel.Children.Add(control);
                 }
@@ -146,7 +158,7 @@ namespace Elden_Ring_Debug_Tool
             {
                 if (CbxValueSearch.IsChecked.Value)
                 {
-                    foreach (var control in row.Cells)
+                    foreach (var control in selectedParam.Cells)
                     {
                         if (((ICellControl)control).Value.Contains(SearchBoxField.Text))
                             ParamPanel.Children.Add(control);
@@ -154,7 +166,7 @@ namespace Elden_Ring_Debug_Tool
                 }
                 else
                 {
-                    foreach (var control in row.Cells)
+                    foreach (var control in selectedParam.Cells)
                     {
                         if (((ICellControl)control).FieldName.ToLower().Contains(SearchBoxField.Text.ToLower()))
                             ParamPanel.Children.Add(control);

@@ -22,7 +22,7 @@ namespace Elden_Ring_Debug_Tool
         public const string GameDataManAoB = "48 8B 05 ? ? ? ? 48 85 C0 74 05 48 8B 40 58 C3 C3";
 
         public const int PlayerGameData = 0x8;
-        public enum Weapons
+        public enum ChrIns
         {
             ArmStyle = 0x328,
             CurrWepSlotOffsetLeft = 0x32C,
@@ -72,6 +72,7 @@ namespace Elden_Ring_Debug_Tool
         }
         public enum EquipParamGoods
         {
+            MaxNum = 0x3A,
             IsFullSuppleItem = 0x4A,
             IsDrop = 0x6F
         }
@@ -90,6 +91,7 @@ namespace Elden_Ring_Debug_Tool
             DisableMultiDropShare = 0x109,
             SwordArtsParamId = 0x198,
             WepType = 0x1A6,
+            MaxArrowQuantity = 0x235,
             OriginEquipWep16 = 0x250
         }
 
@@ -109,5 +111,13 @@ namespace Elden_Ring_Debug_Tool
             Gem = 0x30
         }
 
+        public enum InventoryEntry
+        {
+            GaItemHandle = 0x0,
+            ItemID = 0x4,
+            ItemCategory = 0x7,
+            Quantity = 0x8,
+            DispalyID = 0x10,
+        }
     }
 }

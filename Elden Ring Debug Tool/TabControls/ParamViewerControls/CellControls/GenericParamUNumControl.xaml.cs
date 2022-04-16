@@ -21,12 +21,18 @@ using Xceed.Wpf.Toolkit;
 namespace Elden_Ring_Debug_Tool
 {
     //https://stackoverflow.com/questions/3811179/wpf-usercontrol-with-generic-code-behind lol
-    public abstract partial class GenericParamUNumControl : UserControl
-    {
+    public abstract partial class GenericParamUNumControl : UserControl, INotifyPropertyChanged
+    { 
         // If you use event handlers in GenericUserControl.xaml, you have to define 
         // them here as abstract and implement them in the generic class below, e.g.:
 
-        // abstract protected void MouseClick(object sender, MouseButtonEventArgs e);
+    // abstract protected void MouseClick(object sender, MouseButtonEventArgs e);
+    public event PropertyChangedEventHandler PropertyChanged;
+
+        protected void OnPropertyChanged([CallerMemberName] string name = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+        }
     }
 
     /// <summary>
@@ -35,7 +41,8 @@ namespace Elden_Ring_Debug_Tool
     public partial class ParamUNumControl<T> : GenericParamUNumControl, ICellControl
     {
         public ERParam Param { get; private set; }
-        public int Offset { get; private set; }
+        private int FieldOffset { get; set; }
+        public int Offset => Param.SelectedRow?.DataOffset + FieldOffset ?? 0;
         public string FieldName { get; set; }
         public string Value { get => ParamValue.ToString(); }
 
@@ -79,12 +86,11 @@ namespace Elden_Ring_Debug_Tool
             return (uint)Marshal.SizeOf(typeof(T));
         }
 
-        public ParamUNumControl(ERParam param, int offset, string name)
+        public ParamUNumControl(ERParam param, int fieldOffset ,string name)
         {
             Param = param;
-            Offset = offset;
             FieldName = name;
-
+            FieldOffset = fieldOffset;
             InitializeComponent();
             //UNumControl.ValueChanged += NumControl_ValueChanged;
         }
@@ -95,6 +101,11 @@ namespace Elden_Ring_Debug_Tool
             //    return;
 
             //Value = (T)Convert.ChangeType(NumControl.Value, typeof(T));
+        }
+
+        public void UpdateField()
+        {
+            OnPropertyChanged(nameof(ParamValue));
         }
     }
 

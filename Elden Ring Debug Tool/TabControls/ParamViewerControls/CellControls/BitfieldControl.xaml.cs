@@ -1,7 +1,9 @@
 ﻿using PropertyHook;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -19,10 +21,17 @@ namespace Elden_Ring_Debug_Tool
     /// <summary>
     /// Interaction logic for BitfieldControl.xaml
     /// </summary>
-    public partial class BitfieldControl : UserControl, ICellControl
+    public partial class BitfieldControl : UserControl, ICellControl, INotifyPropertyChanged
     {
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected void OnPropertyChanged([CallerMemberName] string name = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+        }
         public ERParam Param { get; private set; }
-        public int Offset { get; private set; }
+        private int FieldOffset { get; set; }
+        public int Offset => Param.SelectedRow?.DataOffset + FieldOffset ?? 0;
         public int Position { get; private set; }
         public string FieldName { get; set; }
         public string Value { get => ParamValue ? "1" : "0"; }
@@ -42,14 +51,19 @@ namespace Elden_Ring_Debug_Tool
                 Array.Copy(bytes, 0, Param.Bytes, Offset, bytes.Length);
             }
         }
-        public BitfieldControl(ERParam param, int offset, int position, string name)
+        public BitfieldControl(ERParam param, int fieldOffset ,int position, string name)
         {
             Param = param;
-            Offset = offset;
+            FieldOffset = fieldOffset;
             Position = position;
             FieldName = name;
             
             InitializeComponent();
+        }
+
+        public void UpdateField()
+        {
+            OnPropertyChanged(nameof(ParamValue));
         }
     }
 }

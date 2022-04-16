@@ -47,25 +47,12 @@ namespace Elden_Ring_Debug_Tool
 
         private void HandleMaxAvailable()
         {
-            //if (cbxQuantityRestrict.IsChecked.Value)
-            //{
-            //    ERItem item = lbxItems.SelectedItem as ERItem;
-            //    if (item == null)
-            //        return;
+            ERItem item = lbxItems.SelectedItem as ERItem;
+            if (item == null)
+                return;
 
-            //    var max = Hook.GetMaxQuantity(item);
-            //    var held = Hook.GetHeld(item);
-            //    var diff = max - held;
-            //    if (diff != nudQuantity.Maximum)
-            //    {
-            //        nudQuantity.Maximum = diff;
-            //        if (cbxMax.IsChecked.Value)
-            //            nudQuantity.Value = nudQuantity.Maximum;
+            nudQuantity.Maximum = cbxQuantityRestrict.IsChecked.Value ? item.MaxQuantity : int.MaxValue;
 
-            //        nudQuantity.IsEnabled = nudQuantity.Maximum > 1;
-            //        txtMaxHeld.Visibility = nudQuantity.Maximum > 0 ? Visibility.Hidden : Visibility.Visible;
-            //    }
-            //}
         }
 
         internal override void ReloadCtrl()
@@ -147,22 +134,15 @@ namespace Elden_Ring_Debug_Tool
             if (item == null)
                 return;
 
-            //if (!cbxQuantityRestrict.IsChecked.Value)
-            //{
-            //    //var max = Hook.GetMaxQuantity(item);
-            //    //var held = Hook.GetHeld(item);
-            //    nudQuantity.IsEnabled = true;
-            //    nudQuantity.Maximum = int.MaxValue;
-            //    //txtMaxHeld.Visibility = max - held > 0 ? Visibility.Hidden : Visibility.Visible;
-            //}
-            //else if (lbxItems.SelectedIndex != -1)
-            //{
-            //    //var max = Hook.GetMaxQuantity(item);
-            //    //var held = Hook.GetHeld(item);
-            //    nudQuantity.Maximum = 99;
-            //    //nudQuantity.IsEnabled = nudQuantity.Maximum > 1;
-            //    //txtMaxHeld.Visibility = nudQuantity.Maximum > 0 ? Visibility.Hidden : Visibility.Visible;
-            //}
+            if (!cbxQuantityRestrict.IsChecked.Value)
+            {
+                nudQuantity.IsEnabled = true;
+                nudQuantity.Maximum = int.MaxValue;
+            }
+            else if (lbxItems.SelectedIndex != -1)
+            {
+                nudQuantity.Maximum = item.MaxQuantity;
+            }
         }
 
         private void cmbInfusion_SelectedIndexChanged(object sender, EventArgs e)
@@ -184,7 +164,7 @@ namespace Elden_Ring_Debug_Tool
             if (!cbxQuantityRestrict.IsChecked.Value)
                 nudQuantity.Maximum = int.MaxValue;
             else
-                nudQuantity.Maximum = 99;
+                nudQuantity.Maximum = item.MaxQuantity;
 
             //{
             //    txtMaxHeld.Visibility = nudQuantity.Maximum > 0 ? Visibility.Hidden : Visibility.Visible;
@@ -242,7 +222,7 @@ namespace Elden_Ring_Debug_Tool
             if (item == null)
                 return;
 
-            //btnCreate.IsEnabled = Hook.GetIsDroppable(item.ID) || Properties.Settings.Default.SpawnUndroppable;
+            btnCreate.IsEnabled = item.CanAquireFromOtherPlayers || cbxLimit.IsChecked.Value;//Properties.Settings.Default.SpawnUndroppable;
         }
 
         internal void EnableStats(bool enable)
@@ -366,27 +346,27 @@ namespace Elden_Ring_Debug_Tool
 
         private void cbxMaxUpgrade_Checked(object sender, RoutedEventArgs e)
         {
-            //HandleMaxItemCheckbox()
-            //if (cbxMax.IsChecked.Value)
-            //{
-            //    nudUpgrade.Value = nudUpgrade.Maximum;
-            //    nudQuantity.Value = nudQuantity.Maximum;
-            //}
-            //else
-            //{
-            //    nudUpgrade.Value = nudUpgrade.Minimum;
-            //    nudQuantity.Value = nudQuantity.Minimum;
-            //}
+            HandleMaxItemCheckbox();
+            if (cbxMax.IsChecked.Value)
+            {
+                nudUpgrade.Value = nudUpgrade.Maximum;
+                nudQuantity.Value = nudQuantity.Maximum;
+            }
+            else
+            {
+                nudUpgrade.Value = nudUpgrade.Minimum;
+                nudQuantity.Value = nudQuantity.Minimum;
+            }
         }
 
         private void HandleMaxItemCheckbox()
         {
             //Set upgrade nud to max if max checkbox is ticked
-            //if (cbxMax.IsChecked.Value)
-            //{
-            //    nudUpgrade.Value = nudUpgrade.Maximum;
-            //    nudQuantity.Value = nudQuantity.Maximum;
-            //}
+            if (cbxMax.IsChecked.Value)
+            {
+                nudUpgrade.Value = nudUpgrade.Maximum;
+                nudQuantity.Value = nudQuantity.Maximum;
+            }
         }
 
         private void cmbInfusion_KeyDown(object sender, KeyEventArgs e)

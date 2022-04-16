@@ -15,7 +15,7 @@ using Infusion = Elden_Ring_Debug_Tool.ERWeapon.Infusion;
 using Category = Elden_Ring_Debug_Tool.ERItem.Category;
 using WeaponType = Elden_Ring_Debug_Tool.ERWeapon.WeaponType;
 using static SoulsFormats.PARAMDEF;
-
+using System.Collections;
 
 namespace Elden_Ring_Debug_Tool
 {
@@ -34,8 +34,11 @@ namespace Elden_Ring_Debug_Tool
 
         private PHPointer CSSystemStep { get; set; }
         private PHPointer IsLoaded { get; set; }
+
+
         private PHPointer GameDataMan { get; set; }
         private PHPointer PlayerGameData { get; set; }
+        private PHPointer PlayerInventory { get; set; }
         private PHPointer SoloParamRepository { get; set; }
         private PHPointer CapParamCall { get; set; }
         public PHPointer ItemGive { get; set; }
@@ -82,40 +85,7 @@ namespace Elden_Ring_Debug_Tool
             OnPropertyChanged(nameof(Setup));
 
         }
-        private void ReadParams()
-        {
-            foreach (var category in ERItemCategory.All)
-            {
-                foreach (var item in category.Items)
-                {
-                    SetupItem(item);
-                }
-            }
-        }
 
-        private void SetupItem(ERItem item)
-        {
-            switch (item.ItemCategory)
-            {
-                case Category.Weapons:
-                    item.SetupItem(EquipParamWeapon);
-                    break;
-                case Category.Protector:
-                    item.SetupItem(EquipParamProtector);
-                    break;
-                case Category.Accessory:
-                    item.SetupItem(EquipParamAccessory);
-                    break;
-                case Category.Goods:
-                    item.SetupItem(EquipParamGoods);
-                    break;
-                case Category.Gem:
-                    item.SetupItem(EquipParamGem);
-                    break;
-                default:
-                    break;
-            }
-        }
 
         private ERParam EquipParamAccessory;
         private ERParam EquipParamGem;
@@ -123,7 +93,6 @@ namespace Elden_Ring_Debug_Tool
         private ERParam EquipParamProtector;
         private ERParam EquipParamWeapon;
         private ERParam MagicParam;
-
 
         private Engine Engine = new Engine(Architecture.X86, Mode.X64);
         //TKCode
@@ -256,16 +225,56 @@ namespace Elden_Ring_Debug_Tool
             EquipParamGem.RestoreParam();
         }
 
+
+        #endregion
+
+        #region Inventory
+
+        private void ReadParams()
+        {
+            foreach (var category in ERItemCategory.All)
+            {
+                foreach (var item in category.Items)
+                {
+                    SetupItem(item);
+                }
+            }
+        }
+
+        private void SetupItem(ERItem item)
+        {
+            switch (item.ItemCategory)
+            {
+                case Category.Weapons:
+                    item.SetupItem(EquipParamWeapon);
+                    break;
+                case Category.Protector:
+                    item.SetupItem(EquipParamProtector);
+                    break;
+                case Category.Accessory:
+                    item.SetupItem(EquipParamAccessory);
+                    break;
+                case Category.Goods:
+                    item.SetupItem(EquipParamGoods);
+                    break;
+                case Category.Gem:
+                    item.SetupItem(EquipParamGem);
+                    break;
+                default:
+                    break;
+            }
+        }
+
         internal void GetItem(int id, int quantity, int infusion, int upgrade, int gem)
         {
             var itemInfobytes = new byte[0x34];
             var itemInfo = GetPrefferedIntPtr(0x34);
 
             var bytes = BitConverter.GetBytes(0x1);
-            Array.Copy(bytes, 0x0,itemInfobytes, (int)EROffsets.ItemGiveStruct.Count, bytes.Length);
+            Array.Copy(bytes, 0x0, itemInfobytes, (int)EROffsets.ItemGiveStruct.Count, bytes.Length);
 
             bytes = BitConverter.GetBytes(id + infusion + upgrade);
-            Array.Copy(bytes, 0x0,itemInfobytes, (int)EROffsets.ItemGiveStruct.ID, bytes.Length);
+            Array.Copy(bytes, 0x0, itemInfobytes, (int)EROffsets.ItemGiveStruct.ID, bytes.Length);
 
             bytes = BitConverter.GetBytes(quantity);
             Array.Copy(bytes, 0x0, itemInfobytes, (int)EROffsets.ItemGiveStruct.Quantity, bytes.Length);
@@ -281,11 +290,17 @@ namespace Elden_Ring_Debug_Tool
             Free(itemInfo);
         }
 
-        #endregion
+        List<ERInventoryEntry> Inventory;
+        int InvantoryCount => 
 
-        #region Inventory
-
-
+        internal IEnumerable GetInventory()
+        {
+            return new List<ERInventoryEntry>();
+        }
+        private List<ERInventoryEntry> GetInventoryList()
+        {
+            return new List<ERInventoryEntry>();
+        }
         #endregion
 
 
@@ -297,132 +312,132 @@ namespace Elden_Ring_Debug_Tool
         #region ChrAsm
         public byte ArmStyle
         {
-            get => PlayerGameData.ReadByte((int)EROffsets.Weapons.ArmStyle);
+            get => PlayerGameData.ReadByte((int)EROffsets.ChrIns.ArmStyle);
             set
             {
                 if (!Loaded)
                     return;
-                PlayerGameData.WriteByte((int)EROffsets.Weapons.ArmStyle, value);
+                PlayerGameData.WriteByte((int)EROffsets.ChrIns.ArmStyle, value);
             }
         }
         public int CurrWepSlotOffsetLeft
         {
-            get => PlayerGameData.ReadInt32((int)EROffsets.Weapons.CurrWepSlotOffsetLeft);
+            get => PlayerGameData.ReadInt32((int)EROffsets.ChrIns.CurrWepSlotOffsetLeft);
             set
             {
                 if (!Loaded)
                     return;
-                PlayerGameData.WriteInt32((int)EROffsets.Weapons.CurrWepSlotOffsetLeft, value);
+                PlayerGameData.WriteInt32((int)EROffsets.ChrIns.CurrWepSlotOffsetLeft, value);
             }
         }
         public int CurrWepSlotOffsetRight
         {
-            get => PlayerGameData.ReadInt32((int)EROffsets.Weapons.CurrWepSlotOffsetRight);
+            get => PlayerGameData.ReadInt32((int)EROffsets.ChrIns.CurrWepSlotOffsetRight);
             set
             {
                 if (!Loaded)
                     return;
-                PlayerGameData.WriteInt32((int)EROffsets.Weapons.CurrWepSlotOffsetRight, value);
+                PlayerGameData.WriteInt32((int)EROffsets.ChrIns.CurrWepSlotOffsetRight, value);
             }
         }
         public int RHandWeapon1
         {
-            get => PlayerGameData.ReadInt32((int)EROffsets.Weapons.RHandWeapon1);
+            get => PlayerGameData.ReadInt32((int)EROffsets.ChrIns.RHandWeapon1);
             set
             {
                 if (!Loaded)
                     return;
-                PlayerGameData.WriteInt32((int)EROffsets.Weapons.RHandWeapon1, value);
+                PlayerGameData.WriteInt32((int)EROffsets.ChrIns.RHandWeapon1, value);
             }
         }
         public int RHandWeapon2
         {
-            get => PlayerGameData.ReadInt32((int)EROffsets.Weapons.RHandWeapon2);
+            get => PlayerGameData.ReadInt32((int)EROffsets.ChrIns.RHandWeapon2);
             set
             {
                 if (!Loaded)
                     return;
-                PlayerGameData.WriteInt32((int)EROffsets.Weapons.RHandWeapon2, value);
+                PlayerGameData.WriteInt32((int)EROffsets.ChrIns.RHandWeapon2, value);
             }
         }
         public int RHandWeapon3
         {
-            get => PlayerGameData.ReadInt32((int)EROffsets.Weapons.RHandWeapon3);
+            get => PlayerGameData.ReadInt32((int)EROffsets.ChrIns.RHandWeapon3);
             set
             {
                 if (!Loaded)
                     return;
-                PlayerGameData.WriteInt32((int)EROffsets.Weapons.RHandWeapon3, value);
+                PlayerGameData.WriteInt32((int)EROffsets.ChrIns.RHandWeapon3, value);
             }
         }
         public int LHandWeapon1
         {
-            get => PlayerGameData.ReadInt32((int)EROffsets.Weapons.LHandWeapon1);
+            get => PlayerGameData.ReadInt32((int)EROffsets.ChrIns.LHandWeapon1);
             set
             {
                 if (!Loaded)
                     return;
-                PlayerGameData.WriteInt32((int)EROffsets.Weapons.LHandWeapon1, value);
+                PlayerGameData.WriteInt32((int)EROffsets.ChrIns.LHandWeapon1, value);
             }
         }
         public int LHandWeapon2
         {
-            get => PlayerGameData.ReadInt32((int)EROffsets.Weapons.LHandWeapon2);
+            get => PlayerGameData.ReadInt32((int)EROffsets.ChrIns.LHandWeapon2);
             set
             {
                 if (!Loaded)
                     return;
-                PlayerGameData.WriteInt32((int)EROffsets.Weapons.LHandWeapon2, value);
+                PlayerGameData.WriteInt32((int)EROffsets.ChrIns.LHandWeapon2, value);
             }
         }
         public int LHandWeapon3
         {
-            get => PlayerGameData.ReadInt32((int)EROffsets.Weapons.LHandWeapon3);
+            get => PlayerGameData.ReadInt32((int)EROffsets.ChrIns.LHandWeapon3);
             set
             {
                 if (!Loaded)
                     return;
-                PlayerGameData.WriteInt32((int)EROffsets.Weapons.LHandWeapon3, value);
+                PlayerGameData.WriteInt32((int)EROffsets.ChrIns.LHandWeapon3, value);
             }
         }
         public int Arrow1
         {
-            get => PlayerGameData.ReadInt32((int)EROffsets.Weapons.Arrow1);
+            get => PlayerGameData.ReadInt32((int)EROffsets.ChrIns.Arrow1);
             set
             {
                 if (!Loaded)
                     return;
-                PlayerGameData.WriteInt32((int)EROffsets.Weapons.Arrow1, value);
+                PlayerGameData.WriteInt32((int)EROffsets.ChrIns.Arrow1, value);
             }
         }
         public int Arrow2
         {
-            get => PlayerGameData.ReadInt32((int)EROffsets.Weapons.Arrow2);
+            get => PlayerGameData.ReadInt32((int)EROffsets.ChrIns.Arrow2);
             set
             {
                 if (!Loaded)
                     return;
-                PlayerGameData.WriteInt32((int)EROffsets.Weapons.Arrow2, value);
+                PlayerGameData.WriteInt32((int)EROffsets.ChrIns.Arrow2, value);
             }
         }
         public int Bolt1
         {
-            get => PlayerGameData.ReadInt32((int)EROffsets.Weapons.Bolt1);
+            get => PlayerGameData.ReadInt32((int)EROffsets.ChrIns.Bolt1);
             set
             {
                 if (!Loaded)
                     return;
-                PlayerGameData.WriteInt32((int)EROffsets.Weapons.Bolt1, value);
+                PlayerGameData.WriteInt32((int)EROffsets.ChrIns.Bolt1, value);
             }
         }
         public int Bolt2
         {
-            get => PlayerGameData.ReadInt32((int)EROffsets.Weapons.Bolt2);
+            get => PlayerGameData.ReadInt32((int)EROffsets.ChrIns.Bolt2);
             set
             {
                 if (!Loaded)
                     return;
-                PlayerGameData.WriteInt32((int)EROffsets.Weapons.Bolt2, value);
+                PlayerGameData.WriteInt32((int)EROffsets.ChrIns.Bolt2, value);
             }
         } 
         #endregion

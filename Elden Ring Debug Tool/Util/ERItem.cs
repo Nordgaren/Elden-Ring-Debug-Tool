@@ -15,7 +15,7 @@ namespace Elden_Ring_Debug_Tool
             Protector = 0x10000000,
             Accessory = 0x20000000,
             Goods = 0x40000000,
-            Gem = 0x80000000,
+            Gem = 0x80000000
         }
         private static Regex ItemEntryRx = new Regex(@"^\s*(?<id>\S+)\s+(?<name>.*)$");
 
@@ -23,6 +23,7 @@ namespace Elden_Ring_Debug_Tool
         public int ID;
         public Category ItemCategory;
 
+        public short MaxQuantity;
         public bool IsDrop;
         public bool IsMultiplayerShare;
         public bool CanAquireFromOtherPlayers => IsDrop && IsMultiplayerShare;
@@ -33,7 +34,7 @@ namespace Elden_Ring_Debug_Tool
             Name = itemEntry.Groups["name"].Value.Replace("\r", "");
             ID = Convert.ToInt32(itemEntry.Groups["id"].Value);
             ItemCategory = category;
-
+            MaxQuantity = 1;
         }
 
         public override string ToString()
@@ -43,7 +44,7 @@ namespace Elden_Ring_Debug_Tool
 
         public virtual void SetupItem(ERParam param)
         {
-            var bitfield = 0;
+            byte bitfield;
             switch (ItemCategory)
             {
                 case Category.Protector:
@@ -57,6 +58,8 @@ namespace Elden_Ring_Debug_Tool
                     IsDrop = (bitfield & (1 << 4)) != 0;
                     break;
                 case Category.Goods:
+                    MaxQuantity = BitConverter.ToInt16(param.Bytes, param.OffsetDict[ID] + (int)EROffsets.EquipParamGoods.MaxNum);
+
                     bitfield = param.Bytes[param.OffsetDict[ID] + (int)EROffsets.EquipParamGoods.IsFullSuppleItem];
                     IsMultiplayerShare = (bitfield & (1 << 3)) == 0;
 

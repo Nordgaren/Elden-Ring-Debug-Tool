@@ -26,7 +26,101 @@ namespace Elden_Ring_Debug_Tool
         public Dictionary<int, string> NameDictionary { get; private set; }
         public Dictionary<int, int> OffsetDict { get; private set; }
         public int RowLength { get; private set; }
+        private Row _selectedRow;
+        public Row SelectedRow
+        {
+            get
+            {
+                return _selectedRow;
+            }
+            set
+            {
+                _selectedRow = value;
+                foreach (ICellControl control in Cells)
+                {
+                    control.UpdateField();
+                }
+            }
+        }
+        public List<UserControl> Cells { get; private set; }
 
+        private void BuildCells()
+        {
+            Cells = new List<UserControl>();
+            int totalSize = 0;
+            for (int i = 0; i < ParamDef.Fields.Count; i++)
+            {
+                Field field = ParamDef.Fields[i];
+                DefType type = field.DisplayType;
+                var size = ParamUtil.IsArrayType(type) ? ParamUtil.GetValueSize(type) * field.ArrayLength : ParamUtil.GetValueSize(type);
+                if (ParamUtil.IsArrayType(type))
+                    totalSize += ParamUtil.GetValueSize(type) * field.ArrayLength;
+                else
+                    totalSize += ParamUtil.GetValueSize(type);
+
+                if (ParamUtil.IsBitType(type) && field.BitSize != -1)
+                {
+                    int bitOffset = field.BitSize;
+                    DefType bitType = type == DefType.dummy8 ? DefType.u8 : type;
+                    int bitLimit = ParamUtil.GetBitLimit(bitType);
+                    for (; i < ParamDef.Fields.Count - 1; i++)
+                    {
+                        var bitfield = new BitfieldControl(this, totalSize - size, bitOffset - 1, ParamDef.Fields[i].InternalName);
+                        Cells.Add(bitfield);
+                        Field nextField = ParamDef.Fields[i + 1];
+                        DefType nextType = nextField.DisplayType;
+                        if (!ParamUtil.IsBitType(nextType) || nextField.BitSize == -1 || bitOffset + nextField.BitSize > bitLimit
+                            || (nextType == DefType.dummy8 ? DefType.u8 : nextType) != bitType)
+                            break;
+                        bitOffset += nextField.BitSize;
+                    }
+                }
+                else
+                {
+                    switch (type)
+                    {
+                        case DefType.u8:
+                            var u8 = new ParamUNumControl<byte>(this, totalSize - size, field.InternalName);
+                            Cells.Add(u8);
+                            break;
+                        case DefType.s8:
+                            var s8 = new ParamNumControl<sbyte>(this, totalSize - size, field.InternalName);
+                            Cells.Add(s8);
+                            break;
+                        case DefType.u16:
+                            var u16 = new ParamUNumControl<ushort>(this, totalSize - size, field.InternalName);
+                            Cells.Add(u16);
+                            break;
+                        case DefType.s16:
+                            var s16 = new ParamNumControl<short>(this, totalSize - size, field.InternalName);
+                            Cells.Add(s16);
+                            break;
+                        case DefType.u32:
+                            var u32 = new ParamUNumControl<uint>(this, totalSize - size, field.InternalName);
+                            Cells.Add(u32);
+                            break;
+                        case DefType.s32:
+                            var s32 = new ParamNumControl<int>(this, totalSize - size, field.InternalName);
+                            Cells.Add(s32);
+                            break;
+                        case DefType.f32:
+                            var f32 = new ParamDecControl<float>(this, totalSize - size, field.InternalName);
+                            Cells.Add(f32);
+                            break;
+                        case DefType.fixstr:
+                        case DefType.fixstrW:
+                        case DefType.dummy8:
+                            var dummy8 = new ParamNumControl<byte>(this, totalSize - size, field.InternalName);
+                            Cells.Add(dummy8);
+                            break;
+                        default:
+                            break;
+                    }
+                }
+
+
+            }
+        }
         public ERParam(PHPointer pointer, int offset, PARAMDEF Paramdef, string name)
         {
             Pointer = pointer;
@@ -37,6 +131,7 @@ namespace Elden_Ring_Debug_Tool
             BuildNameDictionary();
             BuildOffsetDictionary();
             RowLength = ParamDef.GetRowSize();
+            BuildCells();
         }
         private void BuildOffsetDictionary()
         {
@@ -111,19 +206,9 @@ namespace Elden_Ring_Debug_Tool
             public string Name { get; private set; }
             public int ID { get; private set; }
             public int DataOffset { get; private set; }
-            private List<UserControl> _cells;
+            private List<UserControl> Cells;
 
-            public List<UserControl> Cells
-            {
-                get 
-                { 
-                    if (_cells == null)
-                        BuildCells();
 
-                    return _cells; 
-                }
-                set { _cells = value; }
-            }
 
             public Row(ERParam param, string name, int id, int offset)
             {
@@ -133,84 +218,6 @@ namespace Elden_Ring_Debug_Tool
                 DataOffset = offset;
             }
 
-            private void BuildCells()
-            {
-                _cells = new List<UserControl>();
-                int totalSize = 0;
-                Param.ParamDef.GetRowSize();
-                for (int i = 0; i < Param.ParamDef.Fields.Count; i++)
-                {
-                    Field field = Param.ParamDef.Fields[i];
-                    DefType type = field.DisplayType;
-                    var size = ParamUtil.IsArrayType(type) ? ParamUtil.GetValueSize(type) * field.ArrayLength : ParamUtil.GetValueSize(type);
-                    if (ParamUtil.IsArrayType(type))
-                        totalSize += ParamUtil.GetValueSize(type) * field.ArrayLength;
-                    else
-                        totalSize += ParamUtil.GetValueSize(type);
-
-                    if (ParamUtil.IsBitType(type) && field.BitSize != -1)
-                    {
-                        int bitOffset = field.BitSize;
-                        DefType bitType = type == DefType.dummy8 ? DefType.u8 : type;
-                        int bitLimit = ParamUtil.GetBitLimit(bitType);
-                        for (; i < Param.ParamDef.Fields.Count - 1; i++)
-                        {
-                            var bitfield = new BitfieldControl(Param, DataOffset + totalSize - size, bitOffset - 1, Param.ParamDef.Fields[i].InternalName);
-                            _cells.Add(bitfield);
-                            Field nextField = Param.ParamDef.Fields[i + 1];
-                            DefType nextType = nextField.DisplayType;
-                            if (!ParamUtil.IsBitType(nextType) || nextField.BitSize == -1 || bitOffset + nextField.BitSize > bitLimit
-                                || (nextType == DefType.dummy8 ? DefType.u8 : nextType) != bitType)
-                                break;
-                            bitOffset += nextField.BitSize;
-                        }
-                    }
-                    else
-                    {
-                        switch (type)
-                        {
-                            case DefType.u8:
-                                var u8 = new ParamUNumControl<byte>(Param, DataOffset + totalSize - size, field.InternalName);
-                                _cells.Add(u8);
-                                break;
-                            case DefType.s8:
-                                var s8 = new ParamNumControl<sbyte>(Param, DataOffset + totalSize - size, field.InternalName);
-                                _cells.Add(s8);
-                                break;
-                            case DefType.u16:
-                                var u16 = new ParamUNumControl<ushort>(Param, DataOffset + totalSize - size, field.InternalName);
-                                _cells.Add(u16);
-                                break;
-                            case DefType.s16:
-                                var s16 = new ParamNumControl<short>(Param, DataOffset + totalSize - size, field.InternalName);
-                                _cells.Add(s16);
-                                break;
-                            case DefType.u32:
-                                var u32 = new ParamUNumControl<uint>(Param, DataOffset + totalSize - size, field.InternalName);
-                                _cells.Add(u32);
-                                break;
-                            case DefType.s32:
-                                var s32 = new ParamNumControl<int>(Param, DataOffset + totalSize - size, field.InternalName);
-                                _cells.Add(s32);
-                                break;
-                            case DefType.f32:
-                                var f32 = new ParamDecControl<float>(Param, DataOffset + totalSize - size, field.InternalName);
-                                _cells.Add(f32);
-                                break;
-                            case DefType.fixstr:
-                            case DefType.fixstrW:
-                            case DefType.dummy8:
-                                var dummy8 = new ParamNumControl<byte>(Param, DataOffset + totalSize - size, field.InternalName);
-                                _cells.Add(dummy8);
-                                break;
-                            default:
-                                break;
-                        }
-                    }
-
-
-                }
-            }
 
             public override string ToString()
             {

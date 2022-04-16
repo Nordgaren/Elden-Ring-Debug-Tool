@@ -15,6 +15,6 @@
         </Grid.ColumnDefinitions>
 
         <Label Content="{Binding ElementName=ParamUNumCtrl, Path=FieldName}" HorizontalAlignment="Left" Grid.ColumnSpan="2" />
-        <wpfTool:ULongUpDown Value="{Binding ElementName=ParamUNumCtrl, Path=ParamValue, BindsDirectlyToSource=True}" Name="UNumControl" Width="75" Grid.Column="1" HorizontalAlignment="Right" />
+        <wpfTool:ULongUpDown Value="{Binding ElementName=ParamUNumCtrl, Path=ParamValue}" Name="UNumControl" Width="75" Grid.Column="1" HorizontalAlignment="Right" />
     </Grid>
 </UserControl>

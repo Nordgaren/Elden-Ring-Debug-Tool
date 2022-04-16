@@ -86,6 +86,7 @@ namespace Elden_Ring_Debug_Tool
 
         public override void SetupItem(ERParam param)
         {
+            MaxQuantity = param.Bytes[param.OffsetDict[ID] + (int)EROffsets.EquipParamWeapon.MaxArrowQuantity];
 
             var bitfield = param.Bytes[param.OffsetDict[ID] + (int)EROffsets.EquipParamWeapon.DisableMultiDropShare];
             IsMultiplayerShare = (bitfield & (1 << 0)) == 0;

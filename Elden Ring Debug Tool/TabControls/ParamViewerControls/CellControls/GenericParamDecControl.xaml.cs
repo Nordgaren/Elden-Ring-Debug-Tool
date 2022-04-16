@@ -21,9 +21,14 @@ using Xceed.Wpf.Toolkit;
 namespace Elden_Ring_Debug_Tool
 {
     //https://stackoverflow.com/questions/3811179/wpf-usercontrol-with-generic-code-behind lol
-    public abstract partial class GenericParamDecControl : UserControl
+    public abstract partial class GenericParamDecControl : UserControl, INotifyPropertyChanged
     {
-        
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected void OnPropertyChanged([CallerMemberName] string name = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+        }
         // If you use event handlers in GenericUserControl.xaml, you have to define 
         // them here as abstract and implement them in the generic class below, e.g.:
 
@@ -36,7 +41,8 @@ namespace Elden_Ring_Debug_Tool
     public partial class ParamDecControl<T> : GenericParamDecControl, ICellControl
     {
         public ERParam Param { get; private set; }
-        public int Offset { get; private set; }
+        private int FieldOffset { get; set; }
+        public int Offset => Param.SelectedRow?.DataOffset + FieldOffset ?? 0;
         public string FieldName { get; set; }
         public string Value { get => ParamValue.ToString(); }
         public float ParamValue
@@ -50,17 +56,18 @@ namespace Elden_Ring_Debug_Tool
             }
         }
 
-        public ParamDecControl(ERParam param, int offset, string name)
+        public ParamDecControl(ERParam param, int fieldOffset, string name)
         {
             Param = param;
-            Offset = offset;
+            FieldOffset = fieldOffset;
             FieldName = name;
 
             InitializeComponent();
         }
 
-        private void DecControl_ValueChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
+        public void UpdateField()
         {
+            OnPropertyChanged(nameof(ParamValue));
         }
     }
 }
