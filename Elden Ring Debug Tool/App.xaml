@@ -10,6 +10,7 @@
             </ResourceDictionary.MergedDictionaries>
             <local:BoolToVisibilityConverter x:Key="boolToVisibilityConverter"/>
             <local:NumberToHexString x:Key="numberToHexString"/>
+            <local:HalfNumberConverter x:Key="halfNumberConverter"/>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

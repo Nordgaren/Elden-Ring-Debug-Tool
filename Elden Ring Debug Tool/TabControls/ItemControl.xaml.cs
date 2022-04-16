@@ -44,7 +44,12 @@ namespace Elden_Ring_Debug_Tool
         {
             lbxItems.SelectedIndex = -1;
             lbxItems.SelectedIndex = 0;
-            Hook.LastInventoryCount = 0;
+        }
+
+        internal override void ResetCtrl()
+        {
+            Hook.ResetInventory();
+            DataGridInventory.ItemsSource = new List<ERInventoryEntry>();
         }
 
         private void InventoryTimer_Elapsed(object sender, ElapsedEventArgs e)

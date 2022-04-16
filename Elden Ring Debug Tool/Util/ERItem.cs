@@ -45,7 +45,7 @@ namespace Elden_Ring_Debug_Tool
         public virtual void SetupItem(ERParam param)
         {
             if (!param.OffsetDict.ContainsKey(ID))
-                return;
+                throw new Exception($"{Name} does not have a param entry in this version of Elden Ring!");
 
             byte bitfield;
             switch (ItemCategory)

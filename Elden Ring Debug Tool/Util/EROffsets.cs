@@ -129,5 +129,8 @@ namespace Elden_Ring_Debug_Tool
             DispalyID = 0xC,
             Unk = 0x10
         }
+
+        public const string WorldChrManAoB = "48 8B 05 ? ? ? ? 48 85 C0 74 0F 48 39 88 ? ? ? ? 75 06 89 B1 5C 03 00 00 0F 28 05 ? ? ? ? 4C 8D 45 E7";
+        public const int PlayerInsOffset = 0x18468;
     }
 }

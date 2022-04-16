@@ -43,12 +43,14 @@ namespace Elden_Ring_Debug_Tool
         private PHPointer CapParamCall { get; set; }
         public PHPointer ItemGive { get; set; }
         public PHPointer MapItemMan { get; set; }
+        public PHPointer WorldChrMan { get; set; }
+        public PHPointer PlayerIns { get; set; }
         public static bool Reading { get; set; }
         public string ID => Process?.Id.ToString() ?? "Not Hooked";
         public List<PHPointer> Params;
         //private PHPointer DurabilityAddr { get; set; }
         //private PHPointer DurabilitySpecialAddr { get; set; }
-        public bool Loaded => PlayerGameData != null ?  PlayerGameData.Resolve() != IntPtr.Zero : false;
+        public bool Loaded => PlayerIns != null ? PlayerIns.Resolve() != IntPtr.Zero : false;
         public bool Setup = false;
         public ERHook(int refreshInterval, int minLifetime, Func<Process, bool> processSelector)
             : base(refreshInterval, minLifetime, processSelector)
@@ -68,6 +70,9 @@ namespace Elden_Ring_Debug_Tool
 
 
             CapParamCall = RegisterAbsoluteAOB(EROffsets.CapParamCallAoB);
+
+            WorldChrMan = RegisterRelativeAOB(EROffsets.WorldChrManAoB, EROffsets.RelativePtrAddressOffset, EROffsets.RelativePtrInstructionSize, 0x0);
+            PlayerIns = CreateChildPointer(WorldChrMan, EROffsets.PlayerInsOffset);
         }
 
 
@@ -315,6 +320,12 @@ namespace Elden_Ring_Debug_Tool
                 Array.Copy(bytes, i * EROffsets.PlayerInventoryEntrySize, entry, 0, entry.Length);
                 Inventory.Add(new ERInventoryEntry(entry, this));
             }
+        }
+
+        public void ResetInventory()
+        {
+            Inventory = new List<ERInventoryEntry>();
+            LastInventoryCount = 0;
         }
         #endregion
 

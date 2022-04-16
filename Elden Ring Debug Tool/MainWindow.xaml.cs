@@ -101,6 +101,7 @@ namespace Elden_Ring_Debug_Tool
                     {
                         Reading = true;
                         UpdateProperties();
+                        ResetAllCtrls();
                         //Hook.UpdateName();
                         EnableAllCtrls(false);
                         FormLoaded = false;
@@ -132,6 +133,10 @@ namespace Elden_Ring_Debug_Tool
         private void ReloadAllCtrls()
         {
             DebugItems.ReloadCtrl();
+        }
+        private void ResetAllCtrls()
+        {
+            DebugItems.ResetCtrl();
         }
         private void UpdateAllCtrl()
         {
