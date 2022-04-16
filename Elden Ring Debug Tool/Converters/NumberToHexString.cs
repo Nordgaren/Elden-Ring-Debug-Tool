@@ -6,18 +6,19 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Data;
 
-namespace Elden_Ring_Debug_Tool.Converters
+namespace Elden_Ring_Debug_Tool
 {
-    class FocusToBoolConverter : IValueConverter
+    class NumberToHexString : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            throw new NotImplementedException();
+            return $"0x{((int)value):X8}";
+            //return ((int)value).ToString("X8");
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            throw new NotImplementedException();
+            return int.Parse(value.ToString());
         }
     }
 }

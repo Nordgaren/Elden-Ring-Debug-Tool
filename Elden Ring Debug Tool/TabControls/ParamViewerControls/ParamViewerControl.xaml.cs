@@ -51,7 +51,7 @@ namespace Elden_Ring_Debug_Tool
 
         }
 
-        internal virtual void ReloadCtrl() 
+        internal override void ReloadCtrl() 
         {
 
         }

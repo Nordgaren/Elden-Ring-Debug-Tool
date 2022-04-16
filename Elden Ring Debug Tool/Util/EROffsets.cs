@@ -22,6 +22,10 @@ namespace Elden_Ring_Debug_Tool
         public const string GameDataManAoB = "48 8B 05 ? ? ? ? 48 85 C0 74 05 48 8B 40 58 C3 C3";
 
         public const int PlayerGameData = 0x8;
+        public enum PlayerGameDataStruct
+        {
+            InventoryCount = 0x420
+        }
         public enum ChrIns
         {
             ArmStyle = 0x328,
@@ -96,6 +100,7 @@ namespace Elden_Ring_Debug_Tool
         }
 
         public const string ItemGiveAoB = "8B 02 83 F8 0A";
+        //public const string ItemGiveAoB = "40 55 56 57 41 54 41 55 41 56 41 57 48 8D 6C 24 B0 48 81 EC 50 01 00 00 48 C7 45 C0 FE FF FF FF";
         public const string MapItemManAoB = "48 8B 0D ? ? ? ? C7 44 24 50 FF FF FF FF C7 45 A0 FF FF FF FF 48 85 C9 75 2E";
         public const int ItemGiveOffset = -0x52;
 
@@ -111,13 +116,18 @@ namespace Elden_Ring_Debug_Tool
             Gem = 0x30
         }
 
+        public const int EquipInventoryDataOffset = 0x5B8;
+        public const int PlayerInventoryOffset = 0x10;
+        public const int PlayerInventoryEntrySize = 0x14;
+
         public enum InventoryEntry
         {
             GaItemHandle = 0x0,
             ItemID = 0x4,
             ItemCategory = 0x7,
             Quantity = 0x8,
-            DispalyID = 0x10,
+            DispalyID = 0xC,
+            Unk = 0x10
         }
     }
 }

@@ -59,6 +59,7 @@ namespace Elden_Ring_Debug_Tool
             IsLoaded = CreateChildPointer(CSSystemStep, EROffsets.IsLoadedOffset1, EROffsets.IsLoadedOffset2, EROffsets.IsLoadedOffset3, EROffsets.IsLoadedOffset4);
             GameDataMan = RegisterRelativeAOB(EROffsets.GameDataManAoB, EROffsets.RelativePtrAddressOffset, EROffsets.RelativePtrInstructionSize, 0x0);
             PlayerGameData = CreateChildPointer(GameDataMan, EROffsets.PlayerGameData);
+            PlayerInventory = CreateChildPointer(PlayerGameData, EROffsets.EquipInventoryDataOffset, EROffsets.PlayerInventoryOffset);
 
             SoloParamRepository = RegisterRelativeAOB(EROffsets.SoloParamRepositoryAoB, EROffsets.RelativePtrAddressOffset, EROffsets.RelativePtrInstructionSize, 0x0);
 
@@ -87,12 +88,12 @@ namespace Elden_Ring_Debug_Tool
         }
 
 
-        private ERParam EquipParamAccessory;
-        private ERParam EquipParamGem;
-        private ERParam EquipParamGoods;
-        private ERParam EquipParamProtector;
-        private ERParam EquipParamWeapon;
-        private ERParam MagicParam;
+        public ERParam EquipParamAccessory;
+        public ERParam EquipParamGem;
+        public ERParam EquipParamGoods;
+        public ERParam EquipParamProtector;
+        public ERParam EquipParamWeapon;
+        public ERParam MagicParam;
 
         private Engine Engine = new Engine(Architecture.X86, Mode.X64);
         //TKCode
@@ -291,15 +292,29 @@ namespace Elden_Ring_Debug_Tool
         }
 
         List<ERInventoryEntry> Inventory;
-        int InvantoryCount => 
+        int InventoryCount => PlayerGameData.ReadInt32((int)EROffsets.PlayerGameDataStruct.InventoryCount);
+        public int LastInventoryCount { get; set; }
 
         internal IEnumerable GetInventory()
         {
-            return new List<ERInventoryEntry>();
+            if (InventoryCount != LastInventoryCount)
+                GetInventoryList();
+
+            return Inventory;
         }
-        private List<ERInventoryEntry> GetInventoryList()
+        private void GetInventoryList()
         {
-            return new List<ERInventoryEntry>();
+            Inventory = new List<ERInventoryEntry>();
+            LastInventoryCount = InventoryCount;
+
+            var bytes = PlayerInventory.ReadBytes(0x0, (uint)InventoryCount * EROffsets.PlayerInventoryEntrySize);
+
+            for (int i = 0; i < InventoryCount; i++)
+            {
+                var entry = new byte[EROffsets.PlayerInventoryEntrySize];
+                Array.Copy(bytes, i * EROffsets.PlayerInventoryEntrySize, entry, 0, entry.Length);
+                Inventory.Add(new ERInventoryEntry(entry, this));
+            }
         }
         #endregion
 

@@ -35,6 +35,17 @@ namespace Elden_Ring_Debug_Tool
             InventoryTimer.Interval = 100;
             InventoryTimer.Elapsed += InventoryTimer_Elapsed;
         }
+        internal override void UpdateCtrl() 
+        {
+            DataGridInventory.ItemsSource = Hook.GetInventory();
+        }
+
+        internal override void ReloadCtrl()
+        {
+            lbxItems.SelectedIndex = -1;
+            lbxItems.SelectedIndex = 0;
+            Hook.LastInventoryCount = 0;
+        }
 
         private void InventoryTimer_Elapsed(object sender, ElapsedEventArgs e)
         {
@@ -53,12 +64,6 @@ namespace Elden_Ring_Debug_Tool
 
             nudQuantity.Maximum = cbxQuantityRestrict.IsChecked.Value ? item.MaxQuantity : int.MaxValue;
 
-        }
-
-        internal override void ReloadCtrl()
-        {
-            lbxItems.SelectedIndex = -1;
-            lbxItems.SelectedIndex = 0;
         }
 
         internal override void EnableCtrls(bool enable)
@@ -227,7 +232,12 @@ namespace Elden_Ring_Debug_Tool
 
         internal void EnableStats(bool enable)
         {
-            btnCreate.IsEnabled = enable;
+            ERItem item = lbxItems.SelectedItem as ERItem;
+            var canTrade = false;
+            if (item != null)
+                canTrade = item.CanAquireFromOtherPlayers;
+
+            btnCreate.IsEnabled = enable && canTrade;
         }
 
         private void btnCreate_Click(object sender, RoutedEventArgs e)

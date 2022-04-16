@@ -44,6 +44,9 @@ namespace Elden_Ring_Debug_Tool
 
         public virtual void SetupItem(ERParam param)
         {
+            if (!param.OffsetDict.ContainsKey(ID))
+                return;
+
             byte bitfield;
             switch (ItemCategory)
             {
