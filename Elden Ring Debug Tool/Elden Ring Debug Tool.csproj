@@ -88,6 +88,9 @@
     <None Update="Resources\Items\Armor.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="Resources\Items\Cut Content\Armor.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Resources\Items\Goods\BellBearings.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

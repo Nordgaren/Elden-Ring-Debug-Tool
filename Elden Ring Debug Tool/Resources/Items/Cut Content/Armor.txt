@@ -1,0 +1,6 @@
+1930300 Deathbed Smalls
+1950100 Millicent's Robe
+1950200 Millicent's Gloves
+1950300 Millicent's Boots
+1970100 Millicent's Tunic
+1970200 Golden Prosthetic
