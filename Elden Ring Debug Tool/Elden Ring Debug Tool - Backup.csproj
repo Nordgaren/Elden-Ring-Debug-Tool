@@ -8,12 +8,24 @@
     <PackageIcon>elden_ring_logo-freelogovectors.net_White_Border.png</PackageIcon>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <ApplicationIcon>Icon.ico</ApplicationIcon>
-    <AssemblyVersion>0.4</AssemblyVersion>
-    <FileVersion>0.4</FileVersion>
+    <AssemblyVersion>0.5.1</AssemblyVersion>
+    <FileVersion>0.5</FileVersion>
 	  <IncludeAllContentForSelfExtract>true</IncludeAllContentForSelfExtract>
 	  <PackageId>$(TargetPath)</PackageId>
   </PropertyGroup>
-	
+	<ItemGroup>
+		<OutputDir Include="$(BaseOutputPath)\$(Configuration)\publish\$(ProjectName) $(AssemblyVersion)" />
+	</ItemGroup>
+	<Target Name="MakeMyDir" AfterTargets="Publish" Condition="$(Configuration) == Release">
+		<Message Text="Executing Copy Files task" Importance="High" />
+		<Copy SourceFiles="$(ProjectDir)\$(BaseOutputPath)\$(Configuration)\publish\$(ProjectName).exe" DestinationFolder="@(OutputDir)" />
+		<Copy SourceFiles="$(SolutionDir)readme.md" DestinationFiles="$(ProjectDir)\$(BaseOutputPath)\$(Configuration)\publish\$(ProjectName) $(AssemblyVersion)\readme.txt" />
+		<Exec Command="if not exist &quot;@(OutputDir)\Resources&quot; md &quot;@(OutputDir)\Resources&quot;" />
+		<Exec Command="xcopy /e /y &quot;$(TargetDir)\Resources&quot; &quot;@(OutputDir)\Resources&quot;" />
+		<Message Text="Copied files to build folder" Importance="High" />
+	</Target>
+
+
 	<ItemGroup>
 		<Content Update="keystone.dll">
 			<CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
@@ -23,10 +35,12 @@
 
 	
 	<ItemGroup>
+    <None Remove="Resources\Assembly\ItemGive.asm" />
     <None Remove="Resources\Assembly\SaveParams.asm" />
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="Resources\Assembly\ItemGive.asm" />
     <EmbeddedResource Include="Resources\Assembly\SaveParams.asm">
       <Generator></Generator>
     </EmbeddedResource>
@@ -40,7 +54,11 @@
 
   <ItemGroup>
     <PackageReference Include="Extended.Wpf.Toolkit" Version="4.3.0" />
+    <PackageReference Include="GlobalHotkeys" Version="1.0.0.6" />
     <PackageReference Include="keystoneengine.csharp" Version="0.9.1.1" />
+    <PackageReference Include="Octokit" Version="0.50.0" />
+    <PackageReference Include="PortableJsonSettingsProvider" Version="0.2.1" />
+    <PackageReference Include="PortableSettingsProvider" Version="0.2.4" />
   </ItemGroup>
 
   <ItemGroup>
@@ -49,13 +67,67 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Properties\Settings.Designer.cs">
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Update="TabControls\ParamViewerControls\CellControls\StringControl.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="TabControls\ParamViewerControls\CellControls\GenericParamUNumControl.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
     <None Update="Resources\ERItemCategories.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\Items\Armor.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\Items\Cut Content\Armor.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\Items\Goods\BellBearings.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\Items\Goods\Cookbooks.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\Items\Goods\CraftingMaterials.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\Items\Goods\Consumables.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\Items\Goods\Ashes.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\Items\Goods\Emotes.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\Items\Goods\Flasks.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\Items\Goods\Goods.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\Items\Goods\Notes.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\Items\Goods\UpgradeMaterials.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\Items\Magic.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\Items\Talismans.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Resources\Params\Defs\ActionButtonParam.xml">
@@ -1552,9 +1624,6 @@
     <None Update="Resources\Params\Pointers\ParamOffsets.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Resources\Params\Pointers\ParamOffsets.txt.bak">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Update="Resources\Params\Pointers\PartsDrawParam.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -1747,36 +1816,31 @@
     <None Update="Resources\Params\Pointers\WwiseValueToStrParam_Switch_PlayerVoiceType.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Resources\Weapons\Arrows.txt">
+    <None Update="Resources\Items\Gems.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Resources\Weapons\Bolts.txt">
+    <None Update="Resources\Items\Weapons\Ammo.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Resources\Weapons\Gems.txt">
+    <None Update="Resources\Items\Weapons\MeleeWeapons.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Resources\Weapons\GreatArrows.txt">
+    <None Update="Resources\Items\Weapons\RangedWeapons.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Resources\Weapons\GreatBolts.txt">
+    <None Update="Resources\Items\Weapons\Shields.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Resources\Weapons\MeleeWeapons.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Resources\Weapons\RangedWeapons.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Resources\Weapons\Shields.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Resources\Weapons\SpellTools.txt">
+    <None Update="Resources\Items\Weapons\SpellTools.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
 
   <ItemGroup>
+    <Page Update="TabControls\ParamViewerControls\CellControls\StringControl.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="TabControls\ParamViewerControls\CellControls\GenericParamUNumControl.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
       <SubType>Designer</SubType>
@@ -1817,9 +1881,5 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </None>
   </ItemGroup>
-
-  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="set output=$(TargetDir)Elden Ring Debug Tool @(VersionNumber)&#xD;&#xA;if &quot;$(ConfigurationName)&quot; == &quot;Release&quot; (&#xD;&#xA;  md &quot;%25output%25&quot;&#xD;&#xA;  del &quot;%25output%25&quot;&#xD;&#xA;  md &quot;%25output%25\Resources&quot;&#xD;&#xA;  xcopy  /e &quot;$(TargetDir)\Resources&quot; &quot;%25output%25\Resources&quot;  &#xD;&#xA;  copy &quot;$(TargetName).exe&quot; &quot;%25output%25\&quot;&#xD;&#xA;  copy &quot;$(TargetName).exe.config&quot; &quot;%25output%25\&quot;&#xD;&#xA;  copy &quot;$(TargetDir)$(TargetName).pdb&quot; &quot;%25output%25\&quot;&#xD;&#xA;  copy &quot;$(SolutionDir)readme.md&quot; &quot;%25output%25\readme.txt&quot;&#xD;&#xA;)" />
-  </Target>
 
 </Project>

@@ -36,6 +36,10 @@ My fork of [Property Hook](https://github.com/Nordgaren/PropertyHook) by [TKGP](
 **[King Borehaha](https://github.com/kingborehaha/DS-Gadget-Local-Loader)** Who's local loading system has worked really well for a lot of things, including this project  
 
 # Change Log  
+### Beta 0.5.1
+
+* Fixed item Max Upgrade so it now looks at originEquipWep  
+
 ### Beta 0.5  
 
 * Inventory tab has been added, major thanks to [inuNorii](https://github.com/inunorii)
