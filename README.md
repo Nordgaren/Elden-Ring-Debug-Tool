@@ -5,8 +5,8 @@ A tool for testing and debugging mods in Elden Ring
 Backup your saves before using this tool, and restore the backups before going online.  
 
 ## Requirements 
-* [.NET 5 Desktop Runtime x64](https://download.visualstudio.microsoft.com/download/pr/b1902c77-e022-4b3e-a01a-e8830df936ff/09d0957435bf8c37eae11b4962d4221b/windowsdesktop-runtime-5.0.15-win-x64.exe)  
-
+* [.NET 6 Desktop Runtime x64](https://download.visualstudio.microsoft.com/download/pr/f13d7b5c-608f-432b-b7ec-8fe84f4030a1/5e06998f9ce23c620b9d6bac2dae6c1d/windowsdesktop-runtime-6.0.4-win-x64.exe)  
+* [.Net Framework 4.6.1]( https://www.microsoft.com/en-us/download/details.aspx?id=48130)
 ## Known Issues
 * Loading param row fields is still a TAD sow. I am still looking to optimize it, a bit, if I can.
 

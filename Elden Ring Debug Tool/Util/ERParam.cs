@@ -107,14 +107,17 @@ namespace Elden_Ring_Debug_Tool
                             var f32 = new ParamDecControl<float>(this, totalSize - size, field.InternalName);
                             Cells.Add(f32);
                             break;
-                        case DefType.fixstr:
-                        case DefType.fixstrW:
                         case DefType.dummy8:
                             var dummy8 = new ParamNumControl<byte>(this, totalSize - size, field.InternalName);
                             Cells.Add(dummy8);
                             break;
-                        default:
+                        case DefType.fixstr:
+                        case DefType.fixstrW:
+                            var fixStr = new StringControl(this, totalSize - size, field.ArrayLength, field.InternalName);
+                            Cells.Add(fixStr);
                             break;
+                        default:
+                            throw new Exception($"No control for this type {type}");
                     }
                 }
 
