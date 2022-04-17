@@ -1,4 +1,5 @@
-﻿using SoulsFormats;
+﻿using Bluegrams.Application;
+using SoulsFormats;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -6,6 +7,7 @@ using System.Data;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -18,49 +20,59 @@ namespace Elden_Ring_Debug_Tool
     /// </summary>
     public partial class App : Application
     {
-    public App()
+        internal static Properties.Settings? Settings;
+
+        public App()
         {
             var args = Environment.GetCommandLineArgs();
 #if DEBUG
             //args = new[] { "", @"G:\Steam\steamapps\common\ELDEN RING 1.03.3\Game\regulation.bin.bnd" };
 #endif
             if (args.Length > 1)
-            {
-                var buffer = new byte[4];
-                using (var fs = File.OpenRead(args[1]))
-                {
-                    fs.Read(buffer, 0, buffer.Length); 
-                }
+                ProcessRegulationAndExit(args);
 
-                if (CheckIfPossiblyEncrypted(buffer))
-                {
-                    if (!File.Exists($"{args[1]}.PreDecrypt.bak"))
-                        File.Copy(args[1], $"{args[1]}.PreDecrypt.bak");
+            PortableSettingsProvider.SettingsFileName = "ERDebug.config";
+            PortableSettingsProvider.ApplyProvider(Elden_Ring_Debug_Tool.Properties.Settings.Default);
+            Settings = Elden_Ring_Debug_Tool.Properties.Settings.Default;
 
-                    var decryptedReg = SFUtil.DecryptERRegulation(args[1]);
-                    decryptedReg.Write(args[1]);
-                    MessageBox.Show("Regulation file decrypted", "BND Decrypted", MessageBoxButton.OK, MessageBoxImage.Information);
-                }
-                else if (BND4.IsRead(args[1], out BND4 bnd))
-                {
-                    if (!File.Exists($"{args[1]}.PreEncrypt.bak"))
-                        File.Copy(args[1], $"{args[1]}.PreEncrypt.bak");
-
-                    SFUtil.EncryptERRegulation(args[1], bnd);
-                    MessageBox.Show("Regulation file encrypted", "BND Encrypted", MessageBoxButton.OK, MessageBoxImage.Information);
-                }
-                else
-                {
-                    MessageBox.Show("Drag a regulation bin onto this exe to encrypt or decrypt it.", "Elden Ring Debug Tool Command Line Help", MessageBoxButton.OK, MessageBoxImage.Information);
-                }
-
-                Environment.Exit(0);
-            }
             //Global
             AppDomain.CurrentDomain.UnhandledException += GlobalExceptionHandler;
 
             //WPF specific - setting this event as handled can prevent crashes
             Dispatcher.UnhandledException += WpfExceptionHandler;
+        }
+
+        private void ProcessRegulationAndExit(string[] args)
+        {
+            var buffer = new byte[4];
+            using (var fs = File.OpenRead(args[1]))
+            {
+                fs.Read(buffer, 0, buffer.Length);
+            }
+
+            if (CheckIfPossiblyEncrypted(buffer))
+            {
+                if (!File.Exists($"{args[1]}.PreDecrypt.bak"))
+                    File.Copy(args[1], $"{args[1]}.PreDecrypt.bak");
+
+                var decryptedReg = SFUtil.DecryptERRegulation(args[1]);
+                decryptedReg.Write(args[1]);
+                MessageBox.Show("Regulation file decrypted", "BND Decrypted", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            else if (BND4.IsRead(args[1], out BND4 bnd))
+            {
+                if (!File.Exists($"{args[1]}.PreEncrypt.bak"))
+                    File.Copy(args[1], $"{args[1]}.PreEncrypt.bak");
+
+                SFUtil.EncryptERRegulation(args[1], bnd);
+                MessageBox.Show("Regulation file encrypted", "BND Encrypted", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            else
+            {
+                MessageBox.Show("Drag a regulation bin onto this exe to encrypt or decrypt it.", "Elden Ring Debug Tool Command Line Help", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+
+            Environment.Exit(0);
         }
 
         private bool CheckIfPossiblyEncrypted(byte[] buffer)
@@ -95,8 +107,6 @@ namespace Elden_Ring_Debug_Tool
             }
 
         }
-
-
 
         private readonly object _logFileLock = new object();
         private void LogException(Exception exception)

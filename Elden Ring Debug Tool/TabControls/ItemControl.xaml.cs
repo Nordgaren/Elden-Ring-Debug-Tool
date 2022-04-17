@@ -32,8 +32,6 @@ namespace Elden_Ring_Debug_Tool
             cmbCategory.ItemsSource = ERItemCategory.All;
             cmbCategory.SelectedIndex = 0;
             FilterItems();
-            InventoryTimer.Interval = 100;
-            InventoryTimer.Elapsed += InventoryTimer_Elapsed;
         }
         internal override void UpdateCtrl() 
         {
@@ -52,15 +50,6 @@ namespace Elden_Ring_Debug_Tool
             DataGridInventory.ItemsSource = new List<ERInventoryEntry>();
         }
 
-        private void InventoryTimer_Elapsed(object sender, ElapsedEventArgs e)
-        {
-            Dispatcher.Invoke(new Action(() =>
-            {
-                //if (Properties.Settings.Default.UpdateMaxLive)
-                //    HandleMaxAvailable();
-            }));
-        }
-
         private void HandleMaxAvailable()
         {
             ERItem item = lbxItems.SelectedItem as ERItem;
@@ -73,14 +62,12 @@ namespace Elden_Ring_Debug_Tool
 
         internal override void EnableCtrls(bool enable)
         {
-            InventoryTimer.Enabled = enable;
             btnCreate.IsEnabled = enable;
 
             if (enable)
                 UpdateCreateEnabled();
         }
 
-        Timer InventoryTimer = new Timer();
         private void cmbCategory_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             FilterItems();
@@ -157,7 +144,6 @@ namespace Elden_Ring_Debug_Tool
 
         private void cmbInfusion_SelectedIndexChanged(object sender, EventArgs e)
         {
-             //var infusion = cmbInfusion.SelectedItem as DS2SInfusion;
             //Checks if cbxMaxUpgrade is checked and sets the value to max value
             HandleMaxItemCheckbox();
 
@@ -176,14 +162,6 @@ namespace Elden_Ring_Debug_Tool
             else
                 nudQuantity.Maximum = item.MaxQuantity;
 
-            //{
-            //    txtMaxHeld.Visibility = nudQuantity.Maximum > 0 ? Visibility.Hidden : Visibility.Visible;
-
-            //    //var max = Hook.GetMaxQuantity(item);
-            //    //var held = Hook.GetHeld(item);
-            //    //nudQuantity.IsEnabled = true;
-            //    //txtMaxHeld.Visibility = max - held > 0 ? Visibility.Hidden : Visibility.Visible;
-            //}
 
             nudUpgrade.Maximum = 0;
 

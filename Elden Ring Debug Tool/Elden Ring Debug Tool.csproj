@@ -8,8 +8,8 @@
     <PackageIcon>elden_ring_logo-freelogovectors.net_White_Border.png</PackageIcon>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <ApplicationIcon>Icon.ico</ApplicationIcon>
-    <AssemblyVersion>0.4</AssemblyVersion>
-    <FileVersion>0.4</FileVersion>
+    <AssemblyVersion>0.5</AssemblyVersion>
+    <FileVersion>0.5</FileVersion>
 	  <IncludeAllContentForSelfExtract>true</IncludeAllContentForSelfExtract>
 	  <PackageId>$(TargetPath)</PackageId>
   </PropertyGroup>
@@ -55,6 +55,8 @@
   <ItemGroup>
     <PackageReference Include="Extended.Wpf.Toolkit" Version="4.3.0" />
     <PackageReference Include="keystoneengine.csharp" Version="0.9.1.1" />
+    <PackageReference Include="PortableJsonSettingsProvider" Version="0.2.1" />
+    <PackageReference Include="PortableSettingsProvider" Version="0.2.4" />
   </ItemGroup>
 
   <ItemGroup>
@@ -63,12 +65,21 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Properties\Settings.Designer.cs">
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
     <Compile Update="TabControls\ParamViewerControls\CellControls\GenericParamUNumControl.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
     <None Update="Resources\ERItemCategories.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

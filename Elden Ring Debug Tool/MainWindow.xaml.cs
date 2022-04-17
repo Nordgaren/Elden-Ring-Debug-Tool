@@ -22,6 +22,7 @@ using System.Runtime.CompilerServices;
 using Xceed.Wpf.Toolkit;
 using System.Xml;
 using System.Xml.Serialization;
+using Bluegrams.Application;
 
 namespace Elden_Ring_Debug_Tool
 {
@@ -32,6 +33,7 @@ namespace Elden_Ring_Debug_Tool
     {
         public MainWindow()
         {
+
             InitializeComponent();
             ERItemCategory.GetItemCategories();
             Hook.OnSetup += Hook_OnSetup;
@@ -72,6 +74,7 @@ namespace Elden_Ring_Debug_Tool
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             UpdateTimer.Stop();
+            App.Settings?.Save();
         }
         private void UpdateTimer_Elapsed(object sender, ElapsedEventArgs e)
         {
