@@ -25,13 +25,61 @@ namespace Elden_Ring_Debug_Tool.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("\"LOL\"")]
-        public string Test {
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool ShowWarning {
             get {
-                return ((string)(this["Test"]));
+                return ((bool)(this["ShowWarning"]));
             }
             set {
-                this["Test"] = value;
+                this["ShowWarning"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool SpawnUndroppable {
+            get {
+                return ((bool)(this["SpawnUndroppable"]));
+            }
+            set {
+                this["SpawnUndroppable"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool EnableHotkeys {
+            get {
+                return ((bool)(this["EnableHotkeys"]));
+            }
+            set {
+                this["EnableHotkeys"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool HandleHotkeys {
+            get {
+                return ((bool)(this["HandleHotkeys"]));
+            }
+            set {
+                this["HandleHotkeys"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("27")]
+        public int CreateItem {
+            get {
+                return ((int)(this["CreateItem"]));
+            }
+            set {
+                this["CreateItem"] = value;
             }
         }
     }

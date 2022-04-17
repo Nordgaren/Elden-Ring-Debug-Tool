@@ -21,7 +21,7 @@ namespace Elden_Ring_Debug_Tool
 
         public ERViewModel()
         {
-            Hook = new ERHook(5000, 10000, p => p.MainWindowTitle == "ELDEN RING™");
+            Hook = new ERHook(5000, 15000, p => p.MainWindowTitle == "ELDEN RING™");
             Hook.Start();
         }
         public Brush ForegroundID

@@ -52,6 +52,8 @@ namespace Elden_Ring_Debug_Tool
         //private PHPointer DurabilitySpecialAddr { get; set; }
         public bool Loaded => PlayerIns != null ? PlayerIns.Resolve() != IntPtr.Zero : false;
         public bool Setup = false;
+        public bool Focused => Hooked && User32.GetForegroundProcessID() == Process.Id;
+
         public ERHook(int refreshInterval, int minLifetime, Func<Process, bool> processSelector)
             : base(refreshInterval, minLifetime, processSelector)
         {
@@ -84,12 +86,14 @@ namespace Elden_Ring_Debug_Tool
         }
         public void Update()
         {
+            OnPropertyChanged(nameof(Setup));
+            OnPropertyChanged(nameof(ID));
+
             if (!Setup)
                 return;
-
+    
             OnPropertyChanged(nameof(Loaded));
-            OnPropertyChanged(nameof(Setup));
-
+            OnPropertyChanged(nameof(InventoryCount));
         }
 
 
@@ -297,7 +301,7 @@ namespace Elden_Ring_Debug_Tool
         }
 
         List<ERInventoryEntry> Inventory;
-        int InventoryCount => PlayerGameData.ReadInt32((int)EROffsets.PlayerGameDataStruct.InventoryCount);
+        public int InventoryCount => PlayerGameData.ReadInt32((int)EROffsets.PlayerGameDataStruct.InventoryCount);
         public int LastInventoryCount { get; set; }
 
         internal IEnumerable GetInventory()

@@ -32,6 +32,7 @@ namespace Elden_Ring_Debug_Tool
                 ProcessRegulationAndExit(args);
 
             PortableJsonSettingsProvider.SettingsFileName = "ERDebug.settings.json";
+            PortableJsonSettingsProvider.SettingsDirectory = Environment.CurrentDirectory;
             PortableJsonSettingsProvider.ApplyProvider(Elden_Ring_Debug_Tool.Properties.Settings.Default);
             Settings = Elden_Ring_Debug_Tool.Properties.Settings.Default;
 

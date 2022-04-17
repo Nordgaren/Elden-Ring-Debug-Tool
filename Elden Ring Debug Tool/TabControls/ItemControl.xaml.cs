@@ -198,7 +198,7 @@ namespace Elden_Ring_Debug_Tool
             cmbGems.SelectedIndex = 0;
             cmbGems.IsEnabled = cmbGems.Items.Count > 1;
 
-            btnCreate.IsEnabled = item.CanAquireFromOtherPlayers || cbxLimit.IsChecked.Value;
+            btnCreate.IsEnabled = item.CanAquireFromOtherPlayers || App.Settings.SpawnUndroppable;
             //if (!Properties.Settings.Default.UpdateMaxLive)
             //    HandleMaxAvailable();
             HandleMaxItemCheckbox();
@@ -210,7 +210,7 @@ namespace Elden_Ring_Debug_Tool
             if (item == null)
                 return;
 
-            btnCreate.IsEnabled = item.CanAquireFromOtherPlayers || cbxLimit.IsChecked.Value;//Properties.Settings.Default.SpawnUndroppable;
+            btnCreate.IsEnabled = item.CanAquireFromOtherPlayers || App.Settings.SpawnUndroppable;
         }
 
         internal void EnableStats(bool enable)

@@ -1,0 +1,76 @@
+810 Rowa Raisin
+811 Sweet Raisin
+812 Frozen Raisin
+1235 Raw Meat Dumpling
+1760 Ruin Fragment
+2100 Soft Cotton
+2130 Celestial Dew
+9500 Cracked Pot
+9501 Ritual Pot
+15000 Sliver of Meat
+15010 Beast Liver
+15020 Lump of Flesh
+15030 Beast Blood
+15040 Old Fang
+15050 Budding Horn
+15060 Flight Pinion
+15080 Four-Toed Fowl Foot
+15090 Turtle Neck Meat
+15100 Human Bone Shard
+15110 Great Dragonfly Head
+15120 Slumbering Egg
+15130 Crab Eggs
+15140 Land Octopus Ovary
+15150 Miranda Powder
+15160 Strip of White Flesh
+15340 Thin Beast Bones
+15341 Hefty Beast Bone
+15400 String
+15410 Living Jar Shard
+15420 Albinauric Bloodclot
+15430 Stormhawk Feather
+20650 Poisonbloom
+20651 Trina's Lily
+20652 Fulgurbloom
+20653 Miquella's Lily
+20654 Grave Violet
+20660 Faded Erdleaf Flower
+20680 Erdleaf Flower
+20681 Altus Bloom
+20682 Fire Blossom
+20683 Golden Sunflower
+20685 Tarnished Golden Sunflower
+20690 Herba
+20691 Arteria Leaf
+20710 Dewkissed Herba
+20720 Rowa Fruit
+20721 Golden Rowa
+20722 Rimed Rowa
+20723 Bloodrose
+20740 Eye of Yelough
+20750 Crystal Bud
+20751 Rimed Crystal Bud
+20753 Sacramental Bud
+20760 Mushroom
+20761 Melted Mushroom
+20770 Toxic Mushroom
+20775 Root Resin
+20780 Cracked Crystal
+20795 Sanctuary Stone
+20800 Nascent Butterfly
+20801 Aeonian Butterfly
+20802 Smoldering Butterfly
+20810 Silver Firefly
+20811 Gold Firefly
+20812 Glintstone Firefly
+20820 Golden Centipede
+20825 Silver Tear Husk
+20830 Gold-Tinged Excrement
+20831 Blood-Tainted Excrement
+20840 Cave Moss
+20841 Budding Cave Moss
+20842 Crystal Cave Moss
+20845 Yellow Ember
+20850 Volcanic Stone
+20852 Formic Rock
+20855 Gravel Stone

@@ -23,6 +23,8 @@ using Xceed.Wpf.Toolkit;
 using System.Xml;
 using System.Xml.Serialization;
 using Bluegrams.Application;
+using Octokit;
+using System.Net.Http;
 
 namespace Elden_Ring_Debug_Tool
 {
@@ -37,6 +39,17 @@ namespace Elden_Ring_Debug_Tool
             InitializeComponent();
             ERItemCategory.GetItemCategories();
             Hook.OnSetup += Hook_OnSetup;
+
+            if (App.Settings.ShowWarning)
+            {
+                var warning = new DebugWarning()
+                {
+                    Title = "Online Warning",
+                    Width = 350,
+                    Height = 240
+                };
+                warning.ShowDialog();
+            }
         }
 
         private void Hook_OnSetup(object? sender, PropertyHook.PHEventArgs e)
@@ -51,9 +64,48 @@ namespace Elden_Ring_Debug_Tool
 
         Timer UpdateTimer = new Timer();
 
-        private void Window_Loaded(object sender, RoutedEventArgs e)
+        private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
+
+            Assembly assembly = Assembly.GetExecutingAssembly();
+            FileVersionInfo fileVersionInfo = FileVersionInfo.GetVersionInfo(assembly.Location);
+            var version = fileVersionInfo.FileVersion;
+
+            lblWindowName.Content = $"Elden Ring Debug Tool {version}";
+            EnableAllCtrls(false);
             InitAllCtrls();
+
+            try
+            {
+                GitHubClient gitHubClient = new GitHubClient(new ProductHeaderValue("Elden-Ring-Debug-Tool"));
+                Release release = await gitHubClient.Repository.Release.GetLatest("Nordgaren", "Elden-Ring-Debug-Tool");
+                Version gitVersion = Version.Parse(release.TagName.ToLower().Replace("v", ""));
+                Version exeVersion = Version.Parse(version);
+
+                if (gitVersion > exeVersion) //Compare latest version to current version
+                {
+                    link.NavigateUri = new Uri(release.HtmlUrl);
+                    llbNewVersion.Visibility = Visibility.Visible;
+                    labelCheckVersion.Visibility = Visibility.Hidden;
+                }
+                else if (gitVersion == exeVersion)
+                {
+                    labelCheckVersion.Content = "App up to date";
+                }
+                else
+                {
+                    labelCheckVersion.Content = "App version unreleased. Be wary of bugs!";
+                }
+            }
+            catch (Exception ex) when (ex is HttpRequestException || ex is ApiException || ex is ArgumentException)
+            {
+                labelCheckVersion.Content = "Current app version unknown";
+            }
+            catch (Exception ex)
+            {
+                labelCheckVersion.Content = "Something is very broke, contact Elden Ring Debug Tool repo owner";
+                System.Windows.MessageBox.Show(ex.Message);
+            }
             UpdateTimer.Interval = 16;
             UpdateTimer.Elapsed += UpdateTimer_Elapsed;
             UpdateTimer.Enabled = true;
@@ -74,12 +126,17 @@ namespace Elden_Ring_Debug_Tool
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             UpdateTimer.Stop();
+            SaveAllTabs();
+
             App.Settings?.Save();
         }
         private void UpdateTimer_Elapsed(object sender, ElapsedEventArgs e)
         {
+
             Dispatcher.Invoke(new Action(() =>
             {
+                UpdateMainProperties();
+                Hook.Update();
                 if (Hook.Hooked)
                 {
                     if (Hook.Loaded && Hook.Setup)
@@ -118,12 +175,13 @@ namespace Elden_Ring_Debug_Tool
         {
             //Hook.UpdateMainProperties();
             ViewModel.UpdateMainProperties();
-            //CheckFocused();
+            CheckFocused();
         }
 
         private void InitAllCtrls()
         {
             DebugItems.InitCtrl();
+            InitHotkeys();
         }
         private void UpdateProperties()
         {
@@ -144,7 +202,10 @@ namespace Elden_Ring_Debug_Tool
         private void UpdateAllCtrl()
         {
             DebugItems.UpdateCtrl();
-            Hook.Update();
+        }
+        private void SaveAllTabs()
+        {
+            SaveHotkeys();
         }
 
         private void link_RequestNavigate(object sender, RequestNavigateEventArgs e)
@@ -152,28 +213,32 @@ namespace Elden_Ring_Debug_Tool
             Process.Start(e.Uri.ToString());
         }
 
-        //private void Grid_MouseDown(object sender, MouseButtonEventArgs e)
-        //{
-        //    if (e.ChangedButton == MouseButton.Left)
-        //        DragMove();
-        //}
+        private void Grid_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ChangedButton == MouseButton.Left)
+                DragMove();
+        }
 
-        //private void Minimize_Click(object sender, RoutedEventArgs e)
-        //{
-        //    WindowState = System.Windows.WindowState.Minimized;
-        //}
+        private void Minimize_Click(object sender, RoutedEventArgs e)
+        {
+            WindowState = System.Windows.WindowState.Minimized;
+        }
 
-        //private void MainWindowClose_Click(object sender, RoutedEventArgs e)
-        //{
-        //    Close();
-        //}
+        private void MainWindowClose_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
 
-        //private void Maximize_Click(object sender, RoutedEventArgs e)
-        //{
-        //    if (WindowState == System.Windows.WindowState.Maximized)
-        //        WindowState = System.Windows.WindowState.Normal;
-        //    else
-        //        WindowState = System.Windows.WindowState.Maximized;
-        //}
+        private void Maximize_Click(object sender, RoutedEventArgs e)
+        {
+            if (WindowState == System.Windows.WindowState.Maximized)
+                WindowState = System.Windows.WindowState.Normal;
+            else
+                WindowState = System.Windows.WindowState.Maximized;
+        }
+        private void SpawnUndroppable_Checked(object sender, RoutedEventArgs e)
+        {
+            DebugItems.UpdateCreateEnabled();
+        }
     }
 }

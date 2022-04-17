@@ -1,0 +1,67 @@
+﻿8850 Conspectus Scroll
+8851 Royal House Scroll
+8855 Fire Monks' Prayerbook
+8856 Giant's Prayerbook
+8857 Godskin Prayerbook
+8858 Two Fingers' Prayerbook
+8859 Assassin's Prayerbook
+8860 Erdtree Prayerbook
+8861 Erdtree Codex
+8862 Golden Order Principia
+8863 Golden Order Principles
+8864 Dragon Cult Prayerbook
+8865 Ancient Dragon Prayerbook
+8866 Academy Scroll
+8910 Pidia's Bell Bearing
+8911 Seluvis's Bell Bearing
+8912 Patches' Bell Bearing
+8913 Sellen's Bell Bearing
+8915 D's Bell Bearing
+8916 Bernahl's Bell Bearing
+8917 Miriel's Bell Bearing
+8918 Gostoc's Bell Bearing
+8919 Thops's Bell Bearing
+8920 Kalé's Bell Bearing
+8921 Nomadic Merchant's Bell Bearing [1]
+8922 Nomadic Merchant's Bell Bearing [2]
+8923 Nomadic Merchant's Bell Bearing [3]
+8924 Nomadic Merchant's Bell Bearing [4]
+8925 Nomadic Merchant's Bell Bearing [5]
+8926 Isolated Merchant's Bell Bearing [1]
+8927 Isolated Merchant's Bell Bearing [2]
+8928 Nomadic Merchant's Bell Bearing [6]
+8929 Hermit Merchant's Bell Bearing [1]
+8930 Nomadic Merchant's Bell Bearing [7]
+8931 Nomadic Merchant's Bell Bearing [8]
+8932 Nomadic Merchant's Bell Bearing [9]
+8933 Nomadic Merchant's Bell Bearing [10]
+8934 Nomadic Merchant's Bell Bearing [11]
+8935 Isolated Merchant's Bell Bearing [3]
+8936 Hermit Merchant's Bell Bearing [2]
+8937 Abandoned Merchant's Bell Bearing
+8938 Hermit Merchant's Bell Bearing [3]
+8939 Imprisoned Merchant's Bell Bearing
+8940 Iji's Bell Bearing
+8941 Rogier's Bell Bearing
+8942 Blackguard's Bell Bearing
+8943 Corhyn's Bell Bearing
+8944 Gowry's Bell Bearing
+8945 Bone Peddler's Bell Bearing
+8946 Meat Peddler's Bell Bearing
+8947 Medicine Peddler's Bell Bearing
+8948 Gravity Stone Peddler's Bell Bearing
+8951 Smithing-Stone Miner's Bell Bearing [1]
+8952 Smithing-Stone Miner's Bell Bearing [2]
+8953 Smithing-Stone Miner's Bell Bearing [3]
+8954 Smithing-Stone Miner's Bell Bearing [4]
+8955 Somberstone Miner's Bell Bearing [1]
+8956 Somberstone Miner's Bell Bearing [2]
+8957 Somberstone Miner's Bell Bearing [3]
+8958 Somberstone Miner's Bell Bearing [4]
+8959 Somberstone Miner's Bell Bearing [5]
+8960 Glovewort Picker's Bell Bearing [1]
+8961 Glovewort Picker's Bell Bearing [2]
+8962 Glovewort Picker's Bell Bearing [3]
+8963 Ghost-Glovewort Picker's Bell Bearing [1]
+8964 Ghost-Glovewort Picker's Bell Bearing [2]
+8965 Ghost-Glovewort Picker's Bell Bearing [3]

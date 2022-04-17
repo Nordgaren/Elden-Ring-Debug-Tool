@@ -54,7 +54,9 @@
 
   <ItemGroup>
     <PackageReference Include="Extended.Wpf.Toolkit" Version="4.3.0" />
+    <PackageReference Include="GlobalHotkeys" Version="1.0.0.6" />
     <PackageReference Include="keystoneengine.csharp" Version="0.9.1.1" />
+    <PackageReference Include="Octokit" Version="0.50.0" />
     <PackageReference Include="PortableJsonSettingsProvider" Version="0.2.1" />
     <PackageReference Include="PortableSettingsProvider" Version="0.2.4" />
   </ItemGroup>
@@ -86,7 +88,34 @@
     <None Update="Resources\Items\Armor.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Resources\Items\Goods.txt">
+    <None Update="Resources\Items\Goods\BellBearings.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\Items\Goods\Cookbooks.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\Items\Goods\CraftingMaterials.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\Items\Goods\Consumables.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\Items\Goods\Ashes.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\Items\Goods\Emotes.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\Items\Goods\Flasks.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\Items\Goods\Goods.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\Items\Goods\Notes.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\Items\Goods\UpgradeMaterials.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Resources\Items\Magic.txt">

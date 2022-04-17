@@ -1,6 +1,5 @@
 # Elden-Ring-Debug-Tool
 A tool for testing and debugging mods in Elden Ring
-
  
 # WARNING  
 Backup your saves before using this tool, and restore the backups before going online.  
@@ -12,7 +11,7 @@ Backup your saves before using this tool, and restore the backups before going o
 * Loading param row fields is still a TAD sow. I am still looking to optimize it, a bit, if I can.
 
 ## Installing  
-* Extract contents of zip archive to it's own folder. You may have to run as admin if DS2S META crashes  
+* Extract contents of zip archive to it's own folder. You may have to run as admin if Elden Ring Debug Tool crashes  
 
 ## Usage
 * For a param to load there has to be both a def in `Resources/Params/Defs` and a definition in on of the files in `Resources/Params/Pointers`  
@@ -39,7 +38,13 @@ My fork of [Property Hook](https://github.com/Nordgaren/PropertyHook) by [TKGP](
 
 * Items are BY DEFAULT limited to only items that can be shared in multiplayer. You can turn this off with the checkbox in the panel next to the Give panel.  
 
-* The panel on the right will become inventory viewer.  
+* Panel on the right shows items currently in player inventory.  
+
+* Added settings to local folder and added settings tab.  
+
+* Added hotkeys tab in new settings tab.  
+
+* Added a warning when the app starts up.  
 
 ### Beta 0.4   
 
