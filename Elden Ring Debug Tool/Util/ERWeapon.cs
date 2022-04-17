@@ -125,18 +125,6 @@ namespace Elden_Ring_Debug_Tool
                     MaxUpgrade++;
             }
 
-
-            if (Name.Contains("Arrow"))
-                Console.WriteLine();
-
-            if (Name.Contains("Meteor"))
-                Console.WriteLine();
-
-            if (Name.Contains("Dagger"))
-                Console.WriteLine();
-
-            if (Name.Contains("Horn"))
-                Console.WriteLine();
         }
     }
 }

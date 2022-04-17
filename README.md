@@ -22,7 +22,12 @@ Backup your saves before using this tool, and restore the backups before going o
 
 ## Libraries
 [SoulsFormats](https://github.com/JKAnderson/SoulsFormats) by [TKGP](https://github.com/JKAnderson/)  
+
 My fork of [Property Hook](https://github.com/Nordgaren/PropertyHook) by [TKGP](https://github.com/JKAnderson/)  
+
+[Octokit](https://github.com/octokit/octokit.net) by [Octokit](https://github.com/octokit) team
+
+[GlobalHotkeys](https://github.com/mrousavy/Hotkeys) by [Marc Rousavy](https://github.com/mrousavy)  
 
 ## Thank You  
 **[TKGP](https://github.com/JKAnderson/)** Author of [DS Gadget](https://github.com/JKAnderson/DS-Gadget) [Property Hook](https://github.com/JKAnderson/PropertyHook) and [SoulsFormats](https://github.com/JKAnderson/SoulsFormats)  
