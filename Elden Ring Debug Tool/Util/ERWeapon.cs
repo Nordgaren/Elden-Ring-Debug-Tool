@@ -65,7 +65,7 @@ namespace Elden_Ring_Debug_Tool
             Torch = 87 //Torch
         }
 
-        public enum WeaponTypeUnused
+        public enum AmmoType
         {
             Unarmed = 33,
             Arrow = 81,
@@ -77,7 +77,9 @@ namespace Elden_Ring_Debug_Tool
         public bool Unique { get; set; }
         public int SwordArtId { get; set; }
         public bool Infisible { get; set; }
+        public int MaxUpgrade { get; set; }
         public WeaponType Type { get; set; }
+        public AmmoType TypeAmmo { get; set; }
         public ERGem DefaultGem { get; set; }
         public ERWeapon(string config, Category category) : base(config, category) 
         {
@@ -101,9 +103,40 @@ namespace Elden_Ring_Debug_Tool
             DefaultGem = ERGem.All.FirstOrDefault(gem => gem.SwordArtID == SwordArtId);
 
             Type = (WeaponType)BitConverter.ToInt16(param.Bytes, param.OffsetDict[ID] + (int)EROffsets.EquipParamWeapon.WepType);
+            TypeAmmo = (AmmoType)BitConverter.ToInt16(param.Bytes, param.OffsetDict[ID] + (int)EROffsets.EquipParamWeapon.WepType);
 
             if (DefaultGem == null)
                 throw new Exception($"Cannot locate default gem for {Name}");
+
+       
+
+            var val = 0;
+            for (int i = 1; i < 16 && val != -1; i++)
+            {
+                val = BitConverter.ToInt32(param.Bytes, param.OffsetDict[ID] + (int)EROffsets.EquipParamWeapon.OriginEquipWep + (i * 4));
+                if (val != -1)
+                    MaxUpgrade++;
+            }
+
+            for (int i = 0; i < 10 && val != -1; i++)
+            {
+                val = BitConverter.ToInt32(param.Bytes, param.OffsetDict[ID] + (int)EROffsets.EquipParamWeapon.OriginEquipWep16 + (i * 4));
+                if (val != -1)
+                    MaxUpgrade++;
+            }
+
+
+            if (Name.Contains("Arrow"))
+                Console.WriteLine();
+
+            if (Name.Contains("Meteor"))
+                Console.WriteLine();
+
+            if (Name.Contains("Dagger"))
+                Console.WriteLine();
+
+            if (Name.Contains("Horn"))
+                Console.WriteLine();
         }
     }
 }

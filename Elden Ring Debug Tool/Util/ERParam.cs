@@ -22,7 +22,7 @@ namespace Elden_Ring_Debug_Tool
         public int Length { get; private set; }
         public byte[] Bytes { get; private set; }
         public List<Row> Rows { get; private set; }
-        private static Regex ParamEntryRx = new Regex(@"^\s*(?<id>\S+)\s+(?<name>.*)$");
+        private static Regex ParamEntryRx = new Regex(@"^\s*(?<id>\S+)\s+(?<name>.*)$", RegexOptions.CultureInvariant);
         public Dictionary<int, string> NameDictionary { get; private set; }
         public Dictionary<int, int> OffsetDict { get; private set; }
         public int RowLength { get; private set; }

@@ -17,7 +17,7 @@ namespace Elden_Ring_Debug_Tool
         public List<ERItem> Items;
         public static List<ERItemCategory> All = new List<ERItemCategory>();
 
-        private static Regex CategoryEntryRx = new Regex(@"^(?<category>\S+) (?<show>\S+) (?<path>\S+) (?<name>.+)$");
+        private static Regex CategoryEntryRx = new Regex(@"^(?<category>\S+) (?<show>\S+) (?<path>\S+) (?<name>.+)$", RegexOptions.CultureInvariant);
 
         private ERItemCategory(string name, Category category, string itemList, bool showIDs)
         {

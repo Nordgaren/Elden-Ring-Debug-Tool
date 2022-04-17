@@ -17,7 +17,7 @@ namespace Elden_Ring_Debug_Tool
             Goods = 0x40000000,
             Gem = 0x80000000
         }
-        private static Regex ItemEntryRx = new Regex(@"^\s*(?<id>\S+)\s+(?<name>.*)$");
+        private static Regex ItemEntryRx = new Regex(@"^\s*(?<id>\S+)\s+(?<name>.*)$", RegexOptions.CultureInvariant);
 
         public string Name;
         public int ID;

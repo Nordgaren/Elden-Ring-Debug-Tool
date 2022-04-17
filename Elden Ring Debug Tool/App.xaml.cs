@@ -126,7 +126,7 @@ namespace Elden_Ring_Debug_Tool
                 }
 
                 //Log the error
-                var error = $"{exception.Message}\n\n\n{exception.StackTrace}\n";
+                var error = $"{exception.Message}\n\n\n{exception.StackTrace}\n\n{exception.InnerException?.Message}";
                 File.AppendAllText(logFile, error);
             }
         }

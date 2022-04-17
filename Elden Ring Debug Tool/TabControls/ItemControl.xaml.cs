@@ -50,16 +50,6 @@ namespace Elden_Ring_Debug_Tool
             DataGridInventory.ItemsSource = new List<ERInventoryEntry>();
         }
 
-        private void HandleMaxAvailable()
-        {
-            ERItem item = lbxItems.SelectedItem as ERItem;
-            if (item == null)
-                return;
-
-            nudQuantity.Maximum = cbxQuantityRestrict.IsChecked.Value ? item.MaxQuantity : int.MaxValue;
-
-        }
-
         internal override void EnableCtrls(bool enable)
         {
             btnCreate.IsEnabled = enable;
@@ -146,7 +136,6 @@ namespace Elden_Ring_Debug_Tool
         {
             //Checks if cbxMaxUpgrade is checked and sets the value to max value
             HandleMaxItemCheckbox();
-
         }
 
         private void lbxItems_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -184,7 +173,7 @@ namespace Elden_Ring_Debug_Tool
                             cmbGems.Items.Add(gem);
 
 
-                nudUpgrade.Maximum = weapon.Unique ? 10 : 25;
+                nudUpgrade.Maximum = weapon.MaxUpgrade;
             }
           
             if (cmbInfusion.Items.Count == 0)
@@ -231,8 +220,6 @@ namespace Elden_Ring_Debug_Tool
         //Apply hair to currently loaded character
         public void CreateItem()
         {
-            //if (!Properties.Settings.Default.UpdateMaxLive)
-            //    HandleMaxAvailable();
             //Check if the button is enabled and the selected item isn't null
             if (btnCreate.IsEnabled && lbxItems.SelectedItem != null)
             {
@@ -250,8 +237,6 @@ namespace Elden_Ring_Debug_Tool
                 var gem = cmbGems.SelectedItem as ERGem;
 
                 Hook.GetItem(id, (int)nudQuantity.Value, (int)infusion, (int)nudUpgrade.Value, gem.ID);
-                //if (!Properties.Settings.Default.UpdateMaxLive)
-                //    HandleMaxAvailable();
             }
         }
 
