@@ -6,7 +6,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Elden_Ring_Debug_Tool"
              mc:Ignorable="d" 
-             Background="DarkGray" d:DesignHeight="475" d:DesignWidth="680">
+             Background="DarkGray" d:DesignHeight="475" d:DesignWidth="680" >
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>

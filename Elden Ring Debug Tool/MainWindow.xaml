@@ -7,7 +7,7 @@
         xmlns:wpfTool="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:local="clr-namespace:Elden_Ring_Debug_Tool"
         mc:Ignorable="d"
-        Title="Elden Ring Debug Tool" Height="600" Width="800" MinHeight="600" MinWidth="800" Icon="Icon.ico" Loaded="Window_Loaded" Closing="Window_Closing" Background="DarkGray" 
+        Title="Elden Ring Debug Tool" Height="600" Width="800" MinHeight="600" MinWidth="800" Icon="Icon.ico" Loaded="Window_Loaded" Closing="Window_Closing" Background="#777777" 
         WindowStyle="None" ResizeMode="CanResizeWithGrip" AllowsTransparency="True" BorderThickness="7" >
 
     <Window.DataContext>
@@ -17,6 +17,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="100"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="15"/>
         </Grid.RowDefinitions>
         <StackPanel>
             <Grid Height="25" MouseDown="Grid_MouseDown" Background="Black">
@@ -94,8 +95,8 @@
                         <Label Content="{Binding Hook.Version}" Foreground="{Binding ForegroundVersion}" x:Name="VersionText" Margin="5,0,0,0" />
                     </StackPanel>
                 </StackPanel >-->
-                <StackPanel Grid.Column="1" HorizontalAlignment="Center" Grid.ColumnSpan="3">
-                    <Grid>
+                <StackPanel Grid.Column="1" HorizontalAlignment="Right" Grid.ColumnSpan="3" >
+                    <Grid >
                         <Label x:Name="labelCheckVersion" />
                         <StackPanel Grid.Column="1" Grid.Row="0" >
                             <Label x:Name="llbNewVersion" Visibility="Hidden">
@@ -109,7 +110,7 @@
                 </StackPanel>
             </Grid>
         </StackPanel>
-            <TabControl Background="LightGray" Grid.Row="1">
+        <TabControl Background="LightGray" Grid.Row="1" Margin="0,0,0,0">
             <TabItem Header="Params">
                 <Grid Background="LightGray">
                     <local:ParamViewerControl x:Name="DebugParam" Hook="{Binding Hook}"/>
@@ -118,6 +119,11 @@
             <TabItem Header="Inventory">
                 <Grid Background="LightGray">
                     <local:ItemControl x:Name="DebugItems" Hook="{Binding Hook}"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Cheats">
+                <Grid Background="LightGray">
+                    <local:CheatsControl x:Name="DebugCheats" Hook="{Binding Hook}"/>
                 </Grid>
             </TabItem>
 

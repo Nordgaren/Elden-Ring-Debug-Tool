@@ -125,6 +125,9 @@ namespace Elden_Ring_Debug_Tool
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
+            if (Hook.EnableMapCombat)
+                Hook.EnableMapCombat = false;
+
             UpdateTimer.Stop();
             SaveAllTabs();
 
@@ -210,7 +213,11 @@ namespace Elden_Ring_Debug_Tool
 
         private void link_RequestNavigate(object sender, RequestNavigateEventArgs e)
         {
-            Process.Start(e.Uri.ToString());
+            Process.Start(new ProcessStartInfo
+            {
+                FileName = e.Uri.ToString(),
+                UseShellExecute = true
+            });
         }
 
         private void Grid_MouseDown(object sender, MouseButtonEventArgs e)

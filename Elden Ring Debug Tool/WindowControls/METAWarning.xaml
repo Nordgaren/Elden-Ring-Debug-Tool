@@ -23,7 +23,7 @@
                 Any negative consequences of using this tool online are not the fault of this tool or it's author. You have been warned.
             </TextBlock>
             <TextBlock TextWrapping="WrapWithOverflow" TextAlignment="Center">
-                Delete any characters made with this tool before going online.
+                Delete any saves (Entire save file) made/modified with this tool before going online.
             </TextBlock>
             <Separator Visibility="Hidden" Height="5" />
             <CheckBox x:Name="cbxDoNotShow" HorizontalAlignment="Center" Content="Do not show again"/>

@@ -43,8 +43,12 @@ namespace Elden_Ring_Debug_Tool
         private PHPointer CapParamCall { get; set; }
         public PHPointer ItemGive { get; set; }
         public PHPointer MapItemMan { get; set; }
+        public PHPointer EventFlagMan { get; set; }
+        public PHPointer EventCall { get; set; }
         public PHPointer WorldChrMan { get; set; }
         public PHPointer PlayerIns { get; set; }
+        public PHPointer DisableOpenMap { get; set; }
+        public PHPointer CombatCloseMap { get; set; }
         public static bool Reading { get; set; }
         public string ID => Process?.Id.ToString() ?? "Not Hooked";
         public List<PHPointer> Params;
@@ -69,12 +73,16 @@ namespace Elden_Ring_Debug_Tool
 
             ItemGive = RegisterAbsoluteAOB(EROffsets.ItemGiveAoB);
             MapItemMan = RegisterRelativeAOB(EROffsets.MapItemManAoB, EROffsets.RelativePtrAddressOffset, EROffsets.RelativePtrInstructionSize);
-
+            EventFlagMan = RegisterRelativeAOB(EROffsets.EventFlagManAoB, EROffsets.RelativePtrAddressOffset, EROffsets.RelativePtrInstructionSize);
+            EventCall = RegisterAbsoluteAOB(EROffsets.EventCallAoB);
 
             CapParamCall = RegisterAbsoluteAOB(EROffsets.CapParamCallAoB);
 
             WorldChrMan = RegisterRelativeAOB(EROffsets.WorldChrManAoB, EROffsets.RelativePtrAddressOffset, EROffsets.RelativePtrInstructionSize, 0x0);
             PlayerIns = CreateChildPointer(WorldChrMan, EROffsets.PlayerInsOffset);
+
+            DisableOpenMap = RegisterAbsoluteAOB(EROffsets.DisableOpenMapAoB);
+            CombatCloseMap = RegisterAbsoluteAOB(EROffsets.CombatCloseMapAoB);
         }
 
 
@@ -91,7 +99,7 @@ namespace Elden_Ring_Debug_Tool
 
             if (!Setup)
                 return;
-    
+
             OnPropertyChanged(nameof(Loaded));
             OnPropertyChanged(nameof(InventoryCount));
         }
@@ -111,17 +119,18 @@ namespace Elden_Ring_Debug_Tool
             //Assemble once to get the size
             var bytes = Engine.Assemble(asm, (ulong)Process.MainModule.BaseAddress);
             var error = Engine.GetLastKeystoneError();
+            if (error != KeystoneError.KS_ERR_OK)
+                throw new Exception("Something went wrong during assembly. Code could not be assembled.");
+
             IntPtr insertPtr = GetPrefferedIntPtr(bytes.Buffer.Length, Kernel32.PAGE_EXECUTE_READWRITE);
 
-            //Reassemble with the location if the intPtr to support things like Call and Jmp
+            //Reassemble with the location of the isertPtr to support relative instructions
             bytes = Engine.Assemble(asm, (ulong)insertPtr);
             error = Engine.GetLastKeystoneError();
 
             Kernel32.WriteBytes(Handle, insertPtr, bytes.Buffer);
-
-
 #if DEBUG
-            //DebugPrintArray(bytes);
+            //DebugPrintArray(bytes.Buffer);
 #endif
 
             Execute(insertPtr);
@@ -129,10 +138,10 @@ namespace Elden_Ring_Debug_Tool
         }
 
 #if DEBUG
-        private static void DebugPrintArray(EncodedData bytes)
+        private static void DebugPrintArray(byte[] bytes)
         {
             Debug.WriteLine("");
-            foreach (var b in bytes.Buffer)
+            foreach (var b in bytes)
             {
                 Debug.Write($"{b.ToString("X2")} ");
             }
@@ -158,7 +167,7 @@ namespace Elden_Ring_Debug_Tool
             return paramList;
         }
 
-        public void AddParam(List<ERParam> paramList,string paramPath, string path, string[] pointers)
+        public void AddParam(List<ERParam> paramList, string paramPath, string path, string[] pointers)
         {
             foreach (var entry in pointers)
             {
@@ -337,7 +346,41 @@ namespace Elden_Ring_Debug_Tool
         public int Level => PlayerGameData.ReadInt32((int)EROffsets.Player.Level);
         public string LevelString => PlayerGameData?.ReadInt32((int)EROffsets.Player.Level).ToString() ?? "";
 
+        #region Cheats
 
+        byte[] OriginalCombatCloseMap;
+        private bool _enableMapCombat { get; set; }
+
+        public bool EnableMapCombat
+        {
+            get => _enableMapCombat;
+            set
+            {
+                _enableMapCombat = value;
+                if (value)
+                    EnableMapInCombat();
+                else
+                    DisableMapInCombat();
+            }
+        }
+
+        private void EnableMapInCombat()
+        {
+            OriginalCombatCloseMap = CombatCloseMap.ReadBytes(0x0, 0x5);
+            var asm = Util.GetEmbededResource("Resources.Assembly.DisableMapClose.asm");
+            var assembly = Engine.Assemble(asm, 0);
+
+            DisableOpenMap.WriteByte(0x0, 0xEB); //Write Jump
+            CombatCloseMap.WriteBytes(0x0, assembly.Buffer);
+        }
+
+        private void DisableMapInCombat()
+        {
+            DisableOpenMap.WriteByte(0x0, 0x74); //Write Jump Equals
+            CombatCloseMap.WriteBytes(0x0, OriginalCombatCloseMap); //Place original bytes back for combat close map
+        }
+
+        #endregion
 
         #region ChrAsm
         public byte ArmStyle

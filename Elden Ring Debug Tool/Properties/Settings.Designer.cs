@@ -37,7 +37,7 @@ namespace Elden_Ring_Debug_Tool.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool SpawnUndroppable {
             get {
                 return ((bool)(this["SpawnUndroppable"]));
