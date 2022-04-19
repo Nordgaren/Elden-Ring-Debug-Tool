@@ -42,6 +42,8 @@ My fork of [Property Hook](https://github.com/Nordgaren/PropertyHook) by [TKGP](
 
 * Added new events to items that are spawned, but don't give you the event attached to them (I.E. Maps)  
 
+* Enable opening map in Combat in new Cheats tab.
+
 * Updated for patch 1.04  
 
 ### Beta 0.5.1
