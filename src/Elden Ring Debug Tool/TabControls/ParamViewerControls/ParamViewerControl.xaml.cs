@@ -48,7 +48,6 @@ namespace Elden_Ring_Debug_Tool
         private void ListBoxRows_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             FilterFields();
-
         }
 
         internal override void ReloadCtrl() 
@@ -123,15 +122,7 @@ namespace Elden_Ring_Debug_Tool
 
         private void SearchBoxField_TextChanged(object sender, TextChangedEventArgs e)
         {
-            var selectedParam = ((ERParam)ComboBoxParams.SelectedItem);
-            if (selectedParam == null)
-                return;
-
-            var row = ((ERParam.Row)ListBoxRows.SelectedItem);
-            if (row == null)
-                return;
-
-            selectedParam.SelectedRow = row;
+            FilterFields();
         }
 
         private void FilterFields()

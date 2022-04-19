@@ -64,7 +64,7 @@ namespace Elden_Ring_Debug_Tool
             PlayerGameData = CreateChildPointer(GameDataMan, EROffsets.PlayerGameData);
             PlayerInventory = CreateChildPointer(PlayerGameData, EROffsets.EquipInventoryDataOffset, EROffsets.PlayerInventoryOffset);
 
-            SoloParamRepository = RegisterRelativeAOB(EROffsets.SoloParamRepositoryAoB, EROffsets.RelativePtrAddressOffset, EROffsets.RelativePtrInstructionSize, 0x0);
+            SoloParamRepository = RegisterRelativeAOB(EROffsets.SoloParamRepositoryAoB, EROffsets.RelativePtrAddressOffset, EROffsets.RelativePtrInstructionSize);
 
             ItemGive = RegisterAbsoluteAOB(EROffsets.ItemGiveAoB);
             MapItemMan = RegisterRelativeAOB(EROffsets.MapItemManAoB, EROffsets.RelativePtrAddressOffset, EROffsets.RelativePtrInstructionSize);
@@ -125,7 +125,7 @@ namespace Elden_Ring_Debug_Tool
         {
             //Assemble once to get the size
             var bytes = Engine.Assemble(asm, (ulong)Process.MainModule.BaseAddress);
-            DebugPrintArray(bytes.Buffer);
+            //DebugPrintArray(bytes.Buffer);
             var error = Engine.GetLastKeystoneError();
             if (error != KeystoneError.KS_ERR_OK)
                 throw new Exception("Something went wrong during assembly. Code could not be assembled.");
