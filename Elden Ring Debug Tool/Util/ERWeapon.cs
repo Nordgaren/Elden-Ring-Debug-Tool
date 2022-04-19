@@ -100,15 +100,12 @@ namespace Elden_Ring_Debug_Tool
 
             Unique = BitConverter.ToInt32(param.Bytes, param.OffsetDict[ID] + (int)EROffsets.EquipParamWeapon.MaterialSetID) == 2200;
 
-            DefaultGem = ERGem.All.FirstOrDefault(gem => gem.SwordArtID == SwordArtId);
+            SwordArtId = BitConverter.ToInt32(param.Bytes, param.OffsetDict[ID] + (int)EROffsets.EquipParamWeapon.SwordArtsParamId);
+
 
             Type = (WeaponType)BitConverter.ToInt16(param.Bytes, param.OffsetDict[ID] + (int)EROffsets.EquipParamWeapon.WepType);
             TypeAmmo = (AmmoType)BitConverter.ToInt16(param.Bytes, param.OffsetDict[ID] + (int)EROffsets.EquipParamWeapon.WepType);
 
-            if (DefaultGem == null)
-                throw new Exception($"Cannot locate default gem for {Name}");
-
-       
 
             var val = 0;
             for (int i = 1; i < 16 && val != -1; i++)

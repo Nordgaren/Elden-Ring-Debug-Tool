@@ -38,6 +38,7 @@
     <None Remove="Resources\Assembly\DisableMapClose.asm" />
     <None Remove="Resources\Assembly\ItemGive.asm" />
     <None Remove="Resources\Assembly\SaveParams.asm" />
+    <None Remove="Resources\Assembly\SetEventFlag.asm" />
   </ItemGroup>
 
   <ItemGroup>
@@ -46,6 +47,7 @@
     <EmbeddedResource Include="Resources\Assembly\SaveParams.asm">
       <Generator></Generator>
     </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Assembly\SetEventFlag.asm" />
   </ItemGroup>
 
   <ItemGroup>
@@ -88,6 +90,9 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <None Update="Resources\ERItemCategories.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\Events\GoodsEvents.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Resources\Items\Armor.txt">

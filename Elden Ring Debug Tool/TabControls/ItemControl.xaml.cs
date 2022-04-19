@@ -236,7 +236,11 @@ namespace Elden_Ring_Debug_Tool
 
                 var gem = cmbGems.SelectedItem as ERGem;
 
+                if (item.EventID != -1)
+                    Hook.SetEventFlag(item.EventID);
+
                 Hook.GetItem(id, (int)nudQuantity.Value, (int)infusion, (int)nudUpgrade.Value, gem.ID);
+               
             }
         }
 

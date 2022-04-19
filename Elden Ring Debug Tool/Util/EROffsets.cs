@@ -134,7 +134,20 @@ namespace Elden_Ring_Debug_Tool
         public const string EventCallAoB = "48 89 5C 24 08 48 89 74 24 18 57 48 83 EC 30 48 8B DA 41 0F B6 F8 8B 12 48 8B F1 85 D2 0F 84 ? ? ? ? 45 84 C0";
 
         public const string WorldChrManAoB = "48 8B 05 ? ? ? ? 48 85 C0 74 0F 48 39 88 ? ? ? ? 75 06 89 B1 5C 03 00 00 0F 28 05 ? ? ? ? 4C 8D 45 E7";
+
+        public enum WorldChrMan
+        {
+            NumWorldBlockChr = 0xb528,
+            WorldBlockChr = 0x330
+        }
+
         public const int PlayerInsOffset = 0x18468;
+
+        public enum PlayerIns
+        {
+            TargetHandle = 0x6a8,
+            TargetArea = 0x6ac
+        }
 
         public const string DisableOpenMapAoB = "74 ? C7 45 38 58 02 00 00 C7 45 3C 02 00 00 00 C7 45 40 01 00 00 00 48 ? ? ? ? ? ? 48 89 45 48 48 8D 4D 38 E8 ? ? ? ? E9";
         public const string CombatCloseMapAoB = "E8 ? ? ? ? 84 C0 75 ? 38 83 EA 3C 00 00";

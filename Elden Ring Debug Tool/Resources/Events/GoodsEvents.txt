@@ -1,0 +1,112 @@
+﻿//Format:EventID ItemID //Comment the name
+# Mending Rune
+//9500 8182 //Mending Rune of Perfect Order
+//9502 8183 //Mending Rune of the Death-Prince
+//9504 8184 //Mending Rune of the Fell Curse
+
+# Mechanics
+60100 130 //Spectral Steed Whistle
+60110 8158 //Spirit Calling Bell
+60120 8500 //Crafting Kit
+60130 8590 //Whetstone Knife
+60140 8163 //Tailoring Tools
+60150 8188 //Golden Tailoring Tools
+60210 106 //Tarnished's Wizened Finger
+60220 100 //Tarnished's Furled Finger
+60230 109 //Small Golden Effigy
+60240 101 //Duelist's Furled Finger
+60250 110 //Small Red Effigy
+60270 102 //Bloody Finger
+60280 104 //White Cipher Ring
+60290 105 //Blue Cipher Ring
+60300 108 //Taunter's Tongue
+60310 103 //Finger Severer
+
+# Maps
+62010 8600 //Map: Limgrave, West
+62011 8601 //Map: Weeping Peninsula
+62012 8602 //Map: Limgrave, East
+62020 8603 //Map: Liurnia, East
+62021 8604 //Map: Liurnia, North
+62022 8605 //Map: Liurnia, West
+62030 8606 //Map: Altus Plateau
+62031 8607 //Map: Leyndell, Royal Capital
+62032 8608 //Map: Mt. Gelmir
+62040 8609 //Map: Caelid
+62041 8610 //Map: Dragonbarrow
+62050 8611 //Map: Mountaintops of the Giants, West
+62051 8612 //Map: Mountaintops of the Giants, East
+62060 8613 //Map: Ainsel River
+62061 8614 //Map: Lake of Rot
+62063 8615 //Map: Siofra River
+62062 8616 //Map: Mohgwyn Palace
+62064 8617 //Map: Deeproot Depths
+62052 8618 //Map: Consecrated Snowfield
+
+# Whetblade
+65610 8970 //Iron Whetblade
+65640 8971 //Red-Hot Whetblade
+65660 8972 //Sanctified Whetblade
+65680 8973 //Glintstone Whetblade
+65720 8974 //Black Whetblade
+
+#Cookbooks
+67000 9300 //Nomadic Warrior's Cookbook [1]
+67110 9311 //Nomadic Warrior's Cookbook [2]
+67010 9301 //Nomadic Warrior's Cookbook [3]
+67800 9380 //Nomadic Warrior's Cookbook [4]
+67830 9383 //Nomadic Warrior's Cookbook [5]
+67020 9302 //Nomadic Warrior's Cookbook [6]
+67050 9305 //Nomadic Warrior's Cookbook [7]
+67880 9388 //Nomadic Warrior's Cookbook [8]
+67430 9343 //Nomadic Warrior's Cookbook [9]
+67030 9303 //Nomadic Warrior's Cookbook [10]
+67220 9322 //Nomadic Warrior's Cookbook [11]
+67060 9306 //Nomadic Warrior's Cookbook [12]
+67080 9308 //Nomadic Warrior's Cookbook [13]
+67870 9387 //Nomadic Warrior's Cookbook [14]
+67900 9390 //Nomadic Warrior's Cookbook [15]
+67290 9329 //Nomadic Warrior's Cookbook [16]
+67100 9310 //Nomadic Warrior's Cookbook [17]
+67270 9327 //Nomadic Warrior's Cookbook [18]
+67070 9307 //Nomadic Warrior's Cookbook [19]
+67230 9323 //Nomadic Warrior's Cookbook [20]
+67120 9312 //Nomadic Warrior's Cookbook [21]
+67890 9389 //Nomadic Warrior's Cookbook [22]
+67090 9309 //Nomadic Warrior's Cookbook [23]
+67910 9391 //Nomadic Warrior's Cookbook [24]
+67200 9320 //Armorer's Cookbook [1]
+67210 9321 //Armorer's Cookbook [2]
+67280 9328 //Armorer's Cookbook [3]
+67260 9326 //Armorer's Cookbook [4]
+67310 9331 //Armorer's Cookbook [5]
+67300 9330 //Armorer's Cookbook [6]
+67250 9325 //Armorer's Cookbook [7]
+67410 9341 //Glintstone Craftsman's Cookbook [1]
+67450 9345 //Glintstone Craftsman's Cookbook [2]
+67480 9348 //Glintstone Craftsman's Cookbook [3]
+67400 9340 //Glintstone Craftsman's Cookbook [4]
+67420 9342 //Glintstone Craftsman's Cookbook [5]
+67460 9346 //Glintstone Craftsman's Cookbook [6]
+67470 9347 //Glintstone Craftsman's Cookbook [7]
+67440 9344 //Glintstone Craftsman's Cookbook [8]
+67610 9361 //Missionary's Cookbook [1]
+67600 9360 //Missionary's Cookbook [2]
+67650 9365 //Missionary's Cookbook [3]
+67640 9364 //Missionary's Cookbook [4]
+67630 9363 //Missionary's Cookbook [5]
+67130 9313 //Missionary's Cookbook [6]
+68230 9423 //Missionary's Cookbook [7]
+68000 9400 //Ancient Dragon Apostle's Cookbook [1]
+68010 9401 //Ancient Dragon Apostle's Cookbook [2]
+68030 9403 //Ancient Dragon Apostle's Cookbook [3]
+68020 9402 //Ancient Dragon Apostle's Cookbook [4]
+67840 9381 //Perfumer's Cookbook [1]
+67850 9382 //Perfumer's Cookbook [2]
+67860 9386 //Perfumer's Cookbook [3]
+67920 9392 //Perfumer's Cookbook [4]
+68200 9420 //Fevor's Cookbook [1]
+68220 9421 //Fevor's Cookbook [2]
+68210 9422 //Fevor's Cookbook [3]
+68400 9440 //Frenzied's Cookbook [1]
+68410 9441 //Frenzied's Cookbook [2]

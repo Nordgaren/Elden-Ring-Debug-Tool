@@ -18,7 +18,6 @@ namespace Elden_Ring_Debug_Tool
         public short WeaponAttr;
         public List<Infusion> Infusions;
         public List<WeaponType> WeaponTypes = new List<WeaponType>();
-        public static ERGem None;
 
         private void GetInfusions()
         {
@@ -55,6 +54,7 @@ namespace Elden_Ring_Debug_Tool
             IsDrop = (bitfield & (1 << 1)) != 0;
             IsMultiplayerShare = (bitfield & (1 << 3)) == 0;
 
+            SwordArtID = BitConverter.ToInt32(param.Bytes, param.OffsetDict[ID] + (int)EROffsets.EquipParamGem.SwordArtsParamId);
             CanMountBitfield = BitConverter.ToInt64(param.Bytes, param.OffsetDict[ID] + (int)EROffsets.EquipParamGem.CanMountWep_Dagger);
             WeaponAttr = BitConverter.ToInt16(param.Bytes, param.OffsetDict[ID] + (int)EROffsets.EquipParamGem.ConfigurableWepAttr);
             GetWeapons();

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Elden_Ring_Debug_Tool
 {
-    internal class Util
+    internal static class Util
     {
 
         public static readonly string ExeDir = Environment.CurrentDirectory;
@@ -76,13 +76,30 @@ namespace Elden_Ring_Debug_Tool
                 txtLine = txtLine.Substring(0, txtLine.IndexOf("//")); // remove everything after "//" comments
             };
 
-            if (string.IsNullOrWhiteSpace(txtLine) == true) //empty line check
+            if (string.IsNullOrWhiteSpace(txtLine) == true || txtLine.Contains('#')) //empty line check
             {
                 return false; //resource line invalid
             };
 
             return true; //resource line valid
         }
+
+        /// <summary>
+        /// Removes everything after // in a string and returns the new string with .Trim()
+        /// </summary>
+        /// <param name="txtLine"></param>
+        /// <returns>txtLine.Trim() with everything after // removed</returns>
+        public static string TrimComment(this string txtLine)
+        {
+            //Repurposing Kingborehahas code for checking valid resource to trim hashes
+            if (txtLine.Contains("//"))
+            {
+                txtLine = txtLine.Substring(0, txtLine.IndexOf("//")); // remove everything after "//" comments
+            };
+
+            return txtLine.Trim();
+        }
+
 
         public static string[] RegexSplit(string source, string pattern)
         {

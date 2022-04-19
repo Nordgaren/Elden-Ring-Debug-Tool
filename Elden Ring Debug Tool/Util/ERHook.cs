@@ -16,6 +16,7 @@ using Category = Elden_Ring_Debug_Tool.ERItem.Category;
 using WeaponType = Elden_Ring_Debug_Tool.ERWeapon.WeaponType;
 using static SoulsFormats.PARAMDEF;
 using System.Collections;
+using System.Text.RegularExpressions;
 
 namespace Elden_Ring_Debug_Tool
 {
@@ -44,7 +45,7 @@ namespace Elden_Ring_Debug_Tool
         public PHPointer ItemGive { get; set; }
         public PHPointer MapItemMan { get; set; }
         public PHPointer EventFlagMan { get; set; }
-        public PHPointer EventCall { get; set; }
+        public PHPointer SetEventFlagFunction { get; set; }
         public PHPointer WorldChrMan { get; set; }
         public PHPointer PlayerIns { get; set; }
         public PHPointer DisableOpenMap { get; set; }
@@ -73,8 +74,8 @@ namespace Elden_Ring_Debug_Tool
 
             ItemGive = RegisterAbsoluteAOB(EROffsets.ItemGiveAoB);
             MapItemMan = RegisterRelativeAOB(EROffsets.MapItemManAoB, EROffsets.RelativePtrAddressOffset, EROffsets.RelativePtrInstructionSize);
-            EventFlagMan = RegisterRelativeAOB(EROffsets.EventFlagManAoB, EROffsets.RelativePtrAddressOffset, EROffsets.RelativePtrInstructionSize);
-            EventCall = RegisterAbsoluteAOB(EROffsets.EventCallAoB);
+            EventFlagMan = RegisterRelativeAOB(EROffsets.EventFlagManAoB, EROffsets.RelativePtrAddressOffset, EROffsets.RelativePtrInstructionSize, 0x0);
+            SetEventFlagFunction = RegisterAbsoluteAOB(EROffsets.EventCallAoB);
 
             CapParamCall = RegisterAbsoluteAOB(EROffsets.CapParamCallAoB);
 
@@ -83,6 +84,7 @@ namespace Elden_Ring_Debug_Tool
 
             DisableOpenMap = RegisterAbsoluteAOB(EROffsets.DisableOpenMapAoB);
             CombatCloseMap = RegisterAbsoluteAOB(EROffsets.CombatCloseMapAoB);
+            BuildItemEventDictionary();
         }
 
 
@@ -104,7 +106,6 @@ namespace Elden_Ring_Debug_Tool
             OnPropertyChanged(nameof(InventoryCount));
         }
 
-
         public ERParam EquipParamAccessory;
         public ERParam EquipParamGem;
         public ERParam EquipParamGoods;
@@ -118,6 +119,7 @@ namespace Elden_Ring_Debug_Tool
         {
             //Assemble once to get the size
             var bytes = Engine.Assemble(asm, (ulong)Process.MainModule.BaseAddress);
+            DebugPrintArray(bytes.Buffer);
             var error = Engine.GetLastKeystoneError();
             if (error != KeystoneError.KS_ERR_OK)
                 throw new Exception("Something went wrong during assembly. Code could not be assembled.");
@@ -130,7 +132,7 @@ namespace Elden_Ring_Debug_Tool
 
             Kernel32.WriteBytes(Handle, insertPtr, bytes.Buffer);
 #if DEBUG
-            //DebugPrintArray(bytes.Buffer);
+            DebugPrintArray(bytes.Buffer);
 #endif
 
             Execute(insertPtr);
@@ -174,7 +176,7 @@ namespace Elden_Ring_Debug_Tool
                 if (!Util.IsValidTxtResource(entry))
                     continue;
 
-                var info = entry.Split(':');
+                var info = entry.TrimComment().Split(':');
                 var name = info[1];
                 var defName = info.Length > 2 ? info[2] : name;
 
@@ -247,8 +249,38 @@ namespace Elden_Ring_Debug_Tool
 
         #endregion
 
+        public void SetEventFlag(int flag)
+        {
+            var idPointer = GetPrefferedIntPtr(sizeof(int));
+            Kernel32.WriteInt32(Handle, idPointer, flag);
+
+            var asmString = Util.GetEmbededResource("Resources.Assembly.SetEventFlag.asm");
+            var asm = string.Format(asmString, EventFlagMan.Resolve(), idPointer.ToString("X2"), SetEventFlagFunction.Resolve());
+            AsmExecute(asm);
+            Free(idPointer);
+        }
+
         #region Inventory
 
+        private static Regex ItemEventEntryRx = new Regex(@"^(?<event>\S+) (?<item>\S+)$", RegexOptions.CultureInvariant);
+
+        private static Dictionary<int,int> ItemEventDictionary;
+
+        private void BuildItemEventDictionary()
+        {
+            ItemEventDictionary = new Dictionary<int, int>();
+            var goodsEvents = Util.GetTxtResource("Resources/Events/GoodsEvents.txt");
+            foreach (var line in goodsEvents.Split(new string[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries))
+            {
+                if (Util.IsValidTxtResource(line))
+                {
+                    Match itemEntry = ItemEventEntryRx.Match(line.TrimComment());
+                    var eventID = Convert.ToInt32(itemEntry.Groups["event"].Value);
+                    var itemID = Convert.ToInt32(itemEntry.Groups["item"].Value);
+                    ItemEventDictionary.Add(itemID + (int)Category.Goods, eventID);
+                }
+            }
+        }
         private void ReadParams()
         {
             foreach (var category in ERItemCategory.All)
@@ -256,7 +288,18 @@ namespace Elden_Ring_Debug_Tool
                 foreach (var item in category.Items)
                 {
                     SetupItem(item);
+                    var fullID = item.ID + (int)Category.Goods;
+                    item.EventID = ItemEventDictionary.ContainsKey(fullID) ? ItemEventDictionary[fullID] : -1;
                 }
+            }
+
+            foreach (var category in ERItemCategory.All)
+            {
+                if (category.Category == Category.Weapons)
+                    foreach (ERWeapon weapon in category.Items)
+                    {
+                        weapon.DefaultGem = ERGem.All.FirstOrDefault(gem => gem.SwordArtID == weapon.SwordArtId);
+                    }
             }
         }
 
@@ -342,6 +385,19 @@ namespace Elden_Ring_Debug_Tool
         }
         #endregion
 
+        #region Target  
+
+        public int TargetHandle 
+        {
+            get => PlayerIns?.ReadInt32((int)EROffsets.PlayerIns.TargetHandle) ?? 0;
+            //set => PlayerIns.WriteInt32((int)EROffsets.PlayerIns.TargetHandle, value);
+        }
+        public int TargetArea
+        {
+            get => PlayerIns?.ReadInt32((int)EROffsets.PlayerIns.TargetArea) ?? 0;
+        }
+
+        #endregion
 
         public int Level => PlayerGameData.ReadInt32((int)EROffsets.Player.Level);
         public string LevelString => PlayerGameData?.ReadInt32((int)EROffsets.Player.Level).ToString() ?? "";

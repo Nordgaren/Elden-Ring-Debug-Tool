@@ -24,6 +24,7 @@ namespace Elden_Ring_Debug_Tool
         public Category ItemCategory;
 
         public short MaxQuantity;
+        public int EventID;
         public bool IsDrop;
         public bool IsMultiplayerShare;
         public bool CanAquireFromOtherPlayers => IsDrop && IsMultiplayerShare;

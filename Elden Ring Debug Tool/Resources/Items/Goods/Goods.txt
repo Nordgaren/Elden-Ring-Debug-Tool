@@ -17,18 +17,6 @@
 130 Spectral Steed Whistle
 135 Phantom Great Rune
 150 Furlcalling Finger Remedy
-170 Tarnished's Furled Finger
-171 Duelist's Furled Finger
-172 Bloody Finger
-174 White Cipher Ring
-175 Blue Cipher Ring
-178 Taunter's Tongue
-179 Small Golden Effigy
-180 Small Red Effigy
-181 Spectral Steed Whistle
-182 Furlcalling Finger Remedy
-183 Festering Bloody Finger
-184 Recusant Finger
 190 Rune Arc
 191 Godrick's Great Rune
 192 Radahn's Great Rune
@@ -36,8 +24,6 @@
 194 Rykard's Great Rune
 195 Mohg's Great Rune
 196 Malenia's Great Rune
-250 Flask of Wondrous Physick
-251 Flask of Wondrous Physick
 300 Fire Pot
 301 Redmane Fire Pot
 302 Giantsflame Fire Pot
@@ -82,58 +68,6 @@
 940 Preserving Boluses
 950 Rejuvenating Boluses
 960 Clarifying Boluses
-1000 Flask of Crimson Tears
-1001 Flask of Crimson Tears
-1002 Flask of Crimson Tears +1
-1003 Flask of Crimson Tears +1
-1004 Flask of Crimson Tears +2
-1005 Flask of Crimson Tears +2
-1006 Flask of Crimson Tears +3
-1007 Flask of Crimson Tears +3
-1008 Flask of Crimson Tears +4
-1009 Flask of Crimson Tears +4
-1010 Flask of Crimson Tears +5
-1011 Flask of Crimson Tears +5
-1012 Flask of Crimson Tears +6
-1013 Flask of Crimson Tears +6
-1014 Flask of Crimson Tears +7
-1015 Flask of Crimson Tears +7
-1016 Flask of Crimson Tears +8
-1017 Flask of Crimson Tears +8
-1018 Flask of Crimson Tears +9
-1019 Flask of Crimson Tears +9
-1020 Flask of Crimson Tears +10
-1021 Flask of Crimson Tears +10
-1022 Flask of Crimson Tears +11
-1023 Flask of Crimson Tears +11
-1024 Flask of Crimson Tears +12
-1025 Flask of Crimson Tears +12
-1050 Flask of Cerulean Tears
-1051 Flask of Cerulean Tears
-1052 Flask of Cerulean Tears +1
-1053 Flask of Cerulean Tears +1
-1054 Flask of Cerulean Tears +2
-1055 Flask of Cerulean Tears +2
-1056 Flask of Cerulean Tears +3
-1057 Flask of Cerulean Tears +3
-1058 Flask of Cerulean Tears +4
-1059 Flask of Cerulean Tears +4
-1060 Flask of Cerulean Tears +5
-1061 Flask of Cerulean Tears +5
-1062 Flask of Cerulean Tears +6
-1063 Flask of Cerulean Tears +6
-1064 Flask of Cerulean Tears +7
-1065 Flask of Cerulean Tears +7
-1066 Flask of Cerulean Tears +8
-1067 Flask of Cerulean Tears +8
-1068 Flask of Cerulean Tears +9
-1069 Flask of Cerulean Tears +9
-1070 Flask of Cerulean Tears +10
-1071 Flask of Cerulean Tears +10
-1072 Flask of Cerulean Tears +11
-1073 Flask of Cerulean Tears +11
-1074 Flask of Cerulean Tears +12
-1075 Flask of Cerulean Tears +12
 1100 Pickled Turtle Neck
 1110 Immunizing Cured Meat
 1120 Invigorating Cured Meat

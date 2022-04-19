@@ -1,54 +1,54 @@
-﻿250 Flask of Wondrous Physick
+﻿250 Flask of Wondrous Physick (Empty)
 251 Flask of Wondrous Physick
-1000 Flask of Crimson Tears
+1000 Flask of Crimson Tears (Empty)
 1001 Flask of Crimson Tears
-1002 Flask of Crimson Tears +1
+1002 Flask of Crimson Tears +1 (Empty)
 1003 Flask of Crimson Tears +1
-1004 Flask of Crimson Tears +2
+1004 Flask of Crimson Tears +2 (Empty)
 1005 Flask of Crimson Tears +2
-1006 Flask of Crimson Tears +3
+1006 Flask of Crimson Tears +3 (Empty)
 1007 Flask of Crimson Tears +3
-1008 Flask of Crimson Tears +4
+1008 Flask of Crimson Tears +4 (Empty)
 1009 Flask of Crimson Tears +4
-1010 Flask of Crimson Tears +5
+1010 Flask of Crimson Tears +5 (Empty)
 1011 Flask of Crimson Tears +5
-1012 Flask of Crimson Tears +6
+1012 Flask of Crimson Tears +6 (Empty)
 1013 Flask of Crimson Tears +6
-1014 Flask of Crimson Tears +7
+1014 Flask of Crimson Tears +7 (Empty)
 1015 Flask of Crimson Tears +7
-1016 Flask of Crimson Tears +8
+1016 Flask of Crimson Tears +8 (Empty)
 1017 Flask of Crimson Tears +8
-1018 Flask of Crimson Tears +9
+1018 Flask of Crimson Tears +9 (Empty)
 1019 Flask of Crimson Tears +9
-1020 Flask of Crimson Tears +10
+1020 Flask of Crimson Tears +10 (Empty)
 1021 Flask of Crimson Tears +10
-1022 Flask of Crimson Tears +11
+1022 Flask of Crimson Tears +11 (Empty)
 1023 Flask of Crimson Tears +11
-1024 Flask of Crimson Tears +12
+1024 Flask of Crimson Tears +12 (Empty)
 1025 Flask of Crimson Tears +12
-1050 Flask of Cerulean Tears
+1050 Flask of Cerulean Tears (Empty)
 1051 Flask of Cerulean Tears
-1052 Flask of Cerulean Tears +1
+1052 Flask of Cerulean Tears +1 (Empty)
 1053 Flask of Cerulean Tears +1
-1054 Flask of Cerulean Tears +2
+1054 Flask of Cerulean Tears +2 (Empty)
 1055 Flask of Cerulean Tears +2
-1056 Flask of Cerulean Tears +3
+1056 Flask of Cerulean Tears +3 (Empty)
 1057 Flask of Cerulean Tears +3
-1058 Flask of Cerulean Tears +4
+1058 Flask of Cerulean Tears +4 (Empty)
 1059 Flask of Cerulean Tears +4
-1060 Flask of Cerulean Tears +5
+1060 Flask of Cerulean Tears +5 (Empty)
 1061 Flask of Cerulean Tears +5
-1062 Flask of Cerulean Tears +6
+1062 Flask of Cerulean Tears +6 (Empty)
 1063 Flask of Cerulean Tears +6
-1064 Flask of Cerulean Tears +7
+1064 Flask of Cerulean Tears +7 (Empty)
 1065 Flask of Cerulean Tears +7
-1066 Flask of Cerulean Tears +8
+1066 Flask of Cerulean Tears +8 (Empty)
 1067 Flask of Cerulean Tears +8
-1068 Flask of Cerulean Tears +9
+1068 Flask of Cerulean Tears +9 (Empty)
 1069 Flask of Cerulean Tears +9
-1070 Flask of Cerulean Tears +10
+1070 Flask of Cerulean Tears +10 (Empty)
 1071 Flask of Cerulean Tears +10
-1072 Flask of Cerulean Tears +11
+1072 Flask of Cerulean Tears +11 (Empty)
 1073 Flask of Cerulean Tears +11
-1074 Flask of Cerulean Tears +12
+1074 Flask of Cerulean Tears +12 (Empty)
 1075 Flask of Cerulean Tears +12

@@ -15,6 +15,7 @@ namespace Elden_Ring_Debug_Tool
 
         public string Name;
         public List<ERItem> Items;
+        public Category Category;
         public static List<ERItemCategory> All = new List<ERItemCategory>();
 
         private static Regex CategoryEntryRx = new Regex(@"^(?<category>\S+) (?<show>\S+) (?<path>\S+) (?<name>.+)$", RegexOptions.CultureInvariant);
@@ -23,10 +24,11 @@ namespace Elden_Ring_Debug_Tool
         {
             Name = name;
             Items = new List<ERItem>();
+            Category = category;
             foreach (string line in itemList.Split(new string[] { "\n" }, StringSplitOptions.RemoveEmptyEntries))
             {
                 if (Util.IsValidTxtResource(line)) //determine if line is a valid resource or not
-                    AddItem(line, category);
+                    AddItem(line.TrimComment(), category);
             };
         }
 
@@ -59,7 +61,7 @@ namespace Elden_Ring_Debug_Tool
             {
                 if (Util.IsValidTxtResource(line)) //determine if line is a valid resource or not
                 {
-                    Match itemEntry = CategoryEntryRx.Match(line);
+                    Match itemEntry = CategoryEntryRx.Match(line.TrimComment());
                     var name = itemEntry.Groups["name"].Value;
                     var show = Convert.ToBoolean(itemEntry.Groups["show"].Value);
                     var cat = itemEntry.Groups["category"].Value;
