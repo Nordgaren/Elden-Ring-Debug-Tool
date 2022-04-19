@@ -38,6 +38,12 @@ My fork of [Property Hook](https://github.com/Nordgaren/PropertyHook) by [TKGP](
 **jamesq7** For helping figure out the cheat for enabling the map during combat.  
 
 # Change Log  
+### Beta 0.5.2
+
+* Added new events to items that are spawned, but don't give you the event attached to them (I.E. Maps)  
+
+* Updated for patch 1.04  
+
 ### Beta 0.5.1
 
 * Fixed item Max Upgrade so it now looks at originEquipWep  
