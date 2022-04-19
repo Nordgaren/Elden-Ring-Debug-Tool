@@ -8,8 +8,6 @@ namespace Elden_Ring_Debug_Tool
 {
     internal class EROffsets
     {
-        public const string CSSystemStepAoB = "25 04 00 80 ? ? ? 00 ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00";
-        public const int CSSystemStepOffset = 0x8;
         public const int IsLoadedOffset1 = 0x320;
         public const int IsLoadedOffset2 = 0xC8;
         public const int IsLoadedOffset3 = 0xC0;
@@ -150,6 +148,6 @@ namespace Elden_Ring_Debug_Tool
         }
 
         public const string DisableOpenMapAoB = "74 ? C7 45 38 58 02 00 00 C7 45 3C 02 00 00 00 C7 45 40 01 00 00 00 48 ? ? ? ? ? ? 48 89 45 48 48 8D 4D 38 E8 ? ? ? ? E9";
-        public const string CombatCloseMapAoB = "E8 ? ? ? ? 84 C0 75 ? 38 83 EA 3C 00 00";
+        public const string CombatCloseMapAoB = "E8 ? ? ? ? 84 C0 75 ? 38 83 ? ? ? ? 75 ? 83 E7 FE";
     }
 }

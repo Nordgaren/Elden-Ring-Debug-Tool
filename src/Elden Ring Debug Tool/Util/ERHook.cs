@@ -33,10 +33,6 @@ namespace Elden_Ring_Debug_Tool
             OnSetup?.Invoke(this, new PHEventArgs(this));
         }
 
-        private PHPointer CSSystemStep { get; set; }
-        private PHPointer IsLoaded { get; set; }
-
-
         private PHPointer GameDataMan { get; set; }
         private PHPointer PlayerGameData { get; set; }
         private PHPointer PlayerInventory { get; set; }
@@ -64,8 +60,6 @@ namespace Elden_Ring_Debug_Tool
         {
             OnHooked += ERHook_OnHooked;
 
-            CSSystemStep = RegisterAbsoluteAOB(EROffsets.CSSystemStepAoB, EROffsets.CSSystemStepOffset);
-            IsLoaded = CreateChildPointer(CSSystemStep, EROffsets.IsLoadedOffset1, EROffsets.IsLoadedOffset2, EROffsets.IsLoadedOffset3, EROffsets.IsLoadedOffset4);
             GameDataMan = RegisterRelativeAOB(EROffsets.GameDataManAoB, EROffsets.RelativePtrAddressOffset, EROffsets.RelativePtrInstructionSize, 0x0);
             PlayerGameData = CreateChildPointer(GameDataMan, EROffsets.PlayerGameData);
             PlayerInventory = CreateChildPointer(PlayerGameData, EROffsets.EquipInventoryDataOffset, EROffsets.PlayerInventoryOffset);
@@ -90,6 +84,18 @@ namespace Elden_Ring_Debug_Tool
 
         private void ERHook_OnHooked(object? sender, PHEventArgs e)
         {
+            var gameDataMan = GameDataMan.Resolve();
+            var paramss = SoloParamRepository.Resolve();
+            var itemGive = ItemGive.Resolve();
+            var mapItemMan = MapItemMan.Resolve();
+            var eventFlagMan = EventFlagMan.Resolve();
+            var setEventFlagFunction = SetEventFlagFunction.Resolve(); 
+            var capParamCall = CapParamCall.Resolve();
+            var worldChrMan = WorldChrMan.Resolve();
+
+            var disableOpenMap = DisableOpenMap.Resolve();
+            var combatCloseMap = CombatCloseMap.Resolve();
+
             RaiseOnSetup();
             ReadParams();
             Setup = true;
