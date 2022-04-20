@@ -64,7 +64,7 @@ namespace Elden_Ring_Debug_Tool
             PlayerGameData = CreateChildPointer(GameDataMan, EROffsets.PlayerGameData);
             PlayerInventory = CreateChildPointer(PlayerGameData, EROffsets.EquipInventoryDataOffset, EROffsets.PlayerInventoryOffset);
 
-            SoloParamRepository = RegisterRelativeAOB(EROffsets.SoloParamRepositoryAoB, EROffsets.RelativePtrAddressOffset, EROffsets.RelativePtrInstructionSize, 0);
+            SoloParamRepository = RegisterRelativeAOB(EROffsets.SoloParamRepositoryAoB, EROffsets.RelativePtrAddressOffset, EROffsets.RelativePtrInstructionSize);
 
             ItemGive = RegisterAbsoluteAOB(EROffsets.ItemGiveAoB);
             MapItemMan = RegisterRelativeAOB(EROffsets.MapItemManAoB, EROffsets.RelativePtrAddressOffset, EROffsets.RelativePtrInstructionSize);
@@ -85,7 +85,7 @@ namespace Elden_Ring_Debug_Tool
         private void ERHook_OnHooked(object? sender, PHEventArgs e)
         {
             //var gameDataMan = GameDataMan.Resolve();
-            //var paramss = SoloParamRepository.Resolve();
+            var paramss = SoloParamRepository.Resolve();
             //var itemGive = ItemGive.Resolve();
             //var mapItemMan = MapItemMan.Resolve();
             //var eventFlagMan = EventFlagMan.Resolve();
