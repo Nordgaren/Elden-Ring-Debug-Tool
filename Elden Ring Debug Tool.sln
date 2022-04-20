@@ -5,6 +5,15 @@ VisualStudioVersion = 17.0.32112.339
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Elden Ring Debug Tool", "src\Elden Ring Debug Tool\Elden Ring Debug Tool.csproj", "{ACDC9A09-30DD-4DD7-9423-B8C4CDECF90F}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MemHook", "src\MemHook\MemHook.csproj", "{5FE3C223-5373-4BDF-BC0F-D4EBB83F9CA5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{C6D57919-CA93-41A6-9A80-BFAA5CB97723}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "solution items", "solution items", "{5A55EC0D-D2E0-43B2-B4A9-DA2D23BF0D21}"
+	ProjectSection(SolutionItems) = preProject
+		.github\workflows\build.yml = .github\workflows\build.yml
+	EndProjectSection
+EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SoulsFormats", "src\SoulsFormats\SoulsFormats\SoulsFormats.csproj", "{DF227B9B-A618-45D6-BF3F-BBB2BFCF1B44}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PropertyHook", "src\PropertyHook\PropertyHook\PropertyHook.csproj", "{18EFF8D2-C4D5-4E18-9A31-38E106BA1CF7}"
@@ -12,24 +21,42 @@ EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
+		Publish|Any CPU = Publish|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{ACDC9A09-30DD-4DD7-9423-B8C4CDECF90F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{ACDC9A09-30DD-4DD7-9423-B8C4CDECF90F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ACDC9A09-30DD-4DD7-9423-B8C4CDECF90F}.Publish|Any CPU.ActiveCfg = Publish|Any CPU
+		{ACDC9A09-30DD-4DD7-9423-B8C4CDECF90F}.Publish|Any CPU.Build.0 = Publish|Any CPU
 		{ACDC9A09-30DD-4DD7-9423-B8C4CDECF90F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ACDC9A09-30DD-4DD7-9423-B8C4CDECF90F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5FE3C223-5373-4BDF-BC0F-D4EBB83F9CA5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5FE3C223-5373-4BDF-BC0F-D4EBB83F9CA5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5FE3C223-5373-4BDF-BC0F-D4EBB83F9CA5}.Publish|Any CPU.ActiveCfg = Debug|Any CPU
+		{5FE3C223-5373-4BDF-BC0F-D4EBB83F9CA5}.Publish|Any CPU.Build.0 = Debug|Any CPU
+		{5FE3C223-5373-4BDF-BC0F-D4EBB83F9CA5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5FE3C223-5373-4BDF-BC0F-D4EBB83F9CA5}.Release|Any CPU.Build.0 = Release|Any CPU
 		{DF227B9B-A618-45D6-BF3F-BBB2BFCF1B44}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{DF227B9B-A618-45D6-BF3F-BBB2BFCF1B44}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DF227B9B-A618-45D6-BF3F-BBB2BFCF1B44}.Publish|Any CPU.ActiveCfg = Debug|Any CPU
+		{DF227B9B-A618-45D6-BF3F-BBB2BFCF1B44}.Publish|Any CPU.Build.0 = Debug|Any CPU
 		{DF227B9B-A618-45D6-BF3F-BBB2BFCF1B44}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DF227B9B-A618-45D6-BF3F-BBB2BFCF1B44}.Release|Any CPU.Build.0 = Release|Any CPU
 		{18EFF8D2-C4D5-4E18-9A31-38E106BA1CF7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{18EFF8D2-C4D5-4E18-9A31-38E106BA1CF7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{18EFF8D2-C4D5-4E18-9A31-38E106BA1CF7}.Publish|Any CPU.ActiveCfg = Debug|Any CPU
+		{18EFF8D2-C4D5-4E18-9A31-38E106BA1CF7}.Publish|Any CPU.Build.0 = Debug|Any CPU
 		{18EFF8D2-C4D5-4E18-9A31-38E106BA1CF7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{18EFF8D2-C4D5-4E18-9A31-38E106BA1CF7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{ACDC9A09-30DD-4DD7-9423-B8C4CDECF90F} = {C6D57919-CA93-41A6-9A80-BFAA5CB97723}
+		{5FE3C223-5373-4BDF-BC0F-D4EBB83F9CA5} = {C6D57919-CA93-41A6-9A80-BFAA5CB97723}
+		{18EFF8D2-C4D5-4E18-9A31-38E106BA1CF7} = {C6D57919-CA93-41A6-9A80-BFAA5CB97723}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {1CFB4F6A-4307-4038-BBEE-2E6F8FD440A1}

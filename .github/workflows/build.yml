@@ -1,0 +1,30 @@
+name: build
+
+on: push
+
+jobs:
+  build:
+
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: setup .NET
+      uses: actions/setup-dotnet@v2
+      with:
+        dotnet-version: 6.0.x
+        
+    - name: restore dependencies
+      run: dotnet restore
+      
+    - name: build
+      run: dotnet publish "src/Elden Ring Debug Tool/Elden Ring Debug Tool.csproj" /p:PublishProfile=FolderProfile.pubxml
+
+    - name: publish artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: publish
+        path: src/Elden Ring Debug Tool/bin/Publish/*.zip
+
+    
