@@ -205,6 +205,7 @@ namespace Elden_Ring_Debug_Tool
         private void UpdateAllCtrl()
         {
             DebugItems.UpdateCtrl();
+            Hook.UpdateLastEnemy();
         }
         private void SaveAllTabs()
         {

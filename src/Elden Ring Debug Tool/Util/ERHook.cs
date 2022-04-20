@@ -64,7 +64,7 @@ namespace Elden_Ring_Debug_Tool
             PlayerGameData = CreateChildPointer(GameDataMan, EROffsets.PlayerGameData);
             PlayerInventory = CreateChildPointer(PlayerGameData, EROffsets.EquipInventoryDataOffset, EROffsets.PlayerInventoryOffset);
 
-            SoloParamRepository = RegisterRelativeAOB(EROffsets.SoloParamRepositoryAoB, EROffsets.RelativePtrAddressOffset, EROffsets.RelativePtrInstructionSize);
+            SoloParamRepository = RegisterRelativeAOB(EROffsets.SoloParamRepositoryAoB, EROffsets.RelativePtrAddressOffset, EROffsets.RelativePtrInstructionSize, 0);
 
             ItemGive = RegisterAbsoluteAOB(EROffsets.ItemGiveAoB);
             MapItemMan = RegisterRelativeAOB(EROffsets.MapItemManAoB, EROffsets.RelativePtrAddressOffset, EROffsets.RelativePtrInstructionSize);
@@ -84,17 +84,18 @@ namespace Elden_Ring_Debug_Tool
 
         private void ERHook_OnHooked(object? sender, PHEventArgs e)
         {
-            var gameDataMan = GameDataMan.Resolve();
-            var paramss = SoloParamRepository.Resolve();
-            var itemGive = ItemGive.Resolve();
-            var mapItemMan = MapItemMan.Resolve();
-            var eventFlagMan = EventFlagMan.Resolve();
-            var setEventFlagFunction = SetEventFlagFunction.Resolve(); 
-            var capParamCall = CapParamCall.Resolve();
-            var worldChrMan = WorldChrMan.Resolve();
+            //var gameDataMan = GameDataMan.Resolve();
+            //var paramss = SoloParamRepository.Resolve();
+            //var itemGive = ItemGive.Resolve();
+            //var mapItemMan = MapItemMan.Resolve();
+            //var eventFlagMan = EventFlagMan.Resolve();
+            //var setEventFlagFunction = SetEventFlagFunction.Resolve(); 
+            //var capParamCall = CapParamCall.Resolve();
+            //var worldChrMan = WorldChrMan.Resolve();
 
-            var disableOpenMap = DisableOpenMap.Resolve();
-            var combatCloseMap = CombatCloseMap.Resolve();
+            //var disableOpenMap = DisableOpenMap.Resolve();
+            //var combatCloseMap = CombatCloseMap.Resolve();
+
 
             RaiseOnSetup();
             ReadParams();
@@ -393,16 +394,84 @@ namespace Elden_Ring_Debug_Tool
 
         #region Target  
 
-        public int TargetHandle 
+        private int CurrentTargetHandle  => PlayerIns?.ReadInt32((int)EROffsets.PlayerIns.TargetHandle) ?? 0;
+        private int CurrentTargetArea => PlayerIns?.ReadInt32((int)EROffsets.PlayerIns.TargetArea) ?? 0;
+        private PHPointer _targetEnemy;
+        private PHPointer TargetEnemy
         {
-            get => PlayerIns?.ReadInt32((int)EROffsets.PlayerIns.TargetHandle) ?? 0;
-            //set => PlayerIns.WriteInt32((int)EROffsets.PlayerIns.TargetHandle, value);
+            get => _targetEnemy;
+            set
+            {
+                _targetEnemy = value;
+
+            }
         }
-        public int TargetArea
+        private PHPointer TargetEnemyData;
+
+        public void UpdateLastEnemy()
         {
-            get => PlayerIns?.ReadInt32((int)EROffsets.PlayerIns.TargetArea) ?? 0;
+            var lol = TargetEnemy?.Resolve();
+            if (TargetEnemy != null)
+                return;
+
+            GetTarget();
         }
 
+        public void GetTarget()
+        {
+            //TargetEnemy = null;
+            var count = WorldChrMan.ReadInt32((int)EROffsets.WorldChrMan.NumWorldBlockChr);
+            var worldBlockChr = CreateBasePointer(WorldChrMan.Resolve() + (int)EROffsets.WorldChrMan.WorldBlockChr);
+            var targetHandle = CurrentTargetHandle; //Only read from memory once
+            var targetArea = CurrentTargetArea;
+
+            for (int i = 0; i <= count; i++)
+            {
+                var numChrs = worldBlockChr.ReadInt32((int)EROffsets.WorldBlockChr.NumChr + (i * 0x160));
+                var chrSet = CreateChildPointer(worldBlockChr, (int)EROffsets.WorldBlockChr.ChrSet + (i * 0x160));
+
+                for (int j = 0; j <= numChrs; j++)
+                {
+                    var enemyIns = CreateBasePointer(chrSet.Resolve() + (j * (int)EROffsets.ChrSet.EnemyIns));
+                    var enemyHandle = enemyIns.ReadInt32((int)EROffsets.EnemyIns.EnemyHandle);
+                    var enemyArea = enemyIns.ReadInt32((int)EROffsets.EnemyIns.EnemyArea);
+
+                    if (targetHandle == enemyHandle && targetArea == enemyArea)
+                        TargetEnemy = enemyIns;
+
+                    if (TargetEnemy != null)
+                        return;
+                }
+
+            }
+
+            var success = TryGetEnemy(targetHandle, targetArea, (int)EROffsets.WorldChrMan.ChrSet1);
+
+            if (success)
+                return;
+
+            success = TryGetEnemy(targetHandle, targetArea, (int)EROffsets.WorldChrMan.ChrSet2);
+
+        }
+
+        public bool TryGetEnemy(int targetHandle, int targetArea, int offset)
+        {
+            var chrSet1 = CreateChildPointer(WorldChrMan, offset);
+            var numEntries1 = chrSet1.ReadInt32((int)EROffsets.ChrSet.NumEntries);
+
+            for (int i = 0; i <= numEntries1; i++)
+            {
+                var enemyHandle = chrSet1.ReadInt32(0x78 + (i * 0x10));
+                var enemyArea = chrSet1.ReadInt32(0x78 + 4 + (i * 0x10));
+                if (targetHandle == enemyHandle && targetArea == enemyArea)
+                    TargetEnemy = CreateChildPointer(chrSet1, 0x78 + 8 + (i * 0x10));
+
+                if (TargetEnemy != null)
+                    return true;
+            }
+
+            return false;
+        }
         #endregion
 
         public int Level => PlayerGameData.ReadInt32((int)EROffsets.Player.Level);
@@ -429,11 +498,10 @@ namespace Elden_Ring_Debug_Tool
         private void EnableMapInCombat()
         {
             OriginalCombatCloseMap = CombatCloseMap.ReadBytes(0x0, 0x5);
-            var asm = Util.GetEmbededResource("Resources.Assembly.DisableMapClose.asm");
-            var assembly = Engine.Assemble(asm, 0);
+            var assembly = new byte[] { 0x48, 0x31, 0xC0, 0x90, 0x90 };
 
             DisableOpenMap.WriteByte(0x0, 0xEB); //Write Jump
-            CombatCloseMap.WriteBytes(0x0, assembly.Buffer);
+            CombatCloseMap.WriteBytes(0x0, assembly);
         }
 
         private void DisableMapInCombat()
@@ -574,7 +642,7 @@ namespace Elden_Ring_Debug_Tool
                     return;
                 PlayerGameData.WriteInt32((int)EROffsets.ChrIns.Bolt2, value);
             }
-        } 
+        }
         #endregion
 
         private int OGRHandWeapon1 { get; set; }

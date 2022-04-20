@@ -136,15 +136,35 @@ namespace Elden_Ring_Debug_Tool
         public enum WorldChrMan
         {
             NumWorldBlockChr = 0xb528,
-            WorldBlockChr = 0x330
+            WorldBlockChr = 0x330,
+            ChrSet1 = 0x17420,
+            ChrSet2 = 0x17438
+        }
+
+        public enum WorldBlockChr
+        {
+            NumChr = 0x88,
+            ChrSet = 0x90
+        }
+
+        public enum ChrSet
+        {
+            EnemyIns = 0x10,
+            NumEntries = 0x20,
+        }
+
+        public enum EnemyIns
+        {
+            EnemyHandle = 0x8,
+            EnemyArea = 0xC
         }
 
         public const int PlayerInsOffset = 0x18468;
 
         public enum PlayerIns
         {
-            TargetHandle = 0x6a8,
-            TargetArea = 0x6ac
+            TargetHandle = 0x6a0,
+            TargetArea = 0x6a4
         }
 
         public const string DisableOpenMapAoB = "74 ? C7 45 38 58 02 00 00 C7 45 3C 02 00 00 00 C7 45 40 01 00 00 00 48 ? ? ? ? ? ? 48 89 45 48 48 8D 4D 38 E8 ? ? ? ? E9";
