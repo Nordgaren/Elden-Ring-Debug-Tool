@@ -64,7 +64,7 @@ namespace Elden_Ring_Debug_Tool
             PlayerGameData = CreateChildPointer(GameDataMan, EROffsets.PlayerGameData);
             PlayerInventory = CreateChildPointer(PlayerGameData, EROffsets.EquipInventoryDataOffset, EROffsets.PlayerInventoryOffset);
 
-            SoloParamRepository = RegisterRelativeAOB(EROffsets.SoloParamRepositoryAoB, EROffsets.RelativePtrAddressOffset, EROffsets.RelativePtrInstructionSize);
+            SoloParamRepository = RegisterRelativeAOB(EROffsets.SoloParamRepositoryAoB, EROffsets.RelativePtrAddressOffset, EROffsets.RelativePtrInstructionSize, 0x0);
 
             ItemGive = RegisterAbsoluteAOB(EROffsets.ItemGiveAoB);
             MapItemMan = RegisterRelativeAOB(EROffsets.MapItemManAoB, EROffsets.RelativePtrAddressOffset, EROffsets.RelativePtrInstructionSize);
@@ -240,7 +240,7 @@ namespace Elden_Ring_Debug_Tool
         }
         internal void SaveParam(ERParam param)
         {
-            var asmString = Util.GetEmbededResource("Resources.Assembly.SaveParams.asm");
+            var asmString = Util.GetEmbededResource("Assembly.SaveParams.asm");
             var asm = string.Format(asmString, SoloParamRepository.Resolve(), param.Offset, CapParamCall.Resolve());
             AsmExecute(asm);
         }
@@ -261,7 +261,7 @@ namespace Elden_Ring_Debug_Tool
             var idPointer = GetPrefferedIntPtr(sizeof(int));
             Kernel32.WriteInt32(Handle, idPointer, flag);
 
-            var asmString = Util.GetEmbededResource("Resources.Assembly.SetEventFlag.asm");
+            var asmString = Util.GetEmbededResource("Assembly.SetEventFlag.asm");
             var asm = string.Format(asmString, EventFlagMan.Resolve(), idPointer.ToString("X2"), SetEventFlagFunction.Resolve());
             AsmExecute(asm);
             Free(idPointer);
@@ -353,7 +353,7 @@ namespace Elden_Ring_Debug_Tool
 
             Kernel32.WriteBytes(Handle, itemInfo, itemInfobytes);
 
-            var asmString = Util.GetEmbededResource("Resources.Assembly.ItemGive.asm");
+            var asmString = Util.GetEmbededResource("Assembly.ItemGive.asm");
             var asm = string.Format(asmString, itemInfo.ToString("X2"), MapItemMan.Resolve(), ItemGive.Resolve() + EROffsets.ItemGiveOffset);
             AsmExecute(asm);
             Free(itemInfo);

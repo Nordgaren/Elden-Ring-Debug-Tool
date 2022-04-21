@@ -35,9 +35,12 @@
   <Target Name="CopyResourcesPublish" Condition="'$(Configuration)'=='Publish'" AfterTargets="Publish">
     <Message Text="Copy resource files" Importance="High" />
     <Message Text="Files: @(ResourceFiles)" Importance="High" />
-    <Message Text="directory: $(PublishDir)" Importance="High" />
+    <Message Text="Directory: $(PublishDir)" Importance="High" />
     <Copy SourceFiles="@(ResourceFiles)" DestinationFolder="$(PublishDir)Resources\%(RecursiveDir)" SkipUnchangedFiles="true" />
-    <ZipDirectory SourceDirectory="$(PublishDir)" DestinationFile="$(PublishDir)../Elden Ring debug tool $(AssemblyVersion).zip" Overwrite="true" />
+	<Message Text="Moving Readme: $(PublishDir)" Importance="High" />
+	<Copy SourceFiles="$(SolutionDir)README.md" DestinationFiles="$(PublishDir)README.txt" />
+	  <Exec Command="$(SolutionDir)postbuild.bat $(AssemblyVersion)" />
+    <!--<ZipDirectory SourceDirectory="$(PublishDir)" DestinationFile="$(PublishDir)../Elden Ring Debug Tool $(AssemblyVersion).zip" Overwrite="true" />-->
   </Target>
   
   <ItemGroup>
@@ -1881,18 +1884,18 @@
 
   <ItemGroup>
     <None Remove="C:\Users\Nord\.nuget\packages\keystoneengine.csharp\0.9.1.1\build\x86\keystone.dll" />
-    <None Remove="Resources\Assembly\DisableMapClose.asm" />
-    <None Remove="Resources\Assembly\ItemGive.asm" />
-    <None Remove="Resources\Assembly\SaveParams.asm" />
-    <None Remove="Resources\Assembly\SetEventFlag.asm" />
+    <None Remove="Assembly\DisableMapClose.asm" />
+    <None Remove="Assembly\ItemGive.asm" />
+    <None Remove="Assembly\SaveParams.asm" />
+    <None Remove="Assembly\SetEventFlag.asm" />
   </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Include="Icon.ico" />
-    <EmbeddedResource Include="Resources\Assembly\DisableMapClose.asm" />
-    <EmbeddedResource Include="Resources\Assembly\ItemGive.asm" />
-    <EmbeddedResource Include="Resources\Assembly\SaveParams.asm" />
-    <EmbeddedResource Include="Resources\Assembly\SetEventFlag.asm" />
+    <EmbeddedResource Include="Assembly\DisableMapClose.asm" />
+    <EmbeddedResource Include="Assembly\ItemGive.asm" />
+    <EmbeddedResource Include="Assembly\SaveParams.asm" />
+    <EmbeddedResource Include="Assembly\SetEventFlag.asm" />
   </ItemGroup>
 
   <ItemGroup>
