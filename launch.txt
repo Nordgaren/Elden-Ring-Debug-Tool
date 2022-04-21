@@ -1,1 +1,3 @@
-This is the source code. Download the latest version here: https://github.com/Nordgaren/Elden-Ring-Debug-Tool/releases
+This is the source code. 
+
+To use this tool, download the latest version here: https://github.com/Nordgaren/Elden-Ring-Debug-Tool/releases
