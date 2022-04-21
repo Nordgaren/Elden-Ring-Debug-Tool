@@ -305,7 +305,9 @@ namespace Elden_Ring_Debug_Tool
                 if (category.Category == Category.Weapons)
                     foreach (ERWeapon weapon in category.Items)
                     {
-                        weapon.DefaultGem = ERGem.All.FirstOrDefault(gem => gem.SwordArtID == weapon.SwordArtId);
+                        var gem = ERGem.All.FirstOrDefault(gem => gem.SwordArtID == weapon.SwordArtId);
+                        if (gem != null)
+                            weapon.DefaultGem = gem;
                     }
             }
         }
@@ -410,7 +412,6 @@ namespace Elden_Ring_Debug_Tool
 
         public void UpdateLastEnemy()
         {
-            var lol = TargetEnemy?.Resolve();
             if (TargetEnemy != null)
                 return;
 

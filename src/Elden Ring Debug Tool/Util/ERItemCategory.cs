@@ -16,6 +16,7 @@ namespace Elden_Ring_Debug_Tool
         public string Name;
         public List<ERItem> Items;
         public Category Category;
+        public bool ShowID;
         public static List<ERItemCategory> All = new List<ERItemCategory>();
 
         private static Regex CategoryEntryRx = new Regex(@"^(?<category>\S+) (?<show>\S+) (?<path>\S+) (?<name>.+)$", RegexOptions.CultureInvariant);
@@ -28,24 +29,24 @@ namespace Elden_Ring_Debug_Tool
             foreach (string line in itemList.Split(new string[] { "\n" }, StringSplitOptions.RemoveEmptyEntries))
             {
                 if (Util.IsValidTxtResource(line)) //determine if line is a valid resource or not
-                    AddItem(line.TrimComment(), category);
+                    AddItem(line.TrimComment(), category, showIDs);
             };
         }
 
-        private void AddItem(string line, Category category)
+        private void AddItem(string line, Category category, bool showIDs)
         {
             switch (category)
             {
                 case Category.Weapons:
-                    Items.Add(new ERWeapon(line, category));
+                    Items.Add(new ERWeapon(line, category, showIDs));
                     break;
                 case Category.Protector:
                 case Category.Accessory:
                 case Category.Goods:
-                    Items.Add(new ERItem(line, category));
+                    Items.Add(new ERItem(line, category, showIDs));
                     break;
                 case Category.Gem:
-                    Items.Add(new ERGem(line, category));
+                    Items.Add(new ERGem(line, category, showIDs));
                     break;
                 default:
                     throw new Exception("Incorrect Category");

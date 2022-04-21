@@ -1,0 +1,16 @@
+2140 Margit's Shackle
+2150 Mohg's Shackle
+2160 Pureblood Knight's Medal
+2200 Prattling Pate "Hello"
+2201 Prattling Pate "Thank you"
+2202 Prattling Pate "Apologies"
+2203 Prattling Pate "Wonderful"
+2204 Prattling Pate "Please help"
+2205 Prattling Pate "My beloved"
+2206 Prattling Pate "Let's get to it"
+2207 Prattling Pate "You're beautiful"
+3000 Ancestral Infant's Head
+3010 Omen Bairn
+3011 Regal Omen Bairn
+3020 Miranda's Prayer
+3040 Mimic's Veil

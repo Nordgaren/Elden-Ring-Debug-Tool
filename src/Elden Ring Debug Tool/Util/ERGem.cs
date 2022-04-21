@@ -18,6 +18,7 @@ namespace Elden_Ring_Debug_Tool
         public short WeaponAttr;
         public List<Infusion> Infusions;
         public List<WeaponType> WeaponTypes = new List<WeaponType>();
+        public static ERGem Default = new ERGem("-1 None", Category.Gem, false);
 
         private void GetInfusions()
         {
@@ -61,9 +62,14 @@ namespace Elden_Ring_Debug_Tool
             GetInfusions();
         }
 
-        public ERGem(string config, Category category) : base(config, category)
+        public ERGem(string config, Category category, bool showIDs) : base(config, category, showIDs)
         {
             All.Add(this);
+        }
+
+        static ERGem()
+        {
+            Default.Infusions = new List<Infusion>() { Infusion.Standard };
         }
 
         public static List<WeaponType> Weapons = Enum.GetValues(typeof(WeaponType)).Cast<WeaponType>().ToList();

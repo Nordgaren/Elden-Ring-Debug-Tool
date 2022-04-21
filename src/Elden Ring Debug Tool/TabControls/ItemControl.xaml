@@ -66,7 +66,7 @@
                 <RowDefinition Height="25"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            <ComboBox x:Name="cmbGems" Grid.Row="0" Margin="40,0,0,0" />
+            <ComboBox x:Name="cmbGems" Grid.Row="0" Margin="40,0,0,0" SelectionChanged="cmbGems_SelectionChanged"/>
             <Label Content="Ash" Width="50" HorizontalAlignment="Left" Grid.Row="0"/>
             <ListBox x:Name="lbxItems" Margin="5" Grid.Row="1" SelectionChanged="lbxItems_SelectionChanged" PreviewKeyDown="KeyPressed" ItemContainerStyle="{DynamicResource _ListBoxItemStyle}" />
         </Grid>

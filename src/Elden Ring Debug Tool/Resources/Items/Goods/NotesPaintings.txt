@@ -1,4 +1,11 @@
-﻿8221 Zorayas's Letter
+﻿8200 "Homing Instinct" Painting
+8201 "Resurrection" Painting
+8202 "Champion's Song" Painting
+8203 "Sorcerer" Painting
+8204 "Prophecy" Painting
+8205 "Flightless Bird" Painting
+8206 "Redmane" Painting
+8221 Zorayas's Letter
 8223 Rogier's Letter
 8224 Note: The Preceptor's Secret
 8225 Weathered Map

@@ -114,7 +114,7 @@
     <None Update="Resources\Items\Cut Content\Armor.txt">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </None>
-    <None Update="Resources\Items\Goods\BellBearings.txt">
+    <None Update="Resources\Items\Goods\MerchantItems.txt">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </None>
     <None Update="Resources\Items\Goods\Cookbooks.txt">
@@ -135,10 +135,10 @@
     <None Update="Resources\Items\Goods\Flasks.txt">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </None>
-    <None Update="Resources\Items\Goods\Goods.txt">
+    <None Update="Resources\Items\Goods\Tools.txt">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </None>
-    <None Update="Resources\Items\Goods\Notes.txt">
+    <None Update="Resources\Items\Goods\NotesPaintings.txt">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </None>
     <None Update="Resources\Items\Goods\UpgradeMaterials.txt">
@@ -1879,15 +1879,18 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="C:\Users\Nord\.nuget\packages\keystoneengine.csharp\0.9.1.1\build\x64\keystone.dll" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Remove="C:\Users\Nord\.nuget\packages\keystoneengine.csharp\0.9.1.1\build\x86\keystone.dll" />
     <None Remove="Assembly\DisableMapClose.asm" />
     <None Remove="Assembly\ItemGive.asm" />
     <None Remove="Assembly\SaveParams.asm" />
     <None Remove="Assembly\SetEventFlag.asm" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ResourceFiles Remove="Resources\Items\Goods\Gestures.txt" />
+    <ResourceFiles Remove="Resources\Items\Goods\KeyItems.txt" />
+    <ResourceFiles Remove="Resources\Items\Goods\MerchantItems.txt" />
+    <ResourceFiles Remove="Resources\Items\Goods\NotesPaintings.txt" />
+    <ResourceFiles Remove="Resources\Items\Goods\Tools.txt" />
   </ItemGroup>
 
   <ItemGroup>
@@ -1901,6 +1904,30 @@
   <ItemGroup>
     <ProjectReference Include="..\PropertyHook\PropertyHook\PropertyHook.csproj" />
     <ProjectReference Include="..\SoulsFormats\SoulsFormats\SoulsFormats.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="C:\Users\Nord\.nuget\packages\keystoneengine.csharp\0.9.1.1\build\x64\keystone.dll" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="C:\Users\Nord\.nuget\packages\keystoneengine.csharp\0.9.1.1\build\x86\keystone.dll" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="C:\Users\Nord\.nuget\packages\keystoneengine.csharp\0.9.1.1\build\x64\keystone.dll" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="C:\Users\Nord\.nuget\packages\keystoneengine.csharp\0.9.1.1\build\x64\keystone.dll">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="C:\Users\Nord\.nuget\packages\keystoneengine.csharp\0.9.1.1\build\x86\keystone.dll">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

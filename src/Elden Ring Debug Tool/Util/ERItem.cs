@@ -22,6 +22,7 @@ namespace Elden_Ring_Debug_Tool
         public string Name;
         public int ID;
         public Category ItemCategory;
+        public bool ShowID;
 
         public short MaxQuantity;
         public int EventID;
@@ -29,18 +30,22 @@ namespace Elden_Ring_Debug_Tool
         public bool IsMultiplayerShare;
         public bool CanAquireFromOtherPlayers => IsDrop && IsMultiplayerShare;
 
-        public ERItem(string config, Category category)
+        public ERItem(string config, Category category, bool showID)
         {
             Match itemEntry = ItemEntryRx.Match(config);
             Name = itemEntry.Groups["name"].Value.Replace("\r", "");
             ID = Convert.ToInt32(itemEntry.Groups["id"].Value);
+            ShowID = showID;
             ItemCategory = category;
             MaxQuantity = 1;
         }
 
         public override string ToString()
         {
-            return Name;
+            if (ShowID)
+                return $"{ID} {Name}";
+            else
+                return Name;
         }
 
         public virtual void SetupItem(ERParam param)

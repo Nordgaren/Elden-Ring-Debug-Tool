@@ -1,4 +1,10 @@
-﻿10100 Smithing Stone [1]
+﻿10010 Golden Seed
+10020 Sacred Tear
+10030 Memory Stone
+10040 Talisman Pouch
+10060 Dragon Heart
+10070 Lost Ashes of War
+10100 Smithing Stone [1]
 10101 Smithing Stone [2]
 10102 Smithing Stone [3]
 10103 Smithing Stone [4]
@@ -36,3 +42,4 @@
 10916 Ghost Glovewort [7]
 10917 Ghost Glovewort [8]
 10918 Ghost Glovewort [9]
+10919 Great Ghost Glovewort

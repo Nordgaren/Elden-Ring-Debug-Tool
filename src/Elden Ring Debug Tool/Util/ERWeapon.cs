@@ -81,9 +81,10 @@ namespace Elden_Ring_Debug_Tool
         public WeaponType Type { get; set; }
         public AmmoType TypeAmmo { get; set; }
         public ERGem DefaultGem { get; set; }
-        public ERWeapon(string config, Category category) : base(config, category) 
+        public ERWeapon(string config, Category category, bool showIDs) : base(config, category, showIDs)
         {
             RealID = Util.DeleteFromEnd(ID, 4);
+            DefaultGem = ERGem.Default;
         }
 
         public override void SetupItem(ERParam param)

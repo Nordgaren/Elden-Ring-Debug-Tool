@@ -157,7 +157,7 @@ namespace Elden_Ring_Debug_Tool
             cmbInfusion.Items.Clear();
 
             cmbGems.Items.Clear();
-            cmbGems.Items.Add(new ERGem("-1 None", ERItem.Category.Gem));
+            cmbGems.Items.Add(ERGem.Default);
 
             if (item.ItemCategory == ERItem.Category.Weapons)
             {
@@ -167,11 +167,15 @@ namespace Elden_Ring_Debug_Tool
                         cmbInfusion.Items.Add(infusion);
 
 
+
                 if (!weapon.Unique)
                     foreach (var gem in ERGem.All)
                         if (gem.WeaponTypes.Contains(weapon.Type))
                             cmbGems.Items.Add(gem);
 
+                cmbGems.SelectedItem = weapon.DefaultGem;
+                if (cmbGems.SelectedItem == null)
+                    cmbGems.SelectedItem = ERGem.Default;
 
                 nudUpgrade.Maximum = weapon.MaxUpgrade;
             }
@@ -184,13 +188,24 @@ namespace Elden_Ring_Debug_Tool
             cmbInfusion.SelectedIndex = 0;
             cmbInfusion.IsEnabled = cmbInfusion.Items.Count > 1;
 
-            cmbGems.SelectedIndex = 0;
             cmbGems.IsEnabled = cmbGems.Items.Count > 1;
 
             btnCreate.IsEnabled = item.CanAquireFromOtherPlayers || App.Settings.SpawnUndroppable;
             //if (!Properties.Settings.Default.UpdateMaxLive)
             //    HandleMaxAvailable();
             HandleMaxItemCheckbox();
+        }
+
+        private void cmbGems_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (!Hook.Setup) return;
+
+            var gem = cmbGems.SelectedItem as ERGem;
+            if (gem == null) return;
+
+            cmbInfusion.Items.Clear();
+            foreach (var infusion in gem.Infusions)
+                cmbInfusion.Items.Add(infusion);
         }
 
         public void UpdateCreateEnabled()
@@ -374,5 +389,7 @@ namespace Elden_Ring_Debug_Tool
             if (txtSearch.Text != "")
                 FilterItems();
         }
+
+
     }
 }

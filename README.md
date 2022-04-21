@@ -38,6 +38,12 @@ My fork of [Property Hook](https://github.com/Nordgaren/PropertyHook) by [TKGP](
 **jamesq7** For helping figure out the cheat for enabling the map during combat.  
 
 # Change Log  
+### Beta 0.6
+
+* Fixed item list. Should be no more duplicates and the categories should make sense.  
+
+* Fixed ash of war selection not updating infusion.  
+
 ### Beta 0.5.3
 
 * Fixed field search not working (whoops)
