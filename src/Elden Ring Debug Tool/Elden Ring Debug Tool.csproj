@@ -39,7 +39,7 @@
     <Copy SourceFiles="@(ResourceFiles)" DestinationFolder="$(PublishDir)Resources\%(RecursiveDir)" SkipUnchangedFiles="true" />
 	<Message Text="Moving Readme: $(PublishDir)" Importance="High" />
 	<Copy SourceFiles="$(SolutionDir)README.md" DestinationFiles="$(PublishDir)README.txt" />
-	  <Exec Command="$(SolutionDir)postbuild.bat $(AssemblyVersion)" />
+	  <Exec Command="postbuild.bat $(AssemblyVersion)" />
     <!--<ZipDirectory SourceDirectory="$(PublishDir)" DestinationFile="$(PublishDir)../Elden Ring Debug Tool $(AssemblyVersion).zip" Overwrite="true" />-->
   </Target>
   
