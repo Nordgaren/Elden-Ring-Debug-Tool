@@ -9,7 +9,7 @@ Backup your saves before using this tool, and restore the backups before going o
 * [.Net Framework 4.6.1]( https://www.microsoft.com/en-us/download/details.aspx?id=48130)
 * [Visual C++ Redistributable Packages for Visual Studio 2013](https://www.microsoft.com/en-gb/download/details.aspx?id=40784)
 ## Known Issues
-* Loading param row fields is still a TAD sow. I am still looking to optimize it, a bit, if I can.
+* Duplicates in the item lists.  
 
 ## Installing  
 * Extract contents of zip archive to it's own folder. You may have to run as admin if Elden Ring Debug Tool crashes  
