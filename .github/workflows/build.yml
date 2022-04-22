@@ -25,6 +25,6 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
         name: publish
-        path: src/Elden Ring Debug Tool/bin/Publish/*.zip
+        path: src/Elden Ring Debug Tool/bin/Publish/*.7zip
 
     
