@@ -40,6 +40,8 @@ My fork of [Property Hook](https://github.com/Nordgaren/PropertyHook) by [TKGP](
 # Change Log  
 ### Beta 0.6
 
+* Added target debug tab. Work in progress, but gives some basic information. 
+
 * Fixed item list. Should be no more duplicates and the categories should make sense.  
 
 * Fixed ash of war selection not updating infusion.  

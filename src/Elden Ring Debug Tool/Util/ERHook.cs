@@ -117,6 +117,29 @@ namespace Elden_Ring_Debug_Tool
             OnPropertyChanged(nameof(Loaded));
             OnPropertyChanged(nameof(InventoryCount));
             OnPropertyChanged(nameof(TargetEnemyHandle));
+            OnPropertyChanged(nameof(TargetHp));
+            OnPropertyChanged(nameof(TargetHpMax));
+            OnPropertyChanged(nameof(TargetFp));
+            OnPropertyChanged(nameof(TargetFpMax));
+            OnPropertyChanged(nameof(TargetStam));
+            OnPropertyChanged(nameof(TargetStamMax));
+            OnPropertyChanged(nameof(TargetPoison));
+            OnPropertyChanged(nameof(TargetPoisonMax));
+            OnPropertyChanged(nameof(TargetRot));
+            OnPropertyChanged(nameof(TargetRotMax));
+            OnPropertyChanged(nameof(TargetBleed));
+            OnPropertyChanged(nameof(TargetBleedMax));
+            OnPropertyChanged(nameof(TargetBlight));
+            OnPropertyChanged(nameof(TargetBlightMax));
+            OnPropertyChanged(nameof(TargetFrost));
+            OnPropertyChanged(nameof(TargetFrostMax));
+            OnPropertyChanged(nameof(TargetSleep));
+            OnPropertyChanged(nameof(TargetSleepMax));
+            OnPropertyChanged(nameof(TargetMadness));
+            OnPropertyChanged(nameof(TargetMadnessMax));
+            OnPropertyChanged(nameof(TargetStagger));
+            OnPropertyChanged(nameof(TargetStaggerMax));
+            OnPropertyChanged(nameof(TargetResetTime));
         }
 
         public ERParam EquipParamAccessory;
@@ -404,23 +427,169 @@ namespace Elden_Ring_Debug_Tool
 
         private int CurrentTargetHandle => PlayerIns?.ReadInt32((int)EROffsets.PlayerIns.TargetHandle) ?? 0;
         private int CurrentTargetArea => PlayerIns?.ReadInt32((int)EROffsets.PlayerIns.TargetArea) ?? 0;
-        private PHPointer _targetEnemy { get; set; }
-        private PHPointer TargetEnemy
+        private PHPointer _targetEnemyIns { get; set; }
+        private PHPointer TargetEnemyIns
         {
-            get => _targetEnemy;
+            get => _targetEnemyIns;
             set
             {
-                _targetEnemy = value;
-                TargetEnemyData = CreateChildPointer(_targetEnemy, (int)EROffsets.EnemyIns.InfoOffset, 0x0);
+                _targetEnemyIns = value;
+                TargetEnemyModuleBase = CreateChildPointer(_targetEnemyIns, (int)EROffsets.EnemyIns.ModuleBase);
+                TargetEnemyData = CreateChildPointer(TargetEnemyModuleBase, (int)EROffsets.ModuleBase.EnemyData);
+                TargetEnemyResistance = CreateChildPointer(TargetEnemyModuleBase, (int)EROffsets.ModuleBase.ResistenceData);
+                TargetEnemyStagger = CreateChildPointer(TargetEnemyModuleBase, (int)EROffsets.ModuleBase.StaggerData);
             }
         }
-        private PHPointer TargetEnemyData;
-
         public int TargetEnemyHandle => PlayerIns?.ReadInt32((int)EROffsets.EnemyIns.EnemyHandle) ?? 0;
+        public int TargetEnemyArea => PlayerIns?.ReadInt32((int)EROffsets.EnemyIns.EnemyArea) ?? 0;
+        private PHPointer TargetEnemyModuleBase;
+        private PHPointer TargetEnemyData;
+        private PHPointer TargetEnemyResistance;
+        private PHPointer TargetEnemyStagger;
+
+        private int TargetHandle => _targetEnemyIns?.ReadInt32((int)EROffsets.EnemyIns.EnemyHandle) ?? 0;
+        //public string Model => TargetEnemy?.ReadString((int)EROffsets.EnemyData.Model, );
+        //public string Name => TargetEnemy?.ReadString((int)EROffsets.EnemyData.Name, );
+        public int TargetHp
+        {
+            get => TargetEnemyData?.ReadInt32((int)EROffsets.EnemyData.Hp) ?? 0;
+            set => _ = value; 
+        }
+        public int TargetHpMax
+        {
+            get => TargetEnemyData?.ReadInt32((int)EROffsets.EnemyData.HpMax) ?? 0;
+            set => _ = value;
+
+        }
+        public int TargetFp
+        {
+            get => TargetEnemyData?.ReadInt32((int)EROffsets.EnemyData.Fp) ?? 0;
+            set => _ = value;
+
+        }
+        public int TargetFpMax
+        {
+            get => TargetEnemyData?.ReadInt32((int)EROffsets.EnemyData.FpMax) ?? 0;
+            set => _ = value;
+
+        }
+        public int TargetStam
+        {
+            get => TargetEnemyData?.ReadInt32((int)EROffsets.EnemyData.Stam) ?? 0;
+            set => _ = value;
+
+        }
+        public int TargetStamMax
+        {
+            get => TargetEnemyData?.ReadInt32((int)EROffsets.EnemyData.StamMax) ?? 0;
+            set => _ = value;
+
+        }
+        public int TargetPoison
+        {
+            get => TargetEnemyResistance?.ReadInt32((int)EROffsets.ResistenceData.Poison) ?? 0;
+            set => _ = value;
+
+        }
+        public int TargetPoisonMax
+        {
+            get => TargetEnemyResistance?.ReadInt32((int)EROffsets.ResistenceData.PoisonMax) ?? 0;
+            set => _ = value;
+
+        }
+        public int TargetRot
+        {
+            get => TargetEnemyResistance?.ReadInt32((int)EROffsets.ResistenceData.Rot) ?? 0;
+            set => _ = value;
+
+        }
+        public int TargetRotMax
+        {
+            get => TargetEnemyResistance?.ReadInt32((int)EROffsets.ResistenceData.RotMax) ?? 0;
+            set => _ = value;
+
+        }
+        public int TargetBleed
+        {
+            get => TargetEnemyResistance?.ReadInt32((int)EROffsets.ResistenceData.Bleed) ?? 0;
+            set => _ = value;
+
+        }
+        public int TargetBleedMax
+        {
+            get => TargetEnemyResistance?.ReadInt32((int)EROffsets.ResistenceData.BleedMax) ?? 0;
+            set => _ = value;
+
+        }
+        public int TargetFrost
+        {
+            get => TargetEnemyResistance?.ReadInt32((int)EROffsets.ResistenceData.Frost) ?? 0;
+            set => _ = value;
+
+        }
+        public int TargetFrostMax
+        {
+            get => TargetEnemyResistance?.ReadInt32((int)EROffsets.ResistenceData.FrostMax) ?? 0;
+            set => _ = value;
+
+        }
+        public int TargetBlight
+        {
+            get => TargetEnemyResistance?.ReadInt32((int)EROffsets.ResistenceData.Blight) ?? 0;
+            set => _ = value;
+
+        }
+        public int TargetBlightMax
+        {
+            get => TargetEnemyResistance?.ReadInt32((int)EROffsets.ResistenceData.BlightMax) ?? 0;
+            set => _ = value;
+
+        }
+        public int TargetSleep
+        {
+            get => TargetEnemyResistance?.ReadInt32((int)EROffsets.ResistenceData.Sleep) ?? 0;
+            set => _ = value;
+
+        }
+        public int TargetSleepMax
+        {
+            get => TargetEnemyResistance?.ReadInt32((int)EROffsets.ResistenceData.SleepMax) ?? 0;
+            set => _ = value;
+
+        }
+        public int TargetMadness
+        {
+            get => TargetEnemyResistance?.ReadInt32((int)EROffsets.ResistenceData.Madness) ?? 0;
+            set => _ = value;
+
+        }
+        public int TargetMadnessMax
+        {
+            get => TargetEnemyResistance?.ReadInt32((int)EROffsets.ResistenceData.MadnessMax) ?? 0;
+            set => _ = value;
+
+        }
+        public float TargetStagger
+        {
+            get => TargetEnemyStagger?.ReadSingle((int)EROffsets.StaggerData.Stagger) ?? 0;
+            set => _ = value;
+
+        }
+        public float TargetStaggerMax
+        {
+            get => TargetEnemyStagger?.ReadSingle((int)EROffsets.StaggerData.StaggerMax) ?? 0;
+            set => _ = value;
+
+        }
+        public float TargetResetTime
+        {
+            get => TargetEnemyStagger?.ReadSingle((int)EROffsets.StaggerData.ResetTime) ?? 0;
+            set => _ = value;
+        }
 
         public void UpdateLastEnemy()
         {
-            if (TargetEnemy != null)
+            if (CurrentTargetHandle == -1 || CurrentTargetHandle == TargetHandle)
                 return;
 
             GetTarget();
@@ -428,7 +597,7 @@ namespace Elden_Ring_Debug_Tool
 
         public void GetTarget()
         {
-            //TargetEnemy = null;
+            TargetEnemyIns = null;
             var count = WorldChrMan.ReadInt32((int)EROffsets.WorldChrMan.NumWorldBlockChr);
             var worldBlockChr = CreateBasePointer(WorldChrMan.Resolve() + (int)EROffsets.WorldChrMan.WorldBlockChr);
             var targetHandle = CurrentTargetHandle; //Only read from memory once
@@ -446,9 +615,9 @@ namespace Elden_Ring_Debug_Tool
                     var enemyArea = enemyIns.ReadInt32((int)EROffsets.EnemyIns.EnemyArea);
 
                     if (targetHandle == enemyHandle && targetArea == enemyArea)
-                        TargetEnemy = enemyIns;
+                        TargetEnemyIns = enemyIns;
 
-                    if (TargetEnemy != null)
+                    if (TargetEnemyIns != null)
                         return;
                 }
 
@@ -473,9 +642,9 @@ namespace Elden_Ring_Debug_Tool
                 var enemyHandle = chrSet1.ReadInt32(0x78 + (i * 0x10));
                 var enemyArea = chrSet1.ReadInt32(0x78 + 4 + (i * 0x10));
                 if (targetHandle == enemyHandle && targetArea == enemyArea)
-                    TargetEnemy = CreateChildPointer(chrSet1, 0x78 + 8 + (i * 0x10));
+                    TargetEnemyIns = CreateChildPointer(chrSet1, 0x78 + 8 + (i * 0x10));
 
-                if (TargetEnemy != null)
+                if (TargetEnemyIns != null)
                     return true;
             }
 
@@ -518,7 +687,6 @@ namespace Elden_Ring_Debug_Tool
             DisableOpenMap.WriteByte(0x0, 0x74); //Write Jump Equals
             CombatCloseMap.WriteBytes(0x0, OriginalCombatCloseMap); //Place original bytes back for combat close map
         }
-
         private short ForceWeatherParamID 
         {
             set => WorldAreaWeather?.WriteInt16((int)EROffsets.WorldAreaWeather.ForceWeatherParamID, value); 
