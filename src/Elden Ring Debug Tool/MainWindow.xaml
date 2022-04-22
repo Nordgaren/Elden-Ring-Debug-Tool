@@ -121,6 +121,11 @@
                     <local:ItemControl x:Name="DebugItems" Hook="{Binding Hook}"/>
                 </Grid>
             </TabItem>
+            <TabItem Header="Target">
+                <Grid Background="LightGray">
+                    <local:TargetControl x:Name="DebugTarget" Hook="{Binding Hook}"/>
+                </Grid>
+            </TabItem>
             <TabItem Header="Cheats">
                 <Grid Background="LightGray">
                     <local:CheatsControl x:Name="DebugCheats" Hook="{Binding Hook}"/>

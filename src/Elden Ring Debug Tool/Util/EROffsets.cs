@@ -156,7 +156,8 @@ namespace Elden_Ring_Debug_Tool
         public enum EnemyIns
         {
             EnemyHandle = 0x8,
-            EnemyArea = 0xC
+            EnemyArea = 0xC,
+            InfoOffset = 0x190
         }
 
         public const int PlayerInsOffset = 0x18468;
@@ -166,6 +167,7 @@ namespace Elden_Ring_Debug_Tool
             TargetHandle = 0x6a0,
             TargetArea = 0x6a4
         }
+
 
         public const string DisableOpenMapAoB = "74 ? C7 45 38 58 02 00 00 C7 45 3C 02 00 00 00 C7 45 40 01 00 00 00 48 ? ? ? ? ? ? 48 89 45 48 48 8D 4D 38 E8 ? ? ? ? E9";
         public const string CombatCloseMapAoB = "E8 ? ? ? ? 84 C0 75 ? 38 83 ? ? ? ? 75 ? 83 E7 FE";

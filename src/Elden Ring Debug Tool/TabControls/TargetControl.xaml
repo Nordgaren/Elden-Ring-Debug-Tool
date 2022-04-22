@@ -1,4 +1,5 @@
 ﻿<local:DebugControl x:Class="Elden_Ring_Debug_Tool.TargetControl"
+                    x:Name="DebugTarget"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -11,6 +12,11 @@
             <ColumnDefinition/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        
+        <StackPanel Grid.Column="0">
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Handle:" />
+                <Label Content="{Binding ElementName=DebugTarget, Path=Hook.TargetEnemyHandle}"/>
+            </StackPanel>
+        </StackPanel>
     </Grid>
 </local:DebugControl>

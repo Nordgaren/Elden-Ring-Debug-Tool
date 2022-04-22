@@ -116,6 +116,7 @@ namespace Elden_Ring_Debug_Tool
 
             OnPropertyChanged(nameof(Loaded));
             OnPropertyChanged(nameof(InventoryCount));
+            OnPropertyChanged(nameof(TargetEnemyHandle));
         }
 
         public ERParam EquipParamAccessory;
@@ -410,10 +411,12 @@ namespace Elden_Ring_Debug_Tool
             set
             {
                 _targetEnemy = value;
-
+                TargetEnemyData = CreateChildPointer(_targetEnemy, (int)EROffsets.EnemyIns.InfoOffset, 0x0);
             }
         }
         private PHPointer TargetEnemyData;
+
+        public int TargetEnemyHandle => PlayerIns?.ReadInt32((int)EROffsets.EnemyIns.EnemyHandle) ?? 0;
 
         public void UpdateLastEnemy()
         {
