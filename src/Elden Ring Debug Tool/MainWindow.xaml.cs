@@ -184,6 +184,7 @@ namespace Elden_Ring_Debug_Tool
         private void InitAllCtrls()
         {
             DebugItems.InitCtrl();
+            DebugCheats.InitCtrl();
             InitHotkeys();
         }
         private void UpdateProperties()

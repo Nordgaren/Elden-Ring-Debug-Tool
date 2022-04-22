@@ -84,8 +84,6 @@ namespace Elden_Ring_Debug_Tool
             WorldAreaWeather = RegisterRelativeAOB(EROffsets.WorldAreaWeatherAoB, EROffsets.RelativePtrAddressOffset, EROffsets.RelativePtrInstructionSize, 0x0);
 
             BuildItemEventDictionary();
-
-            WeatherList.CollectionChanged += WeatherList_CollectionChanged;
         }
 
 
@@ -115,9 +113,6 @@ namespace Elden_Ring_Debug_Tool
 
             if (!Setup)
                 return;
-
-            if (_forceWeather)
-                ForceWeatherParamID = (short)SelectedWeather;
 
             OnPropertyChanged(nameof(Loaded));
             OnPropertyChanged(nameof(InventoryCount));
@@ -527,24 +522,49 @@ namespace Elden_Ring_Debug_Tool
         }
         public enum WeatherTypes
         {
-            Clear = 99,
+            Unk0 = 0,
+            Unk1 = 1,
+            Unk10 = 10,
+            Unk11 = 11,
+            Unk20 = 20,
+            Unk21 = 21,
+            Unk30 = 30,
+            Unk31 = 31,
+            Unk40 = 40,
+            Unk41 = 41,
+            Unk50 = 50,
+            Unk51 = 51,
+            Unk52 = 52,
+            Unk60 = 60,
+            Unk81 = 81,
+            Unk82 = 82,
+            Unk83 = 83,
+            Clear = 99
         }
-        public ObservableCollection<WeatherTypes> WeatherList = new ObservableCollection<WeatherTypes>(Enum.GetValues(typeof(WeatherTypes)).Cast<WeatherTypes>());
-        public WeatherTypes SelectedWeather { get; set; }
+        private WeatherTypes _selectedWeather;
+        public WeatherTypes SelectedWeather {
+            get => _selectedWeather;
+            set 
+            { 
+                _selectedWeather = value;
+                if (_forceWeather)
+                    ForceWeatherParamID = (short)_selectedWeather;
+            }
+        }
         private bool _forceWeather;
         public bool ForceWeather
         {
             get { return _forceWeather; }
             set 
             {
-                ForceWeatherParamID = (short)SelectedWeather;
+                ForceWeatherParamID = (short)_selectedWeather;
                 _forceWeather = value; 
             }
         }
-        private void WeatherList_CollectionChanged(object? sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+
+        public void ForceSetWeather()
         {
-            if (_forceWeather)
-                ForceWeatherParamID = (short)SelectedWeather;
+            ForceWeatherParamID = (short)_selectedWeather;
         }
 
         #endregion
