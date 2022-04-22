@@ -24,5 +24,6 @@ namespace Elden_Ring_Debug_Tool
         {
             InitializeComponent();
         }
+
     }
 }

@@ -17,6 +17,7 @@ using WeaponType = Elden_Ring_Debug_Tool.ERWeapon.WeaponType;
 using static SoulsFormats.PARAMDEF;
 using System.Collections;
 using System.Text.RegularExpressions;
+using System.Collections.ObjectModel;
 
 namespace Elden_Ring_Debug_Tool
 {
@@ -27,6 +28,7 @@ namespace Elden_Ring_Debug_Tool
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }
+
         public event EventHandler<PHEventArgs> OnSetup;
         private void RaiseOnSetup()
         {
@@ -46,6 +48,7 @@ namespace Elden_Ring_Debug_Tool
         public PHPointer PlayerIns { get; set; }
         public PHPointer DisableOpenMap { get; set; }
         public PHPointer CombatCloseMap { get; set; }
+        public PHPointer WorldAreaWeather { get; set; }
         public static bool Reading { get; set; }
         public string ID => Process?.Id.ToString() ?? "Not Hooked";
         public List<PHPointer> Params;
@@ -78,7 +81,11 @@ namespace Elden_Ring_Debug_Tool
 
             DisableOpenMap = RegisterAbsoluteAOB(EROffsets.DisableOpenMapAoB);
             CombatCloseMap = RegisterAbsoluteAOB(EROffsets.CombatCloseMapAoB);
+            WorldAreaWeather = RegisterRelativeAOB(EROffsets.WorldAreaWeatherAoB, EROffsets.RelativePtrAddressOffset, EROffsets.RelativePtrInstructionSize, 0x0);
+
             BuildItemEventDictionary();
+
+            WeatherList.CollectionChanged += WeatherList_CollectionChanged;
         }
 
 
@@ -108,6 +115,9 @@ namespace Elden_Ring_Debug_Tool
 
             if (!Setup)
                 return;
+
+            if (_forceWeather)
+                ForceWeatherParamID = (short)SelectedWeather;
 
             OnPropertyChanged(nameof(Loaded));
             OnPropertyChanged(nameof(InventoryCount));
@@ -271,7 +281,7 @@ namespace Elden_Ring_Debug_Tool
 
         private static Regex ItemEventEntryRx = new Regex(@"^(?<event>\S+) (?<item>\S+)$", RegexOptions.CultureInvariant);
 
-        private static Dictionary<int,int> ItemEventDictionary;
+        private static Dictionary<int, int> ItemEventDictionary;
 
         private void BuildItemEventDictionary()
         {
@@ -396,9 +406,9 @@ namespace Elden_Ring_Debug_Tool
 
         #region Target  
 
-        private int CurrentTargetHandle  => PlayerIns?.ReadInt32((int)EROffsets.PlayerIns.TargetHandle) ?? 0;
+        private int CurrentTargetHandle => PlayerIns?.ReadInt32((int)EROffsets.PlayerIns.TargetHandle) ?? 0;
         private int CurrentTargetArea => PlayerIns?.ReadInt32((int)EROffsets.PlayerIns.TargetArea) ?? 0;
-        private PHPointer _targetEnemy;
+        private PHPointer _targetEnemy { get; set; }
         private PHPointer TargetEnemy
         {
             get => _targetEnemy;
@@ -509,6 +519,32 @@ namespace Elden_Ring_Debug_Tool
         {
             DisableOpenMap.WriteByte(0x0, 0x74); //Write Jump Equals
             CombatCloseMap.WriteBytes(0x0, OriginalCombatCloseMap); //Place original bytes back for combat close map
+        }
+
+        private short ForceWeatherParamID 
+        {
+            set => WorldAreaWeather?.WriteInt16((int)EROffsets.WorldAreaWeather.ForceWeatherParamID, value); 
+        }
+        public enum WeatherTypes
+        {
+            Clear = 99,
+        }
+        public ObservableCollection<WeatherTypes> WeatherList = new ObservableCollection<WeatherTypes>(Enum.GetValues(typeof(WeatherTypes)).Cast<WeatherTypes>());
+        public WeatherTypes SelectedWeather { get; set; }
+        private bool _forceWeather;
+        public bool ForceWeather
+        {
+            get { return _forceWeather; }
+            set 
+            {
+                ForceWeatherParamID = (short)SelectedWeather;
+                _forceWeather = value; 
+            }
+        }
+        private void WeatherList_CollectionChanged(object? sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            if (_forceWeather)
+                ForceWeatherParamID = (short)SelectedWeather;
         }
 
         #endregion

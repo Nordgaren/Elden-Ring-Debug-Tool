@@ -8,8 +8,8 @@
     <PackageIcon>elden_ring_logo-freelogovectors.net_White_Border.png</PackageIcon>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <ApplicationIcon>Icon.ico</ApplicationIcon>
-    <AssemblyVersion>0.5.3</AssemblyVersion>
-    <FileVersion>0.5.3</FileVersion>
+    <AssemblyVersion>0.6</AssemblyVersion>
+    <FileVersion>0.6</FileVersion>
 	  <IncludeAllContentForSelfExtract>true</IncludeAllContentForSelfExtract>
 	  <PackageId>$(TargetPath)</PackageId>
     <Configurations>Debug;Release;Publish</Configurations>
@@ -23,7 +23,7 @@
   </ItemGroup>
 
 
-<!-- Copy all resources to the build output directy except when building in publish mode, to have them exist in a debug/release build, but not have them packed into an executable when publishing -->
+	<!-- Copy all resources to the build output directy except when building in publish mode, to have them exist in a debug/release build, but not have them packed into an executable when publishing -->
   <Target Name="CopyResources" Condition="'$(Configuration)'!='Publish'" AfterTargets="Build">
   <Message Text="Copy resource files" Importance="High" />
   <Message Text="Files: @(ResourceFiles)" Importance="High" />
@@ -39,8 +39,8 @@
     <Copy SourceFiles="@(ResourceFiles)" DestinationFolder="$(PublishDir)Resources\%(RecursiveDir)" SkipUnchangedFiles="true" />
 	<Message Text="Moving Readme: $(PublishDir)" Importance="High" />
 	<Copy SourceFiles="$(SolutionDir)README.md" DestinationFiles="$(PublishDir)README.txt" />
-	  <Exec Command="postbuild.bat $(AssemblyVersion)" />
-    <!--<ZipDirectory SourceDirectory="$(PublishDir)" DestinationFile="$(PublishDir)../Elden Ring Debug Tool $(AssemblyVersion).zip" Overwrite="true" />-->
+	<Exec Command="7za.exe a -t7z &quot;Elden Ring Debug Tool.7z&quot; .\bin\Publish\win-x64\* -xr!*.pdb" />
+	<Move SourceFiles="Elden Ring Debug Tool.7z" DestinationFiles="$(PublishDir)..\Elden Ring Debug Tool  $(AssemblyVersion).7z" />
   </Target>
   
   <ItemGroup>
@@ -57,21 +57,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Extended.Wpf.Toolkit" Version="4.3.0" />
-    <PackageReference Include="keystoneengine.csharp" Version="0.9.1.1" />
     <PackageReference Include="Microsoft.Build.Tasks.Core" Version="17.1.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Update="TabControls\ParamViewerControls\CellControls\GenericParamUNumControl.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Resource Include="Icon.ico">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Resource>
   </ItemGroup>
 
   <ItemGroup>
@@ -80,7 +66,6 @@
     <PackageReference Include="keystoneengine.csharp" Version="0.9.1.1" />
     <PackageReference Include="Octokit" Version="0.50.0" />
     <PackageReference Include="PortableJsonSettingsProvider" Version="0.2.1" />
-    <PackageReference Include="PortableSettingsProvider" Version="0.2.4" />
   </ItemGroup>
 
   <ItemGroup>
@@ -1868,21 +1853,14 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="..\Icon\elden_ring_logo-freelogovectors.net_White_Border.png">
+    <!--<None Include="..\Icon\elden_ring_logo-freelogovectors.net_White_Border.png">
       <Pack>True</Pack>
       <PackagePath>\</PackagePath>
-    </None>
+    </None>-->
     <None Include="..\README.md">
       <Pack>True</Pack>
       <PackagePath>\</PackagePath>
     </None>
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Remove="Assembly\DisableMapClose.asm" />
-    <None Remove="Assembly\ItemGive.asm" />
-    <None Remove="Assembly\SaveParams.asm" />
-    <None Remove="Assembly\SetEventFlag.asm" />
   </ItemGroup>
 
   <ItemGroup>
@@ -1894,7 +1872,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="Icon.ico" />
     <EmbeddedResource Include="Assembly\DisableMapClose.asm" />
     <EmbeddedResource Include="Assembly\ItemGive.asm" />
     <EmbeddedResource Include="Assembly\SaveParams.asm" />
@@ -1904,18 +1881,6 @@
   <ItemGroup>
     <ProjectReference Include="..\PropertyHook\PropertyHook\PropertyHook.csproj" />
     <ProjectReference Include="..\SoulsFormats\SoulsFormats\SoulsFormats.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Remove="C:\Users\Nord\.nuget\packages\keystoneengine.csharp\0.9.1.1\build\x64\keystone.dll" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Remove="C:\Users\Nord\.nuget\packages\keystoneengine.csharp\0.9.1.1\build\x86\keystone.dll" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Remove="C:\Users\Nord\.nuget\packages\keystoneengine.csharp\0.9.1.1\build\x64\keystone.dll" />
   </ItemGroup>
 
   <ItemGroup>

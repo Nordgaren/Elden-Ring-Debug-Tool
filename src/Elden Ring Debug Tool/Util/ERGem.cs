@@ -22,7 +22,7 @@ namespace Elden_Ring_Debug_Tool
 
         private void GetInfusions()
         {
-            Infusions = new List<Infusion>() { Infusion.Standard };
+            Infusions = new List<Infusion>();
 
             if (WeaponAttr == 0)
                 return;

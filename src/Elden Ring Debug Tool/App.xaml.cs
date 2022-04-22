@@ -104,7 +104,7 @@ namespace Elden_Ring_Debug_Tool
             }
             catch (Exception ex)
             {
-
+                //Ignore
             }
 
         }
@@ -125,9 +125,24 @@ namespace Elden_Ring_Debug_Tool
                     File.Delete(logFile);
                 }
 
+                var sb = new StringBuilder();
+                //Log the date and time 
+                sb.Append($"{DateTime.Now:ddd, dd MMM yyy HH':'mm':'ss 'GMT'}\n");
                 //Log the error
-                var error = $"{exception.Message}\n\n\n{exception.StackTrace}\n\n{exception.InnerException?.Message}";
-                File.AppendAllText(logFile, error);
+                sb.Append($"{exception.Message}\n\n");
+
+                var count = 0;
+                var innerException = exception.InnerException;
+                while (innerException != null)
+                {
+                    sb.Append($"Inner Exception {count}\n");
+                    sb.Append($"{ innerException.Message}\n\n");
+                    innerException = innerException.InnerException;
+                    count++;
+                }
+
+                sb.Append($"{exception.StackTrace}\n\n\n");
+                File.AppendAllText(logFile, sb.ToString());
             }
         }
     }

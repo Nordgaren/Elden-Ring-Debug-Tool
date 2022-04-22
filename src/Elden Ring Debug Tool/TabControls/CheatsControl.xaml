@@ -18,8 +18,12 @@
                     <Label Content="General"/>
                     <Border BorderBrush="Gray" BorderThickness="1" >
                         <StackPanel Margin="0,5,0,5">
-                            <CheckBox Margin="10,5,0,0" Content="Enable map in combat" IsChecked="{Binding ElementName=DebugCheats,Path=Hook.EnableMapCombat}" />
+                        <CheckBox Margin="10,5,0,0" Content="Enable map in combat" IsChecked="{Binding ElementName=DebugCheats,Path=Hook.EnableMapCombat}" />
+                        <StackPanel Orientation="Horizontal">
+                        <CheckBox Margin="10,5,0,0" Content="Force Weather:" IsChecked="{Binding ElementName=DebugCheats,Path=Hook.ForceWeather}" />
+                            <ComboBox Width="200" Margin="10,0,0,0" ItemsSource="{Binding ElementName=DebugCheats, Path=Hook.WeatherList}" />
                         </StackPanel>
+                    </StackPanel>
                     </Border>
                 </StackPanel>
         </StackPanel>

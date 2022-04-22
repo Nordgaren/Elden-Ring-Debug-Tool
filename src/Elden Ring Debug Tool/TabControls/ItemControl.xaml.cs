@@ -155,23 +155,26 @@ namespace Elden_Ring_Debug_Tool
             nudUpgrade.Maximum = 0;
 
             cmbInfusion.Items.Clear();
+            cmbInfusion.Items.Add(Infusion.Standard);
+            cmbInfusion.SelectedIndex = 0;
 
             cmbGems.Items.Clear();
             cmbGems.Items.Add(ERGem.Default);
+            cmbGems.SelectedIndex = 0;
 
             if (item.ItemCategory == ERItem.Category.Weapons)
             {
                 var weapon = item as ERWeapon;
                 if (weapon.Infisible)
-                    foreach (var infusion in weapon.DefaultGem.Infusions)
-                        cmbInfusion.Items.Add(infusion);
-
-
+                    GetInfusions(weapon.DefaultGem);
 
                 if (!weapon.Unique)
                     foreach (var gem in ERGem.All)
                         if (gem.WeaponTypes.Contains(weapon.Type))
                             cmbGems.Items.Add(gem);
+
+                cmbInfusion.SelectedIndex = 0;
+                cmbInfusion.IsEnabled = cmbInfusion.Items.Count > 1;
 
                 cmbGems.SelectedItem = weapon.DefaultGem;
                 if (cmbGems.SelectedItem == null)
@@ -180,16 +183,9 @@ namespace Elden_Ring_Debug_Tool
                 nudUpgrade.Maximum = weapon.MaxUpgrade;
             }
           
-            if (cmbInfusion.Items.Count == 0)
-                cmbInfusion.Items.Add(Infusion.Standard);
-
             nudUpgrade.IsEnabled = nudUpgrade.Maximum > 0;
-
-            cmbInfusion.SelectedIndex = 0;
             cmbInfusion.IsEnabled = cmbInfusion.Items.Count > 1;
-
             cmbGems.IsEnabled = cmbGems.Items.Count > 1;
-
             btnCreate.IsEnabled = item.CanAquireFromOtherPlayers || App.Settings.SpawnUndroppable;
             //if (!Properties.Settings.Default.UpdateMaxLive)
             //    HandleMaxAvailable();
@@ -204,8 +200,15 @@ namespace Elden_Ring_Debug_Tool
             if (gem == null) return;
 
             cmbInfusion.Items.Clear();
+            GetInfusions(gem);
+        }
+
+        private void GetInfusions(ERGem? gem)
+        {
             foreach (var infusion in gem.Infusions)
                 cmbInfusion.Items.Add(infusion);
+
+            cmbInfusion.SelectedIndex = 0;
         }
 
         public void UpdateCreateEnabled()

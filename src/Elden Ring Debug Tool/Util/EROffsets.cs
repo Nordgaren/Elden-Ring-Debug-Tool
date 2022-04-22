@@ -169,5 +169,13 @@ namespace Elden_Ring_Debug_Tool
 
         public const string DisableOpenMapAoB = "74 ? C7 45 38 58 02 00 00 C7 45 3C 02 00 00 00 C7 45 40 01 00 00 00 48 ? ? ? ? ? ? 48 89 45 48 48 8D 4D 38 E8 ? ? ? ? E9";
         public const string CombatCloseMapAoB = "E8 ? ? ? ? 84 C0 75 ? 38 83 ? ? ? ? 75 ? 83 E7 FE";
+        public const string WorldAreaWeatherAoB = "48 8B 15 ? ? ? ? 32 C0 48 85 D2 ? ? 8B 82";
+
+        public enum WorldAreaWeather
+        {
+            ForceWeatherParamID = 0x2,
+            WeatherParamID = 0xA2,
+            ResetWeather = 0x88
+        }
     }
 }

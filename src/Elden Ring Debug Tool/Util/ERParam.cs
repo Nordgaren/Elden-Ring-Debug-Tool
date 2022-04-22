@@ -22,6 +22,7 @@ namespace Elden_Ring_Debug_Tool
         public int Length { get; private set; }
         public byte[] Bytes { get; private set; }
         public List<Row> Rows { get; private set; }
+        public List<UserControl> Cells { get; private set; }
         private static Regex ParamEntryRx = new Regex(@"^\s*(?<id>\S+)\s+(?<name>.*)$", RegexOptions.CultureInvariant);
         public Dictionary<int, string> NameDictionary { get; private set; }
         public Dictionary<int, int> OffsetDict { get; private set; }
@@ -42,7 +43,6 @@ namespace Elden_Ring_Debug_Tool
                 }
             }
         }
-        public List<UserControl> Cells { get; private set; }
 
         private void BuildCells()
         {
@@ -209,9 +209,6 @@ namespace Elden_Ring_Debug_Tool
             public string Name { get; private set; }
             public int ID { get; private set; }
             public int DataOffset { get; private set; }
-            private List<UserControl> Cells;
-
-
 
             public Row(ERParam param, string name, int id, int offset)
             {
