@@ -90,7 +90,7 @@ namespace Elden_Ring_Debug_Tool
         private void ERHook_OnHooked(object? sender, PHEventArgs e)
         {
             //var gameDataMan = GameDataMan.Resolve();
-            var paramss = SoloParamRepository.Resolve();
+            //var paramss = SoloParamRepository.Resolve();
             //var itemGive = ItemGive.Resolve();
             //var mapItemMan = MapItemMan.Resolve();
             //var eventFlagMan = EventFlagMan.Resolve();
@@ -105,7 +105,20 @@ namespace Elden_Ring_Debug_Tool
             RaiseOnSetup();
             ReadParams();
             Setup = true;
+
+            //LogABunchOfStuff();
         }
+
+        private void LogABunchOfStuff()
+        {
+            var list = new List<string>();
+            list.Add($"WorldChrMan {WorldChrMan.Resolve():X2}");
+            list.Add($"ItemGib {ItemGive.Resolve():X2}");
+            list.Add($"GameDataMan {GameDataMan.Resolve():X2}");
+            list.Add($"SoloParamRepository {SoloParamRepository.Resolve():X2}");
+            File.WriteAllLines(Environment.CurrentDirectory + @"\HookLog.txt", list);
+        }
+
         public void Update()
         {
             OnPropertyChanged(nameof(Setup));
@@ -434,10 +447,10 @@ namespace Elden_Ring_Debug_Tool
             set
             {
                 _targetEnemyIns = value;
-                TargetEnemyModuleBase = CreateChildPointer(_targetEnemyIns, (int)EROffsets.EnemyIns.ModuleBase);
-                TargetEnemyData = CreateChildPointer(TargetEnemyModuleBase, (int)EROffsets.ModuleBase.EnemyData);
-                TargetEnemyResistance = CreateChildPointer(TargetEnemyModuleBase, (int)EROffsets.ModuleBase.ResistenceData);
-                TargetEnemyStagger = CreateChildPointer(TargetEnemyModuleBase, (int)EROffsets.ModuleBase.StaggerData);
+                TargetEnemyModuleBase = _targetEnemyIns != null ? CreateChildPointer(_targetEnemyIns, (int)EROffsets.EnemyIns.ModuleBase) : null;
+                TargetEnemyData = _targetEnemyIns != null ? CreateChildPointer(TargetEnemyModuleBase, (int)EROffsets.ModuleBase.EnemyData) : null;
+                TargetEnemyResistance = _targetEnemyIns != null ? CreateChildPointer(TargetEnemyModuleBase, (int)EROffsets.ModuleBase.ResistenceData) : null;
+                TargetEnemyStagger = _targetEnemyIns != null ? CreateChildPointer(TargetEnemyModuleBase, (int)EROffsets.ModuleBase.StaggerData) : null;
             }
         }
         public int TargetEnemyHandle => PlayerIns?.ReadInt32((int)EROffsets.EnemyIns.EnemyHandle) ?? 0;
@@ -598,6 +611,47 @@ namespace Elden_Ring_Debug_Tool
         public void GetTarget()
         {
             TargetEnemyIns = null;
+            var worldBlockChr = CreateBasePointer(WorldChrMan.Resolve() + (int)EROffsets.WorldChrMan.WorldBlockChr);
+            var targetHandle = CurrentTargetHandle; //Only read from memory once
+            var targetArea = CurrentTargetArea;
+
+            while (true)
+            {
+                var numChrs = worldBlockChr.ReadInt32((int)EROffsets.WorldBlockChr.NumChr);
+                var chrSet = CreateChildPointer(worldBlockChr, (int)EROffsets.WorldBlockChr.ChrSet);
+
+                for (int j = 0; j <= numChrs; j++)
+                {
+                    var enemyIns = CreateChildPointer(chrSet, (j * (int)EROffsets.ChrSet.EnemyIns));
+                    var enemyHandle = enemyIns.ReadInt32((int)EROffsets.EnemyIns.EnemyHandle);
+                    var enemyArea = enemyIns.ReadInt32((int)EROffsets.EnemyIns.EnemyArea);
+
+                    if (targetHandle == enemyHandle && targetArea == enemyArea)
+                        TargetEnemyIns = enemyIns;
+
+                    if (TargetEnemyIns != null)
+                        return;
+                }
+
+                var assertVal = worldBlockChr.ReadInt64(0x80);
+                if (assertVal == -1)
+                    worldBlockChr = CreateBasePointer(worldBlockChr.Resolve() + 0x160);
+                else
+                    break;
+            }
+
+            TryGetEnemy(targetHandle, targetArea, (int)EROffsets.WorldChrMan.ChrSet1);
+
+            if (TargetEnemyIns != null)
+                return;
+
+            TryGetEnemy(targetHandle, targetArea, (int)EROffsets.WorldChrMan.ChrSet2);
+
+        }
+
+        public void GetTargetBackup()
+        {
+            TargetEnemyIns = null;
             var count = WorldChrMan.ReadInt32((int)EROffsets.WorldChrMan.NumWorldBlockChr);
             var worldBlockChr = CreateBasePointer(WorldChrMan.Resolve() + (int)EROffsets.WorldChrMan.WorldBlockChr);
             var targetHandle = CurrentTargetHandle; //Only read from memory once
@@ -623,16 +677,16 @@ namespace Elden_Ring_Debug_Tool
 
             }
 
-            var success = TryGetEnemy(targetHandle, targetArea, (int)EROffsets.WorldChrMan.ChrSet1);
+            TryGetEnemy(targetHandle, targetArea, (int)EROffsets.WorldChrMan.ChrSet1);
 
-            if (success)
+            if (TargetEnemyIns != null)
                 return;
 
-            success = TryGetEnemy(targetHandle, targetArea, (int)EROffsets.WorldChrMan.ChrSet2);
+            TryGetEnemy(targetHandle, targetArea, (int)EROffsets.WorldChrMan.ChrSet2);
 
         }
 
-        public bool TryGetEnemy(int targetHandle, int targetArea, int offset)
+        public void TryGetEnemy(int targetHandle, int targetArea, int offset)
         {
             var chrSet1 = CreateChildPointer(WorldChrMan, offset);
             var numEntries1 = chrSet1.ReadInt32((int)EROffsets.ChrSet.NumEntries);
@@ -645,10 +699,8 @@ namespace Elden_Ring_Debug_Tool
                     TargetEnemyIns = CreateChildPointer(chrSet1, 0x78 + 8 + (i * 0x10));
 
                 if (TargetEnemyIns != null)
-                    return true;
+                    return;
             }
-
-            return false;
         }
         #endregion
 

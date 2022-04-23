@@ -35,9 +35,16 @@ My fork of [Property Hook](https://github.com/Nordgaren/PropertyHook) by [TKGP](
 **[inuNorii](https://github.com/inunorii)** Creator of The Grand Archives table, which I also used for this, and one of the admins at TGA Discord.  
 **[FrankvdStam](https://github.com/FrankvdStam)** Helped with the build action and general troubleshooting.  
 **[King Borehaha](https://github.com/kingborehaha/DS-Gadget-Local-Loader)** Who's local loading system has worked really well for a lot of things, including this project  
-**jamesq7** For helping figure out the cheat for enabling the map during combat.  
+**jamesq7** For helping figure out the cheat for enabling the map during combat and his rewrite of Wulfs Target script
+**wulf2k** For helping figure out the cheat for enabling the map during combat and his rewrite of Wulfs Target script
 
 # Change Log  
+### Beta 0.6.1
+
+* Fixed a bug where some enemies didn't show up in target.  
+
+* Fixed a bug where double clicking in the Inventory datagrid would cause the tool to crash.  
+
 ### Beta 0.6
 
 * Added target debug tab. Work in progress, but gives some basic information. 

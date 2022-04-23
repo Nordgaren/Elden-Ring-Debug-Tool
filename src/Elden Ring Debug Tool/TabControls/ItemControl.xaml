@@ -73,7 +73,7 @@
           
         <GridSplitter Grid.Column="1" Grid.Row="1" Width="3" BorderBrush="Black" HorizontalAlignment="Center" />
         
-        <DataGrid x:Name="DataGridInventory" Grid.Row="1" Grid.Column="2" AutoGenerateColumns="False" HorizontalScrollBarVisibility="Visible">
+        <DataGrid x:Name="DataGridInventory" Grid.Row="1" Grid.Column="2" AutoGenerateColumns="False" HorizontalScrollBarVisibility="Visible" IsReadOnly="True">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Name" Binding="{Binding Path=Name}"/>
                 <DataGridTextColumn Header="Item ID" Binding="{Binding Path=ItemID}"/>

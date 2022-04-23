@@ -46,7 +46,7 @@
                             </StackPanel>
                             <Separator Width="20" Visibility="Hidden"/>-->
                             <StackPanel Width="100">
-                                <Label Content="Health Max" />
+                                <Label Content="Fp Max" />
                                 <wpfTool:IntegerUpDown Value="{Binding ElementName=DebugTarget, Path=Hook.TargetFpMax}" TextAlignment="Center" IsEnabled="False"/>
                             </StackPanel>
                         </StackPanel>
@@ -141,7 +141,7 @@
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="25,5,0,0">
                             <StackPanel>
-                                <Label Content="Forst" Width="60"/>
+                                <Label Content="Frost" Width="60"/>
                             </StackPanel>
                             <StackPanel Width="100">
                                 <wpfTool:IntegerUpDown x:Name="nudFrost" Value="{Binding ElementName=DebugTarget, Path=Hook.TargetFrost}" Maximum="{Binding ElementName=DebugTarget, Path=Hook.TargetFrostMax}" TextAlignment="Center" ClipValueToMinMax="True" IsEnabled="False"/>
@@ -204,7 +204,7 @@
                             </StackPanel>
                         </StackPanel>
                         <StackPanel Width="100" HorizontalAlignment="Left" Margin="23,0,0,0">
-                            <Label Content="Stagger"/>
+                            <Label Content="Reset Timer"/>
                             <wpfTool:DecimalUpDown x:Name="nudTimer" Value="{Binding ElementName=DebugTarget, Path=Hook.TargetStagger}" Maximum="{Binding ElementName=DebugTarget, Path=Hook.TargetStaggerMax}" TextAlignment="Center" ClipValueToMinMax="True" IsEnabled="False"/>
                         </StackPanel>
                     </StackPanel>

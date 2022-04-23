@@ -208,8 +208,8 @@ namespace Elden_Ring_Debug_Tool
 
         public enum PlayerIns
         {
-            TargetHandle = 0x6a0,
-            TargetArea = 0x6a4
+            TargetHandle = 0x6A0,
+            TargetArea = 0x6A4
         }
 
 
