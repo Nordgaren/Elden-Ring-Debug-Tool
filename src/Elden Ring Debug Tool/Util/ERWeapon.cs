@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Elden_Ring_Debug_Tool
 {
-    internal class ERWeapon : ERItem
+    public class ERWeapon : ERItem
     {
         public enum Infusion : short
         {

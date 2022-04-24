@@ -85,6 +85,8 @@ namespace Elden_Ring_Debug_Tool
             WorldAreaWeather = RegisterRelativeAOB(EROffsets.WorldAreaWeatherAoB, EROffsets.RelativePtrAddressOffset, EROffsets.RelativePtrInstructionSize, 0x0);
 
             BuildItemEventDictionary();
+            ERItemCategory.GetItemCategories();
+
         }
 
 
@@ -283,7 +285,7 @@ namespace Elden_Ring_Debug_Tool
         {
             return CreateChildPointer(SoloParamRepository, new int[] { offset, 0x80, 0x80 });
         }
-        internal void SaveParam(ERParam param)
+        public void SaveParam(ERParam param)
         {
             var asmString = Util.GetEmbededResource("Assembly.SaveParams.asm");
             var asm = string.Format(asmString, SoloParamRepository.Resolve(), param.Offset, CapParamCall.Resolve());
@@ -381,7 +383,7 @@ namespace Elden_Ring_Debug_Tool
             }
         }
 
-        internal void GetItem(int id, int quantity, int infusion, int upgrade, int gem)
+        public void GetItem(int id, int quantity, int infusion, int upgrade, int gem)
         {
             var itemInfobytes = new byte[0x34];
             var itemInfo = GetPrefferedIntPtr(0x34);
@@ -410,7 +412,7 @@ namespace Elden_Ring_Debug_Tool
         public int InventoryCount => PlayerGameData.ReadInt32((int)EROffsets.PlayerGameDataStruct.InventoryCount);
         public int LastInventoryCount { get; set; }
 
-        internal IEnumerable GetInventory()
+        public IEnumerable GetInventory()
         {
             if (InventoryCount != LastInventoryCount)
                 GetInventoryList();

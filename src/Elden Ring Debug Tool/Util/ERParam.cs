@@ -23,120 +23,13 @@ namespace Elden_Ring_Debug_Tool
         public int Length { get; private set; }
         public byte[] Bytes { get; private set; }
         public List<Row> Rows { get; private set; }
-        public List<UserControl> Cells { get; private set; }
+        public Row SelectedRow { get; set; }
+        public List<UserControl> Cells { get; set; }
         private static Regex ParamEntryRx = new Regex(@"^\s*(?<id>\S+)\s+(?<name>.*)$", RegexOptions.CultureInvariant);
         public Dictionary<int, string> NameDictionary { get; private set; }
         public Dictionary<int, int> OffsetDict { get; private set; }
         public int RowLength { get; private set; }
-        private Row _selectedRow;
-        public Row SelectedRow
-        {
-            get
-            {
-                return _selectedRow;
-            }
-            set
-            {
-                _selectedRow = value;
-                foreach (ICellControl control in Cells)
-                {
-                    control.UpdateField();
-                }
-            }
-        }
-
-        List<Brush> BrushList = new List<Brush>() { new SolidColorBrush(Color.FromRgb(0xC3, 0xC3, 0xC3)), Brushes.LightGray};
-
-        private void BuildCells()
-        {
-            Cells = new List<UserControl>();
-            int totalSize = 0;
-            for (int i = 0; i < ParamDef.Fields.Count; i++)
-            {
-                Field field = ParamDef.Fields[i];
-                DefType type = field.DisplayType;
-                var size = ParamUtil.IsArrayType(type) ? ParamUtil.GetValueSize(type) * field.ArrayLength : ParamUtil.GetValueSize(type);
-                if (ParamUtil.IsArrayType(type))
-                    totalSize += ParamUtil.GetValueSize(type) * field.ArrayLength;
-                else
-                    totalSize += ParamUtil.GetValueSize(type);
-
-                if (ParamUtil.IsBitType(type) && field.BitSize != -1)
-                {
-                    int bitOffset = field.BitSize;
-                    DefType bitType = type == DefType.dummy8 ? DefType.u8 : type;
-                    int bitLimit = ParamUtil.GetBitLimit(bitType);
-                    for (; i < ParamDef.Fields.Count - 1; i++)
-                    {
-                        var bitfield = new BitfieldControl(this, totalSize - size, bitOffset - 1, ParamDef.Fields[i].InternalName);
-                        bitfield.Background = BrushList[i % BrushList.Count];
-                        Cells.Add(bitfield);
-                        Field nextField = ParamDef.Fields[i + 1];
-                        DefType nextType = nextField.DisplayType;
-                        if (!ParamUtil.IsBitType(nextType) || nextField.BitSize == -1 || bitOffset + nextField.BitSize > bitLimit
-                            || (nextType == DefType.dummy8 ? DefType.u8 : nextType) != bitType)
-                            break;
-                        bitOffset += nextField.BitSize;
-                    }
-                }
-                else
-                {
-                    switch (type)
-                    {
-                        case DefType.u8:
-                            var u8 = new ParamUNumControl<byte>(this, totalSize - size, field.InternalName);
-                            u8.Background = BrushList[i % BrushList.Count];
-                            Cells.Add(u8);
-                            break;
-                        case DefType.s8:
-                            var s8 = new ParamNumControl<sbyte>(this, totalSize - size, field.InternalName);
-                            s8.Background = BrushList[i % BrushList.Count];
-                            Cells.Add(s8);
-                            break;
-                        case DefType.u16:
-                            var u16 = new ParamUNumControl<ushort>(this, totalSize - size, field.InternalName);
-                            u16.Background = BrushList[i % BrushList.Count];
-                            Cells.Add(u16);
-                            break;
-                        case DefType.s16:
-                            var s16 = new ParamNumControl<short>(this, totalSize - size, field.InternalName);
-                            s16.Background = BrushList[i % BrushList.Count];
-                            Cells.Add(s16);
-                            break;
-                        case DefType.u32:
-                            var u32 = new ParamUNumControl<uint>(this, totalSize - size, field.InternalName);
-                            u32.Background = BrushList[i % BrushList.Count];
-                            Cells.Add(u32);
-                            break;
-                        case DefType.s32:
-                            var s32 = new ParamNumControl<int>(this, totalSize - size, field.InternalName);
-                            s32.Background = BrushList[i % BrushList.Count];
-                            Cells.Add(s32);
-                            break;
-                        case DefType.f32:
-                            var f32 = new ParamDecControl<float>(this, totalSize - size, field.InternalName);
-                            f32.Background = BrushList[i % BrushList.Count];
-                            Cells.Add(f32);
-                            break;
-                        case DefType.dummy8:
-                            var dummy8 = new ParamNumControl<byte>(this, totalSize - size, field.InternalName);
-                            dummy8.Background = BrushList[i % BrushList.Count];
-                            Cells.Add(dummy8);
-                            break;
-                        case DefType.fixstr:
-                        case DefType.fixstrW:
-                            var fixStr = new StringControl(this, totalSize - size, field.ArrayLength, field.InternalName);
-                            fixStr.Background = BrushList[i % BrushList.Count];
-                            Cells.Add(fixStr);
-                            break;
-                        default:
-                            throw new Exception($"No control for this type {type}");
-                    }
-                }
-
-
-            }
-        }
+       
         public ERParam(PHPointer pointer, int offset, PARAMDEF Paramdef, string name)
         {
             Pointer = pointer;
@@ -147,7 +40,6 @@ namespace Elden_Ring_Debug_Tool
             BuildNameDictionary();
             BuildOffsetDictionary();
             RowLength = ParamDef.GetRowSize();
-            BuildCells();
         }
         private void BuildOffsetDictionary()
         {
@@ -212,7 +104,7 @@ namespace Elden_Ring_Debug_Tool
         {
             return this.Name.CompareTo(other.Name);
         }
-        internal void RestoreParam()
+        public void RestoreParam()
         {
             Pointer.WriteBytes(0 ,Bytes);
         }

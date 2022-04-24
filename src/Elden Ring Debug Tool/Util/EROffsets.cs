@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Elden_Ring_Debug_Tool
 {
-    internal class EROffsets
+    public class EROffsets
     {
         public const int IsLoadedOffset1 = 0x320;
         public const int IsLoadedOffset2 = 0xC8;

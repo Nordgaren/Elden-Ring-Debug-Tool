@@ -1,0 +1,118 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <RootNamespace>Elden_Ring_Debug_Tool_WPF</RootNamespace>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+    <PackageIcon>elden_ring_logo-freelogovectors.net_White_Border.png</PackageIcon>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <ApplicationIcon>Icon.ico</ApplicationIcon>
+    <AssemblyVersion>0.6.1</AssemblyVersion>
+    <FileVersion>0.6.1</FileVersion>
+	  <IncludeAllContentForSelfExtract>true</IncludeAllContentForSelfExtract>
+	  <PackageId>$(TargetPath)</PackageId>
+    <Configurations>Debug;Release;Publish</Configurations>
+  </PropertyGroup>
+	  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Publish|AnyCPU'">
+    <Optimize>True</Optimize>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ResourceFiles Include="$(SolutionDir)\src\Elden Ring Debug Tool\Resources\**\*.*" />
+  </ItemGroup>
+
+
+	<!-- Copy all resources to the build output directy except when building in publish mode, to have them exist in a debug/release build, but not have them packed into an executable when publishing -->
+  <Target Name="CopyResources" Condition="'$(Configuration)'!='Publish'" AfterTargets="Build">
+  <Message Text="Copy resource files" Importance="High" />
+  <Message Text="Files: @(ResourceFiles)" Importance="High" />
+  <Message Text="directory: $(OutDir)" Importance="High" />
+  <Copy SourceFiles="@(ResourceFiles)" DestinationFolder="$(OutDir)Resources\%(RecursiveDir)" SkipUnchangedFiles="true" />
+  </Target>
+
+  <!-- Copy all resources to the published output -->
+  <Target Name="CopyResourcesPublish" Condition="'$(Configuration)'=='Publish'" AfterTargets="Publish">
+    <Message Text="Copy resource files" Importance="High" />
+    <Message Text="Files: @(ResourceFiles)" Importance="High" />
+    <Message Text="Directory: $(PublishDir)" Importance="High" />
+    <Copy SourceFiles="@(ResourceFiles)" DestinationFolder="$(PublishDir)Resources\%(RecursiveDir)" SkipUnchangedFiles="true" />
+	<Message Text="Moving Readme: $(PublishDir)" Importance="High" />
+	<Copy SourceFiles="$(SolutionDir)README.md" DestinationFiles="$(PublishDir)README.txt" />
+	<Exec Command="7za.exe a -t7z &quot;Elden Ring Debug Tool.7z&quot; .\bin\Publish\win-x64\* -xr!*.pdb" />
+	<Move SourceFiles="Elden Ring Debug Tool.7z" DestinationFiles="$(PublishDir)..\Elden Ring Debug Tool $(AssemblyVersion).7z" />
+  </Target>
+
+	<ItemGroup>
+		<Content Update="keystone.dll">
+			<CopyToPublishDirectory>Never</CopyToPublishDirectory>
+			<ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+		</Content>
+	</ItemGroup>
+
+	<ItemGroup>
+		<Resource Include="Icon.ico">
+			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
+		</Resource>
+	</ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Build.Tasks.Core" Version="17.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Extended.Wpf.Toolkit" Version="4.3.0" />
+    <PackageReference Include="GlobalHotkeys" Version="1.0.0.6" />
+    <PackageReference Include="Octokit" Version="0.50.0" />
+    <PackageReference Include="PortableJsonSettingsProvider" Version="0.2.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Elden Ring Debug Tool\Elden Ring Debug Tool.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Properties\Settings.Designer.cs">
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Update="TabControls\ParamViewerControls\CellControls\StringControl.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="TabControls\ParamViewerControls\CellControls\GenericParamUNumControl.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="TabControls\ParamViewerControls\CellControls\StringControl.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="TabControls\ParamViewerControls\CellControls\GenericParamUNumControl.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="C:\Users\Nord\.nuget\packages\keystoneengine.csharp\0.9.1.1\build\x64\keystone.dll">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="C:\Users\Nord\.nuget\packages\keystoneengine.csharp\0.9.1.1\build\x86\keystone.dll">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>

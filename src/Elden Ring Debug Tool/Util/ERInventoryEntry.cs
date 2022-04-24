@@ -7,7 +7,7 @@ using static Elden_Ring_Debug_Tool.ERItem;
 
 namespace Elden_Ring_Debug_Tool
 {
-    class ERInventoryEntry
+    public class ERInventoryEntry
     {
         public byte[] Bytes { get; private set; }
         public string Name { get; private set; }

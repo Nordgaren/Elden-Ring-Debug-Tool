@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Elden_Ring_Debug_Tool
 {
-    class ERItem
+    public class ERItem
     {
         public enum Category : uint
         {

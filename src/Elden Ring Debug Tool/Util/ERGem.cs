@@ -9,7 +9,7 @@ using WeaponType = Elden_Ring_Debug_Tool.ERWeapon.WeaponType;
 
 namespace Elden_Ring_Debug_Tool
 {
-    class ERGem : ERItem
+    public class ERGem : ERItem
     {
         public static List<ERGem> All = new List<ERGem>();
 

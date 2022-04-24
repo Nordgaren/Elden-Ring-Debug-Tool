@@ -10,7 +10,7 @@ using Category = Elden_Ring_Debug_Tool.ERItem.Category;
 
 namespace Elden_Ring_Debug_Tool
 {
-    class ERItemCategory
+    public class ERItemCategory
     {
 
         public string Name;
