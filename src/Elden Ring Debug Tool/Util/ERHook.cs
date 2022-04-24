@@ -24,7 +24,7 @@ namespace Elden_Ring_Debug_Tool
     public class ERHook : PHook, INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler? PropertyChanged;
-        protected void OnPropertyChanged([CallerMemberName] string name = null)
+        protected void OnPropertyChanged([CallerMemberName] string? name = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }
@@ -169,7 +169,7 @@ namespace Elden_Ring_Debug_Tool
         private void AsmExecute(string asm)
         {
             //Assemble once to get the size
-            var bytes = Engine.Assemble(asm, (ulong)Process.MainModule.BaseAddress);
+            EncodedData? bytes = Engine.Assemble(asm, (ulong)Process.MainModule.BaseAddress);
             //DebugPrintArray(bytes.Buffer);
             var error = Engine.GetLastKeystoneError();
             if (error != KeystoneError.KS_ERR_OK)
@@ -750,6 +750,7 @@ namespace Elden_Ring_Debug_Tool
             DisableOpenMap.WriteByte(0x0, 0x74); //Write Jump Equals
             CombatCloseMap.WriteBytes(0x0, OriginalCombatCloseMap); //Place original bytes back for combat close map
         }
+        private short WeatherParamID => WorldAreaWeather?.ReadInt16((int)EROffsets.WorldAreaWeather.WeatherParamID) ?? 0;
         private short ForceWeatherParamID 
         {
             set => WorldAreaWeather?.WriteInt16((int)EROffsets.WorldAreaWeather.ForceWeatherParamID, value); 
@@ -785,14 +786,22 @@ namespace Elden_Ring_Debug_Tool
                     ForceWeatherParamID = (short)_selectedWeather;
             }
         }
-        private bool _forceWeather;
+        private WeatherTypes _lastSelectedWeather;
+
+        private bool _forceWeather { get; set; }
         public bool ForceWeather
         {
             get { return _forceWeather; }
             set 
             {
                 ForceWeatherParamID = (short)_selectedWeather;
-                _forceWeather = value; 
+                _forceWeather = value;
+
+                if (_forceWeather)
+                    _lastSelectedWeather = (WeatherTypes)WeatherParamID;
+                else
+                    ForceWeatherParamID = (short)_lastSelectedWeather;
+
             }
         }
 

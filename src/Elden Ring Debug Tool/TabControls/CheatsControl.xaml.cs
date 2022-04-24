@@ -33,6 +33,7 @@ namespace Elden_Ring_Debug_Tool
             WeatherBox.SelectedItem = ERHook.WeatherTypes.Clear;
         }
 
+
         internal override void UpdateCtrl()
         {
             if (Hook.ForceWeather)

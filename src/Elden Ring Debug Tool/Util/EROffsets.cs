@@ -221,7 +221,7 @@ namespace Elden_Ring_Debug_Tool
         public enum WorldAreaWeather
         {
             ForceWeatherParamID = 0x2,
-            WeatherParamID = 0xA2,
+            WeatherParamID = 0x2A,
             ResetWeather = 0x88
         }
     }
