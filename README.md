@@ -38,7 +38,14 @@ My fork of [Property Hook](https://github.com/Nordgaren/PropertyHook) by [TKGP](
 **jamesq7** For helping figure out the cheat for enabling the map during combat and his rewrite of Wulfs Target script
 **wulf2k** For helping figure out the cheat for enabling the map during combat and his rewrite of Wulfs Target script
 
-# Change Log  
+# Change Log 
+### Beta 0.6.2
+
+* Fixed weather cheat and added some labels  
+
+* Added some info to the enemy tab  
+
+
 ### Beta 0.6.1
 
 * Fixed a bug where some enemies didn't show up in target.  
