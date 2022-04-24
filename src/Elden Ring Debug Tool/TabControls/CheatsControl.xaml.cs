@@ -30,7 +30,6 @@ namespace Elden_Ring_Debug_Tool
         public override void InitCtrl()
         {
             WeatherTypes = new ObservableCollection<WeatherTypes>(Enum.GetValues(typeof(WeatherTypes)).Cast<WeatherTypes>());
-            WeatherBox.SelectedItem = ERHook.WeatherTypes.Clear;
         }
 
 

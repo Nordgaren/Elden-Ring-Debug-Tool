@@ -206,7 +206,7 @@
                             </StackPanel>
                             <StackPanel Width="100" HorizontalAlignment="Left" Margin="23,0,0,0">
                                 <Label Content="Reset Timer"/>
-                                <wpfTool:DecimalUpDown x:Name="nudTimer" Value="{Binding ElementName=DebugTarget, Path=Hook.TargetStagger}" Maximum="{Binding ElementName=DebugTarget, Path=Hook.TargetStaggerMax}" TextAlignment="Center" ClipValueToMinMax="True" IsEnabled="False"/>
+                                <wpfTool:DecimalUpDown x:Name="nudTimer" Value="{Binding ElementName=DebugTarget, Path=Hook.TargetResetTime}" TextAlignment="Center" ClipValueToMinMax="True" IsEnabled="False"/>
                             </StackPanel>
                         </StackPanel>
                     </Border>

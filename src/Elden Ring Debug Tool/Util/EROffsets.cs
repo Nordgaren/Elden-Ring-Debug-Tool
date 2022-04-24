@@ -157,6 +157,7 @@ namespace Elden_Ring_Debug_Tool
         {
             EnemyHandle = 0x8,
             EnemyArea = 0xC,
+            NpcParam = 0x60,
             ChrType = 0x68,
             ModuleBase = 0x190
         }
@@ -171,30 +172,31 @@ namespace Elden_Ring_Debug_Tool
         public enum EnemyData
         {
             Model = 0xC8,
-            Name = 0x1A0,
             Hp = 0x138,
             HpMax = 0x140,
             Fp = 0x148,
             FpMax = 0x14C,
             Stam = 0x154,
-            StamMax = 0x158
+            StamMax = 0x158,
+            Name = 0x1A0
+
         }
 
         public enum ResistenceData
         {
             Poison = 0x10,
-            PoisonMax = 0x2C,
             Rot = 0x14,
-            RotMax = 0x30,
             Bleed = 0x18,
-            BleedMax = 0x34,
             Blight = 0x1C,
-            BlightMax = 0x38,
             Frost = 0x20,
-            FrostMax = 0x3C,
             Sleep = 0x24,
-            SleepMax = 0x40,
             Madness = 0x28,
+            PoisonMax = 0x2C,
+            RotMax = 0x30,
+            BleedMax = 0x34,
+            BlightMax = 0x38,
+            FrostMax = 0x3C,
+            SleepMax = 0x40,
             MadnessMax = 0x44   
         }
 

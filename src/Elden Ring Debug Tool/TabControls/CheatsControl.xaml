@@ -21,7 +21,13 @@
                         <CheckBox Margin="10,5,0,0" Content="Enable map in combat" IsChecked="{Binding ElementName=DebugCheats,Path=Hook.EnableMapCombat}" />
                         <StackPanel Orientation="Horizontal">
                         <CheckBox Margin="10,5,0,0" Content="Force Weather:" IsChecked="{Binding ElementName=DebugCheats,Path=Hook.ForceWeather}" />
-                            <ComboBox Width="200" Margin="10,0,0,0" ItemsSource="{Binding ElementName=DebugCheats, Path=WeatherTypes}" SelectedValue="{Binding ElementName=DebugCheats, Path=Hook.SelectedWeather}" x:Name="WeatherBox"/>
+                            <ComboBox Width="200" Margin="10,0,0,0" ItemsSource="{Binding ElementName=DebugCheats, Path=WeatherTypes}" SelectedValue="{Binding ElementName=DebugCheats, Path=Hook.SelectedWeather}" x:Name="WeatherBox">
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Converter={StaticResource enumDescriptionConverter}}"></TextBlock>
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
                         </StackPanel>
                     </StackPanel>
                     </Border>

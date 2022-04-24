@@ -18,6 +18,7 @@ using static SoulsFormats.PARAMDEF;
 using System.Collections;
 using System.Text.RegularExpressions;
 using System.Collections.ObjectModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace Elden_Ring_Debug_Tool
 {
@@ -440,6 +441,27 @@ namespace Elden_Ring_Debug_Tool
 
         #region Target  
 
+        public enum PhantomParam
+        {
+            Normal = 0x00,
+            Friendly = 0x01,
+            Invader = 0x02,
+            Phantom = 0x03,
+            Original = 0x05,
+            HostOfFingers = 0x08,
+            InvaderNoText = 0x10,
+            BrightWhitePhantomNoText = 0x14,
+            BloodyFingerRedText = 0x15,
+            RecusantText = 0x16,
+            BlueHunterText = 0x17,
+            BloodyFingerRedText2 = 0x18,
+            OrangeGlowNoText = 0x19,
+            InvalidInvader = 0x20,
+            InvalidInvader1 = 0x21,
+            InvalidInvader2 = 0x22,
+        }
+
+
         private int CurrentTargetHandle => PlayerIns?.ReadInt32((int)EROffsets.PlayerIns.TargetHandle) ?? 0;
         private int CurrentTargetArea => PlayerIns?.ReadInt32((int)EROffsets.PlayerIns.TargetArea) ?? 0;
         private PHPointer _targetEnemyIns { get; set; }
@@ -757,23 +779,32 @@ namespace Elden_Ring_Debug_Tool
         }
         public enum WeatherTypes
         {
-            Cloudy = 0,
+            [Description("Slightly Cloudy")]
+            SlightlyCloudy = 0,
             Sunny = 1,
             Overcast = 10,
+            [Description("Storm Clouds")]
             StormClouds = 11,
             Rain = 20,
+            [Description("Heavy Rain")]
             HeavyRain = 21,
             Downpour = 30,
             Fog = 31,
+            [Description("Light Snow")]
             LightSnow = 40,
             Snow = 41,
+            [Description("Freezing Fog")]
             FreezingFog = 50,
+            [Description("Deep Freezing Fog")]
             DeepFreezingFog = 51,
+            [Description("Deep Freezing Rainy Fog")]
             DeepFreezingRainyFog = 52,
             Windy = 60,
             Blizzard = 81,
+            [Description("Rain and Snow")]
             RainSnow = 82,
             Moonlight = 83,
+            [Description("Light Fog")]
             ClearLightFog = 99,
             Weather1001 = 1001,
             Weather1010 = 1010,
