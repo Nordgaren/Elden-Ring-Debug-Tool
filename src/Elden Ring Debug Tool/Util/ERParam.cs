@@ -8,6 +8,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Controls;
+using System.Windows.Media;
 using static SoulsFormats.PARAMDEF;
 
 namespace Elden_Ring_Debug_Tool
@@ -44,6 +45,8 @@ namespace Elden_Ring_Debug_Tool
             }
         }
 
+        List<Brush> BrushList = new List<Brush>() { new SolidColorBrush(Color.FromRgb(0xC3, 0xC3, 0xC3)), Brushes.LightGray};
+
         private void BuildCells()
         {
             Cells = new List<UserControl>();
@@ -66,6 +69,7 @@ namespace Elden_Ring_Debug_Tool
                     for (; i < ParamDef.Fields.Count - 1; i++)
                     {
                         var bitfield = new BitfieldControl(this, totalSize - size, bitOffset - 1, ParamDef.Fields[i].InternalName);
+                        bitfield.Background = BrushList[i % BrushList.Count];
                         Cells.Add(bitfield);
                         Field nextField = ParamDef.Fields[i + 1];
                         DefType nextType = nextField.DisplayType;
@@ -81,39 +85,48 @@ namespace Elden_Ring_Debug_Tool
                     {
                         case DefType.u8:
                             var u8 = new ParamUNumControl<byte>(this, totalSize - size, field.InternalName);
+                            u8.Background = BrushList[i % BrushList.Count];
                             Cells.Add(u8);
                             break;
                         case DefType.s8:
                             var s8 = new ParamNumControl<sbyte>(this, totalSize - size, field.InternalName);
+                            s8.Background = BrushList[i % BrushList.Count];
                             Cells.Add(s8);
                             break;
                         case DefType.u16:
                             var u16 = new ParamUNumControl<ushort>(this, totalSize - size, field.InternalName);
+                            u16.Background = BrushList[i % BrushList.Count];
                             Cells.Add(u16);
                             break;
                         case DefType.s16:
                             var s16 = new ParamNumControl<short>(this, totalSize - size, field.InternalName);
+                            s16.Background = BrushList[i % BrushList.Count];
                             Cells.Add(s16);
                             break;
                         case DefType.u32:
                             var u32 = new ParamUNumControl<uint>(this, totalSize - size, field.InternalName);
+                            u32.Background = BrushList[i % BrushList.Count];
                             Cells.Add(u32);
                             break;
                         case DefType.s32:
                             var s32 = new ParamNumControl<int>(this, totalSize - size, field.InternalName);
+                            s32.Background = BrushList[i % BrushList.Count];
                             Cells.Add(s32);
                             break;
                         case DefType.f32:
                             var f32 = new ParamDecControl<float>(this, totalSize - size, field.InternalName);
+                            f32.Background = BrushList[i % BrushList.Count];
                             Cells.Add(f32);
                             break;
                         case DefType.dummy8:
                             var dummy8 = new ParamNumControl<byte>(this, totalSize - size, field.InternalName);
+                            dummy8.Background = BrushList[i % BrushList.Count];
                             Cells.Add(dummy8);
                             break;
                         case DefType.fixstr:
                         case DefType.fixstrW:
                             var fixStr = new StringControl(this, totalSize - size, field.ArrayLength, field.InternalName);
+                            fixStr.Background = BrushList[i % BrushList.Count];
                             Cells.Add(fixStr);
                             break;
                         default:
