@@ -188,28 +188,48 @@
         </Grid>
 
         <Grid Grid.Column="1" Grid.RowSpan="2">
-            <StackPanel Margin="10,5,10,0" >
-                <Label Content="Status"/>
-                <Border BorderBrush="Gray" BorderThickness="1" Height="145" >
-                    <StackPanel>
-                        <StackPanel Orientation="Horizontal" Margin="25,0,0,0">
-                            <StackPanel Width="100">
-                                <Label Content="Stagger"/>
-                                <wpfTool:DecimalUpDown x:Name="nudStagger" Value="{Binding ElementName=DebugTarget, Path=Hook.TargetStagger}" Maximum="{Binding ElementName=DebugTarget, Path=Hook.TargetStaggerMax}" TextAlignment="Center" ClipValueToMinMax="True" IsEnabled="False"/>
+            <StackPanel>
+                <StackPanel Margin="10,5,10,0" >
+                    <Label Content="Status"/>
+                    <Border BorderBrush="Gray" BorderThickness="1" Height="145" >
+                        <StackPanel>
+                            <StackPanel Orientation="Horizontal" Margin="25,0,0,0">
+                                <StackPanel Width="100">
+                                    <Label Content="Stagger"/>
+                                    <wpfTool:DecimalUpDown x:Name="nudStagger" Value="{Binding ElementName=DebugTarget, Path=Hook.TargetStagger}" Maximum="{Binding ElementName=DebugTarget, Path=Hook.TargetStaggerMax}" TextAlignment="Center" ClipValueToMinMax="True" IsEnabled="False"/>
+                                </StackPanel>
+                                <Separator Width="20" Visibility="Hidden"/>
+                                <StackPanel Width="100">
+                                    <Label Content="Stagger Max" />
+                                    <wpfTool:DecimalUpDown Value="{Binding ElementName=DebugTarget, Path=Hook.TargetStaggerMax}" TextAlignment="Center" IsEnabled="False"/>
+                                </StackPanel>
                             </StackPanel>
-                            <Separator Width="20" Visibility="Hidden"/>
-                            <StackPanel Width="100">
-                                <Label Content="Stagger Max" />
-                                <wpfTool:DecimalUpDown Value="{Binding ElementName=DebugTarget, Path=Hook.TargetStaggerMax}" TextAlignment="Center" IsEnabled="False"/>
+                            <StackPanel Width="100" HorizontalAlignment="Left" Margin="23,0,0,0">
+                                <Label Content="Reset Timer"/>
+                                <wpfTool:DecimalUpDown x:Name="nudTimer" Value="{Binding ElementName=DebugTarget, Path=Hook.TargetStagger}" Maximum="{Binding ElementName=DebugTarget, Path=Hook.TargetStaggerMax}" TextAlignment="Center" ClipValueToMinMax="True" IsEnabled="False"/>
                             </StackPanel>
                         </StackPanel>
-                        <StackPanel Width="100" HorizontalAlignment="Left" Margin="23,0,0,0">
-                            <Label Content="Reset Timer"/>
-                            <wpfTool:DecimalUpDown x:Name="nudTimer" Value="{Binding ElementName=DebugTarget, Path=Hook.TargetStagger}" Maximum="{Binding ElementName=DebugTarget, Path=Hook.TargetStaggerMax}" TextAlignment="Center" ClipValueToMinMax="True" IsEnabled="False"/>
+                    </Border>
+                </StackPanel>
+                <StackPanel Margin="10,5,10,0" >
+                    <Label Content="Info"/>
+                    <Border BorderBrush="Gray" BorderThickness="1" Height="145" >
+                        <StackPanel>
+                            <StackPanel Orientation="Horizontal" Margin="25,0,0,0">
+                                    <Label Content="Pointer To Enemy"/>
+                                <TextBox Text="{Binding ElementName=DebugTarget, Path=Hook.TargetEnemyInsPtr, Mode=OneWay}" Width="200"/>
+                                <Separator Width="20" Visibility="Hidden"/>
+                            </StackPanel>
+                            <StackPanel Width="100" HorizontalAlignment="Left" Margin="23,0,0,0">
+                                <Label Content="Chr Type"/>
+                                <wpfTool:DecimalUpDown  Value="{Binding ElementName=DebugTarget, Path=Hook.TargetChrType}" TextAlignment="Center" ClipValueToMinMax="True" IsEnabled="True"/>
+                            </StackPanel>
                         </StackPanel>
-                    </StackPanel>
-                </Border>
+                    </Border>
+                </StackPanel>
+
             </StackPanel>
+
         </Grid>
 
 

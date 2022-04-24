@@ -157,6 +157,7 @@ namespace Elden_Ring_Debug_Tool
         {
             EnemyHandle = 0x8,
             EnemyArea = 0xC,
+            ChrType = 0x68,
             ModuleBase = 0x190
         }
 

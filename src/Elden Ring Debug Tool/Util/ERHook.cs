@@ -153,6 +153,8 @@ namespace Elden_Ring_Debug_Tool
             OnPropertyChanged(nameof(TargetStagger));
             OnPropertyChanged(nameof(TargetStaggerMax));
             OnPropertyChanged(nameof(TargetResetTime));
+            OnPropertyChanged(nameof(TargetChrType));
+            OnPropertyChanged(nameof(TargetEnemyInsPtr));
         }
 
         public ERParam EquipParamAccessory;
@@ -453,6 +455,7 @@ namespace Elden_Ring_Debug_Tool
                 TargetEnemyStagger = _targetEnemyIns != null ? CreateChildPointer(TargetEnemyModuleBase, (int)EROffsets.ModuleBase.StaggerData) : null;
             }
         }
+        public string TargetEnemyInsPtr => _targetEnemyIns?.Resolve().ToString("X2") ?? "";
         public int TargetEnemyHandle => PlayerIns?.ReadInt32((int)EROffsets.EnemyIns.EnemyHandle) ?? 0;
         public int TargetEnemyArea => PlayerIns?.ReadInt32((int)EROffsets.EnemyIns.EnemyArea) ?? 0;
         private PHPointer TargetEnemyModuleBase;
@@ -463,6 +466,11 @@ namespace Elden_Ring_Debug_Tool
         private int TargetHandle => _targetEnemyIns?.ReadInt32((int)EROffsets.EnemyIns.EnemyHandle) ?? 0;
         public string TargetModel => TargetEnemyData?.ReadString((int)EROffsets.EnemyData.Model, Encoding.Unicode, 0x10) ?? "No Target";
         public string TargetName => TargetEnemyData?.ReadString((int)EROffsets.EnemyData.Name, Encoding.Unicode, 0x28) ?? "No Target";
+        public int TargetChrType
+        {
+            get => _targetEnemyIns?.ReadInt32((int)EROffsets.EnemyIns.ChrType) ?? 0;
+            set => _targetEnemyIns?.WriteInt32((int)EROffsets.EnemyIns.ChrType, value);
+        }
         public int TargetHp
         {
             get => TargetEnemyData?.ReadInt32((int)EROffsets.EnemyData.Hp) ?? 0;
@@ -748,22 +756,22 @@ namespace Elden_Ring_Debug_Tool
         }
         public enum WeatherTypes
         {
-            Unk0 = 0,
+            Sunny = 0,
             Unk1 = 1,
             Unk10 = 10,
             Unk11 = 11,
-            Unk20 = 20,
-            Unk21 = 21,
-            Unk30 = 30,
-            Unk31 = 31,
-            Unk40 = 40,
-            Unk41 = 41,
-            Unk50 = 50,
-            Unk51 = 51,
-            Unk52 = 52,
-            Unk60 = 60,
-            Unk81 = 81,
-            Unk82 = 82,
+            Rain = 20,
+            HeavyRain = 21,
+            Downpour = 30,
+            Fog = 31,
+            LightSnow = 40,
+            Snow = 41,
+            FreezingFog = 50,
+            DeepFreezingFog = 51,
+            DeepFreezingRainyFog = 52,
+            Windy = 60,
+            Blizzard = 81,
+            RainSnow = 82,
             Unk83 = 83,
             Clear = 99
         }
