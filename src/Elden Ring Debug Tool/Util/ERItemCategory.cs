@@ -21,12 +21,12 @@ namespace Elden_Ring_Debug_Tool
 
         private static Regex CategoryEntryRx = new Regex(@"^(?<category>\S+) (?<show>\S+) (?<path>\S+) (?<name>.+)$", RegexOptions.CultureInvariant);
 
-        private ERItemCategory(string name, Category category, string itemList, bool showIDs)
+        private ERItemCategory(string name, Category category, string[] itemList, bool showIDs)
         {
             Name = name;
             Items = new List<ERItem>();
             Category = category;
-            foreach (string line in itemList.Split(new string[] { "\n" }, StringSplitOptions.RemoveEmptyEntries))
+            foreach (string line in itemList)
             {
                 if (Util.IsValidTxtResource(line)) //determine if line is a valid resource or not
                     AddItem(line.TrimComment(), category, showIDs);
@@ -55,21 +55,21 @@ namespace Elden_Ring_Debug_Tool
 
         public static void GetItemCategories()
         {
-            string result = Util.GetTxtResource("Resources/ERItemCategories.txt");
+            string[] result = Util.GetListResource("Resources/ERItemCategories.txt");
             All = new List<ERItemCategory>();
 
-            foreach (string line in result.Split(new string[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries))
+            foreach (string line in result)
             {
-                if (Util.IsValidTxtResource(line)) //determine if line is a valid resource or not
-                {
-                    Match itemEntry = CategoryEntryRx.Match(line.TrimComment());
-                    var name = itemEntry.Groups["name"].Value;
-                    var show = Convert.ToBoolean(itemEntry.Groups["show"].Value);
-                    var cat = itemEntry.Groups["category"].Value;
-                    var category = (Category)Convert.ToUInt32(cat, 16);
-                    var path = itemEntry.Groups["path"].Value;
-                    All.Add(new ERItemCategory(name , category ,Util.GetTxtResource($"Resources/{path}"), show));
-                }
+                if (!Util.IsValidTxtResource(line)) //determine if line is a valid resource or not
+                    continue;
+
+                Match itemEntry = CategoryEntryRx.Match(line.TrimComment());
+                var name = itemEntry.Groups["name"].Value;
+                var show = Convert.ToBoolean(itemEntry.Groups["show"].Value);
+                var cat = itemEntry.Groups["category"].Value;
+                var category = (Category)Convert.ToUInt32(cat, 16);
+                var path = itemEntry.Groups["path"].Value;
+                All.Add(new ERItemCategory(name, category, Util.GetListResource($"Resources/{path}"), show));
             };
         }
 

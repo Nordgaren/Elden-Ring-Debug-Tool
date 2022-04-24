@@ -318,16 +318,16 @@ namespace Elden_Ring_Debug_Tool
         private void BuildItemEventDictionary()
         {
             ItemEventDictionary = new Dictionary<int, int>();
-            var goodsEvents = Util.GetTxtResource("Resources/Events/GoodsEvents.txt");
-            foreach (var line in goodsEvents.Split(new string[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries))
+            var goodsEvents = Util.GetListResource("Resources/Events/GoodsEvents.txt");
+            foreach (var line in goodsEvents)
             {
-                if (Util.IsValidTxtResource(line))
-                {
-                    Match itemEntry = ItemEventEntryRx.Match(line.TrimComment());
-                    var eventID = Convert.ToInt32(itemEntry.Groups["event"].Value);
-                    var itemID = Convert.ToInt32(itemEntry.Groups["item"].Value);
-                    ItemEventDictionary.Add(itemID + (int)Category.Goods, eventID);
-                }
+                if (!Util.IsValidTxtResource(line))
+                    continue;
+
+                Match itemEntry = ItemEventEntryRx.Match(line.TrimComment());
+                var eventID = Convert.ToInt32(itemEntry.Groups["event"].Value);
+                var itemID = Convert.ToInt32(itemEntry.Groups["item"].Value);
+                ItemEventDictionary.Add(itemID + (int)Category.Goods, eventID);
             }
         }
         private void ReadParams()
@@ -461,8 +461,8 @@ namespace Elden_Ring_Debug_Tool
         private PHPointer TargetEnemyStagger;
 
         private int TargetHandle => _targetEnemyIns?.ReadInt32((int)EROffsets.EnemyIns.EnemyHandle) ?? 0;
-        //public string Model => TargetEnemy?.ReadString((int)EROffsets.EnemyData.Model, );
-        //public string Name => TargetEnemy?.ReadString((int)EROffsets.EnemyData.Name, );
+        public string TargetModel => TargetEnemyData?.ReadString((int)EROffsets.EnemyData.Model, Encoding.Unicode, 0x10) ?? "No Target";
+        public string TargetName => TargetEnemyData?.ReadString((int)EROffsets.EnemyData.Name, Encoding.Unicode, 0x28) ?? "No Target";
         public int TargetHp
         {
             get => TargetEnemyData?.ReadInt32((int)EROffsets.EnemyData.Hp) ?? 0;
@@ -602,6 +602,9 @@ namespace Elden_Ring_Debug_Tool
 
         public void UpdateLastEnemy()
         {
+            var lol = TargetEnemyIns?.Resolve();
+            var name = TargetName;
+            var model = TargetModel;
             if (CurrentTargetHandle == -1 || CurrentTargetHandle == TargetHandle)
                 return;
 

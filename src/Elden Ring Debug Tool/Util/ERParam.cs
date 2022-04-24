@@ -173,22 +173,22 @@ namespace Elden_Ring_Debug_Tool
         private void BuildNameDictionary()
         {
             NameDictionary = new Dictionary<int, string>();
-            string result = Util.GetTxtResource(@$"Resources/Params/Names/{Name}.txt");
-            if (string.IsNullOrWhiteSpace(result))
+            string[] result = Util.GetListResource(@$"Resources/Params/Names/{Name}.txt");
+            if (result.Length == 0)
                 return;
 
-            foreach (string line in result.Split(new string[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries))
+            foreach (string line in result)
             {
-                if (!line.Contains("//")) //determine if line is a valid resource or not
-                {
-                    Match itemEntry = ParamEntryRx.Match(line);
-                    var name = itemEntry.Groups["name"].Value.Replace("\r", "");
-                    var id = Convert.ToInt32(itemEntry.Groups["id"].Value);
-                    if (NameDictionary.ContainsKey(id))
-                        continue;
+                if (!Util.IsValidTxtResource(line)) //determine if line is a valid resource or not
+                    continue;
 
-                    NameDictionary.Add(id, name);
-                }
+                Match itemEntry = ParamEntryRx.Match(line);
+                var name = itemEntry.Groups["name"].Value;//.Replace("\r", "");
+                var id = Convert.ToInt32(itemEntry.Groups["id"].Value);
+                if (NameDictionary.ContainsKey(id))
+                    continue;
+
+                NameDictionary.Add(id, name);
             };
         }
         public override string ToString()
