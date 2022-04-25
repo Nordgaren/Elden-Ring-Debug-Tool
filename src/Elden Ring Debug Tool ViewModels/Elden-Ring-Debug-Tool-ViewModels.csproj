@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+	  <OutputType>Library</OutputType>
+	  <TargetFramework>net6.0-windows</TargetFramework>
+    <RootNamespace>Elden_Ring_Debug_Tool_ViewModels</RootNamespace>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Elden Ring Debug Tool\Elden-Ring-Debug-Tool.csproj" />
+  </ItemGroup>
+
+</Project>

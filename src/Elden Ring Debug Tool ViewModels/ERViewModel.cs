@@ -1,9 +1,9 @@
 ﻿using Elden_Ring_Debug_Tool;
 using System.Windows.Media;
 
-namespace Elden_Ring_Debug_Tool_WPF
+namespace Elden_Ring_Debug_Tool_ViewModels
 {
-    internal class ERViewModel : ObservableObject
+    public class ERViewModel : ObservableObject
     {
         public ERHook Hook { get; private set; }
 

@@ -6,12 +6,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:wpfTool="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:local="clr-namespace:Elden_Ring_Debug_Tool_WPF"
+        xmlns:viewModel="clr-namespace:Elden_Ring_Debug_Tool_ViewModels;assembly=Elden-Ring-Debug-Tool-ViewModels"
         mc:Ignorable="d"
         Title="Elden Ring Debug Tool" Height="600" Width="800" MinHeight="600" MinWidth="800" Icon="Icon.ico" Loaded="Window_Loaded" Closing="Window_Closing" Background="#777777" 
         WindowStyle="None" ResizeMode="CanResizeWithGrip" AllowsTransparency="True" BorderThickness="7" >
 
     <Window.DataContext>
-        <local:ERViewModel x:Name="ViewModel"/>
+        <viewModel:ERViewModel x:Name="ViewModel"/>
     </Window.DataContext>
     <Grid>
         <Grid.RowDefinitions>

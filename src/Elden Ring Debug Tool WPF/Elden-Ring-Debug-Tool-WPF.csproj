@@ -39,9 +39,12 @@
     <Copy SourceFiles="@(ResourceFiles)" DestinationFolder="$(PublishDir)Resources\%(RecursiveDir)" SkipUnchangedFiles="true" />
 	<Message Text="Moving Readme: $(PublishDir)" Importance="High" />
 	<Copy SourceFiles="$(SolutionDir)README.md" DestinationFiles="$(PublishDir)README.txt" />
+	  <Move SourceFiles="$(PublishDir)\$(AssemblyName).exe" DestinationFiles="$(PublishDir)\Elden Ring Debug Tool.exe" />
+	  <Message Text="Renamed executable file." Importance="high" />
 	<Exec Command="7za.exe a -t7z &quot;Elden Ring Debug Tool.7z&quot; .\bin\Publish\win-x64\* -xr!*.pdb" />
 	<Move SourceFiles="Elden Ring Debug Tool.7z" DestinationFiles="$(PublishDir)..\Elden Ring Debug Tool $(AssemblyVersion).7z" />
   </Target>
+
 
 	<ItemGroup>
 		<Content Update="keystone.dll">
@@ -68,7 +71,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Elden Ring Debug Tool\Elden Ring Debug Tool.csproj" />
+    <ProjectReference Include="..\Elden Ring Debug Tool ViewModels\Elden-Ring-Debug-Tool-ViewModels.csproj" />
+    <ProjectReference Include="..\Elden Ring Debug Tool\Elden-Ring-Debug-Tool.csproj" />
   </ItemGroup>
 
   <ItemGroup>
