@@ -20,7 +20,6 @@ namespace Elden_Ring_Debug_Tool_WPF
         {
 
             InitializeComponent();
-            Hook.OnSetup += Hook_OnSetup;
 
             if (App.Settings.ShowWarning)
             {
@@ -32,14 +31,12 @@ namespace Elden_Ring_Debug_Tool_WPF
                 };
                 warning.ShowDialog();
             }
+            Hook.OnSetup += Hook_OnSetup;
         }
 
         private void Hook_OnSetup(object? sender, PropertyHook.PHEventArgs e)
         {
-            Dispatcher.Invoke(() => 
-            {
-                DebugParam.HookParams();
-            });
+            DebugParam.HookParams();
         }
 
         ERHook Hook => ViewModel.Hook;
@@ -158,6 +155,7 @@ namespace Elden_Ring_Debug_Tool_WPF
 
         private void UpdateMainProperties()
         {
+            ViewModel.ParamViewModel.UpdateView();
             //Hook.UpdateMainProperties();
             ViewModel.UpdateMainProperties();
             CheckFocused();

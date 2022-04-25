@@ -12,7 +12,7 @@
         WindowStyle="None" ResizeMode="CanResizeWithGrip" AllowsTransparency="True" BorderThickness="7" >
 
     <Window.DataContext>
-        <viewModel:ERViewModel x:Name="ViewModel"/>
+        <viewModel:MainWindowViewModel x:Name="ViewModel"/>
     </Window.DataContext>
     <Grid>
         <Grid.RowDefinitions>
@@ -114,7 +114,7 @@
         <TabControl Background="LightGray" Grid.Row="1" Margin="0,0,0,0">
             <TabItem Header="Params">
                 <Grid Background="LightGray">
-                    <local:ParamViewerControl x:Name="DebugParam" Hook="{Binding Hook}"/>
+                    <local:ParamViewerControl x:Name="DebugParam" DataContext="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type TabControl}}, Path=DataContext.ParamViewModel}" />
                 </Grid>
             </TabItem>
             <TabItem Header="Inventory">

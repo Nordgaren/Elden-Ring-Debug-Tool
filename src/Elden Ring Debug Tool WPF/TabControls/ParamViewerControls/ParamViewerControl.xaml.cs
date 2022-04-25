@@ -1,7 +1,9 @@
 ﻿using Elden_Ring_Debug_Tool;
+using Elden_Ring_Debug_Tool_ViewModels;
 using SoulsFormats;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
 using System.Windows;
@@ -18,18 +20,24 @@ namespace Elden_Ring_Debug_Tool_WPF
     /// </summary>
     public partial class ParamViewerControl : DebugControl
     {
-        private static XmlSerializer XML = new XmlSerializer(typeof(string[]));
-        public List<ERParam> Params { get; private set; }
+        private ParamViewModel _paramViewModel;
         public ParamViewerControl()
         {
             InitializeComponent();
+            DataContextChanged += new DependencyPropertyChangedEventHandler(OnDataContextChanged);
+        }
+
+        void OnDataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            if (DataContext is ParamViewModel vm)
+            {
+                _paramViewModel = vm;
+            }
         }
 
         public void HookParams()
         {
-            Params = Hook.GetParams();
             BuildParamCells();
-            FilterParams();
         }
 
 
@@ -72,7 +80,7 @@ namespace Elden_Ring_Debug_Tool_WPF
 
         internal void BuildParamCells()
         {
-            foreach (var p in Params)
+            foreach (ERParam p in _paramViewModel.ParamCollectionView)
             {
                 BuildCells(p);
             }
@@ -175,24 +183,7 @@ namespace Elden_Ring_Debug_Tool_WPF
             //SearchBoxParams.Focus();
         }
 
-        private void FilterParams()
-        {
-            if (string.IsNullOrWhiteSpace(SearchBoxParams.Text))
-            {
-                ComboBoxParams.ItemsSource = Params;
-                ComboBoxParams.SelectedIndex = 0;
-            }
-            else
-            {
-                var filteredItems = new List<ERParam>();
-                foreach (var param in Params)
-                {
-                    if (param.Name.ToLower().Contains(SearchBoxParams.Text.ToLower()))
-                        filteredItems.Add(param);
-                }
-                ComboBoxParams.ItemsSource = filteredItems;
-            }
-        }
+        
         private void SearchBoxRow_TextChanged(object sender, TextChangedEventArgs e)
         {
             FilterRows();

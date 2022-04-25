@@ -1,9 +1,11 @@
 ﻿using Elden_Ring_Debug_Tool;
+using System.Windows;
 using System.Windows.Media;
+using System.Windows.Threading;
 
 namespace Elden_Ring_Debug_Tool_ViewModels
 {
-    public class ERViewModel : ObservableObject
+    public class MainWindowViewModel : ViewModelBase
     {
         public ERHook Hook { get; private set; }
 
@@ -14,11 +16,36 @@ namespace Elden_Ring_Debug_Tool_ViewModels
             set => ERHook.Reading = value;
         }
 
-        public ERViewModel()
+        public MainWindowViewModel()
         {
             Hook = new ERHook(5000, 15000, p => p.MainWindowTitle == "ELDEN RING™");
+            Hook.OnSetup += Hook_OnSetup;
+            _paramViewModel = new ParamViewModel(Hook);
             Hook.Start();
         }
+
+        private ParamViewModel _paramViewModel;
+        public ParamViewModel ParamViewModel
+        {
+            get
+            {
+                return _paramViewModel;
+            }
+            set
+            {
+                _paramViewModel = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private void Hook_OnSetup(object? sender, PropertyHook.PHEventArgs e)
+        {
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                _paramViewModel.AddParams();
+            });
+        }
+
         public Brush ForegroundID
         {
             get
@@ -46,30 +73,6 @@ namespace Elden_Ring_Debug_Tool_ViewModels
                 return Brushes.IndianRed;
             }
         }
-        //public string ContentOnline
-        //{
-        //    get
-        //    {
-        //        if (!Hook.Hooked)
-        //            return null;
-
-        //        if (Hook.Online)
-        //            return "Yes";
-        //        return "No";
-        //    }
-        //}
-        //public Brush ForegroundOnline
-        //{
-        //    get
-        //    {
-        //        if (!Hook.Hooked)
-        //            return null;
-
-        //        if (Hook.Online)
-        //            return Brushes.GreenYellow;
-        //        return Brushes.IndianRed;
-        //    }
-        //}
 
         public Brush ForegroundVersion
         {
