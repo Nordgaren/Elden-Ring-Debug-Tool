@@ -12,23 +12,13 @@ namespace Elden_Ring_Debug_Tool_ViewModels.Commands
     public class ResetParamCommand : CommandBase
     {
         private ParamViewerViewModel _paramViewerViewModel;
-        private ERHook _hook;
+        private ERHook _hook => _paramViewerViewModel.Hook;
 
-        public ResetParamCommand(ParamViewerViewModel paramViewerViewModel, ERHook hook)
+        public ResetParamCommand(ParamViewerViewModel paramViewerViewModel)
         {
             _paramViewerViewModel = paramViewerViewModel;
-            _hook = hook;
             _paramViewerViewModel.PropertyChanged += _paramViewerViewModel_PropertyChanged;
         }
-
-        private void _paramViewerViewModel_PropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
-        {
-            if (e.PropertyName == nameof(ParamViewerViewModel.Setup))
-            {
-                OnCanExecuteChanged();
-            }
-        }
-
 
         public override bool CanExecute(object? parameter)
         {
@@ -37,10 +27,19 @@ namespace Elden_Ring_Debug_Tool_ViewModels.Commands
 
         public override void Execute(object? parameter)
         {
-            var result = MessageBox.Show("Are you sure you want to reset the currently selected param to what it was when the debug tool loaded?", "Reset Param", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+            var result = MessageBox.Show("Are you sure you want to reset the currently selected param to what it was when the debug tool loaded?", 
+                "Reset Param", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+
             if (result == MessageBoxResult.Yes)
             {
                 _paramViewerViewModel.SelectedParam.Param.RestoreParam();
+            }
+        }
+        private void _paramViewerViewModel_PropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == nameof(ParamViewerViewModel.Setup))
+            {
+                OnCanExecuteChanged();
             }
         }
     }

@@ -4,7 +4,7 @@ using System.Globalization;
 using System.Reflection;
 using System.Windows.Data;
 
-namespace Elden_Ring_Debug_Tool_WPF
+namespace Elden_Ring_Debug_Tool_WPF.Converters
 {
     public class EnumDescriptionConverter : IValueConverter
     {
@@ -14,7 +14,11 @@ namespace Elden_Ring_Debug_Tool_WPF
             {
                 return string.Empty;
             }
-            FieldInfo fieldInfo = enumObj.GetType().GetField(enumObj.ToString());
+
+            FieldInfo? fieldInfo = enumObj.GetType().GetField(enumObj.ToString());
+
+            if (fieldInfo == null)
+                return enumObj.ToString();
 
             object[] attribArray = fieldInfo.GetCustomAttributes(false);
 
@@ -24,8 +28,10 @@ namespace Elden_Ring_Debug_Tool_WPF
             }
             else
             {
-                DescriptionAttribute attrib = attribArray[0] as DescriptionAttribute;
-                return attrib.Description;
+                if (attribArray[0] is DescriptionAttribute attrib)
+                    return attrib.Description;
+
+                return enumObj.ToString();
             }
         }
 

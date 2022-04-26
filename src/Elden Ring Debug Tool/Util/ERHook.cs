@@ -63,6 +63,7 @@ namespace Elden_Ring_Debug_Tool
             : base(refreshInterval, minLifetime, processSelector)
         {
             OnHooked += ERHook_OnHooked;
+            OnUnhooked += ERHook_OnUnhooked;
 
             GameDataMan = RegisterRelativeAOB(EROffsets.GameDataManAoB, EROffsets.RelativePtrAddressOffset, EROffsets.RelativePtrInstructionSize, 0x0);
             PlayerGameData = CreateChildPointer(GameDataMan, EROffsets.PlayerGameData);
@@ -89,6 +90,10 @@ namespace Elden_Ring_Debug_Tool
 
         }
 
+        private void ERHook_OnUnhooked(object? sender, PHEventArgs e)
+        {
+            Setup = false;
+        }
 
         private void ERHook_OnHooked(object? sender, PHEventArgs e)
         {

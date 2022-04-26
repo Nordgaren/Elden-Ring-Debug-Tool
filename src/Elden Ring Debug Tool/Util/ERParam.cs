@@ -23,6 +23,7 @@ namespace Elden_Ring_Debug_Tool
         public int Length { get; private set; }
         public byte[] Bytes { get; private set; }
         public List<Row> Rows { get; private set; }
+        public List<Field> Fields { get; private set; }
         public Row SelectedRow { get; set; }
         public List<UserControl> Cells { get; set; }
         private static Regex ParamEntryRx = new Regex(@"^\s*(?<id>\S+)\s+(?<name>.*)$", RegexOptions.CultureInvariant);
@@ -126,6 +127,27 @@ namespace Elden_Ring_Debug_Tool
             public override string ToString()
             {
                 return Name;
+            }
+        }
+
+        public class Field
+        {
+            private PARAMDEF.Field _paramdefField;
+            public DefType Type => _paramdefField.DisplayType;
+            public string InternalName => _paramdefField.InternalName;
+            public string DisplayName => _paramdefField.DisplayName;
+            public string Description => _paramdefField.Description;
+            public int Offset { get; }
+
+            public Field(PARAMDEF.Field field, int offset)
+            {
+                _paramdefField = field;
+                Offset = offset;
+            }
+
+            public override string ToString()
+            {
+                return InternalName;
             }
         }
 

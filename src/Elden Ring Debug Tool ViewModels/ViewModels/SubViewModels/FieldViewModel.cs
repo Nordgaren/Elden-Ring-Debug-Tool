@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Elden_Ring_Debug_Tool;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,16 +10,40 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels
 {
     public class FieldViewModel : ViewModelBase
     {
-        private Field _paramdefField;
-        public DefType Type => _paramdefField.DisplayType;
-        public string InternalName => _paramdefField.InternalName;
-        public string DisplayName => _paramdefField.DisplayName;
-        public string Description => _paramdefField.Description;
+        private ERParam.Field _paramdefField;
+        private string _type;
+        public string Type
+        {
+            get => _type;
+            set => SetField(ref _type, value);
+        }
+        private string _internalName;
+        public string InternalName
+        {
+            get => _internalName;
+            set => SetField(ref _internalName, value);
+        }
+        private string _displayName;
+        public string DisplayName
+        {
+            get => _displayName;
+            set => SetField(ref _displayName, value);
+        }
+        private string _description;
+        public string Description
+        {
+            get => _description;
+            set => SetField(ref _description, value);
+        }
         public int Offset { get; }
 
-        public FieldViewModel(Field field, int offset)
+        public FieldViewModel(ERParam.Field field, int offset)
         {
             _paramdefField = field;
+            Type = Enum.GetName(_paramdefField.Type) ?? "";
+            InternalName = _paramdefField.InternalName;
+            DisplayName = _paramdefField.DisplayName;
+            Description = _paramdefField.Description;
             Offset = offset;
         }
 

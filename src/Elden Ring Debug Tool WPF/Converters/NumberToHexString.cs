@@ -2,7 +2,7 @@
 using System.Globalization;
 using System.Windows.Data;
 
-namespace Elden_Ring_Debug_Tool_WPF
+namespace Elden_Ring_Debug_Tool_WPF.Converters
 {
     class NumberToHexString : IValueConverter
     {
@@ -14,7 +14,7 @@ namespace Elden_Ring_Debug_Tool_WPF
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return int.Parse(value.ToString());
+            return int.Parse(value?.ToString() ?? "0");
         }
     }
 }

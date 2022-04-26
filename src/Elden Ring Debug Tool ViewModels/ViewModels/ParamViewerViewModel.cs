@@ -15,14 +15,14 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
 {
     public class ParamViewerViewModel : ViewModelBase
     {
-        public string ParamSavePath => $@"{Directory.GetParent(_hook.Process.MainModule.FileName).Parent.FullName}\capture\param";
+        public string ParamSavePath => $@"{Directory.GetParent(Hook.Process.MainModule.FileName).Parent.FullName}\capture\param";
 
-        private ERHook _hook { get; set; }
+        internal ERHook Hook { get; set; }
         private readonly ObservableCollection<ERParamViewModel> _params;
         private ObservableCollection<ERParam.Row> _rows;
 
         public ICollectionView ParamCollectionView { get; }
-        public ICollectionView RowCollectionView => CollectionViewSource.GetDefaultView(_selectedParam?.Rows);
+        public ICollectionView RowCollectionView => CollectionViewSource.GetDefaultView(SelectedParam?.Rows);
         //public ICollectionView FieldCollectionView => CollectionViewSource.GetDefaultView(_selectedParam?.Rows);
 
         public ICommand SaveParamCommand { get; set; }
@@ -38,14 +38,14 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
 
         public void SetHook(ERHook hook)
         {
-            _hook = hook;
-            SaveParamCommand = new SaveParamCommand(this, _hook);
-            ResetParamCommand = new ResetParamCommand(this, _hook);
-            OpenParamCaptureFolderCommand = new OpenParamCaptureFolderCommand(this, _hook);
+            Hook = hook;
+            SaveParamCommand = new SaveParamCommand(this);
+            ResetParamCommand = new ResetParamCommand(this);
+            OpenParamCaptureFolderCommand = new OpenParamCaptureFolderCommand(this);
         }
         public void AddParams()
         {
-            foreach (var p in _hook.GetParams())
+            foreach (var p in Hook.GetParams())
             {
                 _params.Add(new ERParamViewModel(p));
             }
@@ -103,7 +103,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
 
         public void UpdateView()
         {
-            Setup = _hook.Setup;
+            Setup = Hook.Setup;
         }
 
         #region Search
@@ -177,7 +177,6 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
         }
 
         #endregion
-
 
     }
 }

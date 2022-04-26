@@ -62,7 +62,7 @@ namespace Elden_Ring_Debug_Tool_WPF
             int totalSize = 0;
             for (int i = 0; i < param.ParamDef.Fields.Count; i++)
             {
-                Field field = param.ParamDef.Fields[i];
+                PARAMDEF.Field field = param.ParamDef.Fields[i];
                 DefType type = field.DisplayType;
                 var size = ParamUtil.IsArrayType(type) ? ParamUtil.GetValueSize(type) * field.ArrayLength : ParamUtil.GetValueSize(type);
                 if (ParamUtil.IsArrayType(type))
@@ -80,7 +80,7 @@ namespace Elden_Ring_Debug_Tool_WPF
                         var bitfield = new BitfieldControl(param, totalSize - size, bitOffset - 1, param.ParamDef.Fields[i].InternalName);
                         bitfield.Background = BrushList[i % BrushList.Count];
                         param.Cells.Add(bitfield);
-                        Field nextField = param.ParamDef.Fields[i + 1];
+                        PARAMDEF.Field nextField = param.ParamDef.Fields[i + 1];
                         DefType nextType = nextField.DisplayType;
                         if (!ParamUtil.IsBitType(nextType) || nextField.BitSize == -1 || bitOffset + nextField.BitSize > bitLimit
                             || (nextType == DefType.dummy8 ? DefType.u8 : nextType) != bitType)

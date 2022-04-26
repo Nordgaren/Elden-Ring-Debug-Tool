@@ -14,10 +14,11 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels
         public int Length => Param.Length;
         public byte[] Bytes => Param.Bytes;
         public ObservableCollection<ERParam.Row> Rows { get; }
-        public ERParam.Row SelectedRow => Param.SelectedRow;
+        public ObservableCollection<FieldViewModel> Fields { get; }
+        //public ERParam.Row SelectedRow => Param.SelectedRow;
         //public List<UserControl> Cells { get; set; }
-        public Dictionary<int, string> NameDictionary => Param.NameDictionary;
-        public Dictionary<int, int> OffsetDict  => Param.OffsetDict;
+        //public Dictionary<int, string> NameDictionary => Param.NameDictionary;
+        //public Dictionary<int, int> OffsetDict  => Param.OffsetDict;
         public int RowLength => Param.RowLength;
 
         public ERParamViewModel(ERParam param)
