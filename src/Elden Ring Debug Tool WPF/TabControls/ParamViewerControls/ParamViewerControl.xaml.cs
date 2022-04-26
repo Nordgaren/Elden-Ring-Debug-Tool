@@ -1,5 +1,6 @@
 ﻿using Elden_Ring_Debug_Tool;
-using Elden_Ring_Debug_Tool_ViewModels;
+using Elden_Ring_Debug_Tool_ViewModels.ViewModels;
+using Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels;
 using SoulsFormats;
 using System;
 using System.Collections.Generic;
@@ -20,7 +21,8 @@ namespace Elden_Ring_Debug_Tool_WPF
     /// </summary>
     public partial class ParamViewerControl : DebugControl
     {
-        private ParamViewModel _paramViewModel;
+
+        private ParamViewerViewModel _paramViewModel;
         public ParamViewerControl()
         {
             InitializeComponent();
@@ -29,7 +31,7 @@ namespace Elden_Ring_Debug_Tool_WPF
 
         void OnDataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
-            if (DataContext is ParamViewModel vm)
+            if (DataContext is ParamViewerViewModel vm)
             {
                 _paramViewModel = vm;
             }
@@ -40,49 +42,17 @@ namespace Elden_Ring_Debug_Tool_WPF
             BuildParamCells();
         }
 
-
-        private void ComboBoxParams_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            FilterRows();
-        }
-
-        private void ListBoxRows_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            FilterFields();
-        }
-
         internal override void ReloadCtrl() 
         {
 
         }
-        private Row _selectedRow;
-        public Row SelectedRow
-        {
-            get
-            {
-                return _selectedRow;
-            }
-            set
-            {
-                _selectedRow = value;
-                var param = ((ERParam)ComboBoxParams.SelectedItem);
-                if (param == null)
-                    return;
-                param.SelectedRow = value;
-                foreach (ICellControl control in param.Cells)
-                {
-                    control.UpdateField();
-                }
-            }
-        }
-
         List<Brush> BrushList = new List<Brush>() { new SolidColorBrush(Color.FromRgb(0xC3, 0xC3, 0xC3)), Brushes.LightGray };
 
         internal void BuildParamCells()
         {
-            foreach (ERParam p in _paramViewModel.ParamCollectionView)
+            foreach (ERParamViewModel p in _paramViewModel.ParamCollectionView)
             {
-                BuildCells(p);
+                BuildCells(p.Param);
             }
         }
 
@@ -172,124 +142,6 @@ namespace Elden_Ring_Debug_Tool_WPF
                             throw new Exception($"No control for this type {type}");
                     }
                 }
-            }
-        }
-
-
-        private void SearchBoxParam_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            //ComboBoxParams.IsDropDownOpen = true;
-            //FilterParams();
-            //SearchBoxParams.Focus();
-        }
-
-        
-        private void SearchBoxRow_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            FilterRows();
-        }
-
-        private void FilterRows()
-        {
-            var selectedParam = ((ERParam)ComboBoxParams.SelectedItem);
-            if (selectedParam == null)
-                return;
-
-            if (string.IsNullOrWhiteSpace(SearchBoxRow.Text))
-            {
-                ListBoxRows.ItemsSource = selectedParam.Rows;
-                ListBoxRows.SelectedIndex = 0;
-            }
-            else
-            {
-                var filteredItems = new List<ERParam.Row>();
-                if (CbxIDSearch.IsChecked.Value)
-                {
-                    foreach (var param in selectedParam.Rows)
-                    {
-                        if (param.ID.ToString().Contains(SearchBoxRow.Text))
-                            filteredItems.Add(param);
-                    }
-                }
-                else
-                {
-                    foreach (var param in selectedParam.Rows)
-                    {
-                        if (param.Name.ToLower().Contains(SearchBoxRow.Text.ToLower()))
-                            filteredItems.Add(param);
-                    }
-                }
-                ListBoxRows.ItemsSource = filteredItems;
-            }
-        }
-
-        private void SearchBoxField_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            FilterFields();
-        }
-
-        private void FilterFields()
-        {
-            var selectedParam = ((ERParam)ComboBoxParams.SelectedItem);
-            if (selectedParam == null)
-                return;
-
-            var row = ((ERParam.Row)ListBoxRows.SelectedItem);
-            if (row == null)
-                return;
-
-            SelectedRow = row;
-
-            ParamPanel.Children.Clear();
-            if (string.IsNullOrWhiteSpace(SearchBoxField.Text))
-            {
-                foreach (var control in selectedParam.Cells)
-                {
-                    ParamPanel.Children.Add(control);
-                }
-            }
-            else
-            {
-                if (CbxValueSearch.IsChecked.Value)
-                {
-                    foreach (var control in selectedParam.Cells)
-                    {
-                        if (((ICellControl)control).Value.Contains(SearchBoxField.Text))
-                            ParamPanel.Children.Add(control);
-                    }
-                }
-                else
-                {
-                    foreach (var control in selectedParam.Cells)
-                    {
-                        if (((ICellControl)control).FieldName.ToLower().Contains(SearchBoxField.Text.ToLower()))
-                            ParamPanel.Children.Add(control);
-                    }
-                }
-                
-            }
-        }
-        private string ParamSavePath => $@"{Directory.GetParent(Hook.Process.MainModule.FileName).Parent.FullName}\capture\param";
-        private void SaveButton_Click(object sender, RoutedEventArgs e)
-        {
-            var param = (ERParam)ComboBoxParams.SelectedItem;
-            Hook.SaveParam(param);
-            MessageBox.Show($@"{param.Name} saved to:
-{ParamSavePath}\capture\param", "Param Saved", MessageBoxButton.OK, MessageBoxImage.Information);
-        }
-
-        private void OpenButton_Click(object sender, RoutedEventArgs e)
-        {
-            Process.Start("explorer.exe", ParamSavePath);
-        }
-
-        private void ReloadButton_Click(object sender, RoutedEventArgs e)
-        {
-            var result = MessageBox.Show("Are you sure you want to reset the currently selected param to what it was when the debug tool loaded?", "Reset Param", MessageBoxButton.YesNo, MessageBoxImage.Warning);
-            if (result == MessageBoxResult.Yes)
-            {
-                var selectedParam = ((ERParam)ComboBoxParams.SelectedItem);
-                selectedParam.RestoreParam();
             }
         }
     }

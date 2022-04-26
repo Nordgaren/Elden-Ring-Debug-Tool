@@ -80,7 +80,7 @@
                 <DataGridTextColumn Header="Category" Binding="{Binding Path=Category}"/>
                 <DataGridTextColumn Header="Quantity" Binding="{Binding Path=Quantity}"/>
                 <DataGridTextColumn Header="Display ID" Binding="{Binding Path=DisplayID}"/>
-                <DataGridTextColumn Header="GaItem Handle" Binding="{Binding Path=GaItemHandle, Converter={StaticResource ResourceKey=numberToHexString}}"/>
+                <DataGridTextColumn Header="GaItem Handle" Binding="{Binding Path=GaItemHandle, Converter={StaticResource ResourceKey=NumberToHexString}}"/>
             </DataGrid.Columns>
         </DataGrid>
 

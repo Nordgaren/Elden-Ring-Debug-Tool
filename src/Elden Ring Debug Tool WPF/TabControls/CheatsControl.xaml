@@ -24,7 +24,7 @@
                             <ComboBox Width="200" Margin="10,0,0,0" ItemsSource="{Binding ElementName=DebugCheats, Path=WeatherTypes}" SelectedValue="{Binding ElementName=DebugCheats, Path=Hook.SelectedWeather}" x:Name="WeatherBox">
                                 <ComboBox.ItemTemplate>
                                     <DataTemplate>
-                                        <TextBlock Text="{Binding Converter={StaticResource enumDescriptionConverter}}"></TextBlock>
+                                        <TextBlock Text="{Binding Converter={StaticResource EnumDescriptionConverter}}"></TextBlock>
                                     </DataTemplate>
                                 </ComboBox.ItemTemplate>
                             </ComboBox>

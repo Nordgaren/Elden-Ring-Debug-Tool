@@ -36,7 +36,11 @@ namespace Elden_Ring_Debug_Tool_WPF
 
         private void Hook_OnSetup(object? sender, PropertyHook.PHEventArgs e)
         {
-            DebugParam.HookParams();
+            Dispatcher.Invoke(() =>
+            {
+                DebugParam.HookParams();
+
+            });
         }
 
         ERHook Hook => ViewModel.Hook;
@@ -155,7 +159,7 @@ namespace Elden_Ring_Debug_Tool_WPF
 
         private void UpdateMainProperties()
         {
-            ViewModel.ParamViewModel.UpdateView();
+            ViewModel.ParamViewerViewModel.UpdateView();
             //Hook.UpdateMainProperties();
             ViewModel.UpdateMainProperties();
             CheckFocused();

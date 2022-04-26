@@ -8,10 +8,10 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Themes\ControlDictionary.xaml"/>
             </ResourceDictionary.MergedDictionaries>
-            <local:BoolToVisibilityConverter x:Key="boolToVisibilityConverter"/>
-            <local:NumberToHexString x:Key="numberToHexString"/>
-            <local:HalfNumberConverter x:Key="halfNumberConverter"/>
-            <local:EnumDescriptionConverter x:Key="enumDescriptionConverter"/>
+            <local:StringToVisibilityConverter x:Key="StringToVisibilityConverter"/>
+            <local:NumberToHexString x:Key="NumberToHexString"/>
+            <local:HalfNumberConverter x:Key="HalfNumberConverter"/>
+            <local:EnumDescriptionConverter x:Key="EnumDescriptionConverter"/>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

@@ -123,7 +123,6 @@ namespace Elden_Ring_Debug_Tool
                 DataOffset = offset;
             }
 
-
             public override string ToString()
             {
                 return Name;

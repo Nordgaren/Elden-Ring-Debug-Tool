@@ -3,7 +3,7 @@ using System.Windows;
 using System.Windows.Media;
 using System.Windows.Threading;
 
-namespace Elden_Ring_Debug_Tool_ViewModels
+namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
 {
     public class MainWindowViewModel : ViewModelBase
     {
@@ -20,20 +20,21 @@ namespace Elden_Ring_Debug_Tool_ViewModels
         {
             Hook = new ERHook(5000, 15000, p => p.MainWindowTitle == "ELDEN RING™");
             Hook.OnSetup += Hook_OnSetup;
-            _paramViewModel = new ParamViewModel(Hook);
+            _paramViewerViewModel = new ParamViewerViewModel();
+            _paramViewerViewModel.SetHook(Hook);
             Hook.Start();
         }
 
-        private ParamViewModel _paramViewModel;
-        public ParamViewModel ParamViewModel
+        private ParamViewerViewModel _paramViewerViewModel;
+        public ParamViewerViewModel ParamViewerViewModel
         {
             get
             {
-                return _paramViewModel;
+                return _paramViewerViewModel;
             }
             set
             {
-                _paramViewModel = value;
+                _paramViewerViewModel = value;
                 OnPropertyChanged();
             }
         }
@@ -42,7 +43,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels
         {
             Application.Current.Dispatcher.Invoke(() =>
             {
-                _paramViewModel.AddParams();
+                _paramViewerViewModel.AddParams();
             });
         }
 

@@ -4,11 +4,11 @@ using System.Windows.Data;
 
 namespace Elden_Ring_Debug_Tool_WPF
 {
-    public class BoolToVisibilityConverter : IValueConverter
+    public class StringToVisibilityConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return (bool)value ? System.Windows.Visibility.Visible : System.Windows.Visibility.Hidden;
+            return string.IsNullOrWhiteSpace((string)value) ? System.Windows.Visibility.Visible : System.Windows.Visibility.Hidden;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

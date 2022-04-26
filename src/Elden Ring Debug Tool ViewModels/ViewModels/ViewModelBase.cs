@@ -6,7 +6,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Elden_Ring_Debug_Tool_ViewModels
+namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
 {
     public class ViewModelBase : INotifyPropertyChanged
     {
