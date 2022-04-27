@@ -12,26 +12,22 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels
     {
         private BitField _bitField; 
         private int _bitPosition;
-        public override string StringValue => Value ? "1 True On" : "0 False Off";
-        public bool Value
+        public override string StringValue => (bool)Value ? "1 True On" : "0 False Off";
+        public override object Value
         {
             get => ((Param.Bytes[Offset] & (1 << _bitPosition)) != 0);
             set
             {
-                var paramValue = Param.Bytes[Offset];
-                if (value)
+                byte paramValue = Param.Bytes[Offset];
+                if ((bool)value)
                     paramValue |= (byte)(1 << _bitPosition);
                 else
                     paramValue &= (byte)~(1 << _bitPosition);
 
                 Param.Pointer.WriteByte(Offset, paramValue);
-                var bytes = BitConverter.GetBytes(paramValue);
+                byte[] bytes = BitConverter.GetBytes(paramValue);
                 Array.Copy(bytes, 0, Param.Bytes, Offset, bytes.Length);
             }
-        }
-        public override void Update()
-        {
-            OnPropertyChanged(nameof(Value));
         }
         public BitFieldViewModel(ParamViewerViewModel paramViewerViewModel, BitField bitField) : base(paramViewerViewModel, bitField)
         {

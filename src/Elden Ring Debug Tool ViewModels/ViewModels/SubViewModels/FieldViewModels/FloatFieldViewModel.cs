@@ -11,20 +11,18 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels
     public class FloatFieldViewModel : FieldViewModel
     {
         private FloatField _floatField;
-        public override string StringValue => Value.ToString();
-        public float Value
+        public override object Value
         {
-            get => BitConverter.ToSingle(Param.Bytes, Offset);
+            get => (decimal)BitConverter.ToSingle(Param.Bytes, Offset);
             set
             {
-                Param.Pointer.WriteSingle(Offset, value);
-                var bytes = BitConverter.GetBytes(value);
+                var lol = value;
+                float kek = Convert.ToSingle(value);
+                decimal kekD = (decimal)value;
+                Param.Pointer.WriteSingle(Offset, (float)value);
+                byte[] bytes = BitConverter.GetBytes((float)value);
                 Array.Copy(bytes, 0, Param.Bytes, Offset, bytes.Length);
             }
-        }
-        public override void Update()
-        {
-            OnPropertyChanged(nameof(Value));
         }
         public FloatFieldViewModel(ParamViewerViewModel paramViewerViewModel, FloatField floatField) : base(paramViewerViewModel, floatField)
         {

@@ -11,18 +11,16 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels
     public class NumericViewModel : FieldViewModel
     {
         private NumericField _numericField;
-        public override string StringValue => Value.ToString();
-        public ulong Value
+        public override object Value
         {
             get
             {
-                //var bytes = Param.Pointer.ReadBytes(Offset, GetSize());
                 return GetValue();
             }
             set
             {
-                var buffer = BitConverter.GetBytes(value);
-                var bytes = new byte[GetSize()];
+                byte[] buffer = BitConverter.GetBytes((ulong)value);
+                byte[] bytes = new byte[GetSize()];
                 Array.Copy(buffer, bytes, bytes.Length);
                 Param.Pointer.WriteBytes(Offset, bytes);
                 Array.Copy(bytes, 0, Param.Bytes, Offset, bytes.Length);
@@ -46,10 +44,6 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels
             }
         }
 
-        public override void Update()
-        {
-            OnPropertyChanged(nameof(Value));
-        }
         public NumericViewModel(ParamViewerViewModel paramViewerViewModel, NumericField numericFfield) : base(paramViewerViewModel, numericFfield)
         {
             _numericField = numericFfield;

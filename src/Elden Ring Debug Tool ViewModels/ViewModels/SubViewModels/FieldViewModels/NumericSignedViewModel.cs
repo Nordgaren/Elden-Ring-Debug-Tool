@@ -11,7 +11,6 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels
     public class NumericSignedViewModel : FieldViewModel
     {
         private NumericField _numericField;
-        public override string StringValue => Value.ToString();
 
         public override object Value
         {
@@ -21,8 +20,8 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels
             }
             set
             {
-                var buffer = BitConverter.GetBytes((long)value);
-                var bytes = new byte[GetSize()];
+                byte[] buffer = BitConverter.GetBytes((long)value);
+                byte[] bytes = new byte[GetSize()];
                 Array.Copy(buffer, bytes, bytes.Length);
                 Param.Pointer.WriteBytes(Offset, bytes);
                 Array.Copy(bytes, 0, Param.Bytes, Offset, bytes.Length);
@@ -43,11 +42,6 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels
                 default:
                     return 0;
             }
-        }
-
-        public override void Update()
-        {
-            OnPropertyChanged(nameof(Value));
         }
         public NumericSignedViewModel(ParamViewerViewModel paramViewerViewModel, NumericField numericField) : base(paramViewerViewModel, numericField)
         {

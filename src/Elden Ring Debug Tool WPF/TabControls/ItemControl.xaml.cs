@@ -157,12 +157,15 @@ namespace Elden_Ring_Debug_Tool_WPF
 
             if (item.ItemCategory == ERItem.Category.Weapons)
             {
-                var weapon = item as ERWeapon;
+                ERWeapon? weapon = item as ERWeapon;
+                if (weapon == null)
+                    return;
+
                 if (weapon.Infisible)
                     GetInfusions(weapon.DefaultGem);
 
                 if (!weapon.Unique)
-                    foreach (var gem in ERGem.All)
+                    foreach (ERGem gem in ERGem.All)
                         if (gem.WeaponTypes.Contains(weapon.Type))
                             cmbGems.Items.Add(gem);
 
@@ -189,7 +192,7 @@ namespace Elden_Ring_Debug_Tool_WPF
         {
             if (!Hook.Setup) return;
 
-            var gem = cmbGems.SelectedItem as ERGem;
+            ERGem gem = cmbGems.SelectedItem as ERGem;
             if (gem == null) return;
 
             cmbInfusion.Items.Clear();
@@ -198,7 +201,7 @@ namespace Elden_Ring_Debug_Tool_WPF
 
         private void GetInfusions(ERGem? gem)
         {
-            foreach (var infusion in gem.Infusions)
+            foreach (Infusion infusion in gem.Infusions)
                 cmbInfusion.Items.Add(infusion);
 
             cmbInfusion.SelectedIndex = 0;
@@ -206,7 +209,7 @@ namespace Elden_Ring_Debug_Tool_WPF
 
         public void UpdateCreateEnabled()
         {
-            ERItem item = lbxItems.SelectedItem as ERItem;
+            ERItem? item = lbxItems.SelectedItem as ERItem;
             if (item == null)
                 return;
 
@@ -215,8 +218,8 @@ namespace Elden_Ring_Debug_Tool_WPF
 
         internal void EnableStats(bool enable)
         {
-            ERItem item = lbxItems.SelectedItem as ERItem;
-            var canTrade = false;
+            ERItem? item = lbxItems.SelectedItem as ERItem;
+            bool canTrade = false;
             if (item != null)
                 canTrade = item.CanAquireFromOtherPlayers;
 
@@ -235,17 +238,17 @@ namespace Elden_Ring_Debug_Tool_WPF
             if (btnCreate.IsEnabled && lbxItems.SelectedItem != null)
             {
                 _ = ChangeColor(Brushes.DarkGray);
-                ERItem item = lbxItems.SelectedItem as ERItem;
+                ERItem? item = lbxItems.SelectedItem as ERItem;
                 if (item == null)
                     return;
 
-                var id = item.ID;
+                int id = item.ID;
 
-                var infusion = (Infusion)cmbInfusion.SelectedItem;
+                Infusion infusion = (Infusion)cmbInfusion.SelectedItem;
 
                 id += (int)item.ItemCategory;
 
-                var gem = cmbGems.SelectedItem as ERGem;
+                ERGem? gem = cmbGems.SelectedItem as ERGem;
 
                 if (item.EventID != -1)
                     Hook.SetEventFlag(item.EventID);

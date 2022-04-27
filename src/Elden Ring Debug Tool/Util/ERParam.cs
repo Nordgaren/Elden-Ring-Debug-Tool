@@ -47,23 +47,23 @@ namespace Elden_Ring_Debug_Tool
             OffsetDict = new Dictionary<int, int>();
             Length = Pointer.ReadInt32((int)EROffsets.Param.NameOffset);
             
-            var paramType = Pointer.ReadString(Length, Encoding.UTF8, (uint)Type.Length);
+            string paramType = Pointer.ReadString(Length, Encoding.UTF8, (uint)Type.Length);
             if (paramType != Type)
                 throw new InvalidOperationException($"Incorrect Param Pointer: {paramType} should be {Type}");
 
             Bytes = Pointer.ReadBytes(0x0, (uint)Length);
 
-            var tableLength = BitConverter.ToInt32(Bytes ,(int)EROffsets.Param.TableLength);
-            var Param = 0x40;
-            var ParamID = 0x0;
-            var ParamOffset = 0x8;
-            var nextParam = 0x18;
+            int tableLength = BitConverter.ToInt32(Bytes ,(int)EROffsets.Param.TableLength);
+            int Param = 0x40;
+            int ParamID = 0x0;
+            int ParamOffset = 0x8;
+            int nextParam = 0x18;
 
             while (Param < tableLength)
             {
-                var itemID = BitConverter.ToInt32(Bytes, Param + ParamID);
-                var itemParamOffset = BitConverter.ToInt32(Bytes, Param + ParamOffset);
-                var name = $"{itemID} - ";
+                int itemID = BitConverter.ToInt32(Bytes, Param + ParamID);
+                int itemParamOffset = BitConverter.ToInt32(Bytes, Param + ParamOffset);
+                string name = $"{itemID} - ";
                 if (NameDictionary.ContainsKey(itemID))
                     name += $"{NameDictionary[itemID]}";
 
@@ -88,8 +88,8 @@ namespace Elden_Ring_Debug_Tool
                     continue;
 
                 Match itemEntry = ParamEntryRx.Match(line);
-                var name = itemEntry.Groups["name"].Value;//.Replace("\r", "");
-                var id = Convert.ToInt32(itemEntry.Groups["id"].Value);
+                string name = itemEntry.Groups["name"].Value;//.Replace("\r", "");
+                int id = Convert.ToInt32(itemEntry.Groups["id"].Value);
                 if (NameDictionary.ContainsKey(id))
                     continue;
 
@@ -180,7 +180,7 @@ namespace Elden_Ring_Debug_Tool
                         Fields.Add(new FloatField(field, totalSize - size));
                         break;
                     case DefType.fixstr:
-                        Fields.Add(new FixedStr(field, totalSize - size, Encoding.Unicode));
+                        Fields.Add(new FixedStr(field, totalSize - size, Encoding.ASCII));
                         break;
                     case DefType.fixstrW:
                         Fields.Add(new FixedStr(field, totalSize - size, Encoding.Unicode));

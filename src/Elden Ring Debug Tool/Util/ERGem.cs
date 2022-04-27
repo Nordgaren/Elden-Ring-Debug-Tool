@@ -51,7 +51,7 @@ namespace Elden_Ring_Debug_Tool
         public override void SetupItem(ERParam param)
         {
             MaxQuantity = 1;
-            var bitfield = param.Bytes[param.OffsetDict[ID] + (int)EROffsets.EquipParamGem.IsDiscard];
+            byte bitfield = param.Bytes[param.OffsetDict[ID] + (int)EROffsets.EquipParamGem.IsDiscard];
             IsDrop = (bitfield & (1 << 1)) != 0;
             IsMultiplayerShare = (bitfield & (1 << 3)) == 0;
 

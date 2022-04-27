@@ -27,7 +27,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.Commands
 
         public override void Execute(object? parameter)
         {
-            var result = MessageBox.Show("Are you sure you want to reset the currently selected param to what it was when the debug tool loaded?", 
+            MessageBoxResult result = MessageBox.Show("Are you sure you want to reset the currently selected param to what it was when the debug tool loaded?", 
                 "Reset Param", MessageBoxButton.YesNo, MessageBoxImage.Warning);
 
             if (result == MessageBoxResult.Yes)

@@ -91,7 +91,7 @@ namespace Elden_Ring_Debug_Tool
         {
             MaxQuantity = param.Bytes[param.OffsetDict[ID] + (int)EROffsets.EquipParamWeapon.MaxArrowQuantity];
 
-            var bitfield = param.Bytes[param.OffsetDict[ID] + (int)EROffsets.EquipParamWeapon.DisableMultiDropShare];
+            byte bitfield = param.Bytes[param.OffsetDict[ID] + (int)EROffsets.EquipParamWeapon.DisableMultiDropShare];
             IsMultiplayerShare = (bitfield & (1 << 0)) == 0;
             IsDrop = (bitfield & (1 << 2)) != 0;
             Infisible = (bitfield & (1 << 7)) == 0;
@@ -108,7 +108,7 @@ namespace Elden_Ring_Debug_Tool
             TypeAmmo = (AmmoType)BitConverter.ToInt16(param.Bytes, param.OffsetDict[ID] + (int)EROffsets.EquipParamWeapon.WepType);
 
 
-            var val = 0;
+            int val = 0;
             for (int i = 1; i < 16 && val != -1; i++)
             {
                 val = BitConverter.ToInt32(param.Bytes, param.OffsetDict[ID] + (int)EROffsets.EquipParamWeapon.OriginEquipWep + (i * 4));

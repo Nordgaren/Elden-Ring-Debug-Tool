@@ -19,6 +19,7 @@ using System.Collections;
 using System.Text.RegularExpressions;
 using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
+using SoulsFormats;
 
 namespace Elden_Ring_Debug_Tool
 {
@@ -97,17 +98,17 @@ namespace Elden_Ring_Debug_Tool
 
         private void ERHook_OnHooked(object? sender, PHEventArgs e)
         {
-            //var gameDataMan = GameDataMan.Resolve();
-            //var paramss = SoloParamRepository.Resolve();
-            //var itemGive = ItemGive.Resolve();
-            //var mapItemMan = MapItemMan.Resolve();
-            //var eventFlagMan = EventFlagMan.Resolve();
-            //var setEventFlagFunction = SetEventFlagFunction.Resolve(); 
-            //var capParamCall = CapParamCall.Resolve();
-            //var worldChrMan = WorldChrMan.Resolve();
+            //IntPtr gameDataMan = GameDataMan.Resolve();
+            //IntPtr paramss = SoloParamRepository.Resolve();
+            //IntPtr itemGive = ItemGive.Resolve();
+            //IntPtr mapItemMan = MapItemMan.Resolve();
+            //IntPtr eventFlagMan = EventFlagMan.Resolve();
+            //IntPtr setEventFlagFunction = SetEventFlagFunction.Resolve();
+            //IntPtr capParamCall = CapParamCall.Resolve();
+            //IntPtr worldChrMan = WorldChrMan.Resolve();
 
-            //var disableOpenMap = DisableOpenMap.Resolve();
-            //var combatCloseMap = CombatCloseMap.Resolve();
+            //IntPtr disableOpenMap = DisableOpenMap.Resolve();
+            //IntPtr combatCloseMap = CombatCloseMap.Resolve();
 
 
             RaiseOnSetup();
@@ -119,7 +120,7 @@ namespace Elden_Ring_Debug_Tool
 
         private void LogABunchOfStuff()
         {
-            var list = new List<string>();
+            List<string> list = new List<string>();
             list.Add($"WorldChrMan {WorldChrMan.Resolve():X2}");
             list.Add($"ItemGib {ItemGive.Resolve():X2}");
             list.Add($"GameDataMan {GameDataMan.Resolve():X2}");
@@ -179,7 +180,7 @@ namespace Elden_Ring_Debug_Tool
             //Assemble once to get the size
             EncodedData? bytes = Engine.Assemble(asm, (ulong)Process.MainModule.BaseAddress);
             //DebugPrintArray(bytes.Buffer);
-            var error = Engine.GetLastKeystoneError();
+            KeystoneError error = Engine.GetLastKeystoneError();
             if (error != KeystoneError.KS_ERR_OK)
                 throw new Exception("Something went wrong during assembly. Code could not be assembled.");
 
@@ -202,7 +203,7 @@ namespace Elden_Ring_Debug_Tool
         private static void DebugPrintArray(byte[] bytes)
         {
             Debug.WriteLine("");
-            foreach (var b in bytes)
+            foreach (byte b in bytes)
             {
                 Debug.Write($"{b.ToString("X2")} ");
             }
@@ -214,14 +215,14 @@ namespace Elden_Ring_Debug_Tool
 
         public List<ERParam> GetParams()
         {
-            var paramList = new List<ERParam>();
-            var paramPath = $"{Util.ExeDir}/Resources/Params/";
+            List<ERParam> paramList = new List<ERParam>();
+            string paramPath = $"{Util.ExeDir}/Resources/Params/";
 
-            var pointerPath = $"{paramPath}/Pointers/";
-            var paramPointers = Directory.GetFiles(pointerPath, "*.txt");
-            foreach (var path in paramPointers)
+            string pointerPath = $"{paramPath}/Pointers/";
+            string[] paramPointers = Directory.GetFiles(pointerPath, "*.txt");
+            foreach (string path in paramPointers)
             {
-                var pointers = File.ReadAllLines(path);
+                string[] pointers = File.ReadAllLines(path);
                 AddParam(paramList, paramPath, path, pointers);
             }
 
@@ -230,27 +231,27 @@ namespace Elden_Ring_Debug_Tool
 
         public void AddParam(List<ERParam> paramList, string paramPath, string path, string[] pointers)
         {
-            foreach (var entry in pointers)
+            foreach (string entry in pointers)
             {
                 if (!Util.IsValidTxtResource(entry))
                     continue;
 
-                var info = entry.TrimComment().Split(':');
-                var name = info[1];
-                var defName = info.Length > 2 ? info[2] : name;
+                string[] info = entry.TrimComment().Split(':');
+                string name = info[1];
+                string defName = info.Length > 2 ? info[2] : name;
 
-                var defPath = $"{paramPath}/Defs/{defName}.xml";
+                string defPath = $"{paramPath}/Defs/{defName}.xml";
                 if (!File.Exists(defPath))
                     throw new Exception($"The PARAMDEF {defName} does not exist for {entry}. If the PARAMDEF is named differently than the param name, add another \":\" and append the PARAMDEF name" +
                         $"Example: 3130:WwiseValueToStrParam_BgmBossChrIdConv:WwiseValueToStrConvertParamFormat");
 
-                var offset = int.Parse(info[0], System.Globalization.NumberStyles.HexNumber);
+                int offset = int.Parse(info[0], System.Globalization.NumberStyles.HexNumber);
 
-                var pointer = GetParamPointer(offset);
+                PHPointer pointer = GetParamPointer(offset);
 
-                var paramDef = XmlDeserialize(defPath);
+                PARAMDEF paramDef = XmlDeserialize(defPath);
 
-                var param = new ERParam(pointer, offset, paramDef, name);
+                ERParam param = new ERParam(pointer, offset, paramDef, name);
 
                 SetParamPtrs(param);
 
@@ -292,8 +293,8 @@ namespace Elden_Ring_Debug_Tool
         }
         public void SaveParam(ERParam param)
         {
-            var asmString = Util.GetEmbededResource("Assembly.SaveParams.asm");
-            var asm = string.Format(asmString, SoloParamRepository.Resolve(), param.Offset, CapParamCall.Resolve());
+            string asmString = Util.GetEmbededResource("Assembly.SaveParams.asm");
+            string asm = string.Format(asmString, SoloParamRepository.Resolve(), param.Offset, CapParamCall.Resolve());
             AsmExecute(asm);
         }
         public void RestoreParams()
@@ -310,11 +311,11 @@ namespace Elden_Ring_Debug_Tool
 
         public void SetEventFlag(int flag)
         {
-            var idPointer = GetPrefferedIntPtr(sizeof(int));
+            IntPtr idPointer = GetPrefferedIntPtr(sizeof(int));
             Kernel32.WriteInt32(Handle, idPointer, flag);
 
-            var asmString = Util.GetEmbededResource("Assembly.SetEventFlag.asm");
-            var asm = string.Format(asmString, EventFlagMan.Resolve(), idPointer.ToString("X2"), SetEventFlagFunction.Resolve());
+            string asmString = Util.GetEmbededResource("Assembly.SetEventFlag.asm");
+            string asm = string.Format(asmString, EventFlagMan.Resolve(), idPointer.ToString("X2"), SetEventFlagFunction.Resolve());
             AsmExecute(asm);
             Free(idPointer);
         }
@@ -328,36 +329,36 @@ namespace Elden_Ring_Debug_Tool
         private void BuildItemEventDictionary()
         {
             ItemEventDictionary = new Dictionary<int, int>();
-            var goodsEvents = Util.GetListResource("Resources/Events/GoodsEvents.txt");
-            foreach (var line in goodsEvents)
+            string[] goodsEvents = Util.GetListResource("Resources/Events/GoodsEvents.txt");
+            foreach (string line in goodsEvents)
             {
                 if (!Util.IsValidTxtResource(line))
                     continue;
 
                 Match itemEntry = ItemEventEntryRx.Match(line.TrimComment());
-                var eventID = Convert.ToInt32(itemEntry.Groups["event"].Value);
-                var itemID = Convert.ToInt32(itemEntry.Groups["item"].Value);
+                int eventID = Convert.ToInt32(itemEntry.Groups["event"].Value);
+                int itemID = Convert.ToInt32(itemEntry.Groups["item"].Value);
                 ItemEventDictionary.Add(itemID + (int)Category.Goods, eventID);
             }
         }
         private void ReadParams()
         {
-            foreach (var category in ERItemCategory.All)
+            foreach (ERItemCategory category in ERItemCategory.All)
             {
-                foreach (var item in category.Items)
+                foreach (ERItem item in category.Items)
                 {
                     SetupItem(item);
-                    var fullID = item.ID + (int)Category.Goods;
+                    int fullID = item.ID + (int)Category.Goods;
                     item.EventID = ItemEventDictionary.ContainsKey(fullID) ? ItemEventDictionary[fullID] : -1;
                 }
             }
 
-            foreach (var category in ERItemCategory.All)
+            foreach (ERItemCategory category in ERItemCategory.All)
             {
                 if (category.Category == Category.Weapons)
                     foreach (ERWeapon weapon in category.Items)
                     {
-                        var gem = ERGem.All.FirstOrDefault(gem => gem.SwordArtID == weapon.SwordArtId);
+                        ERGem gem = ERGem.All.FirstOrDefault(gem => gem.SwordArtID == weapon.SwordArtId);
                         if (gem != null)
                             weapon.DefaultGem = gem;
                     }
@@ -390,10 +391,10 @@ namespace Elden_Ring_Debug_Tool
 
         public void GetItem(int id, int quantity, int infusion, int upgrade, int gem)
         {
-            var itemInfobytes = new byte[0x34];
-            var itemInfo = GetPrefferedIntPtr(0x34);
+            byte[]   itemInfobytes = new byte[0x34];
+            IntPtr itemInfo = GetPrefferedIntPtr(0x34);
 
-            var bytes = BitConverter.GetBytes(0x1);
+            byte[] bytes = BitConverter.GetBytes(0x1);
             Array.Copy(bytes, 0x0, itemInfobytes, (int)EROffsets.ItemGiveStruct.Count, bytes.Length);
 
             bytes = BitConverter.GetBytes(id + infusion + upgrade);
@@ -407,8 +408,8 @@ namespace Elden_Ring_Debug_Tool
 
             Kernel32.WriteBytes(Handle, itemInfo, itemInfobytes);
 
-            var asmString = Util.GetEmbededResource("Assembly.ItemGive.asm");
-            var asm = string.Format(asmString, itemInfo.ToString("X2"), MapItemMan.Resolve(), ItemGive.Resolve() + EROffsets.ItemGiveOffset);
+            string asmString = Util.GetEmbededResource("Assembly.ItemGive.asm");
+            string asm = string.Format(asmString, itemInfo.ToString("X2"), MapItemMan.Resolve(), ItemGive.Resolve() + EROffsets.ItemGiveOffset);
             AsmExecute(asm);
             Free(itemInfo);
         }
@@ -429,11 +430,11 @@ namespace Elden_Ring_Debug_Tool
             Inventory = new List<ERInventoryEntry>();
             LastInventoryCount = InventoryCount;
 
-            var bytes = PlayerInventory.ReadBytes(0x0, (uint)InventoryCount * EROffsets.PlayerInventoryEntrySize);
+            byte[] bytes = PlayerInventory.ReadBytes(0x0, (uint)InventoryCount * EROffsets.PlayerInventoryEntrySize);
 
             for (int i = 0; i < InventoryCount; i++)
             {
-                var entry = new byte[EROffsets.PlayerInventoryEntrySize];
+                byte[] entry = new byte[EROffsets.PlayerInventoryEntrySize];
                 Array.Copy(bytes, i * EROffsets.PlayerInventoryEntrySize, entry, 0, entry.Length);
                 Inventory.Add(new ERInventoryEntry(entry, this));
             }
@@ -639,9 +640,6 @@ namespace Elden_Ring_Debug_Tool
 
         public void UpdateLastEnemy()
         {
-            var lol = TargetEnemyIns?.Resolve();
-            var name = TargetName;
-            var model = TargetModel;
             if (CurrentTargetHandle == -1 || CurrentTargetHandle == TargetHandle)
                 return;
 
@@ -651,20 +649,20 @@ namespace Elden_Ring_Debug_Tool
         public void GetTarget()
         {
             TargetEnemyIns = null;
-            var worldBlockChr = CreateBasePointer(WorldChrMan.Resolve() + (int)EROffsets.WorldChrMan.WorldBlockChr);
-            var targetHandle = CurrentTargetHandle; //Only read from memory once
-            var targetArea = CurrentTargetArea;
+            PHPointer worldBlockChr = CreateBasePointer(WorldChrMan.Resolve() + (int)EROffsets.WorldChrMan.WorldBlockChr);
+            int targetHandle = CurrentTargetHandle; //Only read from memory once
+            int targetArea = CurrentTargetArea;
 
             while (true)
             {
-                var numChrs = worldBlockChr.ReadInt32((int)EROffsets.WorldBlockChr.NumChr);
-                var chrSet = CreateChildPointer(worldBlockChr, (int)EROffsets.WorldBlockChr.ChrSet);
+                int numChrs = worldBlockChr.ReadInt32((int)EROffsets.WorldBlockChr.NumChr);
+                PHPointer chrSet = CreateChildPointer(worldBlockChr, (int)EROffsets.WorldBlockChr.ChrSet);
 
                 for (int j = 0; j <= numChrs; j++)
                 {
-                    var enemyIns = CreateChildPointer(chrSet, (j * (int)EROffsets.ChrSet.EnemyIns));
-                    var enemyHandle = enemyIns.ReadInt32((int)EROffsets.EnemyIns.EnemyHandle);
-                    var enemyArea = enemyIns.ReadInt32((int)EROffsets.EnemyIns.EnemyArea);
+                    PHPointer enemyIns = CreateChildPointer(chrSet, (j * (int)EROffsets.ChrSet.EnemyIns));
+                    int enemyHandle = enemyIns.ReadInt32((int)EROffsets.EnemyIns.EnemyHandle);
+                    int enemyArea = enemyIns.ReadInt32((int)EROffsets.EnemyIns.EnemyArea);
 
                     if (targetHandle == enemyHandle && targetArea == enemyArea)
                         TargetEnemyIns = enemyIns;
@@ -673,7 +671,7 @@ namespace Elden_Ring_Debug_Tool
                         return;
                 }
 
-                var assertVal = worldBlockChr.ReadInt64(0x80);
+                long assertVal = worldBlockChr.ReadInt64(0x80);
                 if (assertVal == -1)
                     worldBlockChr = CreateBasePointer(worldBlockChr.Resolve() + 0x160);
                 else
@@ -692,21 +690,21 @@ namespace Elden_Ring_Debug_Tool
         public void GetTargetBackup()
         {
             TargetEnemyIns = null;
-            var count = WorldChrMan.ReadInt32((int)EROffsets.WorldChrMan.NumWorldBlockChr);
-            var worldBlockChr = CreateBasePointer(WorldChrMan.Resolve() + (int)EROffsets.WorldChrMan.WorldBlockChr);
-            var targetHandle = CurrentTargetHandle; //Only read from memory once
-            var targetArea = CurrentTargetArea;
+            int count = WorldChrMan.ReadInt32((int)EROffsets.WorldChrMan.NumWorldBlockChr);
+            PHPointer worldBlockChr = CreateBasePointer(WorldChrMan.Resolve() + (int)EROffsets.WorldChrMan.WorldBlockChr);
+            int targetHandle = CurrentTargetHandle; //Only read from memory once
+            int targetArea = CurrentTargetArea;
 
             for (int i = 0; i <= count; i++)
             {
-                var numChrs = worldBlockChr.ReadInt32((int)EROffsets.WorldBlockChr.NumChr + (i * 0x160));
-                var chrSet = CreateChildPointer(worldBlockChr, (int)EROffsets.WorldBlockChr.ChrSet + (i * 0x160));
+                int numChrs = worldBlockChr.ReadInt32((int)EROffsets.WorldBlockChr.NumChr + (i * 0x160));
+                PHPointer chrSet = CreateChildPointer(worldBlockChr, (int)EROffsets.WorldBlockChr.ChrSet + (i * 0x160));
 
                 for (int j = 0; j <= numChrs; j++)
                 {
-                    var enemyIns = CreateBasePointer(chrSet.Resolve() + (j * (int)EROffsets.ChrSet.EnemyIns));
-                    var enemyHandle = enemyIns.ReadInt32((int)EROffsets.EnemyIns.EnemyHandle);
-                    var enemyArea = enemyIns.ReadInt32((int)EROffsets.EnemyIns.EnemyArea);
+                    PHPointer enemyIns = CreateBasePointer(chrSet.Resolve() + (j * (int)EROffsets.ChrSet.EnemyIns));
+                    int enemyHandle = enemyIns.ReadInt32((int)EROffsets.EnemyIns.EnemyHandle);
+                    int enemyArea = enemyIns.ReadInt32((int)EROffsets.EnemyIns.EnemyArea);
 
                     if (targetHandle == enemyHandle && targetArea == enemyArea)
                         TargetEnemyIns = enemyIns;
@@ -728,13 +726,13 @@ namespace Elden_Ring_Debug_Tool
 
         public void TryGetEnemy(int targetHandle, int targetArea, int offset)
         {
-            var chrSet1 = CreateChildPointer(WorldChrMan, offset);
-            var numEntries1 = chrSet1.ReadInt32((int)EROffsets.ChrSet.NumEntries);
+            PHPointer chrSet1 = CreateChildPointer(WorldChrMan, offset);
+            int numEntries1 = chrSet1.ReadInt32((int)EROffsets.ChrSet.NumEntries);
 
             for (int i = 0; i <= numEntries1; i++)
             {
-                var enemyHandle = chrSet1.ReadInt32(0x78 + (i * 0x10));
-                var enemyArea = chrSet1.ReadInt32(0x78 + 4 + (i * 0x10));
+                int enemyHandle = chrSet1.ReadInt32(0x78 + (i * 0x10));
+                int enemyArea = chrSet1.ReadInt32(0x78 + 4 + (i * 0x10));
                 if (targetHandle == enemyHandle && targetArea == enemyArea)
                     TargetEnemyIns = CreateChildPointer(chrSet1, 0x78 + 8 + (i * 0x10));
 
@@ -768,7 +766,7 @@ namespace Elden_Ring_Debug_Tool
         private void EnableMapInCombat()
         {
             OriginalCombatCloseMap = CombatCloseMap.ReadBytes(0x0, 0x5);
-            var assembly = new byte[] { 0x48, 0x31, 0xC0, 0x90, 0x90 };
+            byte[]? assembly = new byte[] { 0x48, 0x31, 0xC0, 0x90, 0x90 };
 
             DisableOpenMap.WriteByte(0x0, 0xEB); //Write Jump
             CombatCloseMap.WriteBytes(0x0, assembly);

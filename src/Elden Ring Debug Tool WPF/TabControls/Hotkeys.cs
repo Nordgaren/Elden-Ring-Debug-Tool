@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Windows;
+using System.Windows.Input;
 
 namespace Elden_Ring_Debug_Tool_WPF
 {
@@ -40,7 +41,7 @@ namespace Elden_Ring_Debug_Tool_WPF
 
         private void RegisterHotkeys()
         {
-            foreach (var hotkey in Hotkeys)
+            foreach (DebugHotkey hotkey in Hotkeys)
             {
                 hotkey.RegisterHotkey();
             }
@@ -49,9 +50,9 @@ namespace Elden_Ring_Debug_Tool_WPF
 
         private void UnregisterHotkeys()
         {
-            foreach (var hotkey in Hotkeys)
+            foreach (DebugHotkey hotkey in Hotkeys)
             {
-                var key = hotkey.Key;
+                Key key = hotkey.Key;
                 hotkey.UnregisterHotkey();
             }
             HotkeysSet = false;

@@ -18,7 +18,7 @@ namespace Elden_Ring_Debug_Tool_WPF
         private Brush DefaultColor;
 
         public Key Key;
-        public HotKey HotKey;
+        public HotKey? HotKey;
 
         public DebugHotkey(string settingsName, TextBox setTextBox, TabItem setTabPage, Action<HotKey> setAction, System.Windows.Window window)
         {
@@ -69,11 +69,11 @@ namespace Elden_Ring_Debug_Tool_WPF
 
             UnregisterHotkey();
 
-            var mWindow = Window as MainWindow;
-            var existingKey = mWindow.Hotkeys.Find(hKey => hKey.Key == Key && hKey.SettingsName != SettingsName && hKey.Key != Key.Escape);
+            MainWindow? mWindow = Window as MainWindow;
+            DebugHotkey? existingKey = mWindow?.Hotkeys.Find(hKey => hKey.Key == Key && hKey.SettingsName != SettingsName && hKey.Key != Key.Escape);
             if (existingKey != null)
             {
-                var args = new KeyEventArgs(e.KeyboardDevice, e.InputSource, e.Timestamp, Key.Escape);
+                KeyEventArgs? args = new KeyEventArgs(e.KeyboardDevice, e.InputSource, e.Timestamp, Key.Escape);
                 args.RoutedEvent = e.RoutedEvent;
                 existingKey.HotkeyTextBox_KeyUp(existingKey.HotkeyTextBox, args); 
             }

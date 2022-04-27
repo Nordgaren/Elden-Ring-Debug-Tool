@@ -23,7 +23,7 @@ namespace Elden_Ring_Debug_Tool_WPF
 
             if (App.Settings.ShowWarning)
             {
-                var warning = new DebugWarning()
+                DebugWarning warning = new DebugWarning()
                 {
                     Title = "Online Warning",
                     Width = 350,
@@ -42,7 +42,7 @@ namespace Elden_Ring_Debug_Tool_WPF
 
             Assembly assembly = Assembly.GetExecutingAssembly();
             FileVersionInfo fileVersionInfo = FileVersionInfo.GetVersionInfo(assembly.Location);
-            var version = fileVersionInfo.FileVersion;
+            string version = fileVersionInfo.FileVersion;
 
             lblWindowName.Content = $"Elden Ring Debug Tool {version}";
             EnableAllCtrls(false);

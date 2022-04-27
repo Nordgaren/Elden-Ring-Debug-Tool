@@ -19,7 +19,6 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
 
         internal ERHook Hook { get; set; }
         private readonly ObservableCollection<ERParamViewModel> _params;
-        private ObservableCollection<ERParam.Row> _rows;
 
         public ICollectionView ParamCollectionView { get; }
         public ICollectionView RowCollectionView => CollectionViewSource.GetDefaultView(SelectedParam?.Rows);
@@ -33,26 +32,24 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
         {
             _params = new ObservableCollection<ERParamViewModel>(new List<ERParamViewModel>());
             ParamCollectionView = CollectionViewSource.GetDefaultView(_params);
-            _rows = new ObservableCollection<ERParam.Row>(new List<ERParam.Row>());
+            SaveParamCommand = new SaveParamCommand(this);
+            ResetParamCommand = new ResetParamCommand(this);
+            OpenParamCaptureFolderCommand = new OpenParamCaptureFolderCommand(this);
         }
 
         public void SetHook(ERHook hook)
         {
             Hook = hook;
-            SaveParamCommand = new SaveParamCommand(this);
-            ResetParamCommand = new ResetParamCommand(this);
-            OpenParamCaptureFolderCommand = new OpenParamCaptureFolderCommand(this);
+
         }
         public void AddParams()
         {
-            foreach (var p in Hook.GetParams())
+            foreach (ERParam p in Hook.GetParams())
             {
                 _params.Add(new ERParamViewModel(this, p));
             }
             ParamCollectionView.Filter = FilterParams;
             SelectedParam = _params[0];
-            RowCollectionView.Filter = FilterRows;
-            FieldCollectionView.Filter = FilterFields;
         }
 
         private bool _setup;
@@ -83,6 +80,8 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
                 {
                     OnPropertyChanged(nameof(RowCollectionView));
                     RowCollectionView.Filter = FilterRows;
+                    OnPropertyChanged(nameof(FieldCollectionView));
+                    FieldCollectionView.Filter = FilterFields;
                 }
             }
         }
@@ -96,11 +95,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
             }
             set
             {
-                if (SetField(ref _selectedRow, value))
-                {
-                    OnPropertyChanged(nameof(FieldCollectionView));
-                    FieldCollectionView.Filter = FilterFields;
-                }
+                SetField(ref _selectedRow, value);
             }
         }
 

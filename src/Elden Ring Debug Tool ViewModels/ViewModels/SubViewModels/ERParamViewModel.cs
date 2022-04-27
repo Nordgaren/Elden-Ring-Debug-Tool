@@ -25,13 +25,13 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels
             Param = param;
             Rows = new ObservableCollection<RowViewModel>();
 
-            foreach (var row in param.Rows)
+            foreach (Row row in param.Rows)
             {
                 Rows.Add(new RowViewModel(row));
             }
 
             Fields = new ObservableCollection<FieldViewModel>();
-            foreach (var field in param.Fields)
+            foreach (Field field in param.Fields)
             {
                 Fields.Add(GetFieldViewModel(field));
             }

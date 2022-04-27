@@ -46,7 +46,7 @@
                             </Grid.ColumnDefinitions>
 
                             <Label Content="{Binding InternalName}" HorizontalAlignment="Left" FontWeight="DemiBold"/>
-                            <wpfTool:ULongUpDown Value="{Binding Value}" Width="100" FontWeight="DemiBold" Grid.Column="1" HorizontalAlignment="Right" />
+                            <wpfTool:ULongUpDown Value="{Binding Value}" UpdateValueOnEnterKey="True" Width="100" FontWeight="DemiBold" Grid.Column="1" HorizontalAlignment="Right" />
                         </Grid>
                         <DataTemplate.Triggers>
                             <Trigger Property="ItemsControl.AlternationIndex" Value="0">
@@ -78,7 +78,7 @@
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
                             <Label Content="{Binding InternalName}"  HorizontalAlignment="Left" Grid.ColumnSpan="2" FontWeight="DemiBold"/>
-                            <wpfTool:DecimalUpDown Value="{Binding Value}" FormatString="F2" Width="100"  FontWeight="DemiBold"  Grid.Column="1" HorizontalAlignment="Right" />
+                            <wpfTool:DecimalUpDown Value="{Binding Value}" UpdateValueOnEnterKey="True" FormatString="F2" Width="100"  FontWeight="DemiBold"  Grid.Column="1" HorizontalAlignment="Right" />
                         </Grid>
                         <DataTemplate.Triggers>
                             <Trigger Property="ItemsControl.AlternationIndex" Value="0">
@@ -95,7 +95,7 @@
                             </Grid.ColumnDefinitions>
 
                             <Label Content="{Binding InternalName}" HorizontalAlignment="Left" Grid.ColumnSpan="2" FontWeight="DemiBold"/>
-                            <TextBox Text="{Binding Value}" Name="StrControl" Width="80" Grid.Column="1" HorizontalAlignment="Right" />
+                            <TextBox Text="{Binding Value, UpdateSourceTrigger=LostFocus}" Name="StrControl" Width="80" Grid.Column="1" HorizontalAlignment="Right" />
                         </Grid>
                         <DataTemplate.Triggers>
                             <Trigger Property="ItemsControl.AlternationIndex" Value="0">

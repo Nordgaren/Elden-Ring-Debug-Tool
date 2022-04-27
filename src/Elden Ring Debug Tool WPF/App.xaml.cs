@@ -17,7 +17,7 @@ namespace Elden_Ring_Debug_Tool_WPF
 
         public App()
         {
-            var args = Environment.GetCommandLineArgs();
+            string[] args = Environment.GetCommandLineArgs();
 #if DEBUG
             //args = new[] { "", @"G:\Steam\steamapps\common\ELDEN RING 1.03.3\Game\regulation.bin.bnd" };
 #endif
@@ -38,8 +38,8 @@ namespace Elden_Ring_Debug_Tool_WPF
 
         private void ProcessRegulationAndExit(string[] args)
         {
-            var buffer = new byte[4];
-            using (var fs = File.OpenRead(args[1]))
+            byte[] buffer = new byte[4];
+            using (FileStream fs = File.OpenRead(args[1]))
             {
                 fs.Read(buffer, 0, buffer.Length);
             }
@@ -49,7 +49,7 @@ namespace Elden_Ring_Debug_Tool_WPF
                 if (!File.Exists($"{args[1]}.PreDecrypt.bak"))
                     File.Copy(args[1], $"{args[1]}.PreDecrypt.bak");
 
-                var decryptedReg = SFUtil.DecryptERRegulation(args[1]);
+                BND4 decryptedReg = SFUtil.DecryptERRegulation(args[1]);
                 decryptedReg.Write(args[1]);
                 MessageBox.Show("Regulation file decrypted", "BND Decrypted", MessageBoxButton.OK, MessageBoxImage.Information);
             }
@@ -71,7 +71,7 @@ namespace Elden_Ring_Debug_Tool_WPF
 
         private bool CheckIfPossiblyEncrypted(byte[] buffer)
         {
-            var magic = Encoding.ASCII.GetString(buffer);
+            string magic = Encoding.ASCII.GetString(buffer);
             return magic != "BND4" && magic != "DCX\0";
         }
 
@@ -79,7 +79,7 @@ namespace Elden_Ring_Debug_Tool_WPF
         {
             try
             {
-                var exception = (Exception)e.ExceptionObject;
+                Exception? exception = (Exception)e.ExceptionObject;
                 LogException(exception);
             }
             catch (Exception ex)
@@ -107,25 +107,25 @@ namespace Elden_Ring_Debug_Tool_WPF
         {
             lock (_logFileLock)
             {
-                var logFile = Environment.CurrentDirectory + @"\log.txt";
+                string logFile = Environment.CurrentDirectory + @"\log.txt";
 
                 //Log retention: at most 2 days. Can up this, but don't want to risk creating a 10GB log file when shit goes wrong.
                 //Or when it is never cleared. Use NLog? 
-                var createDate = File.GetCreationTime(logFile);
-                var clearDate = createDate.AddDays(2);
+                DateTime createDate = File.GetCreationTime(logFile);
+                DateTime clearDate = createDate.AddDays(2);
                 if (DateTime.Now > clearDate)
                 {
                     File.Delete(logFile);
                 }
 
-                var sb = new StringBuilder();
+                StringBuilder sb = new StringBuilder();
                 //Log the date and time 
                 sb.Append($"{DateTime.Now:ddd, dd MMM yyy HH':'mm':'ss 'GMT'}\n");
                 //Log the error
                 sb.Append($"{exception.Message}\n\n");
 
-                var count = 0;
-                var innerException = exception.InnerException;
+                int count = 0;
+                Exception? innerException = exception.InnerException;
                 while (innerException != null)
                 {
                     sb.Append($"Inner Exception {count}\n");

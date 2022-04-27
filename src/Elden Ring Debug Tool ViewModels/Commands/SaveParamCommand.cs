@@ -27,7 +27,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.Commands
 
         public override void Execute(object? parameter)
         {
-            var param = _paramViewerViewModel.SelectedParam.Param;
+            ERParam param = _paramViewerViewModel.SelectedParam.Param;
 
             _paramViewerViewModel.Hook.SaveParam(param);
 
