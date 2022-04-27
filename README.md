@@ -8,8 +8,9 @@ Backup your saves before using this tool, and restore the backups before going o
 * [.NET 6 Desktop Runtime x64](https://download.visualstudio.microsoft.com/download/pr/f13d7b5c-608f-432b-b7ec-8fe84f4030a1/5e06998f9ce23c620b9d6bac2dae6c1d/windowsdesktop-runtime-6.0.4-win-x64.exe)  
 * [.Net Framework 4.6.1]( https://www.microsoft.com/en-us/download/details.aspx?id=48130)
 * [Visual C++ Redistributable Packages for Visual Studio 2013](https://www.microsoft.com/en-gb/download/details.aspx?id=40784)
+
 ## Known Issues
-* Duplicates in the item lists.  
+* None at this time. If you find any bugs, please let me know!  
 
 ## Installing  
 * Extract contents of zip archive to it's own folder. You may have to run as admin if Elden Ring Debug Tool crashes  
@@ -21,13 +22,11 @@ Backup your saves before using this tool, and restore the backups before going o
 * After saving params, you can decrypt your regulation.bin by dragging and dropping it over the debug tools exe. Rename the param to have the correct capitalization, unpack the regulation.bin with Yabber and replace the one with the saved param and then re-pack the regulation.bin with [Yabber](https://github.com/JKAnderson/Yabber/releases). You can re-encrypt the regulation file, as well, but it is unnecessary.  
 
 ## Libraries
-[SoulsFormats](https://github.com/JKAnderson/SoulsFormats) by [TKGP](https://github.com/JKAnderson/)  
-
-My fork of [Property Hook](https://github.com/Nordgaren/PropertyHook) by [TKGP](https://github.com/JKAnderson/)  
-
 [Octokit](https://github.com/octokit/octokit.net) by [Octokit](https://github.com/octokit) team
 
 [GlobalHotkeys](https://github.com/mrousavy/Hotkeys) by [Marc Rousavy](https://github.com/mrousavy)  
+
+[SettingsProviders](https://github.com/Bluegrams/SettingsProviders) By [Bluegrams](https://github.com/Bluegrams/)
 
 ## Thank You  
 **[TKGP](https://github.com/JKAnderson/)** Author of [DS Gadget](https://github.com/JKAnderson/DS-Gadget) [Property Hook](https://github.com/JKAnderson/PropertyHook) and [SoulsFormats](https://github.com/JKAnderson/SoulsFormats)  
