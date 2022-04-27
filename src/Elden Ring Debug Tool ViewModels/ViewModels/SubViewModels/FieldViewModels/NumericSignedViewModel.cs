@@ -13,7 +13,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels
         private NumericField _numericField;
         public override string StringValue => Value.ToString();
 
-        public long Value
+        public override object Value
         {
             get
             {
@@ -21,7 +21,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels
             }
             set
             {
-                var buffer = BitConverter.GetBytes(value);
+                var buffer = BitConverter.GetBytes((long)value);
                 var bytes = new byte[GetSize()];
                 Array.Copy(buffer, bytes, bytes.Length);
                 Param.Pointer.WriteBytes(Offset, bytes);

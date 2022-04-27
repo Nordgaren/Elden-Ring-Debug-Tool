@@ -18,13 +18,18 @@
                 <ResourceDictionary>
                     
                     <DataTemplate x:Key="NumericSigned">
-                            <Grid Margin="2" x:Name="Grid">
+                        <Grid Margin="2" x:Name="Grid" ToolTipService.ShowDuration="12000">
                                 <Grid.ColumnDefinitions >
                                     <ColumnDefinition/>
                                     <ColumnDefinition/>
                                 </Grid.ColumnDefinitions>
+                            <Grid.ToolTip >
+                                <DockPanel Width="50" Height="70">
+                                    <Label Content="{Binding InternalName}"/>
+                                </DockPanel>
+                            </Grid.ToolTip>
                             <Label Content="{Binding InternalName}" HorizontalAlignment="Left" FontWeight="DemiBold"/>
-                            <wpfTool:LongUpDown Value="{Binding Value}" Width="100" FontWeight="DemiBold" Grid.Column="1" HorizontalAlignment="Right" />
+                            <wpfTool:LongUpDown Value="{Binding Value}" UpdateValueOnEnterKey="True" Width="100" FontWeight="DemiBold" Grid.Column="1" HorizontalAlignment="Right" />
                             </Grid>
                         <DataTemplate.Triggers>
                             <Trigger Property="ItemsControl.AlternationIndex" Value="0">

@@ -36,11 +36,5 @@ namespace Elden_Ring_Debug_Tool_WPF
                 _paramViewModel = vm;
             }
         }
-
-        internal override void ReloadCtrl() 
-        {
-
-        }
-       
     }
 }

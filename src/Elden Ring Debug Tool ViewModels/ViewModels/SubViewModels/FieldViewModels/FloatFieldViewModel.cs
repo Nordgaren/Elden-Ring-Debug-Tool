@@ -22,7 +22,6 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels
                 Array.Copy(bytes, 0, Param.Bytes, Offset, bytes.Length);
             }
         }
-
         public override void Update()
         {
             OnPropertyChanged(nameof(Value));
