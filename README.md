@@ -22,6 +22,10 @@ Backup your saves before using this tool, and restore the backups before going o
 * After saving params, you can decrypt your regulation.bin by dragging and dropping it over the debug tools exe. Rename the param to have the correct capitalization, unpack the regulation.bin with Yabber and replace the one with the saved param and then re-pack the regulation.bin with [Yabber](https://github.com/JKAnderson/Yabber/releases). You can re-encrypt the regulation file, as well, but it is unnecessary.  
 
 ## Libraries
+[ErdTools](https://github.com/Nordgaren/Erd-Tools) by Me.  
+[SoulsFormats](https://github.com/JKAnderson/SoulsFormats) by [TKGP](https://github.com/JKAnderson/)  
+My fork of [Property Hook](https://github.com/Nordgaren/PropertyHook) by [TKGP](https://github.com/JKAnderson/)  
+
 [Octokit](https://github.com/octokit/octokit.net) by [Octokit](https://github.com/octokit) team
 
 [GlobalHotkeys](https://github.com/mrousavy/Hotkeys) by [Marc Rousavy](https://github.com/mrousavy)  
