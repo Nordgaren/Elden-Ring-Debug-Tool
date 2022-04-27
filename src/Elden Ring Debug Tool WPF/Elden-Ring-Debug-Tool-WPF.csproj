@@ -19,7 +19,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ResourceFiles Include="$(SolutionDir)\src\Elden Ring Debug Tool\Resources\**\*.*" />
+    <ResourceFiles Include="$(SolutionDir)\src\Erd-Tools\src\Erd-Tools\Resources\**\*.*" />
   </ItemGroup>
 
 
@@ -71,7 +71,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Elden Ring Debug Tool ViewModels\Elden-Ring-Debug-Tool-ViewModels.csproj" />
-    <ProjectReference Include="..\Elden Ring Debug Tool\Elden-Ring-Debug-Tool.csproj" />
   </ItemGroup>
 
   <ItemGroup>

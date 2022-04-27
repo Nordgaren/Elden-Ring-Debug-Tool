@@ -43,7 +43,7 @@ namespace Elden_Ring_Debug_Tool_WPF
         }
         private void SpawnUndroppable_Checked(object sender, RoutedEventArgs e)
         {
-            DebugItems.UpdateCreateEnabled();
+            //DebugItems.UpdateCreateEnabled();
         }
 
         private void Grid_MouseDown(object sender, MouseButtonEventArgs e)

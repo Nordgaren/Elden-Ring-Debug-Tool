@@ -13,7 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Elden Ring Debug Tool\Elden-Ring-Debug-Tool.csproj" />
+    <ProjectReference Include="..\Erd-Tools\src\Erd-Tools\Erd-Tools.csproj" />
   </ItemGroup>
 
 </Project>
