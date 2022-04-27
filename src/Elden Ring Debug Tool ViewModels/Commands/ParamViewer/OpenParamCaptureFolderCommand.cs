@@ -1,4 +1,4 @@
-﻿using Elden_Ring_Debug_Tool;
+﻿using Erd_Tools;
 using Elden_Ring_Debug_Tool_ViewModels.ViewModels;
 using System;
 using System.Collections.Generic;

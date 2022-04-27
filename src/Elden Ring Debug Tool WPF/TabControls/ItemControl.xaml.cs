@@ -5,8 +5,8 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
-using Elden_Ring_Debug_Tool;
-using Infusion = Elden_Ring_Debug_Tool.ERWeapon.Infusion;
+using Erd_Tools;
+using Infusion = Erd_Tools.ERWeapon.Infusion;
 
 namespace Elden_Ring_Debug_Tool_WPF
 {

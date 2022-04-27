@@ -1,4 +1,4 @@
-﻿using Elden_Ring_Debug_Tool;
+﻿using Erd_Tools;
 using Elden_Ring_Debug_Tool_ViewModels.ViewModels;
 using Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels;
 using SoulsFormats;
@@ -11,7 +11,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Xml.Serialization;
-using static Elden_Ring_Debug_Tool.ERParam;
+using static Erd_Tools.ERParam;
 using static SoulsFormats.PARAMDEF;
 
 namespace Elden_Ring_Debug_Tool_WPF

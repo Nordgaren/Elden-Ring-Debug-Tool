@@ -1,4 +1,4 @@
-﻿using Elden_Ring_Debug_Tool;
+﻿using Erd_Tools;
 using System;
 using System.Collections.Generic;
 using System.Linq;

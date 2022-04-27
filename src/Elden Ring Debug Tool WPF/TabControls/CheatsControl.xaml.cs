@@ -2,7 +2,7 @@
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
-using static Elden_Ring_Debug_Tool.ERHook;
+using static Erd_Tools.ERHook;
 
 namespace Elden_Ring_Debug_Tool_WPF
 {

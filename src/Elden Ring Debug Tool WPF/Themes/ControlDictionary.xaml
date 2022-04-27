@@ -76,7 +76,7 @@
     <Style x:Key="HyperlinkStyle" TargetType="{x:Type TextBlock}">
         <Style.Triggers>
             <Trigger Property="IsEnabled" Value="False">
-                <Setter Property="Foreground" Value="#0F0F0F"/>
+                <Setter Property="Foreground" Value="Black"/>
             </Trigger>
         </Style.Triggers>
     </Style>
