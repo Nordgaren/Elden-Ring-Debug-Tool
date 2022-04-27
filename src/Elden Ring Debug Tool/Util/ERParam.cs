@@ -162,7 +162,6 @@ namespace Elden_Ring_Debug_Tool
                     continue;
                 }
 
-
                 switch (field.DisplayType)
                 {
                     case DefType.s8:
@@ -177,7 +176,7 @@ namespace Elden_Ring_Debug_Tool
                         Fields.Add(new NumericField(field, totalSize - size, false));
                         break;
                     case DefType.f32:
-                        Fields.Add(new FloatField(field, totalSize - size));
+                        Fields.Add(new SingleField(field, totalSize - size));
                         break;
                     case DefType.fixstr:
                         Fields.Add(new FixedStr(field, totalSize - size, Encoding.ASCII));
@@ -199,6 +198,7 @@ namespace Elden_Ring_Debug_Tool
             public string DisplayName => _paramdefField.DisplayName;
             public string Description => _paramdefField.Description;
             public int ArrayLength => _paramdefField.ArrayLength;
+            public object Increment => _paramdefField.Increment;
             public int FieldOffset { get; }
 
             public Field(PARAMDEF.Field field, int fieldOffset)
@@ -240,9 +240,9 @@ namespace Elden_Ring_Debug_Tool
             }
         }
 
-        public class FloatField : Field
+        public class SingleField : Field
         {
-            public FloatField(PARAMDEF.Field field, int fieldOffset) : base(field, fieldOffset)
+            public SingleField(PARAMDEF.Field field, int fieldOffset) : base(field, fieldOffset)
             {
             }
         }

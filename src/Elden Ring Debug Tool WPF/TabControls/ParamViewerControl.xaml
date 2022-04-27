@@ -16,7 +16,12 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary>
-                    
+                    <DataTemplate x:Key="Watermark">
+                        <Border >
+                            <ContentControl Content="{Binding}" Foreground="LightGray" FontWeight="Bold" Focusable="False" />
+                        </Border>
+                    </DataTemplate>
+
                     <DataTemplate x:Key="NumericSigned">
                         <Grid Margin="2" x:Name="Grid" ToolTipService.ShowDuration="12000">
                                 <Grid.ColumnDefinitions >
@@ -29,7 +34,9 @@
                                 </DockPanel>
                             </Grid.ToolTip>
                             <Label Content="{Binding InternalName}" HorizontalAlignment="Left" FontWeight="DemiBold"/>
-                            <wpfTool:LongUpDown Value="{Binding Value}" UpdateValueOnEnterKey="True" Width="100" FontWeight="DemiBold" Grid.Column="1" HorizontalAlignment="Right" />
+                            <wpfTool:LongUpDown Value="{Binding Value}" Minimum="{Binding MinValue}" Maximum="{Binding MaxValue}" Increment="{Binding Increment}" 
+                                                Watermark="Signed" ClipValueToMinMax="True"  Width="100" FontWeight="DemiBold" Grid.Column="1" 
+                                                HorizontalAlignment="Right" WatermarkTemplate="{StaticResource ResourceKey=Watermark}"/>
                             </Grid>
                         <DataTemplate.Triggers>
                             <Trigger Property="ItemsControl.AlternationIndex" Value="0">
@@ -46,7 +53,9 @@
                             </Grid.ColumnDefinitions>
 
                             <Label Content="{Binding InternalName}" HorizontalAlignment="Left" FontWeight="DemiBold"/>
-                            <wpfTool:ULongUpDown Value="{Binding Value}" UpdateValueOnEnterKey="True" Width="100" FontWeight="DemiBold" Grid.Column="1" HorizontalAlignment="Right" />
+                            <wpfTool:ULongUpDown Value="{Binding Value}" Minimum="{Binding MinValue}" Maximum="{Binding MaxValue}" Increment="{Binding Increment}" 
+                                                 Watermark="Unsigned" ClipValueToMinMax="True" Width="100" FontWeight="DemiBold" Grid.Column="1" 
+                                                 HorizontalAlignment="Right" WatermarkTemplate="{StaticResource ResourceKey=Watermark}" />
                         </Grid>
                         <DataTemplate.Triggers>
                             <Trigger Property="ItemsControl.AlternationIndex" Value="0">
@@ -62,7 +71,8 @@
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
                             <Label Content="{Binding InternalName}"  HorizontalAlignment="Left" Grid.ColumnSpan="2" FontWeight="DemiBold"/>
-                            <CheckBox Name="BitControl" IsChecked="{Binding Value}" Width="60" Grid.Column="1" HorizontalContentAlignment="Right" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                            <CheckBox Name="BitControl" IsChecked="{Binding Value}" Width="60" Grid.Column="1" HorizontalContentAlignment="Right" 
+                                      HorizontalAlignment="Right" VerticalAlignment="Center"/>
                         </Grid>
                         <DataTemplate.Triggers>
                             <Trigger Property="ItemsControl.AlternationIndex" Value="0">
@@ -71,14 +81,16 @@
                         </DataTemplate.Triggers>
                     </DataTemplate>
 
-                    <DataTemplate x:Key="FloatField">
+                    <DataTemplate x:Key="SingleField">
                         <Grid Margin="2" x:Name="Grid">
                             <Grid.ColumnDefinitions >
                                 <ColumnDefinition Width="125"/>
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
                             <Label Content="{Binding InternalName}"  HorizontalAlignment="Left" Grid.ColumnSpan="2" FontWeight="DemiBold"/>
-                            <wpfTool:DecimalUpDown Value="{Binding Value}" UpdateValueOnEnterKey="True" FormatString="F2" Width="100"  FontWeight="DemiBold"  Grid.Column="1" HorizontalAlignment="Right" />
+                            <wpfTool:SingleUpDown Value="{Binding Value}" Minimum="{Binding MinValue}" Maximum="{Binding MaxValue}" Increment="{Binding Increment}" 
+                                                  Watermark="Float" ClipValueToMinMax="True" FormatString="F2" Width="100" FontWeight="DemiBold" Grid.Column="1" 
+                                                  HorizontalAlignment="Right" WatermarkTemplate="{StaticResource ResourceKey=Watermark}"/>
                         </Grid>
                         <DataTemplate.Triggers>
                             <Trigger Property="ItemsControl.AlternationIndex" Value="0">
@@ -184,7 +196,7 @@
                     <dts:FieldDataTemplateSelector 
                     NumericSigned="{StaticResource NumericSigned}"
                     NumericUnsigned="{StaticResource NumericUnsigned}"
-                    FloatField="{StaticResource FloatField}"
+                    SingleField="{StaticResource SingleField}"
                     BitField="{StaticResource BitField}"
                     FixedStr="{StaticResource FixedStr}"/>
                 </ItemsControl.ItemTemplateSelector>

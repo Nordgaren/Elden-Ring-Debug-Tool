@@ -15,9 +15,12 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels
         public override string StringValue => (bool)Value ? "1 True On" : "0 False Off";
         public override object Value
         {
-            get => ((Param.Bytes[Offset] & (1 << _bitPosition)) != 0);
+            get => ParamViewerViewModel.SelectedRow != null ?  ((Param.Bytes[Offset] & (1 << _bitPosition)) != 0) : null;
             set
             {
+                if (ParamViewerViewModel.SelectedRow == null)
+                    return;
+
                 byte paramValue = Param.Bytes[Offset];
                 if ((bool)value)
                     paramValue |= (byte)(1 << _bitPosition);

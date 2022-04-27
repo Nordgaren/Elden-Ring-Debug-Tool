@@ -1,7 +1,7 @@
 ﻿using Elden_Ring_Debug_Tool;
 using System.Windows;
 using System.Windows.Media;
-using System.Windows.Threading;
+using System.Timers;
 
 namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
 {
@@ -16,6 +16,8 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
             set => ERHook.Reading = value;
         }
 
+        System.Timers.Timer UpdateTimer = new System.Timers.Timer();
+
         public MainWindowViewModel()
         {
             Hook = new ERHook(5000, 15000, p => p.MainWindowTitle == "ELDEN RING™");
@@ -23,6 +25,13 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
             ParamViewerViewModel = new ParamViewerViewModel();
             ParamViewerViewModel.SetHook(Hook);
             Hook.Start();
+        }
+
+        public void Load()
+        {
+            UpdateTimer.Interval = 16;
+            UpdateTimer.Elapsed += UpdateTimer_Elapsed;
+            UpdateTimer.Enabled = true;
         }
 
         private ParamViewerViewModel _paramViewerViewModel;
@@ -43,9 +52,101 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
         {
             Application.Current.Dispatcher.Invoke(() =>
             {
+                if (Hook.EnableMapCombat)
+                    Hook.EnableMapCombat = false;
+
+                UpdateTimer.Stop();
+                SaveAllTabs();
+
                 ParamViewerViewModel.AddParams();
             });
         }
+
+        public void Dispose()
+        {
+
+        }
+        private void UpdateTimer_Elapsed(object sender, ElapsedEventArgs e)
+        {
+
+            Application.Current.Dispatcher.Invoke(new Action(() =>
+            {
+                UpdateMainProperties();
+                Hook.Update();
+                if (Hook.Hooked)
+                {
+                    if (Hook.Loaded && Hook.Setup)
+                    {
+                        if (!GameLoaded)
+                        {
+                            GameLoaded = true;
+                            Reading = true;
+                            ReloadAllCtrls();
+                            Reading = false;
+                            EnableAllCtrls(true);
+                        }
+                        else
+                        {
+                            Reading = true;
+                            UpdateProperties();
+                            UpdateAllCtrl();
+                            Reading = false;
+                        }
+                    }
+                    else if (GameLoaded)
+                    {
+                        Reading = true;
+                        UpdateProperties();
+                        ResetAllCtrls();
+                        //Hook.UpdateName();
+                        EnableAllCtrls(false);
+                        FormLoaded = false;
+                        Reading = false;
+                    }
+                }
+            }));
+        }
+
+        private void UpdateMainProperties()
+        {
+            ViewModel.ParamViewerViewModel.UpdateView();
+            //Hook.UpdateMainProperties();
+            ViewModel.UpdateMainProperties();
+            CheckFocused();
+        }
+
+        private void InitAllCtrls()
+        {
+            DebugItems.InitCtrl();
+            DebugCheats.InitCtrl();
+            InitHotkeys();
+        }
+        private void UpdateProperties()
+        {
+
+        }
+        private void EnableAllCtrls(bool enable)
+        {
+            DebugItems.EnableCtrls(enable);
+        }
+        private void ReloadAllCtrls()
+        {
+            DebugItems.ReloadCtrl();
+        }
+        private void ResetAllCtrls()
+        {
+            DebugItems.ResetCtrl();
+        }
+        private void UpdateAllCtrl()
+        {
+            DebugItems.UpdateCtrl();
+            Hook.UpdateLastEnemy();
+        }
+        private void SaveAllTabs()
+        {
+            SaveHotkeys();
+        }
+
 
         public Brush ForegroundID
         {

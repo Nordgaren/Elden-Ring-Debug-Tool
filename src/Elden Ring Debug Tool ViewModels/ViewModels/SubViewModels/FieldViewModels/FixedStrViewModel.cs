@@ -16,12 +16,18 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels
         {
             get
             {
+                if (ParamViewerViewModel.SelectedRow == null)
+                    return null;
+
                 byte[] bytes = new byte[ArrayLength];
                 Array.Copy(Param.Bytes, Offset, bytes, 0, ArrayLength);
                 return _encoding.GetString(bytes).Replace("\0", "");
             }
             set
             {
+                if (ParamViewerViewModel.SelectedRow == null)
+                    return;
+
                 string? input = value as string;
                 if (input == null)
                     input = string.Empty;
@@ -37,7 +43,6 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels
                 Array.Copy(bytes, 0, buffer, 0, bytes.Length);
                 Param.Pointer.WriteString(Offset, _encoding, (uint)ArrayLength, input);
                 Array.Copy(buffer, 0, Param.Bytes, Offset, buffer.Length);
-                OnPropertyChanged(nameof(Value));
             }
         }
         public FixedStrViewModel(ParamViewerViewModel paramViewerViewModel, FixedStr fixedStr) : base(paramViewerViewModel, fixedStr)

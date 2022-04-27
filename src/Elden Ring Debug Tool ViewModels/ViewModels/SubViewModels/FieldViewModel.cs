@@ -14,13 +14,16 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels
         protected ParamViewerViewModel ParamViewerViewModel;
         protected ERParam Param => ParamViewerViewModel.SelectedParam.Param;
         public virtual string StringValue => Value?.ToString() ?? "";
-        public virtual object Value { get; set;  }
+        public virtual object Value { get; set; }
         public string Type;
         public string InternalName => _field.InternalName;
         public string DisplayName => _field.DisplayName;
         public string Description => _field.Description;
         public int ArrayLength => _field.ArrayLength;
+        public virtual object MinValue { get; }
+        public virtual object MaxValue { get; }
         public int Offset => ParamViewerViewModel.SelectedRow?.DataOffset + FieldOffset ?? 0;
+        public virtual object Increment => _field.Increment;
         public int FieldOffset { get; }
 
         public FieldViewModel(ParamViewerViewModel paramViewerViewModel, ERParam.Field field)

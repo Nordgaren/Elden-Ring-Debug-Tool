@@ -13,7 +13,7 @@ namespace Elden_Ring_Debug_Tool_WPF.DataTemplateSelectors
     {
         public DataTemplate NumericSigned { get; set; }
         public DataTemplate NumericUnsigned { get; set; }
-        public DataTemplate FloatField { get; set; }
+        public DataTemplate SingleField { get; set; }
         public DataTemplate BitField { get; set; }
         public DataTemplate FixedStr { get; set; }
 
@@ -26,8 +26,8 @@ namespace Elden_Ring_Debug_Tool_WPF.DataTemplateSelectors
             if (fieldViewModel is NumericViewModel)
                 return NumericUnsigned;
 
-            if (fieldViewModel is FloatFieldViewModel)
-                return FloatField;
+            if (fieldViewModel is SingleFieldViewModel)
+                return SingleField;
 
             if (fieldViewModel is BitFieldViewModel)
                 return BitField;

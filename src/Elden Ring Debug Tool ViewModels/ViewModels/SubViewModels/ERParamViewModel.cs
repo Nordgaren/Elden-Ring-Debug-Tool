@@ -47,9 +47,9 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels
                     return new NumericViewModel(ParamViewerViewModel, numField);
             }
 
-            if (field is FloatField floatField)
+            if (field is SingleField floatField)
             {
-                return new FloatFieldViewModel(ParamViewerViewModel, floatField);
+                return new SingleFieldViewModel(ParamViewerViewModel, floatField);
             }
 
             if (field is FixedStr fixedStr)

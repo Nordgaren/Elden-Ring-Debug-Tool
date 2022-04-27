@@ -33,9 +33,6 @@ namespace Elden_Ring_Debug_Tool_WPF
             }
         }
 
-        ERHook Hook => ViewModel.Hook;
-
-        Timer UpdateTimer = new Timer();
 
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
@@ -45,6 +42,8 @@ namespace Elden_Ring_Debug_Tool_WPF
             string version = fileVersionInfo.FileVersion;
 
             lblWindowName.Content = $"Elden Ring Debug Tool {version}";
+
+            ViewModel.Load();
             EnableAllCtrls(false);
             InitAllCtrls();
 
@@ -79,9 +78,7 @@ namespace Elden_Ring_Debug_Tool_WPF
                 labelCheckVersion.Content = "Something is very broke, contact Elden Ring Debug Tool repo owner";
                 System.Windows.MessageBox.Show(ex.Message);
             }
-            UpdateTimer.Interval = 16;
-            UpdateTimer.Elapsed += UpdateTimer_Elapsed;
-            UpdateTimer.Enabled = true;
+           
         }
 
         bool FormLoaded
@@ -98,95 +95,10 @@ namespace Elden_Ring_Debug_Tool_WPF
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            if (Hook.EnableMapCombat)
-                Hook.EnableMapCombat = false;
-
-            UpdateTimer.Stop();
-            SaveAllTabs();
-
+            ViewModel.Dispose();
             App.Settings?.Save();
         }
-        private void UpdateTimer_Elapsed(object sender, ElapsedEventArgs e)
-        {
-
-            Dispatcher.Invoke(new Action(() =>
-            {
-                UpdateMainProperties();
-                Hook.Update();
-                if (Hook.Hooked)
-                {
-                    if (Hook.Loaded && Hook.Setup)
-                    {
-                        if (!FormLoaded)
-                        {
-                            FormLoaded = true;
-                            Reading = true;
-                            ReloadAllCtrls();
-                            Reading = false;
-                            EnableAllCtrls(true);
-                        }
-                        else
-                        {
-                            Reading = true;
-                            UpdateProperties();
-                            UpdateAllCtrl();
-                            Reading = false;
-                        }
-                    }
-                    else if (FormLoaded)
-                    {
-                        Reading = true;
-                        UpdateProperties();
-                        ResetAllCtrls();
-                        //Hook.UpdateName();
-                        EnableAllCtrls(false);
-                        FormLoaded = false;
-                        Reading = false;
-                    }
-                }
-            }));
-        }
-
-        private void UpdateMainProperties()
-        {
-            ViewModel.ParamViewerViewModel.UpdateView();
-            //Hook.UpdateMainProperties();
-            ViewModel.UpdateMainProperties();
-            CheckFocused();
-        }
-
-        private void InitAllCtrls()
-        {
-            DebugItems.InitCtrl();
-            DebugCheats.InitCtrl();
-            InitHotkeys();
-        }
-        private void UpdateProperties()
-        {
-
-        }
-        private void EnableAllCtrls(bool enable)
-        {
-            DebugItems.EnableCtrls(enable);
-        }
-        private void ReloadAllCtrls()
-        {
-            DebugItems.ReloadCtrl();
-        }
-        private void ResetAllCtrls()
-        {
-            DebugItems.ResetCtrl();
-        }
-        private void UpdateAllCtrl()
-        {
-            DebugItems.UpdateCtrl();
-            Hook.UpdateLastEnemy();
-        }
-        private void SaveAllTabs()
-        {
-            SaveHotkeys();
-        }
-
+   
         private void link_RequestNavigate(object sender, RequestNavigateEventArgs e)
         {
             Process.Start(new ProcessStartInfo
