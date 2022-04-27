@@ -32,11 +32,11 @@ namespace Elden_Ring_Debug_Tool_WPF
         private bool HotkeysSet = false;
         private void CheckFocused()
         {
-            if (Hook.Focused && !HotkeysSet)
-                RegisterHotkeys();
+            //if (Hook.Focused && !HotkeysSet)
+            //    RegisterHotkeys();
 
-            if (!Hook.Focused && HotkeysSet)
-                UnregisterHotkeys();
+            //if (!Hook.Focused && HotkeysSet)
+            //    UnregisterHotkeys();
         }
 
         private void RegisterHotkeys()

@@ -40,7 +40,6 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
         public void SetHook(ERHook hook)
         {
             Hook = hook;
-
         }
         public void AddParams()
         {
@@ -50,6 +49,12 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
             }
             ParamCollectionView.Filter = FilterParams;
             SelectedParam = _params[0];
+            Setup = true;
+        }
+
+        public void UnHook()
+        {
+            Setup = false;
         }
 
         private bool _setup;

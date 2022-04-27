@@ -9,6 +9,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Octokit" Version="0.50.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Elden Ring Debug Tool\Elden-Ring-Debug-Tool.csproj" />
   </ItemGroup>
 

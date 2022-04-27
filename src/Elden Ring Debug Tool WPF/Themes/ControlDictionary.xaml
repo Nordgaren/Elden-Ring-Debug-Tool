@@ -73,4 +73,11 @@
             </Setter.Value>
         </Setter>
     </Style>
+    <Style x:Key="HyperlinkStyle" TargetType="{x:Type TextBlock}">
+        <Style.Triggers>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Foreground" Value="#0F0F0F"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
 </ResourceDictionary>

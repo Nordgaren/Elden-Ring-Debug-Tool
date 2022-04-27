@@ -12,11 +12,11 @@
         WindowStyle="None" ResizeMode="CanResizeWithGrip" AllowsTransparency="True" BorderThickness="7" >
 
     <Window.DataContext>
-        <viewModel:MainWindowViewModel x:Name="ViewModel"/>
+        <viewModel:MainWindowViewModel x:Name="MainWindowViewModel"/>
     </Window.DataContext>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="100"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="15"/>
         </Grid.RowDefinitions>
@@ -61,7 +61,7 @@
                         BorderThickness="0"/>
                 </StackPanel>
             </Grid>
-            <Grid Height="95" VerticalAlignment="Top">
+            <!--<Grid Height="95" VerticalAlignment="Top">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
                     <ColumnDefinition/>
@@ -75,7 +75,7 @@
                 <StackPanel Grid.Row="0" Grid.Column="0" HorizontalAlignment="Left">
                     <StackPanel Orientation="Horizontal">
                         <Label Content="Process:" />
-                        <Label Content="{Binding Hook.ID}" Foreground="{Binding ForegroundID}"/>
+                        <Label Content="{Binding ID}" Foreground="{Binding ForegroundID}"/>
                     </StackPanel>
                 </StackPanel >
                 <StackPanel Grid.Row="1" Grid.Column="0" HorizontalAlignment="Left">
@@ -84,7 +84,7 @@
                         <Label Name="lblLoaded" Content="{Binding ContentLoaded}" Margin="1,0,0,0" Foreground="{Binding ForegroundLoaded}"/>
                     </StackPanel>
                 </StackPanel >
-                <!--<StackPanel Grid.Row="2" Grid.Column="0"  HorizontalAlignment="Left">
+                --><!--<StackPanel Grid.Row="2" Grid.Column="0"  HorizontalAlignment="Left">
                     <StackPanel Orientation="Horizontal">
                         <Label Content="Online:" />
                         <Label Content="{Binding ContentOnline}" Margin="5,0,0,0" Foreground="{Binding ForegroundOnline}"/>
@@ -95,13 +95,13 @@
                         <Label Content="Version:" />
                         <Label Content="{Binding Hook.Version}" Foreground="{Binding ForegroundVersion}" x:Name="VersionText" Margin="5,0,0,0" />
                     </StackPanel>
-                </StackPanel >-->
+                </StackPanel >--><!--
                 <StackPanel Grid.Column="1" HorizontalAlignment="Right" Grid.ColumnSpan="3" >
                     <Grid >
                         <Label x:Name="labelCheckVersion" />
                         <StackPanel Grid.Column="1" Grid.Row="0" >
                             <Label x:Name="llbNewVersion" Visibility="Hidden">
-                                <Hyperlink x:Name="link" RequestNavigate="link_RequestNavigate" >
+                                <Hyperlink x:Name="link" >
                                     New version available!
                                 </Hyperlink>
                             </Label>
@@ -109,27 +109,50 @@
 
                     </Grid>
                 </StackPanel>
-            </Grid>
+            --><!--</Grid>-->
         </StackPanel>
+        
+        <StackPanel Grid.Row="3" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center">
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Process:" FontWeight="ExtraBlack"/>
+                <Label Content="{Binding ID}" FontWeight="ExtraBlack" Foreground="{Binding ForegroundID}"/>
+            </StackPanel>
+        </StackPanel >
+        <StackPanel Grid.Row="3" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Loaded:" FontWeight="ExtraBlack"/>
+                <Label Content="{Binding GameLoaded}" FontWeight="ExtraBlack" Foreground="{Binding ForegroundLoaded}"/>
+            </StackPanel>
+        </StackPanel >
+        <StackPanel Grid.Row="3" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,15,0">
+            <Label >
+                <Hyperlink Command="{Binding OpenGitHubCommand}" IsEnabled="{Binding UpdateRequired}">
+                    <TextBlock Style="{DynamicResource HyperlinkStyle}" Text="{Binding UpdateInfo}" FontWeight="ExtraBlack"/>
+                </Hyperlink>
+            </Label>
+        </StackPanel>
+       
+
         <TabControl Background="LightGray" Grid.Row="1" Margin="0,0,0,0">
             <TabItem Header="Params">
                 <Grid Background="LightGray">
-                    <local:ParamViewerControl x:Name="DebugParam" DataContext="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type TabControl}}, Path=DataContext.ParamViewerViewModel}" />
+                    <local:ParamViewerControl x:Name="DebugParam" 
+                    DataContext="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type TabControl}}, Path=DataContext.ParamViewerViewModel}" />
                 </Grid>
             </TabItem>
             <TabItem Header="Inventory">
                 <Grid Background="LightGray">
-                    <local:ItemControl x:Name="DebugItems" Hook="{Binding Hook}"/>
+                    <local:ItemControl x:Name="DebugItems" />
                 </Grid>
             </TabItem>
             <TabItem Header="Target">
                 <Grid Background="LightGray">
-                    <local:TargetControl x:Name="DebugTarget" Hook="{Binding Hook}"/>
+                    <local:TargetControl x:Name="DebugTarget" />
                 </Grid>
             </TabItem>
             <TabItem Header="Cheats">
                 <Grid Background="LightGray">
-                    <local:CheatsControl x:Name="DebugCheats" Hook="{Binding Hook}"/>
+                    <local:CheatsControl x:Name="DebugCheats" />
                 </Grid>
             </TabItem>
 
