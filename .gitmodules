@@ -10,3 +10,6 @@
 [submodule "src/PropertyHook"]
 	path = src/PropertyHook
 	url = https://github.com/Nordgaren/PropertyHook.git
+[submodule "src/Erd-Tools"]
+	path = src/Erd-Tools
+	url = https://github.com/Nordgaren/Erd-Tools.git
