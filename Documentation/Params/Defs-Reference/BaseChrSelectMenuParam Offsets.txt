@@ -1,9 +1,0 @@
-//Format[hex]:Index(size) = Name 
-000(1) = disableParam_NT
-Bitfield: 8
-001(3) = disableParamReserve2
-004(4) = chrInitParam
-008(4) = originChrInitParam
-00C(4) = imageId
-010(4) = textId
-014(12) = reserve

@@ -1,5 +1,0 @@
-//Format[hex]:Index(size) = Name 
-000(4) = value
-004(4) = textId
-008(1) = compareType
-009(3) = padding

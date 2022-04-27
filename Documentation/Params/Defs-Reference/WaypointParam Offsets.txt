@@ -1,6 +1,0 @@
-//Format[hex]:Index(size) = Name 
-000(2) = attribute1
-002(2) = attribute2
-004(2) = attribute3
-006(2) = attribute4
-008(8) = padding4

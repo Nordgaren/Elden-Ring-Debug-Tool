@@ -1,5 +1,0 @@
-//Format[hex]:Index(size) = Name 
-000(1) = sssEnabled
-001(1) = tessellationEnabled
-002(1) = highPrecisionNormalEnabled
-003(1) = dmy

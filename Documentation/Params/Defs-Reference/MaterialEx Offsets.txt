@@ -1,9 +1,0 @@
-//Format[hex]:Index(size) = Name 
-000(64) = paramName
-040(4) = materialId
-044(4) = materialParamValue0
-048(4) = materialParamValue1
-04C(4) = materialParamValue2
-050(4) = materialParamValue3
-054(4) = materialParamValue4
-058(8) = pad

@@ -1,5 +1,0 @@
-//Format[hex]:Index(size) = Name 
-000(4) = spEffectId1
-004(4) = spEffectId2
-008(4) = spEffectId3
-00C(4) = spEffectId4

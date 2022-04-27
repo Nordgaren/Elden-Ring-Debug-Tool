@@ -1,9 +1,0 @@
-//Format[hex]:Index(size) = Name 
-000(1) = disableParam_NT
-Bitfield: 8
-001(3) = disableParamReserve2
-004(4) = client1SpEffectId
-008(4) = client2SpEffectId
-00C(4) = client3SpEffectId
-010(1) = bOverrideSpEffect
-011(15) = pad3

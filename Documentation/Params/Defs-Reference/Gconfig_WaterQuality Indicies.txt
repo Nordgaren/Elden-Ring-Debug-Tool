@@ -1,3 +1,0 @@
-//Format[dec]:Index(size) = Name 
-000(1) = interactionEnabled
-001(3) = dmy

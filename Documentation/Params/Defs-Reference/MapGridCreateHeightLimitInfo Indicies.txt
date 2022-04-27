@@ -1,4 +1,0 @@
-//Format[dec]:Index(size) = Name 
-000(4) = GridEnableCreateHeightMin
-001(4) = GridEnableCreateHeightMax
-002(24) = Reserve

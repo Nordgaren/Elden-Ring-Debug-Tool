@@ -1,2 +1,0 @@
-//Format[hex]:Index(size) = Name 
-000(4) = SoundObjEnableDist

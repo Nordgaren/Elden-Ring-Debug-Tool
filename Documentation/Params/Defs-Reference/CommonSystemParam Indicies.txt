@@ -1,3 +1,0 @@
-//Format[dec]:Index(size) = Name 
-000(4) = mapSaveMapNameIdOnGameStart
-001(60) = reserve0

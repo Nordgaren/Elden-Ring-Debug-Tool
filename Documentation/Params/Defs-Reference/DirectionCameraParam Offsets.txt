@@ -1,4 +1,0 @@
-//Format[hex]:Index(size) = Name 
-000(1) = isUseOption
-Bitfield: 4
-001(15) = pad1

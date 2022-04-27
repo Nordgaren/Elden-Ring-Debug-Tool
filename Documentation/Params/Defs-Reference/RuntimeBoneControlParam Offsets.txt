@@ -1,7 +1,0 @@
-//Format[hex]:Index(size) = Name 
-000(4) = chrId
-004(1) = ctrlType
-005(11) = pad
-010(32) = applyBone
-030(32) = targetBone1
-050(32) = targetBone2

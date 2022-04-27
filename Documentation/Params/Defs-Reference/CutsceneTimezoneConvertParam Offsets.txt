@@ -1,3 +1,0 @@
-//Format[hex]:Index(size) = Name 
-000(4) = SrcTimezoneStart
-004(4) = DstCutscenTime
