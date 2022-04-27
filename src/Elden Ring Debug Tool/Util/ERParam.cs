@@ -24,8 +24,6 @@ namespace Elden_Ring_Debug_Tool
         public byte[] Bytes { get; private set; }
         public List<Row> Rows { get; private set; }
         public List<Field> Fields { get; private set; }
-        public Row SelectedRow { get; set; }
-        public List<UserControl> Cells { get; set; }
         private static Regex ParamEntryRx = new Regex(@"^\s*(?<id>\S+)\s+(?<name>.*)$", RegexOptions.CultureInvariant);
         public Dictionary<int, string> NameDictionary { get; private set; }
         public Dictionary<int, int> OffsetDict { get; private set; }
@@ -41,6 +39,7 @@ namespace Elden_Ring_Debug_Tool
             BuildNameDictionary();
             BuildOffsetDictionary();
             RowLength = ParamDef.GetRowSize();
+            BuildCells();
         }
         private void BuildOffsetDictionary()
         {
@@ -123,26 +122,89 @@ namespace Elden_Ring_Debug_Tool
                 ID = id;
                 DataOffset = offset;
             }
-
             public override string ToString()
             {
                 return Name;
             }
         }
 
-        public class Field
+        private void BuildCells()
+        {
+            Fields = new List<Field>();
+            int totalSize = 0;
+            for (int i = 0; i < ParamDef.Fields.Count; i++)
+            {
+                PARAMDEF.Field field = ParamDef.Fields[i];
+                DefType type = field.DisplayType;
+                int size = ParamUtil.IsArrayType(type) ? ParamUtil.GetValueSize(type) * field.ArrayLength : ParamUtil.GetValueSize(type);
+                if (ParamUtil.IsArrayType(type))
+                    totalSize += ParamUtil.GetValueSize(type) * field.ArrayLength;
+                else
+                    totalSize += ParamUtil.GetValueSize(type);
+
+                if (ParamUtil.IsBitType(type) && field.BitSize != -1)
+                {
+                    int bitOffset = field.BitSize;
+                    DefType bitType = type == DefType.dummy8 ? DefType.u8 : type;
+                    int bitLimit = ParamUtil.GetBitLimit(bitType);
+                    Fields.Add(new BitField(field, totalSize - size, bitOffset - 1));
+
+                    for (; i < ParamDef.Fields.Count - 1; i++)
+                    {
+                        PARAMDEF.Field nextField = ParamDef.Fields[i + 1];
+                        DefType nextType = nextField.DisplayType;
+                        if (!ParamUtil.IsBitType(nextType) || nextField.BitSize == -1 || bitOffset + nextField.BitSize > bitLimit
+                            || (nextType == DefType.dummy8 ? DefType.u8 : nextType) != bitType)
+                            break;
+                        bitOffset += nextField.BitSize;
+                        Fields.Add(new BitField(nextField, totalSize - size, bitOffset - 1));
+                    }
+                    continue;
+                }
+
+
+                switch (field.DisplayType)
+                {
+                    case DefType.s8:
+                    case DefType.s16:
+                    case DefType.s32:
+                        Fields.Add(new NumericField(field, totalSize - size, true));
+                        break;
+                    case DefType.u8:
+                    case DefType.dummy8:
+                    case DefType.u16:
+                    case DefType.u32:
+                        Fields.Add(new NumericField(field, totalSize - size, false));
+                        break;
+                    case DefType.f32:
+                        Fields.Add(new FloatField(field, totalSize - size));
+                        break;
+                    case DefType.fixstr:
+                        Fields.Add(new FixedStr(field, totalSize - size, Encoding.Unicode));
+                        break;
+                    case DefType.fixstrW:
+                        Fields.Add(new FixedStr(field, totalSize - size, Encoding.Unicode));
+                        break;
+                    default:
+                        throw new Exception($"Unknown type: {field.DisplayType}");
+                }
+            }
+        }
+
+        public abstract class Field
         {
             private PARAMDEF.Field _paramdefField;
             public DefType Type => _paramdefField.DisplayType;
             public string InternalName => _paramdefField.InternalName;
             public string DisplayName => _paramdefField.DisplayName;
             public string Description => _paramdefField.Description;
-            public int Offset { get; }
+            public int ArrayLength => _paramdefField.ArrayLength;
+            public int FieldOffset { get; }
 
-            public Field(PARAMDEF.Field field, int offset)
+            public Field(PARAMDEF.Field field, int fieldOffset)
             {
                 _paramdefField = field;
-                Offset = offset;
+                FieldOffset = fieldOffset;
             }
 
             public override string ToString()
@@ -151,6 +213,38 @@ namespace Elden_Ring_Debug_Tool
             }
         }
 
-       
+        public class FixedStr : Field
+        {
+            public Encoding Encoding;
+            public FixedStr(PARAMDEF.Field field, int fieldOffset, Encoding encoding) : base(field, fieldOffset)
+            {
+                Encoding = encoding;
+            }
+        }
+
+        public class NumericField : Field
+        {
+            public bool IsSigned;
+            public NumericField(PARAMDEF.Field field, int fieldOffset, bool isSigned) : base(field, fieldOffset)
+            {
+                IsSigned = isSigned;
+            }
+        }
+
+        public class BitField : Field
+        {
+            public int BitPosition;
+            public BitField(PARAMDEF.Field field, int fieldOffset, int bitPosition) : base(field, fieldOffset)
+            {
+                BitPosition = bitPosition;
+            }
+        }
+
+        public class FloatField : Field
+        {
+            public FloatField(PARAMDEF.Field field, int fieldOffset) : base(field, fieldOffset)
+            {
+            }
+        }
     }
 }

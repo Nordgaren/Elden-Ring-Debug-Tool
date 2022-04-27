@@ -23,7 +23,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
 
         public ICollectionView ParamCollectionView { get; }
         public ICollectionView RowCollectionView => CollectionViewSource.GetDefaultView(SelectedParam?.Rows);
-        //public ICollectionView FieldCollectionView => CollectionViewSource.GetDefaultView(_selectedParam?.Rows);
+        public ICollectionView FieldCollectionView => CollectionViewSource.GetDefaultView(SelectedParam?.Fields);
 
         public ICommand SaveParamCommand { get; set; }
         public ICommand ResetParamCommand { get; set; }
@@ -47,12 +47,12 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
         {
             foreach (var p in Hook.GetParams())
             {
-                _params.Add(new ERParamViewModel(p));
+                _params.Add(new ERParamViewModel(this, p));
             }
             ParamCollectionView.Filter = FilterParams;
             SelectedParam = _params[0];
             RowCollectionView.Filter = FilterRows;
-            //FieldCollectionView.Filter = FilterRows;
+            FieldCollectionView.Filter = FilterFields;
         }
 
         private bool _setup;
@@ -87,8 +87,8 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
             }
         }
 
-        private ERParam.Row _selectedRow;
-        public ERParam.Row SelectedRow
+        private RowViewModel _selectedRow;
+        public RowViewModel SelectedRow
         {
             get
             {
@@ -96,8 +96,11 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
             }
             set
             {
-                if (SetField(ref _selectedRow, value)) return;
-                    //OnPropertyChanged(nameof(FieldCollectionView));
+                if (SetField(ref _selectedRow, value))
+                {
+                    OnPropertyChanged(nameof(FieldCollectionView));
+                    FieldCollectionView.Filter = FilterFields;
+                }
             }
         }
 
@@ -145,7 +148,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
         }
         private bool FilterRows(object obj)
         {
-            if (obj is ERParam.Row row)
+            if (obj is RowViewModel row)
             {
                 return row.Name.Contains(RowFilter, StringComparison.OrdinalIgnoreCase) || row.ID.ToString().Contains(RowFilter);
             }
@@ -163,14 +166,14 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
             set
             {
                 SetField(ref _fieldFilter, value);
-                //FieldCollectionView.Refresh();
+                FieldCollectionView.Refresh();
             }
         }
         private bool FilterFields(object obj)
         {
             if (obj is FieldViewModel field)
             {
-                return field.InternalName.Contains(FieldFilter, StringComparison.OrdinalIgnoreCase) || field.DisplayName.ToString().Contains(FieldFilter);
+                return field.InternalName.Contains(FieldFilter, StringComparison.OrdinalIgnoreCase) || field.DisplayName.ToString().Contains(FieldFilter) || field.StringValue.Contains(FieldFilter);
             }
 
             return false;

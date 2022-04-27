@@ -31,16 +31,6 @@ namespace Elden_Ring_Debug_Tool_WPF
                 };
                 warning.ShowDialog();
             }
-            Hook.OnSetup += Hook_OnSetup;
-        }
-
-        private void Hook_OnSetup(object? sender, PropertyHook.PHEventArgs e)
-        {
-            Dispatcher.Invoke(() =>
-            {
-                DebugParam.HookParams();
-
-            });
         }
 
         ERHook Hook => ViewModel.Hook;

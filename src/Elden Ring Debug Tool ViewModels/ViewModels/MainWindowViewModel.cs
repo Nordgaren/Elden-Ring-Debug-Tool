@@ -20,8 +20,8 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
         {
             Hook = new ERHook(5000, 15000, p => p.MainWindowTitle == "ELDEN RING™");
             Hook.OnSetup += Hook_OnSetup;
-            _paramViewerViewModel = new ParamViewerViewModel();
-            _paramViewerViewModel.SetHook(Hook);
+            ParamViewerViewModel = new ParamViewerViewModel();
+            ParamViewerViewModel.SetHook(Hook);
             Hook.Start();
         }
 
@@ -43,7 +43,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
         {
             Application.Current.Dispatcher.Invoke(() =>
             {
-                _paramViewerViewModel.AddParams();
+                ParamViewerViewModel.AddParams();
             });
         }
 

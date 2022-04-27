@@ -35,6 +35,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.Commands
                 _paramViewerViewModel.SelectedParam.Param.RestoreParam();
             }
         }
+
         private void _paramViewerViewModel_PropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             if (e.PropertyName == nameof(ParamViewerViewModel.Setup))

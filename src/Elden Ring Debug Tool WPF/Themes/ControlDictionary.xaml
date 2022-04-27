@@ -43,6 +43,14 @@
             </Setter.Value>
         </Setter>
     </Style>
+    <Style TargetType="ListBoxItem">
+        <Setter Property="FontSize" Value="20"/>
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding}" Value="one">
+                <Setter Property="Foreground" Value="Yellow"/>
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
     <Style x:Key="_ListBoxItemStyle" TargetType="ListBoxItem">
         <Setter Property="Template">
             <Setter.Value>
@@ -53,9 +61,12 @@
                         <ContentPresenter />
                     </Border>
                     <ControlTemplate.Triggers>
+                        <Trigger Property="IsEnabled" Value="true">
+                            <Setter Property="FontWeight" Value="Bold"/>
+                        </Trigger>
                         <Trigger Property="IsSelected" Value="true">
                             <Setter TargetName="_Border" Property="Background" Value="DarkGray"/>
-                            <Setter Property="FontWeight" Value="Bold"/>
+                            <Setter Property="FontWeight" Value="ExtraBold"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

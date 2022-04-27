@@ -10,7 +10,10 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels
 {
     public class FieldViewModel : ViewModelBase
     {
-        private ERParam.Field _paramdefField;
+        private ERParam.Field _field;
+        protected ParamViewerViewModel ParamViewerViewModel;
+        protected ERParam Param => ParamViewerViewModel.SelectedParam.Param;
+        public virtual string StringValue { get; } = string.Empty;
         private string _type;
         public string Type
         {
@@ -35,16 +38,44 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels
             get => _description;
             set => SetField(ref _description, value);
         }
-        public int Offset { get; }
+        public int ArrayLength;
+        public int Offset => ParamViewerViewModel.SelectedRow?.DataOffset + FieldOffset ?? 0;
+        public int FieldOffset { get; }
 
-        public FieldViewModel(ERParam.Field field, int offset)
+        public FieldViewModel(ParamViewerViewModel paramViewerViewModel, ERParam.Field field)
         {
-            _paramdefField = field;
-            Type = Enum.GetName(_paramdefField.Type) ?? "";
-            InternalName = _paramdefField.InternalName;
-            DisplayName = _paramdefField.DisplayName;
-            Description = _paramdefField.Description;
-            Offset = offset;
+            ParamViewerViewModel = paramViewerViewModel;
+            _field = field;
+            Type = Enum.GetName(_field.Type) ?? "";
+            InternalName = _field.InternalName;
+            DisplayName = _field.DisplayName;
+            Description = _field.Description;
+            ArrayLength = _field.ArrayLength;
+            FieldOffset = _field.FieldOffset;
+        }
+
+        public virtual void Update()
+        {
+            throw new NotImplementedException("Not Implimented for FieldViewModel. Must impliment in class that inherited from FieldViewModel");
+        }
+        public int GetSize()
+        {
+            switch (Type)
+            {
+                case "s8":
+                case "u8":
+                case "dummy8":
+                    return 1;
+                case "s16":
+                case "u16":
+                    return 2;
+                case "s32":
+                case "u32":
+                case "f32":
+                    return 4;
+                default:
+                    throw new Exception($"Invalid size for field {InternalName}");
+            }
         }
 
         public override string ToString()
