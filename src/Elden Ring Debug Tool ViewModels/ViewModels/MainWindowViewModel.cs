@@ -13,7 +13,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
 {
     public class MainWindowViewModel : ViewModelBase
     {
-        internal ERHook Hook { get; private set; }
+        public ERHook Hook { get; private set; }
 
         public bool GameLoaded { get; set; }
         public bool Reading
@@ -31,17 +31,22 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
             Hook.OnSetup += Hook_OnSetup;
             Hook.OnUnhooked += Hook_OnUnhooked;
             OpenGitHubCommand = new OpenGitHubCommand(this);
-            ParamViewerViewModel = new ParamViewerViewModel();
-            ParamViewerViewModel.SetHook(Hook);
             Uri = new Uri("https://github.com/Nordgaren/Elden-Ring-Debug-Tool");
+
+            ParamViewerViewModel = new ParamViewerViewModel();
+            ParamViewerViewModel.InitViewModel(Hook);
+
+            ItemGibViewModel = new ItemGibViewModel();
+            ItemGibViewModel.InitViewModel(Hook);
+
             Hook.Start();
         }
 
         public async Task Load()
         {
             Assembly assembly = Assembly.GetExecutingAssembly();
-            FileVersionInfo fileVersionInfo = FileVersionInfo.GetVersionInfo(assembly.Location);
-            string version = fileVersionInfo.FileVersion;
+            FileVersionInfo? fileVersionInfo = FileVersionInfo.GetVersionInfo(assembly.Location);
+            string? version = fileVersionInfo.FileVersion;
 
             WindowTitle = $"Elden Ring Debug Tool {version}";
             EnableAllCtrls(false);
@@ -86,15 +91,15 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
         private ParamViewerViewModel _paramViewerViewModel;
         public ParamViewerViewModel ParamViewerViewModel
         {
-            get
-            {
-                return _paramViewerViewModel;
-            }
-            set
-            {
-                _paramViewerViewModel = value;
-                OnPropertyChanged();
-            }
+            get => _paramViewerViewModel;
+            set => SetField(ref _paramViewerViewModel, value);
+        }
+
+        private ItemGibViewModel _itemGibViewModel;
+        public ItemGibViewModel ItemGibViewModel
+        {
+            get => _itemGibViewModel;
+            set => SetField(ref _itemGibViewModel, value);
         }
 
         private Uri _uri;
@@ -130,7 +135,6 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
             System.Windows.Application.Current.Dispatcher.Invoke(() =>
             {
                 ID = Hook.ID;
-                ParamViewerViewModel.AddParams();
             });
         }
         private void Hook_OnUnhooked(object? sender, PropertyHook.PHEventArgs e)

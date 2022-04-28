@@ -5,9 +5,11 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:wpfTool="http://schemas.xceed.com/wpf/xaml/toolkit"
-             xmlns:local="clr-namespace:Elden_Ring_Debug_Tool_WPF"
-             mc:Ignorable="d" 
-             d:DesignHeight="600" d:DesignWidth="800" Background="LightGray">
+             xmlns:local="clr-namespace:Elden_Ring_Debug_Tool_WPF" 
+                    xmlns:vm="clr-namespace:Elden_Ring_Debug_Tool_ViewModels.ViewModels;assembly=Elden-Ring-Debug-Tool-ViewModels"
+                    mc:Ignorable="d"
+                    d:DesignHeight="600" d:DesignWidth="800" Background="LightGray"
+                    d:DataContext="{d:DesignInstance vm:ItemGibViewModel, IsDesignTimeCreatable=True}">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition x:Name="LeftCol"/>
@@ -28,20 +30,22 @@
             </Grid.ColumnDefinitions>
             <StackPanel Grid.Column="0" Margin="5">
                 <Label Content="Category"/>
-                <ComboBox x:Name="cmbCategory" SelectionChanged="cmbCategory_SelectionChanged"/>
+                <ComboBox ItemsSource="{Binding CategoryCollectionView}" SelectedValue="{Binding SelectedItemCategory}"/>
                 <Label Content="Infusion"/>
-                <ComboBox x:Name="cmbInfusion" />
+                <ComboBox ItemsSource="{Binding InfusionCollectionView}" IsEnabled="{Binding InfusionCollectionView.IsEmpty, Converter={StaticResource InverseBoolConverter}}" SelectedValue="{Binding SelectedInfusion}" 
+                />
                 <Grid>
-                    <TextBox x:Name="txtSearch" Height="20" TextChanged="txtSearch_TextChanged" PreviewKeyDown="KeyPressed" PreviewMouseLeftButtonDown="txtSearch_PreviewMouseLeftButtonDown"/>
+                    <TextBox Height="20" Text="{Binding ItemFilter, UpdateSourceTrigger=PropertyChanged}" PreviewKeyDown="KeyPressed" PreviewMouseLeftButtonDown="txtSearch_PreviewMouseLeftButtonDown"/>
                     <Label x:Name="lblSearch" Foreground="LightSlateGray" Content="Search..." IsEnabled="False" Margin="5,0,0,0" IsHitTestVisible="False"/>
                 </Grid>
             </StackPanel>
             <StackPanel Grid.Column="1" Margin="5">
                 <Label Content="Quantity" />
-                <wpfTool:IntegerUpDown x:Name="nudQuantity" Minimum="1" Value="1" ClipValueToMinMax="True" Maximum="1"/>
+                <wpfTool:IntegerUpDown Minimum="1" Maximum="{Binding SelectedItem.MaxQuantity}" Value="{Binding Quantity}" 
+                ClipValueToMinMax="True" IsEnabled="{Binding SelectedItem, Converter={StaticResource ResourceKey=NullObjectToBoolConverter}}"/>
                 <Label Content="Upgrade" />
                 <wpfTool:IntegerUpDown x:Name="nudUpgrade" Minimum="0" Maximum="1" Value="0"/>
-                <CheckBox x:Name="SearchAllCheckbox" Content="Search All" Margin="0,10,0,0" Checked="SearchAllCheckbox_Checked" Unchecked="SearchAllCheckbox_Checked"/>
+                <CheckBox IsChecked="{Binding SearchAll}" Content="Search All" Margin="0,10,0,0"/>
             </StackPanel>
             <StackPanel Grid.Column="2" Margin="5">
                 <Label Content="Max Held" Visibility="Hidden" x:Name="txtMaxHeld"/>
@@ -66,9 +70,12 @@
                 <RowDefinition Height="25"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            <ComboBox x:Name="cmbGems" Grid.Row="0" Margin="40,0,0,0" SelectionChanged="cmbGems_SelectionChanged"/>
+            <ComboBox ItemsSource="{Binding GemCollectionView}" SelectedItem="{Binding SelectedGem}" 
+                      IsEnabled="{Binding GemCollectionView.IsEmpty, Converter={StaticResource InverseBoolConverter}}"
+                      Grid.Row="0" Margin="40,0,0,0"/>
             <Label Content="Ash" Width="50" HorizontalAlignment="Left" Grid.Row="0"/>
-            <ListBox x:Name="lbxItems" Margin="5" Grid.Row="1" SelectionChanged="lbxItems_SelectionChanged" PreviewKeyDown="KeyPressed" ItemContainerStyle="{DynamicResource _ListBoxItemStyle}" />
+            <ListBox ItemsSource="{Binding ItemsCollectionView}" SelectedValue="{Binding SelectedItem}"
+                     Margin="5" Grid.Row="1" PreviewKeyDown="KeyPressed" ItemContainerStyle="{DynamicResource _ListBoxItemStyle}" />
         </Grid>
           
         <GridSplitter Grid.Column="1" Grid.Row="1" Width="3" BorderBrush="Black" HorizontalAlignment="Center" />
@@ -80,7 +87,7 @@
                 <DataGridTextColumn Header="Category" Binding="{Binding Path=Category}"/>
                 <DataGridTextColumn Header="Quantity" Binding="{Binding Path=Quantity}"/>
                 <DataGridTextColumn Header="Display ID" Binding="{Binding Path=DisplayID}"/>
-                <DataGridTextColumn Header="GaItem Handle" Binding="{Binding Path=GaItemHandle, Converter={StaticResource ResourceKey=NumberToHexString}}"/>
+                <DataGridTextColumn Header="GaItem Handle" Binding="{Binding Path=GaItemHandle, Converter={StaticResource ResourceKey=NumberToHexStringConverter}}"/>
             </DataGrid.Columns>
         </DataGrid>
 

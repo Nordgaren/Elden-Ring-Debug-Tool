@@ -31,9 +31,16 @@ namespace Elden_Ring_Debug_Tool_WPF
             }
         }
 
+        private void InitAllCtrls()
+        {
+            DebugItems.InitCtrl();
+            DebugCheats.InitCtrl();
+            InitHotkeys();
+        }
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
             await MainWindowViewModel.Load();
+            InitAllCtrls();
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)

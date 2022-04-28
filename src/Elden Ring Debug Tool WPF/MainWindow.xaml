@@ -24,7 +24,7 @@
             <Grid Height="25" MouseDown="Grid_MouseDown" Background="Black">
                 <StackPanel Orientation="Horizontal">
                     <Image Source="Icon.ico" Width="25"/>
-                    <Label x:Name="lblWindowName" Foreground="White"/>
+                    <Label Content="{Binding WindowTitle}" Foreground="White"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" 
                         Grid.Column="11"
@@ -142,17 +142,18 @@
             </TabItem>
             <TabItem Header="Inventory">
                 <Grid Background="LightGray">
-                    <local:ItemControl x:Name="DebugItems" />
+                    <local:ItemControl x:Name="DebugItems" 
+                    DataContext="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type TabControl}}, Path=DataContext.ItemGibViewModel}"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Target">
                 <Grid Background="LightGray">
-                    <local:TargetControl x:Name="DebugTarget" />
+                    <local:TargetControl x:Name="DebugTarget" Hook="{Binding Hook}"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Cheats">
                 <Grid Background="LightGray">
-                    <local:CheatsControl x:Name="DebugCheats" />
+                    <local:CheatsControl x:Name="DebugCheats" Hook="{Binding Hook}"/>
                 </Grid>
             </TabItem>
 

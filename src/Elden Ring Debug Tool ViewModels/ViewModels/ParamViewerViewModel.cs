@@ -37,19 +37,32 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
             OpenParamCaptureFolderCommand = new OpenParamCaptureFolderCommand(this);
         }
 
-        public void SetHook(ERHook hook)
+        public void InitViewModel(ERHook hook)
         {
             Hook = hook;
+            Hook.OnSetup += Hook_OnSetup;
         }
-        public void AddParams()
+
+        private void Hook_OnSetup(object? sender, PropertyHook.PHEventArgs e)
         {
-            foreach (ERParam p in Hook.GetParams())
+            System.Windows.Application.Current.Dispatcher.Invoke(() =>
             {
-                _params.Add(new ERParamViewModel(this, p));
-            }
-            ParamCollectionView.Filter = FilterParams;
-            SelectedParam = _params[0];
-            Setup = true;
+                foreach (ERParam p in Hook.Params)
+                {
+                    _params.Add(new ERParamViewModel(this, p));
+                }
+                ParamCollectionView.Filter = FilterParams;
+
+                if (_params.Count > 0)
+                    SelectedParam = _params[0];
+
+                Setup = true;
+            });
+        }
+
+        public void InitViewModel()
+        {
+            
         }
 
         public void UnHook()
@@ -114,13 +127,11 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
         private string _paramFilter = string.Empty;
         public string ParamFilter
         {
-            get
-            {
-                return _paramFilter;
-            }
+            get => _paramFilter;
             set
             {
                 SetField(ref _paramFilter, value);
+                ParamCollectionView.Refresh();
             }
         }
         private bool FilterParams(object obj)
@@ -136,10 +147,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
         private string _rowFilter = string.Empty;
         public string RowFilter
         {
-            get
-            {
-                return _rowFilter;
-            }
+            get => _rowFilter;
             set
             {
                 SetField(ref _rowFilter, value);
@@ -159,10 +167,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
         private string _fieldFilter = string.Empty;
         public string FieldFilter
         {
-            get
-            {
-                return _fieldFilter;
-            }
+            get => _fieldFilter;
             set
             {
                 SetField(ref _fieldFilter, value);
