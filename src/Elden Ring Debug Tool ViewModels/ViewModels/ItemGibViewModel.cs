@@ -121,6 +121,13 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
             set => SetField(ref _quantity, value);
         }
 
+        private int _upgradeLevel;
+        public int UpgradeLevel
+        {
+            get => _upgradeLevel;
+            set => SetField(ref _upgradeLevel, value);
+        }
+
         private ERItemViewModel? _selectedItem;
         public ERItemViewModel? SelectedItem
         {
@@ -128,6 +135,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
             set { 
                 if (SetField(ref _selectedItem, value))
                 {
+                    OnPropertyChanged(nameof(MaxUpgrade));
                     GemCollectionView.Refresh();
                     if (!GemCollectionView.IsEmpty)
                     {
@@ -135,8 +143,9 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
                     }
                 }
              }
-            
         }
+
+        public int MaxUpgrade => (SelectedItem as ERWeaponViewModel)?.MaxUpgrade ?? 0;
 
         private Infusion? _selectedInfusion;
         public Infusion? SelectedInfusion

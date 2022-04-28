@@ -44,7 +44,7 @@
                 <wpfTool:IntegerUpDown Minimum="1" Maximum="{Binding SelectedItem.MaxQuantity}" Value="{Binding Quantity}" 
                 ClipValueToMinMax="True" IsEnabled="{Binding SelectedItem, Converter={StaticResource ResourceKey=NullObjectToBoolConverter}}"/>
                 <Label Content="Upgrade" />
-                <wpfTool:IntegerUpDown x:Name="nudUpgrade" Minimum="0" Maximum="1" Value="0"/>
+                <wpfTool:IntegerUpDown Minimum="0" Maximum="{Binding MaxUpgrade}" Value="{Binding UpgradeLevel}" ClipValueToMinMax="True" IsEnabled="{Binding SelectedWeapon, Converter={StaticResource ResourceKey=NullObjectToBoolConverter}}"/>
                 <CheckBox IsChecked="{Binding SearchAll}" Content="Search All" Margin="0,10,0,0"/>
             </StackPanel>
             <StackPanel Grid.Column="2" Margin="5">
