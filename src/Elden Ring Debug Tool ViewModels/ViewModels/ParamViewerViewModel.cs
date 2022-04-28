@@ -41,6 +41,13 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
         {
             Hook = hook;
             Hook.OnSetup += Hook_OnSetup;
+            Hook.OnUnhooked += Hook_OnUnhooked;
+        }
+
+        private void Hook_OnUnhooked(object? sender, PropertyHook.PHEventArgs e)
+        {
+            Setup = false;
+
         }
 
         private void Hook_OnSetup(object? sender, PropertyHook.PHEventArgs e)
@@ -58,16 +65,6 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
 
                 Setup = true;
             });
-        }
-
-        public void InitViewModel()
-        {
-            
-        }
-
-        public void UnHook()
-        {
-            Setup = false;
         }
 
         private bool _setup;

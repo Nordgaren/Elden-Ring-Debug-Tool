@@ -19,7 +19,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ResourceFiles Include="$(SolutionDir)\src\Erd-Tools\src\Erd-Tools\Resources\**\*.*" />
+    <ResourceFiles Include="$(SolutionDir)src\Erd-Tools\src\Erd-Tools\Resources\**\*.*" />
   </ItemGroup>
 
 

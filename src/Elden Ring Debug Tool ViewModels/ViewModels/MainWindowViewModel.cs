@@ -25,6 +25,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
         System.Timers.Timer UpdateTimer = new System.Timers.Timer();
         public ICommand OpenGitHubCommand { get; set; }
 
+
         public MainWindowViewModel()
         {
             Hook = new ERHook(5000, 15000, p => p.MainWindowTitle == "ELDEN RING™");
@@ -139,7 +140,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
         }
         private void Hook_OnUnhooked(object? sender, PropertyHook.PHEventArgs e)
         {
-            ParamViewerViewModel.UnHook();
+
         }
 
         public void Dispose()

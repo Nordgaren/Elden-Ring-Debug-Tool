@@ -1,4 +1,5 @@
-﻿using Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels;
+﻿using Elden_Ring_Debug_Tool_ViewModels.Commands;
+using Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels;
 using Erd_Tools;
 using PropertyHook;
 using System;
@@ -9,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Data;
+using System.Windows.Input;
 using static Erd_Tools.ERWeapon;
 
 namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
@@ -25,6 +27,8 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
         public ICollectionView InfusionCollectionView { get; }
         public ICollectionView GemCollectionView { get; }
 
+        public ICommand GibItemCommand { get; set; }
+
         public ItemGibViewModel()
         {
             _categories = new ObservableCollection<ERItemCategoryViewModel>(new List<ERItemCategoryViewModel>());
@@ -37,6 +41,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
             GemCollectionView = CollectionViewSource.GetDefaultView(_gems);
             GemCollectionView.Filter += FilterGems;
 
+            GibItemCommand = new GibItemCommand(this);
         }
 
         private bool FilterInfusions(object obj)
@@ -63,6 +68,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
         {
             Hook = hook;
             Hook.OnSetup += Hook_OnSetup;
+            Hook.OnUnhooked += Hook_OnUnhooked;
             foreach (ERItemCategory itemCategory in ERItemCategory.All)
             {
                 ERItemCategoryViewModel erICVM = new ERItemCategoryViewModel(itemCategory);
@@ -81,6 +87,12 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
                 SelectedItemCategory = _categories[0];
 
         }
+
+        private void Hook_OnUnhooked(object? sender, PHEventArgs e)
+        {
+            Setup = false;
+        }
+
         private void Hook_OnSetup(object? sender, PHEventArgs e)
         {
             System.Windows.Application.Current.Dispatcher.Invoke(() =>
@@ -135,17 +147,71 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
             set { 
                 if (SetField(ref _selectedItem, value))
                 {
-                    OnPropertyChanged(nameof(MaxUpgrade));
+                    SelectedWeapon = SelectedItem as ERWeaponViewModel;
                     GemCollectionView.Refresh();
                     if (!GemCollectionView.IsEmpty)
                     {
                         SelectedGem = _gems.FirstOrDefault(x => x.SwordArtID == ((ERWeaponViewModel)SelectedItem).SwordArtId) ?? null;
                     }
+                    MaxQuantity = SelectedItem?.MaxQuantity ?? 1;
+                    Quantity = Max ? MaxQuantity : 1;
                 }
-             }
+            }
+        }
+        private bool _max = true;
+        public bool Max
+        {
+            get => _max;
+            set
+            {
+                if (SetField(ref _max, value))
+                {
+                    UpgradeLevel = Max ? MaxUpgrade : 0;
+                    Quantity = Max ? MaxQuantity : 1;
+                }
+            }
         }
 
-        public int MaxUpgrade => (SelectedItem as ERWeaponViewModel)?.MaxUpgrade ?? 0;
+        private bool _restrict = true;
+        public bool Restrict
+        {
+            get => _restrict;
+            set
+            {
+                if (SetField(ref _restrict, value))
+                {
+                    MaxQuantity = SelectedItem?.MaxQuantity ?? 1;
+                }
+            }
+        }
+
+        private int _maxUpgrade;
+        public int MaxUpgrade
+        {
+            get => _maxUpgrade;
+            set => SetField(ref _maxUpgrade, value);
+        }
+
+        private int _maxQuantity;
+        public int MaxQuantity
+        {
+            get => _maxQuantity;
+            set => SetField(ref _maxQuantity, Restrict ? value : int.MaxValue);
+        }
+
+        private ERWeaponViewModel? _selectedWeapon;
+        public ERWeaponViewModel? SelectedWeapon
+        {
+            get => _selectedWeapon;
+            set
+            {
+                if (SetField(ref _selectedWeapon, value))
+                {
+                    MaxUpgrade = SelectedWeapon?.MaxUpgrade ?? 0;
+                    UpgradeLevel = Max ? SelectedWeapon?.MaxUpgrade ?? 0 : 0;
+                }
+            }
+        }
 
         private Infusion? _selectedInfusion;
         public Infusion? SelectedInfusion

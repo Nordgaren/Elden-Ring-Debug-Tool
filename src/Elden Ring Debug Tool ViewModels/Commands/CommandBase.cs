@@ -20,7 +20,10 @@ namespace Elden_Ring_Debug_Tool_ViewModels.Commands
 
         protected void OnCanExecuteChanged()
         {
-            CanExecuteChanged?.Invoke(this, new EventArgs());
+            System.Windows.Application.Current.Dispatcher.Invoke(() =>
+            {
+                CanExecuteChanged?.Invoke(this, new EventArgs());
+            });
         }
     }
 }

@@ -57,7 +57,7 @@ namespace Elden_Ring_Debug_Tool_WPF
 
         internal override void EnableCtrls(bool enable)
         {
-            btnCreate.IsEnabled = enable;
+            //btnCreate.IsEnabled = enable;
 
             if (enable)
                 UpdateCreateEnabled();
@@ -299,11 +299,11 @@ namespace Elden_Ring_Debug_Tool_WPF
         //Changes the color of the Apply button
         private async Task ChangeColor(Brush new_color)
         {
-            btnCreate.Background = new_color;
+            //btnCreate.Background = new_color;
 
-            await Task.Delay(TimeSpan.FromSeconds(.25));
+            //await Task.Delay(TimeSpan.FromSeconds(.25));
 
-            btnCreate.Background = default(Brush);
+            //btnCreate.Background = default(Brush);
         }
 
         //handles escape

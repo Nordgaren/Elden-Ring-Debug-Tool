@@ -16,6 +16,8 @@
             <conv:NullObjectToBoolConverter x:Key="NullObjectToBoolConverter"/>
             <conv:InverseBoolConverter x:Key="InverseBoolConverter"/>
             <conv:CountToBoolConverter x:Key="CountToBoolConverter"/>
+            <conv:MultiBoolConverter x:Key="MultiBoolConverter"/>
+            <conv:NullToValueConverter x:Key="NullToValueConverter"/>
         </ResourceDictionary>
     </Application.Resources>
 </Application>
