@@ -7,7 +7,8 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels
     {
         private FixedStr _fixedStr;
         private Encoding _encoding;
-         public override object Value
+        public override string StringValue => Value?.ToString() ?? "null";
+        public string? Value
         {
             get
             {
@@ -20,7 +21,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels
             }
             set
             {
-                if (ParamViewerViewModel.SelectedRow == null)
+                if (ParamViewerViewModel.SelectedRow == null || value == null)
                     return;
 
                 string? input = value as string;
@@ -44,6 +45,16 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels
         {
             _fixedStr = fixedStr;
             _encoding = _fixedStr.Encoding;
+
+            paramViewerViewModel.PropertyChanged += ParamViewerViewModel_PropertyChanged;
+        }
+
+        private void ParamViewerViewModel_PropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == nameof(ParamViewerViewModel.SelectedRow))
+            {
+                OnPropertyChanged(nameof(Value));
+            }
         }
     }
 }

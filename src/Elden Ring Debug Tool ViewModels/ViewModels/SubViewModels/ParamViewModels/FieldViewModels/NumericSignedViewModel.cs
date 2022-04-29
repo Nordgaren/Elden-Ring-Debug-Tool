@@ -2,47 +2,59 @@
 
 namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels
 {
-    public class NumericSignedViewModel : FieldViewModel
+    public class NumericSignedViewModel<T> : FieldViewModel
     {
         private NumericField _numericField;
         public override object MinValue { get; }
         public override object MaxValue { get; }
-
-        public override object Value
+        public override string StringValue => Value?.ToString() ?? "null";
+        public T? Value
         {
             get
             {
                 if (ParamViewerViewModel.SelectedRow == null)
-                    return null;
+                    return default(T);
+
+                if (InternalName.Contains("sleep"))
+                    Console.WriteLine();
 
                 return GetValue();
             }
             set
             {
-                if (ParamViewerViewModel.SelectedRow == null)
+                if (ParamViewerViewModel.SelectedRow == null || value == null)
                     return;
 
-                byte[] buffer = BitConverter.GetBytes((long)value);
+                byte[] buffer = GetBytes(value);
                 byte[] bytes = new byte[GetSize()];
                 Array.Copy(buffer, bytes, bytes.Length);
                 Param.Pointer.WriteBytes(Offset, bytes);
                 Array.Copy(bytes, 0, Param.Bytes, Offset, bytes.Length);
             }
         }
-        private long GetValue()
+        private byte[] GetBytes(T val)
+        {
+            if (val is sbyte sb) return new byte[] { (byte)sb };
+            if (val is short s) return BitConverter.GetBytes(s);
+            if (val is int i) return BitConverter.GetBytes(i);
+
+            throw new NotImplementedException($"No conversion for this type {typeof(T)}");
+        }
+
+        private T? GetValue()
         {
             switch (GetSize())
             {
                 case 1:
-                    return Param.Bytes[Offset];
+                    return (T?)(object)Convert.ToSByte(Param.Bytes[Offset]);
                 case 2:
-                    return BitConverter.ToInt16(Param.Bytes, Offset);
+                    return (T?)(object)BitConverter.ToInt16(Param.Bytes, Offset);
                 case 4:
-                    return BitConverter.ToInt32(Param.Bytes, Offset);
+                    return (T?)(object)BitConverter.ToInt32(Param.Bytes, Offset);
                 case 8:
-                    return BitConverter.ToInt64(Param.Bytes, Offset);
+                    return (T?)(object)BitConverter.ToInt64(Param.Bytes, Offset);
                 default:
-                    return 0;
+                    return default(T?);
             }
         }
         public NumericSignedViewModel(ParamViewerViewModel paramViewerViewModel, NumericField numericField) : base(paramViewerViewModel, numericField)
@@ -64,6 +76,16 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels
                     break;
                 default:
                     break;
+            }
+
+            paramViewerViewModel.PropertyChanged += ParamViewerViewModel_PropertyChanged;
+        }
+
+        private void ParamViewerViewModel_PropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == nameof(ParamViewerViewModel.SelectedRow))
+            {
+                OnPropertyChanged(nameof(Value));
             }
         }
     }

@@ -6,13 +6,23 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels
     {
         private BitField _bitField; 
         private int _bitPosition;
-        public override string StringValue => (bool)Value ? "1 True On" : "0 False Off";
-        public override object Value
+        public override string StringValue
+        {
+            get
+            {
+                if (Value == null)
+                    return "null";
+
+                return (bool)Value ? "1 True On" : "0 False Off";
+            }
+        }
+
+        public bool? Value
         {
             get => ParamViewerViewModel.SelectedRow != null ?  ((Param.Bytes[Offset] & (1 << _bitPosition)) != 0) : null;
             set
             {
-                if (ParamViewerViewModel.SelectedRow == null)
+                if (ParamViewerViewModel.SelectedRow == null || value == null)
                     return;
 
                 byte paramValue = Param.Bytes[Offset];
@@ -30,6 +40,16 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels
         {
             _bitField = bitField;
             _bitPosition = _bitField.BitPosition;
+
+            paramViewerViewModel.PropertyChanged += ParamViewerViewModel_PropertyChanged;
+        }
+
+        private void ParamViewerViewModel_PropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == nameof(ParamViewerViewModel.SelectedRow))
+            {
+                OnPropertyChanged(nameof(Value));
+            }
         }
     }
 }

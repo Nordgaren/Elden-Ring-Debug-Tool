@@ -7,8 +7,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels
         private ERParam.Field _field;
         protected ParamViewerViewModel ParamViewerViewModel;
         protected ERParam Param => ParamViewerViewModel.SelectedParam.Param;
-        public virtual string StringValue => Value?.ToString() ?? "";
-        public virtual object Value { get; set; }
+        public virtual string StringValue => throw new NotImplementedException("String Value not implimented for abstract base class");
         public string Type;
         public string InternalName => _field.InternalName;
         public string DisplayName => _field.DisplayName;
@@ -27,15 +26,6 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels
             Type = Enum.GetName(_field.Type) ?? "";
             FieldOffset = _field.FieldOffset;
 
-            paramViewerViewModel.PropertyChanged += ParamViewerViewModel_PropertyChanged;
-        }
-
-        private void ParamViewerViewModel_PropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
-        {
-            if (e.PropertyName == nameof(ParamViewerViewModel.SelectedRow))
-            {
-                OnPropertyChanged(nameof(Value));
-            }
         }
 
         public int GetSize()

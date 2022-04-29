@@ -129,7 +129,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
         {
             if (obj is ERParamViewModel param)
             {
-                return param.Type.Contains(ParamFilter, StringComparison.OrdinalIgnoreCase);
+                return param.Type.Contains(ParamFilter, StringComparison.InvariantCultureIgnoreCase);
             }
 
             return false;
@@ -149,7 +149,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
         {
             if (obj is RowViewModel row)
             {
-                return row.Name.Contains(RowFilter, StringComparison.OrdinalIgnoreCase) || row.ID.ToString().Contains(RowFilter);
+                return row.Name.Contains(RowFilter, StringComparison.InvariantCultureIgnoreCase) || row.ID.ToString().Contains(RowFilter);
             }
 
             return false;
@@ -161,15 +161,19 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
             get => _fieldFilter;
             set
             {
-                SetField(ref _fieldFilter, value);
-                FieldCollectionView.Refresh();
+               if (SetField(ref _fieldFilter, value))
+                {
+                    FieldCollectionView.Refresh();
+                };
             }
         }
         private bool FilterFields(object obj)
         {
             if (obj is FieldViewModel field)
             {
-                return field.InternalName.Contains(FieldFilter, StringComparison.OrdinalIgnoreCase) || field.DisplayName.ToString().Contains(FieldFilter) || field.StringValue.Contains(FieldFilter);
+                return field.InternalName.Contains(FieldFilter, StringComparison.InvariantCultureIgnoreCase) 
+                    || field.DisplayName.ToString().Contains(FieldFilter, StringComparison.InvariantCultureIgnoreCase) 
+                    || field.StringValue.Contains(FieldFilter);
             }
 
             return false;

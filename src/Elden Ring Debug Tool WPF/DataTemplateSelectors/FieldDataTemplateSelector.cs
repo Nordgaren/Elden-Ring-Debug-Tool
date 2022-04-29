@@ -19,42 +19,23 @@ namespace Elden_Ring_Debug_Tool_WPF.DataTemplateSelectors
         public override DataTemplate SelectTemplate(object item, DependencyObject container)
         {
             FieldViewModel fieldViewModel = (FieldViewModel)item; 
-            if (fieldViewModel is NumericSignedViewModel sValue)
-            {
-                switch (sValue.Type)
-                {
-                    case "s8":
-                        return NumericSigned8;
-                    case "s16":
-                        return NumericSigned16;
-                    case "s32":
-                        return NumericSigned32;
-                    default:
-                        break;
-                }
-            }
+            if (fieldViewModel is NumericSignedViewModel<sbyte>)
+                return NumericSigned8;
 
-            if (fieldViewModel is NumericViewModel value)
-            {
-                switch (value.Type)
-                {
-                    case "u8":
-                        return NumericUnsigned8;
-                    case "dummy8":
-                        if (value.ArrayLength == 2)
-                            return NumericUnsigned16;
-                        else if (value.ArrayLength == 4)
-                            return NumericUnsigned32;
+            if (fieldViewModel is NumericSignedViewModel<short>)
+                return NumericSigned16;
 
-                        return NumericUnsigned8;
-                    case "u16":
-                        return NumericUnsigned16;
-                    case "u32":
-                        return NumericUnsigned32;
-                    default:
-                        break;
-                }
-            }
+            if (fieldViewModel is NumericSignedViewModel<int>)
+                return NumericSigned32;
+
+            if (fieldViewModel is NumericViewModel<byte>)
+                return NumericUnsigned8;
+
+            if (fieldViewModel is NumericViewModel<ushort>)
+                return NumericUnsigned16;
+
+            if (fieldViewModel is NumericViewModel<uint>)
+                return NumericUnsigned32;
 
             if (fieldViewModel is SingleFieldViewModel)
                 return SingleField;

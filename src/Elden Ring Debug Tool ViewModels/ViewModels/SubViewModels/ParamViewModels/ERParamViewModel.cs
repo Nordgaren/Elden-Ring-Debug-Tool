@@ -41,10 +41,27 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels
         {
             if (field is NumericField numField)
             {
-                if (numField.IsSigned)
-                    return new NumericSignedViewModel(ParamViewerViewModel, numField);
-                else
-                    return new NumericViewModel(ParamViewerViewModel, numField);
+                switch (field.Type)
+                {
+                    case SoulsFormats.PARAMDEF.DefType.s8:
+                        return new NumericSignedViewModel<sbyte>(ParamViewerViewModel, numField);
+                    case SoulsFormats.PARAMDEF.DefType.dummy8:
+                    case SoulsFormats.PARAMDEF.DefType.u8:
+                         return new NumericViewModel<byte>(ParamViewerViewModel, numField);
+                    case SoulsFormats.PARAMDEF.DefType.s16:
+                        return new NumericSignedViewModel<short>(ParamViewerViewModel, numField);
+                    case SoulsFormats.PARAMDEF.DefType.u16:
+                         return new NumericViewModel<ushort>(ParamViewerViewModel, numField);
+                    case SoulsFormats.PARAMDEF.DefType.s32:
+                        return new NumericSignedViewModel<int>(ParamViewerViewModel, numField);
+                    case SoulsFormats.PARAMDEF.DefType.u32:
+                         return new NumericViewModel<uint>(ParamViewerViewModel, numField);
+                    case SoulsFormats.PARAMDEF.DefType.f32:
+                    case SoulsFormats.PARAMDEF.DefType.fixstr:
+                    case SoulsFormats.PARAMDEF.DefType.fixstrW:
+                    default:
+                        break;
+                }
             }
 
             if (field is SingleField floatField)
