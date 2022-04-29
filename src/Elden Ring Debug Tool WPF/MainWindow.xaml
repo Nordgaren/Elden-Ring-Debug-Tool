@@ -6,6 +6,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:wpfTool="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:local="clr-namespace:Elden_Ring_Debug_Tool_WPF"
+        xmlns:view="clr-namespace:Elden_Ring_Debug_Tool_WPF.Views"
+        xmlns:ctrl="clr-namespace:Elden_Ring_Debug_Tool_WPF.Controls"
         xmlns:viewModel="clr-namespace:Elden_Ring_Debug_Tool_ViewModels.ViewModels;assembly=Elden-Ring-Debug-Tool-ViewModels"
         mc:Ignorable="d"
         Title="Elden Ring Debug Tool" Height="600" Width="800" MinHeight="600" MinWidth="800" Icon="Icon.ico" Loaded="Window_Loaded" Closing="Window_Closing" Background="#777777" 
@@ -84,18 +86,20 @@
                         <Label Name="lblLoaded" Content="{Binding ContentLoaded}" Margin="1,0,0,0" Foreground="{Binding ForegroundLoaded}"/>
                     </StackPanel>
                 </StackPanel >
-                --><!--<StackPanel Grid.Row="2" Grid.Column="0"  HorizontalAlignment="Left">
+                -->
+            <!--<StackPanel Grid.Row="2" Grid.Column="0"  HorizontalAlignment="Left">
                     <StackPanel Orientation="Horizontal">
                         <Label Content="Online:" />
                         <Label Content="{Binding ContentOnline}" Margin="5,0,0,0" Foreground="{Binding ForegroundOnline}"/>
                     </StackPanel>
                 </StackPanel >-->
-                <!--<StackPanel Grid.Row="1" Grid.Column="1"  HorizontalAlignment="Right">
+            <!--<StackPanel Grid.Row="1" Grid.Column="1"  HorizontalAlignment="Right">
                     <StackPanel Orientation="Horizontal" Width="175">
                         <Label Content="Version:" />
                         <Label Content="{Binding Hook.Version}" Foreground="{Binding ForegroundVersion}" x:Name="VersionText" Margin="5,0,0,0" />
                     </StackPanel>
-                </StackPanel >--><!--
+                </StackPanel >-->
+            <!--
                 <StackPanel Grid.Column="1" HorizontalAlignment="Right" Grid.ColumnSpan="3" >
                     <Grid >
                         <Label x:Name="labelCheckVersion" />
@@ -109,9 +113,10 @@
 
                     </Grid>
                 </StackPanel>
-            --><!--</Grid>-->
+            -->
+            <!--</Grid>-->
         </StackPanel>
-        
+
         <StackPanel Grid.Row="3" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center">
             <StackPanel Orientation="Horizontal">
                 <Label Content="Process:" FontWeight="ExtraBlack"/>
@@ -131,55 +136,61 @@
                 </Hyperlink>
             </Label>
         </StackPanel>
-       
+
 
         <TabControl Background="LightGray" Grid.Row="1" Margin="0,0,0,0">
             <TabItem Header="Params">
                 <Grid Background="LightGray">
-                    <local:ParamViewerControl x:Name="DebugParam" 
+                    <view:ParamViewerView
                     DataContext="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type TabControl}}, Path=DataContext.ParamViewerViewModel}" />
                 </Grid>
             </TabItem>
             <TabItem Header="Inventory">
                 <Grid Background="LightGray">
-                    <local:ItemControl x:Name="DebugItems" 
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <view:ItemView
                     DataContext="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type TabControl}}, Path=DataContext.ItemGibViewModel}"/>
+                    <view:InventoryView Grid.Column="1"
+                    DataContext="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type TabControl}}, Path=DataContext.InventoryViewModel}"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Target">
                 <Grid Background="LightGray">
-                    <local:TargetControl x:Name="DebugTarget" Hook="{Binding Hook}"/>
+                    <view:TargetControl x:Name="DebugTarget"/>
                 </Grid>
             </TabItem>
-            <TabItem Header="Cheats">
+            <TabItem Header="Debug">
                 <Grid Background="LightGray">
-                    <local:CheatsControl x:Name="DebugCheats" Hook="{Binding Hook}"/>
+                    <view:DebugView DataContext="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type TabControl}}, Path=DataContext.DebugViewViewModel}"/>
                 </Grid>
             </TabItem>
 
             <TabItem x:Name="DebugSettings" Header="Settings">
-                    <Grid Background="LightGray">
-                        <TabControl Background="LightGray" Margin="0,10,0,0">
-                            <TabItem Header="General">
-                                <Grid >
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition/>
-                                        <ColumnDefinition/>
-                                    </Grid.ColumnDefinitions>
-                                    <StackPanel>
-                                        <StackPanel Grid.Column="0" >
-                                            <Separator Visibility="Hidden" Height="10"/>
-                                            <Label Content="General"/>
-                                            <Border BorderBrush="Gray" BorderThickness="1" >
-                                                <StackPanel Margin="0,5,0,5">
+                <Grid Background="LightGray">
+                    <TabControl Background="LightGray" Margin="0,10,0,0">
+                        <TabItem Header="General">
+                            <Grid >
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <StackPanel>
+                                    <StackPanel Grid.Column="0" >
+                                        <Separator Visibility="Hidden" Height="10"/>
+                                        <Label Content="General"/>
+                                        <Border BorderBrush="Gray" BorderThickness="1" >
+                                            <StackPanel Margin="0,5,0,5">
                                                 <CheckBox Margin="10,5,0,0" Content="Show Warning on Startup" IsChecked="{Binding ShowWarning, 
                 Mode=TwoWay, 
                 Source={x:Static p:Settings.Default}, 
                 UpdateSourceTrigger=PropertyChanged}"/>
-                                                </StackPanel>
-                                            </Border>
-                                        </StackPanel>
-                                        <!--<StackPanel Grid.Column="0" >
+                                            </StackPanel>
+                                        </Border>
+                                    </StackPanel>
+                                    <!--<StackPanel Grid.Column="0" >
                                             <Separator Visibility="Hidden" Height="10"/>
                                             <Label Content="Stats Tab"/>
                                             <Border BorderBrush="Gray" BorderThickness="1" >
@@ -191,41 +202,41 @@
                                                 </StackPanel>
                                             </Border>
                                         </StackPanel>-->
-                                        <StackPanel Grid.Column="0" >
-                                            <Separator Visibility="Hidden" Height="10"/>
-                                            <Label Content="Item Tab"/>
-                                            <Border BorderBrush="Gray" BorderThickness="1" >
-                                                <StackPanel Margin="0,5,0,5">
-                                                    <!--<CheckBox Margin="10,5,0,0" Content="Give Items Silently" IsChecked="{Binding SilentItemGive, 
+                                    <StackPanel Grid.Column="0" >
+                                        <Separator Visibility="Hidden" Height="10"/>
+                                        <Label Content="Item Tab"/>
+                                        <Border BorderBrush="Gray" BorderThickness="1" >
+                                            <StackPanel Margin="0,5,0,5">
+                                                <!--<CheckBox Margin="10,5,0,0" Content="Give Items Silently" IsChecked="{Binding SilentItemGive, 
                 Mode=TwoWay, 
                 Source={x:Static p:Settings.Default}, 
                 UpdateSourceTrigger=PropertyChanged}"/>-->
-                                                    <CheckBox Margin="10,5,0,0" Content="Spawn Undroppable Items" IsChecked="{Binding SpawnUndroppable, 
+                                                <CheckBox Margin="10,5,0,0" Content="Spawn Undroppable Items" IsChecked="{Binding SpawnUndroppable, 
                 Mode=TwoWay, 
                 Source={x:Static p:Settings.Default}, 
                 UpdateSourceTrigger=PropertyChanged}" Checked="SpawnUndroppable_Checked" Unchecked="SpawnUndroppable_Checked"/>
-                                                </StackPanel>
-                                            </Border>
-                                        </StackPanel>
+                                            </StackPanel>
+                                        </Border>
                                     </StackPanel>
+                                </StackPanel>
 
-                                </Grid>
+                            </Grid>
 
-                            </TabItem>
-                            <TabItem x:Name="tabHotkeys" Header="Hotkeys">
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition/>
-                                        <ColumnDefinition/>
-                                    </Grid.ColumnDefinitions>
-                                    <StackPanel Grid.Row="1" Margin="0,10,0,0">
-                                        <Separator Visibility="Hidden"/>
-                                        <CheckBox Content="Enable Hotkeys" x:Name="cbxEnableHotkeys"/>
-                                        <Separator Visibility="Hidden"/>
-                                        <CheckBox Content="Handle Hotkeys" x:Name="cbxHandleHotkeys"/>
-                                        <Separator Visibility="Hidden"/>
-                                        <Separator Margin="0,10,0,10"/>
-                                        <!--<Label Content="Player Tab"/>
+                        </TabItem>
+                        <TabItem x:Name="tabHotkeys" Header="Hotkeys">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <StackPanel Grid.Row="1" Margin="0,10,0,0">
+                                    <Separator Visibility="Hidden"/>
+                                    <CheckBox Content="Enable Hotkeys" x:Name="cbxEnableHotkeys"/>
+                                    <Separator Visibility="Hidden"/>
+                                    <CheckBox Content="Handle Hotkeys" x:Name="cbxHandleHotkeys"/>
+                                    <Separator Visibility="Hidden"/>
+                                    <Separator Margin="0,10,0,10"/>
+                                    <!--<Label Content="Player Tab"/>
                                         <Border BorderBrush="Gray" BorderThickness="1" >
                                             <StackPanel Margin="5,0,5,5" >
                                                 <local:HotkeyControl x:Name="hkeyStorePosition" HotkeyName="Store Position" Margin="0,5,0,0" />
@@ -238,59 +249,19 @@
                                                 <local:HotkeyControl x:Name="hkeyWarp" HotkeyName="Warp" Margin="0,5,0,0"/>
                                             </StackPanel>
                                         </Border>-->
-                                        <Label Content="Item Tab"/>
-                                        <Border BorderBrush="Gray" BorderThickness="1" >
-                                            <StackPanel Margin="5,0,5,5" >
-                                            <local:HotkeyControl x:Name="hkeyCreateItem" HotkeyName="Create Item" Margin="0,5,0,0"/>
+                                    <Label Content="Item Tab"/>
+                                    <Border BorderBrush="Gray" BorderThickness="1" >
+                                        <StackPanel Margin="5,0,5,5" >
+                                            <ctrl:HotkeyControl x:Name="hkeyCreateItem" HotkeyName="Create Item" Margin="0,5,0,0"/>
                                         </StackPanel>
-                                        </Border>
+                                    </Border>
 
-                                    </StackPanel>
-                                </Grid>
-                            </TabItem>
-                        </TabControl>
-                    </Grid>
-                </TabItem>
-            </TabControl>
+                                </StackPanel>
+                            </Grid>
+                        </TabItem>
+                    </TabControl>
+                </Grid>
+            </TabItem>
+        </TabControl>
     </Grid>
 </Window>
-<!--<Grid Height="25" MouseDown="Grid_MouseDown" Background="Black">
-    <StackPanel Orientation="Horizontal">
-        --><!--<Image Source="Icon.ico" Width="25" />--><!--
-        <Label x:Name="lblWindowName" Foreground="White" Content="Elden Ring Debug Tool"/>
-    </StackPanel>
-    <StackPanel Orientation="Horizontal" 
-                        Grid.Column="11"
-                        HorizontalAlignment="Right"
-                            Grid.ColumnSpan="2">
-        <Button x:Name="Minimize"
-                        Content="➖"
-                        VerticalAlignment="Center"
-                        Width="20"
-                        Height="20"
-                        FontWeight="Bold"
-                        Background="Transparent"
-                        Foreground="White"
-                        Click="Minimize_Click"
-                        BorderThickness="0"/>
-
-        <Button x:Name="Maximize"
-                        Content="☐"
-                        VerticalAlignment="Center"
-                        Width="20"
-                        Height="20"
-                        FontWeight="Bold"
-                        Background="Transparent"
-                        Foreground="White"
-                        Click="Maximize_Click"
-                        BorderThickness="0"/>
-        <Button x:Name="btnClose"
-                        Content="❌"
-                        Width="20"
-                        Height="20"
-                        Background="Transparent"
-                        Foreground="White"
-                        Click="MainWindowClose_Click"
-                        BorderThickness="0"/>
-    </StackPanel>
-</Grid>-->

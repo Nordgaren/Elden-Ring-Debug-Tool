@@ -15,6 +15,5 @@ namespace Elden_Ring_Debug_Tool_WPF.Converters
         {
             return (double)value * 2;
         }
-
     }
 }

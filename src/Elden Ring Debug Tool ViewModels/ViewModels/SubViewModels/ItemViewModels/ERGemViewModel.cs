@@ -1,18 +1,12 @@
 ﻿using Erd_Tools;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static Erd_Tools.ERItem;
 using static Erd_Tools.ERWeapon;
 
 namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels
 {
     public class ERGemViewModel : ERItemViewModel
     {
-        public static ObservableCollection<ERGemViewModel> All = new ObservableCollection<ERGemViewModel>();
+        public static ObservableCollection<ERGemViewModel> AllGems = new ObservableCollection<ERGemViewModel>();
         protected ERGem _gem => _item as ERGem;
         public int SwordArtID => _gem.SwordArtID;
         public short WeaponAttr => _gem.WeaponAttr;
@@ -23,7 +17,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels
         {
             Infusions = new ObservableCollection<Infusion>();
             WeaponTypes = new ObservableCollection<WeaponType>();
-            All.Add(this);
+            AllGems.Add(this);
         }
 
         public override void SetupItem()

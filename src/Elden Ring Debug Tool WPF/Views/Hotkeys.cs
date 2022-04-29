@@ -16,7 +16,7 @@ namespace Elden_Ring_Debug_Tool_WPF
 
             Hotkeys.Add(new DebugHotkey("CreateItem", hkeyCreateItem.tbxHotkey, tabHotkeys, (hotkey) =>
             {
-                DebugItems.CreateItem();
+                //DebugItems.CreateItem();
             }, this));
 
         }

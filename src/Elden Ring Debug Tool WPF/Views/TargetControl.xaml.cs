@@ -1,4 +1,4 @@
-﻿namespace Elden_Ring_Debug_Tool_WPF
+﻿namespace Elden_Ring_Debug_Tool_WPF.Views
 {
     /// <summary>
     /// Interaction logic for TargetControl.xaml

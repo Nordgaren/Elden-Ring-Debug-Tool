@@ -1,10 +1,10 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 
-namespace Elden_Ring_Debug_Tool_WPF
+namespace Elden_Ring_Debug_Tool_WPF.Controls
 {
     /// <summary>
-    /// Interaction logic for metaHotkey.xaml
+    /// Interaction logic for HotkeyControl.xaml
     /// </summary>
     public partial class HotkeyControl : UserControl
     {

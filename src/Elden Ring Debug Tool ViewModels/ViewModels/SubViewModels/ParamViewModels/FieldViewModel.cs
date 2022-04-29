@@ -1,10 +1,4 @@
 ﻿using Erd_Tools;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static SoulsFormats.PARAMDEF;
 
 namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels
 {
@@ -23,7 +17,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels
         public virtual object MinValue { get; }
         public virtual object MaxValue { get; }
         public int Offset => ParamViewerViewModel.SelectedRow?.DataOffset + FieldOffset ?? 0;
-        public virtual object Increment => _field.Increment;
+        public object? Increment => GetIncrement();
         public int FieldOffset { get; }
 
         public FieldViewModel(ParamViewerViewModel paramViewerViewModel, ERParam.Field field)
@@ -63,6 +57,38 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels
                     throw new Exception($"Invalid size for field {InternalName}");
             }
         }
+
+        public object? GetIncrement()
+        {
+
+            if (_field.Increment == null)
+                return null;
+
+            object inc = _field.Increment;
+
+            switch (Type)
+            {
+                case "s8":
+                    return inc as sbyte?;
+                case "u8":
+                    return inc as byte?;
+                case "dummy8":
+                    return inc as byte?;
+                case "s16":
+                    return inc as short?;
+                case "u16":
+                    return inc as ushort?;
+                case "s32":
+                    return inc as int?;
+                case "u32":
+                    return inc as uint?;
+                case "f32":
+                    return inc as float?;
+                default:
+                    throw new Exception($"Invalid size for field {InternalName}");
+            }
+        }
+
 
         public override string ToString()
         {

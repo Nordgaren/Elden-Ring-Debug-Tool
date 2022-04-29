@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using Elden_Ring_Debug_Tool_ViewModels.ViewModels;
+using System.Windows;
 
 namespace Elden_Ring_Debug_Tool_WPF
 {
@@ -7,14 +8,16 @@ namespace Elden_Ring_Debug_Tool_WPF
     /// </summary>
     public partial class DebugWarning : Window
     {
-        public DebugWarning()
+        MainWindowViewModel _mainWindowViewModel;
+        public DebugWarning(MainWindowViewModel mainWindowViewModel)
         {
+            _mainWindowViewModel = mainWindowViewModel;
             InitializeComponent();
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            App.Settings.ShowWarning = !cbxDoNotShow.IsChecked.Value;
+            _mainWindowViewModel.ShowWarning = !cbxDoNotShow.IsChecked.Value;
         }
     }
 }

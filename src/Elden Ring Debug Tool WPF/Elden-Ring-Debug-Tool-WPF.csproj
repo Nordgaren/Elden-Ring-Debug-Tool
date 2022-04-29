@@ -66,7 +66,6 @@
   <ItemGroup>
     <PackageReference Include="Extended.Wpf.Toolkit" Version="4.3.0" />
     <PackageReference Include="GlobalHotkeys" Version="1.0.0.6" />
-    <PackageReference Include="PortableJsonSettingsProvider" Version="0.2.1" />
   </ItemGroup>
 
   <ItemGroup>

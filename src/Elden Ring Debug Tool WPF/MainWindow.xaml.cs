@@ -1,11 +1,5 @@
-﻿using System;
-using System.Diagnostics;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Input;
-using System.Windows.Navigation;
-using System.Reflection;
-using Octokit;
-using System.Net.Http;
 
 namespace Elden_Ring_Debug_Tool_WPF
 {
@@ -19,22 +13,22 @@ namespace Elden_Ring_Debug_Tool_WPF
 
             InitializeComponent();
 
-            if (App.Settings.ShowWarning)
+            if (!MainWindowViewModel.ShowWarning)
+                return;
+
+            DebugWarning warning = new DebugWarning(MainWindowViewModel)
             {
-                DebugWarning warning = new DebugWarning()
-                {
-                    Title = "Online Warning",
-                    Width = 350,
-                    Height = 240
-                };
-                warning.ShowDialog();
-            }
+                Title = "Online Warning",
+                Width = 350,
+                Height = 240
+            };
+            warning.ShowDialog();
         }
 
         private void InitAllCtrls()
         {
-            DebugItems.InitCtrl();
-            DebugCheats.InitCtrl();
+            //DebugItems.InitCtrl();
+            //DebugCheats.InitCtrl();
             InitHotkeys();
         }
         private async void Window_Loaded(object sender, RoutedEventArgs e)

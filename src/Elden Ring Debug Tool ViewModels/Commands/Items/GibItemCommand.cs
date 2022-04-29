@@ -1,10 +1,5 @@
 ﻿using Elden_Ring_Debug_Tool_ViewModels.ViewModels;
 using Erd_Tools;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Elden_Ring_Debug_Tool_ViewModels.Commands
 {
@@ -23,7 +18,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.Commands
         {
             return (_hook?.Setup ?? false) 
                 && _hook.Loaded 
-                && (_itemGibViewModel.SelectedItem?.CanAquireFromOtherPlayers ?? false) 
+                && ((_itemGibViewModel.SelectedItem?.CanAquireFromOtherPlayers ?? false) || MainWindowViewModel.Settings.SpawnUndroppable)
                 && base.CanExecute(parameter);
         }
 

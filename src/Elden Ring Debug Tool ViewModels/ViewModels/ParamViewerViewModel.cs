@@ -1,13 +1,8 @@
 ﻿using Erd_Tools;
 using Elden_Ring_Debug_Tool_ViewModels.Commands;
 using Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Data;
 using System.Windows.Input;
 
@@ -49,7 +44,6 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
             Setup = false;
 
         }
-
         private void Hook_OnSetup(object? sender, PropertyHook.PHEventArgs e)
         {
             System.Windows.Application.Current.Dispatcher.Invoke(() =>

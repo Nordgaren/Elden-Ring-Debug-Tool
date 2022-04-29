@@ -1,12 +1,15 @@
-﻿<local:DebugControl x:Class="Elden_Ring_Debug_Tool_WPF.CheatsControl"
-                    x:Name="DebugCheats"
+﻿<UserControl x:Class="Elden_Ring_Debug_Tool_WPF.Views.DebugView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:Elden_Ring_Debug_Tool_WPF"
-             mc:Ignorable="d" 
-             d:DesignHeight="600" d:DesignWidth="800"  Background="LightGray">
+             xmlns:local="clr-namespace:Elden_Ring_Debug_Tool_WPF" 
+             xmlns:vm="clr-namespace:Elden_Ring_Debug_Tool_ViewModels.ViewModels;assembly=Elden-Ring-Debug-Tool-ViewModels"
+                    xmlns:t="http://schemas.telerik.com/2008/xaml/presentation" 
+                    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             mc:Ignorable="d"
+             d:DesignHeight="600" d:DesignWidth="800" Background="LightGray"
+             d:DataContext="{d:DesignInstance vm:DebugViewViewModel, IsDesignTimeCreatable=True}">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
@@ -18,10 +21,12 @@
                     <Label Content="General"/>
                     <Border BorderBrush="Gray" BorderThickness="1" >
                         <StackPanel Margin="0,5,0,5">
-                        <CheckBox Margin="10,5,0,0" Content="Enable map in combat" IsChecked="{Binding ElementName=DebugCheats,Path=Hook.EnableMapCombat}" />
+                        <CheckBox Margin="10,5,0,0" Content="Enable map in combat"/>
                         <StackPanel Orientation="Horizontal">
-                        <CheckBox Margin="10,5,0,0" Content="Force Weather:" IsChecked="{Binding ElementName=DebugCheats,Path=Hook.ForceWeather}" />
-                            <ComboBox Width="200" Margin="10,0,0,0" ItemsSource="{Binding ElementName=DebugCheats, Path=WeatherTypes}" SelectedValue="{Binding ElementName=DebugCheats, Path=Hook.SelectedWeather}" x:Name="WeatherBox">
+                            <CheckBox Margin="10,5,0,0" Content="Force Weather:" >
+                          
+                            </CheckBox>
+                            <ComboBox Width="200" Margin="10,0,0,0" ItemsSource="{Binding WeatherTypes}" SelectedValue="{Binding SelectedWeather}">
                                 <ComboBox.ItemTemplate>
                                     <DataTemplate>
                                         <TextBlock Text="{Binding Converter={StaticResource EnumDescriptionConverter}}"></TextBlock>
@@ -33,7 +38,5 @@
                     </Border>
                 </StackPanel>
         </StackPanel>
-
-
     </Grid>
-</local:DebugControl>
+</UserControl>

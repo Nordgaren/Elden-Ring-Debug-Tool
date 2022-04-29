@@ -2,13 +2,8 @@
 using Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels;
 using Erd_Tools;
 using PropertyHook;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Data;
 using System.Windows.Input;
 using static Erd_Tools.ERWeapon;
@@ -18,7 +13,6 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
     public class ItemGibViewModel : ViewModelBase
     {
         internal ERHook Hook { get; set; }
-
         private readonly ObservableCollection<ERItemCategoryViewModel> _categories;
         private readonly ObservableCollection<ERGemViewModel> _gems;
 

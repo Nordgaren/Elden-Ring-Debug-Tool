@@ -24,11 +24,6 @@ namespace Elden_Ring_Debug_Tool_WPF
             if (args.Length > 1)
                 ProcessRegulationAndExit(args);
 
-            PortableJsonSettingsProvider.SettingsFileName = "ERDebug.settings.json";
-            PortableJsonSettingsProvider.SettingsDirectory = Environment.CurrentDirectory;
-            PortableJsonSettingsProvider.ApplyProvider(Elden_Ring_Debug_Tool_WPF.Properties.Settings.Default);
-            Settings = Elden_Ring_Debug_Tool_WPF.Properties.Settings.Default;
-
             //Global
             AppDomain.CurrentDomain.UnhandledException += GlobalExceptionHandler;
 

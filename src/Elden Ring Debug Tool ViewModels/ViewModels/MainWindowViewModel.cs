@@ -3,16 +3,18 @@ using System.Windows;
 using System.Windows.Media;
 using System.Timers;
 using System.Diagnostics;
-using System.Windows.Navigation;
 using System.Windows.Input;
 using Elden_Ring_Debug_Tool_ViewModels.Commands;
 using Octokit;
 using System.Reflection;
+using Bluegrams.Application;
 
 namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
 {
     public class MainWindowViewModel : ViewModelBase
     {
+        internal static Properties.Settings? Settings;
+
         public ERHook Hook { get; private set; }
 
         public bool GameLoaded { get; set; }
@@ -25,20 +27,34 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
         System.Timers.Timer UpdateTimer = new System.Timers.Timer();
         public ICommand OpenGitHubCommand { get; set; }
 
+        public bool ShowWarning
+        {
+            get { return Settings.ShowWarning; }
+            set { Settings.ShowWarning = value; }
+        }
+
 
         public MainWindowViewModel()
         {
+
+            PortableJsonSettingsProvider.SettingsFileName = "ERDebug.settings.json";
+            PortableJsonSettingsProvider.SettingsDirectory = Environment.CurrentDirectory;
+            PortableJsonSettingsProvider.ApplyProvider(Properties.Settings.Default);
+            Settings = Properties.Settings.Default;
+
             Hook = new ERHook(5000, 15000, p => p.MainWindowTitle == "ELDEN RING™");
             Hook.OnSetup += Hook_OnSetup;
             Hook.OnUnhooked += Hook_OnUnhooked;
             OpenGitHubCommand = new OpenGitHubCommand(this);
             Uri = new Uri("https://github.com/Nordgaren/Elden-Ring-Debug-Tool");
 
-            ParamViewerViewModel = new ParamViewerViewModel();
-            ParamViewerViewModel.InitViewModel(Hook);
 
+            ParamViewerViewModel = new ParamViewerViewModel();
             ItemGibViewModel = new ItemGibViewModel();
-            ItemGibViewModel.InitViewModel(Hook);
+            InventoryViewModel = new InventoryViewModel();
+            DebugViewViewModel = new DebugViewViewModel();
+
+            InitAllViewModels();
 
             Hook.Start();
         }
@@ -51,7 +67,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
 
             WindowTitle = $"Elden Ring Debug Tool {version}";
             EnableAllCtrls(false);
-            InitAllCtrls();
+
 
             try
             {
@@ -101,6 +117,20 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
         {
             get => _itemGibViewModel;
             set => SetField(ref _itemGibViewModel, value);
+        }
+
+        private InventoryViewModel _inventoryViewModel;
+        public InventoryViewModel InventoryViewModel
+        {
+            get => _inventoryViewModel;
+            set => SetField(ref _inventoryViewModel, value);
+        }
+
+        private DebugViewViewModel _debugViewViewModel;
+        public DebugViewViewModel DebugViewViewModel
+        {
+            get => _debugViewViewModel;
+            set => SetField(ref _debugViewViewModel, value);
         }
 
         private Uri _uri;
@@ -174,7 +204,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
                         {
                             Reading = true;
                             UpdateProperties();
-                            UpdateAllCtrl();
+                            UpdateAllViewModels();
                             Reading = false;
                         }
                     }
@@ -207,11 +237,12 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
             OnPropertyChanged(nameof(GameLoaded));
         }
 
-        private void InitAllCtrls()
+        private void InitAllViewModels()
         {
-            //DebugItems.InitCtrl();
-            //DebugCheats.InitCtrl();
-            //InitHotkeys();
+            ParamViewerViewModel.InitViewModel(Hook);
+            ItemGibViewModel.InitViewModel(Hook);
+            InventoryViewModel.InitViewModel(Hook);
+            DebugViewViewModel.InitViewModel(Hook);
         }
         private void UpdateProperties()
         {
@@ -229,9 +260,10 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
         {
             //DebugItems.ResetCtrl();
         }
-        private void UpdateAllCtrl()
+        private void UpdateAllViewModels()
         {
             //DebugItems.UpdateCtrl();
+            InventoryViewModel.UpdateViewModel();
             Hook.UpdateLastEnemy();
         }
         private void SaveAllTabs()
