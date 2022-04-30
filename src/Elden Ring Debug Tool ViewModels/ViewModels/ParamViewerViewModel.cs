@@ -30,6 +30,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
             SaveParamCommand = new SaveParamCommand(this);
             ResetParamCommand = new ResetParamCommand(this);
             OpenParamCaptureFolderCommand = new OpenParamCaptureFolderCommand(this);
+            OpenParamCaptureFolderCommand.Execute(null);
         }
 
         public void InitViewModel(ERHook hook)

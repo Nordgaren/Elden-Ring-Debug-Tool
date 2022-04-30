@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Runtime.InteropServices;
+using System.Windows;
 using System.Windows.Input;
 
 namespace Elden_Ring_Debug_Tool_WPF
@@ -10,7 +11,6 @@ namespace Elden_Ring_Debug_Tool_WPF
     {
         public MainWindow()
         {
-
             InitializeComponent();
 
             if (!MainWindowViewModel.ShowWarning)
@@ -23,6 +23,7 @@ namespace Elden_Ring_Debug_Tool_WPF
                 Height = 240
             };
             warning.ShowDialog();
+
         }
 
         private void InitAllCtrls()

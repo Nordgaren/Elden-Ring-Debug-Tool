@@ -13,7 +13,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels
             get
             {
                 if (ParamViewerViewModel.SelectedRow == null)
-                    return default(T);
+                    return default(T?);
 
                 return GetValue();
             }

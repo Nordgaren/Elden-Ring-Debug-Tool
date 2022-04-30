@@ -33,8 +33,9 @@
                 <ComboBox ItemsSource="{Binding InfusionCollectionView}" IsEnabled="{Binding InfusionCollectionView.IsEmpty, Converter={StaticResource InverseBoolConverter}}" SelectedValue="{Binding SelectedInfusion}" 
                 />
                 <Grid>
-                    <TextBox Height="20" Text="{Binding ItemFilter, UpdateSourceTrigger=PropertyChanged}"/>
-                    <Label x:Name="lblSearch" Foreground="LightSlateGray" Content="Search..." IsEnabled="False" Margin="5,0,0,0" IsHitTestVisible="False"/>
+                    <wpfTool:AutoSelectTextBox Height="20" Text="{Binding ItemFilter, UpdateSourceTrigger=PropertyChanged}" AutoSelectBehavior="OnFocus" />
+                    <Label Foreground="LightSlateGray" Content="Search..." IsEnabled="False" Margin="5,0,0,0" IsHitTestVisible="False"
+                           Visibility="{Binding ItemFilter, Converter={StaticResource ResourceKey=StringToVisibilityConverter}}"/>
                 </Grid>
             </StackPanel>
             <StackPanel Grid.Column="1" Margin="5">
@@ -70,7 +71,7 @@
             </Grid.RowDefinitions>
             <ComboBox ItemsSource="{Binding GemCollectionView}" SelectedItem="{Binding SelectedGem}" 
                       IsEnabled="{Binding GemCollectionView.IsEmpty, Converter={StaticResource InverseBoolConverter}}"
-                      Grid.Row="0" Margin="40,0,0,0"/>
+                      Grid.Row="0" Margin="40,0,0,0" />
             <Label Content="Ash" Width="50" HorizontalAlignment="Left" Grid.Row="0"/>
             <ListBox ItemsSource="{Binding ItemsCollectionView}" SelectedValue="{Binding SelectedItem}"
                      Margin="5" Grid.Row="1" ItemContainerStyle="{DynamicResource _ListBoxItemStyle}" />

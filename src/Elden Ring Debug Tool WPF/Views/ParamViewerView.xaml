@@ -8,7 +8,8 @@
              xmlns:wpfTool="http://schemas.xceed.com/wpf/xaml/toolkit"
              xmlns:vm="clr-namespace:Elden_Ring_Debug_Tool_ViewModels.ViewModels;assembly=Elden-Ring-Debug-Tool-ViewModels"
              xmlns:dts="clr-namespace:Elden_Ring_Debug_Tool_WPF.DataTemplateSelectors"
-             xmlns:svm="clr-namespace:Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels;assembly=Elden-Ring-Debug-Tool-ViewModels"
+             xmlns:svm="clr-namespace:Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels;assembly=Elden-Ring-Debug-Tool-ViewModels" 
+             xmlns:controls="clr-namespace:Elden_Ring_Debug_Tool_WPF.Controls"
              mc:Ignorable="d" 
              Background="DarkGray" d:DesignHeight="475" d:DesignWidth="680" 
              d:DataContext="{d:DesignInstance vm:ParamViewerViewModel, IsDesignTimeCreatable=True}" >
@@ -27,10 +28,8 @@
                                     <ColumnDefinition/>
                                     <ColumnDefinition/>
                                 </Grid.ColumnDefinitions>
-                            <Grid.ToolTip >
-                                <DockPanel Width="50" Height="70">
-                                    <Label Content="{Binding InternalName}"/>
-                                </DockPanel>
+                            <Grid.ToolTip  >
+                                <controls:ParamToolTip DataContext="{Binding Path=DataContext, RelativeSource={x:Static RelativeSource.TemplatedParent}}"/>
                             </Grid.ToolTip>
                             <Label Content="{Binding InternalName}" HorizontalAlignment="Left" FontWeight="DemiBold"/>
                             <wpfTool:IntegerUpDown Value="{Binding Value}" Minimum="{Binding MinValue}" Maximum="{Binding MaxValue}" Increment="{Binding Increment}" 
@@ -43,6 +42,7 @@
                             </Trigger>
                         </DataTemplate.Triggers>
                     </DataTemplate>
+                    
                     <DataTemplate x:Key="NumericSigned16">
                         <Grid Margin="2" x:Name="Grid" ToolTipService.ShowDuration="12000">
                             <Grid.ColumnDefinitions >
@@ -246,8 +246,8 @@
             </Grid>-->
         </StackPanel>
 
-        <TextBox Text="{Binding RowFilter, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.Column="0" 
-                 HorizontalContentAlignment="Center" IsEnabled="{Binding Setup}"/>
+        <wpfTool:AutoSelectTextBox Text="{Binding RowFilter, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.Column="0" 
+                 HorizontalContentAlignment="Center" IsEnabled="{Binding Setup}" AutoSelectBehavior="OnFocus"/>
 
         <TextBlock Text="Search Rows..." Grid.Row="1" Grid.Column="0" Margin="5,2" MinWidth="50" 
                    HorizontalAlignment="Center" Foreground="DarkGray" 
@@ -255,9 +255,9 @@
                    IsHitTestVisible="False"/>
         
         <GridSplitter Grid.Column="1" Grid.Row="1" Grid.RowSpan="2" Width="2" BorderBrush="Black" HorizontalAlignment="Stretch"/>
-        
-        <TextBox Text="{Binding FieldFilter, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.Column="2" 
-                 HorizontalContentAlignment="Center" IsEnabled="{Binding Setup}"/>
+
+        <wpfTool:AutoSelectTextBox Text="{Binding FieldFilter, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.Column="2" 
+                 HorizontalContentAlignment="Center" IsEnabled="{Binding Setup}" AutoSelectBehavior="OnFocus"/>
 
         <TextBlock Text="Search Fields..." Grid.Row="1" Grid.Column="2" Margin="5,2" MinWidth="50"  
                    HorizontalAlignment="Center" Foreground="DarkGray" 

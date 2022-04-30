@@ -159,7 +159,7 @@
             </TabItem>
             <TabItem Header="Target">
                 <Grid Background="LightGray">
-                    <view:TargetControl x:Name="DebugTarget"/>
+                    <view:TargetControl />
                 </Grid>
             </TabItem>
             <TabItem Header="Debug">

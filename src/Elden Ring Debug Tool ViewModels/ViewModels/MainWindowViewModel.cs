@@ -175,8 +175,8 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
 
         public void Dispose()
         {
-            if (Hook.EnableMapCombat)
-                Hook.EnableMapCombat = false;
+            if (Hook.CombatMapEnabled)
+                Hook.EnableMapCombat(false);
 
             UpdateTimer.Stop();
             SaveAllTabs();

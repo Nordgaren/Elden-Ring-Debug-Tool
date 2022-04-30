@@ -8,7 +8,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels
         protected ParamViewerViewModel ParamViewerViewModel;
         protected ERParam Param => ParamViewerViewModel.SelectedParam.Param;
         public virtual string StringValue => throw new NotImplementedException("String Value not implimented for abstract base class");
-        public string Type;
+        public string Type => _field.Type.ToString();
         public string InternalName => _field.InternalName;
         public string DisplayName => _field.DisplayName;
         public string Description => _field.Description;
@@ -17,15 +17,13 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels
         public virtual object MaxValue { get; }
         public int Offset => ParamViewerViewModel.SelectedRow?.DataOffset + FieldOffset ?? 0;
         public object? Increment => GetIncrement();
-        public int FieldOffset { get; }
+        public int FieldOffset => _field.FieldOffset;
 
         public FieldViewModel(ParamViewerViewModel paramViewerViewModel, ERParam.Field field)
         {
             ParamViewerViewModel = paramViewerViewModel;
             _field = field;
-            Type = Enum.GetName(_field.Type) ?? "";
-            FieldOffset = _field.FieldOffset;
-
+            //Type = Enum.GetName(_field.Type) ?? "null";
         }
 
         public int GetSize()
@@ -78,7 +76,6 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels
                     throw new Exception($"Invalid size for field {InternalName}");
             }
         }
-
 
         public override string ToString()
         {

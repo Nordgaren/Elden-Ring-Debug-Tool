@@ -13,7 +13,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels
                 if (Value == null)
                     return "null";
 
-                return (bool)Value ? "1 True On" : "0 False Off";
+                return (bool)Value ? "1 true On" : "0 false Off";
             }
         }
 

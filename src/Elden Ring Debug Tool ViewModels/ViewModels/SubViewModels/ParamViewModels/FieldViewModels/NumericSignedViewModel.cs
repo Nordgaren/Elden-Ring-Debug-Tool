@@ -13,10 +13,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels
             get
             {
                 if (ParamViewerViewModel.SelectedRow == null)
-                    return default(T);
-
-                if (InternalName.Contains("sleep"))
-                    Console.WriteLine();
+                    return default(T?);
 
                 return GetValue();
             }
@@ -54,7 +51,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels
                 case 8:
                     return (T?)(object)BitConverter.ToInt64(Param.Bytes, Offset);
                 default:
-                    return default(T?);
+                    throw new Exception($"Unknown size for type {Type}");
             }
         }
         public NumericSignedViewModel(ParamViewerViewModel paramViewerViewModel, NumericField numericField) : base(paramViewerViewModel, numericField)

@@ -12,6 +12,7 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <TextBlock TextAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Center" Text="{Binding ElementName=ContHotkey, Path=HotkeyName}"/>
+        
         <TextBox x:Name="tbxHotkey" Width="75" Grid.Column="1" TextAlignment="Center" HorizontalAlignment="Right"/>
     </Grid>
 </UserControl>
