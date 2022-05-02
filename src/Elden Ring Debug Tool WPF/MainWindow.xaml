@@ -142,7 +142,7 @@
             <TabItem Header="Params">
                 <Grid Background="LightGray">
                     <view:ParamViewerView
-                    DataContext="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type TabControl}}, Path=DataContext.ParamViewerViewModel}" />
+                    DataContext="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type TabControl}}, Path=DataContext.ParamViewViewModel}" />
                 </Grid>
             </TabItem>
             <TabItem Header="Inventory">
@@ -160,6 +160,11 @@
             <TabItem Header="Target">
                 <Grid Background="LightGray">
                     <view:TargetControl />
+                </Grid>
+            </TabItem>
+            <TabItem Header="Hotkey">
+                <Grid Background="LightGray">
+                    <view:HotkeyView DataContext="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type TabControl}}, Path=DataContext.HotkeyViewViewModel}"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Debug">
@@ -252,7 +257,6 @@
                                     <Label Content="Item Tab"/>
                                     <Border BorderBrush="Gray" BorderThickness="1" >
                                         <StackPanel Margin="5,0,5,5" >
-                                            <ctrl:HotkeyControl x:Name="hkeyCreateItem" HotkeyName="Create Item" Margin="0,5,0,0"/>
                                         </StackPanel>
                                     </Border>
 

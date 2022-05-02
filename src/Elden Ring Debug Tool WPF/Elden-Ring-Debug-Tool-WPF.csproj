@@ -65,7 +65,6 @@
 
   <ItemGroup>
     <PackageReference Include="Extended.Wpf.Toolkit" Version="4.3.0" />
-    <PackageReference Include="GlobalHotkeys" Version="1.0.0.6" />
   </ItemGroup>
 
   <ItemGroup>

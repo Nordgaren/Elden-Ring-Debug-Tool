@@ -1,30 +1,36 @@
 ﻿using Elden_Ring_Debug_Tool_ViewModels.ViewModels;
 using System;
-using System.Collections.ObjectModel;
+using System.Collections.Generic;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using static Erd_Tools.ERHook;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
 
 namespace Elden_Ring_Debug_Tool_WPF.Views
 {
     /// <summary>
-    /// Interaction logic for Cheats.xaml
+    /// Interaction logic for HotkeyView.xaml
     /// </summary>
-    public partial class DebugView : UserControl
+    public partial class HotkeyView : UserControl
     {
-        public DebugView()
+        public HotkeyView()
         {
             InitializeComponent();
         }
 
-        private DebugViewViewModel _itemGibViewModel;
+        private HotkeyViewViewModel _itemGibViewModel;
 
         private void OnDataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
-            if (DataContext is DebugViewViewModel vm)
+            if (DataContext is HotkeyViewViewModel vm)
             {
                 _itemGibViewModel = vm;
             }
@@ -65,6 +71,5 @@ namespace Elden_Ring_Debug_Tool_WPF.Views
             textBox.Background = Brushes.White;
 
         }
-
     }
 }

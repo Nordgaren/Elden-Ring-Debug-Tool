@@ -28,15 +28,12 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels
             {
                 case Category.Weapons:
                     return new ERWeaponViewModel(item as ERWeapon);
-                    break;
                 case Category.Protector:
                 case Category.Accessory:
                 case Category.Goods:
                     return new ERItemViewModel(item);
-                    break;
                 case Category.Gem:
                     return new ERGemViewModel(item as ERGem);
-                    break;
                 default:
                     throw new Exception("Incorrect Category");
             }

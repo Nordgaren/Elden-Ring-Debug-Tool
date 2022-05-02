@@ -12,7 +12,8 @@ using System.Windows.Data;
 
 namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
 {
-    public class InventoryViewModel : ViewModelBase
+    [Description("Inventory View")]
+    public class InventoryViewViewModel : ViewModelBase
     {
         internal ERHook Hook { get; set; }
 
@@ -57,7 +58,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
 
         public ICollectionView InventoryCollectionView => CollectionViewSource.GetDefaultView(PlayerInventory);
 
-        public InventoryViewModel()
+        public InventoryViewViewModel()
         {
             PlayerInventory = new ObservableCollection<ERInventoryEntryViewModel>();
         }

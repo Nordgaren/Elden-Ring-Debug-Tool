@@ -5,7 +5,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels
     public abstract class FieldViewModel : ViewModelBase
     {
         private ERParam.Field _field;
-        protected ParamViewerViewModel ParamViewerViewModel;
+        protected ParamViewViewModel ParamViewerViewModel;
         protected ERParam Param => ParamViewerViewModel.SelectedParam.Param;
         public virtual string StringValue => throw new NotImplementedException("String Value not implimented for abstract base class");
         public string Type => _field.Type.ToString();
@@ -19,7 +19,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels
         public object? Increment => GetIncrement();
         public int FieldOffset => _field.FieldOffset;
 
-        public FieldViewModel(ParamViewerViewModel paramViewerViewModel, ERParam.Field field)
+        public FieldViewModel(ParamViewViewModel paramViewerViewModel, ERParam.Field field)
         {
             ParamViewerViewModel = paramViewerViewModel;
             _field = field;

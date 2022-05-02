@@ -24,8 +24,8 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels
         {
             System.Windows.Application.Current.Dispatcher.Invoke(() =>
             {
-                Infusions = new ObservableCollection<Infusion>(_gem.Infusions);
-                WeaponTypes = new ObservableCollection<WeaponType>(_gem.WeaponTypes);
+                Infusions = new ObservableCollection<Infusion>(_gem?.Infusions);
+                WeaponTypes = new ObservableCollection<WeaponType>(_gem?.WeaponTypes);
             });
         }
     }

@@ -10,14 +10,12 @@
                 <ResourceDictionary Source="Themes\ControlDictionary.xaml"/>
             </ResourceDictionary.MergedDictionaries>
             <conv:StringToVisibilityConverter x:Key="StringToVisibilityConverter"/>
-            <conv:NumberToHexStringConverter x:Key="NumberToHexStringConverter"/>
-            <conv:HalfNumberConverter x:Key="HalfNumberConverter"/>
-            <conv:EnumDescriptionConverter x:Key="EnumDescriptionConverter"/>
+            <!--<conv:EnumDescriptionConverter x:Key="EnumDescriptionConverter"/>-->
+            <conv:KeyToStringConverter x:Key="KeyToStringConverter"/>
             <conv:NullObjectToBoolConverter x:Key="NullObjectToBoolConverter"/>
             <conv:InverseBoolConverter x:Key="InverseBoolConverter"/>
-            <conv:CountToBoolConverter x:Key="CountToBoolConverter"/>
             <conv:MultiBoolConverter x:Key="MultiBoolConverter"/>
-            <conv:NullToValueConverter x:Key="NullToValueConverter"/>
+            <conv:NullObjectToVisibilityConverter x:Key="NullObjectToVisibilityConverter"/>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

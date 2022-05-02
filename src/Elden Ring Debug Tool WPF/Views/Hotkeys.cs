@@ -10,21 +10,21 @@ namespace Elden_Ring_Debug_Tool_WPF
 
         private void InitHotkeys()
         {
-            cbxEnableHotkeys.IsChecked = App.Settings?.EnableHotkeys;
-            cbxHandleHotkeys.IsChecked = App.Settings?.HandleHotkeys;
+            //cbxEnableHotkeys.IsChecked = App.Settings?.EnableHotkeys;
+            //cbxHandleHotkeys.IsChecked = App.Settings?.HandleHotkeys;
 
 
-            Hotkeys.Add(new DebugHotkey("CreateItem", hkeyCreateItem.tbxHotkey, tabHotkeys, (hotkey) =>
-            {
-                //DebugItems.CreateItem();
-            }, this));
+            //Hotkeys.Add(new DebugHotkey("CreateItem", hkeyCreateItem.tbxHotkey, tabHotkeys, (hotkey) =>
+            //{
+            //    //DebugItems.CreateItem();
+            //}, this));
 
         }
 
         private void SaveHotkeys()
         {
-            App.Settings.EnableHotkeys = cbxEnableHotkeys.IsChecked.Value;
-            App.Settings.HandleHotkeys = cbxHandleHotkeys.IsChecked.Value;
+            //App.Settings.EnableHotkeys = cbxEnableHotkeys.IsChecked.Value;
+            //App.Settings.HandleHotkeys = cbxHandleHotkeys.IsChecked.Value;
             foreach (DebugHotkey hotkey in Hotkeys)
                 hotkey.Save();
         }

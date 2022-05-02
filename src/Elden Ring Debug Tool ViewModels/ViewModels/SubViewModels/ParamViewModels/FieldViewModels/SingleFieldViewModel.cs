@@ -21,7 +21,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels
                 Array.Copy(bytes, 0, Param.Bytes, Offset, bytes.Length);
             }
         }
-        public SingleFieldViewModel(ParamViewerViewModel paramViewerViewModel, SingleField floatField) : base(paramViewerViewModel, floatField)
+        public SingleFieldViewModel(ParamViewViewModel paramViewerViewModel, SingleField floatField) : base(paramViewerViewModel, floatField)
         {
             _floatField = floatField;
             paramViewerViewModel.PropertyChanged += ParamViewerViewModel_PropertyChanged;

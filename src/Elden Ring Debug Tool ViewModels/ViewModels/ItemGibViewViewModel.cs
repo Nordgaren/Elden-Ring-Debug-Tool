@@ -10,7 +10,8 @@ using static Erd_Tools.ERWeapon;
 
 namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
 {
-    public class ItemGibViewModel : ViewModelBase
+    [Description("Item Gib View")]
+    public class ItemGibViewViewModel : ViewModelBase
     {
         internal ERHook Hook { get; set; }
         private readonly ObservableCollection<ERItemCategoryViewModel> _categories;
@@ -23,7 +24,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
 
         public ICommand GibItemCommand { get; set; }
 
-        public ItemGibViewModel()
+        public ItemGibViewViewModel()
         {
             _categories = new ObservableCollection<ERItemCategoryViewModel>(new List<ERItemCategoryViewModel>());
             CategoryCollectionView = CollectionViewSource.GetDefaultView(_categories);
@@ -36,6 +37,8 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
             GemCollectionView.Filter += FilterGems;
 
             GibItemCommand = new GibItemCommand(this);
+
+            Commands.Add(GibItemCommand);
         }
 
         private bool FilterInfusions(object obj)
@@ -143,9 +146,9 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
                 {
                     SelectedWeapon = SelectedItem as ERWeaponViewModel;
                     GemCollectionView.Refresh();
-                    if (!GemCollectionView.IsEmpty)
+                    if (!GemCollectionView.IsEmpty && SelectedItem is ERWeaponViewModel weapon)
                     {
-                        SelectedGem = _gems.FirstOrDefault(x => x.SwordArtID == ((ERWeaponViewModel)SelectedItem).SwordArtId) ?? null;
+                        SelectedGem = _gems.FirstOrDefault(x => x.SwordArtID == weapon.SwordArtId);
                     }
                     MaxQuantity = SelectedItem?.MaxQuantity ?? 1;
                     Quantity = Max ? MaxQuantity : 1;

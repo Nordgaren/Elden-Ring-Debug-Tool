@@ -8,7 +8,7 @@
              xmlns:local="clr-namespace:Elden_Ring_Debug_Tool_WPF"
              mc:Ignorable="d" 
              d:DesignHeight="600" d:DesignWidth="800" Background="LightGray">
-    <Grid>
+    <!--<Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
             <ColumnDefinition/>
@@ -24,11 +24,11 @@
                                 <wpfTool:IntegerUpDown x:Name="nudHealth" Value="{Binding ElementName=DebugTarget, Path=Hook.TargetHp}" Maximum="{Binding ElementName=DebugTarget, Path=Hook.TargetHpMax}" TextAlignment="Center" ClipValueToMinMax="True" IsEnabled="False"/>
                             </StackPanel>
                             <Separator Width="20" Visibility="Hidden"/>
-                            <!--<StackPanel Width="100">
+                            --><!--<StackPanel Width="100">
                                 <Label Content="Health Cap" />
                                 <wpfTool:IntegerUpDown Value="{Binding ElementName=DebugTarget, Path=Hook.TargetHpMax}" TextAlignment="Center" IsEnabled="False"/>
                             </StackPanel>
-                            <Separator Width="20" Visibility="Hidden"/>-->
+                            <Separator Width="20" Visibility="Hidden"/>--><!--
                             <StackPanel Width="100">
                                 <Label Content="Health Max" />
                                 <wpfTool:IntegerUpDown Value="{Binding ElementName=DebugTarget, Path=Hook.TargetHpMax}" TextAlignment="Center" IsEnabled="False"/>
@@ -40,11 +40,11 @@
                                 <wpfTool:IntegerUpDown x:Name="nudFp" Value="{Binding ElementName=DebugTarget, Path=Hook.TargetFp}" Maximum="{Binding ElementName=DebugTarget, Path=Hook.TargetFpMax}" TextAlignment="Center" ClipValueToMinMax="True" IsEnabled="False"/>
                             </StackPanel>
                             <Separator Width="20" Visibility="Hidden"/>
-                            <!--<StackPanel Width="100">
+                            --><!--<StackPanel Width="100">
                                 <Label Content="Health Cap" />
                                 <wpfTool:IntegerUpDown Value="{Binding ElementName=DebugTarget, Path=Hook.TargetHpMax}" TextAlignment="Center" IsEnabled="False"/>
                             </StackPanel>
-                            <Separator Width="20" Visibility="Hidden"/>-->
+                            <Separator Width="20" Visibility="Hidden"/>--><!--
                             <StackPanel Width="100">
                                 <Label Content="Fp Max" />
                                 <wpfTool:IntegerUpDown Value="{Binding ElementName=DebugTarget, Path=Hook.TargetFpMax}" TextAlignment="Center" IsEnabled="False"/>
@@ -64,7 +64,7 @@
                             <Separator Width="20" Visibility="Hidden"/>
 
                         </StackPanel>
-                        <!--<StackPanel Orientation="Horizontal" Margin="25,0,0,0">
+                        --><!--<StackPanel Orientation="Horizontal" Margin="25,0,0,0">
                             <StackPanel Width="100">
                                 <Label Content="Char Type" />
                                 <TextBox Text="{Binding ElementName=DebugTarget, Path=Hook.CharType, Mode=OneWay}" TextAlignment="Center" IsEnabled="False"/>
@@ -79,7 +79,7 @@
                                 <Label Content="Invade Type" />
                                 <TextBox IsEnabled="False"/>
                             </StackPanel>
-                        </StackPanel>-->
+                        </StackPanel>--><!--
                     </StackPanel>
                 </Border>
                 <Separator Height="20" Visibility="Hidden"/>
@@ -233,5 +233,5 @@
         </Grid>
 
 
-    </Grid>
+    </Grid>-->
 </UserControl>

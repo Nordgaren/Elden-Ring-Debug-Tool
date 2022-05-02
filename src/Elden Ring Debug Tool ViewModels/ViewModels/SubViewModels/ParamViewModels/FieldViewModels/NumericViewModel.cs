@@ -56,7 +56,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels
             }
         }
 
-        public NumericViewModel(ParamViewerViewModel paramViewerViewModel, NumericField numericFfield) : base(paramViewerViewModel, numericFfield)
+        public NumericViewModel(ParamViewViewModel paramViewerViewModel, NumericField numericFfield) : base(paramViewerViewModel, numericFfield)
         {
             _numericField = numericFfield;
             switch (Type)

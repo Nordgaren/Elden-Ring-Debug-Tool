@@ -8,7 +8,8 @@ using System.Windows.Input;
 
 namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
 {
-    public class ParamViewerViewModel : ViewModelBase
+    [Description("Param View")]
+    public class ParamViewViewModel : ViewModelBase
     {
         public string ParamSavePath => $@"{Directory.GetParent(Hook.Process.MainModule.FileName).Parent.FullName}\capture\param";
 
@@ -23,14 +24,17 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
         public ICommand ResetParamCommand { get; set; }
         public ICommand OpenParamCaptureFolderCommand { get; set; }
 
-        public ParamViewerViewModel()
+        public ParamViewViewModel()
         {
             _params = new ObservableCollection<ERParamViewModel>(new List<ERParamViewModel>());
             ParamCollectionView = CollectionViewSource.GetDefaultView(_params);
             SaveParamCommand = new SaveParamCommand(this);
             ResetParamCommand = new ResetParamCommand(this);
             OpenParamCaptureFolderCommand = new OpenParamCaptureFolderCommand(this);
-            OpenParamCaptureFolderCommand.Execute(null);
+
+            Commands.Add(SaveParamCommand);
+            Commands.Add(ResetParamCommand);
+            Commands.Add(OpenParamCaptureFolderCommand);
         }
 
         public void InitViewModel(ERHook hook)

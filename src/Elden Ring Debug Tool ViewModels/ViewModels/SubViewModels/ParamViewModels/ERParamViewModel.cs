@@ -6,7 +6,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels
 {
     public class ERParamViewModel : ViewModelBase
     {
-        public ParamViewerViewModel ParamViewerViewModel { get; }
+        public ParamViewViewModel ParamViewerViewModel { get; }
         public ERParam Param { get; }
         public int Offset => Param.Offset;
         public string Name => Param.Name;
@@ -19,7 +19,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels
         public Dictionary<int, int> OffsetDict  => Param.OffsetDict;
         public int RowLength => Param.RowLength;
 
-        public ERParamViewModel(ParamViewerViewModel paramViewerViewModel, ERParam param)
+        public ERParamViewModel(ParamViewViewModel paramViewerViewModel, ERParam param)
         {
             ParamViewerViewModel = paramViewerViewModel;
             Param = param;

@@ -19,7 +19,7 @@ namespace Elden_Ring_Debug_Tool_WPF
         public Key Key;
         public HotKey? HotKey;
 
-        public DebugHotkey(string settingsName, TextBox setTextBox, TabItem setTabPage, Action<HotKey> setAction, System.Windows.Window window)
+        public DebugHotkey(string settingsName, TextBox setTextBox, TabItem setTabPage, Action<HotKey> setAction, Window window)
         {
             SettingsName = settingsName;
             HotkeyTextBox = setTextBox;

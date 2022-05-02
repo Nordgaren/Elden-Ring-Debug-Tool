@@ -41,7 +41,7 @@ namespace Elden_Ring_Debug_Tool_WPF
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             MainWindowViewModel.Dispose();
-            App.Settings?.Save();
+            //App.Settings?.Save();
         }
         private void SpawnUndroppable_Checked(object sender, RoutedEventArgs e)
         {

@@ -20,11 +20,11 @@ namespace Elden_Ring_Debug_Tool_WPF.Views
             DataContextChanged += new DependencyPropertyChangedEventHandler(OnDataContextChanged);
 
         }
-        private ItemGibViewModel _itemGibViewModel;
+        private ItemGibViewViewModel _itemGibViewModel;
 
         void OnDataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
-            if (DataContext is ItemGibViewModel vm)
+            if (DataContext is ItemGibViewViewModel vm)
             {
                 _itemGibViewModel = vm;
             }

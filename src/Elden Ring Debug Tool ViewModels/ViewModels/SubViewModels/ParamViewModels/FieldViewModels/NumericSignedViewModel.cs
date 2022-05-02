@@ -54,7 +54,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels
                     throw new Exception($"Unknown size for type {Type}");
             }
         }
-        public NumericSignedViewModel(ParamViewerViewModel paramViewerViewModel, NumericField numericField) : base(paramViewerViewModel, numericField)
+        public NumericSignedViewModel(ParamViewViewModel paramViewerViewModel, NumericField numericField) : base(paramViewerViewModel, numericField)
         {
             _numericField = numericField;
             switch (Type)

@@ -1,15 +1,17 @@
 ﻿using Erd_Tools;
 using Elden_Ring_Debug_Tool_ViewModels.ViewModels;
 using System.Windows;
+using System.ComponentModel;
 
 namespace Elden_Ring_Debug_Tool_ViewModels.Commands
 {
+    [Description("Save Param")]
     public class SaveParamCommand : CommandBase
     {
-        private ParamViewerViewModel _paramViewerViewModel;
+        private ParamViewViewModel _paramViewerViewModel;
         private ERHook _hook => _paramViewerViewModel.Hook;
 
-        public SaveParamCommand(ParamViewerViewModel paramViewerViewModel)
+        public SaveParamCommand(ParamViewViewModel paramViewerViewModel)
         {
             _paramViewerViewModel = paramViewerViewModel;
             _paramViewerViewModel.PropertyChanged += _paramViewerViewModel_PropertyChanged;
@@ -32,7 +34,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.Commands
 
         private void _paramViewerViewModel_PropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == nameof(ParamViewerViewModel.Setup))
+            if (e.PropertyName == nameof(ParamViewViewModel.Setup))
             {
                 OnCanExecuteChanged();
             }

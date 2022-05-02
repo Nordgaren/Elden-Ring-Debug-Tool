@@ -13,8 +13,6 @@ namespace Elden_Ring_Debug_Tool_WPF
     /// </summary>
     public partial class App : Application
     {
-        internal static Properties.Settings? Settings;
-
         public App()
         {
             string[] args = Environment.GetCommandLineArgs();
@@ -79,7 +77,8 @@ namespace Elden_Ring_Debug_Tool_WPF
             }
             catch (Exception ex)
             {
-                throw ex;
+                LogException(ex);
+                throw;
             }
         }
 
@@ -90,8 +89,9 @@ namespace Elden_Ring_Debug_Tool_WPF
             {
                 LogException(e.Exception);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
+                Console.WriteLine();
                 //Ignore
             }
 

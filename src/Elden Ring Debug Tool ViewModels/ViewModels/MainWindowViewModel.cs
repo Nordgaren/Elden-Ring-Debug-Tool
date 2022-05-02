@@ -8,9 +8,12 @@ using Elden_Ring_Debug_Tool_ViewModels.Commands;
 using Octokit;
 using System.Reflection;
 using Bluegrams.Application;
+using System.ComponentModel;
+using System.Collections.ObjectModel;
 
 namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
 {
+    [Description("Main Window")]
     public class MainWindowViewModel : ViewModelBase
     {
         internal static Properties.Settings? Settings;
@@ -33,6 +36,12 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
             set { Settings.ShowWarning = value; }
         }
 
+        private ObservableCollection<ViewModelBase> _viewModels;
+        public ObservableCollection<ViewModelBase> ViewModels
+        {
+            get => _viewModels;
+            set => SetField(ref _viewModels, value);
+        }
 
         public MainWindowViewModel()
         {
@@ -48,14 +57,23 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
             OpenGitHubCommand = new OpenGitHubCommand(this);
             Uri = new Uri("https://github.com/Nordgaren/Elden-Ring-Debug-Tool");
 
-
-            ParamViewerViewModel = new ParamViewerViewModel();
-            ItemGibViewModel = new ItemGibViewModel();
-            InventoryViewModel = new InventoryViewModel();
+            ParamViewViewModel = new ParamViewViewModel();
+            ItemGibViewModel = new ItemGibViewViewModel();
+            InventoryViewModel = new InventoryViewViewModel();
             DebugViewViewModel = new DebugViewViewModel();
+            HotkeyViewViewModel = new HotkeyViewViewModel();
+
+
+
+            ViewModels = new ObservableCollection<ViewModelBase>();
+            ViewModels.Add(this);
+            ViewModels.Add(ParamViewViewModel);
+            ViewModels.Add(ItemGibViewModel);
+            ViewModels.Add(InventoryViewModel);
+            ViewModels.Add(DebugViewViewModel);
+            ViewModels.Add(HotkeyViewViewModel);
 
             InitAllViewModels();
-
             Hook.Start();
         }
 
@@ -105,26 +123,34 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
             UpdateTimer.Enabled = true;
         }
 
-        private ParamViewerViewModel _paramViewerViewModel;
-        public ParamViewerViewModel ParamViewerViewModel
+        private ParamViewViewModel _paramViewerViewModel;
+        public ParamViewViewModel ParamViewViewModel
         {
             get => _paramViewerViewModel;
             set => SetField(ref _paramViewerViewModel, value);
         }
 
-        private ItemGibViewModel _itemGibViewModel;
-        public ItemGibViewModel ItemGibViewModel
+        private ItemGibViewViewModel _itemGibViewModel;
+        public ItemGibViewViewModel ItemGibViewModel
         {
             get => _itemGibViewModel;
             set => SetField(ref _itemGibViewModel, value);
         }
 
-        private InventoryViewModel _inventoryViewModel;
-        public InventoryViewModel InventoryViewModel
+        private InventoryViewViewModel _inventoryViewModel;
+        public InventoryViewViewModel InventoryViewModel
         {
             get => _inventoryViewModel;
             set => SetField(ref _inventoryViewModel, value);
         }
+
+        private HotkeyViewViewModel _hotkeyViewViewModel;
+        public HotkeyViewViewModel HotkeyViewViewModel
+        {
+            get => _hotkeyViewViewModel;
+            set => SetField(ref _hotkeyViewViewModel, value);
+        }
+
 
         private DebugViewViewModel _debugViewViewModel;
         public DebugViewViewModel DebugViewViewModel
@@ -239,9 +265,10 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
 
         private void InitAllViewModels()
         {
-            ParamViewerViewModel.InitViewModel(Hook);
+            ParamViewViewModel.InitViewModel(Hook);
             ItemGibViewModel.InitViewModel(Hook);
             InventoryViewModel.InitViewModel(Hook);
+            HotkeyViewViewModel.InitViewModel(this);
             DebugViewViewModel.InitViewModel(Hook);
         }
         private void UpdateProperties()

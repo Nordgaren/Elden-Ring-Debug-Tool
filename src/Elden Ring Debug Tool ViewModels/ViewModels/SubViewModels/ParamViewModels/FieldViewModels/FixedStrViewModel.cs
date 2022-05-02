@@ -41,7 +41,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels
                 Array.Copy(buffer, 0, Param.Bytes, Offset, buffer.Length);
             }
         }
-        public FixedStrViewModel(ParamViewerViewModel paramViewerViewModel, FixedStr fixedStr) : base(paramViewerViewModel, fixedStr)
+        public FixedStrViewModel(ParamViewViewModel paramViewerViewModel, FixedStr fixedStr) : base(paramViewerViewModel, fixedStr)
         {
             _fixedStr = fixedStr;
             _encoding = _fixedStr.Encoding;

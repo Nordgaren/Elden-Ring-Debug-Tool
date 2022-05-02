@@ -1,15 +1,17 @@
 ﻿using Erd_Tools;
 using Elden_Ring_Debug_Tool_ViewModels.ViewModels;
-using System.Diagnostics;
+using System.Windows;
+using System.ComponentModel;
 
 namespace Elden_Ring_Debug_Tool_ViewModels.Commands
 {
-    public class OpenParamCaptureFolderCommand : CommandBase
+    [Description("Reset Param")]
+    public class ResetParamCommand : CommandBase
     {
-        private ParamViewerViewModel _paramViewerViewModel;
+        private ParamViewViewModel _paramViewerViewModel;
         private ERHook _hook => _paramViewerViewModel.Hook;
 
-        public OpenParamCaptureFolderCommand(ParamViewerViewModel paramViewerViewModel)
+        public ResetParamCommand(ParamViewViewModel paramViewerViewModel)
         {
             _paramViewerViewModel = paramViewerViewModel;
             _paramViewerViewModel.PropertyChanged += _paramViewerViewModel_PropertyChanged;
@@ -22,12 +24,18 @@ namespace Elden_Ring_Debug_Tool_ViewModels.Commands
 
         public override void Execute(object? parameter)
         {
-            Process.Start("explorer.exe", _paramViewerViewModel.ParamSavePath);
+            MessageBoxResult result = MessageBox.Show("Are you sure you want to reset the currently selected param to what it was when the debug tool loaded?", 
+                "Reset Param", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+
+            if (result == MessageBoxResult.Yes)
+            {
+                _paramViewerViewModel.SelectedParam.Param.RestoreParam();
+            }
         }
 
         private void _paramViewerViewModel_PropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == nameof(ParamViewerViewModel.Setup))
+            if (e.PropertyName == nameof(ParamViewViewModel.Setup))
             {
                 OnCanExecuteChanged();
             }

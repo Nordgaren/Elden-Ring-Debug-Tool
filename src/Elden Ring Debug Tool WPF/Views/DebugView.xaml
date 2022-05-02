@@ -5,38 +5,58 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Elden_Ring_Debug_Tool_WPF" 
              xmlns:vm="clr-namespace:Elden_Ring_Debug_Tool_ViewModels.ViewModels;assembly=Elden-Ring-Debug-Tool-ViewModels"
-                    xmlns:t="http://schemas.telerik.com/2008/xaml/presentation" 
-                    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:svm="clr-namespace:Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels;assembly=Elden-Ring-Debug-Tool-ViewModels"
+             xmlns:t="http://schemas.telerik.com/2008/xaml/presentation" 
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              mc:Ignorable="d"
-             d:DesignHeight="600" d:DesignWidth="800" Background="LightGray"
+             d:DesignHeight="600" d:DesignWidth="400" Background="LightGray"
              d:DataContext="{d:DesignInstance vm:DebugViewViewModel, IsDesignTimeCreatable=True}">
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
-            <StackPanel>
-                <StackPanel Grid.Column="0" >
-                    <Separator Visibility="Hidden" Height="10"/>
-                    <Label Content="General"/>
-                    <Border BorderBrush="Gray" BorderThickness="1" >
-                        <StackPanel Margin="0,5,0,5">
-                        <CheckBox Margin="10,5,0,0" Content="Enable map in combat"/>
-                        <StackPanel Orientation="Horizontal">
-                            <CheckBox Margin="10,5,0,0" Content="Force Weather:" >
-                          
-                            </CheckBox>
-                            <ComboBox Width="200" Margin="10,0,0,0" ItemsSource="{Binding WeatherTypes}" SelectedValue="{Binding SelectedWeather}">
-                                <ComboBox.ItemTemplate>
-                                    <DataTemplate>
-                                        <TextBlock Text="{Binding Converter={StaticResource EnumDescriptionConverter}}"></TextBlock>
-                                    </DataTemplate>
-                                </ComboBox.ItemTemplate>
-                            </ComboBox>
-                        </StackPanel>
-                    </StackPanel>
-                    </Border>
-                </StackPanel>
-        </StackPanel>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <DataGrid x:Name="DG" ItemsSource="{Binding DebugCollectionView}" Grid.Row="1" AutoGenerateColumns="False" d:DataContext="{d:DesignInstance svm:HotkeyViewModel, IsDesignTimeCreatable=True}"
+                          HorizontalScrollBarVisibility="Visible" CanUserAddRows="False" >
+            <DataGrid.Resources>
+                <Style TargetType="{x:Type DataGrid}">
+                    <Setter Property="Background" Value="Transparent"/>
+                </Style>
+                <Style TargetType="{x:Type DataGridRow}">
+                    <Setter Property="Background" Value="Transparent"/>
+                </Style>
+                <Style TargetType="{x:Type DataGridRowHeader}">
+                    <Setter Property="Background" Value="Transparent"/>
+                </Style>
+                <Style TargetType="{x:Type DataGridColumnHeader}">
+                    <Setter Property="Background" Value="DarkGray"/>
+                    <Setter Property="BorderThickness" Value="1"/>
+                    <Setter Property="BorderBrush" Value="Black"/>
+                    <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                </Style>
+            </DataGrid.Resources>
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Name" Binding="{Binding Name}" MinWidth="150" Width="*"/>
+                <DataGridTemplateColumn Header="Toggle State" MinWidth="75" Width="Auto">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate >
+                            <ToggleButton Height="25" Width="25" Style="{StaticResource ToggleButtonPower}" 
+                                                  Background="{Binding Background, RelativeSource={RelativeSource AncestorType=UserControl}}" 
+                                                  IsChecked="{Binding ToggleableCommand.State}" Command="{Binding Command}" Visibility="{Binding ToggleableCommand, Converter={StaticResource NullObjectToVisibilityConverter}}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="Hotkey" MinWidth="100" Width="Auto" >
+                    <DataGridTemplateColumn.CellTemplate >
+                        <DataTemplate>
+                            <TextBox Margin="10,0,10,0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" KeyUp="TextBox_KeyUp" MouseEnter="TextBox_MouseEnter" MouseLeave="TextBox_MouseLeave" Text="{Binding Key, Converter={StaticResource KeyToStringConverter}, UpdateSourceTrigger=LostFocus}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <!--<DataGridComboBoxColumn Header="Parameter" MinWidth="120" Width="120"/>-->
+            </DataGrid.Columns>
+        </DataGrid>
+
     </Grid>
 </UserControl>

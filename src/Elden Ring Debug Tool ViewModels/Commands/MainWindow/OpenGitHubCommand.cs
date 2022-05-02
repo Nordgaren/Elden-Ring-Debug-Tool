@@ -16,7 +16,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.Commands
 
         public override bool CanExecute(object? parameter)
         {
-            return _hook?.Setup ?? false && base.CanExecute(parameter);
+            return base.CanExecute(parameter);
         }
 
         public override void Execute(object? parameter)
@@ -27,6 +27,5 @@ namespace Elden_Ring_Debug_Tool_ViewModels.Commands
                 UseShellExecute = true
             });
         }
-
     }
 }

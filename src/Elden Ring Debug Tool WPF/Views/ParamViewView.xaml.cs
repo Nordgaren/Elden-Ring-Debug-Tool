@@ -10,7 +10,7 @@ namespace Elden_Ring_Debug_Tool_WPF.Views
     public partial class ParamViewerView : UserControl
     {
 
-        private ParamViewerViewModel _paramViewModel;
+        private ParamViewViewModel _paramViewModel;
         public ParamViewerView()
         {
             InitializeComponent();
@@ -19,7 +19,7 @@ namespace Elden_Ring_Debug_Tool_WPF.Views
 
         void OnDataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
-            if (DataContext is ParamViewerViewModel vm)
+            if (DataContext is ParamViewViewModel vm)
             {
                 _paramViewModel = vm;
             }

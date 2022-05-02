@@ -1,24 +1,19 @@
 ﻿using System;
-using System.ComponentModel;
 using System.Globalization;
+using System.Windows;
 using System.Windows.Data;
 
 namespace Elden_Ring_Debug_Tool_WPF.Converters
 {
-    public class CountToBoolConverter : IValueConverter
+    public class NullObjectToVisibilityConverter : IValueConverter
     {
         public object Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
         {
-            int threshold = (int)parameter;
 
-            if (threshold == null)
-                throw new ArgumentNullException("Threshold");
+            if (value == null)
+                return Visibility.Hidden;
 
-            ICollectionView collection = (ICollectionView)value;
-            if (collection == null)
-                return false;
-
-            return collection.IsEmpty;
+            return Visibility.Visible;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

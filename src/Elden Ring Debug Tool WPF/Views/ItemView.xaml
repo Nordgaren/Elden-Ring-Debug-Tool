@@ -9,7 +9,7 @@
                     xmlns:vm="clr-namespace:Elden_Ring_Debug_Tool_ViewModels.ViewModels;assembly=Elden-Ring-Debug-Tool-ViewModels"
                     mc:Ignorable="d"
                     d:DesignHeight="600" d:DesignWidth="400" d:Background="LightGray"
-                    d:DataContext="{d:DesignInstance vm:ItemGibViewModel, IsDesignTimeCreatable=True}">
+                    d:DataContext="{d:DesignInstance vm:ItemGibViewViewModel, IsDesignTimeCreatable=True}">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition x:Name="LeftCol"/>

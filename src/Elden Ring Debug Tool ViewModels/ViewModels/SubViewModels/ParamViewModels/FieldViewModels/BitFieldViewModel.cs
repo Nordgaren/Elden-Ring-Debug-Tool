@@ -36,7 +36,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels
                 Array.Copy(bytes, 0, Param.Bytes, Offset, bytes.Length);
             }
         }
-        public BitFieldViewModel(ParamViewerViewModel paramViewerViewModel, BitField bitField) : base(paramViewerViewModel, bitField)
+        public BitFieldViewModel(ParamViewViewModel paramViewerViewModel, BitField bitField) : base(paramViewerViewModel, bitField)
         {
             _bitField = bitField;
             _bitPosition = _bitField.BitPosition;

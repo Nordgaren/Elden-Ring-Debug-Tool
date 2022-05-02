@@ -1,4 +1,5 @@
 ﻿using Elden_Ring_Debug_Tool_ViewModels.ViewModels;
+using System;
 using System.Windows;
 
 namespace Elden_Ring_Debug_Tool_WPF
@@ -17,6 +18,10 @@ namespace Elden_Ring_Debug_Tool_WPF
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
+
+            if (cbxDoNotShow == null)
+                throw new NullReferenceException($"Do Not Show ComboBox should not be null");
+
             _mainWindowViewModel.ShowWarning = !cbxDoNotShow.IsChecked.Value;
         }
     }
