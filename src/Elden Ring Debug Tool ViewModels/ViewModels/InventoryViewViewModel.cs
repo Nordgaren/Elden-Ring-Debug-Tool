@@ -70,19 +70,23 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
 
         public void UpdateViewModel()
         {
-            if (PlayerInventory.Count != Hook.InventoryCount)
+            if (PlayerInventory.Count != Hook.LastInventoryCount)
             {
-                IEnumerable inventory = Hook.GetInventory();
-                List<ERInventoryEntryViewModel> items = new List<ERInventoryEntryViewModel>();
-
-                foreach (ERInventoryEntry entry in inventory)
-                {
-                    items.Add(new ERInventoryEntryViewModel(entry));
-                }
-
-                PlayerInventory = new ObservableCollection<ERInventoryEntryViewModel>(items);
-
+                GetInventory();
             }
+        }
+
+        private void GetInventory()
+        {
+            IEnumerable inventory = Hook.GetInventory();
+            List<ERInventoryEntryViewModel> items = new List<ERInventoryEntryViewModel>();
+
+            foreach (ERInventoryEntry entry in inventory)
+            {
+                items.Add(new ERInventoryEntryViewModel(entry));
+            }
+
+            PlayerInventory = new ObservableCollection<ERInventoryEntryViewModel>(items);
         }
 
         private int _inventoryCount;
