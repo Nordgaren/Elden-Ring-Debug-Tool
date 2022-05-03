@@ -46,7 +46,6 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
 
         private void Hook_OnUnhooked(object? sender, PropertyHook.PHEventArgs e)
         {
-            Setup = false;
 
         }
         private void Hook_OnSetup(object? sender, PropertyHook.PHEventArgs e)
@@ -62,22 +61,19 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
                 if (_params.Count > 0)
                     SelectedParam = _params[0];
 
-                Setup = true;
             });
         }
 
         private bool _setup;
         public bool Setup
         {
-            get
-            {
-                return _setup;
-            }
-            set
-            {
-                SetField(ref _setup, value);
+            get => _setup;
+            set => SetField(ref _setup, value);
+        }
 
-            }
+        public void UpdateViewModel()
+        {
+            Setup = Hook.Setup;
         }
 
 
@@ -111,11 +107,6 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
             {
                 SetField(ref _selectedRow, value);
             }
-        }
-
-        public void UpdateView()
-        {
-            Setup = Hook.Setup;
         }
 
         #region Search

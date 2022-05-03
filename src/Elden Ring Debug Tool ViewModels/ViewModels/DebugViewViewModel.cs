@@ -1,4 +1,5 @@
-﻿using Elden_Ring_Debug_Tool_ViewModels.Commands;
+﻿using Elden_Ring_Debug_Tool_ViewModels.Attributes;
+using Elden_Ring_Debug_Tool_ViewModels.Commands;
 using Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels;
 using Erd_Tools;
 using System;
@@ -10,6 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Data;
 using System.Windows.Input;
+using static Elden_Ring_Debug_Tool_ViewModels.Attributes.HotkeyParameterAttribute;
 using static Erd_Tools.ERHook;
 
 namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
@@ -17,8 +19,10 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
     [Description("Debug View")]
     public class DebugViewViewModel : ViewModelBase
     {
-        internal ERHook Hook { get; set; }
+        private MainWindowViewModel _mainWindowViewModel { get; set; }
+        internal ERHook Hook { get; private set; }
         public ICommand EnableMapInCombatCommand { get; }
+        public ICommand ForceWeatherCommand { get; }
 
         private ObservableCollection<HotkeyViewModel> _debugCommands;
         public ObservableCollection<HotkeyViewModel> DebugCommands
@@ -39,34 +43,45 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
         {
             ICommand enableMapInCombatCommand = new EnableMapInCombatCommand(this);
             EnableMapInCombatCommand = new ToggleableCommand(enableMapInCombatCommand);
+
+            ICommand forceWeatherCommand = new ForceWeatherCommand(this);
+            ForceWeatherCommand = new ToggleableCommand(forceWeatherCommand);
+
             Commands.Add(EnableMapInCombatCommand);
+            Commands.Add(ForceWeatherCommand);
 
             DebugCommands = new ObservableCollection<HotkeyViewModel>();
-
-            foreach (ICommand command in Commands)
-            {
-                DebugCommands.Add(new HotkeyViewModel(this, command));
-            }
         }
 
-        public void InitViewModel(ERHook hook)
+        public void InitViewModel(MainWindowViewModel mainWindowViewModel)
         {
-            Hook = hook;
+            _mainWindowViewModel = mainWindowViewModel;
+            foreach (ICommand command in Commands)
+            {
+                DebugCommands.Add(new HotkeyViewModel(this, _mainWindowViewModel, command));
+            }
+            Hook = _mainWindowViewModel.Hook;
             Hook.OnSetup += Hook_OnSetup;
             Hook.OnUnhooked += Hook_OnUnhooked;
             WeatherTypes = new ObservableCollection<WeatherTypes>(Enum.GetValues(typeof(WeatherTypes)).Cast<WeatherTypes>());
         }
+        public void UpdateViewModel()
+        {
+            Setup = Hook.Setup;
+            Loaded = Hook.Loaded;
+
+            if (((ToggleableCommand)ForceWeatherCommand).State)
+                Hook.ForceWeather();
+        }
         private void Hook_OnSetup(object? sender, PropertyHook.PHEventArgs e)
         {
-            System.Windows.Application.Current.Dispatcher.Invoke(() =>
-            {
-                Setup = true;
-            });
+            //System.Windows.Application.Current.Dispatcher.Invoke(() =>
+            //{
+            //});
         }
 
         private void Hook_OnUnhooked(object? sender, PropertyHook.PHEventArgs e)
         {
-            Setup = false;
         }
 
         private bool _setup;
@@ -76,7 +91,17 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
             set => SetField(ref _setup, value);
         }
 
+        private bool _loaded;
+        public bool Loaded
+        {
+            get => _loaded;
+            set => SetField(ref _loaded, value);
+        }
+
+
         private ObservableCollection<WeatherTypes> _weatherTypes;
+        [Description("Weather Types")]
+        [HotkeyParameter(typeof(ForceWeatherCommand), ResourceType.ComboBox, SelectedItemPropertyName = nameof(SelectedWeather))]
         public ObservableCollection<WeatherTypes> WeatherTypes
         {
             get => _weatherTypes;
@@ -87,7 +112,13 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
         public WeatherTypes SelectedWeather
         {
             get => _selectedWeather;
-            set => SetField(ref _selectedWeather, value);
+            set
+            {
+                if (SetField(ref _selectedWeather, value))
+                {
+                    Hook.SetForcedWeatherValue(SelectedWeather);
+                }
+            }
         }
 
         #region Search

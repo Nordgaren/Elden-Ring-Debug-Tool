@@ -126,7 +126,7 @@
         <StackPanel Grid.Row="3" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center">
             <StackPanel Orientation="Horizontal">
                 <Label Content="Loaded:" FontWeight="ExtraBlack"/>
-                <Label Content="{Binding GameLoaded}" FontWeight="ExtraBlack" Foreground="{Binding ForegroundLoaded}"/>
+                <Label Content="{Binding ContentLoaded}" FontWeight="ExtraBlack" Foreground="{Binding ForegroundLoaded}"/>
             </StackPanel>
         </StackPanel >
         <StackPanel Grid.Row="3" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,15,0">

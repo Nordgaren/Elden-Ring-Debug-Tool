@@ -10,17 +10,19 @@ using System.Reflection;
 using Bluegrams.Application;
 using System.ComponentModel;
 using System.Collections.ObjectModel;
+using Elden_Ring_Debug_Tool_ViewModels.Manager;
 
 namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
 {
     [Description("Main Window")]
     public class MainWindowViewModel : ViewModelBase
     {
-        internal static Properties.Settings? Settings;
+        internal static Properties.Settings Settings { get; }
 
         public ERHook Hook { get; private set; }
 
-        public bool GameLoaded { get; set; }
+        private bool _gameLoaded;
+
         public bool Reading
         {
             get => ERHook.Reading;
@@ -43,29 +45,32 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
             set => SetField(ref _viewModels, value);
         }
 
-        public MainWindowViewModel()
+        static MainWindowViewModel()
         {
-
             PortableJsonSettingsProvider.SettingsFileName = "ERDebug.settings.json";
-            PortableJsonSettingsProvider.SettingsDirectory = Environment.CurrentDirectory;
+            PortableSettingsProviderBase.SettingsDirectory = Environment.CurrentDirectory;
             PortableJsonSettingsProvider.ApplyProvider(Properties.Settings.Default);
             Settings = Properties.Settings.Default;
+        }
 
+        public MainWindowViewModel()
+        {
             Hook = new ERHook(5000, 15000, p => p.MainWindowTitle == "ELDEN RING™");
             Hook.OnSetup += Hook_OnSetup;
             Hook.OnUnhooked += Hook_OnUnhooked;
             OpenGitHubCommand = new OpenGitHubCommand(this);
-            Uri = new Uri("https://github.com/Nordgaren/Elden-Ring-Debug-Tool");
+            _uri = new Uri("https://github.com/Nordgaren/Elden-Ring-Debug-Tool");
 
-            ParamViewViewModel = new ParamViewViewModel();
-            ItemGibViewModel = new ItemGibViewViewModel();
-            InventoryViewModel = new InventoryViewViewModel();
-            DebugViewViewModel = new DebugViewViewModel();
-            HotkeyViewViewModel = new HotkeyViewViewModel();
+            _paramViewViewModel = new ParamViewViewModel();
+            _itemGibViewModel = new ItemGibViewViewModel();
+            _inventoryViewModel = new InventoryViewViewModel();
+            _debugViewViewModel = new DebugViewViewModel();
+            _hotkeyViewViewModel = new HotkeyViewViewModel();
+            _hotkeyManager = new WindowsRegisteredMultiHotkeyManager(Hook);
 
 
 
-            ViewModels = new ObservableCollection<ViewModelBase>();
+            _viewModels = new ObservableCollection<ViewModelBase>();
             ViewModels.Add(this);
             ViewModels.Add(ParamViewViewModel);
             ViewModels.Add(ItemGibViewModel);
@@ -123,11 +128,11 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
             UpdateTimer.Enabled = true;
         }
 
-        private ParamViewViewModel _paramViewerViewModel;
+        private ParamViewViewModel _paramViewViewModel;
         public ParamViewViewModel ParamViewViewModel
         {
-            get => _paramViewerViewModel;
-            set => SetField(ref _paramViewerViewModel, value);
+            get => _paramViewViewModel;
+            set => SetField(ref _paramViewViewModel, value);
         }
 
         private ItemGibViewViewModel _itemGibViewModel;
@@ -159,6 +164,13 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
             set => SetField(ref _debugViewViewModel, value);
         }
 
+        private IHotkeyManager _hotkeyManager;
+        internal IHotkeyManager HotkeyManager
+        {
+            get => _hotkeyManager;
+            set => SetField(ref _hotkeyManager, value);
+        }
+
         private Uri _uri;
         public Uri Uri
         {
@@ -166,21 +178,21 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
             set => SetField(ref _uri, value);
         }
 
-        private string _updateInfo;
+        private string _updateInfo = string.Empty;
         public string UpdateInfo
         {
             get => _updateInfo;
             set => SetField(ref _updateInfo, value);
         }
 
-        private bool _updateRequired;
+        private bool _updateRequired = false;
         public bool UpdateRequired
         {
             get => _updateRequired;
             set => SetField(ref _updateRequired, value);
         }
 
-        private string _windowTitle;
+        private string _windowTitle = "Elden Ring Debug Tool";
         public string WindowTitle
         {
             get => _windowTitle;
@@ -202,10 +214,11 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
         public void Dispose()
         {
             if (Hook.CombatMapEnabled)
-                Hook.EnableMapCombat(false);
+                Hook.ToggleMapCombat(false);
 
             UpdateTimer.Stop();
             SaveAllTabs();
+            Settings.Save();
         }
         private void UpdateTimer_Elapsed(object? sender, ElapsedEventArgs e)
         {
@@ -250,16 +263,14 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
 
         private void UpdateMainProperties()
         {
+            ID = Hook.ID;
+            GameLoaded = Hook.Loaded;
             //ViewModel.ParamViewerViewModel.UpdateView();
             //Hook.UpdateMainProperties();
             //ViewModel.UpdateMainProperties();
             //CheckFocused();
-            OnPropertyChanged(nameof(ForegroundID));
-            OnPropertyChanged(nameof(ContentLoaded));
-            OnPropertyChanged(nameof(ForegroundLoaded));
             //OnPropertyChanged(nameof(ContentOnline));
             //OnPropertyChanged(nameof(ForegroundOnline));
-            OnPropertyChanged(nameof(ForegroundVersion));
             OnPropertyChanged(nameof(GameLoaded));
         }
 
@@ -268,8 +279,8 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
             ParamViewViewModel.InitViewModel(Hook);
             ItemGibViewModel.InitViewModel(Hook);
             InventoryViewModel.InitViewModel(Hook);
+            DebugViewViewModel.InitViewModel(this);
             HotkeyViewViewModel.InitViewModel(this);
-            DebugViewViewModel.InitViewModel(Hook);
         }
         private void UpdateProperties()
         {
@@ -277,20 +288,20 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
         }
         private void EnableAllCtrls(bool enable)
         {
-            //DebugItems.EnableCtrls(enable);
         }
         private void ReloadAllCtrls()
         {
-            //DebugItems.ReloadCtrl();
         }
         private void ResetAllCtrls()
         {
-            //DebugItems.ResetCtrl();
         }
         private void UpdateAllViewModels()
         {
-            //DebugItems.UpdateCtrl();
+            HotkeyManager.Update();
             InventoryViewModel.UpdateViewModel();
+            ItemGibViewModel.UpdateViewModel();
+            ParamViewViewModel.UpdateViewModel();
+            DebugViewViewModel.UpdateViewModel();
             Hook.UpdateLastEnemy();
         }
         private void SaveAllTabs()
@@ -304,11 +315,17 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
             //DebugItems.UpdateCreateEnabled();
         }
 
-        private string _id;
+        private string _id = "Not Loaded";
         public string ID
         {
             get => _id;
-            set => SetField(ref _id, value);
+            set
+            {
+                if (SetField(ref _id, value))
+                {
+                    OnPropertyChanged(nameof(ForegroundID));
+                }
+            }
         }
         public Brush ForegroundID
         {
@@ -319,11 +336,24 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
                 return Brushes.IndianRed;
             }
         }
+        private bool _loaded;
+        public bool GameLoaded
+        {
+            get => _loaded;
+            set
+            {
+                if (SetField(ref _loaded, value))
+                {
+                    OnPropertyChanged(nameof(ContentLoaded));
+                    OnPropertyChanged(nameof(ForegroundLoaded));
+                }
+            }
+        }
         public string ContentLoaded
         {
             get
             {
-                if (Hook.Loaded)
+                if (GameLoaded)
                     return "Yes";
                 return "No";
             }
@@ -332,20 +362,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
         {
             get
             {
-                if (Hook.Loaded)
-                    return Brushes.GreenYellow;
-                return Brushes.IndianRed;
-            }
-        }
-
-        public Brush ForegroundVersion
-        {
-            get
-            {
-                if (!Hook.Hooked)
-                    return Brushes.Black;
-
-                if (Hook.Is64Bit)
+                if (GameLoaded)
                     return Brushes.GreenYellow;
                 return Brushes.IndianRed;
             }

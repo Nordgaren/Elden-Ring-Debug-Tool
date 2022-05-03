@@ -87,7 +87,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
 
         private void Hook_OnUnhooked(object? sender, PHEventArgs e)
         {
-            Setup = false;
+
         }
 
         private void Hook_OnSetup(object? sender, PHEventArgs e)
@@ -98,8 +98,13 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
                 {
                     item.SetupItem();
                 }
-                Setup = true;
             });
+        }
+
+        public void UpdateViewModel()
+        {
+            Setup = Hook.Setup;
+            Loaded = Hook.Loaded;
         }
 
         private bool _setup;
@@ -107,6 +112,13 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
         {
             get => _setup;
             set => SetField(ref _setup, value);
+        }
+
+        private bool _loaded;
+        public bool Loaded
+        {
+            get => _loaded;
+            set => SetField(ref _loaded, value);
         }
 
         private ERItemCategoryViewModel _selectedItemCategory;

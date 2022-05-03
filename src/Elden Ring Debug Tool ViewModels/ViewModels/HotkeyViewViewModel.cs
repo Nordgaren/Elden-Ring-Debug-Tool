@@ -52,7 +52,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
 
                 foreach (ICommand command in viewModel.Commands)
                 {
-                    hotkeyCollection.Add(new HotkeyViewModel(viewModel, command));
+                    hotkeyCollection.Add(new HotkeyViewModel(viewModel, _mainWindowViewModel,command));
                 }
             }
 
@@ -62,6 +62,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
         public HotkeyViewViewModel()
         {
             Hotkeys = new ObservableCollection<HotkeyViewModel>();
+
         }
 
         public void InitViewModel(MainWindowViewModel mainWindowViewModel)
@@ -77,7 +78,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
         private void _mainWindowViewModel_PropertyChanged(object? sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName == nameof(MainWindowViewModel.ViewModels)
-                || e.PropertyName == nameof(ViewModelBase.Commands))
+                || e.PropertyName == nameof(Commands))
             {
                 Hotkeys = GetHotkeyViewModelCollection();
             }
@@ -119,8 +120,6 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
         private string _hotkeyFilter = string.Empty;
 
         private MainWindowViewModel _mainWindowViewModel;
-
-
 
         public string HotkeyFilter
         {

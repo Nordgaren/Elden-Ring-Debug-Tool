@@ -47,11 +47,11 @@ namespace Elden_Ring_Debug_Tool_WPF.Views
         ////    //lbxItems.SelectedIndex = 0;
         ////}
 
-        ////internal override void ResetCtrl()
-        ////{
-        ////    Hook.ResetInventory();
-        ////    DataGridInventory.ItemsSource = new List<ERInventoryEntry>();
-        ////}
+        //internal override void ResetCtrl()
+        //{
+        //    new ERHook().ResetInventory();
+        //    DataGridInventory.ItemsSource = new List<ERInventoryEntry>();
+        //}
 
         ////internal override void EnableCtrls(bool enable)
         ////{
@@ -188,7 +188,7 @@ namespace Elden_Ring_Debug_Tool_WPF.Views
 
         //    //    nudUpgrade.Maximum = weapon.MaxUpgrade;
         //    //}
-          
+
         //    //nudUpgrade.IsEnabled = nudUpgrade.Maximum > 0;
         //    //cmbInfusion.IsEnabled = cmbInfusion.Items.Count > 1;
         //    //cmbGems.IsEnabled = cmbGems.Items.Count > 1;
@@ -264,7 +264,7 @@ namespace Elden_Ring_Debug_Tool_WPF.Views
         //    //        Hook.SetEventFlag(item.EventID);
 
         //    //    Hook.GetItem(id, (int)nudQuantity.Value, (int)infusion, (int)nudUpgrade.Value, gem.ID);
-               
+
         //    //}
         //}
 

@@ -18,9 +18,13 @@ namespace Elden_Ring_Debug_Tool_ViewModels.Commands
 
         public override bool CanExecute(object? parameter)
         {
+
+            if (_itemGibViewModel.SelectedItem == null)
+                return false;
+
             return (_hook?.Setup ?? false) 
                 && _hook.Loaded 
-                && ((_itemGibViewModel.SelectedItem?.CanAquireFromOtherPlayers ?? false) || (MainWindowViewModel.Settings?.SpawnUndroppable ?? false))
+                && (_itemGibViewModel.SelectedItem.CanAquireFromOtherPlayers || MainWindowViewModel.Settings.SpawnUndroppable)
                 && base.CanExecute(parameter);
         }
 
@@ -42,8 +46,8 @@ namespace Elden_Ring_Debug_Tool_ViewModels.Commands
         private void _itemGibViewModel_PropertyChanged1(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             if (e.PropertyName == nameof(ItemGibViewViewModel.SelectedItem) 
-                || e.PropertyName == nameof(ItemGibViewViewModel.Setup)) 
-                //|| e.PropertyName == nameof(ItemGibViewViewModel.Loaded))
+                || e.PropertyName == nameof(ItemGibViewViewModel.Setup)
+                || e.PropertyName == nameof(ItemGibViewViewModel.Loaded))
             {
                 OnCanExecuteChanged();
             }

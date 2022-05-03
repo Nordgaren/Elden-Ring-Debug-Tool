@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Elden_Ring_Debug_Tool_WPF.Views" 
+             xmlns:dts="clr-namespace:Elden_Ring_Debug_Tool_WPF.DataTemplateSelectors"
              xmlns:vm="clr-namespace:Elden_Ring_Debug_Tool_ViewModels.ViewModels;assembly=Elden-Ring-Debug-Tool-ViewModels" 
              xmlns:svm="clr-namespace:Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels;assembly=Elden-Ring-Debug-Tool-ViewModels" 
              xmlns:wpfTool="http://schemas.xceed.com/wpf/xaml/toolkit" 
@@ -11,6 +12,28 @@
              mc:Ignorable="d"
              d:DesignHeight="600" d:DesignWidth="400" Background="LightGray"
              d:DataContext="{d:DesignInstance vm:HotkeyViewViewModel, IsDesignTimeCreatable=True}">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary>
+                    <DataTemplate x:Key="ComboLol">
+                        <StackPanel Orientation="Horizontal">
+                            <Label x:Name="LabelLol"/>
+                            <ComboBox/>
+                        </StackPanel>
+                    </DataTemplate>
+                    <DataTemplate x:Key="TextLol">
+                        <StackPanel Orientation="Horizontal">
+                            <Label x:Name="LabelTextBoxLol"/>
+                            <ComboBox/>
+                            <TextBox/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -34,7 +57,8 @@
             <ScrollViewer Grid.Row="1"  CanContentScroll="False" >
             <StackPanel>
 
-                <DataGrid x:Name="DG" ItemsSource="{Binding HotkeyCollectionView}" Grid.Row="2" Grid.Column="2" AutoGenerateColumns="False" d:DataContext="{d:DesignInstance svm:HotkeyViewModel, IsDesignTimeCreatable=True}"
+                <DataGrid x:Name="DG" ItemsSource="{Binding HotkeyCollectionView}" Grid.Row="2" Grid.Column="2" AutoGenerateColumns="False" 
+                          d:DataContext="{d:DesignInstance svm:HotkeyViewModel, IsDesignTimeCreatable=True}"
                           HorizontalScrollBarVisibility="Visible" CanUserAddRows="False"  >
                     <DataGrid.GroupStyle>
                         <GroupStyle>
@@ -80,48 +104,39 @@
                         </Style>
                     </DataGrid.Resources>
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Name" Binding="{Binding Name}" MinWidth="150" Width="*"/>
+                        <DataGridTextColumn Header="Name" Binding="{Binding Name}" IsReadOnly="True" MinWidth="150" Width="*"/>
                         <DataGridTemplateColumn Header="Toggle State" MinWidth="75" Width="Auto">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate >
                                     <ToggleButton Height="25" Width="25" Style="{StaticResource ToggleButtonPower}" 
                                                   Background="{Binding Background, RelativeSource={RelativeSource AncestorType=UserControl}}" 
-                                                  IsChecked="{Binding ToggleableCommand.State}" Command="{Binding Command}" Visibility="{Binding ToggleableCommand, Converter={StaticResource NullObjectToVisibilityConverter}}" >
-                                    </ToggleButton>
+                                                  IsChecked="{Binding ToggleableCommand.State}" Command="{Binding Command}" 
+                                                  Visibility="{Binding ToggleableCommand, Converter={StaticResource NullObjectToVisibilityConverter}}" />
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
                         <DataGridTemplateColumn Header="Hotkey" MinWidth="100" Width="Auto" >
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBox Margin="10,0,10,0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" KeyUp="TextBox_KeyUp"  MouseEnter="TextBox_MouseEnter" MouseLeave="TextBox_MouseLeave" Text="{Binding Key, Converter={StaticResource KeyToStringConverter}, UpdateSourceTrigger=LostFocus}" />
+                                    <TextBox Margin="10,0,10,0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" 
+                                             KeyUp="TextBox_KeyUp"  MouseEnter="TextBox_MouseEnter" MouseLeave="TextBox_MouseLeave" 
+                                             Text="{Binding Key, Converter={StaticResource KeyToStringConverter}, UpdateSourceTrigger=LostFocus}" />
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
+              
+
                         <!--<DataGridComboBoxColumn Header="Parameter" MinWidth="120" Width="120"/>-->
                     </DataGrid.Columns>
+                    <!--<DataGrid.RowDetailsTemplate>
+                        <DataTemplate>
+                            <StackPanel>
+                                
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGrid.RowDetailsTemplate>-->
                 </DataGrid>
             </StackPanel>
-                <!--<ItemsControl Background="LightGray" ItemsSource="{Binding FieldCollectionView}" AlternationCount="2">
-                    <ItemsControl.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <VirtualizingStackPanel/>
-                        </ItemsPanelTemplate>
-                    </ItemsControl.ItemsPanel>
-                    --><!--<ItemsControl.ItemTemplateSelector>
-                            <dts:FieldDataTemplateSelector 
-                    NumericSigned32="{StaticResource NumericSigned32}"
-                    NumericSigned16="{StaticResource NumericSigned16}"
-                    NumericSigned8="{StaticResource NumericSigned8}"
-                    NumericUnsigned32="{StaticResource NumericUnsigned32}"
-                    NumericUnsigned16="{StaticResource NumericUnsigned16}"
-                    NumericUnsigned8="{StaticResource NumericUnsigned8}"
-                    SingleField="{StaticResource SingleField}"
-                    BitField="{StaticResource BitField}"
-                    FixedStr="{StaticResource FixedStr}"/>
-                        </ItemsControl.ItemTemplateSelector>--><!--
-
-                </ItemsControl>-->
             </ScrollViewer>
     </Grid>
 </UserControl>

@@ -27,7 +27,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.Commands
             Process.Start("explorer.exe", _paramViewerViewModel.ParamSavePath);
         }
 
-        private void _paramViewerViewModel_PropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
+        private void _paramViewerViewModel_PropertyChanged(object? sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName == nameof(ParamViewViewModel.Setup))
             {

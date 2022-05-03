@@ -11,14 +11,16 @@
              mc:Ignorable="d"
              d:DesignHeight="600" d:DesignWidth="400" Background="LightGray"
              d:DataContext="{d:DesignInstance vm:DebugViewViewModel, IsDesignTimeCreatable=True}">
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="100"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <DataGrid x:Name="DG" ItemsSource="{Binding DebugCollectionView}" Grid.Row="1" AutoGenerateColumns="False" d:DataContext="{d:DesignInstance svm:HotkeyViewModel, IsDesignTimeCreatable=True}"
-                          HorizontalScrollBarVisibility="Visible" CanUserAddRows="False" >
+        <DataGrid x:Name="DG" ItemsSource="{Binding DebugCollectionView}" Grid.Row="1" AutoGenerateColumns="False" 
+                  d:DataContext="{d:DesignInstance svm:HotkeyViewModel, IsDesignTimeCreatable=True}"
+                  HorizontalScrollBarVisibility="Visible" CanUserAddRows="False" >
             <DataGrid.Resources>
                 <Style TargetType="{x:Type DataGrid}">
                     <Setter Property="Background" Value="Transparent"/>
@@ -42,15 +44,18 @@
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate >
                             <ToggleButton Height="25" Width="25" Style="{StaticResource ToggleButtonPower}" 
-                                                  Background="{Binding Background, RelativeSource={RelativeSource AncestorType=UserControl}}" 
-                                                  IsChecked="{Binding ToggleableCommand.State}" Command="{Binding Command}" Visibility="{Binding ToggleableCommand, Converter={StaticResource NullObjectToVisibilityConverter}}" />
+                                          Background="{Binding Background, RelativeSource={RelativeSource AncestorType=UserControl}}" 
+                                          IsChecked="{Binding ToggleableCommand.State}" Command="{Binding Command}" 
+                                          Visibility="{Binding ToggleableCommand, Converter={StaticResource NullObjectToVisibilityConverter}}" />
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
                 <DataGridTemplateColumn Header="Hotkey" MinWidth="100" Width="Auto" >
                     <DataGridTemplateColumn.CellTemplate >
-                        <DataTemplate>
-                            <TextBox Margin="10,0,10,0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" KeyUp="TextBox_KeyUp" MouseEnter="TextBox_MouseEnter" MouseLeave="TextBox_MouseLeave" Text="{Binding Key, Converter={StaticResource KeyToStringConverter}, UpdateSourceTrigger=LostFocus}" />
+                        <DataTemplate >
+                            <TextBox Margin="10,0,10,0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" 
+                                     KeyUp="TextBox_KeyUp" MouseEnter="TextBox_MouseEnter" MouseLeave="TextBox_MouseLeave" 
+                                     Text="{Binding Key, Converter={StaticResource KeyToStringConverter}, UpdateSourceTrigger=LostFocus}" />
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>

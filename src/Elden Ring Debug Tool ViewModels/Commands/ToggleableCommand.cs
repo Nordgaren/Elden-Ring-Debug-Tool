@@ -21,13 +21,13 @@ namespace Elden_Ring_Debug_Tool_ViewModels.Commands
         public void Execute(object? parameter)
         {
             State = !State;
-            _command.Execute(State);
+            _originalCommand.Execute(State);
         }
 
-        private ICommand _command;
+        private ICommand _originalCommand;
         public ToggleableCommand(ICommand command)
         {
-            _command = command;
+            _originalCommand = command;
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;
@@ -48,7 +48,14 @@ namespace Elden_Ring_Debug_Tool_ViewModels.Commands
 
         public bool CanExecute(object? parameter)
         {
-            return _command.CanExecute(parameter);
+            return _originalCommand.CanExecute(parameter);
         }
+
+        public Type GetOriginalType()
+        {
+            return _originalCommand.GetType();
+        }
+
+
     }
 }
