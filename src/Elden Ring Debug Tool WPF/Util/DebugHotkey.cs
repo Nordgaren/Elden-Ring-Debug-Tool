@@ -69,13 +69,13 @@ namespace Elden_Ring_Debug_Tool_WPF
             UnregisterHotkey();
 
             MainWindow? mWindow = Window as MainWindow;
-            DebugHotkey? existingKey = mWindow?.Hotkeys.Find(hKey => hKey.Key == Key && hKey.SettingsName != SettingsName && hKey.Key != Key.Escape);
-            if (existingKey != null)
-            {
-                KeyEventArgs? args = new KeyEventArgs(e.KeyboardDevice, e.InputSource, e.Timestamp, Key.Escape);
-                args.RoutedEvent = e.RoutedEvent;
-                existingKey.HotkeyTextBox_KeyUp(existingKey.HotkeyTextBox, args); 
-            }
+            //DebugHotkey? existingKey = mWindow?.Hotkeys.Find(hKey => hKey.Key == Key && hKey.SettingsName != SettingsName && hKey.Key != Key.Escape);
+            //if (existingKey != null)
+            //{
+            //    KeyEventArgs? args = new KeyEventArgs(e.KeyboardDevice, e.InputSource, e.Timestamp, Key.Escape);
+            //    args.RoutedEvent = e.RoutedEvent;
+            //    existingKey.HotkeyTextBox_KeyUp(existingKey.HotkeyTextBox, args); 
+            //}
             HotkeyTabPage.Focus();
 
         }

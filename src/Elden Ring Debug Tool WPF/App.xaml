@@ -16,6 +16,8 @@
             <conv:InverseBoolConverter x:Key="InverseBoolConverter"/>
             <conv:MultiBoolConverter x:Key="MultiBoolConverter"/>
             <conv:NullObjectToVisibilityConverter x:Key="NullObjectToVisibilityConverter"/>
+            <conv:VisibilityToBoolConverter x:Key="VisibilityToBoolConverter"/>
+            <conv:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

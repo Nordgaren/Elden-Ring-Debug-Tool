@@ -30,7 +30,7 @@ namespace Elden_Ring_Debug_Tool_WPF
         {
             //DebugItems.InitCtrl();
             //DebugCheats.InitCtrl();
-            InitHotkeys();
+            //InitHotkeys();
         }
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {

@@ -19,6 +19,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Xceed.Wpf.Toolkit;
 using static Elden_Ring_Debug_Tool_ViewModels.Attributes.HotkeyParameterAttribute;
 
 namespace Elden_Ring_Debug_Tool_WPF.Views
@@ -81,68 +82,108 @@ namespace Elden_Ring_Debug_Tool_WPF.Views
 
         private void DG_LoadingRowDetails(object sender, DataGridRowDetailsEventArgs e)
         {
-            //HotkeyViewModel hvm = e.Row.DataContext as HotkeyViewModel;
-            //if (hvm == null)
-            //    return;
-
-            //StackPanel p = e.DetailsElement as StackPanel;
-
-            //if (p == null)
-            //    return;
-
-            //IEnumerable<PropertyInfo> parentVmProperties = hvm.GetCustomAttributes();
+            HotkeyViewModel hvm = e.Row.DataContext as HotkeyViewModel;
+            if (hvm == null)
+                return;
 
 
-            //Type t = hvm.Command.GetType();
-            //if (hvm.Command is ToggleableCommand tCommand)
-            //    t = tCommand.GetOriginalType();
+            StackPanel p = e.DetailsElement as StackPanel;
+            if (p == null)
+                return;
 
-            //foreach (PropertyInfo prop in parentVmProperties)
-            //{
-            //    HotkeyParameterAttribute? hKeyParamAttr = prop.GetCustomAttribute<HotkeyParameterAttribute>();
+            e.Row.DetailsVisibility = Visibility.Hidden;
 
-            //    if (hKeyParamAttr == null)
-            //        throw new NullReferenceException(nameof(hKeyParamAttr));
-
-            //    if (hKeyParamAttr.CommandType != t)
-            //        continue;
-
-            //    DescriptionAttribute? attr = prop.GetCustomAttribute<DescriptionAttribute>();
-
-            //    if (attr == null)
-            //        throw new NullReferenceException(nameof(attr));
+            IEnumerable<PropertyInfo> parentVmProperties = hvm.GetCustomAttributes();
 
 
-            //    StackPanel p2 = new StackPanel()
-            //    {
-            //        Orientation = Orientation.Horizontal,
-            //        Width = 200
-            //    };
+            Type t = hvm.Command.GetType();
+            if (hvm.Command is ToggleableCommand tCommand)
+                t = tCommand.GetOriginalType();
 
-            //    Label lab = new Label() { Content = attr.Description };
-            //    p2.Children.Add(lab);
+            foreach (PropertyInfo prop in parentVmProperties)
+            {
+                HotkeyParameterAttribute? hKeyParamAttr = prop.GetCustomAttribute<HotkeyParameterAttribute>();
 
-            //    switch (hKeyParamAttr.Type)
-            //    {
-            //        case ResourceType.ComboBox:
-            //            ComboBox comboBox = new ComboBox();
-            //            comboBox.DataContext = hvm.ParentViewModel;
-            //            comboBox.ItemsSource = (ObservableCollection<object>)prop.GetValue(hvm.ParentViewModel);
-            //            comboBox.SelectedValuePath = hKeyParamAttr.SelectedItemPropertyName;
-            //            p2.Children.Add(comboBox);
-            //            break;
-            //        case ResourceType.NumericUpDown:
-            //            break;
-            //        case ResourceType.DecimalUpDown:
-            //            break;
-            //        case ResourceType.TextBox:
-            //            break;
-            //        default:
-            //            break;
-            //    }
+                if (hKeyParamAttr == null)
+                    continue;
 
-            //    p.Children.Add(p2);
-            //}
+                if (hKeyParamAttr.CommandType != t)
+                    continue;
+
+                DescriptionAttribute? attr = prop.GetCustomAttribute<DescriptionAttribute>();
+
+                if (attr == null)
+                    throw new NullReferenceException(nameof(attr));
+
+                e.Row.DetailsVisibility = Visibility.Visible;
+                hvm.HasDependancies = true;
+
+                StackPanel p2 = new StackPanel()
+                {
+                    Orientation = Orientation.Horizontal,
+                    HorizontalAlignment = HorizontalAlignment.Center,
+                    VerticalAlignment = VerticalAlignment.Center,
+                };
+
+                Label lab = new Label() 
+                { 
+                    Content = attr.Description, 
+                    Margin = new Thickness(0,0,10,0),
+                };
+                p2.Children.Add(lab);
+
+                Binding bItem = new Binding()
+                {
+                    Source = hvm.ParentViewModel,
+                    Path = new PropertyPath(prop.Name)
+                };
+
+                switch (hKeyParamAttr.Type)
+                {
+                    case ResourceType.ComboBox:
+                        ComboBox comboBox = new ComboBox()
+                        {
+                            DataContext = hvm.ParentViewModel
+                        };
+                        Binding bSelectedItem = new Binding()
+                        {
+                            Source = hvm.ParentViewModel,
+                            Path = new PropertyPath(hKeyParamAttr.SelectedItemPropertyName)
+                        };
+                        BindingOperations.SetBinding(comboBox, ComboBox.SelectedValueProperty, bSelectedItem);
+                        BindingOperations.SetBinding(comboBox, ComboBox.ItemsSourceProperty, bItem);
+                        p2.Children.Add(comboBox);
+                        break;
+                    case ResourceType.NumericUpDown:
+                        IntegerUpDown nud = new IntegerUpDown()
+                        {
+                            DataContext = hvm.ParentViewModel
+                        };
+                        BindingOperations.SetBinding(nud, IntegerUpDown.ValueProperty, bItem);
+                        p2.Children.Add(nud);
+                        break;
+                    case ResourceType.DecimalUpDown:
+                        DecimalUpDown dud = new DecimalUpDown()
+                        {
+                            DataContext = hvm.ParentViewModel
+                        };
+                        BindingOperations.SetBinding(dud, DecimalUpDown.ValueProperty, bItem);
+                        p2.Children.Add(dud);
+                        break;
+                    case ResourceType.TextBox:
+                        TextBox textBox = new TextBox()
+                        {
+                            DataContext = hvm.ParentViewModel
+                        };
+                        BindingOperations.SetBinding(textBox, TextBox.TextProperty, bItem);
+                        p2.Children.Add(textBox);
+                        break;
+                    default:
+                        break;
+                }
+
+                p.Children.Add(p2);
+            }
 
         }
     }

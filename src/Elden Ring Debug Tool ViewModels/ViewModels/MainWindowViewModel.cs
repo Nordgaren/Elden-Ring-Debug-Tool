@@ -17,8 +17,6 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
     [Description("Main Window")]
     public class MainWindowViewModel : ViewModelBase
     {
-        internal static Properties.Settings Settings { get; }
-
         public ERHook Hook { get; private set; }
 
         private bool _gameLoaded;
@@ -34,8 +32,8 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
 
         public bool ShowWarning
         {
-            get { return Settings.ShowWarning; }
-            set { Settings.ShowWarning = value; }
+            get { return SettingsViewViewModel.ShowWarning; }
+            set { SettingsViewViewModel.ShowWarning = value; }
         }
 
         private ObservableCollection<ViewModelBase> _viewModels;
@@ -43,14 +41,6 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
         {
             get => _viewModels;
             set => SetField(ref _viewModels, value);
-        }
-
-        static MainWindowViewModel()
-        {
-            PortableJsonSettingsProvider.SettingsFileName = "ERDebug.settings.json";
-            PortableSettingsProviderBase.SettingsDirectory = Environment.CurrentDirectory;
-            PortableJsonSettingsProvider.ApplyProvider(Properties.Settings.Default);
-            Settings = Properties.Settings.Default;
         }
 
         public MainWindowViewModel()
@@ -61,12 +51,12 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
             OpenGitHubCommand = new OpenGitHubCommand(this);
             _uri = new Uri("https://github.com/Nordgaren/Elden-Ring-Debug-Tool");
 
+            _settingsViewViewModel = new SettingsViewViewModel();
             _paramViewViewModel = new ParamViewViewModel();
-            _itemGibViewModel = new ItemGibViewViewModel();
+            _itemGibViewModel = new ItemGibViewViewModel(SettingsViewViewModel);
             _inventoryViewModel = new InventoryViewViewModel();
             _debugViewViewModel = new DebugViewViewModel();
-            _hotkeyViewViewModel = new HotkeyViewViewModel();
-            _hotkeyManager = new WindowsRegisteredMultiHotkeyManager(Hook);
+            _hotkeyViewViewModel = new HotkeyViewViewModel(SettingsViewViewModel);
 
 
 
@@ -156,7 +146,6 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
             set => SetField(ref _hotkeyViewViewModel, value);
         }
 
-
         private DebugViewViewModel _debugViewViewModel;
         public DebugViewViewModel DebugViewViewModel
         {
@@ -164,11 +153,11 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
             set => SetField(ref _debugViewViewModel, value);
         }
 
-        private IHotkeyManager _hotkeyManager;
-        internal IHotkeyManager HotkeyManager
+        private SettingsViewViewModel _settingsViewViewModel;
+        public SettingsViewViewModel SettingsViewViewModel
         {
-            get => _hotkeyManager;
-            set => SetField(ref _hotkeyManager, value);
+            get => _settingsViewViewModel;
+            set => SetField(ref _settingsViewViewModel, value);
         }
 
         private Uri _uri;
@@ -218,7 +207,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
 
             UpdateTimer.Stop();
             SaveAllTabs();
-            Settings.Save();
+            SettingsViewViewModel.Settings.Save();
         }
         private void UpdateTimer_Elapsed(object? sender, ElapsedEventArgs e)
         {
@@ -297,11 +286,12 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
         }
         private void UpdateAllViewModels()
         {
-            HotkeyManager.Update();
             InventoryViewModel.UpdateViewModel();
+
             ItemGibViewModel.UpdateViewModel();
             ParamViewViewModel.UpdateViewModel();
             DebugViewViewModel.UpdateViewModel();
+            HotkeyViewViewModel.UpdateViewModel();
             Hook.UpdateLastEnemy();
         }
         private void SaveAllTabs()

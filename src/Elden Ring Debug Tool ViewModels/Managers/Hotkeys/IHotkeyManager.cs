@@ -9,10 +9,11 @@ namespace Elden_Ring_Debug_Tool_ViewModels.Manager
 {
     internal interface IHotkeyManager
     {
-        public abstract void AddHotkey(Key key, ICommand command);
+        public void AddHotkey(Key key, ICommand command);
 
-        public abstract void RemoveHotkey(Key key, ICommand command);
+        public void RemoveHotkey(Key key, ICommand command);
 
-        public abstract void Update();
+        public void Update();
+        public void SetHotkeyEnable(bool enable);
     }
 }

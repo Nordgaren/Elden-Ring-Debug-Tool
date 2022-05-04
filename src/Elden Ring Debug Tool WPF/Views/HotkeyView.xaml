@@ -12,28 +12,12 @@
              mc:Ignorable="d"
              d:DesignHeight="600" d:DesignWidth="400" Background="LightGray"
              d:DataContext="{d:DesignInstance vm:HotkeyViewViewModel, IsDesignTimeCreatable=True}">
-    <UserControl.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary>
-                    <DataTemplate x:Key="ComboLol">
-                        <StackPanel Orientation="Horizontal">
-                            <Label x:Name="LabelLol"/>
-                            <ComboBox/>
-                        </StackPanel>
-                    </DataTemplate>
-                    <DataTemplate x:Key="TextLol">
-                        <StackPanel Orientation="Horizontal">
-                            <Label x:Name="LabelTextBoxLol"/>
-                            <ComboBox/>
-                            <TextBox/>
-                        </StackPanel>
-                    </DataTemplate>
-                </ResourceDictionary>
-            </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>
-    </UserControl.Resources>
 
+    <UserControl.Resources>
+        <DataTemplate x:Key="StackPanelTemplate">
+            <StackPanel/>
+        </DataTemplate>
+    </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -41,9 +25,9 @@
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="0" Margin="0,10,0,0">
             <Separator Visibility="Hidden"/>
-            <CheckBox Content="Enable Hotkeys" x:Name="cbxEnableHotkeys"/>
+            <CheckBox Content="Enable Hotkeys" IsChecked="{Binding EnableHotkeys}"/>
             <Separator Visibility="Hidden"/>
-            <CheckBox Content="Handle Hotkeys" x:Name="cbxHandleHotkeys"/>
+            <!--<CheckBox Content="Handle Hotkeys" x:Name="cbxHandleHotkeys"/>-->
             <Separator Visibility="Hidden"/>
             <Separator Margin="0,10,0,10"/>
             <Label Content="Hotkeys"/>
@@ -57,9 +41,9 @@
             <ScrollViewer Grid.Row="1"  CanContentScroll="False" >
             <StackPanel>
 
-                <DataGrid x:Name="DG" ItemsSource="{Binding HotkeyCollectionView}" Grid.Row="2" Grid.Column="2" AutoGenerateColumns="False" 
-                          d:DataContext="{d:DesignInstance svm:HotkeyViewModel, IsDesignTimeCreatable=True}"
-                          HorizontalScrollBarVisibility="Visible" CanUserAddRows="False"  >
+                <DataGrid x:Name="DG" ItemsSource="{Binding HotkeyCollectionView}" Grid.Row="2" Grid.Column="2" AutoGenerateColumns="False" RowDetailsVisibilityMode="Visible"
+                          d:DataContext="{d:DesignInstance svm:HotkeyViewModel, IsDesignTimeCreatable=True}" LoadingRowDetails="DG_LoadingRowDetails"
+                          HorizontalScrollBarVisibility="Visible" CanUserAddRows="False">
                     <DataGrid.GroupStyle>
                         <GroupStyle>
                             <GroupStyle.ContainerStyle>
@@ -71,8 +55,8 @@
                                                     <Border BorderThickness="1" Height="23" Background="Gray"  BorderBrush="Black"  >
 
                                                         <StackPanel Orientation="Horizontal" Margin="10,0,0,0">
-                                                                <TextBlock Text="{Binding Name}" />
-                                                                <TextBlock Text="{Binding ItemCount, StringFormat=Count: {0}}" Margin="30,0,0,0" />
+                                                                <TextBlock Text="{Binding Name}" FontSize="11" FontWeight="Bold" />
+                                                            <TextBlock Text="{Binding ItemCount, StringFormat=Count: {0}}" Margin="30,0,0,0" FontSize="11" FontWeight="Bold"  />
                                                             </StackPanel>
                                                         </Border>
 
@@ -124,17 +108,25 @@
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
-              
-
-                        <!--<DataGridComboBoxColumn Header="Parameter" MinWidth="120" Width="120"/>-->
+                        <DataGridTemplateColumn Header="Parameters" Width="50" >
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <ToggleButton Height="25" Width="25" Style="{StaticResource ToggleButtonParameters}" 
+                                                  Background="{Binding Background, RelativeSource={RelativeSource AncestorType=UserControl}}" 
+                                                  Visibility="{Binding HasDependancies, Converter={StaticResource BoolToVisibilityConverter}}"
+                                                  IsChecked="{Binding DetailsVisibility ,RelativeSource={RelativeSource AncestorType=DataGridRow}, Converter={StaticResource VisibilityToBoolConverter}}"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                            
                     </DataGrid.Columns>
-                    <!--<DataGrid.RowDetailsTemplate>
+                    <DataGrid.RowDetailsTemplate>
                         <DataTemplate>
                             <StackPanel>
                                 
                             </StackPanel>
                         </DataTemplate>
-                    </DataGrid.RowDetailsTemplate>-->
+                    </DataGrid.RowDetailsTemplate>
                 </DataGrid>
             </StackPanel>
             </ScrollViewer>

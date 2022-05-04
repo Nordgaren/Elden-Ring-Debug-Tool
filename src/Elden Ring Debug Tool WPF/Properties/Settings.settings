@@ -1,11 +1,11 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
-<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Elden_Ring_Debug_Tool.Properties" GeneratedClassName="Settings">
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Elden_Ring_Debug_Tool_WPF.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
     <Setting Name="ShowWarning" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
-    <Setting Name="SpawnUndroppable" Type="System.Boolean" Scope="User">
+    <Setting Name="SpawnUntradeable" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="EnableHotkeys" Type="System.Boolean" Scope="User">

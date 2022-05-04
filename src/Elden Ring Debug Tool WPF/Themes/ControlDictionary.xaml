@@ -102,5 +102,27 @@
         </Setter>
 
     </Style>
+    <Style x:Key="ToggleButtonParameters" TargetType="{x:Type ToggleButton}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ToggleButton">
+                    <Border Name="B1" Background="Transparent" BorderBrush="Transparent" BorderThickness="2" CornerRadius="15">
+                        <TextBlock Name="T1" Text="◀" FontSize="16" Margin="0,0,0,5" FontWeight="Black" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black" />
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsChecked" Value="True">
+                            <Setter TargetName="T1" Property="Text" Value="▼"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter TargetName="T1" Property="Foreground" Value="DarkGray"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+
+            </Setter.Value>
+        </Setter>
+
+    </Style>
+
 
 </ResourceDictionary>

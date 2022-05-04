@@ -13,7 +13,8 @@ namespace Elden_Ring_Debug_Tool_ViewModels.Commands
         public GibItemCommand(ItemGibViewViewModel itemGibViewModel)
         {
             _itemGibViewModel = itemGibViewModel;
-            _itemGibViewModel.PropertyChanged += _itemGibViewModel_PropertyChanged1;
+            _itemGibViewModel.PropertyChanged += ViewModel_PropertyChanged;
+            _itemGibViewModel.SettingsViewViewModel.PropertyChanged += ViewModel_PropertyChanged;
         }
 
         public override bool CanExecute(object? parameter)
@@ -24,7 +25,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.Commands
 
             return (_hook?.Setup ?? false) 
                 && _hook.Loaded 
-                && (_itemGibViewModel.SelectedItem.CanAquireFromOtherPlayers || MainWindowViewModel.Settings.SpawnUndroppable)
+                && (_itemGibViewModel.SelectedItem.CanAquireFromOtherPlayers || _itemGibViewModel.SettingsViewViewModel.SpawnUntradeable)
                 && base.CanExecute(parameter);
         }
 
@@ -43,11 +44,12 @@ namespace Elden_Ring_Debug_Tool_ViewModels.Commands
             _hook.GetItem(id.Value, quantity, infusion, upgrade, gem);
         }
 
-        private void _itemGibViewModel_PropertyChanged1(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
+        private void ViewModel_PropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             if (e.PropertyName == nameof(ItemGibViewViewModel.SelectedItem) 
                 || e.PropertyName == nameof(ItemGibViewViewModel.Setup)
-                || e.PropertyName == nameof(ItemGibViewViewModel.Loaded))
+                || e.PropertyName == nameof(ItemGibViewViewModel.Loaded)
+                || e.PropertyName == nameof(SettingsViewViewModel.SpawnUntradeable))
             {
                 OnCanExecuteChanged();
             }

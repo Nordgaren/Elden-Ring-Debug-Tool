@@ -50,7 +50,8 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
             {
                 return item.Name.Contains(InventoryFilter, StringComparison.InvariantCultureIgnoreCase) 
                     || item.Quantity.ToString().Contains(InventoryFilter, StringComparison.InvariantCultureIgnoreCase)
-                    || item.ItemID.ToString().Contains(InventoryFilter, StringComparison.InvariantCultureIgnoreCase);
+                    || item.ItemID.ToString().Contains(InventoryFilter, StringComparison.InvariantCultureIgnoreCase)
+                    || item.Category.ToString().Contains(InventoryFilter, StringComparison.InvariantCultureIgnoreCase);
             }
 
             return false;

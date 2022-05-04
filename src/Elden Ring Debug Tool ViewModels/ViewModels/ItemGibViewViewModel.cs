@@ -24,8 +24,11 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
 
         public ICommand GibItemCommand { get; set; }
 
-        public ItemGibViewViewModel()
+        public SettingsViewViewModel SettingsViewViewModel;
+
+        public ItemGibViewViewModel(SettingsViewViewModel settingsViewViewModel)
         {
+            SettingsViewViewModel = settingsViewViewModel;
             _categories = new ObservableCollection<ERItemCategoryViewModel>(new List<ERItemCategoryViewModel>());
             CategoryCollectionView = CollectionViewSource.GetDefaultView(_categories);
 

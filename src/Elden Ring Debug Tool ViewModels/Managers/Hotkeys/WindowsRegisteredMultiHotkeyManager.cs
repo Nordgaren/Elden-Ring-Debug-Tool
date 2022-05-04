@@ -50,10 +50,16 @@ namespace Elden_Ring_Debug_Tool_ViewModels.Manager
                 _hotkeyDictionary.Remove(key);
             }
         }
+        private bool _enableHotkeys { get; set; }
+
+        public void SetHotkeyEnable(bool enable)
+        {
+            _enableHotkeys = enable;
+        }
 
         public void Update()
         {
-            if (_hook.Focused && !(_hotkeyList.Count > 0) && _hotkeyDictionary.Count > 0)
+            if (_enableHotkeys && _hook.Focused && !(_hotkeyList.Count > 0) && _hotkeyDictionary.Count > 0)
                 RegisterHotKeys();
 
             if (!_hook.Focused && _hotkeyList.Count > 0)
@@ -76,6 +82,8 @@ namespace Elden_Ring_Debug_Tool_ViewModels.Manager
             }
             _hotkeyList.Clear();
         }
-  
+
+
+
     }
 }

@@ -57,6 +57,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels
             get => _toggleableCommand;
             set => SetField(ref _toggleableCommand, value);
         }
+        private IHotkeyManager HotkeyManager => MainWindowViewModel.HotkeyViewViewModel.HotkeyManager;
 
         private Key? _key = null;
         public Key? Key
@@ -68,16 +69,22 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels
                 if (SetField(ref _key, value))
                 {
                     if (oldKey != null)
-                        MainWindowViewModel.HotkeyManager.RemoveHotkey(oldKey.Value, Command);
+                        HotkeyManager.RemoveHotkey(oldKey.Value, Command);
 
                     if (Key != null)
-                        MainWindowViewModel.HotkeyManager.AddHotkey(Key.Value, Command);
+                        HotkeyManager.AddHotkey(Key.Value, Command);
                 }
             }
         }
 
         public List<string> StringList = new List<string> { "lol", "kek", "why", "plx", "work!"};
 
+        private bool _hasDependancies = false;
+        public bool HasDependancies
+        {
+            get => _hasDependancies;
+            set => SetField(ref _hasDependancies, value);
+        }
         public HotkeyViewModel() { }
 
         public HotkeyViewModel(ViewModelBase parentViewModel, MainWindowViewModel mainWindowViewModel,ICommand command)
@@ -115,10 +122,6 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels
             {
                 ToggleableCommand = null;
             }
-
-
-
         }
-
     }
 }

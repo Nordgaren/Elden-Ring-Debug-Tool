@@ -14,12 +14,12 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="100"/>
+            <RowDefinition Height="50"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-
-        <DataGrid x:Name="DG" ItemsSource="{Binding DebugCollectionView}" Grid.Row="1" AutoGenerateColumns="False" 
-                  d:DataContext="{d:DesignInstance svm:HotkeyViewModel, IsDesignTimeCreatable=True}"
+        <Label Content="Debug Commands" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="25" FontWeight="ExtraBlack"/>
+        <DataGrid x:Name="DG" ItemsSource="{Binding DebugCollectionView}" Grid.Row="1" AutoGenerateColumns="False" RowDetailsVisibilityMode="Visible"
+                  d:DataContext="{d:DesignInstance svm:HotkeyViewModel, IsDesignTimeCreatable=True}" LoadingRowDetails="DG_LoadingRowDetails"
                   HorizontalScrollBarVisibility="Visible" CanUserAddRows="False" >
             <DataGrid.Resources>
                 <Style TargetType="{x:Type DataGrid}">
@@ -59,8 +59,25 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <!--<DataGridComboBoxColumn Header="Parameter" MinWidth="120" Width="120"/>-->
+                <DataGridTemplateColumn Header="Parameters" Width="50" >
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <ToggleButton Height="25" Width="25" Style="{StaticResource ToggleButtonParameters}" 
+                                                  Background="{Binding Background, RelativeSource={RelativeSource AncestorType=UserControl}}" 
+                                                  Visibility="{Binding HasDependancies, Converter={StaticResource BoolToVisibilityConverter}}"
+                                                  IsChecked="{Binding DetailsVisibility ,RelativeSource={RelativeSource AncestorType=DataGridRow}, Converter={StaticResource VisibilityToBoolConverter}}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
             </DataGrid.Columns>
+            <DataGrid.RowDetailsTemplate>
+                <DataTemplate>
+                    <StackPanel>
+
+                    </StackPanel>
+                </DataTemplate>
+            </DataGrid.RowDetailsTemplate>
         </DataGrid>
 
     </Grid>
