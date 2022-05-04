@@ -105,6 +105,14 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
         }
         internal void UpdateViewModel()
         {
+            Loaded = Hook.Loaded;
+            HotkeyManager.Update();
+
+        }
+
+        internal void ResetViewModel()
+        {
+            Loaded = Hook.Loaded;
             HotkeyManager.Update();
 
         }
@@ -135,7 +143,26 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
         public bool Setup
         {
             get => _setup;
-            set => SetField(ref _setup, value);
+            set
+            {
+                if (SetField(ref _setup, value))
+                {
+                    HotkeyCollectionView.Refresh();
+                }
+            }
+        }
+
+        private bool _loaded;
+        public bool Loaded
+        {
+            get => _loaded;
+            set
+            {
+                if (SetField(ref _loaded, value))
+                {
+                    HotkeyCollectionView.Refresh();
+                }
+            }
         }
 
         #region Search
@@ -173,6 +200,11 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
             }
 
             return false;
+        }
+
+        internal void Dispose()
+        {
+            Setup = false;
         }
 
         #endregion

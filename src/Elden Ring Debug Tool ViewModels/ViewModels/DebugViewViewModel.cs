@@ -67,37 +67,68 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
         }
         public void UpdateViewModel()
         {
-            Setup = Hook.Setup;
             Loaded = Hook.Loaded;
 
             if (((ToggleableCommand)ForceWeatherCommand).State)
                 Hook.ForceWeather();
         }
+
+        public void ResetViewModel()
+        {
+            Loaded = Hook.Loaded;
+
+            if (((ToggleableCommand)ForceWeatherCommand).State)
+                ForceWeatherCommand.Execute(null);
+        }
         private void Hook_OnSetup(object? sender, PropertyHook.PHEventArgs e)
         {
-            //System.Windows.Application.Current.Dispatcher.Invoke(() =>
-            //{
-            //});
+            System.Windows.Application.Current.Dispatcher.Invoke(() =>
+            {
+                Setup = true;
+            });
         }
 
         private void Hook_OnUnhooked(object? sender, PropertyHook.PHEventArgs e)
         {
+            Setup = false;
+        }
+
+        public void Dispose()
+        {
+            if (((ToggleableCommand)ForceWeatherCommand).State)
+                ForceWeatherCommand.Execute(null);
+
+            if (((ToggleableCommand)EnableMapInCombatCommand).State)
+                EnableMapInCombatCommand.Execute(null);
+
+            Setup = false;
         }
 
         private bool _setup;
         public bool Setup
         {
             get => _setup;
-            set => SetField(ref _setup, value);
+            set
+            {
+                if (SetField(ref _setup, value))
+                {
+                    DebugCollectionView.Refresh();
+                }
+            }
         }
 
         private bool _loaded;
         public bool Loaded
         {
             get => _loaded;
-            set => SetField(ref _loaded, value);
+            set
+            {
+                if (SetField(ref _loaded, value))
+                {
+                    DebugCollectionView.Refresh();
+                }
+            }
         }
-
 
         private ObservableCollection<WeatherTypes> _weatherTypes;
         [Description("Weather Types")]

@@ -7,17 +7,26 @@
              xmlns:vm="clr-namespace:Elden_Ring_Debug_Tool_ViewModels.ViewModels;assembly=Elden-Ring-Debug-Tool-ViewModels"
              xmlns:svm="clr-namespace:Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels;assembly=Elden-Ring-Debug-Tool-ViewModels"
              xmlns:t="http://schemas.telerik.com/2008/xaml/presentation" 
-             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" 
+             xmlns:wpfTool="http://schemas.xceed.com/wpf/xaml/toolkit"
              mc:Ignorable="d"
              d:DesignHeight="600" d:DesignWidth="400" Background="LightGray"
              d:DataContext="{d:DesignInstance vm:DebugViewViewModel, IsDesignTimeCreatable=True}">
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="50"/>
+            <RowDefinition Height="70"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Label Content="Debug Commands" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="25" FontWeight="ExtraBlack"/>
+        <StackPanel>
+            <Label Content="Debug Commands" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="25" FontWeight="ExtraBlack"/>
+            <Grid>
+                <wpfTool:AutoSelectTextBox Height="20" Text="{Binding CommandFilter, UpdateSourceTrigger=PropertyChanged}" AutoSelectBehavior="OnFocus" TextAlignment="Center"/>
+                <Label Foreground="LightSlateGray" Content="Search..." IsEnabled="False" Margin="5,0,0,0" IsHitTestVisible="False"
+                           Visibility="{Binding CommandFilter, Converter={StaticResource ResourceKey=StringToVisibilityConverter}}" HorizontalContentAlignment="Center"/>
+            </Grid>
+        </StackPanel>
+       
         <DataGrid x:Name="DG" ItemsSource="{Binding DebugCollectionView}" Grid.Row="1" AutoGenerateColumns="False" RowDetailsVisibilityMode="Visible"
                   d:DataContext="{d:DesignInstance svm:HotkeyViewModel, IsDesignTimeCreatable=True}" LoadingRowDetails="DG_LoadingRowDetails"
                   HorizontalScrollBarVisibility="Visible" CanUserAddRows="False" >

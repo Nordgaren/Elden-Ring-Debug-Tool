@@ -151,15 +151,15 @@
                         <ColumnDefinition/>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
-                    <view:ItemView
-                    DataContext="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type TabControl}}, Path=DataContext.ItemGibViewModel}"/>
+                    <view:ItemGibView
+                    DataContext="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type TabControl}}, Path=DataContext.ItemGibViewViewModel}"/>
                     <view:InventoryView Grid.Column="1"
-                    DataContext="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type TabControl}}, Path=DataContext.InventoryViewModel}"/>
+                    DataContext="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type TabControl}}, Path=DataContext.InventoryViewViewModel}"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Target">
                 <Grid Background="LightGray">
-                    <view:TargetControl />
+                    <view:TargetView DataContext="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type TabControl}}, Path=DataContext.TargetViewViewModel}" />
                 </Grid>
             </TabItem>
             <TabItem Header="Hotkey">

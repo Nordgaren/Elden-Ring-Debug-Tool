@@ -19,6 +19,11 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
             Settings = Properties.Settings.Default;
         }
 
+        public void Dispose()
+        {
+            Settings.Save();
+        }
+
         private bool _showWarning = Settings.ShowWarning;
         public bool ShowWarning
         {

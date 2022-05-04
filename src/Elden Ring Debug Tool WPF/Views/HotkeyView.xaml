@@ -14,10 +14,19 @@
              d:DataContext="{d:DesignInstance vm:HotkeyViewViewModel, IsDesignTimeCreatable=True}">
 
     <UserControl.Resources>
-        <DataTemplate x:Key="StackPanelTemplate">
-            <StackPanel/>
-        </DataTemplate>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary>
+                    <DataTemplate x:Key="StackPanelTemplate">
+                        <StackPanel>
+                        </StackPanel>
+                    </DataTemplate>
+                </ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </UserControl.Resources>
+    
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -92,8 +101,8 @@
                         <DataGridTemplateColumn Header="Toggle State" MinWidth="75" Width="Auto">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate >
-                                    <ToggleButton Height="25" Width="25" Style="{StaticResource ToggleButtonPower}" 
-                                                  Background="{Binding Background, RelativeSource={RelativeSource AncestorType=UserControl}}" 
+                                    <ToggleButton Height="25" Width="25" Style="{StaticResource ToggleButtonPower}"
+                                                  Background="{Binding Background, RelativeSource={RelativeSource AncestorType=DataGridRow}}" 
                                                   IsChecked="{Binding ToggleableCommand.State}" Command="{Binding Command}" 
                                                   Visibility="{Binding ToggleableCommand, Converter={StaticResource NullObjectToVisibilityConverter}}" />
                                 </DataTemplate>
@@ -123,7 +132,7 @@
                     <DataGrid.RowDetailsTemplate>
                         <DataTemplate>
                             <StackPanel>
-                                
+
                             </StackPanel>
                         </DataTemplate>
                     </DataGrid.RowDetailsTemplate>

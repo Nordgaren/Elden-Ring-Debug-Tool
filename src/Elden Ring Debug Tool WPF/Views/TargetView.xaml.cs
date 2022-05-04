@@ -5,9 +5,9 @@ namespace Elden_Ring_Debug_Tool_WPF.Views
     /// <summary>
     /// Interaction logic for TargetControl.xaml
     /// </summary>
-    public partial class TargetControl : UserControl
+    public partial class TargetView : UserControl
     {
-        public TargetControl()
+        public TargetView()
         {
             InitializeComponent();
         }

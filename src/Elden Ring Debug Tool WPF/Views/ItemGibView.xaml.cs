@@ -12,9 +12,9 @@ namespace Elden_Ring_Debug_Tool_WPF.Views
     /// <summary>
     /// Interaction logic for ItemControl.xaml
     /// </summary>
-    public partial class ItemView : UserControl
+    public partial class ItemGibView : UserControl
     {
-        public ItemView()
+        public ItemGibView()
         {
             InitializeComponent();
             DataContextChanged += new DependencyPropertyChangedEventHandler(OnDataContextChanged);

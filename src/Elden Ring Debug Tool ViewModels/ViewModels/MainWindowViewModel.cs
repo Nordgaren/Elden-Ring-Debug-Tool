@@ -53,18 +53,17 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
 
             _settingsViewViewModel = new SettingsViewViewModel();
             _paramViewViewModel = new ParamViewViewModel();
-            _itemGibViewModel = new ItemGibViewViewModel(SettingsViewViewModel);
-            _inventoryViewModel = new InventoryViewViewModel();
+            _itemGibViewViewModel = new ItemGibViewViewModel(SettingsViewViewModel);
+            _inventoryViewViewModel = new InventoryViewViewModel();
             _debugViewViewModel = new DebugViewViewModel();
-            _hotkeyViewViewModel = new HotkeyViewViewModel(SettingsViewViewModel);
-
-
+            _hotkeyViewViewModel = new HotkeyViewViewModel(SettingsViewViewModel); 
+            _targetViewViewModel = new TargetViewViewModel();
 
             _viewModels = new ObservableCollection<ViewModelBase>();
             ViewModels.Add(this);
             ViewModels.Add(ParamViewViewModel);
-            ViewModels.Add(ItemGibViewModel);
-            ViewModels.Add(InventoryViewModel);
+            ViewModels.Add(ItemGibViewViewModel);
+            ViewModels.Add(InventoryViewViewModel);
             ViewModels.Add(DebugViewViewModel);
             ViewModels.Add(HotkeyViewViewModel);
 
@@ -118,6 +117,14 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
             UpdateTimer.Enabled = true;
         }
 
+        private SettingsViewViewModel _settingsViewViewModel;
+        public SettingsViewViewModel SettingsViewViewModel
+        {
+            get => _settingsViewViewModel;
+            set => SetField(ref _settingsViewViewModel, value);
+        }
+
+
         private ParamViewViewModel _paramViewViewModel;
         public ParamViewViewModel ParamViewViewModel
         {
@@ -125,18 +132,18 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
             set => SetField(ref _paramViewViewModel, value);
         }
 
-        private ItemGibViewViewModel _itemGibViewModel;
-        public ItemGibViewViewModel ItemGibViewModel
+        private ItemGibViewViewModel _itemGibViewViewModel;
+        public ItemGibViewViewModel ItemGibViewViewModel
         {
-            get => _itemGibViewModel;
-            set => SetField(ref _itemGibViewModel, value);
+            get => _itemGibViewViewModel;
+            set => SetField(ref _itemGibViewViewModel, value);
         }
 
-        private InventoryViewViewModel _inventoryViewModel;
-        public InventoryViewViewModel InventoryViewModel
+        private InventoryViewViewModel _inventoryViewViewModel;
+        public InventoryViewViewModel InventoryViewViewModel
         {
-            get => _inventoryViewModel;
-            set => SetField(ref _inventoryViewModel, value);
+            get => _inventoryViewViewModel;
+            set => SetField(ref _inventoryViewViewModel, value);
         }
 
         private HotkeyViewViewModel _hotkeyViewViewModel;
@@ -153,11 +160,11 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
             set => SetField(ref _debugViewViewModel, value);
         }
 
-        private SettingsViewViewModel _settingsViewViewModel;
-        public SettingsViewViewModel SettingsViewViewModel
+        private TargetViewViewModel _targetViewViewModel;
+        public TargetViewViewModel TargetViewViewModel
         {
-            get => _settingsViewViewModel;
-            set => SetField(ref _settingsViewViewModel, value);
+            get => _targetViewViewModel;
+            set => SetField(ref _targetViewViewModel, value);
         }
 
         private Uri _uri;
@@ -202,12 +209,11 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
 
         public void Dispose()
         {
-            if (Hook.CombatMapEnabled)
-                Hook.ToggleMapCombat(false);
-
             UpdateTimer.Stop();
+            DebugViewViewModel.Dispose();
+            HotkeyViewViewModel.Dispose();
+            SettingsViewViewModel.Dispose();
             SaveAllTabs();
-            SettingsViewViewModel.Settings.Save();
         }
         private void UpdateTimer_Elapsed(object? sender, ElapsedEventArgs e)
         {
@@ -215,7 +221,6 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
             System.Windows.Application.Current.Dispatcher.Invoke(new Action(() =>
             {
                 UpdateMainProperties();
-                Hook.Update();
                 if (Hook.Hooked)
                 {
                     if (Hook.Loaded && Hook.Setup)
@@ -240,7 +245,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
                     {
                         Reading = true;
                         UpdateProperties();
-                        ResetAllCtrls();
+                        ResetAllViewModels();
                         //Hook.UpdateName();
                         EnableAllCtrls(false);
                         GameLoaded = false;
@@ -253,7 +258,6 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
         private void UpdateMainProperties()
         {
             ID = Hook.ID;
-            GameLoaded = Hook.Loaded;
             //ViewModel.ParamViewerViewModel.UpdateView();
             //Hook.UpdateMainProperties();
             //ViewModel.UpdateMainProperties();
@@ -266,8 +270,8 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
         private void InitAllViewModels()
         {
             ParamViewViewModel.InitViewModel(Hook);
-            ItemGibViewModel.InitViewModel(Hook);
-            InventoryViewModel.InitViewModel(Hook);
+            ItemGibViewViewModel.InitViewModel(Hook);
+            InventoryViewViewModel.InitViewModel(Hook);
             DebugViewViewModel.InitViewModel(this);
             HotkeyViewViewModel.InitViewModel(this);
         }
@@ -281,14 +285,15 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
         private void ReloadAllCtrls()
         {
         }
-        private void ResetAllCtrls()
+        private void ResetAllViewModels()
         {
+            DebugViewViewModel.ResetViewModel();
+            HotkeyViewViewModel.ResetViewModel();
         }
         private void UpdateAllViewModels()
         {
-            InventoryViewModel.UpdateViewModel();
-
-            ItemGibViewModel.UpdateViewModel();
+            InventoryViewViewModel.UpdateViewModel();
+            ItemGibViewViewModel.UpdateViewModel();
             ParamViewViewModel.UpdateViewModel();
             DebugViewViewModel.UpdateViewModel();
             HotkeyViewViewModel.UpdateViewModel();

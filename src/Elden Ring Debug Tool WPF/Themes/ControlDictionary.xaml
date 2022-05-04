@@ -83,21 +83,24 @@
     <Style x:Key="ToggleButtonPower" TargetType="{x:Type ToggleButton}">
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="ToggleButton">
+                <ControlTemplate TargetType="{x:Type ToggleButton}">
                     <Border Name="B1" Background="{Binding Background, RelativeSource={RelativeSource AncestorType=ToggleButton}}" BorderBrush="Transparent" BorderThickness="2" CornerRadius="15">
-                        <TextBlock Name="T1" Text="&#xE7E8;" FontSize="16" Margin="0,0,0,1" FontWeight="ExtraBlack" FontFamily="Segoe MDL2 Assets" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Red" />
+                        <TextBlock Name="T1" Text="&#xE7E8;" FontSize="16" Margin="0,0,0,1" FontWeight="ExtraBlack" FontFamily="Segoe MDL2 Assets" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsChecked" Value="True">
                             <Setter TargetName="B1" Property="BorderBrush" Value="Green"/>
-                            <Setter TargetName="T1" Property="Foreground" Value="Green"/>
+                            <Setter TargetName="T1" Property="Foreground" Value="GreenYellow"/>
+                        </Trigger>
+                        <Trigger Property="IsChecked" Value="False">
+                            <Setter TargetName="B1" Property="BorderBrush" Value="Transparent"/>
+                            <Setter TargetName="T1" Property="Foreground" Value="Red"/>
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter TargetName="T1" Property="Foreground" Value="DarkGray"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
-
             </Setter.Value>
         </Setter>
 

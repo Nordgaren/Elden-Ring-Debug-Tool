@@ -54,8 +54,6 @@ namespace Elden_Ring_Debug_Tool_WPF.Views
             else
                 textBox.Text = key.ToString();
             e.Handled = true;
-
-            DG.Focus();
         }
 
         private void TextBox_MouseEnter(object sender, MouseEventArgs e)
@@ -78,6 +76,7 @@ namespace Elden_Ring_Debug_Tool_WPF.Views
 
             textBox.Background = Brushes.White;
 
+            DG.Items.Refresh();
         }
 
         private void DG_LoadingRowDetails(object sender, DataGridRowDetailsEventArgs e)
@@ -94,7 +93,6 @@ namespace Elden_Ring_Debug_Tool_WPF.Views
             e.Row.DetailsVisibility = Visibility.Hidden;
 
             IEnumerable<PropertyInfo> parentVmProperties = hvm.GetCustomAttributes();
-
 
             Type t = hvm.Command.GetType();
             if (hvm.Command is ToggleableCommand tCommand)

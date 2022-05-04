@@ -90,7 +90,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
 
         private void Hook_OnUnhooked(object? sender, PHEventArgs e)
         {
-
+            Setup = false;
         }
 
         private void Hook_OnSetup(object? sender, PHEventArgs e)

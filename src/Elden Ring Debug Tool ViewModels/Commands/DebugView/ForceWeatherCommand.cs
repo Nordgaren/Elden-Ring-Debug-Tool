@@ -38,7 +38,8 @@ namespace Elden_Ring_Debug_Tool_ViewModels.Commands
 
         private void _debugViewViewModel_PropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == nameof(DebugViewViewModel.Setup))
+            if (e.PropertyName == nameof(DebugViewViewModel.Setup)
+                || e.PropertyName == nameof(DebugViewViewModel.Loaded))
             {
                 OnCanExecuteChanged();
             }
