@@ -1,5 +1,6 @@
 ﻿using Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels;
 using Erd_Tools;
+using Erd_Tools.Models;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -15,10 +16,10 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
     [Description("Inventory View")]
     public class InventoryViewViewModel : ViewModelBase
     {
-        internal ERHook Hook { get; set; }
+        internal ErdHook Hook { get; set; }
 
-        private ObservableCollection<ERInventoryEntryViewModel> _InventoryEntryViewModels;
-        public ObservableCollection<ERInventoryEntryViewModel> PlayerInventory
+        private ObservableCollection<InventoryEntryViewModel> _InventoryEntryViewModels;
+        public ObservableCollection<InventoryEntryViewModel> PlayerInventory
         {
             get => _InventoryEntryViewModels;
             set
@@ -46,7 +47,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
 
         private bool FilterInventory(object obj)
         {
-            if (obj is ERInventoryEntryViewModel item)
+            if (obj is InventoryEntryViewModel item)
             {
                 return item.Name.Contains(InventoryFilter, StringComparison.InvariantCultureIgnoreCase) 
                     || item.Quantity.ToString().Contains(InventoryFilter, StringComparison.InvariantCultureIgnoreCase)
@@ -61,10 +62,10 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
 
         public InventoryViewViewModel()
         {
-            PlayerInventory = new ObservableCollection<ERInventoryEntryViewModel>();
+            PlayerInventory = new ObservableCollection<InventoryEntryViewModel>();
         }
 
-        public void InitViewModel(ERHook hook)
+        public void InitViewModel(ErdHook hook)
         {
             Hook = hook;
         }
@@ -80,14 +81,14 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
         private void GetInventory()
         {
             IEnumerable inventory = Hook.GetInventory();
-            List<ERInventoryEntryViewModel> items = new List<ERInventoryEntryViewModel>();
+            List<InventoryEntryViewModel> items = new List<InventoryEntryViewModel>();
 
-            foreach (ERInventoryEntry entry in inventory)
+            foreach (InventoryEntry entry in inventory)
             {
-                items.Add(new ERInventoryEntryViewModel(entry));
+                items.Add(new InventoryEntryViewModel(entry));
             }
 
-            PlayerInventory = new ObservableCollection<ERInventoryEntryViewModel>(items);
+            PlayerInventory = new ObservableCollection<InventoryEntryViewModel>(items);
         }
 
         private int _inventoryCount;

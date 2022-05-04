@@ -1,4 +1,5 @@
 ﻿using Erd_Tools;
+using Erd_Tools.Models;
 using Elden_Ring_Debug_Tool_ViewModels.ViewModels;
 using System.Windows;
 using System.ComponentModel;
@@ -9,7 +10,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.Commands
     public class SaveParamCommand : CommandBase
     {
         private ParamViewViewModel _paramViewerViewModel;
-        private ERHook _hook => _paramViewerViewModel.Hook;
+        private ErdHook _hook => _paramViewerViewModel.Hook;
 
         public SaveParamCommand(ParamViewViewModel paramViewerViewModel)
         {
@@ -24,7 +25,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.Commands
 
         public override void Execute(object? parameter)
         {
-            ERParam param = _paramViewerViewModel.SelectedParam.Param;
+            Param param = _paramViewerViewModel.SelectedParam.Param;
 
             _paramViewerViewModel.Hook.SaveParam(param);
 

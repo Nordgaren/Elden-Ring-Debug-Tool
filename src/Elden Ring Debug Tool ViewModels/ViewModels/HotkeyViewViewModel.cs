@@ -17,7 +17,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
     [Description("Hotkey View")]
     public class HotkeyViewViewModel : ViewModelBase
     {
-        internal ERHook Hook;
+        internal ErdHook Hook;
 
         private ObservableCollection<HotkeyViewModel> _hotkeys;
         public ObservableCollection<HotkeyViewModel> Hotkeys

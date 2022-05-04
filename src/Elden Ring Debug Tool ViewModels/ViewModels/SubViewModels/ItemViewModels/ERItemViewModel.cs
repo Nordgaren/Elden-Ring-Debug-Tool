@@ -1,12 +1,13 @@
 ﻿using Erd_Tools;
+using Erd_Tools.Models;
 using System.Collections.ObjectModel;
-using static Erd_Tools.ERItem;
+using static Erd_Tools.Models.Item;
 
 namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels
 {
-    public class ERItemViewModel
+    public class ItemViewModel
     {
-        protected ERItem _item;
+        protected Item _item;
         public string Name => _item.Name;
         public int ID => _item.ID;
         public Category ItemCategory => _item.ItemCategory;
@@ -17,9 +18,9 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels
         public bool IsDrop => _item.IsDrop;
         public bool IsMultiplayerShare => _item.IsMultiplayerShare;
         public bool CanAquireFromOtherPlayers => IsDrop && IsMultiplayerShare;
-        public static ObservableCollection<ERItemViewModel> All = new ObservableCollection<ERItemViewModel>();
+        public static ObservableCollection<ItemViewModel> All = new ObservableCollection<ItemViewModel>();
 
-        public ERItemViewModel(ERItem item)
+        public ItemViewModel(Item item)
         {
             _item = item;
             All.Add(this);

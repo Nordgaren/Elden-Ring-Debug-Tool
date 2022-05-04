@@ -1,5 +1,5 @@
 ﻿using System.Text;
-using static Erd_Tools.ERParam;
+using static Erd_Tools.Models.Param;
 
 namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels
 {

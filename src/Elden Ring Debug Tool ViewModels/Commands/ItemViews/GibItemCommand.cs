@@ -8,7 +8,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.Commands
     public class GibItemCommand : CommandBase
     {
         private ItemGibViewViewModel _itemGibViewModel;
-        private ERHook _hook => _itemGibViewModel.Hook;
+        private ErdHook _hook => _itemGibViewModel.Hook;
 
         public GibItemCommand(ItemGibViewViewModel itemGibViewModel)
         {

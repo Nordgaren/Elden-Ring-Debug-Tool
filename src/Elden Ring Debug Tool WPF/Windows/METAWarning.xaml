@@ -6,7 +6,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:p="clr-namespace:Elden_Ring_Debug_Tool_WPF.Properties"
              xmlns:local="clr-namespace:Elden_Ring_Debug_Tool_WPF"
              mc:Ignorable="d" 
              ResizeMode="NoResize"

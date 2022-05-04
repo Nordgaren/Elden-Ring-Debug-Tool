@@ -1,24 +1,26 @@
 ﻿using Elden_Ring_Debug_Tool_ViewModels.Commands;
 using Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels;
 using Erd_Tools;
+using Erd_Tools.Models;
+using Erd_Tools.Models;
 using PropertyHook;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows.Data;
 using System.Windows.Input;
-using static Erd_Tools.ERWeapon;
+using static Erd_Tools.Models.Weapon;
 
 namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
 {
     [Description("Item Gib View")]
     public class ItemGibViewViewModel : ViewModelBase
     {
-        internal ERHook Hook { get; set; }
-        private readonly ObservableCollection<ERItemCategoryViewModel> _categories;
-        private readonly ObservableCollection<ERGemViewModel> _gems;
+        internal ErdHook Hook { get; set; }
+        private readonly ObservableCollection<ItemCategoryViewModel> _categories;
+        private readonly ObservableCollection<GemViewModel> _gems;
 
         public ICollectionView CategoryCollectionView { get; }
-        public ICollectionView ItemsCollectionView => CollectionViewSource.GetDefaultView(SearchAll ? ERItemViewModel.All : SelectedItemCategory?.Items);
+        public ICollectionView ItemsCollectionView => CollectionViewSource.GetDefaultView(SearchAll ? ItemViewModel.All : SelectedItemCategory?.Items);
         public ICollectionView InfusionCollectionView { get; }
         public ICollectionView GemCollectionView { get; }
 
@@ -29,15 +31,15 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
         public ItemGibViewViewModel(SettingsViewViewModel settingsViewViewModel)
         {
             SettingsViewViewModel = settingsViewViewModel;
-            _categories = new ObservableCollection<ERItemCategoryViewModel>(new List<ERItemCategoryViewModel>());
+            _categories = new ObservableCollection<ItemCategoryViewModel>(new List<ItemCategoryViewModel>());
             CategoryCollectionView = CollectionViewSource.GetDefaultView(_categories);
 
-            InfusionCollectionView = CollectionViewSource.GetDefaultView(new ObservableCollection<Infusion>(ERGem.AllInfusions));
+            InfusionCollectionView = CollectionViewSource.GetDefaultView(new ObservableCollection<Infusion>(Gem.AllInfusions));
             InfusionCollectionView.Filter += FilterInfusions;
 
-            _gems = new ObservableCollection<ERGemViewModel>(new List<ERGemViewModel>());
+            _gems = new ObservableCollection<GemViewModel>(new List<GemViewModel>());
             GemCollectionView = CollectionViewSource.GetDefaultView(_gems);
-            GemCollectionView.Filter += FilterGems;
+            GemCollectionView.Filter += FiltGems;
 
             GibItemCommand = new GibItemCommand(this);
 
@@ -54,9 +56,9 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
             return false;
         }
 
-        private bool FilterGems(object obj)
+        private bool FiltGems(object obj)
         {
-            if (obj is ERGemViewModel gem && SelectedItem is ERWeaponViewModel weapon && !weapon.Unique)
+            if (obj is GemViewModel gem && SelectedItem is WeaponViewModel weapon && !weapon.Unique)
             {
                 return gem.WeaponTypes.Contains(weapon.Type);
             }
@@ -64,19 +66,19 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
             return false;
         }
 
-        public void InitViewModel(ERHook hook)
+        public void InitViewModel(ErdHook hook)
         {
             Hook = hook;
             Hook.OnSetup += Hook_OnSetup;
             Hook.OnUnhooked += Hook_OnUnhooked;
-            foreach (ERItemCategory itemCategory in ERItemCategory.All)
+            foreach (ItemCategory itemCategory in ItemCategory.All)
             {
-                ERItemCategoryViewModel erICVM = new ERItemCategoryViewModel(itemCategory);
+                ItemCategoryViewModel erICVM = new ItemCategoryViewModel(itemCategory);
                 _categories.Add(erICVM);
 
-                if (erICVM.Category == ERItem.Category.Gem)
+                if (erICVM.Category == Item.Category.Gem)
                 {
-                    foreach (ERGemViewModel gem in erICVM.Items)
+                    foreach (GemViewModel gem in erICVM.Items)
                     {
                         _gems.Add(gem);
                     }
@@ -97,7 +99,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
         {
             System.Windows.Application.Current.Dispatcher.Invoke(() =>
             {
-                foreach (ERItemViewModel item in ERItemViewModel.All)
+                foreach (ItemViewModel item in ItemViewModel.All)
                 {
                     item.SetupItem();
                 }
@@ -124,8 +126,8 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
             set => SetField(ref _loaded, value);
         }
 
-        private ERItemCategoryViewModel _selectedItemCategory;
-        public ERItemCategoryViewModel SelectedItemCategory
+        private ItemCategoryViewModel _selectedItemCategory;
+        public ItemCategoryViewModel SelectedItemCategory
         {
             get => _selectedItemCategory;
             set 
@@ -133,7 +135,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
                 if (SetField(ref _selectedItemCategory, value))
                 {
                     OnPropertyChanged(nameof(ItemsCollectionView));
-                    ItemsCollectionView.Filter += FilterItems;
+                    ItemsCollectionView.Filter += FiltItems;
                 }
             }
         }
@@ -152,16 +154,16 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
             set => SetField(ref _upgradeLevel, value);
         }
 
-        private ERItemViewModel? _selectedItem;
-        public ERItemViewModel? SelectedItem
+        private ItemViewModel? _selectedItem;
+        public ItemViewModel? SelectedItem
         {
             get => _selectedItem;
             set { 
                 if (SetField(ref _selectedItem, value))
                 {
-                    SelectedWeapon = SelectedItem as ERWeaponViewModel;
+                    SelectedWeapon = SelectedItem as WeaponViewModel;
                     GemCollectionView.Refresh();
-                    if (!GemCollectionView.IsEmpty && SelectedItem is ERWeaponViewModel weapon)
+                    if (!GemCollectionView.IsEmpty && SelectedItem is WeaponViewModel weapon)
                     {
                         SelectedGem = _gems.FirstOrDefault(x => x.SwordArtID == weapon.SwordArtId);
                     }
@@ -211,8 +213,8 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
             set => SetField(ref _maxQuantity, Restrict ? value : int.MaxValue);
         }
 
-        private ERWeaponViewModel? _selectedWeapon;
-        public ERWeaponViewModel? SelectedWeapon
+        private WeaponViewModel? _selectedWeapon;
+        public WeaponViewModel? SelectedWeapon
         {
             get => _selectedWeapon;
             set
@@ -232,8 +234,8 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
             set => SetField(ref _selectedInfusion, value);
         }
 
-        private ERGemViewModel? _selectedGem;
-        public ERGemViewModel? SelectedGem
+        private GemViewModel? _selectedGem;
+        public GemViewModel? SelectedGem
         {
             get => _selectedGem;
             set
@@ -271,9 +273,9 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
             }
         }
 
-        private bool FilterItems(object obj)
+        private bool FiltItems(object obj)
         {
-            if (obj is ERItemViewModel item)
+            if (obj is ItemViewModel item)
             {
                 return item.Name.Contains(ItemFilter, StringComparison.InvariantCultureIgnoreCase);
             }

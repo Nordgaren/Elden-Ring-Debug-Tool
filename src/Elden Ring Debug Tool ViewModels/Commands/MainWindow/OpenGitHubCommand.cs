@@ -7,7 +7,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.Commands
     public class OpenGitHubCommand : CommandBase
     {
         private MainWindowViewModel _mainWindowViewModel;
-        private ERHook _hook => _mainWindowViewModel.Hook;
+        private ErdHook _hook => _mainWindowViewModel.Hook;
 
         public OpenGitHubCommand(MainWindowViewModel mainWindowViewModel)
         {

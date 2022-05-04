@@ -1,13 +1,13 @@
-﻿using Erd_Tools;
+﻿using Erd_Tools.Models;
 using System.Collections.ObjectModel;
-using static Erd_Tools.ERParam;
+using static Erd_Tools.Models.Param;
 
 namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels
 {
-    public class ERParamViewModel : ViewModelBase
+    public class ParamViewModel : ViewModelBase
     {
         public ParamViewViewModel ParamViewerViewModel { get; }
-        public ERParam Param { get; }
+        public Param Param { get; }
         public int Offset => Param.Offset;
         public string Name => Param.Name;
         public string Type => Param.Type;
@@ -19,7 +19,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels
         public Dictionary<int, int> OffsetDict  => Param.OffsetDict;
         public int RowLength => Param.RowLength;
 
-        public ERParamViewModel(ParamViewViewModel paramViewerViewModel, ERParam param)
+        public ParamViewModel(ParamViewViewModel paramViewerViewModel, Param param)
         {
             ParamViewerViewModel = paramViewerViewModel;
             Param = param;

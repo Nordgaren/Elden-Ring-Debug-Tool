@@ -17,14 +17,14 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
     [Description("Main Window")]
     public class MainWindowViewModel : ViewModelBase
     {
-        public ERHook Hook { get; private set; }
+        public ErdHook Hook { get; private set; }
 
         private bool _gameLoaded;
 
         public bool Reading
         {
-            get => ERHook.Reading;
-            set => ERHook.Reading = value;
+            get => ErdHook.Reading;
+            set => ErdHook.Reading = value;
         }
 
         System.Timers.Timer UpdateTimer = new System.Timers.Timer();
@@ -45,7 +45,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
 
         public MainWindowViewModel()
         {
-            Hook = new ERHook(5000, 15000, p => p.MainWindowTitle == "ELDEN RING™");
+            Hook = new ErdHook(5000, 15000, p => p.MainWindowTitle == "ELDEN RING™");
             Hook.OnSetup += Hook_OnSetup;
             Hook.OnUnhooked += Hook_OnUnhooked;
             OpenGitHubCommand = new OpenGitHubCommand(this);

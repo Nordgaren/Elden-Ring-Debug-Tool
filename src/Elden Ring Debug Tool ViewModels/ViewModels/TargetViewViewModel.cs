@@ -11,13 +11,13 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
     [Description("Target View")]
     public class TargetViewViewModel
     {
-        internal ERHook Hook { get; private set; }
+        internal ErdHook Hook { get; private set; }
 
         public TargetViewViewModel()
         {
 
         }
-        public void InitViewModel(ERHook hook)
+        public void InitViewModel(ErdHook hook)
         {
             Hook = hook;
         }

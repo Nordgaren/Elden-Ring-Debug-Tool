@@ -5,6 +5,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows.Data;
 using System.Windows.Input;
+using Erd_Tools.Models;
 
 namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
 {
@@ -13,8 +14,8 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
     {
         public string ParamSavePath => $@"{Directory.GetParent(Hook.Process.MainModule.FileName).Parent.FullName}\capture\param";
 
-        internal ERHook Hook { get; set; }
-        private readonly ObservableCollection<ERParamViewModel> _params;
+        internal ErdHook Hook { get; set; }
+        private readonly ObservableCollection<ParamViewModel> _params;
 
         public ICollectionView ParamCollectionView { get; }
         public ICollectionView RowCollectionView => CollectionViewSource.GetDefaultView(SelectedParam?.Rows);
@@ -26,7 +27,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
 
         public ParamViewViewModel()
         {
-            _params = new ObservableCollection<ERParamViewModel>(new List<ERParamViewModel>());
+            _params = new ObservableCollection<ParamViewModel>(new List<ParamViewModel>());
             ParamCollectionView = CollectionViewSource.GetDefaultView(_params);
             SaveParamCommand = new SaveParamCommand(this);
             ResetParamCommand = new ResetParamCommand(this);
@@ -37,7 +38,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
             Commands.Add(OpenParamCaptureFolderCommand);
         }
 
-        public void InitViewModel(ERHook hook)
+        public void InitViewModel(ErdHook hook)
         {
             Hook = hook;
             Hook.OnSetup += Hook_OnSetup;
@@ -52,9 +53,9 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
         {
             System.Windows.Application.Current.Dispatcher.Invoke(() =>
             {
-                foreach (ERParam p in Hook.Params)
+                foreach (Param p in Hook.Params)
                 {
-                    _params.Add(new ERParamViewModel(this, p));
+                    _params.Add(new ParamViewModel(this, p));
                 }
                 ParamCollectionView.Filter = FilterParams;
 
@@ -77,8 +78,8 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
         }
 
 
-        private ERParamViewModel _selectedParam;
-        public ERParamViewModel SelectedParam
+        private ParamViewModel _selectedParam;
+        public ParamViewModel SelectedParam
         {
             get
             {
@@ -123,7 +124,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
         }
         private bool FilterParams(object obj)
         {
-            if (obj is ERParamViewModel param)
+            if (obj is ParamViewModel param)
             {
                 return param.Type.Contains(ParamFilter, StringComparison.InvariantCultureIgnoreCase);
             }

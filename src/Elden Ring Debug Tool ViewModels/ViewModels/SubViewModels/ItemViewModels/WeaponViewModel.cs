@@ -1,11 +1,12 @@
 ﻿using Erd_Tools;
-using static Erd_Tools.ERWeapon;
+using Erd_Tools.Models;
+using static Erd_Tools.Models.Weapon;
 
 namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels
 {
-    public class ERWeaponViewModel : ERItemViewModel
+    public class WeaponViewModel : ItemViewModel
     {
-        protected ERWeapon _weapon => _item as ERWeapon;
+        protected Weapon _weapon => _item as Weapon;
         public int RealID => _weapon.RealID;
         public bool Unique => _weapon.Unique;
         public int SwordArtId => _weapon.SwordArtId;
@@ -13,8 +14,8 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels
         public int MaxUpgrade => _weapon.MaxUpgrade;
         public WeaponType Type => _weapon.Type;
         public AmmoType TypeAmmo => _weapon.TypeAmmo;
-        //public ERGemViewModel DefaultGem { get; set; }
-        public ERWeaponViewModel(ERWeapon weapon) : base(weapon)
+        //public GemViewModel DefaultGem { get; set; }
+        public WeaponViewModel(Weapon weapon) : base(weapon)
         {
         }
 

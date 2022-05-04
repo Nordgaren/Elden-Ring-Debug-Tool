@@ -32,9 +32,9 @@ namespace Elden_Ring_Debug_Tool_WPF.Views
 
         ////public override void InitCtrl()
         ////{
-        ////    //cmbCategory.ItemsSource = ERItemCategory.All;
+        ////    //cmbCategory.ItemsSource = ItemCategory.All;
         ////    //cmbCategory.SelectedIndex = 0;
-        ////    FilterItems();
+        ////    FiltItems();
         ////}
         ////internal override void UpdateCtrl() 
         ////{
@@ -49,8 +49,8 @@ namespace Elden_Ring_Debug_Tool_WPF.Views
 
         //internal override void ResetCtrl()
         //{
-        //    new ERHook().ResetInventory();
-        //    DataGridInventory.ItemsSource = new List<ERInventoryEntry>();
+        //    new ErdHook().ResetInventory();
+        //    DataGridInventory.ItemsSource = new List<InventoryEntry>();
         //}
 
         ////internal override void EnableCtrls(bool enable)
@@ -63,20 +63,20 @@ namespace Elden_Ring_Debug_Tool_WPF.Views
 
         //private void cmbCategory_SelectionChanged(object sender, SelectionChangedEventArgs e)
         //{
-        //    FilterItems();
+        //    FiltItems();
         //}
 
         ////Clear items and add the ones that match text in search box
-        //private void FilterItems()
+        //private void FiltItems()
         //{
         //    //lbxItems.Items.Clear();
 
         //    //if (SearchAllCheckbox.IsChecked.Value && txtSearch.Text != "")
         //    //{
         //    //    //search every item category
-        //    //    foreach (ERItemCategory category in cmbCategory.Items)
+        //    //    foreach (ItemCategory category in cmbCategory.Items)
         //    //    {
-        //    //        foreach (ERItem item in category.Items)
+        //    //        foreach (Item item in category.Items)
         //    //        {
         //    //            if (item.ToString().ToLower().Contains(txtSearch.Text.ToLower()))
         //    //                lbxItems.Items.Add(item);
@@ -86,8 +86,8 @@ namespace Elden_Ring_Debug_Tool_WPF.Views
         //    //else
         //    //{
         //    //    //only search selected item category
-        //    //    ERItemCategory category = cmbCategory.SelectedItem as ERItemCategory;
-        //    //    foreach (ERItem item in category.Items)
+        //    //    ItemCategory category = cmbCategory.SelectedItem as ItemCategory;
+        //    //    foreach (Item item in category.Items)
         //    //    {
         //    //        if (item.ToString().ToLower().Contains(txtSearch.Text.ToLower()))
         //    //            lbxItems.Items.Add(item);
@@ -102,7 +102,7 @@ namespace Elden_Ring_Debug_Tool_WPF.Views
 
         //private void txtSearch_TextChanged(object sender, TextChangedEventArgs e)
         //{
-        //    FilterItems();
+        //    FiltItems();
         //}
 
         ////Handles the "Searching..." label on the text box
@@ -120,7 +120,7 @@ namespace Elden_Ring_Debug_Tool_WPF.Views
         //    //if (lbxItems == null)
         //    //    return;
 
-        //    //ERItem item = lbxItems.SelectedItem as ERItem;
+        //    //Item item = lbxItems.SelectedItem as Item;
         //    //if (item == null)
         //    //    return;
 
@@ -145,7 +145,7 @@ namespace Elden_Ring_Debug_Tool_WPF.Views
         //{
         //    //if (!Hook.Setup) return;
 
-        //    //ERItem item = lbxItems.SelectedItem as ERItem;
+        //    //Item item = lbxItems.SelectedItem as Item;
         //    //if (item == null)
         //    //    return;
 
@@ -162,10 +162,10 @@ namespace Elden_Ring_Debug_Tool_WPF.Views
         //    //cmbInfusion.SelectedIndex = 0;
 
         //    //cmbGems.Items.Clear();
-        //    //cmbGems.Items.Add(ERGem.Default);
+        //    //cmbGems.Items.Add(Gem.Default);
         //    //cmbGems.SelectedIndex = 0;
 
-        //    //if (item.ItemCategory == ERItem.Category.Weapons)
+        //    //if (item.ItemCategory == Item.Category.Weapons)
         //    //{
         //    //    ERWeapon? weapon = item as ERWeapon;
         //    //    if (weapon == null)
@@ -175,7 +175,7 @@ namespace Elden_Ring_Debug_Tool_WPF.Views
         //    //        GetInfusions(weapon.DefaultGem);
 
         //    //    if (!weapon.Unique)
-        //    //        foreach (ERGem gem in ERGem.All)
+        //    //        foreach (Gem gem in Gem.All)
         //    //            if (gem.WeaponTypes.Contains(weapon.Type))
         //    //                cmbGems.Items.Add(gem);
 
@@ -184,7 +184,7 @@ namespace Elden_Ring_Debug_Tool_WPF.Views
 
         //    //    cmbGems.SelectedItem = weapon.DefaultGem;
         //    //    if (cmbGems.SelectedItem == null)
-        //    //        cmbGems.SelectedItem = ERGem.Default;
+        //    //        cmbGems.SelectedItem = Gem.Default;
 
         //    //    nudUpgrade.Maximum = weapon.MaxUpgrade;
         //    //}
@@ -202,14 +202,14 @@ namespace Elden_Ring_Debug_Tool_WPF.Views
         //{
         //    //if (!Hook.Setup) return;
 
-        //    //ERGem gem = cmbGems.SelectedItem as ERGem;
+        //    //Gem gem = cmbGems.SelectedItem as Gem;
         //    //if (gem == null) return;
 
         //    //cmbInfusion.Items.Clear();
         //    //GetInfusions(gem);
         //}
 
-        //private void GetInfusions(ERGem? gem)
+        //private void GetInfusions(Gem? gem)
         //{
         //    //foreach (Infusion infusion in gem.Infusions)
         //    //    cmbInfusion.Items.Add(infusion);
@@ -219,7 +219,7 @@ namespace Elden_Ring_Debug_Tool_WPF.Views
 
         //public void UpdateCreateEnabled()
         //{
-        //    //ERItem? item = lbxItems.SelectedItem as ERItem;
+        //    //Item? item = lbxItems.SelectedItem as Item;
         //    //if (item == null)
         //    //    return;
 
@@ -228,7 +228,7 @@ namespace Elden_Ring_Debug_Tool_WPF.Views
 
         //internal void EnableStats(bool enable)
         //{
-        //    //ERItem? item = lbxItems.SelectedItem as ERItem;
+        //    //Item? item = lbxItems.SelectedItem as Item;
         //    //bool canTrade = false;
         //    //if (item != null)
         //    //    canTrade = item.CanAquireFromOtherPlayers;
@@ -248,7 +248,7 @@ namespace Elden_Ring_Debug_Tool_WPF.Views
         //    //if (btnCreate.IsEnabled && lbxItems.SelectedItem != null)
         //    //{
         //    //    _ = ChangeColor(Brushes.DarkGray);
-        //    //    ERItem? item = lbxItems.SelectedItem as ERItem;
+        //    //    Item? item = lbxItems.SelectedItem as Item;
         //    //    if (item == null)
         //    //        return;
 
@@ -258,7 +258,7 @@ namespace Elden_Ring_Debug_Tool_WPF.Views
 
         //    //    id += (int)item.ItemCategory;
 
-        //    //    ERGem? gem = cmbGems.SelectedItem as ERGem;
+        //    //    Gem? gem = cmbGems.SelectedItem as Gem;
 
         //    //    if (item.EventID != -1)
         //    //        Hook.SetEventFlag(item.EventID);
@@ -347,7 +347,7 @@ namespace Elden_Ring_Debug_Tool_WPF.Views
         //{
         //    //checkbox changed, refresh search filter (if txtSearch is not empty)
         //    //if (txtSearch.Text != "")
-        //    //    FilterItems();
+        //    //    FiltItems();
         //}
 
         //private void cbxMaxUpgrade_Checked(object sender, RoutedEventArgs e)
@@ -396,7 +396,7 @@ namespace Elden_Ring_Debug_Tool_WPF.Views
         //private void SearchAllCheckbox_Checked(object sender, RoutedEventArgs e)
         //{
         //    //if (txtSearch.Text != "")
-        //    //    FilterItems();
+        //    //    FiltItems();
         //}
 
 

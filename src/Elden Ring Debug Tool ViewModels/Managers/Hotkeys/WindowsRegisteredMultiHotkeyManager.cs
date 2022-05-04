@@ -7,11 +7,11 @@ namespace Elden_Ring_Debug_Tool_ViewModels.Manager
 {
     internal class WindowsRegisteredMultiHotkeyManager : IHotkeyManager
     {
-        private ERHook _hook { get; }
+        private ErdHook _hook { get; }
         private Dictionary<Key, List<ICommand>> _hotkeyDictionary { get; }
         private List<HotKey> _hotkeyList { get; }
 
-        public WindowsRegisteredMultiHotkeyManager(ERHook hook)
+        public WindowsRegisteredMultiHotkeyManager(ErdHook hook)
         {
             _hook = hook;
             _hotkeyDictionary = new Dictionary<Key, List<ICommand>>();

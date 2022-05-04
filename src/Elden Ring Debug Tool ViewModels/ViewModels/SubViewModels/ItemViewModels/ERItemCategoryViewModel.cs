@@ -1,39 +1,40 @@
-﻿using Erd_Tools;
+﻿using Erd_Tools.Models;
+using Erd_Tools.Models;
 using System.Collections.ObjectModel;
-using static Erd_Tools.ERItem;
+using static Erd_Tools.Models.Item;
 
 namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels
 {
-    public class ERItemCategoryViewModel : ViewModelBase
+    public class ItemCategoryViewModel : ViewModelBase
     {
-        private ERItemCategory _erItemCategory;
-        public string Name => _erItemCategory.Name;
-        public ObservableCollection<ERItemViewModel> Items;
-        public Category Category => _erItemCategory.Category;
-        public bool ShowID => _erItemCategory.ShowID;
+        private ItemCategory _ItemCategory;
+        public string Name => _ItemCategory.Name;
+        public ObservableCollection<ItemViewModel> Items;
+        public Category Category => _ItemCategory.Category;
+        public bool ShowID => _ItemCategory.ShowID;
 
-        public ERItemCategoryViewModel(ERItemCategory erItemCategory)
+        public ItemCategoryViewModel(ItemCategory ItemCategory)
         {
-            _erItemCategory = erItemCategory;
+            _ItemCategory = ItemCategory;
 
-            Items = new ObservableCollection<ERItemViewModel>();
-            foreach (ERItem item in _erItemCategory.Items)
+            Items = new ObservableCollection<ItemViewModel>();
+            foreach (Item item in _ItemCategory.Items)
             {
                 Items.Add(GetViewModel(item));
             }
         }
-        private ERItemViewModel GetViewModel(ERItem item)
+        private ItemViewModel GetViewModel(Item item)
         {
             switch (item.ItemCategory)
             {
                 case Category.Weapons:
-                    return new ERWeaponViewModel(item as ERWeapon);
+                    return new WeaponViewModel(item as Weapon);
                 case Category.Protector:
                 case Category.Accessory:
                 case Category.Goods:
-                    return new ERItemViewModel(item);
+                    return new ItemViewModel(item);
                 case Category.Gem:
-                    return new ERGemViewModel(item as ERGem);
+                    return new GemViewModel(item as Gem);
                 default:
                     throw new Exception("Incorrect Category");
             }

@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 using System.Windows.Data;
 using System.Windows.Input;
 using static Elden_Ring_Debug_Tool_ViewModels.Attributes.HotkeyParameterAttribute;
-using static Erd_Tools.ERHook;
+using static Erd_Tools.ErdHook;
 
 namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
 {
@@ -20,7 +20,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
     public class DebugViewViewModel : ViewModelBase
     {
         private MainWindowViewModel _mainWindowViewModel { get; set; }
-        internal ERHook Hook { get; private set; }
+        internal ErdHook Hook { get; private set; }
         public ICommand EnableMapInCombatCommand { get; }
         public ICommand ForceWeatherCommand { get; }
 
