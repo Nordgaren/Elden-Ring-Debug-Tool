@@ -56,6 +56,7 @@ My fork of [Property Hook](https://github.com/Nordgaren/PropertyHook) by [TKGP](
 
 * Can now lock target as well as lock some stats on the target    
 
+* Can double click on any of the labels in the enemy panel to copy the label to your clipboard. 
 
 ### Beta 0.6.1
 
