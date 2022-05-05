@@ -49,10 +49,8 @@
                                 <ColumnDefinition/>
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
-                            <Grid.ToolTip >
-                                <DockPanel Width="50" Height="70">
-                                    <Label Content="{Binding InternalName}"/>
-                                </DockPanel>
+                            <Grid.ToolTip  >
+                                <controls:ParamToolTip DataContext="{Binding DataContext, RelativeSource={x:Static RelativeSource.TemplatedParent}}"/>
                             </Grid.ToolTip>
                             <Label Content="{Binding InternalName}" HorizontalAlignment="Left" FontWeight="DemiBold"/>
                             <wpfTool:ShortUpDown Value="{Binding Value}" Minimum="{Binding MinValue}" Maximum="{Binding MaxValue}" Increment="{Binding Increment}" 
@@ -72,10 +70,8 @@
                                 <ColumnDefinition/>
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
-                            <Grid.ToolTip >
-                                <DockPanel Width="50" Height="70">
-                                    <Label Content="{Binding InternalName}"/>
-                                </DockPanel>
+                            <Grid.ToolTip  >
+                                <controls:ParamToolTip DataContext="{Binding DataContext, RelativeSource={x:Static RelativeSource.TemplatedParent}}"/>
                             </Grid.ToolTip>
                             <Label Content="{Binding InternalName}" HorizontalAlignment="Left" FontWeight="DemiBold"/>
                             <wpfTool:SByteUpDown Value="{Binding Value}" Minimum="{Binding MinValue}" Maximum="{Binding MaxValue}" Increment="{Binding Increment}" 
@@ -96,7 +92,9 @@
                                 <ColumnDefinition Width="125"/>
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
-
+                            <Grid.ToolTip  >
+                                <controls:ParamToolTip DataContext="{Binding DataContext, RelativeSource={x:Static RelativeSource.TemplatedParent}}"/>
+                            </Grid.ToolTip>
                             <Label Content="{Binding InternalName}" HorizontalAlignment="Left" FontWeight="DemiBold"/>
                             <wpfTool:UIntegerUpDown Value="{Binding Value}" Minimum="{Binding MinValue}" Maximum="{Binding MaxValue}" Increment="{Binding Increment}" 
                                                  Watermark="Unsigned 32" ClipValueToMinMax="True" Width="100" FontWeight="DemiBold" Grid.Column="1" 
@@ -114,6 +112,9 @@
                                 <ColumnDefinition Width="125"/>
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
+                            <Grid.ToolTip  >
+                                <controls:ParamToolTip DataContext="{Binding DataContext, RelativeSource={x:Static RelativeSource.TemplatedParent}}"/>
+                            </Grid.ToolTip>
 
                             <Label Content="{Binding InternalName}" HorizontalAlignment="Left" FontWeight="DemiBold"/>
                             <wpfTool:UShortUpDown Value="{Binding Value}" Minimum="{Binding MinValue}" Maximum="{Binding MaxValue}" Increment="{Binding Increment}" 
@@ -132,6 +133,9 @@
                                 <ColumnDefinition Width="125"/>
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
+                            <Grid.ToolTip  >
+                                <controls:ParamToolTip DataContext="{Binding DataContext, RelativeSource={x:Static RelativeSource.TemplatedParent}}"/>
+                            </Grid.ToolTip>
 
                             <Label Content="{Binding InternalName}" HorizontalAlignment="Left" FontWeight="DemiBold"/>
                             <wpfTool:ByteUpDown Value="{Binding Value}" Minimum="{Binding MinValue}" Maximum="{Binding MaxValue}" Increment="{Binding Increment}" 
@@ -152,6 +156,9 @@
                                 <ColumnDefinition Width="125"/>
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
+                            <Grid.ToolTip  >
+                                <controls:ParamToolTip DataContext="{Binding DataContext, RelativeSource={x:Static RelativeSource.TemplatedParent}}"/>
+                            </Grid.ToolTip>
                             <Label Content="{Binding InternalName}"  HorizontalAlignment="Left" Grid.ColumnSpan="2" FontWeight="DemiBold"/>
                             <CheckBox Name="BitControl" IsChecked="{Binding Value}" Width="60" Grid.Column="1" HorizontalContentAlignment="Right" 
                                       HorizontalAlignment="Right" VerticalAlignment="Center"/>
@@ -169,6 +176,9 @@
                                 <ColumnDefinition Width="125"/>
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
+                            <Grid.ToolTip  >
+                                <controls:ParamToolTip DataContext="{Binding DataContext, RelativeSource={x:Static RelativeSource.TemplatedParent}}"/>
+                            </Grid.ToolTip>
                             <Label Content="{Binding InternalName}"  HorizontalAlignment="Left" Grid.ColumnSpan="2" FontWeight="DemiBold"/>
                             <wpfTool:SingleUpDown Value="{Binding Value}" Minimum="{Binding MinValue}" Maximum="{Binding MaxValue}" Increment="{Binding Increment}" 
                                                   Watermark="Float 32" ClipValueToMinMax="True" FormatString="F2" Width="100" FontWeight="DemiBold" Grid.Column="1" 
@@ -187,6 +197,9 @@
                                 <ColumnDefinition Width="100"/>
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
+                            <Grid.ToolTip  >
+                                <controls:ParamToolTip DataContext="{Binding DataContext, RelativeSource={x:Static RelativeSource.TemplatedParent}}"/>
+                            </Grid.ToolTip>
 
                             <Label Content="{Binding InternalName}" HorizontalAlignment="Left" Grid.ColumnSpan="2" FontWeight="DemiBold"/>
                             <TextBox Text="{Binding Value, UpdateSourceTrigger=LostFocus}" Name="StrControl" Width="80" Grid.Column="1" HorizontalAlignment="Right" />
