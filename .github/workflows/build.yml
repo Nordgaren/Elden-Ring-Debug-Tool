@@ -25,9 +25,9 @@ jobs:
 
     - run: move './README.md' './src/Elden Ring Debug Tool WPF/bin/Publish/win-x64/README.txt'
 
-    - run: 7z a -t7z "Elden Ring Debug Tool.7z" src/Elden Ring Debug Tool WPF/Publish/win-x64/* -xr!*.pdb
+    - run: 7z a -t7z 'Elden Ring Debug Tool.7z' 'src/Elden-Ring-Debug-Tool-WPF/Publish/win-x64/*'' -xr!*.pdb
 
-    - run: move 'Elden Ring Debug Tool.7z' './src/Elden Ring Debug Tool WPF/bin/Publish/Elden Ring Debug Tool.7z'
+    - run: move 'Elden Ring Debug Tool.7z' './src/Elden-Ring-Debug-Tool-WPF/bin/Publish/Elden Ring Debug Tool.7z'
 
 
     - name: publish artifact
