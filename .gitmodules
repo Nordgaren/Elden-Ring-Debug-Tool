@@ -1,15 +1,3 @@
-[submodule "SoulsFormats"]
-	path = src/SoulsFormats
-	url = https://github.com/JKAnderson/SoulsFormats.git
-[submodule "PropertyHook"]
-	path = src/PropertyHook
-	url = https://github.com/Nordgaren/PropertyHook.git
-[submodule "src/SoulsFormats"]
-	path = src/SoulsFormats
-	url = https://github.com/Nordgaren/SoulsFormats.git
-[submodule "src/PropertyHook"]
-	path = src/PropertyHook
-	url = https://github.com/Nordgaren/PropertyHook.git
 [submodule "src/Erd-Tools"]
 	path = src/Erd-Tools
 	url = https://github.com/Nordgaren/Erd-Tools.git
