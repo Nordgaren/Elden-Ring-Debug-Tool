@@ -10,9 +10,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "solution items", "solution 
 		.github\workflows\build.yml = .github\workflows\build.yml
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Elden-Ring-Debug-Tool-WPF", "src\Elden Ring Debug Tool WPF\Elden-Ring-Debug-Tool-WPF.csproj", "{0BBEF35F-0AF0-455E-B64B-840C2F351CE0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Elden-Ring-Debug-Tool-WPF", "src\Elden-Ring-Debug-Tool-WPF\Elden-Ring-Debug-Tool-WPF.csproj", "{0BBEF35F-0AF0-455E-B64B-840C2F351CE0}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Elden-Ring-Debug-Tool-ViewModels", "src\Elden Ring Debug Tool ViewModels\Elden-Ring-Debug-Tool-ViewModels.csproj", "{6CB74744-3ADE-4008-9E29-E2B7B525530A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Elden-Ring-Debug-Tool-ViewModels", "src\Elden-Ring-Debug-Tool-ViewModels\Elden-Ring-Debug-Tool-ViewModels.csproj", "{6CB74744-3ADE-4008-9E29-E2B7B525530A}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Erd-Tools", "src\Erd-Tools\src\Erd-Tools\Erd-Tools.csproj", "{14B26024-92DE-4CA4-9AB7-90411B1A121B}"
 EndProject

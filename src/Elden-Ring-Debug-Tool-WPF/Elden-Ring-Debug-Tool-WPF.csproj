@@ -68,7 +68,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Elden Ring Debug Tool ViewModels\Elden-Ring-Debug-Tool-ViewModels.csproj" />
+    <ProjectReference Include="..\Elden-Ring-Debug-Tool-ViewModels\Elden-Ring-Debug-Tool-ViewModels.csproj" />
   </ItemGroup>
 
   <ItemGroup>
