@@ -25,7 +25,7 @@ jobs:
 
     - name: Action 7z
       uses: edgarrc/action-7z@v1
-        args: 7z a -t7z "Elden Ring Debug Tool.7z" .\bin\Publish\win-x64\* -xr!*.pdb
+        args: 7z a -t7z -mx=9 "Elden Ring Debug Tool.7z" .\bin\Publish\win-x64\* -xr!*.pdb
 
     - name: publish artifact
         uses: actions/upload-artifact@v3
