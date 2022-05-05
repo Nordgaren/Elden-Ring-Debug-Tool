@@ -32,7 +32,7 @@ jobs:
       uses: kzrnm/get-net-sdk-project-versions-action@v1.1.1
       id: get-version
       with:
-        proj-path: src/Elden Ring Debug Tool WPF/Elden-Ring-Debug-Tool-WPF.csproj
+        proj-path: src/Elden-Ring-Debug-Tool-WPF/Elden-Ring-Debug-Tool-WPF.csproj
 
 
     - run: move 'Elden Ring Debug Tool.7z' './src/Elden-Ring-Debug-Tool-WPF/bin/Publish/Elden Ring Debug Tool ${{steps.get-version.outputs.version}}.7z'
@@ -42,6 +42,6 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
         name: publish
-        path: src/Elden Ring Debug Tool/bin/Publish/*.7zip
+        path: src/Elden-Ring-Debug-Tool-WPF/bin/Publish/*.7zip
 
     
