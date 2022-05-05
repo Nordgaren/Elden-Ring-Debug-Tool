@@ -28,10 +28,5 @@ jobs:
       with:
       args: 7za.exe a -t7z "Elden Ring Debug Tool.7z" .\bin\Publish\win-x64\* -xr!*.pdb
 
-  - name: publish artifact
-      uses: actions/upload-artifact@v3
-      with:
-        name: publish
-        path: src/Elden Ring Debug Tool/bin/Publish/*.7zip
 
     
