@@ -37,8 +37,9 @@
     <Message Text="Files: @(ResourceFiles)" Importance="High" />
     <Message Text="Directory: $(PublishDir)" Importance="High" />
     <Copy SourceFiles="@(ResourceFiles)" DestinationFolder="$(PublishDir)Resources\%(RecursiveDir)" SkipUnchangedFiles="true" />
-	<!--<Message Text="Moving Readme: $(PublishDir)" Importance="High" />
-	<Copy SourceFiles="$(SolutionDir)README.md" DestinationFiles="$(PublishDir)README.txt" />-->
+	  <Message Text="Moving Readme: $(PublishDir)" Importance="High" />
+	  <Message Text="Solution Dir: $(SolutionDir)" Importance="High" />
+	<Copy SourceFiles="$(SolutionDir)README.md" DestinationFiles="$(PublishDir)README.txt" />
 	  <Move SourceFiles="$(PublishDir)\$(AssemblyName).exe" DestinationFiles="$(PublishDir)\Elden Ring Debug Tool.exe" />
 	  <Message Text="Renamed executable file." Importance="high" />
 	<!--<Exec Command="7za.exe a -t7z &quot;Elden Ring Debug Tool.7z&quot; .\bin\Publish\win-x64\* -xr!*.pdb" />
