@@ -10,7 +10,7 @@ Backup your saves before using this tool, and restore the backups before going o
 * [Visual C++ Redistributable Packages for Visual Studio 2013](https://www.microsoft.com/en-gb/download/details.aspx?id=40784)
 
 ## Known Issues
-* None at this time. If you find any bugs, please let me know!  
+* Hotkeys don't save between sessions at this moment. They will next update  
 
 ## Installing  
 * Extract contents of zip archive to it's own folder. You may have to run as admin if Elden Ring Debug Tool crashes  
