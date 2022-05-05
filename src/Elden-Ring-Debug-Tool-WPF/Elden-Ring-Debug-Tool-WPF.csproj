@@ -42,8 +42,8 @@
 	<Copy SourceFiles="$(SolutionDir)README.md" DestinationFiles="$(PublishDir)README.txt" />
 	  <Move SourceFiles="$(PublishDir)\$(AssemblyName).exe" DestinationFiles="$(PublishDir)\Elden Ring Debug Tool.exe" />
 	  <Message Text="Renamed executable file." Importance="high" />
-	<!--<Exec Command="7za.exe a -t7z &quot;Elden Ring Debug Tool.7z&quot; .\bin\Publish\win-x64\* -xr!*.pdb" />
-	<Move SourceFiles="Elden Ring Debug Tool.7z" DestinationFiles="$(PublishDir)..\Elden Ring Debug Tool $(AssemblyVersion).7z" />-->
+	<Exec Command="7za.exe a -t7z &quot;Elden Ring Debug Tool.7z&quot; .\bin\Publish\win-x64\* -xr!*.pdb" />
+	<Move SourceFiles="Elden Ring Debug Tool.7z" DestinationFiles="$(PublishDir)..\Elden Ring Debug Tool $(AssemblyVersion).7z" />
   </Target>
 
 
