@@ -42,11 +42,19 @@ My fork of [Property Hook](https://github.com/Nordgaren/PropertyHook) by [TKGP](
 **wulf2k** For helping figure out the cheat for enabling the map during combat and his rewrite of Wulfs Target script
 
 # Change Log 
-### Beta 0.6.2
+### Beta 0.7
 
 * Fixed weather cheat and added some labels  
 
 * Added some info to the enemy tab  
+
+* Made the hotkeys easier to make and added a system to reference parameters in other tabs  
+
+* Hotkeys don't save at the moment. Currently looking into the options with the new upcoing dock system  
+
+* Everything should load up much faster and the window shouldn't freeze while loading  
+
+* Can now lock target as well as lock some stats on the target    
 
 
 ### Beta 0.6.1

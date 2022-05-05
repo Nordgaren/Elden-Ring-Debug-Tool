@@ -6,8 +6,8 @@
              xmlns:local="clr-namespace:Elden_Ring_Debug_Tool_WPF.Views" 
              xmlns:vm="clr-namespace:Elden_Ring_Debug_Tool_ViewModels.ViewModels;assembly=Elden-Ring-Debug-Tool-ViewModels"
              mc:Ignorable="d"
-             d:DesignHeight="600" d:DesignWidth="400" d:Background="LightGray"
-             d:DataContext="{d:DesignInstance vm:InventoryViewModel, IsDesignTimeCreatable=True}">
+             d:DesignHeight="600" d:DesignWidth="400" d:Background="LightGray" DataContextChanged="OnDataContextChanged"
+             d:DataContext="{d:DesignInstance vm:InventoryViewViewModel, IsDesignTimeCreatable=True}">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="150"/>

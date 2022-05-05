@@ -91,35 +91,23 @@ namespace Elden_Ring_Debug_Tool_WPF.Views
 
         private void DG_LoadingRowDetails(object sender, DataGridRowDetailsEventArgs e)
         {
+            e.Row.DetailsVisibility = Visibility.Hidden;
+
             HotkeyViewModel hvm = e.Row.DataContext as HotkeyViewModel;
             if (hvm == null)
                 return;
 
+            if (!hvm.HasDependancies)
+                return;
 
             StackPanel p = e.DetailsElement as StackPanel;
             if (p == null)
                 return;
 
-            e.Row.DetailsVisibility = Visibility.Hidden;
-
-            IEnumerable<PropertyInfo> parentVmProperties = hvm.GetCustomAttributes();
-
-
-            Type t = hvm.Command.GetType();
-            if (hvm.Command is ToggleableCommand tCommand)
-                t = tCommand.GetOriginalType();
-
-            foreach (PropertyInfo prop in parentVmProperties)
+            foreach ((PropertyInfo Prop, HotkeyParameterAttribute Parameter) dependancy in hvm.HotkeyParameterAttribute)
             {
-                HotkeyParameterAttribute? hKeyParamAttr = prop.GetCustomAttribute<HotkeyParameterAttribute>();
 
-                if (hKeyParamAttr == null)
-                    continue;
-
-                if (hKeyParamAttr.CommandType != t)
-                    continue;
-
-                DescriptionAttribute? attr = prop.GetCustomAttribute<DescriptionAttribute>();
+                DescriptionAttribute? attr = dependancy.Prop.GetCustomAttribute<DescriptionAttribute>();
 
                 if (attr == null)
                     throw new NullReferenceException(nameof(attr));
@@ -144,10 +132,10 @@ namespace Elden_Ring_Debug_Tool_WPF.Views
                 Binding bItem = new Binding()
                 {
                     Source = hvm.ParentViewModel,
-                    Path = new PropertyPath(prop.Name)
+                    Path = new PropertyPath(dependancy.Prop.Name)
                 };
 
-                switch (hKeyParamAttr.Type)
+                switch (dependancy.Parameter.Type)
                 {
                     case ResourceType.ComboBox:
                         ComboBox comboBox = new ComboBox()
@@ -157,7 +145,7 @@ namespace Elden_Ring_Debug_Tool_WPF.Views
                         Binding bSelectedItem = new Binding()
                         {
                             Source = hvm.ParentViewModel,
-                            Path = new PropertyPath(hKeyParamAttr.SelectedItemPropertyName)
+                            Path = new PropertyPath(dependancy.Parameter.SelectedItemPropertyName)
                         };
                         BindingOperations.SetBinding(comboBox, ComboBox.SelectedValueProperty, bSelectedItem);
                         BindingOperations.SetBinding(comboBox, ComboBox.ItemsSourceProperty, bItem);

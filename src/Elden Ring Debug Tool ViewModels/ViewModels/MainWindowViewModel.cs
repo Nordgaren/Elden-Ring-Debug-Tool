@@ -53,10 +53,10 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
 
             _settingsViewViewModel = new SettingsViewViewModel();
             _paramViewViewModel = new ParamViewViewModel();
-            _itemGibViewViewModel = new ItemGibViewViewModel(SettingsViewViewModel);
+            _itemGibViewViewModel = new ItemGibViewViewModel();
             _inventoryViewViewModel = new InventoryViewViewModel();
             _debugViewViewModel = new DebugViewViewModel();
-            _hotkeyViewViewModel = new HotkeyViewViewModel(SettingsViewViewModel); 
+            _hotkeyViewViewModel = new HotkeyViewViewModel(); 
             _targetViewViewModel = new TargetViewViewModel();
 
             _viewModels = new ObservableCollection<ViewModelBase>();
@@ -65,6 +65,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
             ViewModels.Add(ItemGibViewViewModel);
             ViewModels.Add(InventoryViewViewModel);
             ViewModels.Add(DebugViewViewModel);
+            ViewModels.Add(TargetViewViewModel);
             ViewModels.Add(HotkeyViewViewModel);
 
             InitAllViewModels();
@@ -270,9 +271,10 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
         private void InitAllViewModels()
         {
             ParamViewViewModel.InitViewModel(Hook);
-            ItemGibViewViewModel.InitViewModel(Hook);
+            ItemGibViewViewModel.InitViewModel(Hook, SettingsViewViewModel);
             InventoryViewViewModel.InitViewModel(Hook);
             DebugViewViewModel.InitViewModel(this);
+            TargetViewViewModel.InitViewModel(Hook);
             HotkeyViewViewModel.InitViewModel(this);
         }
         private void UpdateProperties()
@@ -297,7 +299,8 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
             ParamViewViewModel.UpdateViewModel();
             DebugViewViewModel.UpdateViewModel();
             HotkeyViewViewModel.UpdateViewModel();
-            Hook.UpdateLastEnemy();
+            TargetViewViewModel.UpdateViewModel();
+            //Hook.UpdateLastEnemy();
         }
         private void SaveAllTabs()
         {

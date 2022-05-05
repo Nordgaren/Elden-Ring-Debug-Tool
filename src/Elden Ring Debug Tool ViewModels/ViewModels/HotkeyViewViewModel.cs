@@ -60,22 +60,21 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
             return hotkeyCollection;
         }
 
-        public MainWindowViewModel _mainWindowViewModel;
+        private MainWindowViewModel _mainWindowViewModel { get; set; }
 
-        public SettingsViewViewModel SettingsViewViewModel;
+        private SettingsViewViewModel _settingsViewViewModel { get; set; }
 
-        public HotkeyViewViewModel(SettingsViewViewModel settingsViewViewModel)
-        {
-            SettingsViewViewModel = settingsViewViewModel;
-            _enableHotkeys = settingsViewViewModel.EnableHotKeys;
-            Hotkeys = new ObservableCollection<HotkeyViewModel>();
-        }
+        public HotkeyViewViewModel() { }
 
         public void InitViewModel(MainWindowViewModel mainWindowViewModel)
         {
             _mainWindowViewModel = mainWindowViewModel;
+            _settingsViewViewModel = _mainWindowViewModel.SettingsViewViewModel;
+            _enableHotkeys = _settingsViewViewModel.EnableHotKeys;
+            Hotkeys = new ObservableCollection<HotkeyViewModel>();
             Hook = _mainWindowViewModel.Hook;
             _hotkeyManager = new WindowsRegisteredMultiHotkeyManager(Hook);
+            _hotkeyManager.SetHotkeyEnable(SettingsViewViewModel.Settings.EnableHotkeys);
             Hook.OnSetup += Hook_OnSetup;
             Hook.OnUnhooked += Hook_OnUnhooked;
             _mainWindowViewModel.PropertyChanged += ViewModel_PropertyChanged;
@@ -134,7 +133,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
                 if (SetField(ref _enableHotkeys, value))
                 {
                     HotkeyManager.SetHotkeyEnable(EnableHotkeys);
-                    SettingsViewViewModel.EnableHotKeys = EnableHotkeys;
+                    _settingsViewViewModel.EnableHotKeys = EnableHotkeys;
                 }
             }
         }

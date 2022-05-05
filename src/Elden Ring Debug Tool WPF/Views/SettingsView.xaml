@@ -9,7 +9,7 @@
              xmlns:t="http://schemas.telerik.com/2008/xaml/presentation" 
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              mc:Ignorable="d"
-             d:DesignHeight="600" d:DesignWidth="400" d:Background="LightGray"
+             d:DesignHeight="600" d:DesignWidth="400" d:Background="LightGray" DataContextChanged="OnDataContextChanged"
              d:DataContext="{d:DesignInstance vm:SettingsViewViewModel, IsDesignTimeCreatable=True}">
     <Grid>
         <GroupBox Header="General Settings" Height="75" VerticalAlignment="Top" BorderBrush="Black" Margin="10">

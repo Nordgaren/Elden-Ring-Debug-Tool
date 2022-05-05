@@ -10,7 +10,7 @@
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" 
              xmlns:wpfTool="http://schemas.xceed.com/wpf/xaml/toolkit"
              mc:Ignorable="d"
-             d:DesignHeight="600" d:DesignWidth="400" Background="LightGray"
+             d:DesignHeight="600" d:DesignWidth="400" Background="LightGray" DataContextChanged="OnDataContextChanged"
              d:DataContext="{d:DesignInstance vm:DebugViewViewModel, IsDesignTimeCreatable=True}">
 
     <Grid>

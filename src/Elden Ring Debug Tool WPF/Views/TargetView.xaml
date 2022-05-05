@@ -8,14 +8,200 @@
              xmlns:local="clr-namespace:Elden_Ring_Debug_Tool_WPF" 
              xmlns:vm="clr-namespace:Elden_Ring_Debug_Tool_ViewModels.ViewModels;assembly=Elden-Ring-Debug-Tool-ViewModels"
              mc:Ignorable="d"
-             d:DesignHeight="600" d:DesignWidth="800" Background="LightGray"
+             d:DesignHeight="600" d:DesignWidth="800" Background="LightGray" DataContextChanged="OnDataContextChanged"
              d:DataContext="{d:DesignInstance vm:TargetViewViewModel, IsDesignTimeCreatable=True}">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        
+        <StackPanel>
+            <Line Visibility="Hidden" Height="20"/>
+            <GroupBox Header="General Info">
+                <Expander ExpandDirection="Down" IsExpanded="True">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+
+                        <StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="Enemy Name:"/>
+                                <Label Content="{Binding TargetEnemy.Name, Mode=OneWay}" MouseDoubleClick="Label_MouseDoubleClick"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="Enemy Model"/>
+                                <Label Content="{Binding TargetEnemy.Model}" MouseDoubleClick="Label_MouseDoubleClick"/>
+                            </StackPanel>
+                            <CheckBox Content="Padding" Visibility="Hidden"/>
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="Chr Type:"/>
+                                <wpfTool:IntegerUpDown Value="{Binding TargetEnemy.ChrType}" Width="50" Margin="5,0,0,0" Maximum="34" MouseDoubleClick="Label_MouseDoubleClick"/>
+                            </StackPanel>
+                        </StackPanel>
+
+                        <StackPanel Grid.Column="1">
+                            <CheckBox Content="Lock Enemy" IsChecked="{Binding LockTarget}"/>
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="Enemy Handle"/>
+                                <Label Content="{Binding TargetEnemy.Handle}" MouseDoubleClick="Label_MouseDoubleClick"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="Enemy Pointer"/>
+                                <Label Content="{Binding TargetEnemy.Pointer}" MouseDoubleClick="Label_MouseDoubleClick"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="Team Type:"/>
+                                <wpfTool:ByteUpDown Value="{Binding TargetEnemy.TeamType}" Width="50" Margin="5,0,0,0" MouseDoubleClick="Label_MouseDoubleClick"/>
+                            </StackPanel>
+                        </StackPanel>
+                     
+
+                    </Grid>
+                 
+                </Expander>
+            </GroupBox>
+            <GroupBox Header="Enemy Data">
+                <Expander ExpandDirection="Down" IsExpanded="True">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel>
+                            <Label Content="Enemy Hp:"/>
+                            <Label Content="Enemy Fp: "/>
+                            <Label Content="Enemy Stam: "/>
+                        </StackPanel>
+
+                        <StackPanel Grid.Column="1">
+                            <StackPanel Orientation="Horizontal">
+                                <wpfTool:IntegerUpDown Value="{Binding TargetEnemy.Hp}" Maximum="{Binding TargetEnemy.HpMax}" Width="50" HorizontalAlignment="Center" ValueChanged="IntegerUpDown_ValueChanged"/>
+                                <Label Content="/"/>
+                                <Label Content="{Binding TargetEnemy.HpMax, Mode=OneWay}" MouseDoubleClick="Label_MouseDoubleClick"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <wpfTool:IntegerUpDown Value="{Binding TargetEnemy.Fp}" Maximum="{Binding TargetEnemy.FpMax}" Width="50" HorizontalAlignment="Center"/>
+                                <Label Content="/"/>
+                                <Label Content="{Binding TargetEnemy.FpMax, Mode=OneWay}" MouseDoubleClick="Label_MouseDoubleClick"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <wpfTool:IntegerUpDown Value="{Binding TargetEnemy.Stamina}" Maximum="{Binding TargetEnemy.StaminaMax}" Width="50" HorizontalAlignment="Center"/>
+                                <Label Content="/"/>
+                                <Label Content="{Binding TargetEnemy.StaminaMax, Mode=OneWay}" MouseDoubleClick="Label_MouseDoubleClick"/>
+                            </StackPanel>
+                        </StackPanel>
+
+                        <StackPanel Grid.Column="2">
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="Base Hp:"/>
+                                <Label Content="{Binding TargetEnemy.HpBase, Mode=OneWay}" MouseDoubleClick="Label_MouseDoubleClick"/>
+                                <CheckBox Content="Lock" IsChecked="{Binding LockHp}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="Base Fp:" />
+                                <Label Content="{Binding TargetEnemy.FpBase, Mode=OneWay}" MouseDoubleClick="Label_MouseDoubleClick"/>
+                                <CheckBox Content="Lock" IsChecked="{Binding LockFp}" VerticalAlignment="Center"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="Base Fp:" />
+                                <Label Content="{Binding TargetEnemy.StaminaBase, Mode=OneWay}" MouseDoubleClick="Label_MouseDoubleClick"/>
+                                <CheckBox Content="Lock" IsChecked="{Binding LockStam}" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </StackPanel>
+
+                    </Grid>
+
+
+                </Expander>
+            </GroupBox>
+
+            <GroupBox Header="Status" >
+                <Expander IsExpanded="True">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel>
+                            <StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <Label Content="Poison: "/>
+                                    <Label Content="{Binding TargetEnemy.Poison}"/>
+                                    <Label Content="/"/>
+                                    <Label Content="{Binding TargetEnemy.PoisonMax}"/>
+                                </StackPanel>
+                                <ProgressBar Value="{Binding TargetEnemy.Poison}" Maximum="{Binding TargetEnemy.PoisonMax}"/>
+                            </StackPanel>
+                            <StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <Label Content="Rot: "/>
+                                    <Label Content="{Binding TargetEnemy.Rot}"/>
+                                    <Label Content="/"/>
+                                    <Label Content="{Binding TargetEnemy.RotMax}"/>
+                                </StackPanel>
+                                <ProgressBar Value="{Binding TargetEnemy.Rot}" Maximum="{Binding TargetEnemy.RotMax}" />
+                            </StackPanel>
+                            <StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <Label Content="Bleed: "/>
+                                    <Label Content="{Binding TargetEnemy.Bleed}"/>
+                                    <Label Content="/"/>
+                                    <Label Content="{Binding TargetEnemy.BleedMax}"/>
+                                </StackPanel>
+                                <ProgressBar Value="{Binding TargetEnemy.Bleed}" Maximum="{Binding TargetEnemy.BleedMax}" />
+                            </StackPanel>
+                            <StackPanel >
+                                <StackPanel Orientation="Horizontal">
+                                    <Label Content="Frost: "/>
+                                    <Label Content="{Binding TargetEnemy.Frost}"/>
+                                    <Label Content="/"/>
+                                    <Label Content="{Binding TargetEnemy.FrostMax}"/>
+                                </StackPanel>
+                                <ProgressBar Value="{Binding TargetEnemy.Frost}" Maximum="{Binding TargetEnemy.FrostMax}" />
+                            </StackPanel>
+                        </StackPanel>
+
+                        <StackPanel Grid.Column="1">
+                            <StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <Label Content="Blight: "/>
+                                    <Label Content="{Binding TargetEnemy.Blight}"/>
+                                    <Label Content="/"/>
+                                    <Label Content="{Binding TargetEnemy.BlightMax}"/>
+                                </StackPanel>
+                                <ProgressBar Value="{Binding TargetEnemy.Blight}" Maximum="{Binding TargetEnemy.BlightMax}"/>
+                            </StackPanel>
+                            <StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <Label Content="Sleep: "/>
+                                    <Label Content="{Binding TargetEnemy.Sleep}"/>
+                                    <Label Content="/"/>
+                                    <Label Content="{Binding TargetEnemy.SleepMax}"/>
+                                </StackPanel>
+                                <ProgressBar Value="{Binding TargetEnemy.Sleep}" Maximum="{Binding TargetEnemy.SleepMax}" />
+                            </StackPanel>
+                            <StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <Label Content="Madness: "/>
+                                    <Label Content="{Binding TargetEnemy.Madness}"/>
+                                    <Label Content="/"/>
+                                    <Label Content="{Binding TargetEnemy.MadnessMax}"/>
+                                </StackPanel>
+                                <ProgressBar Value="{Binding TargetEnemy.Madness}" Maximum="{Binding TargetEnemy.MadnessMax}" />
+                            </StackPanel>
+                   
+                        </StackPanel>
+                    </Grid>
+                
+           
+                </Expander>
+            </GroupBox>
+        </StackPanel>
+
+
     </Grid>
 
 

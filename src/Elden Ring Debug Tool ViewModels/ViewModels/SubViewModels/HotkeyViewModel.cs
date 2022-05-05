@@ -18,11 +18,6 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels
 
         public ViewModelBase ParentViewModel =>  _parentViewModel;
 
-        public IEnumerable<PropertyInfo> GetCustomAttributes()
-        {
-            return _parentViewModel.GetType().GetProperties().Where(x => x.CustomAttributes.Any(a => a.AttributeType == typeof(HotkeyParameterAttribute)));
-        }
-
         private MainWindowViewModel _mainWindowViewModel;
         internal MainWindowViewModel MainWindowViewModel
         {
@@ -77,14 +72,9 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels
             }
         }
 
-        public List<string> StringList = new List<string> { "lol", "kek", "why", "plx", "work!"};
+        public bool HasDependancies { get; set; }
 
-        private bool _hasDependancies = false;
-        public bool HasDependancies
-        {
-            get => _hasDependancies;
-            set => SetField(ref _hasDependancies, value);
-        }
+        public List<(PropertyInfo prop, HotkeyParameterAttribute parameter)> HotkeyParameterAttribute { get; set; }
         public HotkeyViewModel() { }
 
         public HotkeyViewModel(ViewModelBase parentViewModel, MainWindowViewModel mainWindowViewModel,ICommand command)
@@ -105,23 +95,46 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels
 
             Name = Command.GetType().Name;
 
-            DescriptionAttribute? commandDescription = Command.GetType().GetCustomAttribute<DescriptionAttribute>();
+            IEnumerable<PropertyInfo> customAttrs = _parentViewModel.GetType().GetProperties().Where(x => x.CustomAttributes.Any(a => a.AttributeType == typeof(HotkeyParameterAttribute)));
+
+            Type commantType = GetDescriptionAttr();
+
+            HotkeyParameterAttribute = new List<(PropertyInfo Prop, HotkeyParameterAttribute Parameter)>();
+
+            foreach (PropertyInfo prop in customAttrs)
+            {
+                HotkeyParameterAttribute? hKeyParamAttr = prop.GetCustomAttribute<HotkeyParameterAttribute>();
+
+                if (hKeyParamAttr == null || hKeyParamAttr.CommandType != commantType)
+                    continue;
+
+
+                HotkeyParameterAttribute.Add((prop,hKeyParamAttr));
+            }
+
+            HasDependancies = HotkeyParameterAttribute.Count > 0;
+        }
+
+        private Type GetDescriptionAttr()
+        {
+            Type? type = Command.GetType();
+            DescriptionAttribute? commandDescription = type.GetCustomAttribute<DescriptionAttribute>();
 
             if (commandDescription != null)
                 Name = commandDescription.Description;
 
             if (Command is ToggleableCommand tCommand)
             {
+                type = tCommand.GetOriginalType();
+
                 ToggleableCommand = tCommand;
-                commandDescription = tCommand.GetOriginalType().GetCustomAttribute<DescriptionAttribute>();
+                commandDescription = type.GetCustomAttribute<DescriptionAttribute>();
 
                 if (commandDescription != null)
                     Name = commandDescription.Description;
             }
-            else
-            {
-                ToggleableCommand = null;
-            }
+
+            return type;
         }
     }
 }

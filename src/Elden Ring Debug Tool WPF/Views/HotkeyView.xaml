@@ -10,7 +10,7 @@
              xmlns:wpfTool="http://schemas.xceed.com/wpf/xaml/toolkit" 
              xmlns:controls="clr-namespace:Elden_Ring_Debug_Tool_WPF.Controls"
              mc:Ignorable="d"
-             d:DesignHeight="600" d:DesignWidth="400" Background="LightGray"
+             d:DesignHeight="600" d:DesignWidth="400" Background="LightGray" DataContextChanged="OnDataContextChanged"
              d:DataContext="{d:DesignInstance vm:HotkeyViewViewModel, IsDesignTimeCreatable=True}">
 
     <UserControl.Resources>
@@ -112,7 +112,7 @@
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <TextBox Margin="10,0,10,0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" 
-                                             KeyUp="TextBox_KeyUp"  MouseEnter="TextBox_MouseEnter" MouseLeave="TextBox_MouseLeave" 
+                                             KeyUp="TextBox_KeyUp"  MouseEnter="TextBox_MouseEnter" MouseLeave="TextBox_MouseLeave"
                                              Text="{Binding Key, Converter={StaticResource KeyToStringConverter}, UpdateSourceTrigger=LostFocus}" />
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>

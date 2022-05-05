@@ -16,8 +16,8 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
     public class ItemGibViewViewModel : ViewModelBase
     {
         internal ErdHook Hook { get; set; }
-        private readonly ObservableCollection<ItemCategoryViewModel> _categories;
-        private readonly ObservableCollection<GemViewModel> _gems;
+        private ObservableCollection<ItemCategoryViewModel> _categories { get; }
+        private ObservableCollection<GemViewModel> _gems { get; }
 
         public ICollectionView CategoryCollectionView { get; }
         public ICollectionView ItemsCollectionView => CollectionViewSource.GetDefaultView(SearchAll ? ItemViewModel.All : SelectedItemCategory?.Items);
@@ -28,9 +28,8 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
 
         public SettingsViewViewModel SettingsViewViewModel;
 
-        public ItemGibViewViewModel(SettingsViewViewModel settingsViewViewModel)
+        public ItemGibViewViewModel()
         {
-            SettingsViewViewModel = settingsViewViewModel;
             _categories = new ObservableCollection<ItemCategoryViewModel>(new List<ItemCategoryViewModel>());
             CategoryCollectionView = CollectionViewSource.GetDefaultView(_categories);
 
@@ -41,9 +40,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
             GemCollectionView = CollectionViewSource.GetDefaultView(_gems);
             GemCollectionView.Filter += FiltGems;
 
-            GibItemCommand = new GibItemCommand(this);
-
-            Commands.Add(GibItemCommand);
+      
         }
 
         private bool FilterInfusions(object obj)
@@ -66,8 +63,13 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
             return false;
         }
 
-        public void InitViewModel(ErdHook hook)
+        public void InitViewModel(ErdHook hook, SettingsViewViewModel settingsViewViewModel)
         {
+            SettingsViewViewModel = settingsViewViewModel;
+
+            GibItemCommand = new GibItemCommand(this);
+            Commands.Add(GibItemCommand);
+
             Hook = hook;
             Hook.OnSetup += Hook_OnSetup;
             Hook.OnUnhooked += Hook_OnUnhooked;

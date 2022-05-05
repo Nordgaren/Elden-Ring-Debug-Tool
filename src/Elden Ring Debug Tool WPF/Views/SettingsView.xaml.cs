@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Elden_Ring_Debug_Tool_ViewModels.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,16 @@ namespace Elden_Ring_Debug_Tool_WPF.Views
         public SettingsView()
         {
             InitializeComponent();
+        }
+
+        private SettingsViewViewModel _settingsViewViewModel;
+
+        private void OnDataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            if (DataContext is SettingsViewViewModel vm)
+            {
+                _settingsViewViewModel = vm;
+            }
         }
     }
 }

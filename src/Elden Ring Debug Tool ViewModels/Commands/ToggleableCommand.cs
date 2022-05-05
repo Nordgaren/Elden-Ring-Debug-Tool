@@ -56,6 +56,5 @@ namespace Elden_Ring_Debug_Tool_ViewModels.Commands
             return _originalCommand.GetType();
         }
 
-
     }
 }
