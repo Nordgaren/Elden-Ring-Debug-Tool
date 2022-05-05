@@ -25,7 +25,7 @@ jobs:
 
     # - run: move './README.md' './src/Elden-Ring-Debug-Tool-WPF/bin/Publish/win-x64/README.txt'
 
-    - run: 7z a -t7z 'Elden Ring Debug Tool.7z' 'src/Elden-Ring-Debug-Tool-WPF/Publish/win-x64/*' -xr!*.pdb
+    - run: 7z a -t7z 'Elden Ring Debug Tool.7z' 'src/Elden-Ring-Debug-Tool-WPF/bin/Publish/win-x64/*' -xr!*.pdb
 
     - name: get-net-sdk-project-versions-action
       uses: kzrnm/get-net-sdk-project-versions-action@v1.1.1
