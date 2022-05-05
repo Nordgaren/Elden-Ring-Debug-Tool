@@ -42,6 +42,12 @@ My fork of [Property Hook](https://github.com/Nordgaren/PropertyHook) by [TKGP](
 **wulf2k** For helping figure out the cheat for enabling the map during combat and his rewrite of Wulfs Target script
 
 # Change Log 
+### Beta 0.7.2
+
+* Fixed a glitch with the inventory not updating properly  
+
+* Beautified the inventory datagrid  
+
 ### Beta 0.7.1
 
 * Fixed missing tooltips  

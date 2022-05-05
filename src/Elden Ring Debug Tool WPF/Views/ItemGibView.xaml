@@ -74,7 +74,7 @@
                       Grid.Row="0" Margin="40,0,0,0" />
             <Label Content="Ash" Width="50" HorizontalAlignment="Left" Grid.Row="0"/>
             <ListBox ItemsSource="{Binding ItemsCollectionView}" SelectedValue="{Binding SelectedItem}"
-                     Margin="5" Grid.Row="1" ItemContainerStyle="{DynamicResource _ListBoxItemStyle}" />
+                    Grid.Row="1" ItemContainerStyle="{DynamicResource _ListBoxItemStyle}" />
         </Grid>
 
     </Grid>

@@ -16,9 +16,16 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <StackPanel>
+            <StackPanel.Resources>
+                
+
+            </StackPanel.Resources>
+
+
+
             <Line Visibility="Hidden" Height="20"/>
             <GroupBox Header="General Info">
-                <Expander ExpandDirection="Down" IsExpanded="True">
+                <Expander ExpandDirection="Down" IsExpanded="True" Style="{StaticResource StatusGroupExpander}" Header="EnemyIns">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition/>
@@ -63,7 +70,7 @@
                 </Expander>
             </GroupBox>
             <GroupBox Header="Enemy Data">
-                <Expander ExpandDirection="Down" IsExpanded="True">
+                <Expander ExpandDirection="Down" IsExpanded="True" Style="{StaticResource StatusGroupExpander}" Header="Data">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"/>
@@ -119,7 +126,7 @@
             </GroupBox>
 
             <GroupBox Header="Status" >
-                <Expander IsExpanded="True">
+                <Expander IsExpanded="True" Style="{StaticResource StatusGroupExpander}" Header="Buildup Data">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition/>

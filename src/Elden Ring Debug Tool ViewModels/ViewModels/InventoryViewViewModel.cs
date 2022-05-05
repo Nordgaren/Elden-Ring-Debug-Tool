@@ -18,13 +18,13 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
     {
         internal ErdHook Hook { get; set; }
 
-        private ObservableCollection<InventoryEntryViewModel> _InventoryEntryViewModels;
+        private ObservableCollection<InventoryEntryViewModel> _inventoryEntryViewModels;
         public ObservableCollection<InventoryEntryViewModel> PlayerInventory
         {
-            get => _InventoryEntryViewModels;
+            get => _inventoryEntryViewModels;
             set
             {
-                if (SetField(ref _InventoryEntryViewModels, value))
+                if (SetField(ref _inventoryEntryViewModels, value))
                 {
                     OnPropertyChanged(nameof(InventoryCollectionView));
                     InventoryCollectionView.Filter += FilterInventory;
@@ -70,16 +70,16 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
             Hook = hook;
         }
 
+        private int _lastInvetoryCount { get; set; }
         public void UpdateViewModel()
         {
-            if (PlayerInventory.Count != Hook.LastInventoryCount)
-            {
+            if (_lastInvetoryCount != Hook.InventoryEntries)
                 GetInventory();
-            }
         }
 
         private void GetInventory()
         {
+            _lastInvetoryCount = Hook.InventoryEntries;
             IEnumerable inventory = Hook.GetInventory();
             List<InventoryEntryViewModel> items = new List<InventoryEntryViewModel>();
 
@@ -89,6 +89,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
             }
 
             PlayerInventory = new ObservableCollection<InventoryEntryViewModel>(items);
+            InventoryCount = PlayerInventory.Count;
         }
 
         private int _inventoryCount;

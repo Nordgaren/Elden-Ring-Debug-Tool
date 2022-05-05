@@ -18,7 +18,7 @@
             <TextBlock Text="Inventory" HorizontalAlignment="Center" FontSize="20" FontWeight="ExtraBlack" Margin="30"  Grid.Row="0"/>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                 <Label Content="Count:" FontWeight="Bold"/>
-                <Label Content="{Binding PlayerInventory.Count}" FontWeight="Bold"/>
+                <Label Content="{Binding InventoryCount}" FontWeight="Bold"/>
             </StackPanel>
         </StackPanel>
         <TextBox Text="{Binding InventoryFilter, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.Column="0" 
@@ -29,14 +29,31 @@
                    Visibility="{Binding InventoryFilter, Converter={StaticResource ResourceKey=StringToVisibilityConverter}}" 
                    IsHitTestVisible="False"/>
 
-        <DataGrid ItemsSource="{Binding InventoryCollectionView}" Grid.Row="2" Grid.Column="2" AutoGenerateColumns="False" HorizontalScrollBarVisibility="Visible" IsReadOnly="True">
+        <DataGrid ItemsSource="{Binding InventoryCollectionView}" Grid.Row="2" Grid.Column="2" AutoGenerateColumns="False" HorizontalScrollBarVisibility="Visible" IsReadOnly="True" Background="LightGray">
+            <DataGrid.Resources>
+                <Style TargetType="{x:Type DataGrid}">
+                    <Setter Property="Background" Value="Transparent"/>
+                </Style>
+                <Style TargetType="{x:Type DataGridRow}">
+                    <Setter Property="Background" Value="Transparent"/>
+                </Style>
+                <Style TargetType="{x:Type DataGridRowHeader}">
+                    <Setter Property="Background" Value="Transparent"/>
+                </Style>
+                <Style TargetType="{x:Type DataGridColumnHeader}">
+                    <Setter Property="Background" Value="DarkGray"/>
+                    <Setter Property="BorderThickness" Value="1"/>
+                    <Setter Property="BorderBrush" Value="Black"/>
+                    <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                </Style>
+            </DataGrid.Resources>
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Name" Binding="{Binding Name}"/>
                 <DataGridTextColumn Header="Item ID" Binding="{Binding ItemID}"/>
-                <DataGridTextColumn Header="Category" Binding="{Binding Category}"/>
-                <DataGridTextColumn Header="Quantity" Binding="{Binding Quantity}"/>
-                <DataGridTextColumn Header="Display ID" Binding="{Binding DisplayID}"/>
-                <DataGridTextColumn Header="GaItem Handle" Binding="{Binding GaItemHandle}"/>
+                <DataGridTextColumn Header="Category" Binding="{Binding Category}" MinWidth="50"/>
+                <DataGridTextColumn Header="Quantity" Binding="{Binding Quantity}"  MinWidth="60"/>
+                <DataGridTextColumn Header="Display ID" Binding="{Binding DisplayID}" MinWidth="75"/>
+                <DataGridTextColumn Header="GaItem Handle" Binding="{Binding GaItemHandle}" MinWidth="90"/>
             </DataGrid.Columns>
         </DataGrid>
       

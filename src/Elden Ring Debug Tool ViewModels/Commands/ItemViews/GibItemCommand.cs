@@ -31,10 +31,11 @@ namespace Elden_Ring_Debug_Tool_ViewModels.Commands
 
         public override void Execute(object? parameter)
         {
-            int? id = _itemGibViewModel.SelectedItem?.ID;
-
-            if (id == null)
+            if (_itemGibViewModel.SelectedItem == null)
                 throw new NullReferenceException("Selected Item cannot be null when trying to spawn items.");
+
+            int? id = _itemGibViewModel.SelectedItem.ID;
+            id += (int)_itemGibViewModel.SelectedItem.ItemCategory;
 
             int quantity = _itemGibViewModel.Quantity;
             int infusion = _itemGibViewModel.SelectedInfusion.HasValue ? (int)_itemGibViewModel.SelectedInfusion : 0;
