@@ -23,8 +23,7 @@ jobs:
     - name: build
       run: dotnet publish "src/Elden Ring Debug Tool WPF/Elden-Ring-Debug-Tool-WPF.csproj" /p:PublishProfile=FolderProfile.pubxml
 
-    - name: Action 7z
-      uses: edgarrc/action-7z@v1
+    - uses: edgarrc/action-7z@v1
         args: 7z a -t7z -mx=9 build.7z ./build/
 
     - name: publish artifact
