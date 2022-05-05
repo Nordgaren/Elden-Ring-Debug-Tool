@@ -21,12 +21,12 @@ jobs:
       run: dotnet restore
       
     - name: build
-      run: dotnet publish "src/Elden Ring Debug Tool/Elden Ring Debug Tool.csproj" /p:PublishProfile=FolderProfile.pubxml
+      run: dotnet publish "src/Elden Ring Debug Tool WPF/Elden-Ring-Debug-Tool-WPF.csproj" /p:PublishProfile=FolderProfile.pubxml
 
-    - name: publish artifact
-      uses: actions/upload-artifact@v3
-      with:
-        name: publish
-        path: src/Elden Ring Debug Tool/bin/Publish/*.7zip
+    #- name: publish artifact
+    #  uses: actions/upload-artifact@v3
+    #  with:
+    #    name: publish
+    #    path: src/Elden Ring Debug Tool/bin/Publish/*.7zip
 
     
