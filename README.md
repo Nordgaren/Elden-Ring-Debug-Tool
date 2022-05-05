@@ -52,6 +52,8 @@ My fork of [Property Hook](https://github.com/Nordgaren/PropertyHook) by [TKGP](
 
 * Fixed missing tooltips  
 
+* Added translated paramdefs
+
 ### Beta 0.7
 
 * Fixed weather cheat and added some labels  
