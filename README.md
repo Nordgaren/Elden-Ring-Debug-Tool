@@ -1,9 +1,8 @@
 # Elden-Ring-Debug-Tool
 A tool for testing and debugging mods in Elden Ring  
 
-Build Test
-
- ![github__version](https://img.shields.io/github/v/release/Nordgaren/Elden-Ring-Debug-Tool)
+![build](https://github.com/FrankvdStam/SoulSplitter/actions/workflows/build.yml/badge.svg) 
+![github__version](https://img.shields.io/github/v/release/Nordgaren/Elden-Ring-Debug-Tool)
 [![GitHub all releases](https://img.shields.io/github/downloads/Nordgaren/Elden-Ring-Debug-Tool/total)](https://github.com/Nordgaren/Elden-Ring-Debug-Tool/releases/latest)
 
 
