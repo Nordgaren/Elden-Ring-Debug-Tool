@@ -44,7 +44,7 @@ namespace Elden_Ring_Debug_Tool_WPF.Views
             }
         }
 
-        private void TextBox_KeyUp(object sender, KeyEventArgs e)
+        private void TextBox_KeyDown(object sender, KeyEventArgs e)
         {
             TextBox textBox = sender as TextBox;
 

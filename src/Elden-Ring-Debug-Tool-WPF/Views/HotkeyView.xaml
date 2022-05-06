@@ -112,8 +112,8 @@
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <TextBox Margin="10,0,10,0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" 
-                                             KeyUp="TextBox_KeyUp"  MouseEnter="TextBox_MouseEnter" MouseLeave="TextBox_MouseLeave"
-                                             Text="{Binding Key, Converter={StaticResource KeyToStringConverter}, UpdateSourceTrigger=LostFocus}" />
+                                             MouseEnter="TextBox_MouseEnter" MouseLeave="TextBox_MouseLeave" KeyDown="TextBox_KeyDown"
+                                             Text="{Binding Key, Converter={StaticResource KeyToStringConverter}, UpdateSourceTrigger=PropertyChanged}" />
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>

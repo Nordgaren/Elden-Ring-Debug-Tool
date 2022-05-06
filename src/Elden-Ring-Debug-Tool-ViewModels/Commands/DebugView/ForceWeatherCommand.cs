@@ -9,9 +9,16 @@ using System.Threading.Tasks;
 namespace Elden_Ring_Debug_Tool_ViewModels.Commands
 {
     [Description("Force Weather")]
-    public class ForceWeatherCommand : CommandBase
+    public class ForceWeatherCommand : CommandBase, IToggleableCommand
     {
         private DebugViewViewModel _debugViewViewModel;
+
+        private bool _state;
+        public bool State
+        {
+            get => _state;
+            set => SetField(ref _state, value);
+        }
 
         public ForceWeatherCommand(DebugViewViewModel debugViewViewModel)
         {
@@ -26,14 +33,12 @@ namespace Elden_Ring_Debug_Tool_ViewModels.Commands
 
         public override void Execute(object? parameter)
         {
-            if (!(parameter is bool state))
-                throw new ArgumentException($"Argument {nameof(parameter)} must be a {typeof(bool)}");
-
             if (_debugViewViewModel.SelectedWeather == null)
                 throw new Exception($"{nameof(_debugViewViewModel.SelectedWeather)} cannot be null when trying to force weather");
 
+            State = !State;
             _debugViewViewModel.Hook.SetForcedWeatherValue(_debugViewViewModel.SelectedWeather);
-            _debugViewViewModel.Hook.ToggleForceWeather(state);
+            _debugViewViewModel.Hook.ToggleForceWeather(State);
         }
 
         private void _debugViewViewModel_PropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)

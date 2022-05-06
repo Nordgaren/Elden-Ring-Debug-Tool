@@ -46,8 +46,8 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels
             set => SetField(ref _command, value);
         }
 
-        private ToggleableCommand? _toggleableCommand;
-        public ToggleableCommand? ToggleableCommand
+        private IToggleableCommand? _toggleableCommand;
+        public IToggleableCommand? ToggleableCommand
         {
             get => _toggleableCommand;
             set => SetField(ref _toggleableCommand, value);
@@ -123,16 +123,8 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels
             if (commandDescription != null)
                 Name = commandDescription.Description;
 
-            if (Command is ToggleableCommand tCommand)
-            {
-                type = tCommand.GetOriginalType();
-
+            if (Command is IToggleableCommand tCommand)
                 ToggleableCommand = tCommand;
-                commandDescription = type.GetCustomAttribute<DescriptionAttribute>();
-
-                if (commandDescription != null)
-                    Name = commandDescription.Description;
-            }
 
             return type;
         }
