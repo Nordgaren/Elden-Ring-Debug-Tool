@@ -23,7 +23,7 @@ jobs:
     - name: build
       run: dotnet publish "src/Elden-Ring-Debug-Tool-WPF/Elden-Ring-Debug-Tool-WPF.csproj" /p:PublishProfile=FolderProfile.pubxml
 
-    - run: 7z a -t7z "Elden Ring Debug Tool.7z" src/Elden-Ring-Debug-Tool-WPF/bin/Publish/win-x64/*
+    - run: 7z a -t7z "Elden Ring Debug Tool.7z" ./src/Elden-Ring-Debug-Tool-WPF/bin/Publish/win-x64/* -xr!*.pdb
     # - uses: grez72/action-zip-7z@v0.1.0
     #   with:
     #     args: 7z a -t7z 'Elden Ring Debug Tool.7z' src/Elden-Ring-Debug-Tool-WPF/bin/Publish/win-x64/* -xr!*.pdb
