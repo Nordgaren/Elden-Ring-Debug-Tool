@@ -41,8 +41,14 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
 
         public DebugViewViewModel()
         {
+<<<<<<< HEAD
             EnableMapInCombatCommand = new EnableMapInCombatCommand(this);
 
+=======
+
+            EnableMapInCombatCommand = new EnableMapInCombatCommand(this);
+
+>>>>>>> ae9e1ff649386255a43b62d99a99da6a0c3a8f45
             ForceWeatherCommand = new ForceWeatherCommand(this);
 
             Commands.Add(EnableMapInCombatCommand);
