@@ -21,7 +21,9 @@
   <ItemGroup>
     <ResourceFiles Include="$(SolutionDir)src\Erd-Tools\src\Erd-Tools\Resources\**\*.*" />
   </ItemGroup>
-
+	<PropertyGroup>
+		<SolutionDir>$(MSBuildThisFileDirectory)..\..\</SolutionDir>
+	</PropertyGroup>
 
 	<!-- Copy all resources to the build output directy except when building in publish mode, to have them exist in a debug/release build, but not have them packed into an executable when publishing -->
   <Target Name="CopyResources" Condition="'$(Configuration)'!='Publish'" AfterTargets="Build">
