@@ -9,9 +9,17 @@ using System.Threading.Tasks;
 namespace Elden_Ring_Debug_Tool_ViewModels.Commands
 {
     [Description("Enable Map In Combat")]
-    public class EnableMapInCombatCommand : CommandBase
+
+    public class EnableMapInCombatCommand : CommandBase, IToggleableCommand
     {
         private DebugViewViewModel _debugViewViewModel;
+
+        private bool _state;
+        public bool State
+        {
+            get => _state;
+            set => SetField(ref _state, value);
+        }
 
         public EnableMapInCombatCommand(DebugViewViewModel debugViewViewModel)
         {
@@ -26,11 +34,8 @@ namespace Elden_Ring_Debug_Tool_ViewModels.Commands
 
         public override void Execute(object? parameter)
         {
-            if (!(parameter is bool state))
-                throw new ArgumentException($"Argument {nameof(parameter)} must be a {typeof(bool)}");
-
-
-            _debugViewViewModel.Hook.ToggleMapCombat(state);
+            State = !State;
+            _debugViewViewModel.Hook.ToggleMapCombat(State);
         }
 
         private void _debugViewViewModel_PropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)

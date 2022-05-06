@@ -41,11 +41,10 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
 
         public DebugViewViewModel()
         {
-            ICommand enableMapInCombatCommand = new EnableMapInCombatCommand(this);
-            EnableMapInCombatCommand = new ToggleableCommand(enableMapInCombatCommand);
 
-            ICommand forceWeatherCommand = new ForceWeatherCommand(this);
-            ForceWeatherCommand = new ToggleableCommand(forceWeatherCommand);
+            EnableMapInCombatCommand = new EnableMapInCombatCommand(this);
+
+            ForceWeatherCommand = new ForceWeatherCommand(this);
 
             Commands.Add(EnableMapInCombatCommand);
             Commands.Add(ForceWeatherCommand);
@@ -69,7 +68,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
         {
             Loaded = Hook.Loaded;
 
-            if (((ToggleableCommand)ForceWeatherCommand).State)
+            if (((IToggleableCommand)ForceWeatherCommand).State)
                 Hook.ForceWeather();
         }
 
@@ -77,7 +76,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
         {
             Loaded = Hook.Loaded;
 
-            if (((ToggleableCommand)ForceWeatherCommand).State)
+            if (((IToggleableCommand)ForceWeatherCommand).State)
                 ForceWeatherCommand.Execute(null);
         }
         private void Hook_OnSetup(object? sender, PropertyHook.PHEventArgs e)
@@ -95,10 +94,10 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
 
         public void Dispose()
         {
-            if (((ToggleableCommand)ForceWeatherCommand).State)
+            if (((IToggleableCommand)ForceWeatherCommand).State)
                 ForceWeatherCommand.Execute(null);
 
-            if (((ToggleableCommand)EnableMapInCombatCommand).State)
+            if (((IToggleableCommand)EnableMapInCombatCommand).State)
                 EnableMapInCombatCommand.Execute(null);
 
             Setup = false;
