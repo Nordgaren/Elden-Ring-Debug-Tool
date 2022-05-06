@@ -43,6 +43,6 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
         name: publish
-        path: src/Elden-Ring-Debug-Tool-WPF/bin/Publish/Elden Ring Debug Tool ${{steps.get-version.outputs.version}}.7z
+        path: src/Elden-Ring-Debug-Tool-WPF/bin/Publish/Elden Ring Debug Tool ${{steps.get-version.outputs.assembly-version}}.7z
 
     
