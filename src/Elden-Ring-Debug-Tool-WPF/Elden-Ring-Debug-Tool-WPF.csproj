@@ -21,7 +21,9 @@
   <ItemGroup>
     <ResourceFiles Include="$(SolutionDir)src\Erd-Tools\src\Erd-Tools\Resources\**\*.*" />
   </ItemGroup>
-
+	<PropertyGroup>
+		<SolutionDir>$(MSBuildThisFileDirectory)..\..\</SolutionDir>
+	</PropertyGroup>
 
 	<!-- Copy all resources to the build output directy except when building in publish mode, to have them exist in a debug/release build, but not have them packed into an executable when publishing -->
   <Target Name="CopyResources" Condition="'$(Configuration)'!='Publish'" AfterTargets="Build">
@@ -37,12 +39,13 @@
     <Message Text="Files: @(ResourceFiles)" Importance="High" />
     <Message Text="Directory: $(PublishDir)" Importance="High" />
     <Copy SourceFiles="@(ResourceFiles)" DestinationFolder="$(PublishDir)Resources\%(RecursiveDir)" SkipUnchangedFiles="true" />
-	<Message Text="Moving Readme: $(PublishDir)" Importance="High" />
+	  <Message Text="Moving Readme: $(PublishDir)" Importance="High" />
+	  <Message Text="Solution Dir: $(SolutionDir)" Importance="High" />
 	<Copy SourceFiles="$(SolutionDir)README.md" DestinationFiles="$(PublishDir)README.txt" />
 	  <Move SourceFiles="$(PublishDir)\$(AssemblyName).exe" DestinationFiles="$(PublishDir)\Elden Ring Debug Tool.exe" />
 	  <Message Text="Renamed executable file." Importance="high" />
-	<Exec Command="7za.exe a -t7z &quot;Elden Ring Debug Tool.7z&quot; .\bin\Publish\win-x64\* -xr!*.pdb" />
-	<Move SourceFiles="Elden Ring Debug Tool.7z" DestinationFiles="$(PublishDir)..\Elden Ring Debug Tool $(AssemblyVersion).7z" />
+	<!--<Exec Command="7za.exe a -t7z &quot;Elden Ring Debug Tool.7z&quot; .\bin\Publish\win-x64\* -xr!*.pdb" />
+	<Move SourceFiles="Elden Ring Debug Tool.7z" DestinationFiles="$(PublishDir)..\Elden Ring Debug Tool $(AssemblyVersion).7z" />-->
   </Target>
 
 
@@ -68,7 +71,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Elden Ring Debug Tool ViewModels\Elden-Ring-Debug-Tool-ViewModels.csproj" />
+    <ProjectReference Include="..\Elden-Ring-Debug-Tool-ViewModels\Elden-Ring-Debug-Tool-ViewModels.csproj" />
   </ItemGroup>
 
   <ItemGroup>
