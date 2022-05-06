@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 namespace Elden_Ring_Debug_Tool_ViewModels.Commands
 {
     [Description("Force Weather")]
+
     public class ForceWeatherCommand : CommandBase, IToggleableCommand
     {
         private DebugViewViewModel _debugViewViewModel;

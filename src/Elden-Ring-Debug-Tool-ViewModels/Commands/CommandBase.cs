@@ -37,5 +37,6 @@ namespace Elden_Ring_Debug_Tool_ViewModels.Commands
             OnPropertyChanged(propertyName ?? "");
             return true;
         }
+
     }
 }

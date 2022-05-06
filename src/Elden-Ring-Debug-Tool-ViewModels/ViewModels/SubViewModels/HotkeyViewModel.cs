@@ -122,7 +122,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels
 
             if (commandDescription != null)
                 Name = commandDescription.Description;
-
+                
             if (Command is IToggleableCommand tCommand)
                 ToggleableCommand = tCommand;
 
