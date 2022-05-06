@@ -9,10 +9,6 @@ using System.Threading.Tasks;
 namespace Elden_Ring_Debug_Tool_ViewModels.Commands
 {
     [Description("Enable Map In Combat")]
-<<<<<<< HEAD
-=======
-
->>>>>>> ae9e1ff649386255a43b62d99a99da6a0c3a8f45
     public class EnableMapInCombatCommand : CommandBase, IToggleableCommand
     {
         private DebugViewViewModel _debugViewViewModel;
