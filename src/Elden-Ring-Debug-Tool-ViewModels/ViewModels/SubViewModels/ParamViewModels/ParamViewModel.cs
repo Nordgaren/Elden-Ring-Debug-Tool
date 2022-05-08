@@ -1,6 +1,6 @@
 ﻿using Erd_Tools.Models;
 using System.Collections.ObjectModel;
-using SoulsFormats.Formats.PARAM.PARAMDEF;
+using SoulsFormats;
 using static Erd_Tools.Models.Param;
 
 namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels

@@ -9,11 +9,10 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static Erd_Tools.ErdHook;
 using System.Windows.Data;
 using System.Windows.Input;
-using Erd_Tools.Hook;
 using static Elden_Ring_Debug_Tool_ViewModels.Attributes.HotKeyParameterAttribute;
-using static Erd_Tools.Hook.ErdHook;
 
 namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
 {

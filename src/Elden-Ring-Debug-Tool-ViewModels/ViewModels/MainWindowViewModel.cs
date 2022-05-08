@@ -10,7 +10,6 @@ using System.Reflection;
 using Bluegrams.Application;
 using System.ComponentModel;
 using System.Collections.ObjectModel;
-using Erd_Tools.Hook;
 using Application = System.Windows.Application;
 
 namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels

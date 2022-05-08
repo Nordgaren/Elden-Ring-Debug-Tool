@@ -5,7 +5,6 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows.Data;
 using System.Windows.Input;
-using Erd_Tools.Hook;
 using Erd_Tools.Models;
 
 namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels

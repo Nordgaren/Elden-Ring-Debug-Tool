@@ -11,7 +11,6 @@ using System.Threading.Tasks;
 using System.Windows.Data;
 using System.Windows.Input;
 using Elden_Ring_Debug_Tool_ViewModels.Managers;
-using Erd_Tools.Hook;
 
 namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
 {

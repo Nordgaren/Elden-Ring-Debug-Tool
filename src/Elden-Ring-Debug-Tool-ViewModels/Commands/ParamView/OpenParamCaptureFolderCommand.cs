@@ -2,7 +2,6 @@
 using Elden_Ring_Debug_Tool_ViewModels.ViewModels;
 using System.Diagnostics;
 using System.ComponentModel;
-using Erd_Tools.Hook;
 
 namespace Elden_Ring_Debug_Tool_ViewModels.Commands
 {

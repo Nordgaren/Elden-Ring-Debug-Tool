@@ -8,7 +8,6 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows.Data;
 using System.Windows.Input;
-using Erd_Tools.Hook;
 using static Erd_Tools.Models.Weapon;
 
 namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels

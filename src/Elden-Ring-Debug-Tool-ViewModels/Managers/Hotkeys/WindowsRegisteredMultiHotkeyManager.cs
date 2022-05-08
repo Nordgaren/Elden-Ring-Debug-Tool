@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Input;
-using Erd_Tools.Hook;
+using Erd_Tools;
 using mrousavy;
 
 namespace Elden_Ring_Debug_Tool_ViewModels.Managers
