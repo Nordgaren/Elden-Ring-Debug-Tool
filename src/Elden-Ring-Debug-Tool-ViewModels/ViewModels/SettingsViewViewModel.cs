@@ -37,7 +37,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
             }
         }
 
-        private bool _enableHotKeys = Settings.EnableHotkeys;
+        private bool _enableHotKeys = Settings.EnableHotKeys;
         public bool EnableHotKeys
         {
             get => _enableHotKeys;
@@ -45,7 +45,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
             {
                 if (SetField(ref _enableHotKeys, value))
                 {
-                    Settings.EnableHotkeys = EnableHotKeys;
+                    Settings.EnableHotKeys = EnableHotKeys;
                 }
             }
         }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Elden_Ring_Debug_Tool_ViewModels.Attributes
 {
-    public class HotkeyParameterAttribute : Attribute
+    public class HotKeyParameterAttribute : Attribute
     {
         public enum ResourceType
         {
@@ -20,7 +20,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.Attributes
         public string? SelectedItemPropertyName { get; set; }
         public ResourceType Type { get; set; }
 
-        public HotkeyParameterAttribute(Type commandType, ResourceType type)
+        public HotKeyParameterAttribute(Type commandType, ResourceType type)
         {
             CommandType = commandType;
             Type = type;

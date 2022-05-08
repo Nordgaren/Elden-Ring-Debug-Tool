@@ -1,8 +1,8 @@
-﻿using Elden_Ring_Debug_Tool_ViewModels.ViewModels;
-using System;
+﻿using System;
 using System.Windows;
+using Elden_Ring_Debug_Tool_ViewModels.ViewModels;
 
-namespace Elden_Ring_Debug_Tool_WPF
+namespace Elden_Ring_Debug_Tool_WPF.Windows
 {
     /// <summary>
     /// Interaction logic for METAWarning.xaml

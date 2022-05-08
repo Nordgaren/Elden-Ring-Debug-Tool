@@ -1,13 +1,14 @@
 ﻿using Elden_Ring_Debug_Tool_ViewModels.ViewModels;
 using Erd_Tools;
 using System.ComponentModel;
+using Erd_Tools.Hook;
 
 namespace Elden_Ring_Debug_Tool_ViewModels.Commands
 {
     [Description("Gib Item")]
     public class GibItemCommand : CommandBase
     {
-        private ItemGibViewViewModel _itemGibViewModel;
+        private ItemGibViewViewModel _itemGibViewModel { get; }
         private ErdHook _hook => _itemGibViewModel.Hook;
 
         public GibItemCommand(ItemGibViewViewModel itemGibViewModel)
@@ -45,12 +46,12 @@ namespace Elden_Ring_Debug_Tool_ViewModels.Commands
             _hook.GetItem(id.Value, quantity, infusion, upgrade, gem);
         }
 
-        private void ViewModel_PropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
+        private void ViewModel_PropertyChanged(object? sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == nameof(ItemGibViewViewModel.SelectedItem) 
-                || e.PropertyName == nameof(ItemGibViewViewModel.Setup)
-                || e.PropertyName == nameof(ItemGibViewViewModel.Loaded)
-                || e.PropertyName == nameof(SettingsViewViewModel.SpawnUntradeable))
+            if (e.PropertyName is nameof(ItemGibViewViewModel.SelectedItem) 
+                or nameof(ItemGibViewViewModel.Setup) 
+                or nameof(ItemGibViewViewModel.Loaded) 
+                or nameof(SettingsViewViewModel.SpawnUntradeable))
             {
                 OnCanExecuteChanged();
             }

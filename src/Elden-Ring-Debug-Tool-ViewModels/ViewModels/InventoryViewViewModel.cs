@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Data;
+using Erd_Tools.Hook;
 
 namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
 {

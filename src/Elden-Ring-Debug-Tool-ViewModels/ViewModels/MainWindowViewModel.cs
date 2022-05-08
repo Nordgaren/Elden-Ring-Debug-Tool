@@ -10,7 +10,8 @@ using System.Reflection;
 using Bluegrams.Application;
 using System.ComponentModel;
 using System.Collections.ObjectModel;
-using Elden_Ring_Debug_Tool_ViewModels.Manager;
+using Erd_Tools.Hook;
+using Application = System.Windows.Application;
 
 namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
 {
@@ -18,8 +19,6 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
     public class MainWindowViewModel : ViewModelBase
     {
         public ErdHook Hook { get; private set; }
-
-        private bool _gameLoaded;
 
         public bool Reading
         {
@@ -32,8 +31,8 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
 
         public bool ShowWarning
         {
-            get { return SettingsViewViewModel.ShowWarning; }
-            set { SettingsViewViewModel.ShowWarning = value; }
+            get => SettingsViewViewModel.ShowWarning;
+            set => SettingsViewViewModel.ShowWarning = value;
         }
 
         private ObservableCollection<ViewModelBase> _viewModels;
@@ -56,7 +55,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
             _itemGibViewViewModel = new ItemGibViewViewModel();
             _inventoryViewViewModel = new InventoryViewViewModel();
             _debugViewViewModel = new DebugViewViewModel();
-            _hotkeyViewViewModel = new HotkeyViewViewModel(); 
+            _hotKeyViewViewModel = new HotKeyViewViewModel();
             _targetViewViewModel = new TargetViewViewModel();
 
             _viewModels = new ObservableCollection<ViewModelBase>();
@@ -66,11 +65,14 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
             ViewModels.Add(InventoryViewViewModel);
             ViewModels.Add(DebugViewViewModel);
             ViewModels.Add(TargetViewViewModel);
-            ViewModels.Add(HotkeyViewViewModel);
+            ViewModels.Add(HotKeyViewViewModel);
 
             InitAllViewModels();
             Hook.Start();
+            Application.Current.Exit += Dispose;
         }
+
+
 
         public async Task Load()
         {
@@ -147,11 +149,11 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
             set => SetField(ref _inventoryViewViewModel, value);
         }
 
-        private HotkeyViewViewModel _hotkeyViewViewModel;
-        public HotkeyViewViewModel HotkeyViewViewModel
+        private HotKeyViewViewModel _hotKeyViewViewModel;
+        public HotKeyViewViewModel HotKeyViewViewModel
         {
-            get => _hotkeyViewViewModel;
-            set => SetField(ref _hotkeyViewViewModel, value);
+            get => _hotKeyViewViewModel;
+            set => SetField(ref _hotKeyViewViewModel, value);
         }
 
         private DebugViewViewModel _debugViewViewModel;
@@ -207,53 +209,49 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
         {
 
         }
-
-        public void Dispose()
+        private void Dispose(object sender, ExitEventArgs e)
         {
             UpdateTimer.Stop();
             DebugViewViewModel.Dispose();
-            HotkeyViewViewModel.Dispose();
             SettingsViewViewModel.Dispose();
             SaveAllTabs();
         }
         private void UpdateTimer_Elapsed(object? sender, ElapsedEventArgs e)
         {
 
-            System.Windows.Application.Current.Dispatcher.Invoke(new Action(() =>
+            Application.Current.Dispatcher.Invoke(() =>
             {
                 UpdateMainProperties();
-                if (Hook.Hooked)
+                if (!Hook.Hooked) return;
+                if (Hook.Loaded && Hook.Setup)
                 {
-                    if (Hook.Loaded && Hook.Setup)
+                    if (!GameLoaded)
                     {
-                        if (!GameLoaded)
-                        {
-                            GameLoaded = true;
-                            Reading = true;
-                            ReloadAllCtrls();
-                            Reading = false;
-                            EnableAllCtrls(true);
-                        }
-                        else
-                        {
-                            Reading = true;
-                            UpdateProperties();
-                            UpdateAllViewModels();
-                            Reading = false;
-                        }
+                        GameLoaded = true;
+                        Reading = true;
+                        ReloadAllCtrls();
+                        Reading = false;
+                        EnableAllCtrls(true);
                     }
-                    else if (GameLoaded)
+                    else
                     {
                         Reading = true;
                         UpdateProperties();
-                        ResetAllViewModels();
-                        //Hook.UpdateName();
-                        EnableAllCtrls(false);
-                        GameLoaded = false;
+                        UpdateAllViewModels();
                         Reading = false;
                     }
                 }
-            }));
+                else if (GameLoaded)
+                {
+                    Reading = true;
+                    UpdateProperties();
+                    ResetAllViewModels();
+                    //Hook.UpdateName();
+                    EnableAllCtrls(false);
+                    GameLoaded = false;
+                    Reading = false;
+                }
+            });
         }
 
         private void UpdateMainProperties()
@@ -275,7 +273,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
             InventoryViewViewModel.InitViewModel(Hook);
             DebugViewViewModel.InitViewModel(this);
             TargetViewViewModel.InitViewModel(Hook);
-            HotkeyViewViewModel.InitViewModel(this);
+            HotKeyViewViewModel.InitViewModel(this);
         }
         private void UpdateProperties()
         {
@@ -290,7 +288,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
         private void ResetAllViewModels()
         {
             DebugViewViewModel.ResetViewModel();
-            HotkeyViewViewModel.ResetViewModel();
+            HotKeyViewViewModel.ResetViewModel();
         }
         private void UpdateAllViewModels()
         {
@@ -298,16 +296,16 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
             ItemGibViewViewModel.UpdateViewModel();
             ParamViewViewModel.UpdateViewModel();
             DebugViewViewModel.UpdateViewModel();
-            HotkeyViewViewModel.UpdateViewModel();
+            HotKeyViewViewModel.UpdateViewModel();
             TargetViewViewModel.UpdateViewModel();
             //Hook.UpdateLastEnemy();
         }
         private void SaveAllTabs()
         {
-            //SaveHotkeys();
+            //SaveHotKeys();
         }
 
-  
+
         private void SpawnUndroppable_Checked(object sender, RoutedEventArgs e)
         {
             //DebugItems.UpdateCreateEnabled();
@@ -321,11 +319,11 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
             {
                 if (SetField(ref _id, value))
                 {
-                    OnPropertyChanged(nameof(ForegroundID));
+                    OnPropertyChanged(nameof(ForegroundId));
                 }
             }
         }
-        public Brush ForegroundID
+        public Brush ForegroundId
         {
             get
             {

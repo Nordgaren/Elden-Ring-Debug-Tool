@@ -5,6 +5,8 @@ using System.IO;
 using System.Text;
 using System.Windows;
 using System.Windows.Threading;
+using SoulsFormats.Binder.BND4;
+using SoulsFormats.Util;
 
 namespace Elden_Ring_Debug_Tool_WPF
 {

@@ -50,24 +50,24 @@ namespace Elden_Ring_Debug_Tool_ViewModels.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool EnableHotkeys {
+        public bool EnableHotKeys {
             get {
-                return ((bool)(this["EnableHotkeys"]));
+                return ((bool)(this["EnableHotKeys"]));
             }
             set {
-                this["EnableHotkeys"] = value;
+                this["EnableHotKeys"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool HandleHotkeys {
+        public bool HandleHotKeys {
             get {
-                return ((bool)(this["HandleHotkeys"]));
+                return ((bool)(this["HandleHotKeys"]));
             }
             set {
-                this["HandleHotkeys"] = value;
+                this["HandleHotKeys"] = value;
             }
         }
         

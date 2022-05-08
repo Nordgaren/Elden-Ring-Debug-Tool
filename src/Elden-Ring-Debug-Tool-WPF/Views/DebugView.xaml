@@ -28,7 +28,7 @@
         </StackPanel>
        
         <DataGrid x:Name="DG" ItemsSource="{Binding DebugCollectionView}" Grid.Row="1" AutoGenerateColumns="False" RowDetailsVisibilityMode="Visible"
-                  d:DataContext="{d:DesignInstance svm:HotkeyViewModel, IsDesignTimeCreatable=True}" LoadingRowDetails="DG_LoadingRowDetails"
+                  d:DataContext="{d:DesignInstance svm:HotKeyViewModel, IsDesignTimeCreatable=True}" LoadingRowDetails="DG_LoadingRowDetails"
                   HorizontalScrollBarVisibility="Visible" CanUserAddRows="False" >
             <DataGrid.Resources>
                 <Style TargetType="{x:Type DataGrid}">
@@ -59,7 +59,7 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTemplateColumn Header="Hotkey" MinWidth="100" Width="Auto" >
+                <DataGridTemplateColumn Header="HotKey" MinWidth="100" Width="Auto" >
                     <DataGridTemplateColumn.CellTemplate >
                         <DataTemplate >
                             <TextBox Margin="10,0,10,0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" 
@@ -73,7 +73,7 @@
                         <DataTemplate>
                             <ToggleButton Height="25" Width="25" Style="{StaticResource ToggleButtonParameters}" 
                                                   Background="{Binding Background, RelativeSource={RelativeSource AncestorType=UserControl}}" 
-                                                  Visibility="{Binding HasDependancies, Converter={StaticResource BoolToVisibilityConverter}}"
+                                                  Visibility="{Binding HasDependencies, Converter={StaticResource BoolToVisibilityConverter}}"
                                                   IsChecked="{Binding DetailsVisibility ,RelativeSource={RelativeSource AncestorType=DataGridRow}, Converter={StaticResource VisibilityToBoolConverter}}"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>

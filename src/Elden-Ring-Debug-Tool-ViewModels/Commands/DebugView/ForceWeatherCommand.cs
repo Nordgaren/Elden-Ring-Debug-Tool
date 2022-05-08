@@ -11,7 +11,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.Commands
     [Description("Force Weather")]
     public class ForceWeatherCommand : CommandBase, IToggleableCommand
     {
-        private DebugViewViewModel _debugViewViewModel;
+        private DebugViewViewModel _debugViewViewModel { get; }
 
         private bool _state;
         public bool State
@@ -33,9 +33,6 @@ namespace Elden_Ring_Debug_Tool_ViewModels.Commands
 
         public override void Execute(object? parameter)
         {
-            if (_debugViewViewModel.SelectedWeather == null)
-                throw new Exception($"{nameof(_debugViewViewModel.SelectedWeather)} cannot be null when trying to force weather");
-
             State = !State;
             _debugViewViewModel.Hook.SetForcedWeatherValue(_debugViewViewModel.SelectedWeather);
             _debugViewViewModel.Hook.ToggleForceWeather(State);

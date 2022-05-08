@@ -1,5 +1,6 @@
 ﻿using Erd_Tools.Models;
 using System.Collections.ObjectModel;
+using SoulsFormats.Formats.PARAM.PARAMDEF;
 using static Erd_Tools.Models.Param;
 
 namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels
@@ -43,24 +44,21 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels
             {
                 switch (field.Type)
                 {
-                    case SoulsFormats.PARAMDEF.DefType.s8:
+                    case PARAMDEF.DefType.s8:
                         return new NumericSignedViewModel<sbyte>(ParamViewerViewModel, numField);
-                    case SoulsFormats.PARAMDEF.DefType.dummy8:
-                    case SoulsFormats.PARAMDEF.DefType.u8:
+                    case PARAMDEF.DefType.dummy8:
+                    case PARAMDEF.DefType.u8:
                          return new NumericViewModel<byte>(ParamViewerViewModel, numField);
-                    case SoulsFormats.PARAMDEF.DefType.s16:
+                    case PARAMDEF.DefType.s16:
                         return new NumericSignedViewModel<short>(ParamViewerViewModel, numField);
-                    case SoulsFormats.PARAMDEF.DefType.u16:
+                    case PARAMDEF.DefType.u16:
                          return new NumericViewModel<ushort>(ParamViewerViewModel, numField);
-                    case SoulsFormats.PARAMDEF.DefType.s32:
+                    case PARAMDEF.DefType.s32:
                         return new NumericSignedViewModel<int>(ParamViewerViewModel, numField);
-                    case SoulsFormats.PARAMDEF.DefType.u32:
+                    case PARAMDEF.DefType.u32:
                          return new NumericViewModel<uint>(ParamViewerViewModel, numField);
-                    case SoulsFormats.PARAMDEF.DefType.f32:
-                    case SoulsFormats.PARAMDEF.DefType.fixstr:
-                    case SoulsFormats.PARAMDEF.DefType.fixstrW:
                     default:
-                        break;
+                        throw new Exception($"No view model found for NumericField {field.InternalName}");
                 }
             }
 

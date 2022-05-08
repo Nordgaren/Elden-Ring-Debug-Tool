@@ -119,7 +119,7 @@
         <StackPanel Grid.Row="3" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center">
             <StackPanel Orientation="Horizontal">
                 <Label Content="Process:" FontWeight="ExtraBlack"/>
-                <Label Content="{Binding ID}" FontWeight="ExtraBlack" Foreground="{Binding ForegroundID}"/>
+                <Label Content="{Binding ID}" FontWeight="ExtraBlack" Foreground="{Binding ForegroundId}"/>
             </StackPanel>
         </StackPanel >
         <StackPanel Grid.Row="3" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center">
@@ -161,9 +161,9 @@
                     <view:TargetView DataContext="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type TabControl}}, Path=DataContext.TargetViewViewModel}" />
                 </Grid>
             </TabItem>
-            <TabItem Header="Hotkey">
+            <TabItem Header="HotKey">
                 <Grid Background="LightGray">
-                    <view:HotkeyView DataContext="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type TabControl}}, Path=DataContext.HotkeyViewViewModel}"/>
+                    <view:HotKeyView DataContext="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type TabControl}}, Path=DataContext.HotKeyViewViewModel}"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Debug">

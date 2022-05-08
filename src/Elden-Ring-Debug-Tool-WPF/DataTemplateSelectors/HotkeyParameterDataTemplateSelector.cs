@@ -8,7 +8,7 @@ using System.Windows.Controls;
 
 namespace Elden_Ring_Debug_Tool_WPF.DataTemplateSelectors
 {
-    internal class HotkeyParameterDataTemplateSelector : DataTemplateSelector
+    internal class HotKeyParameterDataTemplateSelector : DataTemplateSelector
     {
         public DataTemplate ComboLol { get; set; }
         public DataTemplate TextLol { get; set; }

@@ -11,7 +11,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.Commands
     [Description("Enable Map In Combat")]
     public class EnableMapInCombatCommand : CommandBase, IToggleableCommand
     {
-        private DebugViewViewModel _debugViewViewModel;
+        private DebugViewViewModel _debugViewViewModel { get; }
 
         private bool _state;
         public bool State

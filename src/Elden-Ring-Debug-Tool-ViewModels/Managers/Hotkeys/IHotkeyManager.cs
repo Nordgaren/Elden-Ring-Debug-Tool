@@ -1,19 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Input;
+﻿using System.Windows.Input;
 
-namespace Elden_Ring_Debug_Tool_ViewModels.Manager
+namespace Elden_Ring_Debug_Tool_ViewModels.Managers
 {
-    internal interface IHotkeyManager
+    internal interface IHotKeyManager
     {
-        public void AddHotkey(Key key, ICommand command);
+        public void AddHotKey(Key key, ICommand command);
 
-        public void RemoveHotkey(Key key, ICommand command);
+        public void RemoveHotKey(Key key, ICommand command);
 
         public void Update();
-        public void SetHotkeyEnable(bool enable);
+        public void SetHotKeyEnable(bool enable);
     }
 }

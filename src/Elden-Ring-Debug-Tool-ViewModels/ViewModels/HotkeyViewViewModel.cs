@@ -1,5 +1,4 @@
-﻿using Elden_Ring_Debug_Tool_ViewModels.Manager;
-using Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels;
+﻿using Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels;
 using Erd_Tools;
 using System;
 using System.Collections.Generic;
@@ -11,34 +10,36 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Data;
 using System.Windows.Input;
+using Elden_Ring_Debug_Tool_ViewModels.Managers;
+using Erd_Tools.Hook;
 
 namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
 {
-    [Description("Hotkey View")]
-    public class HotkeyViewViewModel : ViewModelBase
+    [Description("HotKey View")]
+    public class HotKeyViewViewModel : ViewModelBase
     {
         internal ErdHook Hook;
 
-        private ObservableCollection<HotkeyViewModel> _hotkeys;
-        public ObservableCollection<HotkeyViewModel> Hotkeys
+        private ObservableCollection<HotKeyViewModel> _hotKeys;
+        public ObservableCollection<HotKeyViewModel> HotKeys
         {
-            get => _hotkeys;
+            get => _hotKeys;
             set
             {
-                if (SetField(ref _hotkeys, value))
+                if (SetField(ref _hotKeys, value))
                 {
-                    OnPropertyChanged(nameof(HotkeyCollectionView));
-                    HotkeyCollectionView.GroupDescriptions.Add(new PropertyGroupDescription(nameof(HotkeyViewModel.ParentViewModelName)));
-                    HotkeyCollectionView.Filter += FilterHotkeys;
+                    OnPropertyChanged(nameof(HotKeyCollectionView));
+                    HotKeyCollectionView.GroupDescriptions.Add(new PropertyGroupDescription(nameof(HotKeyViewModel.ParentViewModelName)));
+                    HotKeyCollectionView.Filter += FilterHotKeys;
                 }
             }
         }
 
-        public ICollectionView HotkeyCollectionView => CollectionViewSource.GetDefaultView(Hotkeys);
+        public ICollectionView HotKeyCollectionView => CollectionViewSource.GetDefaultView(HotKeys);
 
-        private ObservableCollection<HotkeyViewModel> GetHotkeyViewModelCollection()
+        private ObservableCollection<HotKeyViewModel> GetHotKeyViewModelCollection()
         {
-            ObservableCollection<HotkeyViewModel> hotkeyCollection = new ObservableCollection<HotkeyViewModel>();
+            ObservableCollection<HotKeyViewModel> hotkeyCollection = new ObservableCollection<HotKeyViewModel>();
             foreach (ViewModelBase viewModel in _mainWindowViewModel.ViewModels)
             {
                 if (viewModel is DebugViewViewModel debugViewViewModel)
@@ -53,7 +54,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
 
                 foreach (ICommand command in viewModel.Commands)
                 {
-                    hotkeyCollection.Add(new HotkeyViewModel(viewModel, _mainWindowViewModel,command));
+                    hotkeyCollection.Add(new HotKeyViewModel(viewModel, _mainWindowViewModel,command));
                 }
             }
 
@@ -64,21 +65,19 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
 
         private SettingsViewViewModel _settingsViewViewModel { get; set; }
 
-        public HotkeyViewViewModel() { }
-
         public void InitViewModel(MainWindowViewModel mainWindowViewModel)
         {
             _mainWindowViewModel = mainWindowViewModel;
             _settingsViewViewModel = _mainWindowViewModel.SettingsViewViewModel;
-            _enableHotkeys = _settingsViewViewModel.EnableHotKeys;
-            Hotkeys = new ObservableCollection<HotkeyViewModel>();
+            _enableHotKeys = _settingsViewViewModel.EnableHotKeys;
+            HotKeys = new ObservableCollection<HotKeyViewModel>();
             Hook = _mainWindowViewModel.Hook;
-            _hotkeyManager = new WindowsRegisteredMultiHotkeyManager(Hook);
-            _hotkeyManager.SetHotkeyEnable(SettingsViewViewModel.Settings.EnableHotkeys);
+            _hotKeyManager = new WindowsRegisteredMultiHotKeyManager(Hook);
+            _hotKeyManager.SetHotKeyEnable(SettingsViewViewModel.Settings.EnableHotKeys);
             Hook.OnSetup += Hook_OnSetup;
             Hook.OnUnhooked += Hook_OnUnhooked;
             _mainWindowViewModel.PropertyChanged += ViewModel_PropertyChanged;
-            Hotkeys = GetHotkeyViewModelCollection();
+            HotKeys = GetHotKeyViewModelCollection();
         }
 
         private void ViewModel_PropertyChanged(object? sender, PropertyChangedEventArgs e)
@@ -86,7 +85,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
             if (e.PropertyName == nameof(_mainWindowViewModel.ViewModels)
                 || e.PropertyName == nameof(Commands))
             {
-                Hotkeys = GetHotkeyViewModelCollection();
+                HotKeys = GetHotKeyViewModelCollection();
             }
         }
 
@@ -105,35 +104,35 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
         internal void UpdateViewModel()
         {
             Loaded = Hook.Loaded;
-            HotkeyManager.Update();
+            HotKeyManager.Update();
 
         }
 
         internal void ResetViewModel()
         {
             Loaded = Hook.Loaded;
-            HotkeyManager.Update();
+            HotKeyManager.Update();
 
         }
 
-        private IHotkeyManager _hotkeyManager;
-        internal IHotkeyManager HotkeyManager
+        private IHotKeyManager _hotKeyManager;
+        internal IHotKeyManager HotKeyManager
         {
-            get => _hotkeyManager;
-            set => SetField(ref _hotkeyManager, value);
+            get => _hotKeyManager;
+            set => SetField(ref _hotKeyManager, value);
         }
 
 
-        private bool _enableHotkeys;
-        public bool EnableHotkeys
+        private bool _enableHotKeys;
+        public bool EnableHotKeys
         {
-            get => _enableHotkeys;
+            get => _enableHotKeys;
             set 
             {
-                if (SetField(ref _enableHotkeys, value))
+                if (SetField(ref _enableHotKeys, value))
                 {
-                    HotkeyManager.SetHotkeyEnable(EnableHotkeys);
-                    _settingsViewViewModel.EnableHotKeys = EnableHotkeys;
+                    HotKeyManager.SetHotKeyEnable(EnableHotKeys);
+                    _settingsViewViewModel.EnableHotKeys = EnableHotKeys;
                 }
             }
         }
@@ -146,7 +145,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
             {
                 if (SetField(ref _setup, value))
                 {
-                    HotkeyCollectionView.Refresh();
+                    HotKeyCollectionView.Refresh();
                 }
             }
         }
@@ -159,7 +158,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
             {
                 if (SetField(ref _loaded, value))
                 {
-                    HotkeyCollectionView.Refresh();
+                    HotKeyCollectionView.Refresh();
                 }
             }
         }
@@ -173,37 +172,32 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
             set
             {
                 SetField(ref _searchAll, value);
-                OnPropertyChanged(nameof(HotkeyCollectionView));
+                OnPropertyChanged(nameof(HotKeyCollectionView));
             }
         }
 
         private string _hotkeyFilter = string.Empty;
 
 
-        public string HotkeyFilter
+        public string HotKeyFilter
         {
             get => _hotkeyFilter;
             set
             {
                 SetField(ref _hotkeyFilter, value);
-                HotkeyCollectionView.Refresh();
+                HotKeyCollectionView.Refresh();
             }
         }
 
-        private bool FilterHotkeys(object obj)
+        private bool FilterHotKeys(object obj)
         {
-            if (obj is HotkeyViewModel hotkey)
+            if (obj is HotKeyViewModel hotkey)
             {
-                return hotkey.Name.Contains(HotkeyFilter, StringComparison.InvariantCultureIgnoreCase)
-                    || hotkey.ParentViewModelName.Contains(HotkeyFilter, StringComparison.InvariantCultureIgnoreCase);
+                return hotkey.Name.Contains(HotKeyFilter, StringComparison.InvariantCultureIgnoreCase)
+                    || hotkey.ParentViewModelName.Contains(HotKeyFilter, StringComparison.InvariantCultureIgnoreCase);
             }
 
             return false;
-        }
-
-        internal void Dispose()
-        {
-            Setup = false;
         }
 
         #endregion

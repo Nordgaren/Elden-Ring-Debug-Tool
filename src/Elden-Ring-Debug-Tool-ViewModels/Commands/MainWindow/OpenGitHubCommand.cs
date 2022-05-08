@@ -6,19 +6,11 @@ namespace Elden_Ring_Debug_Tool_ViewModels.Commands
 {
     public class OpenGitHubCommand : CommandBase
     {
-        private MainWindowViewModel _mainWindowViewModel;
-        private ErdHook _hook => _mainWindowViewModel.Hook;
-
+        private MainWindowViewModel _mainWindowViewModel { get; }
         public OpenGitHubCommand(MainWindowViewModel mainWindowViewModel)
         {
             _mainWindowViewModel = mainWindowViewModel;
         }
-
-        public override bool CanExecute(object? parameter)
-        {
-            return base.CanExecute(parameter);
-        }
-
         public override void Execute(object? parameter)
         {
             Process.Start(new ProcessStartInfo

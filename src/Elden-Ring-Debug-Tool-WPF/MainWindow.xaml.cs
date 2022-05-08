@@ -1,6 +1,7 @@
 ﻿using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Input;
+using Elden_Ring_Debug_Tool_WPF.Windows;
 
 namespace Elden_Ring_Debug_Tool_WPF
 {
@@ -30,7 +31,7 @@ namespace Elden_Ring_Debug_Tool_WPF
         {
             //DebugItems.InitCtrl();
             //DebugCheats.InitCtrl();
-            //InitHotkeys();
+            //InitHotKeys();
         }
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
@@ -40,7 +41,6 @@ namespace Elden_Ring_Debug_Tool_WPF
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            MainWindowViewModel.Dispose();
             //App.Settings?.Save();
         }
         private void SpawnUndroppable_Checked(object sender, RoutedEventArgs e)

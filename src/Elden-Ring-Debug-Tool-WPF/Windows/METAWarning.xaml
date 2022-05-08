@@ -1,4 +1,4 @@
-﻿<Window x:Class="Elden_Ring_Debug_Tool_WPF.DebugWarning"
+﻿<Window x:Class="Elden_Ring_Debug_Tool_WPF.Windows.DebugWarning"
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" 
              xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
              x:Name="Window"

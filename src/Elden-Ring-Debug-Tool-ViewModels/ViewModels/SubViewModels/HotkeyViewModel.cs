@@ -1,6 +1,5 @@
 ﻿using Elden_Ring_Debug_Tool_ViewModels.Attributes;
 using Elden_Ring_Debug_Tool_ViewModels.Commands;
-using Elden_Ring_Debug_Tool_ViewModels.Manager;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -9,10 +8,11 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Elden_Ring_Debug_Tool_ViewModels.Managers;
 
 namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels
 {
-    public class HotkeyViewModel : ViewModelBase
+    public class HotKeyViewModel : ViewModelBase
     {
         private ViewModelBase _parentViewModel { get; }
 
@@ -52,7 +52,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels
             get => _toggleableCommand;
             set => SetField(ref _toggleableCommand, value);
         }
-        private IHotkeyManager HotkeyManager => MainWindowViewModel.HotkeyViewViewModel.HotkeyManager;
+        private IHotKeyManager _hotKeyManager => MainWindowViewModel.HotKeyViewViewModel.HotKeyManager;
 
         private Key? _key = null;
         public Key? Key
@@ -64,20 +64,19 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels
                 if (SetField(ref _key, value))
                 {
                     if (oldKey != null)
-                        HotkeyManager.RemoveHotkey(oldKey.Value, Command);
+                        _hotKeyManager.RemoveHotKey(oldKey.Value, Command);
 
                     if (Key != null)
-                        HotkeyManager.AddHotkey(Key.Value, Command);
+                        _hotKeyManager.AddHotKey(Key.Value, Command);
                 }
             }
         }
 
-        public bool HasDependancies { get; set; }
+        public bool HasDependencies { get; set; }
 
-        public List<(PropertyInfo prop, HotkeyParameterAttribute parameter)> HotkeyParameterAttribute { get; set; }
-        public HotkeyViewModel() { }
+        public List<(PropertyInfo prop, HotKeyParameterAttribute parameter)> HotKeyParameterAttribute { get; set; }
 
-        public HotkeyViewModel(ViewModelBase parentViewModel, MainWindowViewModel mainWindowViewModel,ICommand command)
+        public HotKeyViewModel(ViewModelBase parentViewModel, MainWindowViewModel mainWindowViewModel,ICommand command)
         {
 
             _mainWindowViewModel = mainWindowViewModel;
@@ -95,24 +94,24 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels
 
             Name = Command.GetType().Name;
 
-            IEnumerable<PropertyInfo> customAttrs = _parentViewModel.GetType().GetProperties().Where(x => x.CustomAttributes.Any(a => a.AttributeType == typeof(HotkeyParameterAttribute)));
+            IEnumerable<PropertyInfo> customAttrs = _parentViewModel.GetType().GetProperties().Where(x => x.CustomAttributes.Any(a => a.AttributeType == typeof(HotKeyParameterAttribute)));
 
-            Type commantType = GetDescriptionAttr();
+            Type commandType = GetDescriptionAttr();
 
-            HotkeyParameterAttribute = new List<(PropertyInfo Prop, HotkeyParameterAttribute Parameter)>();
+            HotKeyParameterAttribute = new List<(PropertyInfo Prop, HotKeyParameterAttribute Parameter)>();
 
             foreach (PropertyInfo prop in customAttrs)
             {
-                HotkeyParameterAttribute? hKeyParamAttr = prop.GetCustomAttribute<HotkeyParameterAttribute>();
+                HotKeyParameterAttribute? hKeyParamAttr = prop.GetCustomAttribute<HotKeyParameterAttribute>();
 
-                if (hKeyParamAttr == null || hKeyParamAttr.CommandType != commantType)
+                if (hKeyParamAttr == null || hKeyParamAttr.CommandType != commandType)
                     continue;
 
 
-                HotkeyParameterAttribute.Add((prop,hKeyParamAttr));
+                HotKeyParameterAttribute.Add((prop,hKeyParamAttr));
             }
 
-            HasDependancies = HotkeyParameterAttribute.Count > 0;
+            HasDependencies = HotKeyParameterAttribute.Count > 0;
         }
 
         private Type GetDescriptionAttr()

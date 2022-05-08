@@ -1,23 +1,23 @@
-﻿using Erd_Tools;
-using mrousavy;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Input;
+using Erd_Tools.Hook;
+using mrousavy;
 
-namespace Elden_Ring_Debug_Tool_ViewModels.Manager
+namespace Elden_Ring_Debug_Tool_ViewModels.Managers
 {
-    internal class WindowsRegisteredMultiHotkeyManager : IHotkeyManager
+    internal class WindowsRegisteredMultiHotKeyManager : IHotKeyManager
     {
         private ErdHook _hook { get; }
         private Dictionary<Key, List<ICommand>> _hotkeyDictionary { get; }
         private List<HotKey> _hotkeyList { get; }
 
-        public WindowsRegisteredMultiHotkeyManager(ErdHook hook)
+        public WindowsRegisteredMultiHotKeyManager(ErdHook hook)
         {
             _hook = hook;
             _hotkeyDictionary = new Dictionary<Key, List<ICommand>>();
             _hotkeyList = new List<HotKey>();
         }
-        public void AddHotkey(Key key, ICommand command)
+        public void AddHotKey(Key key, ICommand command)
         {
             if (!_hotkeyDictionary.ContainsKey(key))
             {
@@ -38,7 +38,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.Manager
             }
         }
 
-        public void RemoveHotkey(Key key, ICommand command)
+        public void RemoveHotKey(Key key, ICommand command)
         {
             bool success = _hotkeyDictionary[key].Remove(command);
 
@@ -50,16 +50,16 @@ namespace Elden_Ring_Debug_Tool_ViewModels.Manager
                 _hotkeyDictionary.Remove(key);
             }
         }
-        private bool _enableHotkeys { get; set; }
+        private bool _enableHotKeys { get; set; }
 
-        public void SetHotkeyEnable(bool enable)
+        public void SetHotKeyEnable(bool enable)
         {
-            _enableHotkeys = enable;
+            _enableHotKeys = enable;
         }
 
         public void Update()
         {
-            if (_enableHotkeys && _hook.Focused && !(_hotkeyList.Count > 0) && _hotkeyDictionary.Count > 0)
+            if (_enableHotKeys && _hook.Focused && !(_hotkeyList.Count > 0) && _hotkeyDictionary.Count > 0)
                 RegisterHotKeys();
 
             if (!_hook.Focused && _hotkeyList.Count > 0)

@@ -11,8 +11,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Data;
 using System.Windows.Input;
-using static Elden_Ring_Debug_Tool_ViewModels.Attributes.HotkeyParameterAttribute;
-using static Erd_Tools.ErdHook;
+using Erd_Tools.Hook;
+using static Elden_Ring_Debug_Tool_ViewModels.Attributes.HotKeyParameterAttribute;
+using static Erd_Tools.Hook.ErdHook;
 
 namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
 {
@@ -24,8 +25,8 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
         public ICommand EnableMapInCombatCommand { get; }
         public ICommand ForceWeatherCommand { get; }
 
-        private ObservableCollection<HotkeyViewModel> _debugCommands;
-        public ObservableCollection<HotkeyViewModel> DebugCommands
+        private ObservableCollection<HotKeyViewModel> _debugCommands;
+        public ObservableCollection<HotKeyViewModel> DebugCommands
         {
             get => _debugCommands;
             set
@@ -48,7 +49,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
             Commands.Add(EnableMapInCombatCommand);
             Commands.Add(ForceWeatherCommand);
 
-            DebugCommands = new ObservableCollection<HotkeyViewModel>();
+            DebugCommands = new ObservableCollection<HotKeyViewModel>();
         }
 
         public void InitViewModel(MainWindowViewModel mainWindowViewModel)
@@ -56,7 +57,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
             _mainWindowViewModel = mainWindowViewModel;
             foreach (ICommand command in Commands)
             {
-                DebugCommands.Add(new HotkeyViewModel(this, _mainWindowViewModel, command));
+                DebugCommands.Add(new HotKeyViewModel(this, _mainWindowViewModel, command));
             }
             Hook = _mainWindowViewModel.Hook;
             Hook.OnSetup += Hook_OnSetup;
@@ -98,8 +99,6 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
 
             if (((IToggleableCommand)EnableMapInCombatCommand).State)
                 EnableMapInCombatCommand.Execute(null);
-
-            Setup = false;
         }
 
         private bool _setup;
@@ -130,7 +129,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
 
         private ObservableCollection<WeatherTypes> _weatherTypes;
         [Description("Weather Types")]
-        [HotkeyParameter(typeof(ForceWeatherCommand), ResourceType.ComboBox, SelectedItemPropertyName = nameof(SelectedWeather))]
+        [HotKeyParameter(typeof(ForceWeatherCommand), ResourceType.ComboBox, SelectedItemPropertyName = nameof(SelectedWeather))]
         public ObservableCollection<WeatherTypes> WeatherTypes
         {
             get => _weatherTypes;
@@ -177,7 +176,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
 
         private bool FilterCommands(object obj)
         {
-            if (obj is HotkeyViewModel hotkey)
+            if (obj is HotKeyViewModel hotkey)
             {
                 return hotkey.Name.Contains(CommandFilter, StringComparison.InvariantCultureIgnoreCase);
             }

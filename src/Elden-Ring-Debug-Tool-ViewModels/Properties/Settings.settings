@@ -8,10 +8,10 @@
     <Setting Name="SpawnUntradeable" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="EnableHotkeys" Type="System.Boolean" Scope="User">
+    <Setting Name="EnableHotKeys" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
-    <Setting Name="HandleHotkeys" Type="System.Boolean" Scope="User">
+    <Setting Name="HandleHotKeys" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="CreateItem" Type="System.Int32" Scope="User">

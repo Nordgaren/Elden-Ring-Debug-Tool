@@ -20,7 +20,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Xceed.Wpf.Toolkit;
-using static Elden_Ring_Debug_Tool_ViewModels.Attributes.HotkeyParameterAttribute;
+using static Elden_Ring_Debug_Tool_ViewModels.Attributes.HotKeyParameterAttribute;
 
 namespace Elden_Ring_Debug_Tool_WPF.Views
 {
@@ -93,18 +93,18 @@ namespace Elden_Ring_Debug_Tool_WPF.Views
         {
             e.Row.DetailsVisibility = Visibility.Hidden;
 
-            HotkeyViewModel hvm = e.Row.DataContext as HotkeyViewModel;
+            HotKeyViewModel hvm = e.Row.DataContext as HotKeyViewModel;
             if (hvm == null)
                 return;
 
-            if (!hvm.HasDependancies)
+            if (!hvm.HasDependencies)
                 return;
 
             StackPanel p = e.DetailsElement as StackPanel;
             if (p == null)
                 return;
 
-            foreach ((PropertyInfo Prop, HotkeyParameterAttribute Parameter) dependancy in hvm.HotkeyParameterAttribute)
+            foreach ((PropertyInfo Prop, HotKeyParameterAttribute Parameter) dependancy in hvm.HotKeyParameterAttribute)
             {
 
                 DescriptionAttribute? attr = dependancy.Prop.GetCustomAttribute<DescriptionAttribute>();
@@ -113,7 +113,7 @@ namespace Elden_Ring_Debug_Tool_WPF.Views
                     throw new NullReferenceException(nameof(attr));
 
                 e.Row.DetailsVisibility = Visibility.Visible;
-                hvm.HasDependancies = true;
+                hvm.HasDependencies = true;
 
                 StackPanel p2 = new StackPanel()
                 {
