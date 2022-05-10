@@ -45,7 +45,7 @@ Backup your saves before using this tool, and restore the backups before going o
 **[FrankvdStam](https://github.com/FrankvdStam)** Helped with the build action, MVVM stuff and general troubleshooting.  
 **[King Borehaha](https://github.com/kingborehaha/DS-Gadget-Local-Loader)** Who's local loading system has worked really well for a lot of things, including this project  
 **jamesq7** For helping figure out the cheat for enabling the map during combat and his rewrite of Wulfs Target script
-**wulf2k** For helping figure out the cheat for enabling the map during combat and his rewrite of Wulfs Target script
+**[wulf2k](https://github.com/Wulf2k)** For helping figure out the cheat for enabling the map during combat and his target script
 
 # Change Log 
 ### Beta 0.7.2
