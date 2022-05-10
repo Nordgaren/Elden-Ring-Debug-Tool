@@ -55,6 +55,10 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels
             Blight = _targetEnemy.Blight;
             Sleep = _targetEnemy.Sleep;
             Madness = _targetEnemy.Madness;
+
+            StaggerMax = _targetEnemy.StaggerMax;
+            Stagger = _targetEnemy.Stagger;
+            ResetTime = _targetEnemy.ResetTime;
   
             _reading = false;
         }
@@ -300,7 +304,33 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels
 
         #endregion
 
+        #region Stagger
 
+        private float _stagger;
+
+        public float Stagger
+        {
+            get => StaggerMax - _stagger;
+            set => SetField(ref _stagger, value);
+        }
+
+        private float _staggerMax;
+
+        public float StaggerMax
+        {
+            get => _staggerMax;
+            set => SetField(ref _staggerMax, value);
+        }
+
+        private float _resetTime;
+
+        public float ResetTime
+        {
+            get => _resetTime;
+            set => SetField(ref _resetTime, value);
+        }
+
+        #endregion
 
 
     }

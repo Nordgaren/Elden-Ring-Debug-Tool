@@ -10,6 +10,7 @@
              mc:Ignorable="d"
              d:DesignHeight="600" d:DesignWidth="800" Background="LightGray" DataContextChanged="OnDataContextChanged"
              d:DataContext="{d:DesignInstance vm:TargetViewViewModel, IsDesignTimeCreatable=True}">
+
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
@@ -204,6 +205,25 @@
                     </Grid>
                 
            
+                </Expander>
+            </GroupBox>
+
+            <GroupBox Header="Status" >
+                <Expander IsExpanded="True" Style="{StaticResource StatusGroupExpander}" Header="Buildup Data">
+                    <StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="Stagger: "/>
+                            <Label Content="{Binding TargetEnemy.Stagger}"/>
+                            <Label Content="/"/>
+                            <Label Content="{Binding TargetEnemy.StaggerMax}"/>
+                        </StackPanel>
+                        <ProgressBar Value="{Binding TargetEnemy.Stagger}" Maximum="{Binding TargetEnemy.StaggerMax}" />
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="Reset Time: "/>
+                            <Label Content="{Binding TargetEnemy.ResetTime}"/>
+                        </StackPanel>
+                        <ProgressBar Value="{Binding TargetEnemy.ResetTime}" Maximum="5" />
+                    </StackPanel>
                 </Expander>
             </GroupBox>
         </StackPanel>
