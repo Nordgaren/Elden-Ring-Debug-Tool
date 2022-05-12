@@ -82,6 +82,9 @@
                             <Trigger Property="ItemsControl.AlternationIndex" Value="0">
                                 <Setter Property="Background" Value="#C3C3C3" TargetName="Grid"/>
                             </Trigger>
+                            <Trigger Property="ItemsControl.AlternationIndex" Value="1">
+                                <Setter Property="Background" Value="LightGray" TargetName="Grid"/>
+                            </Trigger>
                         </DataTemplate.Triggers>
                     </DataTemplate>
 

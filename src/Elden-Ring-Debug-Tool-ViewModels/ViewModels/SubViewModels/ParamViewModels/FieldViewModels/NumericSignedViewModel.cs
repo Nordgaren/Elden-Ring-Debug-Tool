@@ -8,12 +8,12 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels
         public override object MinValue { get; }
         public override object MaxValue { get; }
         public override string StringValue => Value?.ToString() ?? "null";
-        public T? Value
+        public object Value
         {
             get
             {
                 if (ParamViewerViewModel.SelectedRow == null)
-                    return default(T?);
+                    return null;
 
                 return GetValue();
             }
@@ -22,7 +22,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels
                 if (ParamViewerViewModel.SelectedRow == null || value == null)
                     return;
 
-                byte[] buffer = GetBytes(value);
+                byte[] buffer = GetBytes((T)value);
                 byte[] bytes = new byte[GetSize()];
                 Array.Copy(buffer, bytes, bytes.Length);
                 Param.Pointer.WriteBytes(Offset, bytes);

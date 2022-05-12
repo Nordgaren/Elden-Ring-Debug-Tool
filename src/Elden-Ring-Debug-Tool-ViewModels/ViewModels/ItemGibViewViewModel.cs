@@ -137,7 +137,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
                 if (SetField(ref _selectedItemCategory, value))
                 {
                     OnPropertyChanged(nameof(ItemsCollectionView));
-                    ItemsCollectionView.Filter += FiltItems;
+                    ItemsCollectionView.Filter += FilerItems;
                 }
             }
         }
@@ -275,7 +275,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
             }
         }
 
-        private bool FiltItems(object obj)
+        private bool FilerItems(object obj)
         {
             if (obj is ItemViewModel item)
             {
