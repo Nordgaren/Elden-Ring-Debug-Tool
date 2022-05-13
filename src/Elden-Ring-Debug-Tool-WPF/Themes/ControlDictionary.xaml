@@ -284,12 +284,11 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ToggleButton}">
-                    <Border Name="B1" Background="{Binding Background, RelativeSource={RelativeSource AncestorType=ToggleButton}}" BorderBrush="Transparent" BorderThickness="2" CornerRadius="15">
+                    <Border Name="B1" Background="{Binding Background, RelativeSource={RelativeSource AncestorType=ToggleButton}}" BorderBrush="Transparent" BorderThickness="0" CornerRadius="15">
                         <TextBlock Name="T1" Text="&#xE7E8;" FontSize="16" Margin="0,0,0,1" FontWeight="ExtraBlack" FontFamily="Segoe MDL2 Assets" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsChecked" Value="True">
-                            <Setter TargetName="B1" Property="BorderBrush" Value="Green"/>
                             <Setter TargetName="T1" Property="Foreground" Value="GreenYellow"/>
                         </Trigger>
                         <Trigger Property="IsChecked" Value="False">
@@ -410,9 +409,9 @@
     <SolidColorBrush x:Key="Button.Disabled.Foreground" Color="#555555"/>
     <Style TargetType="{x:Type Button}">
         <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
-        <Setter Property="Background" Value="{StaticResource Button.Static.Background}"/>
+        <Setter Property="Background" Value="{StaticResource Background}"/>
         <Setter Property="BorderBrush" Value="{StaticResource Button.Static.Border}"/>
-        <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+        <Setter Property="Foreground" Value="{StaticResource Foreground}"/>
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="HorizontalContentAlignment" Value="Center"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
@@ -428,15 +427,15 @@
                             <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
                         </Trigger>
                         <Trigger Property="IsMouseOver" Value="true">
-                            <Setter Property="Background" TargetName="border" Value="{StaticResource Button.MouseOver.Background}"/>
+                            <Setter Property="Background" TargetName="border" Value="{StaticResource BackgroundMouseOver}"/>
                             <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.MouseOver.Border}"/>
                         </Trigger>
                         <Trigger Property="IsPressed" Value="true">
-                            <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Pressed.Background}"/>
+                            <Setter Property="Background" TargetName="border" Value="{StaticResource BackgroundAlt}"/>
                             <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Pressed.Border}"/>
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="false">
-                            <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Disabled.Background}"/>
+                            <Setter Property="Background" TargetName="border" Value="{StaticResource BackgroundAlt}"/>
                             <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Disabled.Border}"/>
                             <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="{StaticResource ForegroundDisabled}" />
                         </Trigger>
