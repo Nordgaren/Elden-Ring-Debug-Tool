@@ -61,8 +61,7 @@ namespace Elden_Ring_Debug_Tool_WPF
                     double percentVertical = e.GetPosition(this).Y / ActualHeight;
                     double targetVertical = RestoreBounds.Height * percentVertical;
 
-                    POINT lMousePosition;
-                    GetCursorPos(out lMousePosition);
+                    GetCursorPos(out POINT lMousePosition);
                     Left = lMousePosition.X - targetHorizontal;
                     Top = lMousePosition.Y - targetVertical;
 
