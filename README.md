@@ -48,6 +48,12 @@ Backup your saves before using this tool, and restore the backups before going o
 **[wulf2k](https://github.com/Wulf2k)** For helping figure out the cheat for enabling the map during combat and his target script
 
 # Change Log 
+### Beta 0.8
+
+* Fixed null values showing as 0  
+
+* Fixed tooltips disappearing when user has scalled UI in Windows settings  
+
 ### Beta 0.7.2
 
 * Fixed a glitch with the inventory not updating properly  
