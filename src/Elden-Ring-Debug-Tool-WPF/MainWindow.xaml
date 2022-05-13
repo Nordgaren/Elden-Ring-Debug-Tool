@@ -8,9 +8,10 @@
         xmlns:view="clr-namespace:Elden_Ring_Debug_Tool_WPF.Views"
         xmlns:ctrl="clr-namespace:Elden_Ring_Debug_Tool_WPF.Controls"
         xmlns:viewModel="clr-namespace:Elden_Ring_Debug_Tool_ViewModels.ViewModels;assembly=Elden-Ring-Debug-Tool-ViewModels"
+        xmlns:dock="https://github.com/Dirkster99/AvalonDock"
         mc:Ignorable="d"
-        Title="Elden Ring Debug Tool" Height="600" Width="800" MinHeight="600" MinWidth="800" Icon="Icon.ico" Loaded="Window_Loaded" Closing="Window_Closing" Background="#777777" 
-        WindowStyle="None" ResizeMode="CanResizeWithGrip" AllowsTransparency="True" BorderThickness="7" >
+        Title="Elden Ring Debug Tool" Height="600" Width="800" MinHeight="600" MinWidth="800" Icon="Icon.ico" Loaded="Window_Loaded" Closing="Window_Closing" Background="{StaticResource Background}" 
+        WindowStyle="None" ResizeMode="CanResizeWithGrip" AllowsTransparency="True" BorderThickness="7">
 
     <Window.DataContext>
         <viewModel:MainWindowViewModel x:Name="MainWindowViewModel"/>
@@ -18,14 +19,15 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="15"/>
         </Grid.RowDefinitions>
         <StackPanel>
-            <Grid Height="25" MouseDown="Grid_MouseDown" Background="Black">
+            <Grid Height="25" MouseDown="Grid_MouseDown" Background="{StaticResource Background}">
                 <StackPanel Orientation="Horizontal">
                     <Image Source="Icon.ico" Width="25"/>
-                    <Label Content="{Binding WindowTitle}" Foreground="White"/>
+                    <Label Content="{Binding WindowTitle}" Foreground="{StaticResource Foreground}"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" 
                         Grid.Column="11"
@@ -62,6 +64,12 @@
                         BorderThickness="0"/>
                 </StackPanel>
             </Grid>
+            <Menu Grid.Row="1" Background="Gray" Foreground="White">
+                <MenuItem Header="File">
+
+                </MenuItem>
+
+            </Menu>
             <!--<Grid Height="95" VerticalAlignment="Top">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
@@ -136,8 +144,50 @@
             </Label>
         </StackPanel>
 
+        <dock:DockingManager Grid.Row="2" x:Name="DockingManager" AllowMixedOrientation="True" >
+            <DockingManager.Theme>
+                <Vs2013DarkTheme></Vs2013DarkTheme>
+            </DockingManager.Theme>
+            <dock:LayoutRoot>
+                <dock:LayoutPanel Orientation="Horizontal">
+                    <dock:LayoutAnchorablePane>
+                        <dock:LayoutAnchorable ContentId="Params" Title="Params" CanClose="True" CanHide="True" CanDockAsTabbedDocument="True">
+                            <view:ParamView
+                                DataContext="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.ParamViewViewModel}" />
 
-        <TabControl Background="LightGray" Grid.Row="1" Margin="0,0,0,0">
+                        </dock:LayoutAnchorable>
+
+                        <dock:LayoutAnchorable ContentId="Inventory" Title="Inventory" CanClose="True" CanHide="True">
+                            <StackPanel Orientation="Horizontal">
+                                <view:ItemGibView
+                                    DataContext="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.ItemGibViewViewModel}"/>
+                                <view:InventoryView Grid.Column="1"
+                                                    DataContext="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.InventoryViewViewModel}"/>
+                            </StackPanel>
+                        </dock:LayoutAnchorable>
+
+                        <dock:LayoutAnchorable ContentId="Target" Title="Target" CanClose="True" CanHide="True">
+                            <view:TargetView DataContext="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.TargetViewViewModel}" />
+                        </dock:LayoutAnchorable>
+                        <dock:LayoutAnchorable ContentId="HotKey" Title="HotKey" CanClose="True" CanHide="True">
+                            <view:HotKeyView DataContext="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.HotKeyViewViewModel}"/>
+                        </dock:LayoutAnchorable>
+
+                        <dock:LayoutAnchorable ContentId="Debug" Title="Debug" CanClose="True" CanHide="True">
+                            <view:DebugView DataContext="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.DebugViewViewModel}"/>
+                        </dock:LayoutAnchorable>
+                        <dock:LayoutAnchorable ContentId="Settings" Title="Settings" CanClose="True" CanHide="True">
+                            <view:SettingsView DataContext="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.SettingsViewViewModel}"/>
+                        </dock:LayoutAnchorable>
+                    </dock:LayoutAnchorablePane>
+
+                </dock:LayoutPanel>
+            </dock:LayoutRoot>
+        </dock:DockingManager>
+
+
+
+        <!--<TabControl Background="LightGray" Grid.Row="2" Margin="0,0,0,0">
             <TabItem Header="Params">
                 <Grid Background="LightGray">
                     <view:ParamViewerView
@@ -177,6 +227,6 @@
                 </Grid>
             </TabItem>
 
-        </TabControl>
+        </TabControl>-->
     </Grid>
 </Window>

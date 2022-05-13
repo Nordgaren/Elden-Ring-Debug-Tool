@@ -105,12 +105,14 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
                 {
                     item.SetupItem();
                 }
+
+                Setup = true;
             });
         }
 
         public void UpdateViewModel()
         {
-            Setup = Hook.Setup;
+            //Setup = Hook.Setup;
             Loaded = Hook.Loaded;
         }
 

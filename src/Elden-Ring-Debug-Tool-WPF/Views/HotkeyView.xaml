@@ -10,7 +10,7 @@
              xmlns:wpfTool="http://schemas.xceed.com/wpf/xaml/toolkit" 
              xmlns:controls="clr-namespace:Elden_Ring_Debug_Tool_WPF.Controls"
              mc:Ignorable="d"
-             d:DesignHeight="600" d:DesignWidth="400" Background="LightGray" DataContextChanged="OnDataContextChanged"
+             d:DesignHeight="600" d:DesignWidth="400" Background="{StaticResource Background}" DataContextChanged="OnDataContextChanged"
              d:DataContext="{d:DesignInstance vm:HotKeyViewViewModel, IsDesignTimeCreatable=True}">
 
     <UserControl.Resources>
@@ -61,7 +61,7 @@
                                         <Setter.Value>
                                             <ControlTemplate TargetType="{x:Type GroupItem}">
                                                 <StackPanel>
-                                                    <Border BorderThickness="1" Height="23" Background="Gray"  BorderBrush="Black"  >
+                                                    <Border BorderThickness="1" Height="23" Background="{StaticResource BackgroundAlt}"  BorderBrush="Black"  >
 
                                                         <StackPanel Orientation="Horizontal" Margin="10,0,0,0">
                                                                 <TextBlock Text="{Binding Name}" FontSize="11" FontWeight="Bold" />
@@ -82,15 +82,19 @@
                     <DataGrid.Resources>
                         <Style TargetType="{x:Type DataGrid}">
                             <Setter Property="Background" Value="Transparent"/>
+                            <Setter Property="Foreground" Value="{StaticResource Foreground}"/>
                         </Style>
                         <Style TargetType="{x:Type DataGridRow}">
                             <Setter Property="Background" Value="Transparent"/>
+                            <Setter Property="Foreground" Value="{StaticResource Foreground}"/>
                         </Style>
                         <Style TargetType="{x:Type DataGridRowHeader}">
                             <Setter Property="Background" Value="Transparent"/>
+                            <Setter Property="Foreground" Value="{StaticResource Foreground}"/>
                         </Style>
                         <Style TargetType="{x:Type DataGridColumnHeader}">
-                            <Setter Property="Background" Value="DarkGray"/>
+                            <Setter Property="Background" Value="{StaticResource Background}"/>
+                            <Setter Property="Foreground" Value="{StaticResource Foreground}"/>
                             <Setter Property="BorderThickness" Value="1"/>
                             <Setter Property="BorderBrush" Value="Black"/>
                             <Setter Property="HorizontalContentAlignment" Value="Center"/>

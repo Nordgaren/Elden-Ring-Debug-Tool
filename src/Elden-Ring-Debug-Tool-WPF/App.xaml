@@ -8,6 +8,7 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Themes\ControlDictionary.xaml"/>
+                <ResourceDictionary Source="Themes\ComboBoxStyle.xaml"/>
             </ResourceDictionary.MergedDictionaries>
             <conv:StringToVisibilityConverter x:Key="StringToVisibilityConverter"/>
             <!--<conv:EnumDescriptionConverter x:Key="EnumDescriptionConverter"/>-->
@@ -18,6 +19,7 @@
             <conv:NullObjectToVisibilityConverter x:Key="NullObjectToVisibilityConverter"/>
             <conv:VisibilityToBoolConverter x:Key="VisibilityToBoolConverter"/>
             <conv:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+
         </ResourceDictionary>
     </Application.Resources>
 </Application>

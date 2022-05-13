@@ -10,7 +10,7 @@
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" 
              xmlns:wpfTool="http://schemas.xceed.com/wpf/xaml/toolkit"
              mc:Ignorable="d"
-             d:DesignHeight="600" d:DesignWidth="400" Background="LightGray" DataContextChanged="OnDataContextChanged"
+             d:DesignHeight="600" d:DesignWidth="400" Background="{StaticResource Background}" DataContextChanged="OnDataContextChanged"
              d:DataContext="{d:DesignInstance vm:DebugViewViewModel, IsDesignTimeCreatable=True}">
 
     <Grid>
@@ -33,15 +33,19 @@
             <DataGrid.Resources>
                 <Style TargetType="{x:Type DataGrid}">
                     <Setter Property="Background" Value="Transparent"/>
+                    <Setter Property="Foreground" Value="{StaticResource Foreground}"/>
                 </Style>
                 <Style TargetType="{x:Type DataGridRow}">
                     <Setter Property="Background" Value="Transparent"/>
+                    <Setter Property="Foreground" Value="{StaticResource Foreground}"/>
                 </Style>
                 <Style TargetType="{x:Type DataGridRowHeader}">
                     <Setter Property="Background" Value="Transparent"/>
+                    <Setter Property="Foreground" Value="{StaticResource Foreground}"/>
                 </Style>
                 <Style TargetType="{x:Type DataGridColumnHeader}">
-                    <Setter Property="Background" Value="DarkGray"/>
+                    <Setter Property="Background" Value="{StaticResource Background}"/>
+                    <Setter Property="Foreground" Value="{StaticResource Foreground}"/>
                     <Setter Property="BorderThickness" Value="1"/>
                     <Setter Property="BorderBrush" Value="Black"/>
                     <Setter Property="HorizontalContentAlignment" Value="Center"/>
@@ -71,7 +75,7 @@
                 <DataGridTemplateColumn Header="Parameters" Width="50" >
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <ToggleButton Height="25" Width="25" Style="{StaticResource ToggleButtonParameters}" 
+                            <ToggleButton Height="25" Width="25" Style="{StaticResource ToggleButtonParameters}"
                                                   Background="{Binding Background, RelativeSource={RelativeSource AncestorType=UserControl}}" 
                                                   Visibility="{Binding HasDependencies, Converter={StaticResource BoolToVisibilityConverter}}"
                                                   IsChecked="{Binding DetailsVisibility ,RelativeSource={RelativeSource AncestorType=DataGridRow}, Converter={StaticResource VisibilityToBoolConverter}}"/>

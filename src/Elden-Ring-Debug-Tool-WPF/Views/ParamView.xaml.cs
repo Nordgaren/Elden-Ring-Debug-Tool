@@ -7,11 +7,11 @@ namespace Elden_Ring_Debug_Tool_WPF.Views
     /// <summary>
     /// Interaction logic for ParamViewerControl.xaml
     /// </summary>
-    public partial class ParamViewerView : UserControl
+    public partial class ParamView : UserControl
     {
 
         private ParamViewViewModel _paramViewModel;
-        public ParamViewerView()
+        public ParamView()
         {
             InitializeComponent();
             DataContextChanged += new DependencyPropertyChangedEventHandler(OnDataContextChanged);

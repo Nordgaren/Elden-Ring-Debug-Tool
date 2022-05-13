@@ -1,6 +1,7 @@
 ﻿using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Input;
+using AvalonDock.Themes;
 using Elden_Ring_Debug_Tool_WPF.Windows;
 
 namespace Elden_Ring_Debug_Tool_WPF
@@ -17,14 +18,13 @@ namespace Elden_Ring_Debug_Tool_WPF
             if (!MainWindowViewModel.ShowWarning)
                 return;
 
-            DebugWarning warning = new DebugWarning(MainWindowViewModel)
+            DebugWarning warning = new(MainWindowViewModel)
             {
                 Title = "Online Warning",
                 Width = 350,
                 Height = 240
             };
             warning.ShowDialog();
-
         }
 
         private void InitAllCtrls()
@@ -35,8 +35,7 @@ namespace Elden_Ring_Debug_Tool_WPF
         }
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            await MainWindowViewModel.Load();
-            InitAllCtrls();
+            //await MainWindowViewModel.Load();
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)

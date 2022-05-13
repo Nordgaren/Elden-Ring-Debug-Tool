@@ -68,13 +68,12 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
 
             InitAllViewModels();
             Hook.Start();
+            Application.Current.MainWindow.Loaded += Load;
             Application.Current.Exit += Dispose;
         }
 
-
-
-        public async Task Load()
-        {
+        public async void Load(object sender, RoutedEventArgs e)
+    {
             Assembly assembly = Assembly.GetExecutingAssembly();
             FileVersionInfo? fileVersionInfo = FileVersionInfo.GetVersionInfo(assembly.Location);
             string? version = fileVersionInfo.FileVersion;
@@ -199,7 +198,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
 
         private void Hook_OnSetup(object? sender, PropertyHook.PHEventArgs e)
         {
-            System.Windows.Application.Current.Dispatcher.Invoke(() =>
+            Application.Current.Dispatcher.Invoke(() =>
             {
                 ID = Hook.ID;
             });

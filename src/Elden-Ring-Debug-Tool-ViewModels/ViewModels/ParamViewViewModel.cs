@@ -62,6 +62,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
                 if (_params.Count > 0)
                     SelectedParam = _params[0];
 
+                Setup = true;
             });
         }
 
@@ -74,7 +75,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
 
         public void UpdateViewModel()
         {
-            Setup = Hook.Setup;
+            //Setup = Hook.Setup;
         }
 
 
