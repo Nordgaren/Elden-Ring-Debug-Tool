@@ -137,7 +137,7 @@
                             <StackPanel>
                                 <StackPanel Orientation="Horizontal">
                                     <Label Content="Poison: "/>
-                                    <Label Content="{Binding TargetEnemy.Poison}"/>
+                                    <Label Content="{Binding TargetEnemy.Poison}" />
                                     <Label Content="/"/>
                                     <Label Content="{Binding TargetEnemy.PoisonMax}"/>
                                 </StackPanel>

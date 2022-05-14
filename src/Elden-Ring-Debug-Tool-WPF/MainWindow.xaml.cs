@@ -48,40 +48,18 @@ namespace Elden_Ring_Debug_Tool_WPF
             //DebugItems.UpdateCreateEnabled();
         }
 
-        private void Grid_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            if (e.ChangedButton == MouseButton.Left)
-            {
-                if (WindowState == WindowState.Maximized)
-                {
-                    WindowState = WindowState.Normal;
-                    double percentHorizontal = e.GetPosition(this).X / ActualWidth;
-                    double targetHorizontal = RestoreBounds.Width * percentHorizontal;
-
-                    double percentVertical = e.GetPosition(this).Y / ActualHeight;
-                    double targetVertical = RestoreBounds.Height * percentVertical;
-
-                    GetCursorPos(out POINT lMousePosition);
-                    Left = lMousePosition.X - targetHorizontal;
-                    Top = lMousePosition.Y - targetVertical;
-
-                }
-                DragMove();
-            }
-        }
-
         [DllImport("user32.dll")]
         [return: MarshalAs(UnmanagedType.Bool)]
-        static extern bool GetCursorPos(out POINT lpPoint);
+        static extern bool GetCursorPos(out Point lpPoint);
 
 
         [StructLayout(LayoutKind.Sequential)]
-        public struct POINT
+        public struct Point
         {
             public int X;
             public int Y;
 
-            public POINT(int x, int y)
+            public Point(int x, int y)
             {
                 this.X = x;
                 this.Y = y;
@@ -101,6 +79,34 @@ namespace Elden_Ring_Debug_Tool_WPF
         private void Maximize_Click(object sender, RoutedEventArgs e)
         {
             WindowState = WindowState == WindowState.Maximized ? WindowState.Normal : WindowState.Maximized;
+        }
+
+        private void UIElement_OnMouseMove(object sender, MouseEventArgs e)
+        {
+            if (e.LeftButton == MouseButtonState.Pressed)
+            {
+                if (WindowState == WindowState.Maximized)
+                {
+                    WindowState = WindowState.Normal;
+                    double percentHorizontal = e.GetPosition(this).X / ActualWidth;
+                    double targetHorizontal = RestoreBounds.Width * percentHorizontal;
+
+                    double percentVertical = e.GetPosition(this).Y / ActualHeight;
+                    double targetVertical = RestoreBounds.Height * percentVertical;
+
+                    GetCursorPos(out Point lMousePosition);
+                    Left = lMousePosition.X - targetHorizontal;
+                    Top = lMousePosition.Y - targetVertical;
+
+                }
+                DragMove();
+            }
+        }
+
+        private void UIElement_OnMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ClickCount == 2)
+                Maximize_Click(null, null);
         }
     }
 }

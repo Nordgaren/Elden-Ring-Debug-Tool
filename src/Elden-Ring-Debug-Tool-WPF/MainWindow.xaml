@@ -11,7 +11,7 @@
         xmlns:dock="https://github.com/Dirkster99/AvalonDock"
         mc:Ignorable="d"
         Title="Elden Ring Debug Tool" Height="600" Width="800" MinHeight="600" MinWidth="800" Icon="Icon.ico" Loaded="Window_Loaded" Closing="Window_Closing" Background="{StaticResource Background}" 
-        WindowStyle="None" ResizeMode="CanResizeWithGrip" AllowsTransparency="True" BorderThickness="7" MouseDoubleClick="Maximize_Click">
+        WindowStyle="None" ResizeMode="CanResizeWithGrip" AllowsTransparency="True" BorderThickness="7" >
 
     <Window.DataContext>
         <viewModel:MainWindowViewModel x:Name="MainWindowViewModel"/>
@@ -19,15 +19,25 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="15"/>
         </Grid.RowDefinitions>
         <StackPanel>
-            <Grid Height="25" MouseDown="Grid_MouseDown" Background="{StaticResource Background}">
+            <Grid Height="25" MouseMove="UIElement_OnMouseMove" MouseDown="UIElement_OnMouseDown" Background="{StaticResource Background}">
                 <StackPanel Orientation="Horizontal">
                     <Image Source="Icon.ico" Width="25"/>
                     <Label Content="{Binding WindowTitle}" Foreground="{StaticResource Foreground}"/>
+                    <Menu Background="{StaticResource Background}" Foreground="{StaticResource Foreground}" VerticalAlignment="Center">
+                        <MenuItem Header="Tools">
+                            <MenuItem Header="Params" IsChecked="{Binding IsVisible, ElementName=Params, Mode=TwoWay}" IsCheckable="True" />
+                            <MenuItem Header="Inventory" IsChecked="{Binding IsVisible, ElementName=Inventory, Mode=TwoWay}" IsCheckable="True" />
+                            <MenuItem Header="Target" IsChecked="{Binding IsVisible, ElementName=Target, Mode=TwoWay}" IsCheckable="True" />
+                            <MenuItem Header="Debug" IsChecked="{Binding IsVisible, ElementName=Debug, Mode=TwoWay}" IsCheckable="True" />
+                            <MenuItem Header="HotKey" IsChecked="{Binding IsVisible, ElementName=HotKey, Mode=TwoWay}" IsCheckable="True" />
+                            <MenuItem Header="Settings" IsChecked="{Binding IsVisible, ElementName=Settings, Mode=TwoWay}" IsCheckable="True" />
+                        </MenuItem>
+
+                    </Menu>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" 
                         Grid.Column="11"
@@ -63,13 +73,9 @@
                         Click="MainWindowClose_Click"
                         BorderThickness="0"/>
                 </StackPanel>
+
             </Grid>
-            <Menu Grid.Row="1" Background="Gray" Foreground="White">
-                <MenuItem Header="File">
 
-                </MenuItem>
-
-            </Menu>
             <!--<Grid Height="95" VerticalAlignment="Top">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
@@ -124,19 +130,19 @@
             <!--</Grid>-->
         </StackPanel>
 
-        <StackPanel Grid.Row="3" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center">
+        <StackPanel Grid.Row="2" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center">
             <StackPanel Orientation="Horizontal">
                 <Label Content="Process:" FontWeight="ExtraBlack"/>
                 <Label Content="{Binding ID}" FontWeight="ExtraBlack" Foreground="{Binding ForegroundId}"/>
             </StackPanel>
         </StackPanel >
-        <StackPanel Grid.Row="3" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center">
+        <StackPanel Grid.Row="2" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center">
             <StackPanel Orientation="Horizontal">
                 <Label Content="Loaded:" FontWeight="ExtraBlack"/>
                 <Label Content="{Binding ContentLoaded}" FontWeight="ExtraBlack" Foreground="{Binding ForegroundLoaded}"/>
             </StackPanel>
         </StackPanel >
-        <StackPanel Grid.Row="3" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,15,0">
+        <StackPanel Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,15,0">
             <Label >
                 <Hyperlink Command="{Binding OpenGitHubCommand}" IsEnabled="{Binding UpdateRequired}">
                     <TextBlock Style="{DynamicResource HyperlinkStyle}" Text="{Binding UpdateInfo}" FontWeight="ExtraBlack"/>
@@ -144,39 +150,46 @@
             </Label>
         </StackPanel>
 
-        <dock:DockingManager Grid.Row="2" x:Name="DockingManager" AllowMixedOrientation="True" >
+        <dock:DockingManager Grid.Row="1" x:Name="DockingManager" AllowMixedOrientation="True" >
             <DockingManager.Theme>
                 <Vs2013DarkTheme></Vs2013DarkTheme>
             </DockingManager.Theme>
             <dock:LayoutRoot>
                 <dock:LayoutPanel Orientation="Horizontal">
                     <dock:LayoutAnchorablePane>
-                        <dock:LayoutAnchorable ContentId="Params" Title="Params" CanClose="True" CanHide="True" CanDockAsTabbedDocument="True">
+                        <dock:LayoutAnchorable ContentId="Params" Title="Params" CanHide="True" CanClose="False" x:Name="Params" CanDockAsTabbedDocument="False">
                             <view:ParamView
                                 DataContext="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.ParamViewViewModel}" />
 
                         </dock:LayoutAnchorable>
 
-                        <dock:LayoutAnchorable ContentId="Inventory" Title="Inventory" CanClose="True" CanHide="True">
-                            <StackPanel Orientation="Horizontal">
-                                <view:ItemGibView
+                        <dock:LayoutAnchorable ContentId="Inventory" Title="Inventory" CanHide="True" CanClose="False" x:Name="Inventory" CanDockAsTabbedDocument="False">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <view:ItemGibView Grid.Column="0"
                                     DataContext="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.ItemGibViewViewModel}"/>
                                 <view:InventoryView Grid.Column="1"
                                                     DataContext="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.InventoryViewViewModel}"/>
-                            </StackPanel>
+
+                            </Grid>
                         </dock:LayoutAnchorable>
 
-                        <dock:LayoutAnchorable ContentId="Target" Title="Target" CanClose="True" CanHide="True">
+                        <dock:LayoutAnchorable ContentId="Target" Title="Target" CanHide="True" CanClose="False" x:Name="Target" CanDockAsTabbedDocument="False">
                             <view:TargetView DataContext="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.TargetViewViewModel}" />
                         </dock:LayoutAnchorable>
-                        <dock:LayoutAnchorable ContentId="HotKey" Title="HotKey" CanClose="True" CanHide="True">
+
+                        <dock:LayoutAnchorable ContentId="HotKey" Title="HotKey" CanHide="True" CanClose="False" x:Name="HotKey" CanDockAsTabbedDocument="False">
                             <view:HotKeyView DataContext="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.HotKeyViewViewModel}"/>
                         </dock:LayoutAnchorable>
 
-                        <dock:LayoutAnchorable ContentId="Debug" Title="Debug" CanClose="True" CanHide="True">
+                        <dock:LayoutAnchorable ContentId="Debug" Title="Debug" CanHide="True" CanClose="False" x:Name="Debug" CanDockAsTabbedDocument="False">
                             <view:DebugView DataContext="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.DebugViewViewModel}"/>
                         </dock:LayoutAnchorable>
-                        <dock:LayoutAnchorable ContentId="Settings" Title="Settings" CanClose="True" CanHide="True">
+
+                        <dock:LayoutAnchorable ContentId="Settings" Title="Settings" CanHide="True" CanClose="False" x:Name="Settings" CanDockAsTabbedDocument="False">
                             <view:SettingsView DataContext="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.SettingsViewViewModel}"/>
                         </dock:LayoutAnchorable>
                     </dock:LayoutAnchorablePane>
