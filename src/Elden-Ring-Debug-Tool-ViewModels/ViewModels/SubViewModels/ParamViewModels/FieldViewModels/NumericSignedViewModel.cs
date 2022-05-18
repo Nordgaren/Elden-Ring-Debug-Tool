@@ -72,7 +72,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels
                     MaxValue = int.MaxValue;
                     break;
                 default:
-                    break;
+                    throw new Exception("Signed 'Type' not found Exception");
             }
 
             paramViewerViewModel.PropertyChanged += ParamViewerViewModel_PropertyChanged;

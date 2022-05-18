@@ -56,12 +56,13 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels
             }
         }
 
-        public NumericViewModel(ParamViewViewModel paramViewerViewModel, NumericField numericFfield) : base(paramViewerViewModel, numericFfield)
+        public NumericViewModel(ParamViewViewModel paramViewerViewModel, NumericField numericField) : base(paramViewerViewModel, numericField)
         {
-            _numericField = numericFfield;
+            _numericField = numericField;
             switch (Type)
             {
                 case "u8":
+                case "dummy8":
                     MinValue = byte.MinValue;
                     MaxValue = byte.MaxValue;
                     break;
@@ -74,7 +75,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels
                     MaxValue = uint.MaxValue;
                     break;
                 default:
-                    break;
+                    throw new Exception("Unsigned 'Type' not found Exception");
             }
 
             paramViewerViewModel.PropertyChanged += ParamViewerViewModel_PropertyChanged;

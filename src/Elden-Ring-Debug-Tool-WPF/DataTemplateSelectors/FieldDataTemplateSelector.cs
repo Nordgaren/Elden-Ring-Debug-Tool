@@ -18,7 +18,7 @@ namespace Elden_Ring_Debug_Tool_WPF.DataTemplateSelectors
 
         public override DataTemplate SelectTemplate(object item, DependencyObject container)
         {
-            FieldViewModel fieldViewModel = (FieldViewModel)item; 
+            FieldViewModel fieldViewModel = (FieldViewModel)item;
             if (fieldViewModel is NumericSignedViewModel<sbyte>)
                 return NumericSigned8;
 
@@ -40,13 +40,16 @@ namespace Elden_Ring_Debug_Tool_WPF.DataTemplateSelectors
             if (fieldViewModel is SingleFieldViewModel)
                 return SingleField;
 
-            if (fieldViewModel is BitFieldViewModel)
+            if (fieldViewModel is PartialNumericViewModel)
+                return NumericUnsigned8;
+
+            if (fieldViewModel is BitFieldViewModel) 
                 return BitField;
 
             if (fieldViewModel is FixedStrViewModel)
                 return FixedStr;
 
-            throw new System.Exception($"No Template Avalable {item}");
+            throw new System.Exception($"No Template Found for {item}");
         }
     }
 }

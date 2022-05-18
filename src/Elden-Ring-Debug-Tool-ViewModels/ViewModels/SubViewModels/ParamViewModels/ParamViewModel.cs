@@ -74,6 +74,9 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels
 
             if (field is BitField bitField)
             {
+                if (bitField is PartialNumericField partialNumericField)
+                    return new PartialNumericViewModel(ParamViewerViewModel, partialNumericField);
+
                 return new BitFieldViewModel(ParamViewerViewModel, bitField);
             }
 

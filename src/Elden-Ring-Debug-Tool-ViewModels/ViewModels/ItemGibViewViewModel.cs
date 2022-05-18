@@ -263,6 +263,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
             {
                 SetField(ref _searchAll, value);
                 OnPropertyChanged(nameof(ItemsCollectionView));
+                ItemsCollectionView.Filter = FilerItems;
             }
         }
 
