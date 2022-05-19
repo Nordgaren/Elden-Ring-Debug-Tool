@@ -17,7 +17,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels
         public ObservableCollection<RowViewModel> Rows { get; }
         public ObservableCollection<FieldViewModel> Fields { get; }
         public Dictionary<int, string> NameDictionary => Param.NameDictionary;
-        public Dictionary<int, int> OffsetDict  => Param.OffsetDict;
+        public Dictionary<int, int> OffsetDict => Param.OffsetDict;
         public int RowLength => Param.RowLength;
 
         public ParamViewModel(ParamViewViewModel paramViewerViewModel, Param param)
@@ -48,15 +48,15 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels
                         return new NumericSignedViewModel<sbyte>(ParamViewerViewModel, numField);
                     case PARAMDEF.DefType.dummy8:
                     case PARAMDEF.DefType.u8:
-                         return new NumericViewModel<byte>(ParamViewerViewModel, numField);
+                        return new NumericViewModel<byte>(ParamViewerViewModel, numField);
                     case PARAMDEF.DefType.s16:
                         return new NumericSignedViewModel<short>(ParamViewerViewModel, numField);
                     case PARAMDEF.DefType.u16:
-                         return new NumericViewModel<ushort>(ParamViewerViewModel, numField);
+                        return new NumericViewModel<ushort>(ParamViewerViewModel, numField);
                     case PARAMDEF.DefType.s32:
                         return new NumericSignedViewModel<int>(ParamViewerViewModel, numField);
                     case PARAMDEF.DefType.u32:
-                         return new NumericViewModel<uint>(ParamViewerViewModel, numField);
+                        return new NumericViewModel<uint>(ParamViewerViewModel, numField);
                     default:
                         throw new Exception($"No view model found for NumericField {field.InternalName}");
                 }
@@ -72,11 +72,23 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels
                 return new FixedStrViewModel(ParamViewerViewModel, fixedStr);
             }
 
+            if (field is PartialByteField partialByteField)
+            {
+                return new PartialByteViewModel(ParamViewerViewModel, partialByteField);
+            }
+
+            if (field is PartialUShortField partialUShortField)
+            {
+                return new PartialUShortViewModel(ParamViewerViewModel, partialUShortField);
+            }
+
+            if (field is PartialUIntField partialUIntField)
+            {
+                return new PartialUintViewModel(ParamViewerViewModel, partialUIntField);
+            }
+
             if (field is BitField bitField)
             {
-                if (bitField is PartialNumericField partialNumericField)
-                    return new PartialNumericViewModel(ParamViewerViewModel, partialNumericField);
-
                 return new BitFieldViewModel(ParamViewerViewModel, bitField);
             }
 

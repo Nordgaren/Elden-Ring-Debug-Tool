@@ -40,7 +40,7 @@ namespace Elden_Ring_Debug_Tool_WPF.DataTemplateSelectors
             if (fieldViewModel is SingleFieldViewModel)
                 return SingleField;
 
-            if (fieldViewModel is PartialNumericViewModel)
+            if (fieldViewModel is PartialByteViewModel)
                 return NumericUnsigned8;
 
             if (fieldViewModel is BitFieldViewModel) 
