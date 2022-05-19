@@ -28,20 +28,17 @@ namespace Elden_Ring_Debug_Tool_WPF.DataTemplateSelectors
             if (fieldViewModel is NumericSignedViewModel<int>)
                 return NumericSigned32;
 
-            if (fieldViewModel is NumericViewModel<byte>)
+            if (fieldViewModel is NumericViewModel<byte> or PartialByteViewModel)
                 return NumericUnsigned8;
 
-            if (fieldViewModel is NumericViewModel<ushort>)
+            if (fieldViewModel is NumericViewModel<ushort> or PartialUShortViewModel)
                 return NumericUnsigned16;
 
-            if (fieldViewModel is NumericViewModel<uint>)
+            if (fieldViewModel is NumericViewModel<uint> or PartialUintViewModel)
                 return NumericUnsigned32;
 
             if (fieldViewModel is SingleFieldViewModel)
                 return SingleField;
-
-            if (fieldViewModel is PartialByteViewModel)
-                return NumericUnsigned8;
 
             if (fieldViewModel is BitFieldViewModel) 
                 return BitField;

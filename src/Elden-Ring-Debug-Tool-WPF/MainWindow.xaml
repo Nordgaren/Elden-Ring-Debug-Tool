@@ -40,10 +40,8 @@
                     </Menu>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" 
-                        Grid.Column="11"
-                        HorizontalAlignment="Right"
-                            Grid.ColumnSpan="2">
-                    <Button x:Name="Minimize"
+                        HorizontalAlignment="Right">
+                    <Button
                         Content="➖"
                         VerticalAlignment="Center"
                         Width="20"
@@ -54,7 +52,7 @@
                         Click="Minimize_Click"
                         BorderThickness="0"/>
 
-                    <Button x:Name="Maximize"
+                    <Button
                         Content="☐"
                         VerticalAlignment="Center"
                         Width="20"
@@ -64,7 +62,7 @@
                         Foreground="White"
                         Click="Maximize_Click"
                         BorderThickness="0"/>
-                    <Button x:Name="btnClose"
+                    <Button
                         Content="❌"
                         Width="20"
                         Height="20"
@@ -75,59 +73,6 @@
                 </StackPanel>
 
             </Grid>
-
-            <!--<Grid Height="95" VerticalAlignment="Top">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
-                <StackPanel Grid.Row="0" Grid.Column="0" HorizontalAlignment="Left">
-                    <StackPanel Orientation="Horizontal">
-                        <Label Content="Process:" />
-                        <Label Content="{Binding ID}" Foreground="{Binding ForegroundID}"/>
-                    </StackPanel>
-                </StackPanel >
-                <StackPanel Grid.Row="1" Grid.Column="0" HorizontalAlignment="Left">
-                    <StackPanel Orientation="Horizontal">
-                        <Label Content="Loaded:" />
-                        <Label Name="lblLoaded" Content="{Binding ContentLoaded}" Margin="1,0,0,0" Foreground="{Binding ForegroundLoaded}"/>
-                    </StackPanel>
-                </StackPanel >
-                -->
-            <!--<StackPanel Grid.Row="2" Grid.Column="0"  HorizontalAlignment="Left">
-                    <StackPanel Orientation="Horizontal">
-                        <Label Content="Online:" />
-                        <Label Content="{Binding ContentOnline}" Margin="5,0,0,0" Foreground="{Binding ForegroundOnline}"/>
-                    </StackPanel>
-                </StackPanel >-->
-            <!--<StackPanel Grid.Row="1" Grid.Column="1"  HorizontalAlignment="Right">
-                    <StackPanel Orientation="Horizontal" Width="175">
-                        <Label Content="Version:" />
-                        <Label Content="{Binding Hook.Version}" Foreground="{Binding ForegroundVersion}" x:Name="VersionText" Margin="5,0,0,0" />
-                    </StackPanel>
-                </StackPanel >-->
-            <!--
-                <StackPanel Grid.Column="1" HorizontalAlignment="Right" Grid.ColumnSpan="3" >
-                    <Grid >
-                        <Label x:Name="labelCheckVersion" />
-                        <StackPanel Grid.Column="1" Grid.Row="0" >
-                            <Label x:Name="llbNewVersion" Visibility="Hidden">
-                                <Hyperlink x:Name="link" >
-                                    New version available!
-                                </Hyperlink>
-                            </Label>
-                        </StackPanel>
-
-                    </Grid>
-                </StackPanel>
-            -->
-            <!--</Grid>-->
         </StackPanel>
 
         <StackPanel Grid.Row="2" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center">
@@ -159,7 +104,7 @@
                     <dock:LayoutAnchorablePane>
                         <dock:LayoutAnchorable ContentId="Params" Title="Params" CanHide="True" CanClose="False" x:Name="Params" CanDockAsTabbedDocument="False">
                             <view:ParamView
-                                DataContext="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.ParamViewViewModel}" />
+                                DataContext="{Binding DataContext.ParamViewViewModel,RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}" />
 
                         </dock:LayoutAnchorable>
 
@@ -170,27 +115,27 @@
                                     <ColumnDefinition/>
                                 </Grid.ColumnDefinitions>
                                 <view:ItemGibView Grid.Column="0"
-                                    DataContext="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.ItemGibViewViewModel}"/>
+                                    DataContext="{Binding DataContext.ItemGibViewViewModel, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}"/>
                                 <view:InventoryView Grid.Column="1"
-                                                    DataContext="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.InventoryViewViewModel}"/>
+                                                    DataContext="{Binding DataContext.InventoryViewViewModel,RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}"/>
 
                             </Grid>
                         </dock:LayoutAnchorable>
 
                         <dock:LayoutAnchorable ContentId="Target" Title="Target" CanHide="True" CanClose="False" x:Name="Target" CanDockAsTabbedDocument="False">
-                            <view:TargetView DataContext="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.TargetViewViewModel}" />
+                            <view:TargetView DataContext="{Binding DataContext.TargetViewViewModel, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}" />
                         </dock:LayoutAnchorable>
 
                         <dock:LayoutAnchorable ContentId="HotKey" Title="HotKey" CanHide="True" CanClose="False" x:Name="HotKey" CanDockAsTabbedDocument="False">
-                            <view:HotKeyView DataContext="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.HotKeyViewViewModel}"/>
+                            <view:HotKeyView DataContext="{Binding DataContext.HotKeyViewViewModel,RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}"/>
                         </dock:LayoutAnchorable>
 
                         <dock:LayoutAnchorable ContentId="Debug" Title="Debug" CanHide="True" CanClose="False" x:Name="Debug" CanDockAsTabbedDocument="False">
-                            <view:DebugView DataContext="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.DebugViewViewModel}"/>
+                            <view:DebugView DataContext="{Binding DataContext.DebugViewViewModel,RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}"/>
                         </dock:LayoutAnchorable>
 
                         <dock:LayoutAnchorable ContentId="Settings" Title="Settings" CanHide="True" CanClose="False" x:Name="Settings" CanDockAsTabbedDocument="False">
-                            <view:SettingsView DataContext="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.SettingsViewViewModel}"/>
+                            <view:SettingsView DataContext="{Binding DataContext.SettingsViewViewModel,RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}"/>
                         </dock:LayoutAnchorable>
                     </dock:LayoutAnchorablePane>
 
@@ -198,48 +143,5 @@
             </dock:LayoutRoot>
         </dock:DockingManager>
 
-
-
-        <!--<TabControl Background="LightGray" Grid.Row="2" Margin="0,0,0,0">
-            <TabItem Header="Params">
-                <Grid Background="LightGray">
-                    <view:ParamViewerView
-                    DataContext="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type TabControl}}, Path=DataContext.ParamViewViewModel}" />
-                </Grid>
-            </TabItem>
-            <TabItem Header="Inventory">
-                <Grid Background="LightGray">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                    </Grid.ColumnDefinitions>
-                    <view:ItemGibView
-                    DataContext="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type TabControl}}, Path=DataContext.ItemGibViewViewModel}"/>
-                    <view:InventoryView Grid.Column="1"
-                    DataContext="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type TabControl}}, Path=DataContext.InventoryViewViewModel}"/>
-                </Grid>
-            </TabItem>
-            <TabItem Header="Target">
-                <Grid Background="LightGray">
-                    <view:TargetView DataContext="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type TabControl}}, Path=DataContext.TargetViewViewModel}" />
-                </Grid>
-            </TabItem>
-            <TabItem Header="HotKey">
-                <Grid Background="LightGray">
-                    <view:HotKeyView DataContext="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type TabControl}}, Path=DataContext.HotKeyViewViewModel}"/>
-                </Grid>
-            </TabItem>
-            <TabItem Header="Debug">
-                <Grid Background="LightGray">
-                    <view:DebugView DataContext="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type TabControl}}, Path=DataContext.DebugViewViewModel}"/>
-                </Grid>
-            </TabItem>
-            <TabItem Header="Settings">
-                <Grid Background="LightGray">
-                    <view:SettingsView DataContext="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type TabControl}}, Path=DataContext.SettingsViewViewModel}"/>
-                </Grid>
-            </TabItem>
-
-        </TabControl>-->
     </Grid>
 </Window>

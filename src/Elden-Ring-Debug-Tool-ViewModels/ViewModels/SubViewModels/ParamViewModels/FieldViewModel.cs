@@ -16,13 +16,14 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels
         public virtual object MinValue { get; }
         public virtual object MaxValue { get; }
         public int Offset => ParamViewerViewModel.SelectedRow?.DataOffset + FieldOffset ?? 0;
-        public object? Increment => GetIncrement();
+        public object Increment { get; }
         public int FieldOffset => _field.FieldOffset;
 
         public FieldViewModel(ParamViewViewModel paramViewerViewModel, Param.Field field)
         {
             ParamViewerViewModel = paramViewerViewModel;
             _field = field;
+            Increment = GetIncrement();
             //Type = Enum.GetName(_field.Type) ?? "null";
         }
 
@@ -46,7 +47,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels
             }
         }
 
-        public object? GetIncrement()
+        public object GetIncrement()
         {
 
             if (_field.Increment == null)
@@ -57,21 +58,21 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels
             switch (Type)
             {
                 case "s8":
-                    return inc as sbyte?;
+                    return Convert.ToSByte(inc);
                 case "u8":
-                    return inc as byte?;
+                    return Convert.ToByte(inc);
                 case "dummy8":
-                    return inc as byte?;
+                    return Convert.ToByte(inc);
                 case "s16":
-                    return inc as short?;
+                    return Convert.ToInt16(inc);
                 case "u16":
-                    return inc as ushort?;
+                    return Convert.ToUInt16(inc);
                 case "s32":
-                    return inc as int?;
+                    return Convert.ToInt32(inc);
                 case "u32":
-                    return inc as uint?;
+                    return Convert.ToUInt32(inc);
                 case "f32":
-                    return inc as float?;
+                    return Convert.ToSingle(inc);
                 default:
                     throw new Exception($"Invalid size for field {InternalName}");
             }

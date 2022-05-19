@@ -7,7 +7,8 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels
     {
         private PartialUShortField _partialUShortField { get; }
         public override object MinValue { get; }
-        public override object MaxValue { get; }
+        private ushort _maxValue { get; }
+        public override object MaxValue => _maxValue;
         public override string StringValue => Value?.ToString() ?? "null";
         private int _bitPosition  => _partialUShortField.BitPosition;
         private int _width  => _partialUShortField.Width;
@@ -19,7 +20,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels
                 if (ParamViewerViewModel.SelectedRow == null)
                     return null;
 
-                ushort val = Param.Bytes[Offset];
+                ushort val = BitConverter.ToUInt16(Param.Bytes, Offset);
                 val <<= (_typeSize - _width - _bitPosition);
                 val >>= 8 - _width;
                 return val;
@@ -35,7 +36,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels
                     return;
                 }
 
-                ushort mask = (ushort)((int)MaxValue << _bitPosition);
+                ushort mask = (ushort)(_maxValue << _bitPosition);
                 ushort oldVal = Param.Bytes[Offset];
                 ushort val = (ushort)(oldVal & ~mask);
                 val |= (ushort)(value.Value << _bitPosition);
@@ -48,7 +49,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels
         public PartialUShortViewModel(ParamViewViewModel paramViewerViewModel, PartialUShortField partialUShortField) : base(paramViewerViewModel, partialUShortField)
         {
             _partialUShortField = partialUShortField;
-            MaxValue = (byte)(1 << _width) - 1;
+            _maxValue = (ushort)((1 << _width) - 1);
             MinValue = byte.MinValue;
             paramViewerViewModel.PropertyChanged += ParamViewerViewModel_PropertyChanged;
         }

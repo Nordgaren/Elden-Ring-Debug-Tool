@@ -7,7 +7,8 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels
     {
         private PartialByteField _partialByteField { get; }
         public override object MinValue { get; }
-        public override object MaxValue { get; }
+        private byte _maxValue { get; }
+        public override object MaxValue => _maxValue;
         public override string StringValue => Value?.ToString() ?? "null";
         private int _bitPosition  => _partialByteField.BitPosition;
         private int _width  => _partialByteField.Width;
@@ -35,7 +36,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels
                     return;
                 }
 
-                byte mask = (byte)((int)MaxValue << _bitPosition);
+                byte mask = (byte)((uint)_maxValue << _bitPosition);
                 byte oldVal = Param.Bytes[Offset];
                 byte val = (byte)(oldVal & ~mask);
                 val |= (byte)(value.Value << _bitPosition);
@@ -47,7 +48,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels
         public PartialByteViewModel(ParamViewViewModel paramViewerViewModel, PartialByteField partialByteField) : base(paramViewerViewModel, partialByteField)
         {
             _partialByteField = partialByteField;
-            MaxValue = (byte)(1 << _width) - 1;
+            _maxValue = (byte)((1 << _width) - 1);
             MinValue = byte.MinValue;
             paramViewerViewModel.PropertyChanged += ParamViewerViewModel_PropertyChanged;
         }
