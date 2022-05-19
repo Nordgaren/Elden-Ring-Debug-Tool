@@ -50,6 +50,14 @@ Backup your saves before using this tool, and restore the backups before going o
 # Change Log 
 ### Beta 0.8
 
+* Continued re-coloring things.  
+
+* Added each tab as it's own dockable pane that can be stacked like regular tabs, or put side by side. They can also be showns and hidden.  
+
+* Fields now all have proper increment/decrement controls.  
+
+* Fields that are multi-bit wide now work, for instance Bullet -> FollowType is now a 3 bit wide number, with a max of 7, instead of just a checkbox.  
+
 * Fixed null values showing as 0  
 
 * Fixed tooltips disappearing when user has scalled UI in Windows settings  

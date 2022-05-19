@@ -10,6 +10,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels
         private uint _maxValue { get; }
         public override object MaxValue => _maxValue;
         public override string StringValue => Value?.ToString() ?? "null";
+        public override string InternalName => $"{_partialUIntField.InternalName} ({_maxValue})";
         private int _bitPosition  => _partialUIntField.BitPosition;
         private int _width  => _partialUIntField.Width;
         private int _typeSize => GetSize() * 8;

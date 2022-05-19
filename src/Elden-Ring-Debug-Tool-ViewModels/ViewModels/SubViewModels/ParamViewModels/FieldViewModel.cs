@@ -9,7 +9,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels
         protected Param Param => ParamViewerViewModel.SelectedParam.Param;
         public virtual string StringValue => throw new NotImplementedException("String Value not implemented for abstract base class");
         public string Type => _field.Type.ToString();
-        public string InternalName => _field.InternalName;
+        public virtual string InternalName => _field.InternalName;
         public string DisplayName => _field.DisplayName;
         public string Description => _field.Description;
         public int ArrayLength => _field.ArrayLength;

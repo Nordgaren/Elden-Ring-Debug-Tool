@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows;
+using System.Windows.Input;
 using Elden_Ring_Debug_Tool_ViewModels.ViewModels;
 
 namespace Elden_Ring_Debug_Tool_WPF.Windows
@@ -23,6 +24,14 @@ namespace Elden_Ring_Debug_Tool_WPF.Windows
                 throw new NullReferenceException($"Do Not Show ComboBox should not be null");
 
             _mainWindowViewModel.ShowWarning = !cbxDoNotShow.IsChecked.Value;
+        }
+
+        private void UIElement_OnMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.LeftButton == MouseButtonState.Pressed)
+            {
+                DragMove();
+            }
         }
     }
 }

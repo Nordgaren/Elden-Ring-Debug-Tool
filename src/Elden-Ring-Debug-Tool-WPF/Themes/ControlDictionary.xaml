@@ -20,7 +20,6 @@
         <Setter Property="TextWrapping" Value="NoWrap"/>
         <Setter Property="TextTrimming" Value="None"/>
     </Style>
-
     <Style TargetType="{x:Type ToolTip}">
         <Setter Property="Background" Value="{StaticResource BackgroundMouseOver}"/>
     </Style>
