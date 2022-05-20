@@ -17,7 +17,7 @@ namespace Elden_Ring_Debug_Tool_WPF
         {
             string[] args = Environment.GetCommandLineArgs();
 #if DEBUG
-            //args = new[] { "", @"G:\Steam\steamapps\common\ELDEN RING 1.03.3\Game\regulation.bin.bnd" };
+            //args = new[] { "", @"path\to\debug\file" };
 #endif
             if (args.Length > 1)
                 ProcessRegulationAndExit(args);

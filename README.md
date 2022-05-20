@@ -60,7 +60,7 @@ Backup your saves before using this tool, and restore the backups before going o
 
 * Fixed null values showing as 0  
 
-* Fixed tooltips disappearing when user has scalled UI in Windows settings  
+* Fixed tooltips disappearing when user has scalled UI in Windows settings   (.Net 6 Update may be required)  
 
 ### Beta 0.7.2
 
