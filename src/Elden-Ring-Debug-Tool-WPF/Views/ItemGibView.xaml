@@ -59,7 +59,7 @@
                 <Separator Height="25" Visibility="Hidden"/>
                 <CheckBox IsChecked="{Binding Max}" Content="Max" Margin="0,2,0,0"/>
                 <Separator Height="5" Visibility="Hidden"/>
-                <Button Content="Create" Command="{Binding GibItemCommand}"/>
+                <Button Content="Create" Command="{Binding GibItemCommand}" CommandParameter="{Binding ElementName=ItemsListBox, Path=SelectedItems}"/>
             </StackPanel>
 
 
@@ -73,7 +73,7 @@
                       IsEnabled="{Binding GemCollectionView.IsEmpty, Converter={StaticResource InverseBoolConverter}}"
                       Grid.Row="0" Margin="40,0,0,0" />
             <Label Content="Ash" Width="50" HorizontalAlignment="Left" Grid.Row="0"/>
-            <ListBox ItemsSource="{Binding ItemsCollectionView}" SelectedValue="{Binding SelectedItem}"
+            <ListBox Name="ItemsListBox" ItemsSource="{Binding ItemsCollectionView}" SelectedValue="{Binding SelectedItem}" SelectionMode="Extended"
                     Grid.Row="1" ItemContainerStyle="{DynamicResource _ListBoxItemStyle}" />
         </Grid>
 

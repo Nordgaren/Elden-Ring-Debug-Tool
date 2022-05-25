@@ -158,6 +158,14 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
             set => SetField(ref _upgradeLevel, value);
         }
 
+        private List<ItemViewModel>? _selectedItems;
+
+        public List<ItemViewModel>? SelectedItems
+        {
+            get => _selectedItems;
+            set => SetField(ref _selectedItems, value);
+        }
+
         private ItemViewModel? _selectedItem;
         public ItemViewModel? SelectedItem
         {

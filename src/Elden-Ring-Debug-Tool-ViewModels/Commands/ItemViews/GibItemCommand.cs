@@ -1,6 +1,10 @@
-﻿using Elden_Ring_Debug_Tool_ViewModels.ViewModels;
+﻿using System.Collections;
+using Elden_Ring_Debug_Tool_ViewModels.ViewModels;
 using Erd_Tools;
 using System.ComponentModel;
+using System.Windows.Controls;
+using Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels;
+using Erd_Tools.Models;
 
 namespace Elden_Ring_Debug_Tool_ViewModels.Commands
 {
@@ -34,15 +38,26 @@ namespace Elden_Ring_Debug_Tool_ViewModels.Commands
             if (_itemGibViewModel.SelectedItem == null)
                 throw new NullReferenceException("Selected Item cannot be null when trying to spawn items.");
 
-            int? id = _itemGibViewModel.SelectedItem.ID;
-            id += (int)_itemGibViewModel.SelectedItem.ItemCategory;
+            if (!(parameter is IList iList))
+                return;
 
-            int quantity = _itemGibViewModel.Quantity;
-            int infusion = _itemGibViewModel.SelectedInfusion.HasValue ? (int)_itemGibViewModel.SelectedInfusion : 0;
-            int upgrade = _itemGibViewModel.UpgradeLevel;
-            int gem = _itemGibViewModel.SelectedGem?.ID ?? -1;
+            foreach (ItemViewModel itemViewModel in iList)
+            {
+                int? id = itemViewModel.ID;
+                id += (int)itemViewModel.ItemCategory;
 
-            _hook.GetItem(id.Value, quantity, infusion, upgrade, gem);
+                int quantity = _itemGibViewModel.Quantity;
+                int infusion = _itemGibViewModel.SelectedInfusion.HasValue ? (int)_itemGibViewModel.SelectedInfusion : 0;
+                int upgrade = _itemGibViewModel.UpgradeLevel;
+                int gem = _itemGibViewModel.SelectedGem?.ID ?? -1;
+
+                _hook.GetItem(id.Value, quantity, infusion, upgrade, gem);
+
+                if (itemViewModel.EventID != null)
+                    _hook.SetEventFlag(itemViewModel.EventID);
+
+            }
+
         }
 
         private void ViewModel_PropertyChanged(object? sender, PropertyChangedEventArgs e)
