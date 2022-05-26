@@ -18,7 +18,8 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels
         public bool IsDrop => _item.IsDrop;
         public bool IsMultiplayerShare => _item.IsMultiplayerShare;
         public bool CanAquireFromOtherPlayers => IsDrop && IsMultiplayerShare;
-        public static ObservableCollection<ItemViewModel> All = new ObservableCollection<ItemViewModel>();
+        public static ObservableCollection<ItemViewModel> All = new();
+        public int MaxUpgrade => _item is Weapon weapon ? weapon.MaxUpgrade : 0; 
 
         public ItemViewModel(Item item)
         {

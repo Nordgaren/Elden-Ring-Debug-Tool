@@ -27,8 +27,8 @@ namespace Elden_Ring_Debug_Tool_ViewModels.Commands
             if (_itemGibViewModel.SelectedItem == null)
                 return false;
 
-            return (_hook?.Setup ?? false) 
-                && _hook.Loaded 
+            return (_hook?.Setup ?? false)
+                && _hook.Loaded
                 && (_itemGibViewModel.SelectedItem.CanAquireFromOtherPlayers || _itemGibViewModel.SettingsViewViewModel.SpawnUntradeable)
                 && base.CanExecute(parameter);
         }
@@ -41,30 +41,60 @@ namespace Elden_Ring_Debug_Tool_ViewModels.Commands
             if (!(parameter is IList iList))
                 return;
 
+            if (iList.Count > 1)
+                SpawnMultiItem(iList);
+            else
+                SpawnSingleItem(iList[0] as ItemViewModel);
+
+        }
+
+        private void SpawnSingleItem(ItemViewModel? itemViewModel)
+        {
+            if (itemViewModel == null)
+                throw new ArgumentNullException(nameof(itemViewModel));
+
+            int? id = itemViewModel.ID;
+            id += (int)itemViewModel.ItemCategory;
+
+            int quantity = _itemGibViewModel.Quantity;
+            int infusion = _itemGibViewModel.SelectedInfusion.HasValue ? (int)_itemGibViewModel.SelectedInfusion : 0;
+            int upgrade = _itemGibViewModel.UpgradeLevel;
+
+            int gem = _itemGibViewModel.SelectedGem?.ID ?? -1;
+
+            _hook.GetItem(id.Value, quantity, infusion, upgrade, gem);
+
+            if (itemViewModel.EventID != -1)
+                _hook.SetEventFlag(itemViewModel.EventID);
+        }
+
+        private void SpawnMultiItem(IEnumerable iList)
+        {
             foreach (ItemViewModel itemViewModel in iList)
             {
                 int? id = itemViewModel.ID;
                 id += (int)itemViewModel.ItemCategory;
 
-                int quantity = _itemGibViewModel.Quantity;
+                int quantity = _itemGibViewModel.Max ? itemViewModel.MaxQuantity : _itemGibViewModel.Quantity;
                 int infusion = _itemGibViewModel.SelectedInfusion.HasValue ? (int)_itemGibViewModel.SelectedInfusion : 0;
-                int upgrade = _itemGibViewModel.UpgradeLevel;
+
+
+                int upgrade = _itemGibViewModel.Max ? itemViewModel.MaxUpgrade : _itemGibViewModel.UpgradeLevel;
+
                 int gem = _itemGibViewModel.SelectedGem?.ID ?? -1;
 
                 _hook.GetItem(id.Value, quantity, infusion, upgrade, gem);
 
-                if (itemViewModel.EventID != null)
+                if (itemViewModel.EventID != -1)
                     _hook.SetEventFlag(itemViewModel.EventID);
-
             }
-
         }
 
         private void ViewModel_PropertyChanged(object? sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName is nameof(ItemGibViewViewModel.SelectedItem) 
-                or nameof(ItemGibViewViewModel.Setup) 
-                or nameof(ItemGibViewViewModel.Loaded) 
+            if (e.PropertyName is nameof(ItemGibViewViewModel.SelectedItem)
+                or nameof(ItemGibViewViewModel.Setup)
+                or nameof(ItemGibViewViewModel.Loaded)
                 or nameof(SettingsViewViewModel.SpawnUntradeable))
             {
                 OnCanExecuteChanged();
