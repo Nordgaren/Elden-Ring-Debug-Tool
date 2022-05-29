@@ -16,7 +16,7 @@ Backup your saves before using this tool, and restore the backups before going o
 * [Visual C++ Redistributable x64 Packages for Visual Studio 2013](https://www.microsoft.com/en-gb/download/details.aspx?id=40784)
 
 ## Seamless Coop Support  
-* Inside the Elden Ring Debug Tool folder is a Resources folder. In `Resources/ItemCategories.txt` and remove the two slashes from `//0x40000000 false Items/Goods/SeamlessCoop.txt Seamless Coop` (line 10). This will load the Seamless Coop items the next time the debug tool is started.  
+* Inside the Elden Ring Debug Tool folder is a Resources folder. In `Resources/ItemCategories.txt` and remove the two slashes from start of `//0x40000000 false Items/Goods/SeamlessCoop.txt Seamless Coop` (line 10). This will load the Seamless Coop items the next time the debug tool is started.  
 * Launch Elden Ring with the Seamless Coop mod installed
 * Launch Elden Ring Debug Tool.  
 * Item Spawning is only available while a character is loaded   
