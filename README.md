@@ -15,15 +15,15 @@ Backup your saves before using this tool, and restore the backups before going o
 * [.Net Framework 4.6.1]( https://www.microsoft.com/en-us/download/details.aspx?id=48130)
 * [Visual C++ Redistributable x64 Packages for Visual Studio 2013](https://www.microsoft.com/en-gb/download/details.aspx?id=40784)
 
-## Seamless Coop Support
-* Currently, Seamless Coop items are available by a small patch in the release section (You can also manually edit the files, if you're a modder looking to add your own items)  
-* Download 0.8 from the Releases section.  
-* Launch Elden Ring with the Seamless Coop mod installed  
+## Seamless Coop Support  
+* Inside the Elden Ring Debug Tool folder is a Resources folder. In `Resources/ItemCategories.txt` and remove the two slashes from `//0x40000000 false Items/Goods/SeamlessCoop.txt Seamless Coop` (line 10). This will load the Seamless Coop items the next time the debug tool is started.  
+* Launch Elden Ring with the Seamless Coop mod installed
+* Launch Elden Ring Debug Tool.  
 * Item Spawning is only available while a character is loaded   
 * Go to "Settings" and select "Spawn Untradeable"  
 * In the "Inventory" tab, there is a category called "Seamless Coop". This will give you a selection of the four items added by the Seamless Coop mod. Click the item you wish to create and hit the "Create" button.   
 
-## Known Issues
+## Known Issues  
 * Hotkeys don't save between sessions at this moment. They will next update  
 
 ## Installing  
