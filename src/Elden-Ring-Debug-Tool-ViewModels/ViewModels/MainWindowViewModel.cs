@@ -315,6 +315,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
             ItemGibViewViewModel.UpdateViewModel();
             ParamViewViewModel.UpdateViewModel();
             DebugViewViewModel.UpdateViewModel();
+            GraceViewViewModel.UpdateViewModel();
             HotKeyViewViewModel.UpdateViewModel();
             TargetViewViewModel.UpdateViewModel();
             MiscViewViewModel.UpdateViewModel();

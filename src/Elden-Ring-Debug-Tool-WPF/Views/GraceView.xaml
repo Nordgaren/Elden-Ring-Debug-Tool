@@ -11,8 +11,8 @@
              mc:Ignorable="d" 
              d:DesignHeight="600" d:DesignWidth="800" Background="{StaticResource Background}" DataContextChanged="OnDataContextChanged"
              d:DataContext="{d:DesignInstance vm:GraceViewViewModel, IsDesignTimeCreatable=True}">
-    <UserControl.Resources>
-        <CollectionViewSource Source="{Binding GraceCollection}" x:Key="GracesCollectionViewSource">
+    <!--<UserControl.Resources>
+        <CollectionViewSource Source="{Binding GraceCollection}" x:Key="GracesCollectionViewSource" Filter="{Binding Filter}">
             <CollectionViewSource.GroupDescriptions>
                 <PropertyGroupDescription PropertyName="Continent"/>
                 <PropertyGroupDescription PropertyName="Hub"/>
@@ -23,7 +23,7 @@
                 <PropertyGroupDescription PropertyName="Continent"/>
             </CollectionViewSource.GroupDescriptions>
         </CollectionViewSource>
-    </UserControl.Resources>
+    </UserControl.Resources>-->
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -38,16 +38,16 @@
                     <CheckBox Content="Quick Select Bonfire" Margin="10,0,0,0" VerticalAlignment="Center"/>
                 </StackPanel>
                 <Grid HorizontalAlignment="Center" Margin="0,0,82,0">
-                    <wpfTool:AutoSelectTextBox Height="20" AutoSelectBehavior="OnFocus" Width="300" />
+                    <wpfTool:AutoSelectTextBox Height="20" AutoSelectBehavior="OnFocus" Width="300" Text="{Binding GraceFilter, UpdateSourceTrigger=PropertyChanged}"/>
                     <Label Foreground="LightSlateGray" Content="Search..." IsEnabled="False" Margin="5,0,0,0" IsHitTestVisible="False"
-                           Visibility="{Binding WarpFilter, Converter={StaticResource ResourceKey=StringToVisibilityConverter}}"/>
+                           Visibility="{Binding GraceFilter, Converter={StaticResource ResourceKey=StringToVisibilityConverter}}"/>
                 </Grid>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                     <ComboBox
                         Width="300"
                         Margin="5"
                         HorizontalAlignment="Left"
-                        ItemsSource="{Binding Source={StaticResource GracesCollectionViewSource}}" 
+                        ItemsSource="{Binding GraceCollectionView}" 
                         SelectedValue="{Binding SelectedGraceViewModel}"
                         IsEditable="True" 
                         Foreground="{StaticResource Foreground}"
@@ -75,7 +75,7 @@
                             </Style>
                         </ComboBox.ItemContainerStyle>
                     </ComboBox>
-                    <Button Content="Warp" Width="75" Margin="10,0,0,0" x:Name="btnWarp"/>
+                    <Button Content="Warp" Width="75" Margin="10,0,0,0" Command="{Binding WarpCommand}" CommandParameter="{Binding SelectedGraceViewModel.}"/>
                 </StackPanel>
             </StackPanel>
 
@@ -89,9 +89,14 @@
             <Label Content="Manage Graces" HorizontalAlignment="Center" />
         </StackPanel>
         <StackPanel Grid.Row="2" Margin="25,0,25,0">
+            <Grid HorizontalAlignment="Center" Margin="0,0,82,0">
+                <wpfTool:AutoSelectTextBox Height="20" AutoSelectBehavior="OnFocus" HorizontalContentAlignment="Center" Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=StackPanel}}" Text="{Binding HubFilter, UpdateSourceTrigger=PropertyChanged}"/>
+                <Label Foreground="LightSlateGray" Content="Search..." HorizontalContentAlignment="Center" IsEnabled="False" Margin="5,0,0,0" IsHitTestVisible="False"
+                       Visibility="{Binding HubFilter, Converter={StaticResource ResourceKey=StringToVisibilityConverter}}"/>
+            </Grid>
             <ComboBox 
               HorizontalAlignment="Left"
-              ItemsSource="{Binding Source={StaticResource HubsCollectionViewSource}}"
+              ItemsSource="{Binding HubCollectionView}"
               SelectedValue="{Binding SelectedHubViewModel}"
               IsEditable="True"
               IsTextSearchEnabled="False"
@@ -145,11 +150,15 @@
                             <ColumnDefinition Width="200"/>
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
                         <Label Content="{Binding Name}" Grid.Column="1" />
-                        <Button Content="Set" Width="50" Grid.Column="2"/>
-                        <Button Content="Warp" Width="50" Grid.Column="3"/>
+                        <ToggleButton Grid.Column="2" Height="25" Width="25" Style="{StaticResource ToggleButtonPower}" 
+                                      Background="{Binding Background, RelativeSource={RelativeSource AncestorType=UserControl}}" 
+                                      IsChecked="{Binding Enabled}"/>
+                        <Button Content="Set" Width="50" Grid.Column="3"/>
+                        <Button Content="Warp" Width="50" Grid.Column="4"/>
                     </Grid>
 
                 </DataTemplate>

@@ -35,4 +35,8 @@
     </None>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Commands\GraceView\" />
+  </ItemGroup>
+
 </Project>

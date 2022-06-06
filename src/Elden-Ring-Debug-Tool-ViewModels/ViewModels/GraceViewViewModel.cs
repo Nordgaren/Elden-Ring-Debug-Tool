@@ -6,9 +6,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Data;
+using System.Windows.Input;
+using Elden_Ring_Debug_Tool_ViewModels.Commands;
 using Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels;
 using Erd_Tools;
 using Erd_Tools.Models;
+using PropertyHook;
 using Grace = Erd_Tools.Models.Grace;
 using GraceViewModel = Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels.GraceViewModel;
 
@@ -16,43 +19,74 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
 {
     public class GraceViewViewModel : ViewModelBase
     {
+        public ICollectionView GraceCollectionView { get; set; }
+        public ICollectionView HubCollectionView { get; set; }
 
-        private ObservableCollection<GraceViewModel> _graceCollection;
-
-        public ObservableCollection<GraceViewModel> GraceCollection
-        {
-            get => _graceCollection;
-            set => SetField(ref _graceCollection, value);
-        }
-
-        private ObservableCollection<HubViewModel> _hubCollection;
-
-        public ObservableCollection<HubViewModel> HubCollection
-        {
-            get => _hubCollection;
-            set => SetField(ref _hubCollection, value);
-        }
+        public ICommand WarpCommand { get; }
 
         internal ErdHook Hook { get; set; }
 
-
         public GraceViewViewModel()
         {
+            WarpCommand = new WarpCommand(this);
+        }
+
+        public void UpdateViewModel()
+        {
+            foreach (GraceViewModel grace in GraceViewModel.All)
+            {
+                grace.Update(Hook.CheckGraceStatus(grace.Grace));
+            }
+
+            Setup = Hook.Setup;
+            Loaded = Hook.Loaded;
+        }
+
+        private bool _setup;
+        public bool Setup
+        {
+            get => _setup;
+            set => SetField(ref _setup, value);
+        }
+
+        private bool _loaded;
+        public bool Loaded
+        {
+            get => _loaded;
+            set => SetField(ref _loaded, value);
         }
 
         public void InitViewModel(ErdHook hook)
         {
             Hook = hook;
+            Hook.OnSetup += Hook_OnSetup;
             foreach (Continent continent in Continent.Continents)
             {
                 new ContinentViewModel(continent);
             }
 
-            GraceCollection = GraceViewModel.All;
-            HubCollection = HubViewModel.All;;
-            //WarpCollectionView = CollectionViewSource.GetDefaultView(GraceViewModel.All);
+            GraceCollectionView = CollectionViewSource.GetDefaultView(GraceViewModel.All);
+            GraceCollectionView.GroupDescriptions.Add(new PropertyGroupDescription(nameof(GraceViewModel.Continent)));
+            GraceCollectionView.GroupDescriptions.Add(new PropertyGroupDescription(nameof(GraceViewModel.Hub)));
+            GraceCollectionView.Filter += FilerGrace;
+            SelectedGraceViewModel = (GraceViewModel) GraceCollectionView.CurrentItem;
+
+            HubCollectionView = CollectionViewSource.GetDefaultView(HubViewModel.All);
+            HubCollectionView.GroupDescriptions.Add(new PropertyGroupDescription(nameof(HubViewModel.Continent)));
+            HubCollectionView.Filter += FilerHub;
+            SelectedHubViewModel = (HubViewModel)HubCollectionView.CurrentItem;
         }
 
+        private void Hook_OnSetup(object? sender, PHEventArgs e)
+        {
+            //System.Windows.Application.Current.Dispatcher.Invoke(() =>
+            //{
+            //    foreach (GraceViewModel grace in GraceViewModel.All)
+            //    {
+            //        grace.Update(Hook.CheckGraceStatus(grace.Grace));
+            //    }
+            //});
+        }
 
         private GraceViewModel _selectedGraceViewModel;
 
@@ -71,29 +105,6 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
         }
         #region Search
 
-        private string _warpFilter = string.Empty;
-        public string WarpFilter
-        {
-            get => _warpFilter;
-            set
-            {
-                if (SetField(ref _warpFilter, value))
-                {
-                    //ItemsCollectionView.Refresh();
-                }
-            }
-        }
-
-        private bool FilerWarp(object obj)
-        {
-            if (obj is object item)
-            {
-                //return item.Name.Contains(GraceFilter, StringComparison.InvariantCultureIgnoreCase);
-            }
-
-            return false;
-        }
-
         private string _graceFilter = string.Empty;
         public string GraceFilter
         {
@@ -102,16 +113,43 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
             {
                 if (SetField(ref _graceFilter, value))
                 {
-                    //ItemsCollectionView.Refresh();
+                    GraceCollectionView.Refresh();
+                    if (!GraceCollectionView.IsEmpty)
+                        SelectedGraceViewModel = (GraceViewModel)GraceCollectionView.CurrentItem;
                 }
             }
         }
 
         private bool FilerGrace(object obj)
         {
-            if (obj is object item)
+            if (obj is GraceViewModel grace)
             {
-                //return item.Name.Contains(GraceFilter, StringComparison.InvariantCultureIgnoreCase);
+                return grace.Name.Contains(GraceFilter, StringComparison.InvariantCultureIgnoreCase);
+            }
+
+            return false;
+        }
+
+        private string _hubFilter = string.Empty;
+        public string HubFilter
+        {
+            get => _hubFilter;
+            set
+            {
+                if (SetField(ref _hubFilter, value))
+                {
+                    HubCollectionView.Refresh();
+                    if (!HubCollectionView.IsEmpty)
+                        SelectedHubViewModel = (HubViewModel)HubCollectionView.CurrentItem;
+                }
+            }
+        }
+
+        private bool FilerHub(object obj)
+        {
+            if (obj is HubViewModel hub)
+            {
+                return hub.Name.Contains(HubFilter, StringComparison.InvariantCultureIgnoreCase);
             }
 
             return false;
