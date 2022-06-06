@@ -16,9 +16,8 @@ Backup your saves before using this tool, and restore the backups before going o
 * [Visual C++ Redistributable x64 Packages for Visual Studio 2013](https://www.microsoft.com/en-gb/download/details.aspx?id=40784)
 
 ## How To Use 
-* Launch Elden Ring with the Seamless Coop mod installed
+* Launch Elden Ring and get on one of your characters
 * Launch Elden Ring Debug Tool.  
-* Item Spawning is only available while a character is loaded   
 * Go to "Settings" and select "Spawn Untradeable"  
 * Go to "Inventory" tab. You can select a category and search for the item that way, or you can check "Search All" by the search bar and search for the item that way.  
 * Select an item in the listbox and hit create on the item you want to spawn. The "Ash" combobox will only be avaiable on weapons that can equip ashes.  
