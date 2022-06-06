@@ -25,10 +25,10 @@ namespace Elden_Ring_Debug_Tool_ViewModels.Commands
 
         public override void Execute(object? parameter)
         {
-            if (!(parameter is int bonfireID))
+            if (!(parameter is int entityID))
                 throw new ArgumentNullException(nameof(parameter), "parameter was null. parameter must be an int");
 
-            _graceViewViewModel.Hook.Warp(bonfireID);
+            _graceViewViewModel.Hook.Warp(entityID);
         }
 
         private void _debugViewViewModel_PropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)

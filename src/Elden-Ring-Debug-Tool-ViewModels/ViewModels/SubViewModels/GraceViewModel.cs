@@ -15,8 +15,11 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels
         public string Continent => Grace.Continent;
         public string Hub => Grace.Hub;
         public string Name => Grace.Name;
-        public List<string> Offsets => Grace.Offsets;
+        public int PtrOffset => Grace.PtrOffset;
+        public int DataOffset => Grace.DataOffset;
         public int BitStart => Grace.BitStart;
+        public int EntityID => Grace.EntityID;
+        public int EventFlagID => Grace.EventFlagID;
         private bool _enabled;
 
         public bool Enabled

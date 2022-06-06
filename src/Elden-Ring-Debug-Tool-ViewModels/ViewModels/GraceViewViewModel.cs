@@ -35,7 +35,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
         {
             foreach (GraceViewModel grace in GraceViewModel.All)
             {
-                grace.Update(Hook.CheckGraceStatus(grace.Grace));
+                grace.Update(Hook.CheckGraceStatus(grace.PtrOffset, grace.DataOffset, grace.BitStart));
             }
 
             Setup = Hook.Setup;
@@ -60,7 +60,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
         {
             Hook = hook;
             Hook.OnSetup += Hook_OnSetup;
-            foreach (Continent continent in Continent.Continents)
+            foreach (Continent continent in Continent.All)
             {
                 new ContinentViewModel(continent);
             }

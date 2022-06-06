@@ -52,7 +52,7 @@
                         IsEditable="True" 
                         Foreground="{StaticResource Foreground}"
                         IsTextSearchEnabled="False" 
-                        StaysOpenOnEdit="True">
+                        StaysOpenOnEdit="True" Template="{DynamicResource ComboBoxTemplate}">
                         <ComboBox.GroupStyle>
                             <GroupStyle>
                                 <GroupStyle.HeaderTemplate>
@@ -64,18 +64,12 @@
                         </ComboBox.GroupStyle>
                         <ComboBox.ItemTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding Name}" Background="{StaticResource Background}" Foreground="{StaticResource Foreground}"/>
+                                <TextBlock Text="{Binding Name}" Foreground="{StaticResource Foreground}"/>
                             </DataTemplate>
                         </ComboBox.ItemTemplate>
-                        <ComboBox.ItemContainerStyle>
-                            <Style TargetType="ComboBoxItem">
-                                <Setter Property="Background" Value="{StaticResource Background}" />
-                                <Setter Property="BorderBrush" Value="{StaticResource Background}"/>
-
-                            </Style>
-                        </ComboBox.ItemContainerStyle>
+            
                     </ComboBox>
-                    <Button Content="Warp" Width="75" Margin="10,0,0,0" Command="{Binding WarpCommand}" CommandParameter="{Binding SelectedGraceViewModel.}"/>
+                    <Button Content="Warp" Width="75" Margin="10,0,0,0" Command="{Binding WarpCommand}" CommandParameter="{Binding SelectedGraceViewModel.EntityID}"/>
                 </StackPanel>
             </StackPanel>
 
@@ -101,7 +95,7 @@
               IsEditable="True"
               IsTextSearchEnabled="False"
               StaysOpenOnEdit="True"
-              Foreground="{StaticResource Foreground}"
+              Foreground="{StaticResource Foreground}" Template="{DynamicResource ComboBoxTemplate}"
               Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=StackPanel}}">
 
                 <ComboBox.GroupStyle>
@@ -119,17 +113,10 @@
                 </ComboBox.GroupStyle>
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
-                        <TextBlock Text="{Binding Name}" Background="{StaticResource Background}"
-                           Foreground="{StaticResource Foreground}" />
+                        <TextBlock Text="{Binding Name}" Foreground="{StaticResource Foreground}" />
                     </DataTemplate>
                 </ComboBox.ItemTemplate>
-                <ComboBox.ItemContainerStyle>
-                    <Style TargetType="ComboBoxItem">
-                        <Setter Property="Background" Value="{StaticResource Background}" />
-                        <Setter Property="BorderBrush" Value="{StaticResource Background}"/>
 
-                    </Style>
-                </ComboBox.ItemContainerStyle>
             </ComboBox>
 
         </StackPanel>
@@ -158,7 +145,7 @@
                                       Background="{Binding Background, RelativeSource={RelativeSource AncestorType=UserControl}}" 
                                       IsChecked="{Binding Enabled}"/>
                         <Button Content="Set" Width="50" Grid.Column="3"/>
-                        <Button Content="Warp" Width="50" Grid.Column="4"/>
+                        <Button Content="Warp" Width="50" Grid.Column="4" Command="{Binding WarpCommand, RelativeSource={RelativeSource AncestorType=UserControl}, Path=DataContext}" CommandParameter="{Binding SelectedGraceViewModel.EntityID, RelativeSource={RelativeSource AncestorType=UserControl}, Path=DataContext}"/>
                     </Grid>
 
                 </DataTemplate>
