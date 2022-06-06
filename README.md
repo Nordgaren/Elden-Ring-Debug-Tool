@@ -15,13 +15,14 @@ Backup your saves before using this tool, and restore the backups before going o
 * [.Net Framework 4.6.1]( https://www.microsoft.com/en-us/download/details.aspx?id=48130)
 * [Visual C++ Redistributable x64 Packages for Visual Studio 2013](https://www.microsoft.com/en-gb/download/details.aspx?id=40784)
 
-## Seamless Coop Support  
-* Inside the Elden Ring Debug Tool folder is a Resources folder. In `Resources/ItemCategories.txt` and remove the two slashes from start of `//0x40000000 false Items/Goods/SeamlessCoop.txt Seamless Coop` (line 10). This will load the Seamless Coop items the next time the debug tool is started.  
-* Launch Elden Ring with the Seamless Coop mod installed
+## How To Use 
+* Launch Elden Ring and get on one of your characters
 * Launch Elden Ring Debug Tool.  
-* Item Spawning is only available while a character is loaded   
 * Go to "Settings" and select "Spawn Untradeable"  
-* In the "Inventory" tab, there is a category called "Seamless Coop". This will give you a selection of the four items added by the Seamless Coop mod. Click the item you wish to create and hit the "Create" button.   
+* Go to "Inventory" tab. You can select a category and search for the item that way, or you can check "Search All" by the search bar and search for the item that way.  
+* Select an item in the listbox and hit create on the item you want to spawn. The "Ash" combobox will only be avaiable on weapons that can equip ashes.  
+* **SEAMLESS COOP ITEM CATEGORY**: Inside the Elden Ring Debug Tool folder is a Resources folder. In `Resources/ItemCategories.txt` and remove the two slashes from start of `//0x40000000 false Items/Goods/SeamlessCoop.txt Seamless Coop` (line 10). This will load the Seamless Coop items the next time the debug tool is started.  
+* After re-launching the program,iIn the "Inventory" tab, there will now be a category called "Seamless Coop". This will give you a selection of the four items added by the Seamless Coop mod. Click the item you wish to create and hit the "Create" button.   
 
 ## Known Issues  
 * Hotkeys don't save between sessions at this moment. They will next update  
@@ -29,7 +30,7 @@ Backup your saves before using this tool, and restore the backups before going o
 ## Installing  
 * Extract contents of zip archive to it's own folder. You may have to run as admin if Elden Ring Debug Tool crashes  
 
-## Usage
+## Advanced Usage
 * For a param to load there has to be both a def in `Resources/Params/Defs` and a definition in on of the files in `Resources/Params/Pointers`  
 * The format for pointer is `Offset:Name`. You can organize these files however you want. They will all be opened, read, split and added to the Param list, if there is a corresponding def. If the param has a shared def, you can optionally format like so `Offset:Name:ParamDefName` and the tool will look for the correct paramdef.  
 * Can add names to a file with the same name as the param in `Resources/Params/Names` to add row names. Default name will just be the Row ID.  
