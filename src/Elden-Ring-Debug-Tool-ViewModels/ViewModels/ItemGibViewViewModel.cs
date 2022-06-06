@@ -15,6 +15,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
     [Description("Item Gib View")]
     public class ItemGibViewViewModel : ViewModelBase
     {
+        public CancellationTokenSource _cts = new();
         internal ErdHook Hook { get; set; }
         private ObservableCollection<ItemCategoryViewModel> _categories { get; }
         private ObservableCollection<GemViewModel> _gems { get; }
@@ -25,6 +26,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
         public ICollectionView GemCollectionView { get; }
 
         public ICommand GibItemCommand { get; set; }
+        public ICommand CancelGibItemCommand { get; set; }
 
         public SettingsViewViewModel SettingsViewViewModel;
 
@@ -38,9 +40,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
 
             _gems = new ObservableCollection<GemViewModel>(new List<GemViewModel>());
             GemCollectionView = CollectionViewSource.GetDefaultView(_gems);
-            GemCollectionView.Filter += FiltGems;
-
-      
+            GemCollectionView.Filter += FilterGems;
         }
 
         private bool FilterInfusions(object obj)
@@ -53,7 +53,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
             return false;
         }
 
-        private bool FiltGems(object obj)
+        private bool FilterGems(object obj)
         {
             if (obj is GemViewModel gem && SelectedItem is WeaponViewModel weapon && !weapon.Unique)
             {
@@ -67,20 +67,26 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
         {
             SettingsViewViewModel = settingsViewViewModel;
 
-            GibItemCommand = new GibItemCommand(this);
+            GibItemCommand = new GibItemCommand(this, _cts);
             Commands.Add(GibItemCommand);
+
+            CancelGibItemCommand = new RelayCommand(() =>
+            {
+                _cts.Cancel();
+                CancelVisibility = false;
+            });
 
             Hook = hook;
             Hook.OnSetup += Hook_OnSetup;
             Hook.OnUnhooked += Hook_OnUnhooked;
             foreach (ItemCategory itemCategory in ItemCategory.All)
             {
-                ItemCategoryViewModel erICVM = new ItemCategoryViewModel(itemCategory);
-                _categories.Add(erICVM);
+                ItemCategoryViewModel itemCategoryViewModel = new(itemCategory);
+                _categories.Add(itemCategoryViewModel);
 
-                if (erICVM.Category == Item.Category.Gem)
+                if (itemCategoryViewModel.Category == Item.Category.Gem)
                 {
-                    foreach (GemViewModel gem in erICVM.Items)
+                    foreach (GemViewModel gem in itemCategoryViewModel.Items)
                     {
                         _gems.Add(gem);
                     }
@@ -89,7 +95,13 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
 
             if (_categories.Count > 0)
                 SelectedItemCategory = _categories[0];
+        }
 
+        private bool _cancelVisibility;
+        public bool CancelVisibility
+        {
+            get => _cancelVisibility;
+            set => SetField(ref _cancelVisibility, value);
         }
 
         private void Hook_OnUnhooked(object? sender, PHEventArgs e)
@@ -158,19 +170,13 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
             set => SetField(ref _upgradeLevel, value);
         }
 
-        private List<ItemViewModel>? _selectedItems;
-
-        public List<ItemViewModel>? SelectedItems
-        {
-            get => _selectedItems;
-            set => SetField(ref _selectedItems, value);
-        }
 
         private ItemViewModel? _selectedItem;
         public ItemViewModel? SelectedItem
         {
             get => _selectedItem;
-            set { 
+            set 
+            { 
                 if (SetField(ref _selectedItem, value))
                 {
                     SelectedWeapon = SelectedItem as WeaponViewModel;

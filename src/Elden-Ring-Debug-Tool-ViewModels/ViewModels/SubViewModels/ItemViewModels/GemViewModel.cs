@@ -7,7 +7,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels
 {
     public class GemViewModel : ItemViewModel
     {
-        public static ObservableCollection<GemViewModel> AllGems = new ObservableCollection<GemViewModel>();
+        public static ObservableCollection<GemViewModel> AllGems = new();
         protected Gem _gem => _item as Gem;
         public int SwordArtID => _gem.SwordArtID;
         public short WeaponAttr => _gem.WeaponAttr;

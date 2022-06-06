@@ -1,0 +1,34 @@
+﻿<UserControl x:Class="Elden_Ring_Debug_Tool_WPF.Views.MiscView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Elden_Ring_Debug_Tool_WPF" 
+             xmlns:vm="clr-namespace:Elden_Ring_Debug_Tool_ViewModels.ViewModels;assembly=Elden-Ring-Debug-Tool-ViewModels"
+             xmlns:svm="clr-namespace:Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels;assembly=Elden-Ring-Debug-Tool-ViewModels"
+             xmlns:t="http://schemas.telerik.com/2008/xaml/presentation" 
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" 
+             xmlns:wpfTool="http://schemas.xceed.com/wpf/xaml/toolkit"
+             mc:Ignorable="d"
+             d:DesignHeight="600" d:DesignWidth="400" Background="{StaticResource Background}" DataContextChanged="OnDataContextChanged"
+             d:DataContext="{d:DesignInstance vm:MiscViewViewModel, IsDesignTimeCreatable=True}">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Border Grid.Row="0" BorderBrush="White" BorderThickness="2" Margin="25" >
+            <StackPanel Margin="5">
+                <Label Content="Set Event Flag" FontWeight="Bold" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+                <Separator Visibility="Hidden" Height="10"></Separator>
+                <wpfTool:IntegerUpDown Value="{Binding EventFlag}" ShowButtonSpinner="False" TextAlignment="Center" Width="125"/>
+                <Separator Visibility="Hidden" Height="10"></Separator>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" >
+                    <Button Content="Enable" Command="{Binding EnableEventFlag}" CommandParameter="{Binding EventFlag}"/>
+                    <Separator Visibility="Hidden" Width="20"></Separator>
+                    <Button Content="Disable" Command="{Binding DisableEventFlag}" CommandParameter="{Binding EventFlag}"/>
+                </StackPanel>
+            </StackPanel>
+        </Border>
+       
+    </Grid>
+</UserControl>

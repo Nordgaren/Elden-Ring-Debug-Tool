@@ -4,7 +4,7 @@ using System.Windows.Input;
 
 namespace Elden_Ring_Debug_Tool_ViewModels.Commands
 {
-    public abstract class CommandBase : ICommand, INotifyPropertyChanged 
+    public abstract class AsyncCommandBase : ICommand, INotifyPropertyChanged 
     {
         public event EventHandler? CanExecuteChanged;
         public event PropertyChangedEventHandler? PropertyChanged;
@@ -14,7 +14,12 @@ namespace Elden_Ring_Debug_Tool_ViewModels.Commands
             return true;
         }
 
-        public abstract void Execute(object? parameter);
+        public async void Execute(object? parameter)
+        {
+            await ExecuteAsync(parameter);
+        }
+
+        public abstract Task ExecuteAsync(object? parameter);
 
         protected void OnCanExecuteChanged()
         {
@@ -28,6 +33,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.Commands
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }
+
 
         protected bool SetField<T>(ref T field, T value, [CallerMemberName] string? propertyName = null)
         {

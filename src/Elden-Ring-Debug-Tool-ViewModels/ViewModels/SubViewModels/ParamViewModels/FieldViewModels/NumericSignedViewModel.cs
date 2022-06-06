@@ -43,7 +43,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels
             switch (GetSize())
             {
                 case 1:
-                    return (T?)(object)Convert.ToSByte(Param.Bytes[Offset]);
+                    return (T?)(object)(sbyte)Param.Bytes[Offset];
                 case 2:
                     return (T?)(object)BitConverter.ToInt16(Param.Bytes, Offset);
                 case 4:

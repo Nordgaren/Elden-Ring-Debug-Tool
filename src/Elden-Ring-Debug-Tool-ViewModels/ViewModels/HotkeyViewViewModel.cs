@@ -38,7 +38,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
 
         private ObservableCollection<HotKeyViewModel> GetHotKeyViewModelCollection()
         {
-            ObservableCollection<HotKeyViewModel> hotkeyCollection = new ObservableCollection<HotKeyViewModel>();
+            ObservableCollection<HotKeyViewModel> hotkeyCollection = new();
             foreach (ViewModelBase viewModel in _mainWindowViewModel.ViewModels)
             {
                 if (viewModel is DebugViewViewModel debugViewViewModel)

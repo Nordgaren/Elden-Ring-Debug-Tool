@@ -19,6 +19,7 @@
             <conv:NullObjectToVisibilityConverter x:Key="NullObjectToVisibilityConverter"/>
             <conv:VisibilityToBoolConverter x:Key="VisibilityToBoolConverter"/>
             <conv:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+            <conv:InverseBoolToVisibilityConverter x:Key="InverseBoolToVisibilityConverter"/>
 
         </ResourceDictionary>
     </Application.Resources>

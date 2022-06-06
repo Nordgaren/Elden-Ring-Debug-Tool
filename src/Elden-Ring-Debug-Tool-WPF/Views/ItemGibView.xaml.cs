@@ -260,8 +260,8 @@ namespace Elden_Ring_Debug_Tool_WPF.Views
 
         //    //    Gem? gem = cmbGems.SelectedItem as Gem;
 
-        //    //    if (item.EventID != -1)
-        //    //        Hook.SetEventFlag(item.EventID);
+        //    //    if (item.ParamRowID != -1)
+        //    //        Hook.SetEventFlag(item.ParamRowID);
 
         //    //    Hook.GetItem(id, (int)nudQuantity.Value, (int)infusion, (int)nudUpgrade.Value, gem.ID);
 

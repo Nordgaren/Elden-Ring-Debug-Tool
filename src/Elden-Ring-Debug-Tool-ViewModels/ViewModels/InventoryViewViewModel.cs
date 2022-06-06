@@ -81,7 +81,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
         {
             _lastInvetoryCount = Hook.InventoryEntries;
             IEnumerable inventory = Hook.GetInventory();
-            List<InventoryEntryViewModel> items = new List<InventoryEntryViewModel>();
+            List<InventoryEntryViewModel> items = new();
 
             foreach (InventoryEntry entry in inventory)
             {

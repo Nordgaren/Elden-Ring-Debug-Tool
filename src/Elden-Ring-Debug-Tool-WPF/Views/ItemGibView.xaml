@@ -59,7 +59,11 @@
                 <Separator Height="25" Visibility="Hidden"/>
                 <CheckBox IsChecked="{Binding Max}" Content="Max" Margin="0,2,0,0"/>
                 <Separator Height="5" Visibility="Hidden"/>
-                <Button Content="Create" Command="{Binding GibItemCommand}" CommandParameter="{Binding ElementName=ItemsListBox, Path=SelectedItems}"/>
+                <Grid>
+                    <Button Content="Cancel" Command="{Binding CancelGibItemCommand}" CommandParameter="{Binding ElementName=ItemsListBox, Path=SelectedItems}" Visibility="{Binding CancelVisibility, Converter={StaticResource BoolToVisibilityConverter}}"/>
+                    <Button Content="Create" Command="{Binding GibItemCommand}" CommandParameter="{Binding ElementName=ItemsListBox, Path=SelectedItems}" Visibility="{Binding CancelVisibility, Converter={StaticResource InverseBoolToVisibilityConverter}}"/>
+                </Grid>
+              
             </StackPanel>
 
 

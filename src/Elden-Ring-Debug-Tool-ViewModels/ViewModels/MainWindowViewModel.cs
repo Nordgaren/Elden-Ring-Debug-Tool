@@ -17,7 +17,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
     [Description("Main Window")]
     public class MainWindowViewModel : ViewModelBase
     {
-        public ErdHook Hook { get; private set; }
+        public ErdHook Hook { get; }
 
         public bool Reading
         {
@@ -25,7 +25,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
             set => ErdHook.Reading = value;
         }
 
-        System.Timers.Timer UpdateTimer = new System.Timers.Timer();
+        private System.Timers.Timer _updateTimer { get; } = new();
         public ICommand OpenGitHubCommand { get; set; }
 
         public bool ShowWarning
@@ -43,7 +43,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
 
         public MainWindowViewModel()
         {
-            Hook = new ErdHook(5000, 15000, p => p.MainWindowTitle == "ELDEN RING™");
+            Hook = new ErdHook(5000, 15000, p => p.MainWindowTitle == "ELDEN RING™" || p.MainWindowTitle == "ELDEN RING");
             Hook.OnSetup += Hook_OnSetup;
             Hook.OnUnhooked += Hook_OnUnhooked;
             OpenGitHubCommand = new OpenGitHubCommand(this);
@@ -54,17 +54,21 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
             _itemGibViewViewModel = new ItemGibViewViewModel();
             _inventoryViewViewModel = new InventoryViewViewModel();
             _debugViewViewModel = new DebugViewViewModel();
+            _graceViewViewModel = new GraceViewViewModel();
             _hotKeyViewViewModel = new HotKeyViewViewModel();
             _targetViewViewModel = new TargetViewViewModel();
+            _miscViewViewModel = new MiscViewViewModel();
 
             _viewModels = new ObservableCollection<ViewModelBase>();
             ViewModels.Add(this);
             ViewModels.Add(ParamViewViewModel);
             ViewModels.Add(ItemGibViewViewModel);
             ViewModels.Add(InventoryViewViewModel);
+            ViewModels.Add(GraceViewViewModel);
             ViewModels.Add(DebugViewViewModel);
             ViewModels.Add(TargetViewViewModel);
             ViewModels.Add(HotKeyViewViewModel);
+            ViewModels.Add(MiscViewViewModel);
 
             InitAllViewModels();
             Hook.Start();
@@ -84,7 +88,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
 
             try
             {
-                GitHubClient gitHubClient = new GitHubClient(new ProductHeaderValue("Elden-Ring-Debug-Tool"));
+                GitHubClient gitHubClient = new(new ProductHeaderValue("Elden-Ring-Debug-Tool"));
                 Release release = await gitHubClient.Repository.Release.GetLatest("Nordgaren", "Elden-Ring-Debug-Tool");
                 Version gitVersion = Version.Parse(release.TagName.ToLower().Replace("v", ""));
                 Version exeVersion = Version.Parse(version);
@@ -113,9 +117,9 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
                 UpdateInfo = "Something is very broke, contact Elden Ring Debug Tool repo owner";
                 MessageBox.Show(ex.Message);
             }
-            UpdateTimer.Interval = 16;
-            UpdateTimer.Elapsed += UpdateTimer_Elapsed;
-            UpdateTimer.Enabled = true;
+            _updateTimer.Interval = 16;
+            _updateTimer.Elapsed += UpdateTimer_Elapsed;
+            _updateTimer.Enabled = true;
         }
 
         private SettingsViewViewModel _settingsViewViewModel;
@@ -168,6 +172,21 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
             set => SetField(ref _targetViewViewModel, value);
         }
 
+        private GraceViewViewModel _graceViewViewModel;
+        public GraceViewViewModel GraceViewViewModel
+        {
+            get => _graceViewViewModel;
+            set => SetField(ref _graceViewViewModel, value);
+        }
+
+        private MiscViewViewModel _miscViewViewModel;
+        public MiscViewViewModel MiscViewViewModel
+        {
+            get => _miscViewViewModel;
+            set => SetField(ref _miscViewViewModel, value);
+        }
+
+
         private Uri _uri;
         public Uri Uri
         {
@@ -209,7 +228,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
         }
         private void Dispose(object sender, ExitEventArgs e)
         {
-            UpdateTimer.Stop();
+            _updateTimer.Stop();
             DebugViewViewModel.Dispose();
             SettingsViewViewModel.Dispose();
             SaveAllTabs();
@@ -261,7 +280,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
             //CheckFocused();
             //OnPropertyChanged(nameof(ContentOnline));
             //OnPropertyChanged(nameof(ForegroundOnline));
-            OnPropertyChanged(nameof(GameLoaded));
+            //OnPropertyChanged(nameof(GameLoaded));
         }
 
         private void InitAllViewModels()
@@ -271,7 +290,9 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
             InventoryViewViewModel.InitViewModel(Hook);
             DebugViewViewModel.InitViewModel(this);
             TargetViewViewModel.InitViewModel(Hook);
+            GraceViewViewModel.InitViewModel(Hook);
             HotKeyViewViewModel.InitViewModel(this);
+            MiscViewViewModel.InitViewModel(Hook);
         }
         private void UpdateProperties()
         {
@@ -296,6 +317,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
             DebugViewViewModel.UpdateViewModel();
             HotKeyViewViewModel.UpdateViewModel();
             TargetViewViewModel.UpdateViewModel();
+            MiscViewViewModel.UpdateViewModel();
             //Hook.UpdateLastEnemy();
         }
         private void SaveAllTabs()
