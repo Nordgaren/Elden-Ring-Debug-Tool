@@ -108,7 +108,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.Commands
                     if (itemViewModel is WeaponViewModel weaponViewModel)
                     {
                         gem = selectedGem?.ID ?? -1;
-                        infusion = selectedGem != null && selectedGem.Infusions.Contains((Infusion)infusion) ? selectedGem.ID : 0;
+                        infusion = selectedInfusion != null && selectedGem != null && selectedGem.Infusions.Contains(selectedInfusion.Value) ? selectedGem.ID : 0;
                     }
 
                     _itemGibViewModel._cts.Token.ThrowIfCancellationRequested();

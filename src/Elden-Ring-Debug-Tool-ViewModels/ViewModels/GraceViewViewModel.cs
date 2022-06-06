@@ -23,12 +23,18 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
         public ICollectionView HubCollectionView { get; set; }
 
         public ICommand WarpCommand { get; }
+        public ICommand SetGraceCommand { get; }
+        public ICommand ManageAllGraceCommand { get; }
+        public ICommand ManageAllHubsCommand { get; }
 
         internal ErdHook Hook { get; set; }
 
         public GraceViewViewModel()
         {
             WarpCommand = new WarpCommand(this);
+            SetGraceCommand = new SetGraceCommand(this);
+            ManageAllGraceCommand = new ManageAllGraceCommand(this);
+            ManageAllHubsCommand = new ManageAllHubsCommand(this);
         }
 
         public void UpdateViewModel()
@@ -38,8 +44,28 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
                 grace.Update(Hook.CheckGraceStatus(grace.PtrOffset, grace.DataOffset, grace.BitStart));
             }
 
+            LastGraceID = Hook.LastGrace;
+  
+
+
+
             Setup = Hook.Setup;
             Loaded = Hook.Loaded;
+        }
+
+
+        public void ReloadViewModel()
+        {
+            if (string.IsNullOrWhiteSpace(GraceFilter))
+            {
+                GraceViewModel? graceViewModel = GraceViewModel.All.FirstOrDefault(g => g.EntityID + 1000 == Hook.LastGrace);
+
+                if (graceViewModel != null)
+                {
+                    SelectedGraceViewModel = graceViewModel;
+                }
+            }
+
         }
 
         private bool _setup;
@@ -62,14 +88,14 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
             Hook.OnSetup += Hook_OnSetup;
             foreach (Continent continent in Continent.All)
             {
-                new ContinentViewModel(continent);
+                new ContinentViewModel(continent, Hook);
             }
 
             GraceCollectionView = CollectionViewSource.GetDefaultView(GraceViewModel.All);
             GraceCollectionView.GroupDescriptions.Add(new PropertyGroupDescription(nameof(GraceViewModel.Continent)));
             GraceCollectionView.GroupDescriptions.Add(new PropertyGroupDescription(nameof(GraceViewModel.Hub)));
             GraceCollectionView.Filter += FilerGrace;
-            SelectedGraceViewModel = (GraceViewModel) GraceCollectionView.CurrentItem;
+            SelectedGraceViewModel = (GraceViewModel)GraceCollectionView.CurrentItem;
 
             HubCollectionView = CollectionViewSource.GetDefaultView(HubViewModel.All);
             HubCollectionView.GroupDescriptions.Add(new PropertyGroupDescription(nameof(HubViewModel.Continent)));
@@ -88,12 +114,61 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
             //});
         }
 
+        private bool _quickSelectBonfire;
+
+        public bool QuickSelectBonfire
+        {
+            get => _quickSelectBonfire;
+            set => SetField(ref _quickSelectBonfire, value);
+        }
+
+        private int _lastGraceID;
+
+        public int LastGraceID
+        {
+            get => _lastGraceID;
+            set
+            {
+                if (SetField(ref _lastGraceID, value))
+                {
+                    int lastGraceID = LastGraceID - 1000;
+                    if (lastGraceID != LastGraceViewModel?.EntityID)
+                    {
+                        GraceViewModel? graceViewModel = GraceViewModel.All.FirstOrDefault(g => g.EntityID == lastGraceID);
+                        if (graceViewModel != null)
+                        {
+                            LastGraceViewModel = graceViewModel;
+                        }
+                    }
+                }
+              
+            }
+
+        }
+
+        private GraceViewModel? _lastGraceViewModel;
+        public GraceViewModel? LastGraceViewModel
+        {
+            get => _lastGraceViewModel;
+            set => SetField(ref _lastGraceViewModel, value);
+        }
+
+
         private GraceViewModel _selectedGraceViewModel;
 
         public GraceViewModel SelectedGraceViewModel
         {
             get => _selectedGraceViewModel;
-            set => SetField(ref _selectedGraceViewModel, value);
+            set
+            {
+                if (SetField(ref _selectedGraceViewModel, value) && QuickSelectBonfire)
+                {
+                    Hook.LastGrace = SelectedGraceViewModel.EntityID + 1000;
+                    //LastGraceViewModel = SelectedGraceViewModel;
+                }
+            }
+
+
         }
 
         private HubViewModel _selectedHubViewModel;
@@ -114,8 +189,12 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
                 if (SetField(ref _graceFilter, value))
                 {
                     GraceCollectionView.Refresh();
+
                     if (!GraceCollectionView.IsEmpty)
+                    {
+                        GraceCollectionView.MoveCurrentToFirst();
                         SelectedGraceViewModel = (GraceViewModel)GraceCollectionView.CurrentItem;
+                    }
                 }
             }
         }
@@ -140,7 +219,11 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
                 {
                     HubCollectionView.Refresh();
                     if (!HubCollectionView.IsEmpty)
+                    {
+                        HubCollectionView.MoveCurrentToFirst();
                         SelectedHubViewModel = (HubViewModel)HubCollectionView.CurrentItem;
+                        return;
+                    }
                 }
             }
         }
@@ -155,5 +238,6 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
             return false;
         }
         #endregion
+
     }
 }

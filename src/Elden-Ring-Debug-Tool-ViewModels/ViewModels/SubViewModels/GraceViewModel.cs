@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Erd_Tools.Models;
+using Erd_Tools;
 
 namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels
 {
@@ -21,15 +22,22 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels
         public int EntityID => Grace.EntityID;
         public int EventFlagID => Grace.EventFlagID;
         private bool _enabled;
-
+        private ErdHook _hook { get; }
         public bool Enabled
         {
             get => _enabled;
-            set => SetField(ref _enabled, value);
+            set
+            {
+                if (SetField(ref _enabled, value))
+                {
+                    _hook.SetEventFlag(EventFlagID, Enabled);
+                }
+            }
         }
 
-        public GraceViewModel(Grace grace)
+        public GraceViewModel(Grace grace, ErdHook hook)
         {
+            _hook = hook;
             Grace = grace;
             All.Add(this);
         }
@@ -53,14 +61,14 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels
         public string Name { get; }
         public ObservableCollection<GraceViewModel> Graces { get; set; } = new();
 
-        public HubViewModel(Hub hub, string continent)
+        public HubViewModel(Hub hub, string continent, ErdHook hook)
         {
             _hub = hub;
             Continent = continent;
             Name = hub.Name;
             foreach (var grace in hub.Graces)
             {
-                Graces.Add(new GraceViewModel(grace));
+                Graces.Add(new GraceViewModel(grace, hook));
             }
             All.Add(this);
         }
@@ -76,13 +84,13 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels
         private Continent _continent { get; }
         public string Name { get; set; } = "";
         public ObservableCollection<HubViewModel> Hubs { get; set; } = new();
-        public ContinentViewModel(Continent continent)
+        public ContinentViewModel(Continent continent, ErdHook hook)
         {
             _continent = continent;
             Name = continent.Name;
             foreach (Hub hub in continent.Hubs)
             {
-                Hubs.Add(new HubViewModel(hub, Name));
+                Hubs.Add(new HubViewModel(hub, Name, hook));
             }
 
             All.Add(this);

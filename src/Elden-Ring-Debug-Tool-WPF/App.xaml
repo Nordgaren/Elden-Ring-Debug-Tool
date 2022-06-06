@@ -9,7 +9,6 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Styles\ControlDictionary.xaml"/>
                 <ResourceDictionary Source="Styles\ComboBoxStyle.xaml"/>
-                <ResourceDictionary Source="Styles\HeaderedComboBoxStyle.xaml"/>
             </ResourceDictionary.MergedDictionaries>
             <conv:StringToVisibilityConverter x:Key="StringToVisibilityConverter"/>
             <!--<conv:EnumDescriptionConverter x:Key="EnumDescriptionConverter"/>-->

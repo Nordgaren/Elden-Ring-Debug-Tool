@@ -53,5 +53,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
             get => _eventFlag;
             set => SetField(ref _eventFlag, value);
         }
+
+        
     }
 }

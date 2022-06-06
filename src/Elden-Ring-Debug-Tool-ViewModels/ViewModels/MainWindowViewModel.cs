@@ -246,7 +246,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
                     {
                         GameLoaded = true;
                         Reading = true;
-                        ReloadAllCtrls();
+                        ReloadAllViewModels();
                         Reading = false;
                         EnableAllCtrls(true);
                     }
@@ -301,8 +301,9 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
         private void EnableAllCtrls(bool enable)
         {
         }
-        private void ReloadAllCtrls()
+        private void ReloadAllViewModels()
         {
+            GraceViewViewModel.ReloadViewModel();
         }
         private void ResetAllViewModels()
         {

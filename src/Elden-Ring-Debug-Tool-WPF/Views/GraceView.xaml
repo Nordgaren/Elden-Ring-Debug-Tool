@@ -35,7 +35,7 @@
             <StackPanel>
                 <Label Content="Quick Warp" HorizontalAlignment="Center"/>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                    <CheckBox Content="Quick Select Bonfire" Margin="10,0,0,0" VerticalAlignment="Center"/>
+                    <CheckBox Content="Quick Select Bonfire" Margin="10,0,265,0" VerticalAlignment="Center" IsChecked="{Binding QuickSelectBonfire}"/>
                 </StackPanel>
                 <Grid HorizontalAlignment="Center" Margin="0,0,82,0">
                     <wpfTool:AutoSelectTextBox Height="20" AutoSelectBehavior="OnFocus" Width="300" Text="{Binding GraceFilter, UpdateSourceTrigger=PropertyChanged}"/>
@@ -49,8 +49,7 @@
                         HorizontalAlignment="Left"
                         ItemsSource="{Binding GraceCollectionView}" 
                         SelectedValue="{Binding SelectedGraceViewModel}"
-                        IsEditable="True" 
-                        Foreground="{StaticResource Foreground}"
+                        IsEditable="False" 
                         IsTextSearchEnabled="False" 
                         StaysOpenOnEdit="True" Template="{DynamicResource ComboBoxTemplate}">
                         <ComboBox.GroupStyle>
@@ -76,26 +75,38 @@
         </StackPanel>
         <StackPanel Grid.Row="1">
             <Label Content="Grace" FontSize="20" HorizontalAlignment="Center" />
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <Label Content="Last Grace: " FontSize="20" HorizontalAlignment="Center"  />
+                <Label Content="{Binding LastGraceViewModel.Name}" FontSize="20" HorizontalAlignment="Center" Foreground="Gold" />
+            </StackPanel>
             <Separator Visibility="Hidden" Height="10" />
-            <Button Content="Unlock All" Width="125" HorizontalAlignment="Center" Margin="25,0,25,0" />
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <Button Content="Unlock All" Width="125" HorizontalAlignment="Center" Margin="25,0,25,0" Command="{Binding ManageAllGraceCommand}" CommandParameter="True" />
+                <Separator Visibility="Hidden" Height="10" />
+                <Button Content="Lock All" Width="125" HorizontalAlignment="Center" Margin="25,0,25,0" Command="{Binding ManageAllGraceCommand}" CommandParameter="False" />
+            </StackPanel>
             <Separator Visibility="Hidden" Height="10" />
             <Separator Height="1" />
             <Label Content="Manage Graces" HorizontalAlignment="Center" />
+
         </StackPanel>
         <StackPanel Grid.Row="2" Margin="25,0,25,0">
-            <Grid HorizontalAlignment="Center" Margin="0,0,82,0">
-                <wpfTool:AutoSelectTextBox Height="20" AutoSelectBehavior="OnFocus" HorizontalContentAlignment="Center" Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=StackPanel}}" Text="{Binding HubFilter, UpdateSourceTrigger=PropertyChanged}"/>
-                <Label Foreground="LightSlateGray" Content="Search..." HorizontalContentAlignment="Center" IsEnabled="False" Margin="5,0,0,0" IsHitTestVisible="False"
-                       Visibility="{Binding HubFilter, Converter={StaticResource ResourceKey=StringToVisibilityConverter}}"/>
-            </Grid>
+            <StackPanel  Margin="40,0,40,0" >
+                <Grid HorizontalAlignment="Center" Margin="0,0,0,0">
+                    <wpfTool:AutoSelectTextBox Height="20" AutoSelectBehavior="OnFocus" HorizontalContentAlignment="Center" Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=StackPanel}}" Text="{Binding HubFilter, UpdateSourceTrigger=PropertyChanged}"/>
+                    <Label Foreground="LightSlateGray" Content="Search..." HorizontalContentAlignment="Center" IsEnabled="False" Margin="5,0,0,0" IsHitTestVisible="False"
+                           Visibility="{Binding HubFilter, Converter={StaticResource ResourceKey=StringToVisibilityConverter}}"/>
+                </Grid>
+            </StackPanel>
+    
             <ComboBox 
               HorizontalAlignment="Left"
               ItemsSource="{Binding HubCollectionView}"
               SelectedValue="{Binding SelectedHubViewModel}"
-              IsEditable="True"
+              IsEditable="False"
               IsTextSearchEnabled="False"
               StaysOpenOnEdit="True"
-              Foreground="{StaticResource Foreground}" Template="{DynamicResource ComboBoxTemplate}"
+              Template="{DynamicResource ComboBoxTemplate}"
               Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=StackPanel}}">
 
                 <ComboBox.GroupStyle>
@@ -118,13 +129,18 @@
                 </ComboBox.ItemTemplate>
 
             </ComboBox>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <Button Content="Unlock All in Hub" Width="125" HorizontalAlignment="Center" Margin="25,0,25,0" Command="{Binding ManageAllHubsCommand}" CommandParameter="True" />
+                <Separator Visibility="Hidden" Height="10" />
+                <Button Content="Lock All in Hub" Width="125" HorizontalAlignment="Center" Margin="25,0,25,0" Command="{Binding ManageAllHubsCommand}" CommandParameter="False" />
+            </StackPanel>
 
         </StackPanel>
         <Separator Visibility="Hidden" Height="10" />
         <ItemsControl ItemsSource="{Binding SelectedHubViewModel.Graces}" Grid.Row="3" Margin="25,0,25,10">
             <ItemsControl.Template>
                 <ControlTemplate>
-                    <ScrollViewer x:Name="ScrollViewer" Padding="{TemplateBinding Padding}">
+                    <ScrollViewer x:Name="ScrollViewer" Padding="{TemplateBinding Padding}" VerticalScrollBarVisibility="Auto">
                         <ItemsPresenter />
                     </ScrollViewer>
                 </ControlTemplate>
@@ -144,8 +160,8 @@
                         <ToggleButton Grid.Column="2" Height="25" Width="25" Style="{StaticResource ToggleButtonPower}" 
                                       Background="{Binding Background, RelativeSource={RelativeSource AncestorType=UserControl}}" 
                                       IsChecked="{Binding Enabled}"/>
-                        <Button Content="Set" Width="50" Grid.Column="3"/>
-                        <Button Content="Warp" Width="50" Grid.Column="4" Command="{Binding WarpCommand, RelativeSource={RelativeSource AncestorType=UserControl}, Path=DataContext}" CommandParameter="{Binding SelectedGraceViewModel.EntityID, RelativeSource={RelativeSource AncestorType=UserControl}, Path=DataContext}"/>
+                        <Button Content="Set" Width="50" Grid.Column="3" Margin="25,0,0,0"  Command="{Binding DataContext.SetGraceCommand, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}" CommandParameter="{Binding EntityID}"/>
+                        <Button Content="Warp" Width="50" Grid.Column="4" Margin="25,0,0,0" Command="{Binding DataContext.WarpCommand, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}" CommandParameter="{Binding EntityID}"/>
                     </Grid>
 
                 </DataTemplate>
