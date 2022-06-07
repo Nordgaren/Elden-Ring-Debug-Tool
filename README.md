@@ -21,6 +21,7 @@ Backup your saves before using this tool, and restore the backups before going o
 * Go to "Settings" and select "Spawn Untradeable"  
 * Go to "Inventory" tab. You can select a category and search for the item that way, or you can check "Search All" by the search bar and search for the item that way.  
 * Select an item in the listbox and hit create on the item you want to spawn. The "Ash" combobox will only be avaiable on weapons that can equip ashes.  
+* If the tool doesn't connect, you may have to run it as administrator before it can see the Elden Ring process.  
 * **SEAMLESS COOP ITEM CATEGORY**: Inside the Elden Ring Debug Tool folder is a Resources folder. In `Resources/ItemCategories.txt` and remove the two slashes from start of `//0x40000000 false Items/Goods/SeamlessCoop.txt Seamless Coop` (line 10). This will load the Seamless Coop items the next time the debug tool is started.  
 * After re-launching the program,iIn the "Inventory" tab, there will now be a category called "Seamless Coop". This will give you a selection of the four items added by the Seamless Coop mod. Click the item you wish to create and hit the "Create" button.   
 
