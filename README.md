@@ -8,7 +8,7 @@ A tool for testing and debugging mods in Elden Ring
 
  
 # WARNING  
-Backup your saves before using this tool, and restore the backups before going online.  
+Backup your saves before using this tool, and restore the backups before going online.  Using this too to skip around the game (for example going to the madness grace before talking to malenia or killing margit) will cause you to get banned!  
 
 ## Requirements 
 * [.NET 6 Desktop Runtime x64](https://download.visualstudio.microsoft.com/download/pr/f13d7b5c-608f-432b-b7ec-8fe84f4030a1/5e06998f9ce23c620b9d6bac2dae6c1d/windowsdesktop-runtime-6.0.4-win-x64.exe)  
