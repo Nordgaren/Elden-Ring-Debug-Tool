@@ -19,12 +19,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels
 
             Handle = _targetEnemy.Handle;
 
-            HpMax = _targetEnemy.HpMax;
-            HpBase = _targetEnemy.HpBase;
-            FpMax = _targetEnemy.FpMax;
-            FpBase = _targetEnemy.FpBase;
-            StaminaMax = _targetEnemy.StaminaMax;
-            StaminaBase = _targetEnemy.StaminaBase;
+      
         }
         public void UpdateEnemy()
         {
@@ -34,6 +29,13 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels
 
             Name = _targetEnemy.Name;
             Model = _targetEnemy.Model;
+
+            HpMax = _targetEnemy.HpMax;
+            HpBase = _targetEnemy.HpBase;
+            FpMax = _targetEnemy.FpMax;
+            FpBase = _targetEnemy.FpBase;
+            StaminaMax = _targetEnemy.StaminaMax;
+            StaminaBase = _targetEnemy.StaminaBase;
 
             Hp = _targetEnemy.Hp;
             Fp = _targetEnemy.Fp;
