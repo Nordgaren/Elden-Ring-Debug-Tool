@@ -33,10 +33,11 @@
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
 
-                        <StackPanel>
+                        <StackPanel Grid.ColumnSpan="2">
                             <StackPanel Orientation="Horizontal">
                                 <Label Content="Name:"/>
-                                <Label Content="Coming Soon" MouseDoubleClick="Label_MouseDoubleClick"/>
+                                <Separator Visibility="Hidden" Width="20"/>
+                                <TextBox Text="{Binding Name}" Width="300"/>
                             </StackPanel>
 
                             <StackPanel Orientation="Horizontal" Visibility="Hidden">

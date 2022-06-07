@@ -43,7 +43,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
             //    if (enemy != null)
             //        PlayerIns = new EnemyViewModel(enemy);
             //}
-
+            Name = Hook.Name;
             PlayerIns.UpdateEnemy();
 
             if (LockHp)
@@ -70,6 +70,19 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
             set => SetField(ref _playerIns, value);
         }
 
+        private string _name;
+
+        public string Name
+        {
+            get => _name;
+            set
+            {
+                if (SetField(ref _name, value))
+                {
+                    Hook.Name = Name;
+                }
+            }
+        }
         private int _lockHpValue { get; set; }
 
         private bool _lockHp;
