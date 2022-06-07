@@ -4,6 +4,7 @@ using Erd_Tools;
 using System.ComponentModel;
 using System.Windows.Controls;
 using Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels;
+using Erd_Tools.Models.Items;
 using static Erd_Tools.Models.Weapon;
 
 namespace Elden_Ring_Debug_Tool_ViewModels.Commands
@@ -69,55 +70,48 @@ namespace Elden_Ring_Debug_Tool_ViewModels.Commands
             if (itemViewModel == null)
                 throw new ArgumentNullException(nameof(itemViewModel));
 
-            int? id = itemViewModel.ID;
-            id += (int)itemViewModel.ItemCategory;
-
             int quantity = _itemGibViewModel.Quantity;
             int infusion = _itemGibViewModel.SelectedInfusion.HasValue ? (int)_itemGibViewModel.SelectedInfusion : 0;
             int upgrade = _itemGibViewModel.UpgradeLevel;
 
             int gem = _itemGibViewModel.SelectedGem?.ID ?? -1;
 
-            _hook.GetItem(id.Value, quantity, infusion, upgrade, gem);
+            _hook.GetItem(new ItemSpawnInfo(itemViewModel.ID, itemViewModel.ItemCategory, quantity, itemViewModel.MaxQuantity, infusion, upgrade, gem, itemViewModel.EventID));
 
-            if (itemViewModel.EventID != -1)
-                _hook.SetEventFlag(itemViewModel.EventID, true);
+
         }
 
         private async Task SpawnMultiItem(IEnumerable iList)
         {
             bool max = _itemGibViewModel.Max;
             int upgradeLevel = _itemGibViewModel.UpgradeLevel;
+            int quantityValue = _itemGibViewModel.MaxQuantity;
             GemViewModel? selectedGem = _itemGibViewModel.SelectedGem;
             Infusion? selectedInfusion = _itemGibViewModel.SelectedInfusion;
 
             await Task.Run(() =>
             {
+                List<ItemSpawnInfo> items = new();
                 foreach (ItemViewModel itemViewModel in iList)
                 {
-                    int? id = itemViewModel.ID;
-                    id += (int)itemViewModel.ItemCategory;
-
-                    int quantity = max ? itemViewModel.MaxQuantity : _itemGibViewModel.Quantity;
-                    int infusion = 0;
+                    int quantity = max ? itemViewModel.MaxQuantity : Math.Max(quantityValue, itemViewModel.MaxQuantity);
 
                     int upgrade = max ? itemViewModel.MaxUpgrade : Math.Max(upgradeLevel, itemViewModel.MaxUpgrade);
 
                     int gem = -1;
 
+                    int infusion = 0;
                     if (itemViewModel is WeaponViewModel weaponViewModel)
                     {
                         gem = selectedGem?.ID ?? -1;
-                        infusion = selectedInfusion != null && selectedGem != null && selectedGem.Infusions.Contains(selectedInfusion.Value) ? selectedGem.ID : 0;
+                        infusion = selectedInfusion != null && selectedGem != null && selectedGem.Infusions.Contains(selectedInfusion.Value) ? (int)selectedInfusion.Value : 0;
                     }
 
-                    _itemGibViewModel._cts.Token.ThrowIfCancellationRequested();
+                    items.Add(new ItemSpawnInfo(itemViewModel.ID, itemViewModel.ItemCategory,quantity,itemViewModel.MaxQuantity, infusion, upgrade, gem, itemViewModel.EventID));
 
-                    _hook.GetItem(id.Value, quantity, infusion, upgrade, gem);
-
-                    if (itemViewModel.EventID != -1)
-                        _hook.SetEventFlag(itemViewModel.EventID, true);
                 }
+                _hook.GetItem(items, _itemGibViewModel._cts.Token);
+
             });
 
         }

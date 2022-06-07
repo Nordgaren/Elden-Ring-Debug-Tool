@@ -57,6 +57,20 @@ Backup your saves before using this tool, and restore the backups before going o
 **[wulf2k](https://github.com/Wulf2k)** For helping figure out the cheat for enabling the map during combat and his target script
 
 # Change Log 
+### Beta 0.8.1
+
+* Misc tab where you can set and unset event flags by ID.   
+
+* Grace management tab where you can manage the graces that are open, set your last grace and warp to any grace.  
+
+* Multi Item Spawning enabled.  
+
+* Support for computers who's language setup couldn't find the Elden Ring process.  
+
+* Item Gib now responds correctly and only gives you a message box if you haven't gotten the item before.  
+
+* Bug fixes who's patch notes got deleted by clumsyness.  
+
 ### Beta 0.8
 
 * Continued re-coloring things.  
