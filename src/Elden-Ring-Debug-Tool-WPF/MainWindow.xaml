@@ -30,6 +30,7 @@
                     <Menu Background="{StaticResource Background}" Foreground="{StaticResource Foreground}" VerticalAlignment="Center">
                         <MenuItem Header="Tools">
                             <MenuItem Header="Params" IsChecked="{Binding IsVisible, ElementName=Params, Mode=TwoWay}" IsCheckable="True" />
+                            <MenuItem Header="Player" IsChecked="{Binding IsVisible, ElementName=Player, Mode=TwoWay}" IsCheckable="True" />
                             <MenuItem Header="Inventory" IsChecked="{Binding IsVisible, ElementName=Inventory, Mode=TwoWay}" IsCheckable="True" />
                             <MenuItem Header="Target" IsChecked="{Binding IsVisible, ElementName=Target, Mode=TwoWay}" IsCheckable="True" />
                             <MenuItem Header="Grace" IsChecked="{Binding IsVisible, ElementName=Grace, Mode=TwoWay}" IsCheckable="True" />
@@ -109,6 +110,10 @@
 
                         </dock:LayoutAnchorable>
 
+                        <dock:LayoutAnchorable ContentId="Player" Title="Player" CanHide="True" CanClose="False" x:Name="Target" CanDockAsTabbedDocument="False">
+                            <view:PlayerView DataContext="{Binding DataContext.PlayerViewViewModel, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}" />
+                        </dock:LayoutAnchorable>
+
                         <dock:LayoutAnchorable ContentId="Inventory" Title="Inventory" CanHide="True" CanClose="False" x:Name="Inventory" CanDockAsTabbedDocument="False">
                             <Grid>
                                 <Grid.ColumnDefinitions>
@@ -123,7 +128,7 @@
                             </Grid>
                         </dock:LayoutAnchorable>
 
-                        <dock:LayoutAnchorable ContentId="Target" Title="Target" CanHide="True" CanClose="False" x:Name="Target" CanDockAsTabbedDocument="False">
+                        <dock:LayoutAnchorable ContentId="Target" Title="Target" CanHide="True" CanClose="False" x:Name="Player" CanDockAsTabbedDocument="False">
                             <view:TargetView DataContext="{Binding DataContext.TargetViewViewModel, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}" />
                         </dock:LayoutAnchorable>
 

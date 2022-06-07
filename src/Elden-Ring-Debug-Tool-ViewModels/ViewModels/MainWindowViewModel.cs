@@ -51,6 +51,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
 
             _settingsViewViewModel = new SettingsViewViewModel();
             _paramViewViewModel = new ParamViewViewModel();
+            _playerViewViewModel = new PlayerViewViewModel();
             _itemGibViewViewModel = new ItemGibViewViewModel();
             _inventoryViewViewModel = new InventoryViewViewModel();
             _debugViewViewModel = new DebugViewViewModel();
@@ -62,6 +63,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
             _viewModels = new ObservableCollection<ViewModelBase>();
             ViewModels.Add(this);
             ViewModels.Add(ParamViewViewModel);
+            ViewModels.Add(PlayerViewViewModel);
             ViewModels.Add(ItemGibViewViewModel);
             ViewModels.Add(InventoryViewViewModel);
             ViewModels.Add(GraceViewViewModel);
@@ -135,6 +137,13 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
         {
             get => _paramViewViewModel;
             set => SetField(ref _paramViewViewModel, value);
+        }
+
+        private PlayerViewViewModel _playerViewViewModel;
+        public PlayerViewViewModel PlayerViewViewModel
+        {
+            get => _playerViewViewModel;
+            set => SetField(ref _playerViewViewModel, value);
         }
 
         private ItemGibViewViewModel _itemGibViewViewModel;
@@ -286,6 +295,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
         private void InitAllViewModels()
         {
             ParamViewViewModel.InitViewModel(Hook);
+            PlayerViewViewModel.InitViewModel(Hook);
             ItemGibViewViewModel.InitViewModel(Hook, SettingsViewViewModel);
             InventoryViewViewModel.InitViewModel(Hook);
             DebugViewViewModel.InitViewModel(this);
@@ -315,6 +325,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
             InventoryViewViewModel.UpdateViewModel();
             ItemGibViewViewModel.UpdateViewModel();
             ParamViewViewModel.UpdateViewModel();
+            PlayerViewViewModel.UpdateViewModel();
             DebugViewViewModel.UpdateViewModel();
             GraceViewViewModel.UpdateViewModel();
             HotKeyViewViewModel.UpdateViewModel();

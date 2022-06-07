@@ -59,6 +59,8 @@ Backup your saves before using this tool, and restore the backups before going o
 # Change Log 
 ### Beta 0.8.1
 
+* Player panel with some info (Mainly the same as target). A compelete redesign of target and Player panel is coming soon!  
+
 * Misc tab where you can set and unset event flags by ID.   
 
 * Grace management tab where you can manage the graces that are open, set your last grace and warp to any grace.  
