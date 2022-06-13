@@ -43,7 +43,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
 
         public MainWindowViewModel()
         {
-            Hook = new ErdHook(5000, 15000, p => p.MainWindowTitle == "ELDEN RING™" || p.MainWindowTitle == "ELDEN RING");
+            Hook = new ErdHook(5000, 15000, p => p.MainWindowTitle is "ELDEN RING™" or "ELDEN RING");
             Hook.OnSetup += Hook_OnSetup;
             Hook.OnUnhooked += Hook_OnUnhooked;
             OpenGitHubCommand = new OpenGitHubCommand(this);
@@ -297,7 +297,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
             ParamViewViewModel.InitViewModel(Hook);
             PlayerViewViewModel.InitViewModel(Hook);
             ItemGibViewViewModel.InitViewModel(Hook, SettingsViewViewModel);
-            InventoryViewViewModel.InitViewModel(Hook);
+            InventoryViewViewModel.InitViewModel(Hook, SettingsViewViewModel);
             DebugViewViewModel.InitViewModel(this);
             TargetViewViewModel.InitViewModel(Hook);
             GraceViewViewModel.InitViewModel(Hook);

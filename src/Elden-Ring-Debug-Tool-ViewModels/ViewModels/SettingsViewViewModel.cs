@@ -63,5 +63,19 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
             }
         }
 
+        private bool _editInventoryCounts = Settings.EditInventoryCounts;
+        public bool EditInventoryCounts
+        {
+            get => _editInventoryCounts;
+            set
+            {
+                if (SetField(ref _editInventoryCounts, value))
+                {
+                    Settings.EditInventoryCounts = EditInventoryCounts;
+                }
+            }
+        }
+
+
     }
 }

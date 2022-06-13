@@ -12,12 +12,14 @@
              d:DesignHeight="600" d:DesignWidth="400" d:Background="{StaticResource Background}" DataContextChanged="OnDataContextChanged"
              d:DataContext="{d:DesignInstance vm:SettingsViewViewModel, IsDesignTimeCreatable=True}">
     <Grid>
-        <GroupBox Header="General Settings" Height="75" VerticalAlignment="Top" BorderBrush="Black" Margin="10">
+        <GroupBox Header="General Settings" VerticalAlignment="Top" BorderBrush="Black" Margin="10">
             <StackPanel>
                 <Line Height="10" Visibility="Hidden"/>
                 <CheckBox Content="Show Warning" IsChecked="{Binding ShowWarning}"/>
                 <Line Height="10" Visibility="Hidden"/>
                 <CheckBox Content="Spawn Untradeable" IsChecked="{Binding SpawnUntradeable}"/>
+                <Line Height="10" Visibility="Hidden"/>
+                <CheckBox Content="Edit Inventory Count" IsChecked="{Binding EditInventoryCounts}"/>
             </StackPanel>
         </GroupBox>
     </Grid>

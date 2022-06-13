@@ -6,7 +6,7 @@
       <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="SpawnUntradeable" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">False</Value>
+      <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="EnableHotKeys" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
@@ -16,6 +16,9 @@
     </Setting>
     <Setting Name="CreateItem" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">27</Value>
+    </Setting>
+    <Setting Name="EditInventoryCounts" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
     </Setting>
   </Settings>
 </SettingsFile>

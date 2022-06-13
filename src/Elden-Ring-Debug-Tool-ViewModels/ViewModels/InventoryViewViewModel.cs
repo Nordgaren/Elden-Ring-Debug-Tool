@@ -60,22 +60,36 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
 
         public ICollectionView InventoryCollectionView => CollectionViewSource.GetDefaultView(PlayerInventory);
 
+        public SettingsViewViewModel SettingsViewViewModel { get; set; }
+
         public InventoryViewViewModel()
         {
             PlayerInventory = new ObservableCollection<InventoryEntryViewModel>();
         }
 
-        public void InitViewModel(ErdHook hook)
+        public void InitViewModel(ErdHook hook, SettingsViewViewModel settingsViewViewModel)
         {
             Hook = hook;
+            SettingsViewViewModel = settingsViewViewModel;
+            //SettingsViewViewModel.PropertyChanged += SettingsViewViewModel_PropertyChanged;
         }
+
 
         private int _lastInvetoryCount { get; set; }
         public void UpdateViewModel()
         {
+            Reading = true;
             if (_lastInvetoryCount != Hook.InventoryEntries)
                 GetInventory();
+
+            HeldNormalItems = Hook.HeldNormalItems;
+            MaxNormalItems = Hook.MaxNormalItems;
+            HeldSpecialItems = Hook.HeldSpecialItems;
+            MaxSpecialItems = Hook.MaxSpecialItems;
+            Reading = false;
         }
+
+        public bool Reading { get; set; } = false;
 
         private void GetInventory()
         {
@@ -97,6 +111,65 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
         {
             get => _inventoryCount;
             set => SetField(ref _inventoryCount, value);
+        }
+
+        public int InventoryMax => MaxNormalItems + MaxSpecialItems;
+
+
+        private int _heldNormalItems;
+
+        public int HeldNormalItems
+        {
+            get => _heldNormalItems;
+            set
+            {
+                if (SetField(ref _heldNormalItems, value) && !Reading)
+                {
+                    Hook.HeldNormalItems = HeldNormalItems;
+                }
+            }
+        }
+
+        private int _maxNormalItems;
+
+        public int MaxNormalItems
+        {
+            get => _maxNormalItems;
+            set
+            {
+                if (SetField(ref _maxNormalItems, value))
+                {
+                    OnPropertyChanged(nameof(InventoryMax));
+                }
+            }
+        }
+
+        private int _maxSpecialItems;
+
+        public int MaxSpecialItems
+        {
+            get => _maxSpecialItems;
+            set
+            {
+                if (SetField(ref _maxSpecialItems, value))
+                {
+                    OnPropertyChanged(nameof(InventoryMax));
+                }
+            }
+        }
+
+        private int _heldSpecialItems;
+
+        public int HeldSpecialItems
+        {
+            get => _heldSpecialItems;
+            set
+            {
+                if (SetField(ref _heldSpecialItems, value) && !Reading)
+                {
+                    Hook.HeldSpecialItems = HeldSpecialItems;
+                }
+            }
         }
     }
 }

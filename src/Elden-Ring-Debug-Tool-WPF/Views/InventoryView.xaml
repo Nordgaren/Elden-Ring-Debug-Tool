@@ -4,22 +4,57 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Elden_Ring_Debug_Tool_WPF.Views" 
+             xmlns:wpfTool="http://schemas.xceed.com/wpf/xaml/toolkit"
              xmlns:vm="clr-namespace:Elden_Ring_Debug_Tool_ViewModels.ViewModels;assembly=Elden-Ring-Debug-Tool-ViewModels"
              mc:Ignorable="d"
              d:DesignHeight="600" d:DesignWidth="400" d:Background="{StaticResource Background}" DataContextChanged="OnDataContextChanged"
              d:DataContext="{d:DesignInstance vm:InventoryViewViewModel, IsDesignTimeCreatable=True}">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="150"/>
+            <RowDefinition Height="200"/>
             <RowDefinition Height="20"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <StackPanel Grid.Column="4">
-            <TextBlock Style="{DynamicResource TextBlockStyle}" Text="Inventory" HorizontalAlignment="Center" FontSize="20" FontWeight="ExtraBlack" Margin="30"  Grid.Row="0"/>
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                <Label Content="Count:" FontWeight="Bold"/>
-                <Label Content="{Binding InventoryCount}" FontWeight="Bold"/>
-            </StackPanel>
+        <StackPanel>
+            <TextBlock Style="{DynamicResource TextBlockStyle}" Text="Inventory" HorizontalAlignment="Center" FontSize="20" FontWeight="ExtraBlack" Margin="0,20,0,0"  Grid.Row="0"/>
+            <GroupBox Header="Inventory Counts">
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <Label Content="Count:" FontWeight="Bold"/>
+                        <Label Content="{Binding InventoryCount}" FontWeight="Bold"/>
+                        <Label Content="/" FontWeight="Bold"/>
+                        <Label Content="{Binding InventoryMax}" FontWeight="Bold"/>
+                    </StackPanel>
+                    <Separator Visibility="Hidden"/>
+                    <Grid HorizontalAlignment="Center">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width ="100"/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Label Content="Normal Items:" FontWeight="Bold"  Grid.Column="0"/>
+                        <wpfTool:IntegerUpDown Value="{Binding HeldNormalItems}" FontWeight="Bold" Width="50" Background="{StaticResource Background}" Foreground="{StaticResource Foreground}"  Grid.Column="1" IsEnabled="{Binding SettingsViewViewModel.EditInventoryCounts}" ShowButtonSpinner="{Binding SettingsViewViewModel.EditInventoryCounts}"/>
+                        <Label Content="/" FontWeight="Bold"  Grid.Column="2"/>
+                        <Label Content="{Binding MaxNormalItems}" FontWeight="Bold"  Grid.Column="3"/>
+                    </Grid>
+                    <Separator Visibility="Hidden"/>
+                    <Grid  HorizontalAlignment="Center">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width ="94"/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Label Content="Special Items:" FontWeight="Bold" Grid.Column="0" />
+                        <wpfTool:IntegerUpDown Value="{Binding HeldSpecialItems}" FontWeight="Bold" Width="50" Grid.Column="1" Background="{StaticResource Background}" Foreground="{StaticResource Foreground}" IsEnabled="{Binding SettingsViewViewModel.EditInventoryCounts}" ShowButtonSpinner="{Binding SettingsViewViewModel.EditInventoryCounts}"/>
+                        <Label Content="/" FontWeight="Bold" Grid.Column="2"/>
+                        <Label Content="{Binding MaxSpecialItems}" FontWeight="Bold" Grid.Column="3"/>
+                    </Grid>
+                </StackPanel>
+            
+            </GroupBox>
+        
         </StackPanel>
         <TextBox Text="{Binding InventoryFilter, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.Column="0" 
                  HorizontalContentAlignment="Center" />

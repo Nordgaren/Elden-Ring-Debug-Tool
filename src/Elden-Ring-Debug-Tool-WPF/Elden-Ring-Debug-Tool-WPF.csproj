@@ -8,7 +8,7 @@
     <PackageIcon>elden_ring_logo-freelogovectors.net_White_Border.png</PackageIcon>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <ApplicationIcon>Icon.ico</ApplicationIcon>
-    <AssemblyVersion>0.8.1</AssemblyVersion>
+    <AssemblyVersion>0.8.2</AssemblyVersion>
     <FileVersion>0.8.1</FileVersion>
 	  <IncludeAllContentForSelfExtract>true</IncludeAllContentForSelfExtract>
 	  <RuntimeFrameworkVersion>6.0.5</RuntimeFrameworkVersion>

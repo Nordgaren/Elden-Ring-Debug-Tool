@@ -28,7 +28,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
         public ICommand GibItemCommand { get; set; }
         public ICommand CancelGibItemCommand { get; set; }
 
-        public SettingsViewViewModel SettingsViewViewModel;
+        public SettingsViewViewModel SettingsViewViewModel { get; set; }
 
         public ItemGibViewViewModel()
         {

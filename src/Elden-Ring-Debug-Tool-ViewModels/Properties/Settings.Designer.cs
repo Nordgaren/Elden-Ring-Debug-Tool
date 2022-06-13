@@ -37,7 +37,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
         public bool SpawnUntradeable {
             get {
                 return ((bool)(this["SpawnUntradeable"]));
@@ -80,6 +80,18 @@ namespace Elden_Ring_Debug_Tool_ViewModels.Properties {
             }
             set {
                 this["CreateItem"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool EditInventoryCounts {
+            get {
+                return ((bool)(this["EditInventoryCounts"]));
+            }
+            set {
+                this["EditInventoryCounts"] = value;
             }
         }
     }
