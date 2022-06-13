@@ -59,6 +59,12 @@ Backup your saves before using this tool, and restore the backups before going o
 **[wulf2k](https://github.com/Wulf2k)** For helping figure out the cheat for enabling the map during combat and his target script
 
 # Change Log 
+### Beta 0.8.2
+
+* Added inventory counts to the Inventory page.  
+
+* Spawn Untradeable is now enabled by default. Be careful spawning in cut content (hidden in ItemCategories.txt) and using it online in vanilla. Still useful to turn off for mass a item gibs.  
+
 ### Beta 0.8.1
 
 * Player panel with some info (Mainly the same as target). A compelete redesign of target and Player panel is coming soon!  
