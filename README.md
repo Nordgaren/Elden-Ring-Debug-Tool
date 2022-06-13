@@ -26,7 +26,7 @@ Backup your saves before using this tool, and restore the backups before going o
 * After re-launching the program,iIn the "Inventory" tab, there will now be a category called "Seamless Coop". This will give you a selection of the four items added by the Seamless Coop mod. Click the item you wish to create and hit the "Create" button.   
 
 ## Known Issues  
-* Hotkeys don't save between sessions at this moment. They will next update  
+* Hotkeys don't save between sessions at this moment. They will Soon™  
 
 ## Installing  
 * Extract contents of zip archive to it's own folder. You may have to run as admin if Elden Ring Debug Tool crashes  
@@ -50,6 +50,7 @@ Backup your saves before using this tool, and restore the backups before going o
 
 ## Thank You  
 **[TKGP](https://github.com/JKAnderson/)** Author of [DS Gadget](https://github.com/JKAnderson/DS-Gadget) [Property Hook](https://github.com/JKAnderson/PropertyHook) and [SoulsFormats](https://github.com/JKAnderson/SoulsFormats)  
+**[vawser](https://github.com/vawser/)** Author of [Yapped Rune Bear](https://github.com/vawser/Yapped-Rune-Bear) and curator of knowledge.  
 **Pav** Author of one of the CE Tables I used to find pointers and offsets, as well as provided the pointer list  
 **[inuNorii](https://github.com/inunorii)** Creator of The Grand Archives table, which I also used for this, and one of the admins at TGA Discord.  
 **[FrankvdStam](https://github.com/FrankvdStam)** Helped with the build action, MVVM stuff and general troubleshooting.  
