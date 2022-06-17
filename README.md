@@ -59,6 +59,10 @@ Backup your saves before using this tool, and restore the backups before going o
 **[wulf2k](https://github.com/Wulf2k)** For helping figure out the cheat for enabling the map during combat and his target script
 
 # Change Log 
+### Beta 0.8.3
+
+* un-oofed SiteOfGrace xml  
+
 ### Beta 0.8.2
 
 * Added inventory counts to the Inventory page.  
