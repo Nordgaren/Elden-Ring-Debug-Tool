@@ -1,11 +1,9 @@
 # Elden-Ring-Debug-Tool
 A tool for testing and debugging mods in Elden Ring  
 
-![build](https://github.com/FrankvdStam/SoulSplitter/actions/workflows/build.yml/badge.svg) 
+![build](https://github.com/Nordgaren/Elden-Ring-Debug-Tool/actions/workflows/build.yml/badge.svg) 
 ![github__version](https://img.shields.io/github/v/release/Nordgaren/Elden-Ring-Debug-Tool)
 [![GitHub all releases](https://img.shields.io/github/downloads/Nordgaren/Elden-Ring-Debug-Tool/total)](https://github.com/Nordgaren/Elden-Ring-Debug-Tool/releases/latest)
-
-
  
 # WARNING  
 Backup your saves before using this tool, and restore the backups before going online.  Using this too to skip around the game (for example going to the madness grace before talking to malenia or killing margit) will cause you to get banned!  
