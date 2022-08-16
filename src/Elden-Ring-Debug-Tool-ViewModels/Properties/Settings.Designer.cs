@@ -94,5 +94,17 @@ namespace Elden_Ring_Debug_Tool_ViewModels.Properties {
                 this["EditInventoryCounts"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("00:01:30")]
+        public global::System.TimeSpan LoadTimeout {
+            get {
+                return ((global::System.TimeSpan)(this["LoadTimeout"]));
+            }
+            set {
+                this["LoadTimeout"] = value;
+            }
+        }
     }
 }

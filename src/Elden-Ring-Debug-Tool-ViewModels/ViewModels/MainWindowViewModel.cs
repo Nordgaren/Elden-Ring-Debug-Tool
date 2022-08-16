@@ -10,6 +10,7 @@ using System.Reflection;
 using Bluegrams.Application;
 using System.ComponentModel;
 using System.Collections.ObjectModel;
+using Elden_Ring_Debug_Tool_ViewModels.Properties;
 using Application = System.Windows.Application;
 
 namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
@@ -18,7 +19,6 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
     public class MainWindowViewModel : ViewModelBase
     {
         public ErdHook Hook { get; }
-
         public bool Reading
         {
             get => ErdHook.Reading;
@@ -43,13 +43,14 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
 
         public MainWindowViewModel()
         {
-            Hook = new ErdHook(5000, 15000, p => p.MainWindowTitle is "ELDEN RING™" or "ELDEN RING");
+            Hook = new ErdHook(5000, 1000, p => p.MainWindowTitle is "ELDEN RING™" or "ELDEN RING");
             Hook.OnSetup += Hook_OnSetup;
             Hook.OnUnhooked += Hook_OnUnhooked;
             OpenGitHubCommand = new OpenGitHubCommand(this);
             _uri = new Uri("https://github.com/Nordgaren/Elden-Ring-Debug-Tool");
 
             _settingsViewViewModel = new SettingsViewViewModel();
+            Hook.LoadTimeout = SettingsViewViewModel.LoadTimeout;
             _paramViewViewModel = new ParamViewViewModel();
             _playerViewViewModel = new PlayerViewViewModel();
             _itemGibViewViewModel = new ItemGibViewViewModel();
@@ -86,7 +87,6 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
 
             WindowTitle = $"Elden Ring Debug Tool {version}";
             EnableAllCtrls(false);
-
 
             try
             {
@@ -130,7 +130,6 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
             get => _settingsViewViewModel;
             set => SetField(ref _settingsViewViewModel, value);
         }
-
 
         private ParamViewViewModel _paramViewViewModel;
         public ParamViewViewModel ParamViewViewModel
@@ -195,7 +194,6 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
             set => SetField(ref _miscViewViewModel, value);
         }
 
-
         private Uri _uri;
         public Uri Uri
         {
@@ -223,7 +221,6 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
             get => _windowTitle;
             set => SetField(ref _windowTitle, value);
         }
-
         private void Hook_OnSetup(object? sender, PropertyHook.PHEventArgs e)
         {
             Application.Current.Dispatcher.Invoke(() =>
@@ -244,7 +241,6 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
         }
         private void UpdateTimer_Elapsed(object? sender, ElapsedEventArgs e)
         {
-
             Application.Current.Dispatcher.Invoke(() =>
             {
                 UpdateMainProperties();

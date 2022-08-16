@@ -20,15 +20,21 @@
             <StackPanel Margin="5">
                 <Label Content="Set Event Flag" FontWeight="Bold" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
                 <Separator Visibility="Hidden" Height="10"></Separator>
-                <wpfTool:IntegerUpDown Value="{Binding EventFlag}" ShowButtonSpinner="False" TextAlignment="Center" Width="125"/>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <wpfTool:IntegerUpDown Value="{Binding EventFlag}" ShowButtonSpinner="False" TextAlignment="Center" Width="110"/>
+                    <Separator Width="10" Visibility="Hidden"/>
+                    <ToggleButton Style="{StaticResource ToggleButtonPower}" Width="25" Background="{StaticResource Background}" IsChecked="{Binding IsEventFlag, Mode=OneWay}"/>
+                </StackPanel>
                 <Separator Visibility="Hidden" Height="10"></Separator>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" >
                     <Button Content="Enable" Command="{Binding EnableEventFlag}" CommandParameter="{Binding EventFlag}"/>
                     <Separator Visibility="Hidden" Width="20"></Separator>
                     <Button Content="Disable" Command="{Binding DisableEventFlag}" CommandParameter="{Binding EventFlag}"/>
+                    <Separator Visibility="Hidden" Width="20"></Separator>
+                    <Button Content="Check" Command="{Binding CheckEventFlag}" CommandParameter="{Binding EventFlag}"/>
                 </StackPanel>
             </StackPanel>
         </Border>
-       
+
     </Grid>
 </UserControl>

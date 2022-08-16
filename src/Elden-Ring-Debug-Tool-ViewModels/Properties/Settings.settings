@@ -20,5 +20,8 @@
     <Setting Name="EditInventoryCounts" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
+    <Setting Name="LoadTimeout" Type="System.TimeSpan" Scope="User">
+      <Value Profile="(Default)">00:01:30</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

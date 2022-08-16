@@ -57,6 +57,10 @@ Backup your saves before using this tool, and restore the backups before going o
 **[wulf2k](https://github.com/Wulf2k)** Original author of the target script and various other contributions  
 
 # Change Log 
+### Beta 0.8.4  
+
+* Added current animation to Player and Target tab.  
+
 ### Beta 0.8.3
 
 * un-oofed SiteOfGrace xml  

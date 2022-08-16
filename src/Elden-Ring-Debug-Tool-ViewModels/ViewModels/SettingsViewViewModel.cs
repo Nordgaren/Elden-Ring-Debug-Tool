@@ -76,6 +76,17 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
             }
         }
 
-
+        private TimeSpan _loadTimeout = Settings.LoadTimeout;
+        public TimeSpan LoadTimeout
+        {
+            get => _loadTimeout;
+            set
+            {
+                if (SetField(ref _loadTimeout, value))
+                {
+                    Settings.LoadTimeout = LoadTimeout;
+                }
+            }
+        }
     }
 }

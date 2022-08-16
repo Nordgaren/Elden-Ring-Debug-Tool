@@ -72,6 +72,7 @@
 
                 </Expander>
             </GroupBox>
+            <Separator Visibility="Hidden"/>
             <GroupBox Header="Player Data">
                 <Expander ExpandDirection="Down" IsExpanded="True" Style="{StaticResource StatusGroupExpander}" Header="Data">
                     <Grid>
@@ -127,6 +128,8 @@
 
                 </Expander>
             </GroupBox>
+
+            <Separator Visibility="Hidden"/>
 
 
         </StackPanel>
@@ -214,7 +217,7 @@
 
                 </Expander>
             </GroupBox>
-
+            <Separator Visibility="Hidden"/>
             <GroupBox Header="Status" >
                 <Expander IsExpanded="True" Style="{StaticResource StatusGroupExpander}" Header="Buildup Data">
                     <StackPanel>
@@ -232,6 +235,16 @@
                         <ProgressBar Value="{Binding PlayerIns.ResetTime}" Maximum="5" />
                     </StackPanel>
                 </Expander>
+            </GroupBox>
+            <Separator Visibility="Hidden"/>
+            <GroupBox Header="Animations">
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="Current Animation: "/>
+                        <Label Content="{Binding PlayerIns.CurrentAnimation}"/>
+                    </StackPanel>
+                </StackPanel>
+
             </GroupBox>
         </StackPanel>
 

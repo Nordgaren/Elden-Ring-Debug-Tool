@@ -14,11 +14,12 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
         public ErdHook Hook { get; private set; }
         public ICommand EnableEventFlag { get; }
         public ICommand DisableEventFlag { get; }
-
+        public ICommand CheckEventFlag { get; }
         public MiscViewViewModel()
         {
             EnableEventFlag = new EnableEventCommand(this);
             DisableEventFlag = new DisableEventCommand(this);
+            CheckEventFlag = new IsEventCommand(this);
         }
 
         public void UpdateViewModel()
@@ -47,13 +48,24 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
         }
 
         private int _eventFlag;
-
         public int EventFlag
         {
             get => _eventFlag;
-            set => SetField(ref _eventFlag, value);
+            set
+            {
+                if (SetField(ref _eventFlag, value))
+                {
+                    IsEventFlag = null;
+                }
+            }
         }
 
+        private bool? _isEventFlag;
+        public bool? IsEventFlag
+        {
+            get => _isEventFlag;
+            set => SetField(ref _isEventFlag, value);
+        }
         
     }
 }

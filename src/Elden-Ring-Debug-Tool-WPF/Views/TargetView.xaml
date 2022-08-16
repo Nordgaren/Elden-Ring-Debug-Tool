@@ -231,6 +231,16 @@
                     </StackPanel>
                 </Expander>
             </GroupBox>
+            <Separator Visibility="Hidden"/>
+            <GroupBox Header="Animations">
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="Current Animation: "/>
+                        <Label Content="{Binding TargetEnemy.CurrentAnimation}"/>
+                    </StackPanel>
+                </StackPanel>
+
+            </GroupBox>
         </StackPanel>
 
 

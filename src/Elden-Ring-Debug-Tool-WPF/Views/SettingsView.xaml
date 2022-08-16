@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Elden_Ring_Debug_Tool_WPF" 
              xmlns:vm="clr-namespace:Elden_Ring_Debug_Tool_ViewModels.ViewModels;assembly=Elden-Ring-Debug-Tool-ViewModels"
+             xmlns:wpfTool="http://schemas.xceed.com/wpf/xaml/toolkit"
              xmlns:svm="clr-namespace:Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels;assembly=Elden-Ring-Debug-Tool-ViewModels"
              xmlns:t="http://schemas.telerik.com/2008/xaml/presentation" 
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
@@ -20,6 +21,12 @@
                 <CheckBox Content="Spawn Untradeable" IsChecked="{Binding SpawnUntradeable}"/>
                 <Line Height="10" Visibility="Hidden"/>
                 <CheckBox Content="Edit Inventory Count" IsChecked="{Binding EditInventoryCounts}"/>
+                <Line Height="10" Visibility="Hidden"/>
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Load Timeout: "/>
+                    <Line Width="20" Visibility="Hidden"/>
+                    <wpfTool:TimeSpanUpDown Text="Load Timer" Width="100"/>
+                </StackPanel>
             </StackPanel>
         </GroupBox>
     </Grid>

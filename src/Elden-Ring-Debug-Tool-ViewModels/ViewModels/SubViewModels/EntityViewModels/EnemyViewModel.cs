@@ -15,7 +15,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels
         {
             _targetEnemy = targetEnemy;
 
-            Pointer = _targetEnemy.TargetEnemyInsPtr;
+            Pointer = _targetEnemy.TargetChrInsPtr;
 
             Handle = _targetEnemy.Handle;
 
@@ -61,6 +61,8 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels
             StaggerMax = _targetEnemy.StaggerMax;
             Stagger = _targetEnemy.Stagger;
             ResetTime = _targetEnemy.ResetTime;
+
+            CurrentAnimation = _targetEnemy.CurrentAnimation;
   
             _reading = false;
         }
@@ -332,6 +334,16 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels
             set => SetField(ref _resetTime, value);
         }
 
+        #endregion
+
+        #region ActionRequest
+        private int _currentAnimation;
+
+        public int CurrentAnimation
+        {
+            get => _currentAnimation;
+            set => SetField(ref _currentAnimation, value);
+        }
         #endregion
 
 
