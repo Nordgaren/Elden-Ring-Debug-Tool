@@ -17,7 +17,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
         internal ErdHook Hook { get; set; }
         private readonly ObservableCollection<ParamViewModel> _params;
 
-        public ICollectionView ParamCollectionView { get; }
+        public ICollectionView ParamCollectionView { get; set; }
         public ICollectionView RowCollectionView => CollectionViewSource.GetDefaultView(SelectedParam?.Rows);
         public ICollectionView FieldCollectionView => CollectionViewSource.GetDefaultView(SelectedParam?.Fields);
 
@@ -47,17 +47,19 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
 
         private void Hook_OnUnhooked(object? sender, PropertyHook.PHEventArgs e)
         {
+            SelectedParam = null;
+            SelectedRow = null;
             Setup = false;
         }
         private void Hook_OnSetup(object? sender, PropertyHook.PHEventArgs e)
         {
             System.Windows.Application.Current.Dispatcher.Invoke(() =>
             {
+                _params.Clear();
                 foreach (Param p in Hook.Params)
                 {
                     _params.Add(new ParamViewModel(this, p));
                 }
-                ParamCollectionView.Filter = FilterParams;
 
                 if (_params.Count > 0)
                     SelectedParam = _params[0];
@@ -88,7 +90,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
             }
             set
             {
-                if (SetField(ref _selectedParam, value))
+                if (SetField(ref _selectedParam, value) && value != null)
                 {
                     OnPropertyChanged(nameof(RowCollectionView));
                     RowCollectionView.Filter = FilterRows;

@@ -11,6 +11,7 @@ using Bluegrams.Application;
 using System.ComponentModel;
 using System.Collections.ObjectModel;
 using Elden_Ring_Debug_Tool_ViewModels.Properties;
+using Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels;
 using Application = System.Windows.Application;
 
 namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels

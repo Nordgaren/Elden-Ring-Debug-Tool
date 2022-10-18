@@ -9,7 +9,7 @@ using Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels;
 
 namespace Elden_Ring_Debug_Tool_ViewModels.Commands
 {
-    public class ManageAllGraceCommand : CommandBase
+    public class ManageAllGraceCommand : AsyncCommandBase
     {
         private GraceViewViewModel _graceViewViewModel { get; }
 
@@ -24,19 +24,26 @@ namespace Elden_Ring_Debug_Tool_ViewModels.Commands
             return _graceViewViewModel.Hook.Setup && _graceViewViewModel.Hook.Loaded && base.CanExecute(parameter);
         }
 
-        public override void Execute(object? parameter)
+        public override Task ExecuteAsync(object? parameter)
         {
-            bool enable;
-            if (!(bool.TryParse(parameter as string, out enable)))
-                throw new ArgumentNullException(nameof(parameter), "parameter was null. parameter must be a bool");
-
-            foreach (GraceViewModel grace in GraceViewModel.All)
+            return Task.Run(() =>
             {
-                _graceViewViewModel.Hook.SetEventFlag(grace.EventFlagID, enable);
-            }
+                bool enable;
+                if (!(bool.TryParse(parameter as string, out enable)))
+                    throw new ArgumentNullException(nameof(parameter), "parameter was null. parameter must be a bool");
+
+                _graceViewViewModel.MassChange = true;
+                foreach (GraceViewModel grace in GraceViewModel.All)
+                {
+                    _graceViewViewModel.Hook.SetEventFlag(grace.EventFlagID, enable);
+                }
+
+                _graceViewViewModel.MassChange = false;
+            });
         }
 
-        private void _debugViewViewModel_PropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
+        private void _debugViewViewModel_PropertyChanged(object? sender,
+            System.ComponentModel.PropertyChangedEventArgs e)
         {
             if (e.PropertyName is nameof(GraceViewViewModel.Setup)
                 or nameof(GraceViewViewModel.Loaded))

@@ -2,9 +2,11 @@
 using SoulsFormats;
 using System;
 using System.IO;
+using System.Reflection;
 using System.Text;
 using System.Windows;
 using System.Windows.Threading;
+using Erd_Tools;
 
 namespace Elden_Ring_Debug_Tool_WPF
 {
@@ -39,19 +41,17 @@ namespace Elden_Ring_Debug_Tool_WPF
 
             if (CheckIfPossiblyEncrypted(buffer))
             {
-                if (!File.Exists($"{args[1]}.PreDecrypt.bak"))
-                    File.Copy(args[1], $"{args[1]}.PreDecrypt.bak");
-
                 BND4 decryptedReg = SFUtil.DecryptERRegulation(args[1]);
-                decryptedReg.Write(args[1]);
+                decryptedReg.Write($"{args[1]}.decrypted");
                 MessageBox.Show("Regulation file decrypted", "BND Decrypted", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             else if (BND4.IsRead(args[1], out BND4 bnd))
             {
-                if (!File.Exists($"{args[1]}.PreEncrypt.bak"))
-                    File.Copy(args[1], $"{args[1]}.PreEncrypt.bak");
+                string regulationName = $"{Path.GetDirectoryName(args[1])}\\regulation.bin";
+                if (!File.Exists($"{regulationName}.PreEncrypt.bak"))
+                    File.Copy(args[1], $"{regulationName}.PreEncrypt.bak");
 
-                SFUtil.EncryptERRegulation(args[1], bnd);
+                SFUtil.EncryptERRegulation(regulationName, bnd);
                 MessageBox.Show("Regulation file encrypted", "BND Encrypted", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             else
@@ -85,8 +85,7 @@ namespace Elden_Ring_Debug_Tool_WPF
 
         private void WpfExceptionHandler(object sender, DispatcherUnhandledExceptionEventArgs e)
         {
-            try
-            {
+            try {
                 LogException(e.Exception);
             }
             catch (Exception)

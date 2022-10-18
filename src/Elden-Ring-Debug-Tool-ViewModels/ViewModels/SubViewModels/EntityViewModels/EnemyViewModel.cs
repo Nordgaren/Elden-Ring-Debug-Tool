@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels
+namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
 {
     public class EnemyViewModel : ViewModelBase
     {
@@ -14,13 +14,9 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels
         public EnemyViewModel(Enemy targetEnemy)
         {
             _targetEnemy = targetEnemy;
-
-            Pointer = _targetEnemy.TargetChrInsPtr;
-
             Handle = _targetEnemy.Handle;
-
-      
         }
+
         public void UpdateEnemy()
         {
             _reading = true;
@@ -63,28 +59,21 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels
             ResetTime = _targetEnemy.ResetTime;
 
             CurrentAnimation = _targetEnemy.CurrentAnimation;
-  
+
             _reading = false;
         }
 
         bool _reading { get; set; }
 
         #region EnemyIns
-        private string _pointer;
-        public string Pointer
-        {
-            get => _pointer;
-            set => SetField(ref _pointer, value);
-        }
 
-        private int _handle;
-        public int Handle
-        {
-            get => _handle;
-            set => SetField(ref _handle, value);
-        }
+        public string Pointer => $"0x{_targetEnemy.TargetChrInsPtr:X2}";
+        public long Handle { get; }    
+        public string HandleString => $"0x{_targetEnemy.Handle:X2}";
+
 
         private int _chrType;
+
         public int ChrType
         {
             get => _chrType;
@@ -98,6 +87,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels
         }
 
         private byte _teamType;
+
         public byte TeamType
         {
             get => _teamType;
@@ -108,11 +98,14 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels
                     _targetEnemy.TeamType = value;
                 }
             }
-        } 
+        }
+
         #endregion
 
         #region Data
+
         private string _name;
+
         public string Name
         {
             get => _name;
@@ -120,6 +113,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels
         }
 
         private string _model;
+
         public string Model
         {
             get => _model;
@@ -127,7 +121,9 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels
         }
 
         #region Data
+
         private int _hp;
+
         public int Hp
         {
             get => _hp;
@@ -141,6 +137,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels
         }
 
         private int _hpMax;
+
         public int HpMax
         {
             get => _hpMax;
@@ -148,6 +145,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels
         }
 
         private int _hpBase;
+
         public int HpBase
         {
             get => _hpBase;
@@ -155,6 +153,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels
         }
 
         private int _fp;
+
         public int Fp
         {
             get => _fp;
@@ -168,6 +167,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels
         }
 
         private int _fpMax;
+
         public int FpMax
         {
             get => _fpMax;
@@ -175,6 +175,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels
         }
 
         private int _fpBase;
+
         public int FpBase
         {
             get => _fpBase;
@@ -182,6 +183,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels
         }
 
         private int _stamina;
+
         public int Stamina
         {
             get => _stamina;
@@ -189,24 +191,29 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels
         }
 
         private int _staminaMax;
+
         public int StaminaMax
         {
             get => _staminaMax;
             set => SetField(ref _staminaMax, value);
         }
+
         #endregion
 
         private int _staminaBase;
+
         public int StaminaBase
         {
             get => _staminaBase;
             set => SetField(ref _staminaBase, value);
-        } 
+        }
+
         #endregion
 
         #region Resistences
 
         private int _poison;
+
         public int Poison
         {
             get => PoisonMax - _poison;
@@ -214,6 +221,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels
         }
 
         private int _poisonMax;
+
         public int PoisonMax
         {
             get => _poisonMax;
@@ -221,6 +229,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels
         }
 
         private int _rot;
+
         public int Rot
         {
             get => RotMax - _rot;
@@ -228,6 +237,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels
         }
 
         private int _rotMax;
+
         public int RotMax
         {
             get => _rotMax;
@@ -235,6 +245,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels
         }
 
         private int _bleed;
+
         public int Bleed
         {
             get => BleedMax - _bleed;
@@ -242,6 +253,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels
         }
 
         private int _bleedMax;
+
         public int BleedMax
         {
             get => _bleedMax;
@@ -250,6 +262,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels
 
 
         private int _frost;
+
         public int Frost
         {
             get => FrostMax - _frost;
@@ -257,6 +270,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels
         }
 
         private int _frostMax;
+
         public int FrostMax
         {
             get => _frostMax;
@@ -264,6 +278,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels
         }
 
         private int _blight;
+
         public int Blight
         {
             get => BlightMax - _blight;
@@ -271,6 +286,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels
         }
 
         private int _blightMax;
+
         public int BlightMax
         {
             get => _blightMax;
@@ -278,6 +294,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels
         }
 
         private int _sleep;
+
         public int Sleep
         {
             get => SleepMax - _sleep;
@@ -285,6 +302,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels
         }
 
         private int _sleepMax;
+
         public int SleepMax
         {
             get => _sleepMax;
@@ -292,6 +310,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels
         }
 
         private int _madness;
+
         public int Madness
         {
             get => MadnessMax - _madness;
@@ -299,12 +318,12 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels
         }
 
         private int _madnessMax;
+
         public int MadnessMax
         {
             get => _madnessMax;
             set => SetField(ref _madnessMax, value);
         }
-
 
         #endregion
 
@@ -337,6 +356,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels
         #endregion
 
         #region ActionRequest
+
         private int _currentAnimation;
 
         public int CurrentAnimation
@@ -344,8 +364,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels
             get => _currentAnimation;
             set => SetField(ref _currentAnimation, value);
         }
+
         #endregion
-
-
     }
 }

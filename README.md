@@ -61,6 +61,20 @@ Backup your saves before using this tool, and restore the backups before going o
 
 * Added current animation to Player and Target tab.  
 
+* Params read strings from memory, if they are available.  
+
+* Reloading the game now refreshes the param view, so old params/values aren't still present in the list 
+
+* Cleaned up program icon thanks to Rayan  
+
+* Target tab should now no longer miss any enemies when targeting them  
+
+* Changed enemy handle to a long integer, and display it as hex  
+
+* Can now lock target before acquiring one, and it will lock on  
+
+* Fixed a bug where the grace view would freeze when locking/unlocking all graces.  
+
 ### Beta 0.8.3
 
 * un-oofed SiteOfGrace xml  

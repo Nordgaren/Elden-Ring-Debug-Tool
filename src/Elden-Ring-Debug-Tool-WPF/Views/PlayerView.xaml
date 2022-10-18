@@ -7,9 +7,10 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Elden_Ring_Debug_Tool_WPF" 
              xmlns:vm="clr-namespace:Elden_Ring_Debug_Tool_ViewModels.ViewModels;assembly=Elden-Ring-Debug-Tool-ViewModels"
+             xmlns:svm="clr-namespace:Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels;assembly=Elden-Ring-Debug-Tool-ViewModels"
              mc:Ignorable="d"
              d:DesignHeight="600" d:DesignWidth="800" d:Background="{StaticResource Background}" DataContextChanged="OnDataContextChanged"
-             d:DataContext="{d:DesignInstance vm:PlayerViewViewModel, IsDesignTimeCreatable=True}">
+             d:DataContext="{d:DesignInstance svm:PlayerViewViewModel, IsDesignTimeCreatable=True}">
 
     <Grid>
         <Grid.ColumnDefinitions>

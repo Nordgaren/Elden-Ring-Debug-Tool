@@ -36,18 +36,21 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
             ManageAllGraceCommand = new ManageAllGraceCommand(this);
             ManageAllHubsCommand = new ManageAllHubsCommand(this);
         }
+        
+        public bool MassChange { get; set; }
 
-        public void UpdateViewModel()
-        {
-            foreach (GraceViewModel grace in GraceViewModel.All)
+        public void UpdateViewModel() {
+
+            if (!MassChange) 
             {
-                grace.Update(Hook.CheckGraceStatus(grace.PtrOffset, grace.DataOffset, grace.BitStart));
+                foreach (GraceViewModel grace in GraceViewModel.All)
+                {
+                    grace.Update(Hook.CheckGraceStatus(grace.PtrOffset, grace.DataOffset, grace.BitStart));
+                }
             }
+       
 
             LastGraceID = Hook.LastGrace;
-  
-
-
 
             Setup = Hook.Setup;
             Loaded = Hook.Loaded;

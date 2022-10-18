@@ -53,7 +53,7 @@
                             <CheckBox Content="Lock Enemy" IsChecked="{Binding LockTarget}"/>
                             <StackPanel Orientation="Horizontal">
                                 <Label Content="Enemy Handle"/>
-                                <Label Content="{Binding TargetEnemy.Handle}" MouseDoubleClick="Label_MouseDoubleClick"/>
+                                <Label Content="{Binding TargetEnemy.HandleString}" MouseDoubleClick="Label_MouseDoubleClick"/>
                             </StackPanel>
                             <StackPanel Orientation="Horizontal">
                                 <Label Content="Enemy Pointer"/>

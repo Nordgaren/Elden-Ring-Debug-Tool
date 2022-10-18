@@ -23,17 +23,20 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels
         public int EventFlagID => Grace.EventFlagID;
         private bool _enabled;
         private ErdHook _hook { get; }
+
         public bool Enabled
         {
             get => _enabled;
             set
             {
-                if (SetField(ref _enabled, value))
+                if (SetField(ref _enabled, value) && !_reading)
                 {
                     _hook.SetEventFlag(EventFlagID, Enabled);
                 }
             }
         }
+
+        private bool _reading { get; set; }
 
         public GraceViewModel(Grace grace, ErdHook hook)
         {
@@ -44,7 +47,9 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels
 
         public void Update(bool enabled)
         {
+            _reading = true;
             Enabled = enabled;
+            _reading = false;
         }
 
         public override string ToString()
@@ -70,6 +75,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels
             {
                 Graces.Add(new GraceViewModel(grace, hook));
             }
+
             All.Add(this);
         }
 
@@ -78,12 +84,14 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels
             return Name;
         }
     }
+
     public class ContinentViewModel
     {
         public static ObservableCollection<ContinentViewModel> All { get; set; } = new();
         private Continent _continent { get; }
         public string Name { get; set; } = "";
         public ObservableCollection<HubViewModel> Hubs { get; set; } = new();
+
         public ContinentViewModel(Continent continent, ErdHook hook)
         {
             _continent = continent;
@@ -101,5 +109,4 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels
             return Name;
         }
     }
-
 }
