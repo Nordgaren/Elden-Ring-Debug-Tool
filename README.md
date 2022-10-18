@@ -58,6 +58,7 @@ Backup your saves before using this tool, and restore the backups before going o
 
 # Change Log 
 ### Beta 0.8.4  
+* Updated to 1.07
 
 * Added current animation to Player and Target tab.  
 
