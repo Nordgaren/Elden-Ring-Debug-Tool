@@ -6,8 +6,8 @@
     <RootNamespace>Elden_Ring_Debug_Tool_ViewModels</RootNamespace>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <AssemblyVersion>0.8.3</AssemblyVersion>
-    <FileVersion>0.8.3</FileVersion>
+    <AssemblyVersion>0.8.4.1</AssemblyVersion>
+    <FileVersion>0.8.4.1</FileVersion>
   </PropertyGroup>
 
   <ItemGroup>
