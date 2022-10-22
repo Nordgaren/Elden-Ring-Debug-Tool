@@ -57,6 +57,11 @@ Backup your saves before using this tool, and restore the backups before going o
 **[wulf2k](https://github.com/Wulf2k)** Original author of the target script and various other contributions  
 
 # Change Log 
+### Beta 0.8.4.1
+* Un-oofed the version number
+
+* Un-oofed the ERR magic.txt file
+
 ### Beta 0.8.4  
 * Updated to 1.07
 
