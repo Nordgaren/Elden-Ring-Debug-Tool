@@ -81,6 +81,8 @@ Backup your saves before using this tool, and restore the backups before going o
 
 * Fixed a bug where the grace view would freeze when locking/unlocking all graces.  
 
+* Added ERR items to Resources as optional. You can access them by uncommenting them in the `Resources/ItemCategories.txt` file  
+
 ### Beta 0.8.3
 
 * un-oofed SiteOfGrace xml  
