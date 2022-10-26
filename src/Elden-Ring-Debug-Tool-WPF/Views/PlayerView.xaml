@@ -49,6 +49,8 @@
                             <StackPanel Orientation="Horizontal">
                                 <Label Content="Chr Type:"/>
                                 <wpfTool:IntegerUpDown Value="{Binding PlayerIns.ChrType}" Width="50" Margin="5,0,0,0" Maximum="34" MouseDoubleClick="Label_MouseDoubleClick"/>
+                                <Separator Visibility="Hidden" Width="5"/>
+                                <CheckBox Content="Lock" IsChecked="{Binding LockChr}" VerticalAlignment="Center" />
                             </StackPanel>
                         </StackPanel>
 
@@ -65,6 +67,8 @@
                             <StackPanel Orientation="Horizontal">
                                 <Label Content="Team Type:"/>
                                 <wpfTool:ByteUpDown Value="{Binding PlayerIns.TeamType}" Width="50" Margin="5,0,0,0" MouseDoubleClick="Label_MouseDoubleClick"/>
+                                <Separator Visibility="Hidden" Width="5"/>
+                                <CheckBox Content="Lock" IsChecked="{Binding LockTeam}" VerticalAlignment="Center"/>
                             </StackPanel>
                         </StackPanel>
 

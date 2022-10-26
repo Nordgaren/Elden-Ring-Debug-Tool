@@ -8,26 +8,29 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels {
+namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels
+{
     [Description("Target View")]
-    public class PlayerViewViewModel : ViewModelBase {
+    public class PlayerViewViewModel : ViewModelBase
+    {
         internal ErdHook Hook { get; private set; }
 
         public PlayerViewViewModel() { }
 
-        public void InitViewModel(ErdHook hook) {
+        public void InitViewModel(ErdHook hook)
+        {
             Hook = hook;
             if (Hook.PlayerIns.Resolve() != IntPtr.Zero)
                 PlayerIns = new EnemyViewModel(new Enemy(Hook.PlayerIns, Hook));
         }
 
-        public void UpdateViewModel() {
-            
-            if (PlayerIns == null && Hook.PlayerIns.Resolve() != IntPtr.Zero) 
+        public void UpdateViewModel()
+        {
+            if (PlayerIns == null && Hook.PlayerIns.Resolve() != IntPtr.Zero)
                 PlayerIns = new EnemyViewModel(new Enemy(Hook.PlayerIns, Hook));
 
             if (PlayerIns == null) return;
-            
+
             // if (PlayerIns?.Hp == 0)
             // {
             //     PlayerIns = null;
@@ -53,6 +56,10 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels {
             if (LockFp) PlayerIns.Fp = _lockFpValue;
 
             if (LockStam) PlayerIns.Stamina = _lockStamValue;
+
+            if (LockTeam) PlayerIns.TeamType = _lockTeamValue;
+
+            if (LockChr) PlayerIns.ChrType = _lockChrValue;
         }
 
         private bool _lockTarget;
@@ -63,10 +70,13 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels {
 
         private string _name;
 
-        public string Name {
+        public string Name
+        {
             get => _name;
-            set {
-                if (SetField(ref _name, value)) {
+            set
+            {
+                if (SetField(ref _name, value))
+                {
                     Hook.Name = Name;
                 }
             }
@@ -76,10 +86,13 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels {
 
         private bool _lockHp;
 
-        public bool LockHp {
+        public bool LockHp
+        {
             get => _lockHp;
-            set {
-                if (SetField(ref _lockHp, value)) {
+            set
+            {
+                if (SetField(ref _lockHp, value))
+                {
                     if (value) _lockHpValue = PlayerIns.Hp;
                 }
             }
@@ -88,10 +101,13 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels {
         private int _lockFpValue { get; set; }
         private bool _lockFp;
 
-        public bool LockFp {
+        public bool LockFp
+        {
             get => _lockFp;
-            set {
-                if (SetField(ref _lockFp, value)) {
+            set
+            {
+                if (SetField(ref _lockFp, value))
+                {
                     if (value) _lockFpValue = PlayerIns.Fp;
                 }
             }
@@ -100,11 +116,44 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels {
         private int _lockStamValue { get; set; }
         private bool _lockStam;
 
-        public bool LockStam {
+        public bool LockStam
+        {
             get => _lockStam;
-            set {
-                if (SetField(ref _lockStam, value)) {
+            set
+            {
+                if (SetField(ref _lockStam, value))
+                {
                     if (value) _lockStamValue = PlayerIns.Stamina;
+                }
+            }
+        }
+
+        private byte _lockTeamValue { get; set; }
+        private bool _lockTeamBool;
+
+        public bool LockTeam
+        {
+            get => _lockTeamBool;
+            set
+            {
+                if (SetField(ref _lockTeamBool, value))
+                {
+                    if (value) _lockTeamValue = PlayerIns.TeamType;
+                }
+            }
+        }
+
+        private int _lockChrValue { get; set; }
+        private bool _lockChrBool;
+
+        public bool LockChr
+        {
+            get => _lockChrBool;
+            set
+            {
+                if (SetField(ref _lockChrBool, value))
+                {
+                    if (value) _lockChrValue = PlayerIns.ChrType;
                 }
             }
         }
