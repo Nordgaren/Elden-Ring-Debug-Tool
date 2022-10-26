@@ -57,6 +57,13 @@ Backup your saves before using this tool, and restore the backups before going o
 **[wulf2k](https://github.com/Wulf2k)** Original author of the target script and various other contributions  
 
 # Change Log 
+### Beta 0.8.5
+* Updated paramdefs for AtkParam, SpEffect, GameSystemCommonParam, and SwordArtsParam + added FinalDamageRateParam  
+
+* Fixed bug with max value and spawning multiple items  
+
+* Fixed PlayerIns not reloading correctly and added lock to Chr and Team type.    
+
 ### Beta 0.8.4.1
 * Un-oofed the version number
 
