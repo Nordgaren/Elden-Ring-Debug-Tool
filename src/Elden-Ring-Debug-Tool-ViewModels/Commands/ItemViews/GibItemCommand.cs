@@ -94,9 +94,9 @@ namespace Elden_Ring_Debug_Tool_ViewModels.Commands
                 List<ItemSpawnInfo> items = new();
                 foreach (ItemViewModel itemViewModel in iList)
                 {
-                    int quantity = max ? itemViewModel.MaxQuantity : Math.Max(quantityValue, itemViewModel.MaxQuantity);
+                    int quantity = max ? itemViewModel.MaxQuantity : Math.Min(quantityValue, itemViewModel.MaxQuantity);
 
-                    int upgrade = max ? itemViewModel.MaxUpgrade : Math.Max(upgradeLevel, itemViewModel.MaxUpgrade);
+                    int upgrade = max ? itemViewModel.MaxUpgrade : Math.Min(upgradeLevel, itemViewModel.MaxUpgrade);
 
                     int gem = -1;
 
