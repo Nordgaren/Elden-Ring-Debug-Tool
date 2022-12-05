@@ -10,7 +10,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels
         public int RealID => _weapon.RealID;
         public bool Unique => _weapon.Unique;
         public int SwordArtId => _weapon.SwordArtId;
-        public bool Infusible => _weapon.Infisible;
+        public bool Infusible => _weapon.Infusible;
         public int MaxUpgrade => _weapon.MaxUpgrade;
         public WeaponType Type => _weapon.Type;
         public AmmoType TypeAmmo => _weapon.TypeAmmo;

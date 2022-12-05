@@ -29,6 +29,12 @@ Backup your saves before using this tool, and restore the backups before going o
 ## Installing  
 * Extract contents of zip archive to it's own folder. You may have to run as admin if Elden Ring Debug Tool crashes  
 
+## Building
+To publish final output, run this command in the `Elden-Ring-Debug-Tool\` directory
+```
+dotnet publish '.\src\Elden-Ring-Debug-Tool-WPF\Elden-Ring-Debug-Tool-WPF.csproj' -c Release /p:PublishProfile=FolderProfile
+```
+
 ## Advanced Usage
 * For a param to load there has to be both a def in `Resources/Params/Defs` and a definition in on of the files in `Resources/Params/Pointers`  
 * The format for pointer is `Offset:Name`. You can organize these files however you want. They will all be opened, read, split and added to the Param list, if there is a corresponding def. If the param has a shared def, you can optionally format like so `Offset:Name:ParamDefName` and the tool will look for the correct paramdef.  
@@ -57,6 +63,11 @@ Backup your saves before using this tool, and restore the backups before going o
 **[wulf2k](https://github.com/Wulf2k)** Original author of the target script and various other contributions  
 
 # Change Log 
+### Beta 0.8.5.1
+* Added update for ERR items.  
+
+* Fixed bug with strings not being pulled from resources if there is no string in memory for Param rows.  
+
 ### Beta 0.8.5
 * Updated paramdefs for AtkParam, SpEffect, GameSystemCommonParam, and SwordArtsParam + added FinalDamageRateParam  
 
