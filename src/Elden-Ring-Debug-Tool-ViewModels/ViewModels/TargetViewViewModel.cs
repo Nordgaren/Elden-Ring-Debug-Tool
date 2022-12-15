@@ -35,14 +35,14 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
                 LockTarget = false;
             }
 
-            // if (Hook.CurrentTargetHandle != -1 && Hook.CurrentTargetHandle != TargetEnemy?.Handle && !(LockTarget && TargetEnemy != null))
-            // {
-            //     
-            //     Enemy? enemy = Hook.GetTarget();
-            //
-            //     if (enemy != null)
-            //         TargetEnemy = new EnemyViewModel(enemy);
-            // }
+            if (Hook.CurrentTargetHandle != -1 && Hook.CurrentTargetHandle != TargetEnemy?.Handle && !(LockTarget && TargetEnemy != null))
+            {
+                
+                Enemy? enemy = Hook.GetTarget();
+            
+                if (enemy != null)
+                    TargetEnemy = new EnemyViewModel(enemy);
+            }
 
             TargetEnemy?.UpdateEnemy();
 

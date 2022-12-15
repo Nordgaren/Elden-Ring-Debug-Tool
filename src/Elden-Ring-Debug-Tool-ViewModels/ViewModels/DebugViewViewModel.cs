@@ -68,7 +68,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
             Loaded = Hook.Loaded;
 
             if (((IToggleableCommand)ForceWeatherCommand).State)
-                Hook.ForceWeather();
+                Task.Run(Hook.ForceWeather);
         }
 
         public void ResetViewModel()
