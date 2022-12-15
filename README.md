@@ -63,6 +63,11 @@ dotnet publish '.\src\Elden-Ring-Debug-Tool-WPF\Elden-Ring-Debug-Tool-WPF.csproj
 **[wulf2k](https://github.com/Wulf2k)** Original author of the target script and various other contributions  
 
 # Change Log 
+### Beta 0.8.5.2
+* Updated AoBs and Offsets for 1.08  
+
+* Possible fix for GUI freeze when forcing weather.  
+
 ### Beta 0.8.5.1
 * Added update for ERR items.  
 
