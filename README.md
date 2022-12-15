@@ -63,6 +63,9 @@ dotnet publish '.\src\Elden-Ring-Debug-Tool-WPF\Elden-Ring-Debug-Tool-WPF.csproj
 **[wulf2k](https://github.com/Wulf2k)** Original author of the target script and various other contributions  
 
 # Change Log 
+### Beta 0.8.5.3
+* Updated BuddyParam thanks to Philiquaz
+
 ### Beta 0.8.5.2
 * Updated AoBs and Offsets for 1.08  
 
