@@ -6,7 +6,7 @@ A tool for testing and debugging mods in Elden Ring
 [![GitHub all releases](https://img.shields.io/github/downloads/Nordgaren/Elden-Ring-Debug-Tool/total)](https://github.com/Nordgaren/Elden-Ring-Debug-Tool/releases/latest)
  
 # WARNING  
-Backup your saves before using this tool, and restore the backups before going online. Using this too to skip around the game (for example going to the madness grace before talking to melina or killing margit) will cause you to get banned!  
+Backup your saves before using this tool, and restore the backups before going online. Using this tool to skip around the game (for example going to the madness grace before talking to melina or killing margit) will cause you to get banned!  
 
 Disable EAC to use this tool. You will need to use something like [Luke Yui's Offline Launcher](https://www.nexusmods.com/eldenring/mods/98).
 
