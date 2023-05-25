@@ -43,7 +43,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
             {
                 if (viewModel is DebugViewViewModel debugViewViewModel)
                 {
-                    foreach (var hKeyVM in debugViewViewModel.DebugCommands)
+                    foreach (HotKeyViewModel hKeyVM in debugViewViewModel.DebugCommands)
                     {
                         hotkeyCollection.Add(hKeyVM);
                     }

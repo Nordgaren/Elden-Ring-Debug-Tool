@@ -8,12 +8,12 @@ using System.Threading.Tasks;
 
 namespace Elden_Ring_Debug_Tool_ViewModels.Commands
 {
-    [Description("Warp Command")]
-    public class WarpCommand : CommandBase
+    [Description("Warp to Last Grace")]
+    public class WarpLastCommand : CommandBase
     {
         private GraceViewViewModel _graceViewViewModel { get; }
 
-        public WarpCommand(GraceViewViewModel graceViewViewModel)
+        public WarpLastCommand(GraceViewViewModel graceViewViewModel)
         {
             _graceViewViewModel = graceViewViewModel;
             _graceViewViewModel.PropertyChanged += _debugViewViewModel_PropertyChanged;
@@ -26,10 +26,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.Commands
 
         public override void Execute(object? parameter)
         {
-            if (!(parameter is int entityID))
-                throw new ArgumentNullException(nameof(parameter), "parameter was null. parameter must be an int");
-
-            _graceViewViewModel.Hook.Warp(entityID);
+            _graceViewViewModel.Hook.Warp(_graceViewViewModel.LastGraceID);
         }
 
         private void _debugViewViewModel_PropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)

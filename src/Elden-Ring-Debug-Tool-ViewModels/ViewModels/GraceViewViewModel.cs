@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Elden_Ring_Debug_Tool_ViewModels.Attributes;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -14,24 +15,45 @@ using Erd_Tools.Models;
 using PropertyHook;
 using Grace = Erd_Tools.Models.Grace;
 using GraceViewModel = Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels.GraceViewModel;
+using static Elden_Ring_Debug_Tool_ViewModels.Attributes.HotKeyParameterAttribute;
 
 namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
 {
+    [Description("Grace View")]
     public class GraceViewViewModel : ViewModelBase
     {
         public ICollectionView GraceCollectionView { get; set; }
         public ICollectionView HubCollectionView { get; set; }
 
         public ICommand WarpCommand { get; }
+        public ICommand WarpLastCommand { get; }
         public ICommand SetGraceCommand { get; }
         public ICommand ManageAllGraceCommand { get; }
         public ICommand ManageAllHubsCommand { get; }
+        
+        // private ObservableCollection<HotKeyViewModel> _graceCommands;
+        // public ObservableCollection<HotKeyViewModel> GraceCommands
+        // {
+        //     get => _graceCommands;
+        //     set
+        //     {
+        //         if (SetField(ref _graceCommands, value))
+        //         {
+        //             GraceCollectionView.Filter += FilterCommands;
+        //             OnPropertyChanged(nameof(GraceCollectionView));
+        //         }
+        //     }
+        // }
+        //
+        // private MainWindowViewModel _mainWindowViewModel { get; set; }
 
         internal ErdHook Hook { get; set; }
 
         public GraceViewViewModel()
         {
             WarpCommand = new WarpCommand(this);
+            WarpLastCommand = new WarpLastCommand(this);
+            Commands.Add(WarpLastCommand);
             SetGraceCommand = new SetGraceCommand(this);
             ManageAllGraceCommand = new ManageAllGraceCommand(this);
             ManageAllHubsCommand = new ManageAllHubsCommand(this);
@@ -124,9 +146,8 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
             get => _quickSelectBonfire;
             set => SetField(ref _quickSelectBonfire, value);
         }
-
+        
         private int _lastGraceID;
-
         public int LastGraceID
         {
             get => _lastGraceID;
