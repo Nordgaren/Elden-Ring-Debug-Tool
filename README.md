@@ -23,7 +23,11 @@ Disable EAC to use this tool. You will need to use something like [Luke Yui's Of
 * Select an item in the listbox and hit create on the item you want to spawn. The "Ash" combobox will only be avaiable on weapons that can equip ashes.  
 * If the tool doesn't connect, you may have to run it as administrator before it can see the Elden Ring process.  
 * **SEAMLESS COOP ITEM CATEGORY**: Inside the Elden Ring Debug Tool folder is a Resources folder. In `Resources/ItemCategories.txt` and remove the two slashes from start of `//0x40000000 false Items/Goods/SeamlessCoop.txt Seamless Coop` (line 10). This will load the Seamless Coop items the next time the debug tool is started.  
-* After re-launching the program,iIn the "Inventory" tab, there will now be a category called "Seamless Coop". This will give you a selection of the four items added by the Seamless Coop mod. Click the item you wish to create and hit the "Create" button.   
+* After re-launching the program,iIn the "Inventory" tab, there will now be a category called "Seamless Coop". This will give you a selection of the four items added by the Seamless Coop mod. Click the item you wish to create and hit the "Create" button.
+
+## Mod Resource Folders.
+These are resource folders that expand the tool to work with overhauls, like Convergence.
+* [Convergence](https://www.nexusmods.com/eldenring/mods/3521) expansion by [Oravex02](https://www.nexusmods.com/eldenring/users/140263078)
 
 ## Known Issues  
 * Hotkeys don't save between sessions at this moment. They will Soon™  
