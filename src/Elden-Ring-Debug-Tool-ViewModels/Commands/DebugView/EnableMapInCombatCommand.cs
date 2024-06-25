@@ -28,7 +28,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.Commands
 
         public override bool CanExecute(object? parameter)
         {
-            return _debugViewViewModel.Hook.Setup && base.CanExecute(parameter);
+            return _debugViewViewModel.Hook.Setup && _debugViewViewModel.Hook.CombatCloseMap.Resolve() != IntPtr.Zero && _debugViewViewModel.Hook.DisableOpenMap.Resolve() != IntPtr.Zero && base.CanExecute(parameter);
         }
 
         public override void Execute(object? parameter)

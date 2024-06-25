@@ -4,6 +4,7 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using AvalonDock.Themes;
 using Elden_Ring_Debug_Tool_WPF.Windows;
+using System.Threading;
 
 namespace Elden_Ring_Debug_Tool_WPF
 {

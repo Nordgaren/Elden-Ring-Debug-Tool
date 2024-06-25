@@ -210,7 +210,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
 
         #endregion
 
-        #region Resistences
+        #region Resistances
 
         private int _poison;
 

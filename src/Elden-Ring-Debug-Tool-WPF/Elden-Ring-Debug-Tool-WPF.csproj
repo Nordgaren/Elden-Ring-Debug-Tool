@@ -1,5 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
+      <ILLinkPackVersion>7.0.100-1.23401.1</ILLinkPackVersion>
     <OutputType>WinExe</OutputType>
     <TargetFramework>net6.0-windows</TargetFramework>
     <RootNamespace>Elden_Ring_Debug_Tool_WPF</RootNamespace>
@@ -18,7 +19,10 @@
 	  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Publish|AnyCPU'">
     <Optimize>True</Optimize>
   </PropertyGroup>
-
+    <ItemGroup>
+        <PackageReference Include="Microsoft.NET.ILLink.Tasks" Version="$(ILLinkPackVersion)" />
+        <PackageReference Include="Microsoft.NET.ILLink.Analyzers" Version="$(ILLinkPackVersion)" />
+    </ItemGroup>
   <ItemGroup>
     <ResourceFiles Include="$(SolutionDir)src\Erd-Tools\src\Erd-Tools\Resources\**\*.*" />
   </ItemGroup>

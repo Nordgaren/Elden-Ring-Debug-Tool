@@ -7,6 +7,7 @@ using System.Text;
 using System.Windows;
 using System.Windows.Threading;
 using Erd_Tools;
+using System.Collections;
 
 namespace Elden_Ring_Debug_Tool_WPF
 {
@@ -42,7 +43,7 @@ namespace Elden_Ring_Debug_Tool_WPF
             if (CheckIfPossiblyEncrypted(buffer))
             {
                 BND4 decryptedReg = SFUtil.DecryptERRegulation(args[1]);
-                decryptedReg.Write($"{args[1]}.decrypted");
+                decryptedReg.Write($"{args[1]}.decrypted3");
                 MessageBox.Show("Regulation file decrypted", "BND Decrypted", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             else if (BND4.IsRead(args[1], out BND4 bnd))
@@ -85,12 +86,13 @@ namespace Elden_Ring_Debug_Tool_WPF
 
         private void WpfExceptionHandler(object sender, DispatcherUnhandledExceptionEventArgs e)
         {
-            try {
+            try
+            {
                 LogException(e.Exception);
             }
             catch (Exception)
             {
-                Console.WriteLine();
+                //Console.WriteLine();
                 //Ignore
             }
 
@@ -101,7 +103,8 @@ namespace Elden_Ring_Debug_Tool_WPF
         {
             lock (_logFileLock)
             {
-                string logFile = Environment.CurrentDirectory + @"\log.txt";
+                DateTime time = DateTime.Now;
+                string logFile = Environment.CurrentDirectory + @$"\log-{time}.txt";
 
                 //Log retention: at most 2 days. Can up this, but don't want to risk creating a 10GB log file when shit goes wrong.
                 //Or when it is never cleared. Use NLog? 
@@ -112,18 +115,18 @@ namespace Elden_Ring_Debug_Tool_WPF
                     File.Delete(logFile);
                 }
 
-                StringBuilder sb = new StringBuilder();
+                StringBuilder sb = new();
                 //Log the date and time 
-                sb.Append($"{DateTime.Now:ddd, dd MMM yyy HH':'mm':'ss 'GMT'}\n");
+                sb.Append($"{time:ddd, dd MMM yyy HH':'mm':'ss 'GMT'}\n");
                 //Log the error
                 sb.Append($"{exception.Message}\n\n");
 
-                int count = 0;
+                int count = 1;
                 Exception? innerException = exception.InnerException;
                 while (innerException != null)
                 {
                     sb.Append($"Inner Exception {count}\n");
-                    sb.Append($"{ innerException.Message}\n\n");
+                    sb.Append($"{innerException.Message}\n\n");
                     innerException = innerException.InnerException;
                     count++;
                 }
