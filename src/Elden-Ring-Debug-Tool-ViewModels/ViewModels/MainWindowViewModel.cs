@@ -44,7 +44,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
 
         public MainWindowViewModel()
         {
-            Hook = new ErdHook(5000, 1000, p => p.MainWindowTitle is "ELDEN RING™" or "ELDEN RING");
+            Hook = new ErdHook(5000, 1000, p => p.MainWindowTitle is "ELDEN RING™");
             Hook.OnSetup += Hook_OnSetup;
             Hook.OnUnhooked += Hook_OnUnhooked;
             OpenGitHubCommand = new OpenGitHubCommand(this);

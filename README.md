@@ -69,6 +69,17 @@ dotnet publish '.\src\Elden-Ring-Debug-Tool-WPF\Elden-Ring-Debug-Tool-WPF.csproj
 **[wulf2k](https://github.com/Wulf2k)** Original author of the target script and various other contributions  
 
 # Change Log 
+### Beta 0.8.6.0
+* Updated to work with Elden Ring DLC.  
+
+* Added DLC Items and Graces. Item event flags are not working yet for DLC items, sorry (this includes maps).  
+
+* Fixed Debug Tool hooking the wrong program.  
+
+* Added DLC Params as blank params. Needs updating.  
+
+* Event flags and more bug fixes coming soon.  
+
 ### Beta 0.8.5.3
 * Updated BuddyParam thanks to Philiquaz
 

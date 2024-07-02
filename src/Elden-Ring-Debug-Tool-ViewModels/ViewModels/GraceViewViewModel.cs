@@ -30,7 +30,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
         public ICommand SetGraceCommand { get; }
         public ICommand ManageAllGraceCommand { get; }
         public ICommand ManageAllHubsCommand { get; }
-        
+
         // private ObservableCollection<HotKeyViewModel> _graceCommands;
         // public ObservableCollection<HotKeyViewModel> GraceCommands
         // {
@@ -58,7 +58,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
             ManageAllGraceCommand = new ManageAllGraceCommand(this);
             ManageAllHubsCommand = new ManageAllHubsCommand(this);
         }
-        
+
         public bool MassChange { get; set; }
 
         public void UpdateViewModel() {
@@ -90,10 +90,10 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
                     SelectedGraceViewModel = graceViewModel;
                 }
             }
-
         }
 
         private bool _setup;
+
         public bool Setup
         {
             get => _setup;
@@ -101,6 +101,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
         }
 
         private bool _loaded;
+
         public bool Loaded
         {
             get => _loaded;
@@ -146,8 +147,9 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
             get => _quickSelectBonfire;
             set => SetField(ref _quickSelectBonfire, value);
         }
-        
+
         private int _lastGraceID;
+
         public int LastGraceID
         {
             get => _lastGraceID;
@@ -158,19 +160,19 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
                     int lastGraceID = LastGraceID - 1000;
                     if (lastGraceID != LastGraceViewModel?.EntityID)
                     {
-                        GraceViewModel? graceViewModel = GraceViewModel.All.FirstOrDefault(g => g.EntityID == lastGraceID);
+                        GraceViewModel? graceViewModel =
+                            GraceViewModel.All.FirstOrDefault(g => g.EntityID == lastGraceID);
                         if (graceViewModel != null)
                         {
                             LastGraceViewModel = graceViewModel;
                         }
                     }
                 }
-              
             }
-
         }
 
         private GraceViewModel? _lastGraceViewModel;
+
         public GraceViewModel? LastGraceViewModel
         {
             get => _lastGraceViewModel;
@@ -191,8 +193,6 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
                     //LastGraceViewModel = SelectedGraceViewModel;
                 }
             }
-
-
         }
 
         private HubViewModel _selectedHubViewModel;
@@ -202,9 +202,11 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
             get => _selectedHubViewModel;
             set => SetField(ref _selectedHubViewModel, value);
         }
+
         #region Search
 
         private string _graceFilter = string.Empty;
+
         public string GraceFilter
         {
             get => _graceFilter;
@@ -234,6 +236,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
         }
 
         private string _hubFilter = string.Empty;
+
         public string HubFilter
         {
             get => _hubFilter;
@@ -261,7 +264,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
 
             return false;
         }
-        #endregion
 
+        #endregion
     }
 }
