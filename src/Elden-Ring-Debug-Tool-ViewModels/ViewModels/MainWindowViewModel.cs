@@ -44,7 +44,8 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
 
         public MainWindowViewModel()
         {
-            Hook = new ErdHook(5000, 1000, p => p.MainWindowTitle is "ELDEN RING™");
+            Hook = new ErdHook(5000, 1000, p => ((p.MainWindowTitle is "ELDEN RING") || (p.MainWindowTitle is "ELDEN RING™")));
+            //for some reason the japanese version of elden ring doesnt have "trademark" symbol at the end of window name
             Hook.OnSetup += Hook_OnSetup;
             Hook.OnUnhooked += Hook_OnUnhooked;
             OpenGitHubCommand = new OpenGitHubCommand(this);
