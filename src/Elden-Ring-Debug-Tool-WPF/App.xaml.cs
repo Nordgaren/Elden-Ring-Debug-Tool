@@ -43,7 +43,7 @@ namespace Elden_Ring_Debug_Tool_WPF
             if (CheckIfPossiblyEncrypted(buffer))
             {
                 BND4 decryptedReg = SFUtil.DecryptERRegulation(args[1]);
-                decryptedReg.Write($"{args[1]}.decrypted3");
+                decryptedReg.Write($"{args[1]}.decrypted");
                 MessageBox.Show("Regulation file decrypted", "BND Decrypted", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             else if (BND4.IsRead(args[1], out BND4 bnd))

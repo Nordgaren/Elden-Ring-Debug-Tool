@@ -36,6 +36,7 @@
                             <MenuItem Header="Grace" IsChecked="{Binding IsVisible, ElementName=Grace, Mode=TwoWay}" IsCheckable="True" />
                             <MenuItem Header="Debug" IsChecked="{Binding IsVisible, ElementName=Debug, Mode=TwoWay}" IsCheckable="True" />
                             <MenuItem Header="HotKey" IsChecked="{Binding IsVisible, ElementName=HotKey, Mode=TwoWay}" IsCheckable="True" />
+                            <MenuItem Header="Gestures" IsChecked="{Binding IsVisible, ElementName=Gestures, Mode=TwoWay}" IsCheckable="True" />
                             <MenuItem Header="Settings" IsChecked="{Binding IsVisible, ElementName=Settings, Mode=TwoWay}" IsCheckable="True" />
                         </MenuItem>
 
@@ -134,6 +135,10 @@
 
                         <dock:LayoutAnchorable ContentId="Grace" Title="Grace" CanHide="True" CanClose="False" x:Name="Grace" CanDockAsTabbedDocument="False">
                             <view:GraceView DataContext="{Binding DataContext.GraceViewViewModel, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}" />
+                        </dock:LayoutAnchorable>
+                        
+                        <dock:LayoutAnchorable ContentId="Gestures" Title="Gestures" CanHide="True" CanClose="False" x:Name="Gestures" CanDockAsTabbedDocument="False">
+                            <view:GestureView DataContext="{Binding DataContext.GestureViewViewModel, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}"/>
                         </dock:LayoutAnchorable>
 
                         <dock:LayoutAnchorable ContentId="HotKey" Title="HotKey" CanHide="True" CanClose="False" x:Name="HotKey" CanDockAsTabbedDocument="False">

@@ -65,12 +65,11 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
 
             if (!MassChange) 
             {
-                foreach (GraceViewModel grace in GraceViewModel.All)
+                foreach (GraceViewModel grace in SelectedHubViewModel.Graces)
                 {
                     grace.Update(Hook.CheckGraceStatus(grace.PtrOffset, grace.DataOffset, grace.BitStart));
                 }
             }
-       
 
             LastGraceID = Hook.LastGrace;
 

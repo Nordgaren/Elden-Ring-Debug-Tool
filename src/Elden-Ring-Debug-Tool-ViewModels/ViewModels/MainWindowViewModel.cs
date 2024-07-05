@@ -44,7 +44,12 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
 
         public MainWindowViewModel()
         {
-            Hook = new ErdHook(5000, 1000, p => p.MainWindowTitle is "ELDEN RING™");
+            // We need to check more than just the window title, since the Japanese version of the game has
+            // a different window title. If the title is just "ELDEN RING", we also need to check the process
+            // name. Hopefully this doesn't break if people rename their exe.  
+            Hook = new ErdHook(5000, 1000, 
+                p => p.MainWindowTitle is "ELDEN RING™" 
+                     || (p.MainWindowTitle is "ELDEN RING" && p.ProcessName == "eldenring"));
             Hook.OnSetup += Hook_OnSetup;
             Hook.OnUnhooked += Hook_OnUnhooked;
             OpenGitHubCommand = new OpenGitHubCommand(this);
@@ -60,6 +65,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
             _graceViewViewModel = new GraceViewViewModel();
             _hotKeyViewViewModel = new HotKeyViewViewModel();
             _targetViewViewModel = new TargetViewViewModel();
+            _gestureViewViewModel = new GestureViewViewModel();
             _miscViewViewModel = new MiscViewViewModel();
 
             _viewModels = new ObservableCollection<ViewModelBase>();
@@ -72,6 +78,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
             ViewModels.Add(DebugViewViewModel);
             ViewModels.Add(TargetViewViewModel);
             ViewModels.Add(HotKeyViewViewModel);
+            ViewModels.Add(GestureViewViewModel);
             ViewModels.Add(MiscViewViewModel);
 
             InitAllViewModels();
@@ -187,6 +194,13 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
             get => _graceViewViewModel;
             set => SetField(ref _graceViewViewModel, value);
         }
+        
+        private GestureViewViewModel _gestureViewViewModel;
+        public GestureViewViewModel GestureViewViewModel
+        {
+            get => _gestureViewViewModel;
+            set => SetField(ref _gestureViewViewModel, value);
+        }
 
         private MiscViewViewModel _miscViewViewModel;
         public MiscViewViewModel MiscViewViewModel
@@ -298,6 +312,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
             DebugViewViewModel.InitViewModel(this);
             TargetViewViewModel.InitViewModel(Hook);
             GraceViewViewModel.InitViewModel(Hook);
+            GestureViewViewModel.InitViewModel(Hook);
             HotKeyViewViewModel.InitViewModel(this);
             MiscViewViewModel.InitViewModel(Hook);
         }
@@ -327,6 +342,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
             GraceViewViewModel.UpdateViewModel();
             HotKeyViewViewModel.UpdateViewModel();
             TargetViewViewModel.UpdateViewModel();
+            GestureViewViewModel.UpdateViewModel();
             MiscViewViewModel.UpdateViewModel();
             //Hook.UpdateLastEnemy();
         }
