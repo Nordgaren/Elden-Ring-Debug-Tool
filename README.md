@@ -69,6 +69,14 @@ dotnet publish '.\src\Elden-Ring-Debug-Tool-WPF\Elden-Ring-Debug-Tool-WPF.csproj
 **[wulf2k](https://github.com/Wulf2k)** Original author of the target script and various other contributions  
 
 # Change Log 
+### Beta 0.8.6.2
+* Added Gestures tab  
+
+* Fixed support for Japanese users  
+
+### Beta 0.8.6.1
+* Re-added limgrave graces  
+
 ### Beta 0.8.6.0
 * Updated to work with Elden Ring DLC.  
 

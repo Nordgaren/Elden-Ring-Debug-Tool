@@ -32,7 +32,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.Commands
             _graceViewViewModel.Hook.Warp(entityID);
         }
 
-        private void _debugViewViewModel_PropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
+        private void _debugViewViewModel_PropertyChanged(object? sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName is nameof(GraceViewViewModel.Setup)
                 or nameof(GraceViewViewModel.Loaded))
