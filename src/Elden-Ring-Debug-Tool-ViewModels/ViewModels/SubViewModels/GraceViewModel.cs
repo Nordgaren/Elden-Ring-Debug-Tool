@@ -21,8 +21,9 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels
         public int BitStart => Grace.BitStart;
         public int EntityID => Grace.EntityID;
         public int EventFlagID => Grace.EventFlagID;
-        private bool _enabled;
         private ErdHook _hook { get; }
+
+        private bool _enabled;
 
         public bool Enabled
         {

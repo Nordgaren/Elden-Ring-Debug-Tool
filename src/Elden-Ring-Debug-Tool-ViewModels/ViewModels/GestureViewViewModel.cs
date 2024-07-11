@@ -31,7 +31,6 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
         public GestureViewViewModel()
         {
             SetGestureCommand = new SetGestureCommand(this);
-            Commands.Add(SetGestureCommand);
         }
         
         public void UpdateViewModel() {
