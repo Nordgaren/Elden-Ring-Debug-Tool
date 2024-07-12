@@ -12,6 +12,7 @@ using Elden_Ring_Debug_Tool_ViewModels.Commands;
 using Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels;
 using Erd_Tools;
 using Erd_Tools.Models;
+using Erd_Tools.Models.System.Dlc;
 using PropertyHook;
 using Grace = Erd_Tools.Models.Grace;
 using GraceViewModel = Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels.GraceViewModel;
@@ -61,15 +62,22 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
 
         public bool MassChange { get; set; }
 
-        public void UpdateViewModel() {
+        public void UpdateViewModel()
+        {
+            if (!Setup)
+            {
+                return;
+            }
 
-            if (!MassChange) 
+            if (!MassChange)
             {
                 foreach (GraceViewModel grace in SelectedHubViewModel.Graces)
                 {
-                    grace.Update(Hook.CheckGraceStatus(grace.PtrOffset, grace.DataOffset, grace.BitStart));
+                    grace.Update(Hook.CSFD4VirtualMemoryFlag.IsEventFlagFast(grace.EventFlagID));
                 }
             }
+
+            HideDlc = SettingsViewViewModel.Settings.HideDlc;
 
             LastGraceID = Hook.LastGrace;
 
@@ -82,7 +90,8 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
         {
             if (string.IsNullOrWhiteSpace(GraceFilter))
             {
-                GraceViewModel? graceViewModel = GraceViewModel.All.FirstOrDefault(g => g.EntityID + 1000 == Hook.LastGrace);
+                GraceViewModel? graceViewModel =
+                    GraceViewModel.All.FirstOrDefault(g => g.EntityID + 1000 == Hook.LastGrace);
 
                 if (graceViewModel != null)
                 {
@@ -111,7 +120,12 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
         {
             Hook = hook;
             Hook.OnSetup += Hook_OnSetup;
-            foreach (Continent continent in Continent.All)
+        }
+
+        private void Hook_OnSetup(object? sender, PHEventArgs e)
+        {
+            List<Continent> continents = Hook.GetContinents();
+            foreach (Continent continent in continents)
             {
                 new ContinentViewModel(continent, Hook);
             }
@@ -126,10 +140,12 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
             HubCollectionView.GroupDescriptions.Add(new PropertyGroupDescription(nameof(HubViewModel.Continent)));
             HubCollectionView.Filter += FilerHub;
             SelectedHubViewModel = (HubViewModel)HubCollectionView.CurrentItem;
-        }
+            HubCollectionView.Refresh();
 
-        private void Hook_OnSetup(object? sender, PHEventArgs e)
-        {
+            OnPropertyChanged(nameof(GraceCollectionView));
+            OnPropertyChanged(nameof(HubCollectionView));
+
+            Setup = true;
             //System.Windows.Application.Current.Dispatcher.Invoke(() =>
             //{
             //    foreach (GraceViewModel grace in GraceViewModel.All)
@@ -202,6 +218,22 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
             set => SetField(ref _selectedHubViewModel, value);
         }
 
+        private bool _hideDlc = true;
+
+        public bool HideDlc
+        {
+            get => _hideDlc;
+            set
+            {
+                if (SetField(ref _hideDlc, value))
+                {
+                    GraceCollectionView.Refresh();
+                    HubCollectionView.Refresh();
+                    ;
+                }
+            }
+        }
+
         #region Search
 
         private string _graceFilter = string.Empty;
@@ -228,6 +260,11 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
         {
             if (obj is GraceViewModel grace)
             {
+                if (HideDlc && grace.Dlc != DlcName.None)
+                {
+                    return false;
+                }
+
                 return grace.Name.Contains(GraceFilter, StringComparison.InvariantCultureIgnoreCase);
             }
 
@@ -258,6 +295,11 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
         {
             if (obj is HubViewModel hub)
             {
+                if (HideDlc && hub.Dlc != DlcName.None)
+                {
+                    return false;
+                }
+
                 return hub.Name.Contains(HubFilter, StringComparison.InvariantCultureIgnoreCase);
             }
 

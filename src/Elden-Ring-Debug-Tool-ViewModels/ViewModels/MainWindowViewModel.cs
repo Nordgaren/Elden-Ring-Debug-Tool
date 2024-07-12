@@ -325,6 +325,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
         }
         private void ReloadAllViewModels()
         {
+            Hook.CSFD4VirtualMemoryFlag.ClearCache();
             GraceViewViewModel.ReloadViewModel();
         }
         private void ResetAllViewModels()

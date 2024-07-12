@@ -88,5 +88,18 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
                 }
             }
         }
+        
+        private bool _hideDlc = Settings.HideDlc;
+        public bool HideDlc
+        {
+            get => _hideDlc;
+            set
+            {
+                if (SetField(ref _hideDlc, value))
+                {
+                    Settings.HideDlc = HideDlc;
+                }
+            }
+        }
     }
 }

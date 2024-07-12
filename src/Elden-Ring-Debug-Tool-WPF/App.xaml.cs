@@ -104,7 +104,7 @@ namespace Elden_Ring_Debug_Tool_WPF
             lock (_logFileLock)
             {
                 DateTime time = DateTime.Now;
-                string logFile = Environment.CurrentDirectory + @$"\log-{time}.txt";
+                string logFile = Environment.CurrentDirectory + @$"\log-{time:hh-mm-ss}.txt";
 
                 //Log retention: at most 2 days. Can up this, but don't want to risk creating a 10GB log file when shit goes wrong.
                 //Or when it is never cleared. Use NLog? 

@@ -1,4 +1,5 @@
 ﻿using Erd_Tools.Models.Game;
+using Erd_Tools.Models.System.Dlc;
 
 namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels
 {
@@ -13,7 +14,8 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels
         }
 
         public int Id => _gesture.Id; 
-        public string Name => _gesture.Name; 
+        public string Name => _gesture.Name;
+        public DlcName Dlc => _gesture.Dlc;
         
         public GestureViewModel(Gesture gesture)
         {

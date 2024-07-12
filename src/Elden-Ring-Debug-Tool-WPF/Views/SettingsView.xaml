@@ -22,6 +22,8 @@
                 <Line Height="10" Visibility="Hidden"/>
                 <CheckBox Content="Edit Inventory Count" IsChecked="{Binding EditInventoryCounts}"/>
                 <Line Height="10" Visibility="Hidden"/>
+                <CheckBox Content="Hide Dlc Entries" IsChecked="{Binding HideDlc}"/>
+                <Line Height="10" Visibility="Hidden"/>
                 <StackPanel Orientation="Horizontal">
                     <Label Content="Load Timeout: "/>
                     <Line Width="20" Visibility="Hidden"/>

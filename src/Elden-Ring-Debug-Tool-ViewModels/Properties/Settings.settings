@@ -1,4 +1,4 @@
-﻿<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Elden_Ring_Debug_Tool_ViewModels.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
@@ -23,5 +23,9 @@
     <Setting Name="LoadTimeout" Type="System.TimeSpan" Scope="User">
       <Value Profile="(Default)">00:01:30</Value>
     </Setting>
+    <Setting Name="HideDlc" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
   </Settings>
 </SettingsFile>
+

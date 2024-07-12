@@ -11,46 +11,48 @@
              mc:Ignorable="d" 
              d:DesignHeight="600" d:DesignWidth="800" Background="{StaticResource Background}" DataContextChanged="OnDataContextChanged"
              d:DataContext="{d:DesignInstance vm:GestureViewViewModel, IsDesignTimeCreatable=True}">
-    <StackPanel>
-        <Label Content="Gestures" HorizontalAlignment="Center"/>
-        <Grid HorizontalAlignment="Center" Margin="0,0,0,0">
-        <wpfTool:AutoSelectTextBox Height="20" AutoSelectBehavior="OnFocus" Width="300" Text="{Binding GestureFilter, UpdateSourceTrigger=PropertyChanged}"/>
-            <Label Foreground="LightSlateGray" Content="Search..." IsEnabled="False" Margin="5,0,0,0" IsHitTestVisible="False"
-                   Visibility="{Binding GestureFilter, Converter={StaticResource ResourceKey=StringToVisibilityConverter}}"/>
-        </Grid>
-            <Grid>
-                <ItemsControl ItemsSource="{Binding GestureCollectionView}" Margin="25,0,25,10">
-                    <ItemsControl.Template>
-                        <ControlTemplate>
-                            <ScrollViewer x:Name="ScrollViewer" Padding="{TemplateBinding Padding}" VerticalScrollBarVisibility="Auto">
-                                <ItemsPresenter />
-                            </ScrollViewer>
-                        </ControlTemplate>
-                    </ItemsControl.Template>
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate>
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="200"/>
-                                    <ColumnDefinition Width="Auto"/>
-                                    <ColumnDefinition Width="Auto"/>
-                                    <ColumnDefinition Width="Auto"/>
-                                    <ColumnDefinition Width="*"/>
-                                </Grid.ColumnDefinitions>
-                                <Label Content="{Binding Name}" Grid.Column="1" />
-                                <ToggleButton Grid.Column="2" Height="25" Width="25" Style="{StaticResource ToggleButtonPower}" 
-                                              Background="{Binding Background, RelativeSource={RelativeSource AncestorType=UserControl}}" 
-                                              IsChecked="{Binding Enabled}" Command="{Binding DataContext.SetGestureCommand, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}"
-                                              CommandParameter="{Binding}"/>
-                            </Grid>
-
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-
-                </ItemsControl>
-
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Label Content="Gestures" HorizontalAlignment="Center" Grid.Row="0"/>
+            <Grid HorizontalAlignment="Center" Margin="0,0,0,0" Grid.Row="1">
+                <wpfTool:AutoSelectTextBox Height="20" AutoSelectBehavior="OnFocus" Width="300" Text="{Binding GestureFilter, UpdateSourceTrigger=PropertyChanged}"/>
+                <Label Foreground="LightSlateGray" Content="Search..." IsEnabled="False" Margin="5,0,0,0" IsHitTestVisible="False"
+                       Visibility="{Binding GestureFilter, Converter={StaticResource ResourceKey=StringToVisibilityConverter}}"/>
             </Grid>
-    </StackPanel>
+            <ItemsControl ItemsSource="{Binding GestureCollectionView}" Margin="25,0,25,10" Grid.Row="2">
+                <ItemsControl.Template>
+                    <ControlTemplate>
+                        <ScrollViewer x:Name="ScrollViewer" Padding="{TemplateBinding Padding}" VerticalScrollBarVisibility="Auto">
+                            <ItemsPresenter />
+                        </ScrollViewer>
+                    </ControlTemplate>
+                </ItemsControl.Template>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="200"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Label Content="{Binding Name}" Grid.Column="1" />
+                            <ToggleButton Grid.Column="2" Height="25" Width="25" Style="{StaticResource ToggleButtonPower}" 
+                                          Background="{Binding Background, RelativeSource={RelativeSource AncestorType=UserControl}}" 
+                                          IsChecked="{Binding Enabled}" Command="{Binding DataContext.SetGestureCommand, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}"
+                                          CommandParameter="{Binding}"/>
+                        </Grid>
 
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+
+            </ItemsControl>
+
+        </Grid>
 </UserControl>

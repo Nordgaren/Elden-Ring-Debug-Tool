@@ -6,6 +6,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Erd_Tools.Models;
 using Erd_Tools;
+using Erd_Tools.Models.Msg;
+using Erd_Tools.Models.System.Dlc;
 
 namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels
 {
@@ -16,11 +18,9 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels
         public string Continent => Grace.Continent;
         public string Hub => Grace.Hub;
         public string Name => Grace.Name;
-        public int PtrOffset => Grace.PtrOffset;
-        public int DataOffset => Grace.DataOffset;
-        public int BitStart => Grace.BitStart;
         public int EntityID => Grace.EntityID;
         public int EventFlagID => Grace.EventFlagID;
+        public DlcName Dlc => Grace.Dlc;
         private ErdHook _hook { get; }
 
         private bool _enabled;
@@ -66,6 +66,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels
         public string Continent { get; }
         public string Name { get; }
         public ObservableCollection<GraceViewModel> Graces { get; set; } = new();
+        public DlcName Dlc => _hub.Dlc;
 
         public HubViewModel(Hub hub, string continent, ErdHook hook)
         {
@@ -92,6 +93,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels
         private Continent _continent { get; }
         public string Name { get; set; } = "";
         public ObservableCollection<HubViewModel> Hubs { get; set; } = new();
+        public DlcName Dlc => _continent.Dlc;
 
         public ContinentViewModel(Continent continent, ErdHook hook)
         {

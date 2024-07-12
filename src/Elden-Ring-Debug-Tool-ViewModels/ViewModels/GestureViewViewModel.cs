@@ -3,6 +3,7 @@ using Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels;
 using Erd_Tools;
 using Erd_Tools.Models;
 using Erd_Tools.Models.Game;
+using Erd_Tools.Models.System.Dlc;
 using PropertyHook;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -78,6 +79,14 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
             List<Gesture> gestures = Hook.GestureGameData.GetGestures();
             Gestures = new ObservableCollection<GestureViewModel>();
 
+            gestures.Remove((Hook.CSDlc.DlcAvailable(DlcName.PreOrderGesture)
+                    ? gestures.Find((g) => g.Id == 109)
+                    : gestures.Find((g) => g.Id == 108)));
+            
+            gestures.Remove(Hook.CSDlc.DlcAvailable(DlcName.ShadowOfTheErdtreePreOrderGesture)
+                ? gestures.Find((g) => g.Id == 116)
+                : gestures.Find((g) => g.Id == 113));
+
             foreach (Gesture gesture in gestures)
             {
                 Gestures.Add(new GestureViewModel(gesture));
@@ -85,7 +94,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
             Setup = true;
             GestureCollectionView = CollectionViewSource.GetDefaultView(Gestures);
             GestureCollectionView.Filter += FilerGestures;
-        }       
+        }     
         
         private string _gestureFilter = string.Empty;
         public string GestureFilter

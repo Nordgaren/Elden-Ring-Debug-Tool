@@ -19,7 +19,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.Commands
 
         public override bool CanExecute(object? parameter)
         {
-            return _miscViewViewModel.Hook.Setup && _miscViewViewModel.Hook.EventFlagMan.Resolve() != IntPtr.Zero && base.CanExecute(parameter);
+            return _miscViewViewModel.Hook.Setup && _miscViewViewModel.Hook.CSFD4VirtualMemoryFlag.Resolve() != IntPtr.Zero && base.CanExecute(parameter);
         }
 
         public override void Execute(object? parameter)
