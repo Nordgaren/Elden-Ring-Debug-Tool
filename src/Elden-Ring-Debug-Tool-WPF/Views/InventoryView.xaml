@@ -17,11 +17,15 @@
         </Grid.RowDefinitions>
         <StackPanel>
             <TextBlock Style="{DynamicResource TextBlockStyle}" Text="Inventory" HorizontalAlignment="Center" FontSize="20" FontWeight="ExtraBlack" Margin="0,20,0,0"  Grid.Row="0"/>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <ToggleButton HorizontalAlignment="Center" Content="Inventory" Width="70" IsChecked="{Binding ShowStorage, Converter={StaticResource ResourceKey=InverseBoolConverter}}"/>
+                <ToggleButton HorizontalAlignment="Center" Content="Storage" Width="70" IsChecked="{Binding ShowStorage}"/>
+            </StackPanel>
             <GroupBox Header="Inventory Counts">
                 <StackPanel>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                         <Label Content="Count:" FontWeight="Bold"/>
-                        <Label Content="{Binding InventoryCount}" FontWeight="Bold"/>
+                        <Label Content="{Binding HeldNormalItems}" FontWeight="Bold"/>
                         <Label Content="/" FontWeight="Bold"/>
                         <Label Content="{Binding InventoryMax}" FontWeight="Bold"/>
                     </StackPanel>
@@ -65,6 +69,11 @@
                    IsHitTestVisible="False"/>
 
         <DataGrid ItemsSource="{Binding InventoryCollectionView}" Grid.Row="2" Grid.Column="2" AutoGenerateColumns="False" HorizontalScrollBarVisibility="Visible" IsReadOnly="True" Background="{StaticResource Background}">
+            <DataGrid.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="Remove Item" Foreground="White" Command="{Binding RemoveItemCommand}" CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ContextMenu}}, Path=PlacementTarget.SelectedItem}"/>
+                </ContextMenu>
+            </DataGrid.ContextMenu>
             <DataGrid.Resources>
                 <Style TargetType="{x:Type DataGrid}">
                     <Setter Property="Background" Value="Transparent"/>

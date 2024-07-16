@@ -108,12 +108,25 @@ namespace Elden_Ring_Debug_Tool_ViewModels.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool HideDlc {
             get {
                 return ((bool)(this["HideDlc"]));
             }
             set {
                 this["HideDlc"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool Init {
+            get {
+                return ((bool)(this["Init"]));
+            }
+            set {
+                this["Init"] = value;
             }
         }
     }

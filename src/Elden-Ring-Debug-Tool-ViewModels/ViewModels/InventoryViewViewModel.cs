@@ -1,4 +1,5 @@
-﻿using Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels;
+﻿using Elden_Ring_Debug_Tool_ViewModels.Commands;
+using Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels;
 using Erd_Tools;
 using Erd_Tools.Models;
 using System;
@@ -10,6 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Data;
+using System.Windows.Input;
 
 namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
 {
@@ -25,6 +27,20 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
             set
             {
                 if (SetField(ref _inventoryEntryViewModels, value))
+                {
+                    OnPropertyChanged(nameof(InventoryCollectionView));
+                    InventoryCollectionView.Filter += FilterInventory;
+                }
+            }
+        }
+        
+        private ObservableCollection<InventoryEntryViewModel> _storageEntryViewModels;
+        public ObservableCollection<InventoryEntryViewModel> PlayerStorage
+        {
+            get => _storageEntryViewModels;
+            set
+            {
+                if (SetField(ref _storageEntryViewModels, value))
                 {
                     OnPropertyChanged(nameof(InventoryCollectionView));
                     InventoryCollectionView.Filter += FilterInventory;
@@ -58,13 +74,16 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
             return false;
         }
 
-        public ICollectionView InventoryCollectionView => CollectionViewSource.GetDefaultView(PlayerInventory);
+        public ICollectionView InventoryCollectionView => CollectionViewSource.GetDefaultView(ShowStorage ? PlayerStorage : PlayerInventory);
+        public ICommand RemoveItemCommand { get; init; }
 
         public SettingsViewViewModel SettingsViewViewModel { get; set; }
 
         public InventoryViewViewModel()
         {
             PlayerInventory = new ObservableCollection<InventoryEntryViewModel>();
+            PlayerStorage = new ObservableCollection<InventoryEntryViewModel>();
+            RemoveItemCommand = new RemoveItemCommand(this);
         }
 
         public void InitViewModel(ErdHook hook, SettingsViewViewModel settingsViewViewModel)
@@ -74,15 +93,34 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
             //SettingsViewViewModel.PropertyChanged += SettingsViewViewModel_PropertyChanged;
         }
 
+        private bool _showStorage;
 
-        private int _lastInvetoryCount { get; set; }
+        public bool ShowStorage
+        {
+            get => _showStorage;
+            set
+            {
+                if (SetField(ref _showStorage, value))
+                {
+                    OnPropertyChanged(nameof(InventoryCollectionView));
+                    InventoryCollectionView.Refresh();
+                }
+            }
+        }
+
+
+        private uint _lastInventoryCount { get; set; }
+        private uint _lastStorageCount { get; set; }
         public void UpdateViewModel()
         {
             Reading = true;
-            if (_lastInvetoryCount != Hook.InventoryEntries)
+            if (_lastInventoryCount != Hook.InventoryEntries)
                 GetInventory();
+            
+            if (_lastStorageCount != Hook.StorageEntries)
+                GetStorage();
 
-            HeldNormalItems = Hook.HeldNormalItems;
+            HeldNormalItems = ShowStorage ? Hook.StorageEntries : Hook.InventoryEntries;
             MaxNormalItems = Hook.MaxNormalItems;
             HeldSpecialItems = Hook.HeldSpecialItems;
             MaxSpecialItems = Hook.MaxSpecialItems;
@@ -93,7 +131,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
 
         private void GetInventory()
         {
-            _lastInvetoryCount = Hook.InventoryEntries;
+            _lastInventoryCount = Hook.InventoryEntries;
             IEnumerable inventory = Hook.GetInventory();
             List<InventoryEntryViewModel> items = new();
 
@@ -104,6 +142,21 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
 
             PlayerInventory = new ObservableCollection<InventoryEntryViewModel>(items);
             InventoryCount = PlayerInventory.Count;
+        }
+        
+        private void GetStorage()
+        {
+            _lastStorageCount = Hook.StorageEntries;
+            IEnumerable inventory = Hook.GetStorage();
+            List<InventoryEntryViewModel> items = new();
+
+            foreach (InventoryEntry entry in inventory)
+            {
+                items.Add(new InventoryEntryViewModel(entry));
+            }
+
+            PlayerStorage = new ObservableCollection<InventoryEntryViewModel>(items);
+            InventoryCount = PlayerStorage.Count;
         }
 
         private int _inventoryCount;
@@ -116,18 +169,12 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
         public int InventoryMax => MaxNormalItems + MaxSpecialItems;
 
 
-        private int _heldNormalItems;
+        private uint _heldNormalItems;
 
-        public int HeldNormalItems
+        public uint HeldNormalItems
         {
             get => _heldNormalItems;
-            set
-            {
-                if (SetField(ref _heldNormalItems, value) && !Reading)
-                {
-                    Hook.HeldNormalItems = HeldNormalItems;
-                }
-            }
+            set => SetField(ref _heldNormalItems, value);
         }
 
         private int _maxNormalItems;

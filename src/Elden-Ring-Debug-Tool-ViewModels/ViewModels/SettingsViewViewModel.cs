@@ -23,6 +23,20 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
         {
             Settings.Save();
         }
+        
+        private bool _init = Settings.Init;
+        public bool Init
+        {
+            get => _init;
+            set
+            {
+                if (SetField(ref _init, value))
+                {
+                    Settings.Init = Init;
+                }
+            }
+        }
+
 
         private bool _showWarning = Settings.ShowWarning;
         public bool ShowWarning

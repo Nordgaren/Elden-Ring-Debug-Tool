@@ -14,9 +14,12 @@ namespace Elden_Ring_Debug_Tool_WPF.Converters
             return !(bool)value;
         }
 
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        public object ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)
         {
-            throw new NotImplementedException("There is no backwards conversion for count to bool");
+            if (value == null)
+                return false;
+
+            return !(bool)value;
         }
     }
 }

@@ -12,6 +12,7 @@ using System.ComponentModel;
 using System.Collections.ObjectModel;
 using Elden_Ring_Debug_Tool_ViewModels.Properties;
 using Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels;
+using Erd_Tools.Models.System.Dlc;
 using Application = System.Windows.Application;
 
 namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
@@ -242,6 +243,12 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
             {
                 ID = Hook.ID;
             });
+
+            if (SettingsViewViewModel.Init)
+            {
+                SettingsViewViewModel.Init = true;
+                SettingsViewViewModel.HideDlc = !Hook.CSDlc.DlcAvailable(DlcName.ShadowOfTheErdtree);
+            }
         }
         private void Hook_OnUnhooked(object? sender, PropertyHook.PHEventArgs e)
         {

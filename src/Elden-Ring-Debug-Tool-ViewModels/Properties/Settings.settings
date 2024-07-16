@@ -24,7 +24,10 @@
       <Value Profile="(Default)">00:01:30</Value>
     </Setting>
     <Setting Name="HideDlc" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)" />
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="Init" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
     </Setting>
   </Settings>
 </SettingsFile>

@@ -16,6 +16,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels
         public string Category => _inventoryEntry?.Category.ToString() ?? "Unknown Category";
         public int Quantity => _inventoryEntry.Quantity;
         public int DisplayID => _inventoryEntry.DisplayID;
+        public uint Index => _inventoryEntry.Index;
         public InventoryEntryViewModel(InventoryEntry inventoryEntry)
         {
             _inventoryEntry = inventoryEntry;
