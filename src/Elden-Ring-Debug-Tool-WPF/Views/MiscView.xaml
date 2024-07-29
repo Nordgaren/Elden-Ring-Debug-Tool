@@ -42,7 +42,14 @@
 
                 <ScrollViewer VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Visible" Height="200" Width="Auto">
                     <!-- Set an appropriate height -->
-                    <ListBox x:Name="EventFlagResultsListBox" />
+                    <ListBox x:Name="EventFlagResultsListBox">
+                        <ListBox.ItemContainerStyle>
+                            <Style TargetType="ListBoxItem">
+                                <Setter Property="FontSize" Value="12"/>
+                                <!-- Change the value to adjust the font size -->
+                            </Style>
+                        </ListBox.ItemContainerStyle>
+                    </ListBox>
                 </ScrollViewer>
             </StackPanel>
         </Border>
