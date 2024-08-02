@@ -112,7 +112,7 @@
                 </Style>
             </DataGrid.Resources>
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Index" Binding="{Binding Index}" />
+                <!-- <DataGridTextColumn Header="Index" Binding="{Binding Index}" /> -->
                 <DataGridTextColumn Header="Name" Binding="{Binding Name}" />
                 <DataGridTextColumn Header="Item ID" Binding="{Binding ItemID}" />
                 <DataGridTextColumn Header="Category" Binding="{Binding Category}" MinWidth="50" />
