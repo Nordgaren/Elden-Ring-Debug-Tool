@@ -88,16 +88,20 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
 
         public void ReloadViewModel()
         {
-            if (string.IsNullOrWhiteSpace(GraceFilter))
+            if (!string.IsNullOrWhiteSpace(GraceFilter))
             {
-                GraceViewModel? graceViewModel =
-                    GraceViewModel.All.FirstOrDefault(g => g.EntityID + 1000 == Hook.LastGrace);
-
-                if (graceViewModel != null)
-                {
-                    SelectedGraceViewModel = graceViewModel;
-                }
+                return;
             }
+
+            GraceViewModel? graceViewModel =
+                GraceViewModel.All.FirstOrDefault(g => g.EntityID + 1000 == Hook.LastGrace);
+
+            if (graceViewModel == null)
+            {
+                return;
+            }
+
+            SelectedGraceViewModel = graceViewModel;
         }
 
         private bool _setup;
@@ -170,18 +174,22 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
             get => _lastGraceID;
             set
             {
-                if (SetField(ref _lastGraceID, value))
+                if (!SetField(ref _lastGraceID, value))
                 {
-                    int lastGraceID = LastGraceID - 1000;
-                    if (lastGraceID != LastGraceViewModel?.EntityID)
-                    {
-                        GraceViewModel? graceViewModel =
-                            GraceViewModel.All.FirstOrDefault(g => g.EntityID == lastGraceID);
-                        if (graceViewModel != null)
-                        {
-                            LastGraceViewModel = graceViewModel;
-                        }
-                    }
+                    return;
+                }
+
+                int lastGraceID = LastGraceID - 1000;
+                if (lastGraceID == LastGraceViewModel?.EntityID)
+                {
+                    return;
+                }
+
+                GraceViewModel? graceViewModel =
+                    GraceViewModel.All.FirstOrDefault(g => g.EntityID == lastGraceID);
+                if (graceViewModel != null)
+                {
+                    LastGraceViewModel = graceViewModel;
                 }
             }
         }
@@ -202,11 +210,13 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
             get => _selectedGraceViewModel;
             set
             {
-                if (SetField(ref _selectedGraceViewModel, value) && QuickSelectBonfire)
+                if (!SetField(ref _selectedGraceViewModel, value) || !QuickSelectBonfire)
                 {
-                    Hook.LastGrace = SelectedGraceViewModel.EntityID + 1000;
-                    //LastGraceViewModel = SelectedGraceViewModel;
+                    return;
                 }
+
+                Hook.LastGrace = SelectedGraceViewModel.EntityID + 1000;
+                //LastGraceViewModel = SelectedGraceViewModel;
             }
         }
 
@@ -225,12 +235,13 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
             get => _hideDlc;
             set
             {
-                if (SetField(ref _hideDlc, value))
+                if (!SetField(ref _hideDlc, value))
                 {
-                    GraceCollectionView.Refresh();
-                    HubCollectionView.Refresh();
-                    ;
+                    return;
                 }
+
+                GraceCollectionView.Refresh();
+                HubCollectionView.Refresh();
             }
         }
 
@@ -243,32 +254,37 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
             get => _graceFilter;
             set
             {
-                if (SetField(ref _graceFilter, value))
+                if (!SetField(ref _graceFilter, value))
                 {
-                    GraceCollectionView.Refresh();
-
-                    if (!GraceCollectionView.IsEmpty)
-                    {
-                        GraceCollectionView.MoveCurrentToFirst();
-                        SelectedGraceViewModel = (GraceViewModel)GraceCollectionView.CurrentItem;
-                    }
+                    return;
                 }
+
+                GraceCollectionView.Refresh();
+
+                if (GraceCollectionView.IsEmpty)
+                {
+                    return;
+                }
+
+                GraceCollectionView.MoveCurrentToFirst();
+                SelectedGraceViewModel = (GraceViewModel)GraceCollectionView.CurrentItem;
             }
         }
 
         private bool FilerGrace(object obj)
         {
-            if (obj is GraceViewModel grace)
+            if (obj is not GraceViewModel grace)
             {
-                if (HideDlc && grace.Dlc != DlcName.None)
-                {
-                    return false;
-                }
-
-                return grace.Name.Contains(GraceFilter, StringComparison.InvariantCultureIgnoreCase);
+                return false;
             }
 
-            return false;
+            if (HideDlc && grace.Dlc != DlcName.None)
+            {
+                return false;
+            }
+
+            return grace.Name.Contains(GraceFilter, StringComparison.InvariantCultureIgnoreCase);
+
         }
 
         private string _hubFilter = string.Empty;
@@ -278,32 +294,37 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
             get => _hubFilter;
             set
             {
-                if (SetField(ref _hubFilter, value))
+                if (!SetField(ref _hubFilter, value))
                 {
-                    HubCollectionView.Refresh();
-                    if (!HubCollectionView.IsEmpty)
-                    {
-                        HubCollectionView.MoveCurrentToFirst();
-                        SelectedHubViewModel = (HubViewModel)HubCollectionView.CurrentItem;
-                        return;
-                    }
+                    return;
                 }
+
+                HubCollectionView.Refresh();
+                if (HubCollectionView.IsEmpty)
+                {
+                    return;
+                }
+
+                HubCollectionView.MoveCurrentToFirst();
+                SelectedHubViewModel = (HubViewModel)HubCollectionView.CurrentItem;
+                return;
             }
         }
 
         private bool FilerHub(object obj)
         {
-            if (obj is HubViewModel hub)
+            if (obj is not HubViewModel hub)
             {
-                if (HideDlc && hub.Dlc != DlcName.None)
-                {
-                    return false;
-                }
-
-                return hub.Name.Contains(HubFilter, StringComparison.InvariantCultureIgnoreCase);
+                return false;
             }
 
-            return false;
+            if (HideDlc && hub.Dlc != DlcName.None)
+            {
+                return false;
+            }
+
+            return hub.Name.Contains(HubFilter, StringComparison.InvariantCultureIgnoreCase);
+
         }
 
         #endregion

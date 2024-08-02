@@ -102,6 +102,14 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
             {
                 if (SetField(ref _showStorage, value))
                 {
+                    if (ShowStorage)
+                    {
+                        GetStorage();
+                    } else
+                    {
+                        GetInventory();
+                    }
+                    
                     OnPropertyChanged(nameof(InventoryCollectionView));
                     InventoryCollectionView.Refresh();
                 }
@@ -120,7 +128,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
             if (_lastStorageCount != Hook.StorageEntries)
                 GetStorage();
 
-            HeldNormalItems = ShowStorage ? Hook.StorageEntries : Hook.InventoryEntries;
+            TotalInventoryEntries = Hook.TotalInventoryEntries;
             MaxNormalItems = Hook.MaxNormalItems;
             HeldSpecialItems = Hook.HeldSpecialItems;
             MaxSpecialItems = Hook.MaxSpecialItems;
@@ -169,12 +177,12 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
         public int InventoryMax => MaxNormalItems + MaxSpecialItems;
 
 
-        private uint _heldNormalItems;
+        private uint _totalInventoryEntries;
 
-        public uint HeldNormalItems
+        public uint TotalInventoryEntries
         {
-            get => _heldNormalItems;
-            set => SetField(ref _heldNormalItems, value);
+            get => _totalInventoryEntries;
+            set => SetField(ref _totalInventoryEntries, value);
         }
 
         private int _maxNormalItems;
@@ -217,6 +225,14 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
                     Hook.HeldSpecialItems = HeldSpecialItems;
                 }
             }
+        }
+
+        private InventoryEntryViewModel _selectedItem;
+
+        public InventoryEntryViewModel SelectedItem
+        {
+            get => _selectedItem;
+            set => SetField(ref _selectedItem, value);
         }
     }
 }

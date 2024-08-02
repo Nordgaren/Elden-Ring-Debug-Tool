@@ -246,9 +246,11 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
 
             if (SettingsViewViewModel.Init)
             {
-                SettingsViewViewModel.Init = true;
-                SettingsViewViewModel.HideDlc = !Hook.CSDlc.DlcAvailable(DlcName.ShadowOfTheErdtree);
+                return;
             }
+
+            SettingsViewViewModel.Init = true;
+            SettingsViewViewModel.HideDlc = !Hook.CSDlc.DlcAvailable(DlcName.ShadowOfTheErdtree);
         }
         private void Hook_OnUnhooked(object? sender, PropertyHook.PHEventArgs e)
         {

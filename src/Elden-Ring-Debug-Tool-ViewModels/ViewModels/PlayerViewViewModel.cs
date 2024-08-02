@@ -24,8 +24,11 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels
                 PlayerIns = new EnemyViewModel(new Enemy(Hook.PlayerIns, Hook));
         }
 
+        private bool _reading = false;
+
         public void UpdateViewModel()
         {
+            _reading = true;
             if (PlayerIns == null && Hook.PlayerIns.Resolve() != IntPtr.Zero)
                 PlayerIns = new EnemyViewModel(new Enemy(Hook.PlayerIns, Hook));
 
@@ -60,6 +63,8 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels
             if (LockTeam) PlayerIns.TeamType = _lockTeamValue;
 
             if (LockChr) PlayerIns.ChrType = _lockChrValue;
+            
+            _reading = false;
         }
 
         private bool _lockTarget;
@@ -77,6 +82,9 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels
             {
                 if (SetField(ref _name, value))
                 {
+                    if (_reading)
+                        return;
+                    
                     Hook.Name = Name;
                 }
             }
