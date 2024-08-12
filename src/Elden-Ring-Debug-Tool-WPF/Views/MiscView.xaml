@@ -12,7 +12,7 @@
              mc:Ignorable="d"
              d:DesignHeight="600" d:DesignWidth="400" Background="{StaticResource Background}" DataContextChanged="OnDataContextChanged"
              d:DataContext="{d:DesignInstance vm:MiscViewViewModel, IsDesignTimeCreatable=True}">
-    <Grid>
+    <Grid x:Name="grid">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
@@ -33,23 +33,30 @@
                     <Separator Width="20" Visibility="Hidden"/>
                     <Button Content="Check" Command="{Binding CheckEventFlag}" CommandParameter="{Binding EventFlag}"/>
                 </StackPanel>
-                <Button Content="Check All Mimic Tears" Click="CheckAllMimicTears_Click" />
-                <Button Content="Check All Lost Ashes of War" Click="CheckAllLostAshes_Click" />
-                <Button Content="Check All Ancient Dragon Smithing Stones" Click="CheckAllAncientStones_Click" />
-                <Button Content="Check All Somber Ancient Dragon Smithing Stones" Click="CheckAllSomberAncientStones_Click" />
-                <Button Content="Check All Great Grave Gloveworts" Click="CheckAllGreatGraveGloves_Click" />
-                <Button Content="Check All Great Ghost Gloveworts" Click="CheckAllGreatGhostGloves_Click" />
+                <Button Content="Check All Larval Tears" Click="CheckAllLarvalTears_Click" Tag="Larval Tears" />
+                <Button Content="Check All Lost Ashes of War" Click="CheckAllLostAshes_Click" Tag="Lost Ashes of War" />
+                <Button Content="Check All Ancient Dragon Smithing Stones" Click="CheckAllAncientStones_Click" Tag="Ancient Dragon Smithing Stones" />
+                <Button Content="Check All Somber Ancient Dragon Smithing Stones" Click="CheckAllSomberAncientStones_Click" Tag="Somber Ancient Dragon Smithing Stones" />
+                <Button Content="Check All Great Grave Gloveworts" Click="CheckAllGreatGraveGloves_Click" Tag="Great Grave Gloveworts" />
+                <Button Content="Check All Great Ghost Gloveworts" Click="CheckAllGreatGhostGloves_Click" Tag="Great Ghost Gloveworts" />
 
-                <ScrollViewer VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Visible" Height="200" Width="Auto">
+                <ScrollViewer VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Visible" Height="350" Width="Auto">
                     <!-- Set an appropriate height -->
-                    <ListBox x:Name="EventFlagResultsListBox">
-                        <ListBox.ItemContainerStyle>
-                            <Style TargetType="ListBoxItem">
-                                <Setter Property="FontSize" Value="12"/>
-                                <!-- Change the value to adjust the font size -->
-                            </Style>
-                        </ListBox.ItemContainerStyle>
+                    <ListBox x:Name="EventFlagResultsListBox" HorizontalContentAlignment="Stretch">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Border Margin="2" Padding="5" Background="{Binding IsEventFlag, Converter={StaticResource BooleanToColorConverter}}">
+                                    <TextBlock>
+                                        <Hyperlink NavigateUri="{Binding URL}" RequestNavigate="Hyperlink_RequestNavigate" Foreground="White">
+                                        <ToggleButton Style="{StaticResource ToggleButtonPower}" Width="25" Background="{StaticResource Background}" IsChecked="{Binding IsEventFlag, Mode=OneWay}"/>
+                                        <TextBlock Text="{Binding DisplayText}"/>
+                                        </Hyperlink>
+                                    </TextBlock>
+                                </Border>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
                     </ListBox>
+
                 </ScrollViewer>
             </StackPanel>
         </Border>
