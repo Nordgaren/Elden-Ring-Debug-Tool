@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,11 +17,13 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
         public ICommand EnableEventFlag { get; }
         public ICommand DisableEventFlag { get; }
         public ICommand CheckEventFlag { get; }
+
         public MiscViewViewModel()
         {
             EnableEventFlag = new EnableEventCommand(this);
             DisableEventFlag = new DisableEventCommand(this);
             CheckEventFlag = new IsEventCommand(this);
+            EventFlags = new ObservableCollection<EventFlagItem>();
         }
 
         public void UpdateViewModel()
@@ -66,6 +70,47 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
             get => _isEventFlag;
             set => SetField(ref _isEventFlag, value);
         }
-        
+
+        // Declare the EventFlags property
+        private ObservableCollection<EventFlagItem> _eventFlags;
+        public ObservableCollection<EventFlagItem> EventFlags
+        {
+            get => _eventFlags;
+            set => SetField(ref _eventFlags, value);
+        }
+    }
+    public class EventFlagItem : ViewModelBase, INotifyPropertyChanged
+    {
+        public ErdHook Hook { get; private set; }
+
+        //private bool _isEventFlag;
+        //public bool IsEventFlag
+        //{
+        //    get => _isEventFlag;
+        //    set
+        //    {
+        //        if (_isEventFlag != value)
+        //        {
+        //            _isEventFlag = value;
+        //            OnPropertyChanged(nameof(IsEventFlag));
+        //        }
+        //    }
+        //}
+
+        private bool? _isEventFlag;
+        public bool? IsEventFlag
+        {
+            get => _isEventFlag;
+            set => SetField(ref _isEventFlag, value);
+        }
+        public int EventID { get; set; }
+        public string DisplayText { get; set; }
+        public string URL { get; set; } 
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected virtual void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
     }
 }
