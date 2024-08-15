@@ -9,7 +9,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels
 {
     public class InventoryEntryViewModel
     {
-        private InventoryEntry _inventoryEntry;
+        private readonly InventoryEntry _inventoryEntry;
         public string Name => _inventoryEntry.Name;
         public string GaItemHandle => $"0x{_inventoryEntry.GaItemHandle:X2}";
         public int ItemID 
@@ -32,5 +32,9 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels
         {
             _inventoryEntry = inventoryEntry;
         }
+        
+        public bool IsNew => _inventoryEntry.IsNew;
+        public string PotType => _inventoryEntry.PotType.ToString() ?? "Unknown Pot Type";
+
     }
 }

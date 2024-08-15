@@ -119,6 +119,7 @@
                 <DataGridTextColumn Header="Quantity" Binding="{Binding Quantity}" MinWidth="60" />
                 <DataGridTextColumn Header="Display ID" Binding="{Binding DisplayID}" MinWidth="75" />
                 <DataGridTextColumn Header="GaItem Handle" Binding="{Binding GaItemHandle}" MinWidth="90" />
+                <DataGridTextColumn Header="Pot Type" Binding="{Binding PotType}" MinWidth="90" />
             </DataGrid.Columns>
         </DataGrid>
         <StackPanel Grid.Row="3">
