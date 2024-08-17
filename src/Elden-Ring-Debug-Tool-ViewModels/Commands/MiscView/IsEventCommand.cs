@@ -24,16 +24,21 @@ namespace Elden_Ring_Debug_Tool_ViewModels.Commands
 
         public override void Execute(object? parameter)
         {
-            if (!(parameter is int eventID))
-                throw new ArgumentNullException(nameof(parameter), "parameter was null. parameter must be an int");
+            int eventID;
+            if (parameter == null)
+                eventID = _miscViewViewModel.EventFlag;  // Use the current EventFlag if no parameter is passed
+            else if (parameter is int id)
+                eventID = id;
+            else
+                throw new ArgumentException("Parameter must be an int", nameof(parameter));
 
+            // This checks the event flag and updates the ViewModel's IsEventFlag property
             _miscViewViewModel.IsEventFlag = _miscViewViewModel.Hook.IsEventFlag(eventID);
         }
 
         private void _debugViewViewModel_PropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            if (e.PropertyName is nameof(MiscViewViewModel.Setup) 
-                or nameof(MiscViewViewModel.Loaded))
+            if (e.PropertyName == nameof(MiscViewViewModel.Setup) || e.PropertyName == nameof(MiscViewViewModel.Loaded))
             {
                 OnCanExecuteChanged();
             }
