@@ -4,6 +4,9 @@ A tool for testing and debugging mods in Elden Ring
 ![build](https://github.com/Nordgaren/Elden-Ring-Debug-Tool/actions/workflows/build.yml/badge.svg) 
 ![github__version](https://img.shields.io/github/v/release/Nordgaren/Elden-Ring-Debug-Tool)
 [![GitHub all releases](https://img.shields.io/github/downloads/Nordgaren/Elden-Ring-Debug-Tool/total)](https://github.com/Nordgaren/Elden-Ring-Debug-Tool/releases/latest)
+
+# Nexus Mods
+My mods will no longer be on Nexus Mods, and I do not give permission to re-upload them. If you mirror my mods to Nexus, I will have them taken down. Nexus is a scummy website that takes andvantage of mod authors, and only enforces their ToS if they feel like it. They make money off the backs of mod authors, but don't have the mod authors backs. I will not support this. 
  
 # WARNING  
 Backup your saves before using this tool, and restore the backups before going online. Using this tool to skip around the game (for example going to the madness grace before talking to melina or killing margit) will cause you to get banned!  
