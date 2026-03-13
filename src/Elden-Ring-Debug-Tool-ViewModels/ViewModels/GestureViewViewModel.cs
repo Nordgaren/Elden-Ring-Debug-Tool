@@ -1,12 +1,12 @@
 ﻿using Elden_Ring_Debug_Tool_ViewModels.Commands.GestureView;
 using Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels;
 using Erd_Tools;
-using Erd_Tools.Models;
 using Erd_Tools.Models.Game;
 using Erd_Tools.Models.System.Dlc;
 using PropertyHook;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Windows;
 using System.Windows.Data;
 using System.Windows.Input;
 
@@ -33,19 +33,46 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
         {
             SetGestureCommand = new SetGestureCommand(this);
         }
-        
-        public void UpdateViewModel() {
-            if (!Setup)
+
+        private bool _isUpdatingGestures;
+
+        public async void UpdateViewModel()
+        {
+            // If the view isn't active, isn't setup, OR is currently busy updating, do nothing
+            if (!IsActiveView || !Setup || _isUpdatingGestures) 
             {
                 return;
             }
-            
-            foreach (GestureViewModel gesture in GestureCollectionView)
+
+            _isUpdatingGestures = true;
+
+            try
             {
-                gesture.Enabled = Hook.GestureGameData.CheckGesture(gesture.Id);
+                // Offload the heavy memory reading to a background thread
+                await Task.Run(() =>
+                {
+                    foreach (GestureViewModel gesture in GestureCollectionView)
+                    {
+                        // Read memory in the background
+                        bool isEnabled = Hook.GestureGameData.CheckGesture(gesture.Id);
+                
+                        // PERFORMANCE BOOST: Only bother the UI thread if the value ACTUALLY changed
+                        if (gesture.Enabled != isEnabled)
+                        {
+                            Application.Current.Dispatcher.Invoke(() =>
+                            {
+                                gesture.Enabled = isEnabled;
+                            });
+                        }
+                    }
+                });
+            }
+            finally
+            {
+                // Release the lock so the next timer tick can process
+                _isUpdatingGestures = false;
             }
         }
-
 
         public void ReloadViewModel()
         {
@@ -93,7 +120,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
             }
             Setup = true;
             GestureCollectionView = CollectionViewSource.GetDefaultView(Gestures);
-            GestureCollectionView.Filter += FilerGestures;
+            GestureCollectionView.Filter += FilterGestures;
         }     
         
         private string _gestureFilter = string.Empty;
@@ -114,7 +141,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
             }
         }
         
-        private bool FilerGestures(object obj)
+        private bool FilterGestures(object obj)
         {
             if (obj is GestureViewModel gesture)
             {

@@ -6,6 +6,7 @@ using Erd_Tools.Models;
 using PropertyHook;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Windows;
 using System.Windows.Data;
 using System.Windows.Input;
 using static Erd_Tools.Models.Weapon;
@@ -79,7 +80,16 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
             Hook = hook;
             Hook.OnSetup += Hook_OnSetup;
             Hook.OnUnhooked += Hook_OnUnhooked;
-            foreach (ItemCategory itemCategory in ItemCategory.All)
+
+            if (_categories.Count > 0)
+                SelectedItemCategory = _categories[0];
+        }
+
+        private void populateItemLists(List<ItemCategory> itemCategories) {
+            _categories.Clear();
+            _gems.Clear();
+            
+            foreach (ItemCategory itemCategory in itemCategories)
             {
                 ItemCategoryViewModel itemCategoryViewModel = new(itemCategory);
                 _categories.Add(itemCategoryViewModel);
@@ -92,9 +102,6 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
                     }
                 }
             }
-
-            if (_categories.Count > 0)
-                SelectedItemCategory = _categories[0];
         }
 
         private bool _cancelVisibility;
@@ -113,6 +120,8 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
         {
             System.Windows.Application.Current.Dispatcher.Invoke(() =>
             {
+                populateItemLists(ItemCategory.Live);
+                
                 foreach (ItemViewModel item in ItemViewModel.All)
                 {
                     item.SetupItem();
@@ -124,6 +133,8 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
 
         public void UpdateViewModel()
         {
+            if (!IsActiveView) return;
+            
             //Setup = Hook.Setup;
             Loaded = Hook.Loaded;
         }
@@ -302,5 +313,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
             return false;
         } 
         #endregion
+        
+
     }
 }
