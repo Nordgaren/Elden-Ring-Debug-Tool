@@ -9,7 +9,8 @@
              mc:Ignorable="d"
              d:DesignHeight="600" d:DesignWidth="400" d:Background="{StaticResource Background}"
              DataContextChanged="OnDataContextChanged"
-             d:DataContext="{d:DesignInstance vm:InventoryViewViewModel, IsDesignTimeCreatable=True}">
+             d:DataContext="{d:DesignInstance vm:InventoryViewViewModel, IsDesignTimeCreatable=True}" 
+             IsVisibleChanged="OnIsVisibleChanged">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="200" />
@@ -86,8 +87,12 @@
                   Background="{StaticResource Background}">
             <DataGrid.ContextMenu>
                 <ContextMenu>
+                    <MenuItem Header="Get Address" Foreground="White" Command="{Binding GetAddressCommand}"
+                              CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ContextMenu}}, Path=PlacementTarget.SelectedItem}" />
+                    <Separator/>
                     <MenuItem Header="Remove Item" Foreground="White" Command="{Binding RemoveItemCommand}"
                               CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ContextMenu}}, Path=PlacementTarget.SelectedItem}" />
+                    
                 </ContextMenu>
             </DataGrid.ContextMenu>
             <DataGrid.Resources>

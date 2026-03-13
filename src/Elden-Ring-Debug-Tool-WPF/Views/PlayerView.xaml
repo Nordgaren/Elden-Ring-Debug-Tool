@@ -10,7 +10,8 @@
              xmlns:svm="clr-namespace:Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels;assembly=Elden-Ring-Debug-Tool-ViewModels"
              mc:Ignorable="d"
              d:DesignHeight="600" d:DesignWidth="800" d:Background="{StaticResource Background}" DataContextChanged="OnDataContextChanged"
-             d:DataContext="{d:DesignInstance svm:PlayerViewViewModel, IsDesignTimeCreatable=True}">
+             d:DataContext="{d:DesignInstance svm:PlayerViewViewModel, IsDesignTimeCreatable=True}" 
+                    IsVisibleChanged="OnIsVisibleChanged">
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -39,6 +40,10 @@
                                 <Label Content="Name:"/>
                                 <Separator Visibility="Hidden" Width="20"/>
                                 <TextBox Text="{Binding Name}" Width="300"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                <Label Content="Clear Count: "/>
+                                <wpfTool:UIntegerUpDown Value="{Binding ClearCount}" />
                             </StackPanel>
 
                             <StackPanel Orientation="Horizontal" Visibility="Hidden">

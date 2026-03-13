@@ -7,6 +7,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
 {
@@ -26,6 +27,8 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
 
         public void UpdateViewModel()
         {
+            if (!IsActiveView) return;
+            
             if (TargetEnemy?.Hp == 0 || (Hook.CurrentTargetHandle == -1 && !LockTarget))
             {
                 TargetEnemy = null;
@@ -114,5 +117,6 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
                 }
             }
         }
+
     }
 }

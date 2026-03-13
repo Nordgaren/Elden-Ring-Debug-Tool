@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.Windows.Data;
 using System.Windows.Input;
 using Erd_Tools.Models;
+using System.Windows;
 
 namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
 {
@@ -77,6 +78,8 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
 
         public void UpdateViewModel()
         {
+            if (!IsActiveView) return;
+            
             //Setup = Hook.Setup;
         }
 
@@ -180,6 +183,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
         }
 
         #endregion
+
 
     }
 }

@@ -24,6 +24,14 @@ namespace Elden_Ring_Debug_Tool_WPF.Views
                 _targetViewViewModel = vm;
             }
         }
+        
+        private void OnIsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            if (DataContext is ViewModelBase vm)
+            {
+                vm.IsActiveView = IsVisible; 
+            }
+        }
 
         private void Label_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {

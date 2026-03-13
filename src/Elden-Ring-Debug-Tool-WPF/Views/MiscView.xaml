@@ -1,38 +1,126 @@
 ﻿<UserControl x:Class="Elden_Ring_Debug_Tool_WPF.Views.MiscView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:Elden_Ring_Debug_Tool_WPF" 
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:Elden_Ring_Debug_Tool_WPF"
              xmlns:vm="clr-namespace:Elden_Ring_Debug_Tool_ViewModels.ViewModels;assembly=Elden-Ring-Debug-Tool-ViewModels"
              xmlns:svm="clr-namespace:Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels;assembly=Elden-Ring-Debug-Tool-ViewModels"
-             xmlns:t="http://schemas.telerik.com/2008/xaml/presentation" 
-             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" 
+             xmlns:t="http://schemas.telerik.com/2008/xaml/presentation"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:wpfTool="http://schemas.xceed.com/wpf/xaml/toolkit"
              mc:Ignorable="d"
-             d:DesignHeight="600" d:DesignWidth="400" Background="{StaticResource Background}" DataContextChanged="OnDataContextChanged"
-             d:DataContext="{d:DesignInstance vm:MiscViewViewModel, IsDesignTimeCreatable=True}">
+             d:DesignHeight="600" d:DesignWidth="400" Background="{StaticResource Background}"
+             DataContextChanged="OnDataContextChanged"
+             d:DataContext="{d:DesignInstance vm:MiscViewViewModel, IsDesignTimeCreatable=True}" 
+             IsVisibleChanged="OnIsVisibleChanged">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <Border Grid.Row="0" BorderBrush="White" BorderThickness="2" Margin="25" >
+        <Border Grid.Row="0" BorderBrush="White" BorderThickness="2" Margin="25">
             <StackPanel Margin="5">
-                <Label Content="Set Event Flag" FontWeight="Bold" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+                <Label Content="Set Event Flag" FontWeight="Bold" HorizontalContentAlignment="Center"
+                       VerticalContentAlignment="Center" />
                 <Separator Visibility="Hidden" Height="10"></Separator>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                    <wpfTool:IntegerUpDown Value="{Binding EventFlag}" ShowButtonSpinner="False" TextAlignment="Center" Width="110"/>
-                    <Separator Width="10" Visibility="Hidden"/>
-                    <ToggleButton Style="{StaticResource ToggleButtonPower}" Width="25" Background="{StaticResource Background}" IsChecked="{Binding IsEventFlag, Mode=OneWay}"/>
+                    <wpfTool:UIntegerUpDown Value="{Binding EventFlag}" ShowButtonSpinner="False"
+                                            TextAlignment="Center" Width="110" />
+                    <Separator Width="10" Visibility="Hidden" />
+                    <ToggleButton Style="{StaticResource ToggleButtonPower}" Width="25"
+                                  Background="{StaticResource Background}"
+                                  IsChecked="{Binding IsEventFlag, Mode=OneWay}" />
                 </StackPanel>
                 <Separator Visibility="Hidden" Height="10"></Separator>
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" >
-                    <Button Content="Enable" Command="{Binding EnableEventFlag}" CommandParameter="{Binding EventFlag}"/>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <Button Content="Enable" Command="{Binding EnableEventFlag}" CommandParameter="{Binding EventFlag}" />
                     <Separator Visibility="Hidden" Width="20"></Separator>
-                    <Button Content="Disable" Command="{Binding DisableEventFlag}" CommandParameter="{Binding EventFlag}"/>
+                    <Button Content="Disable" Command="{Binding DisableEventFlag}"
+                            CommandParameter="{Binding EventFlag}" />
                     <Separator Visibility="Hidden" Width="20"></Separator>
-                    <Button Content="Check" Command="{Binding CheckEventFlag}" CommandParameter="{Binding EventFlag}"/>
+                    <Button Content="Check" Command="{Binding CheckEventFlag}" CommandParameter="{Binding EventFlag}" />
                 </StackPanel>
+            </StackPanel>
+        </Border>
+
+
+        <Border Grid.Row="1" BorderBrush="White" BorderThickness="2" Margin="25">
+            <StackPanel Margin="5">
+                <Label Content="Event Flag Watch" FontWeight="Bold" HorizontalContentAlignment="Center"
+                       VerticalContentAlignment="Center" />
+                <Separator Visibility="Hidden" Height="10"></Separator>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <StackPanel Orientation="Vertical">
+                        <Label Content="Id" HorizontalAlignment="Center"></Label>
+                        <wpfTool:UIntegerUpDown Value="{Binding WatchFlag}" ShowButtonSpinner="False"
+                                                TextAlignment="Center" Width="110" />
+                    </StackPanel>
+                    <Separator Width="10" Visibility="Hidden" />
+                    <StackPanel Orientation="Vertical">
+                        <Label Content="Bits" HorizontalAlignment="Center"></Label>
+                        <wpfTool:UIntegerUpDown Value="{Binding Bits}" ShowButtonSpinner="False"
+                                                TextAlignment="Center" Width="25" />
+                    </StackPanel>
+                    <Separator Width="10" Visibility="Hidden" />
+                    <StackPanel Orientation="Vertical">
+                        <Label Content="Description" HorizontalAlignment="Center"></Label>
+                        <TextBox Text="{Binding Description}" TextAlignment="Center" Width="150" Background="White"/>
+                    </StackPanel>
+
+                    <!-- <ToggleButton Style="{StaticResource ToggleButtonPower}" Width="25" Background="{StaticResource Background}" IsChecked="{Binding IsEventFlag, Mode=OneWay}"/> -->
+                </StackPanel>
+                <Separator Visibility="Hidden" Height="10"></Separator>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <Button Content="Add Watch" Command="{Binding AddEventWatch}"
+                            CommandParameter="{Binding EventWatch}" />
+                </StackPanel>
+                <Separator Visibility="Hidden" Height="10"></Separator>
+
+                <DataGrid ItemsSource="{Binding EventWatchCollectionView}"
+                          SelectedItem="{Binding SelectedItem}"
+                          AutoGenerateColumns="False" HorizontalScrollBarVisibility="Visible" AllowDrop="True"
+                          Background="{StaticResource Background}" CanUserAddRows="False">
+                    <DataGrid.Resources>
+                        <Style TargetType="{x:Type DataGrid}">
+                            <Setter Property="Background" Value="Transparent" />
+                            <Setter Property="Foreground" Value="{StaticResource Foreground}" />
+                        </Style>
+                        <Style TargetType="{x:Type DataGridRow}">
+                            <Setter Property="Background" Value="Transparent" />
+                            <Setter Property="Foreground" Value="{StaticResource Foreground}" />
+                        </Style>
+                        <Style TargetType="{x:Type DataGridRowHeader}">
+                            <Setter Property="Background" Value="Transparent" />
+                            <Setter Property="Foreground" Value="{StaticResource Foreground}" />
+                        </Style>
+                        <Style TargetType="{x:Type DataGridColumnHeader}">
+                            <Setter Property="Background" Value="{StaticResource Background}" />
+                            <Setter Property="Foreground" Value="{StaticResource Foreground}" />
+                            <Setter Property="BorderThickness" Value="1" />
+                            <Setter Property="BorderBrush" Value="Black" />
+                            <Setter Property="HorizontalContentAlignment" Value="Center" />
+                        </Style>
+                        <Style TargetType="DataGridCell">
+                            <Setter Property="TextBlock.TextAlignment" Value="Center" />
+                        </Style>
+                    </DataGrid.Resources>
+                    <DataGrid.Columns>
+                        <!-- <DataGridTextColumn Header="Index" Binding="{Binding Index}" /> -->
+                        <DataGridTextColumn Header="Event ID" Binding="{Binding EventId}" Width="*" MinWidth="100" />
+                        <DataGridTextColumn Header="Bits" Binding="{Binding Bits}" Width="*"/>
+                        <DataGridTextColumn Header="Description" Binding="{Binding Description}" Width="*" MinWidth="150" />
+                        <DataGridTextColumn Header="Value" Binding="{Binding Value}" Width="*" MinWidth="60" IsReadOnly="True"/>
+                        <DataGridTemplateColumn Header="Actions">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button Content="Delete" Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}, Path=DataContext.RemoveEventWatch}"
+                                            CommandParameter="{Binding}" />
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
             </StackPanel>
         </Border>
 

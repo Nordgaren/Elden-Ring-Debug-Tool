@@ -10,6 +10,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Data;
 using System.Windows.Input;
 
@@ -76,6 +77,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
 
         public ICollectionView InventoryCollectionView => CollectionViewSource.GetDefaultView(ShowStorage ? PlayerStorage : PlayerInventory);
         public ICommand RemoveItemCommand { get; init; }
+        public ICommand GetAddressCommand { get; init; }
 
         public SettingsViewViewModel SettingsViewViewModel { get; set; }
 
@@ -84,6 +86,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
             PlayerInventory = new ObservableCollection<InventoryEntryViewModel>();
             PlayerStorage = new ObservableCollection<InventoryEntryViewModel>();
             RemoveItemCommand = new RemoveItemCommand(this);
+            GetAddressCommand = new GetAddressCommand(this);
         }
 
         public void InitViewModel(ErdHook hook, SettingsViewViewModel settingsViewViewModel)
@@ -121,6 +124,8 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
         private uint _lastStorageCount { get; set; }
         public void UpdateViewModel()
         {
+            if (!IsActiveView) return;
+            
             Reading = true;
             if (_lastInventoryCount != Hook.InventoryEntries)
                 GetInventory();
@@ -234,5 +239,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
             get => _selectedItem;
             set => SetField(ref _selectedItem, value);
         }
+
+
     }
 }

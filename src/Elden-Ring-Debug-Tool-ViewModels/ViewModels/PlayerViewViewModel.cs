@@ -7,6 +7,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels
 {
@@ -28,6 +29,8 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels
 
         public void UpdateViewModel()
         {
+            if (!IsActiveView) return;
+            
             _reading = true;
             if (PlayerIns == null && Hook.PlayerIns.Resolve() != IntPtr.Zero)
                 PlayerIns = new EnemyViewModel(new Enemy(Hook.PlayerIns, Hook));
@@ -52,6 +55,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels
             //}
 
             Name = Hook.Name;
+            ClearCount = Hook.ClearCount;
             PlayerIns.UpdateEnemy();
 
             if (LockHp) PlayerIns.Hp = _lockHpValue;
@@ -72,6 +76,22 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels
 
         private EnemyViewModel _playerIns;
         public EnemyViewModel? PlayerIns { get => _playerIns; set => SetField(ref _playerIns, value); }
+
+        private uint _clearCount;
+        public uint ClearCount
+        {
+            get => _clearCount;
+            set
+            {
+                if (SetField(ref _clearCount, value))
+                {
+                    if (_reading)
+                        return;
+                    
+                    Hook.ClearCount = ClearCount;
+                }
+            }
+        }
 
         private string _name;
 
@@ -165,5 +185,6 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels
                 }
             }
         }
+
     }
 }

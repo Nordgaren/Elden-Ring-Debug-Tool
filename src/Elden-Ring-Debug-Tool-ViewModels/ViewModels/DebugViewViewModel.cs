@@ -9,6 +9,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using static Erd_Tools.ErdHook;
 using System.Windows.Data;
 using System.Windows.Input;
@@ -65,6 +66,9 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
         }
         public void UpdateViewModel()
         {
+            if (!IsActiveView) return;
+            
+            
             Loaded = Hook.Loaded;
 
             if (((IToggleableCommand)ForceWeatherCommand).State)
@@ -184,5 +188,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
         }
 
         #endregion
+        
+
     }
 }

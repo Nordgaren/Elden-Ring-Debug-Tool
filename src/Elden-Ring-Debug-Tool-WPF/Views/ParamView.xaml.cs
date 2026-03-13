@@ -24,5 +24,12 @@ namespace Elden_Ring_Debug_Tool_WPF.Views
                 _paramViewModel = vm;
             }
         }
+        private void OnIsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            if (DataContext is ViewModelBase vm)
+            {
+                vm.IsActiveView = IsVisible; 
+            }
+        }
     }
 }

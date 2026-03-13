@@ -18,7 +18,18 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels
 
             set => _inventoryEntry.ItemID = value;
         }
-        public string Category => _inventoryEntry?.Category.ToString() ?? "Unknown Category";
+        public string Category
+        {
+            get => _inventoryEntry.Category.ToString() ?? "Unknown Category";
+            set
+            {
+                if (Enum.TryParse(value, out Item.Category cat))
+                {
+                    _inventoryEntry.Category = cat;
+                }
+            }
+        }
+
         public int Quantity
         {
             get => _inventoryEntry.Quantity;
@@ -35,6 +46,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels
         
         public bool IsNew => _inventoryEntry.IsNew;
         public string PotType => _inventoryEntry.PotType.ToString() ?? "Unknown Pot Type";
+        public string Address => _inventoryEntry.GetAddress().ToString("X");
 
     }
 }

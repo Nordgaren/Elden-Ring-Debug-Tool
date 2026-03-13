@@ -19,7 +19,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels
         public string Hub => Grace.Hub;
         public string Name => Grace.Name;
         public int EntityID => Grace.EntityID;
-        public int EventFlagID => Grace.EventFlagID;
+        public uint EventFlagID => Grace.EventFlagID;
         public DlcName Dlc => Grace.Dlc;
         private ErdHook _hook { get; }
 

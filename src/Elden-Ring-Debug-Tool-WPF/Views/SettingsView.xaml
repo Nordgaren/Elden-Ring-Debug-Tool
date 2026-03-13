@@ -11,7 +11,8 @@
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              mc:Ignorable="d"
              d:DesignHeight="600" d:DesignWidth="400" d:Background="{StaticResource Background}" DataContextChanged="OnDataContextChanged"
-             d:DataContext="{d:DesignInstance vm:SettingsViewViewModel, IsDesignTimeCreatable=True}">
+             d:DataContext="{d:DesignInstance vm:SettingsViewViewModel, IsDesignTimeCreatable=True}" 
+                IsVisibleChanged="OnIsVisibleChanged">
     <Grid>
         <GroupBox Header="General Settings" VerticalAlignment="Top" BorderBrush="Black" Margin="10">
             <StackPanel>

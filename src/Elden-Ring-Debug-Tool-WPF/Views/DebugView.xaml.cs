@@ -43,6 +43,14 @@ namespace Elden_Ring_Debug_Tool_WPF.Views
                 _debugViewViewModel = vm;
             }
         }
+        
+        private void OnIsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            if (DataContext is ViewModelBase vm)
+            {
+                vm.IsActiveView = IsVisible; 
+            }
+        }
 
         private void TextBox_KeyDown(object sender, KeyEventArgs e)
         {

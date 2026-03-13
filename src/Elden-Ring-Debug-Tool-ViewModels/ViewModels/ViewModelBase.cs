@@ -33,5 +33,18 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
             OnPropertyChanged(propertyName ?? "");
             return true;
         }
+        
+        private bool _isActiveView;
+
+        public bool IsActiveView
+        {
+            get => _isActiveView;
+            set
+            {
+                _isActiveView = value;
+                OnPropertyChanged(nameof(IsActiveView));
+            }
+        }
+        
     }
 }

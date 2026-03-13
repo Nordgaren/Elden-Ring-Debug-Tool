@@ -9,7 +9,8 @@
              xmlns:vm="clr-namespace:Elden_Ring_Debug_Tool_ViewModels.ViewModels;assembly=Elden-Ring-Debug-Tool-ViewModels"
              mc:Ignorable="d"
              d:DesignHeight="600" d:DesignWidth="400" d:Background="{StaticResource Background}" DataContextChanged="OnDataContextChanged"
-             d:DataContext="{d:DesignInstance vm:ItemGibViewViewModel, IsDesignTimeCreatable=True}">
+             d:DataContext="{d:DesignInstance vm:ItemGibViewViewModel, IsDesignTimeCreatable=True}" 
+            IsVisibleChanged="OnIsVisibleChanged">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition x:Name="LeftCol"/>

@@ -14,6 +14,7 @@ using Erd_Tools;
 using Erd_Tools.Models;
 using Erd_Tools.Models.System.Dlc;
 using PropertyHook;
+using System.Windows;
 using Grace = Erd_Tools.Models.Grace;
 using GraceViewModel = Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels.GraceViewModel;
 using static Elden_Ring_Debug_Tool_ViewModels.Attributes.HotKeyParameterAttribute;
@@ -64,6 +65,8 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
 
         public void UpdateViewModel()
         {
+            if (!IsActiveView) return;
+            
             if (!Setup)
             {
                 return;
@@ -73,7 +76,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
             {
                 foreach (GraceViewModel grace in SelectedHubViewModel.Graces)
                 {
-                    grace.Update(Hook.CSFD4VirtualMemoryFlag.IsEventFlagFast(grace.EventFlagID));
+                    grace.Update(Hook.CSFD4VirtualMemoryFlag.IsEventFlagFast(grace.EventFlagID) != 0);
                 }
             }
 
@@ -142,7 +145,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
 
             HubCollectionView = CollectionViewSource.GetDefaultView(HubViewModel.All);
             HubCollectionView.GroupDescriptions.Add(new PropertyGroupDescription(nameof(HubViewModel.Continent)));
-            HubCollectionView.Filter += FilerHub;
+            HubCollectionView.Filter += FilterHub;
             SelectedHubViewModel = (HubViewModel)HubCollectionView.CurrentItem;
             HubCollectionView.Refresh();
 
@@ -311,7 +314,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
             }
         }
 
-        private bool FilerHub(object obj)
+        private bool FilterHub(object obj)
         {
             if (obj is not HubViewModel hub)
             {

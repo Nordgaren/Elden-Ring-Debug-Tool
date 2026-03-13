@@ -11,7 +11,8 @@
              xmlns:wpfTool="http://schemas.xceed.com/wpf/xaml/toolkit"
              mc:Ignorable="d"
              d:DesignHeight="600" d:DesignWidth="400" Background="{StaticResource Background}" DataContextChanged="OnDataContextChanged"
-             d:DataContext="{d:DesignInstance vm:DebugViewViewModel, IsDesignTimeCreatable=True}">
+             d:DataContext="{d:DesignInstance vm:DebugViewViewModel, IsDesignTimeCreatable=True}" 
+             IsVisibleChanged="OnIsVisibleChanged">
 
     <Grid>
         <Grid.RowDefinitions>

@@ -14,7 +14,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels
         public bool ShowID => _item.ShowID;
 
         public short MaxQuantity => _item.MaxQuantity;
-        public int EventID => _item.EventID;
+        public uint EventID => _item.EventID;
         public bool IsDrop => _item.IsDrop;
         public bool IsMultiplayerShare => _item.IsMultiplayerShare;
         public bool CanAquireFromOtherPlayers => _item.CanAquireFromOtherPlayers;

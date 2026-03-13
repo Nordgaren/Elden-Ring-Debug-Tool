@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using System.Windows.Data;
 using System.Windows.Input;
 using Elden_Ring_Debug_Tool_ViewModels.Managers;
+using System.Windows;
 
 namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
 {
@@ -102,6 +103,8 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
         }
         internal void UpdateViewModel()
         {
+            if (!IsActiveView) return;
+            
             Loaded = Hook.Loaded;
             HotKeyManager.Update();
 
@@ -200,5 +203,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
         }
 
         #endregion
+        
+
     }
 }

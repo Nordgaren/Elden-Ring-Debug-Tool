@@ -11,7 +11,8 @@
              xmlns:controls="clr-namespace:Elden_Ring_Debug_Tool_WPF.Controls"
              mc:Ignorable="d"
              d:DesignHeight="600" d:DesignWidth="400" Background="{StaticResource Background}" DataContextChanged="OnDataContextChanged"
-             d:DataContext="{d:DesignInstance vm:HotKeyViewViewModel, IsDesignTimeCreatable=True}">
+             d:DataContext="{d:DesignInstance vm:HotKeyViewViewModel, IsDesignTimeCreatable=True}" 
+             IsVisibleChanged="OnIsVisibleChanged">
 
     <UserControl.Resources>
         <ResourceDictionary>

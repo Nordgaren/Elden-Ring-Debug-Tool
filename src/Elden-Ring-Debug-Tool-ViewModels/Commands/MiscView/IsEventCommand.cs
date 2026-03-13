@@ -24,8 +24,8 @@ namespace Elden_Ring_Debug_Tool_ViewModels.Commands
 
         public override void Execute(object? parameter)
         {
-            if (!(parameter is int eventID))
-                throw new ArgumentNullException(nameof(parameter), "parameter was null. parameter must be an int");
+            if (!(parameter is uint eventID))
+                throw new ArgumentNullException(nameof(parameter), "parameter was null. parameter must be an uint");
 
             _miscViewViewModel.IsEventFlag = _miscViewViewModel.Hook.IsEventFlag(eventID);
         }
