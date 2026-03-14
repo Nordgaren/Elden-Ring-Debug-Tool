@@ -95,6 +95,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
             {
                 if (SetField(ref _selectedParam, value) && value != null)
                 {
+                    _ = LoadParamDataAsync(_selectedParam);
                     OnPropertyChanged(nameof(RowCollectionView));
                     RowCollectionView.Filter = FilterRows;
                     OnPropertyChanged(nameof(FieldCollectionView));
@@ -114,6 +115,19 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
             {
                 SetField(ref _selectedRow, value);
             }
+        }
+        
+        private async Task LoadParamDataAsync(ParamViewModel param)
+        {
+            // Await the background parsing (UI stays completely responsive!)
+            await param.LoadDataAsync();
+            
+            // Tell the UI to refresh its bindings now that the data actually exists
+            // (If your UI binds directly to SelectedParam.Rows, firing a property changed 
+            // on SelectedParam will force the UI to re-read the Rows property).
+            OnPropertyChanged(nameof(SelectedParam)); 
+            OnPropertyChanged(nameof(RowCollectionView));
+            OnPropertyChanged(nameof(FieldCollectionView));
         }
 
         #region Search
