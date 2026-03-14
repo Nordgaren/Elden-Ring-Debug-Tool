@@ -1,6 +1,7 @@
 ﻿using Erd_Tools.Models;
 using System.Collections.ObjectModel;
 using SoulsFormats;
+using System.Windows;
 using static Erd_Tools.Models.Param;
 
 namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels
@@ -14,28 +15,76 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels.SubViewModels
         public string Type => Param.Type;
         public int Length => Param.Length;
         public byte[] Bytes => Param.Bytes;
-        public ObservableCollection<RowViewModel> Rows { get; }
-        public ObservableCollection<FieldViewModel> Fields { get; }
+        private ObservableCollection<RowViewModel> _rows;
+        public ObservableCollection<RowViewModel> Rows 
+        { 
+            get => _rows; 
+            private set => SetField(ref _rows, value); 
+        }
+        private ObservableCollection<FieldViewModel> _fields;
+        public ObservableCollection<FieldViewModel> Fields 
+        { 
+            get => _fields; 
+            private set => SetField(ref _fields, value); 
+        }
         public Dictionary<int, string> NameDictionary => Param.NameDictionary;
         public Dictionary<int, int> OffsetDict => Param.OffsetDict;
         public int RowLength => Param.RowLength;
+        private bool _isLoaded;
+        private bool _isLoading;
 
         public ParamViewModel(ParamViewViewModel paramViewerViewModel, Param param)
         {
             ParamViewerViewModel = paramViewerViewModel;
             Param = param;
             Rows = new ObservableCollection<RowViewModel>();
-
-            foreach (Row row in param.Rows)
-            {
-                Rows.Add(new RowViewModel(row));
-            }
-
             Fields = new ObservableCollection<FieldViewModel>();
-            foreach (Field field in param.Fields)
+
+        }
+        
+        public async Task LoadDataAsync()
+        {
+            // Prevent multiple triggers from loading the same param simultaneously
+            if (_isLoaded || _isLoading) return;
+            _isLoading = true;
+
+            // Tell the underlying model to parse the memory (Runs on background thread)
+            await Param.LoadAsync();
+
+            // Build the view models on a background thread so the UI doesn't freeze
+            List<RowViewModel> tempRows = new();
+            List<FieldViewModel> tempFields = new();
+
+            await Task.Run(() =>
             {
-                Fields.Add(GetFieldViewModel(field));
-            }
+                foreach (Row row in Param.Rows)
+                {
+                    tempRows.Add(new RowViewModel(row));
+                }
+
+                foreach (Field field in Param.Fields)
+                {
+                    tempFields.Add(GetFieldViewModel(field));
+                }
+            });
+
+            // Reassign the collections on the main UI thread. 
+            // Reassigning is WAY faster than doing Rows.Add() thousands of times in a loop!
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                Rows = new ObservableCollection<RowViewModel>(tempRows);
+                Fields = new ObservableCollection<FieldViewModel>(tempFields);
+            });
+
+            // Notify the UI that the underlying properties are now populated
+            OnPropertyChanged(nameof(Length));
+            OnPropertyChanged(nameof(Bytes));
+            OnPropertyChanged(nameof(NameDictionary));
+            OnPropertyChanged(nameof(OffsetDict));
+            OnPropertyChanged(nameof(RowLength));
+
+            _isLoaded = true;
+            _isLoading = false;
         }
 
         private FieldViewModel GetFieldViewModel(Field field)

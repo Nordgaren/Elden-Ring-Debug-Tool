@@ -60,6 +60,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
             Hook.LoadTimeout = SettingsViewViewModel.LoadTimeout;
             _paramViewViewModel = new ParamViewViewModel();
             _playerViewViewModel = new PlayerViewViewModel();
+            _faceViewViewModel = new FaceViewViewModel();
             _itemGibViewViewModel = new ItemGibViewViewModel();
             _inventoryViewViewModel = new InventoryViewViewModel();
             _debugViewViewModel = new DebugViewViewModel();
@@ -73,6 +74,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
             ViewModels.Add(this);
             ViewModels.Add(ParamViewViewModel);
             ViewModels.Add(PlayerViewViewModel);
+            ViewModels.Add(FaceViewViewModel);
             ViewModels.Add(ItemGibViewViewModel);
             ViewModels.Add(InventoryViewViewModel);
             ViewModels.Add(GraceViewViewModel);
@@ -153,6 +155,13 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
             get => _playerViewViewModel;
             set => SetField(ref _playerViewViewModel, value);
         }
+                
+        private FaceViewViewModel _faceViewViewModel;
+        public FaceViewViewModel FaceViewViewModel
+        {
+            get => _faceViewViewModel;
+            set => SetField(ref _faceViewViewModel, value);
+        }
 
         private ItemGibViewViewModel _itemGibViewViewModel;
         public ItemGibViewViewModel ItemGibViewViewModel
@@ -209,7 +218,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
             get => _miscViewViewModel;
             set => SetField(ref _miscViewViewModel, value);
         }
-
+        
         private Uri _uri;
         public Uri Uri
         {
@@ -316,6 +325,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
         {
             ParamViewViewModel.InitViewModel(Hook);
             PlayerViewViewModel.InitViewModel(Hook);
+            FaceViewViewModel.InitViewModel(Hook);
             ItemGibViewViewModel.InitViewModel(Hook, SettingsViewViewModel);
             InventoryViewViewModel.InitViewModel(Hook, SettingsViewViewModel);
             DebugViewViewModel.InitViewModel(this);
@@ -348,6 +358,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
             ItemGibViewViewModel.UpdateViewModel();
             ParamViewViewModel.UpdateViewModel();
             PlayerViewViewModel.UpdateViewModel();
+            FaceViewViewModel.UpdateViewModel();
             DebugViewViewModel.UpdateViewModel();
             GraceViewViewModel.UpdateViewModel();
             HotKeyViewViewModel.UpdateViewModel();

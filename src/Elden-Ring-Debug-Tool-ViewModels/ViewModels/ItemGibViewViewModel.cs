@@ -81,8 +81,7 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
             Hook.OnSetup += Hook_OnSetup;
             Hook.OnUnhooked += Hook_OnUnhooked;
 
-            if (_categories.Count > 0)
-                SelectedItemCategory = _categories[0];
+
         }
 
         private void populateItemLists(List<ItemCategory> itemCategories) {
@@ -126,7 +125,8 @@ namespace Elden_Ring_Debug_Tool_ViewModels.ViewModels
                 {
                     item.SetupItem();
                 }
-
+                if (_categories.Count > 0)
+                    SelectedItemCategory = _categories[0];
                 Setup = true;
             });
         }
